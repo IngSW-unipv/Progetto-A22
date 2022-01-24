@@ -1,8 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Una tipologia di asset utilizzata per l'attacco 
  * @author ME
@@ -10,8 +7,6 @@ import javax.persistence.Table;
  * @see Asset
  *
  */
-@Entity
-@Table(name = "VIRUS")
 public class Virus extends Asset {
 
 	/**

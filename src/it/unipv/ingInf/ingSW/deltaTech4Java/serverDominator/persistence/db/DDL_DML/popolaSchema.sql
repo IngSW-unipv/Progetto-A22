@@ -1,13 +1,14 @@
+USE `ServerDomDB`;
 -- -----------------------------------------------------
--- Data for table `ServerDomDB`.`ACCOUNT`
+-- Data for table `ServerDomDB`.`USER_ACCOUNT`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `ServerDomDB`;
-INSERT INTO `ServerDomDB`.`ACCOUNT` (`USERNAME`, `EMAIL`, `PASSW`) VALUES ('Tawa', 'tawa@serverdominator.com', '12345678');
-INSERT INTO `ServerDomDB`.`ACCOUNT` (`USERNAME`, `EMAIL`, `PASSW`) VALUES ('Gio', 'gio@serverdominator.com', '123456789');
-INSERT INTO `ServerDomDB`.`ACCOUNT` (`USERNAME`, `EMAIL`, `PASSW`) VALUES ('MatPara', 'matteo.para@serverdominator.com', '12345678');
-INSERT INTO `ServerDomDB`.`ACCOUNT` (`USERNAME`, `EMAIL`, `PASSW`) VALUES ('Luca', 'luca@serverdominator.com', '1234567890');
-INSERT INTO `ServerDomDB`.`ACCOUNT` (`USERNAME`, `EMAIL`, `PASSW`) VALUES ('MatC', 'matteo.c99@serverdominator.com', '12345678');
+INSERT INTO `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`, `MNY`, `PUNTEGGIO`, `EMAIL`, `PASSW`) VALUES ('Tawa', DEFAULT, NULL, NULL, NULL);
+INSERT INTO `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`, `MNY`, `PUNTEGGIO`, `EMAIL`, `PASSW`) VALUES ('MatPara', DEFAULT, NULL, NULL, NULL);
+INSERT INTO `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`, `MNY`, `PUNTEGGIO`, `EMAIL`, `PASSW`) VALUES ('MatC', DEFAULT, NULL, NULL, NULL);
+INSERT INTO `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`, `MNY`, `PUNTEGGIO`, `EMAIL`, `PASSW`) VALUES ('Gio', DEFAULT, NULL, NULL, NULL);
+INSERT INTO `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`, `MNY`, `PUNTEGGIO`, `EMAIL`, `PASSW`) VALUES ('Luca', DEFAULT, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -23,6 +24,23 @@ INSERT INTO `ServerDomDB`.`ASSET` (`idAsset`, `COSTO`, `NOME`, `DESCRIZIONE`, `L
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `ServerDomDB`.`ASET_Own`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `ServerDomDB`;
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (1, 'Tawa', 3);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (1, 'MatPara', 3);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (1, 'Matc', 3);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (2, 'Gio', 2);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (2, 'Luca', 2);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (2, 'MatP', 2);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (3, 'Matc', 1);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (3, 'Tawa', 1);
+INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (3, 'MatPara', 1);
+
+COMMIT;
 
 
 -- -----------------------------------------------------
@@ -116,19 +134,7 @@ INSERT INTO `ServerDomDB`.`GIOCATORE` (`idGIOCATORE`, `POSIZIONE`, `FINE_GIOCO`,
 
 COMMIT;
 
--- -----------------------------------------------------
--- Data for table `ServerDomDB`.`ASET_Own`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `ServerDomDB`;
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (1, 'Tawa', 3);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (1, 'MatPara', 3);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (1, 'Matc', 3);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (2, 'Gio', 2);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (2, 'Luca', 2);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (2, 'MatP', 2);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (3, 'Matc', 1);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (3, 'Tawa', 1);
-INSERT INTO `ServerDomDB`.`ASET_Own` (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`, `QUANTITA`) VALUES (3, 'MatPara', 1);
 
-COMMIT;
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

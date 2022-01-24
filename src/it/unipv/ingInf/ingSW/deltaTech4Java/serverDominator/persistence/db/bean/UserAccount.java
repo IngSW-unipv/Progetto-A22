@@ -2,15 +2,8 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean
 
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 /**
- * Obiettivi di punteggio
+ * UserAccount
  * @author ME
  * @version 1.0
  * @see Obiettivi
@@ -19,28 +12,25 @@ import javax.persistence.Table;
  * @see ObiettiviUser
  * @see ArrayList
  */
-@Entity
-@Table(name = "USER_ACCOUNT")
 public class UserAccount {
     /**
      * Username di UserAccount
      */
-    @Id
-    @Column(name = "USERNAME")
 	private String username;
     
     /**
      * Soldi associati al giocatore 
      */
-    @Column(name = "MNY")
 	private int mny;
     
     /**
      * Punteggio del giocatore 
      */
-    @Column(name = "PUNTEGGIO")
 	private Integer punteggio;
-    
+
+    private String Email;
+ 
+    private String passw;
     
 	/**
 	 * Gli asset posseduti dallo  UserAccount
@@ -85,15 +75,17 @@ public class UserAccount {
 	/**
 	 * Crea UserAccount
 	 * @param username
-	 * Soldi dello UserAccount
+	 * Identificativo dello user Account
 	 * @param mny
+	 * Soldi dello UserAccount
 	 * @param punteggio
-	 * Asset posseduti dallo UserAccount
+	 * Punteggio dello userAccount
 	 * @param asetOwns
-	 * partite Giocate Dallo UserAccount
+	 * Asset posseduti dallo UserAccount
 	 * @param giocatores
-	 * Obiettivi Dello UserAccount
+	 * partite Giocate Dallo UserAccount
 	 * @param obiettiviUsers
+	 * Obiettivi Dello UserAccounts
 	 */
 	public UserAccount(String username, int mny, Integer punteggio, 
 			ArrayList<AsetOwn> asetOwns, ArrayList<Giocatore> giocatores, ArrayList<ObiettiviUser> obiettiviUsers) {
@@ -107,8 +99,7 @@ public class UserAccount {
 	/**
 	 * @return username associato allo UserAccount
 	 */
-	@Id
-    @Column(name = "USERNAME")
+
 	public String getUsername() {
 		return this.username;
 	}
@@ -150,12 +141,12 @@ public class UserAccount {
 	public void setPunteggio(Integer punteggio) {
 		this.punteggio = punteggio;
 	}
-	  
+	
+
 	/**
 	 * @return Asset in possesso di account
 	 */
-	@OneToMany(mappedBy = "primaryKey.userAccount",
-	            cascade = CascadeType.ALL)
+
 	public ArrayList<AsetOwn> getAsetOwns() {
 		return this.asetOwns;
 	}
@@ -164,8 +155,7 @@ public class UserAccount {
 	 * Setta gli asset in possesso di UserAccount
 	 * @param asetOwns
 	 */
-	@OneToMany(mappedBy = "primaryKey.userAccount",
-	            cascade = CascadeType.ALL)
+
 	public void setAsetOwns(ArrayList<AsetOwn> asetOwns) {
 		this.asetOwns = asetOwns;
 	}
@@ -173,8 +163,7 @@ public class UserAccount {
 	/**
 	 * @return partite giocate da UserAccount
 	 */
-	@OneToMany(mappedBy = "primaryKey.userAccount",
-	            cascade = CascadeType.ALL)
+
 	public ArrayList<Giocatore> getGiocatores() {
 		return this.giocatores;
 	}
@@ -245,5 +234,22 @@ public class UserAccount {
 	public void removeGiocatores(Giocatore giocatore) {
 		this.giocatores.remove(giocatore);
 	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String email) {
+		Email = email;
+	}
+
+	public String getPassw() {
+		return passw;
+	}
+
+	public void setPassw(String passw) {
+		this.passw = passw;
+	}
+	
 	
 }

@@ -1,15 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-
 /**
  * Relazione che associa gli asset al UserAccount
  * @author ME
@@ -18,13 +8,7 @@ import javax.persistence.Transient;
  * @see AssetOwnId
  * @see UserAccount
  */
-@Entity
-@Table(name = "ASET_Own")
-@AssociationOverrides({
-    @AssociationOverride(name = "primaryKey.asset",
-        joinColumns = @JoinColumn(name = "ASSET")),
-    @AssociationOverride(name = "primaryKey.userAccount",
-        joinColumns = @JoinColumn(name = "USERNAME")) })
+
 public class AsetOwn{
 
 	/**
@@ -67,7 +51,7 @@ public class AsetOwn{
 	/**
 	 * @return id AssetOwm
 	 */
-	@EmbeddedId
+	
 	public AsetOwnId getPrimaryKey () {
 		return this.primaryKey ;
 	}
@@ -82,7 +66,6 @@ public class AsetOwn{
 	/**
 	 * @return Asset associato
 	 */
-	@Transient
 	public Asset getAsset() {
 		return this.getPrimaryKey ().getAsset();
 	}
@@ -97,7 +80,6 @@ public class AsetOwn{
 	/**
 	 * @return UserAccount associato
 	 */
-	@Transient
 	public UserAccount getUserAccount() {
 		return this.getPrimaryKey ().getUserAccount();
 	}
@@ -112,7 +94,7 @@ public class AsetOwn{
 	/**
 	 * @return quantita posseduta
 	 */
-	@Column(name = "qantita")
+	
 	public int getQuantita() {
 		return this.quantita;
 	}

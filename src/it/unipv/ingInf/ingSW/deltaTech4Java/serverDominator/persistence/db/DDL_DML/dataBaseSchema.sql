@@ -1,8 +1,3 @@
---
--- Server 
--- 		Product: MySQL Community Server - GPL 
--- Version: 8.0
---
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -21,19 +16,6 @@ CREATE SCHEMA IF NOT EXISTS `ServerDomDB` DEFAULT CHARACTER SET utf8 ;
 USE `ServerDomDB` ;
 
 -- -----------------------------------------------------
--- Table `ServerDomDB`.`ACCOUNT`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`ACCOUNT` ;
-
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ACCOUNT` (
-  `USERNAME` VARCHAR(20) NOT NULL,
-  `EMAIL` VARCHAR(255) NULL DEFAULT 'null',
-  `PASSW` VARCHAR(32) NOT NULL,
-  PRIMARY KEY (`USERNAME`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `ServerDomDB`.`USER_ACCOUNT`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ServerDomDB`.`USER_ACCOUNT` ;
@@ -42,6 +24,8 @@ CREATE TABLE IF NOT EXISTS `ServerDomDB`.`USER_ACCOUNT` (
   `USERNAME` VARCHAR(20) NOT NULL,
   `MNY` INT NOT NULL DEFAULT 0,
   `PUNTEGGIO` INT NULL DEFAULT 0,
+  `EMAIL` VARCHAR(45) NULL,
+  `PASSW` VARCHAR(45) NULL,
   PRIMARY KEY (`USERNAME`))
 ENGINE = InnoDB;
 
@@ -223,42 +207,6 @@ USE `ServerDomDB`;
 DELIMITER $$
 
 USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`ACCOUNT_BEFORE_INSERT` $$
-USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`ACCOUNT_BEFORE_INSERT` BEFORE INSERT ON `ACCOUNT` FOR EACH ROW
-BEGIN
-	if 
-		new.username is not null 
-        and 
-        new.username not in(select USERNAME FROM USER_ACCOUNT)
-	then
-		insert into USER_ACCOUNT VALUES(new.username, default, default);   
-	else
-		KILL query connection_id();
-    end if;
-END$$
-
-
-USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`ACCOUNT_BEFORE_UPDATE` $$
-USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`ACCOUNT_BEFORE_UPDATE` BEFORE UPDATE ON `ACCOUNT` FOR EACH ROW
-BEGIN
-if (#se cambia username E USERNAME è GIA USATO
-			old.username<>new.username		AND 
-			new.username in(select USERNAME FROM USER_ACCOUNT))
-	then
-		kill query connection_id();
-	else 
-		if  old.username<>new.username
-        then
-			update USER_ACCOUNT set username=new.username where username=old.username;
-		end if;
-	end if;
-END$$
-
-
-USE `ServerDomDB`$$
 DROP TRIGGER IF EXISTS `ServerDomDB`.`USER_ACCOUNT_BEFORE_UPDATE` $$
 USE `ServerDomDB`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`USER_ACCOUNT_BEFORE_UPDATE` BEFORE UPDATE ON `USER_ACCOUNT` FOR EACH ROW
@@ -381,9 +329,9 @@ END$$
 
 
 USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`OBIETTIVI_USER_AFTER_INSERT` $$
+DROP TRIGGER IF EXISTS `ServerDomDB`.`OBIETTIVI_USER_BEFORE_INSERT` $$
 USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`OBIETTIVI_USER_AFTER_INSERT` BEFORE INSERT ON `OBIETTIVI_USER` FOR EACH ROW
+CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`OBIETTIVI_USER_BEFORE_INSERT` BEFORE INSERT ON `OBIETTIVI_USER` FOR EACH ROW
 BEGIN
 declare punteggioGiocatore int;
 declare punteggioObiettivo int;

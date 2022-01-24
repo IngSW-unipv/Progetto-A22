@@ -3,23 +3,12 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean
 
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-
 /**
  * Qualunque asset aquistabile nel gioco 
  * @author ME
  * @version 1.0
  * @see AsetOwn
  */
-@Entity
-@Table(name = "ASSET")
 public class Asset{
 
 	/**
@@ -89,9 +78,7 @@ public class Asset{
 	/**
 	 * @return id dell'asset
 	 */
-	@Id
-	@GeneratedValue
-	@Column(name = "idAsset")
+
 	public int getIdAsset() {
 		return this.idAsset;
 	}
@@ -167,8 +154,7 @@ public class Asset{
      * mappature dell'associazione con assetOwn
      * @return
      */
-    @OneToMany(mappedBy = "primaryKey.asset",
-            cascade = CascadeType.ALL)
+
 	public ArrayList<AsetOwn> getAsetOwns() {
 		return this.asetOwns;
 	}

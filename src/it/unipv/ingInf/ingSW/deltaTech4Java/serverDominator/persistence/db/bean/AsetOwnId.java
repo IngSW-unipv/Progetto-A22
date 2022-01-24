@@ -1,12 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
-
-
 /**
  * Identificativo composto di asset own
  * @author ME
@@ -14,13 +7,13 @@ import javax.persistence.ManyToOne;
  * @see Asset
  * @see UserAccount
  */
-@Embeddable
+
 /* 
  * @Embeddable
  * sta per che questa classe può essere incorporata in altre entity
  * 
  */
-public class AsetOwnId implements Serializable{
+public class AsetOwnId{
 
 	/**
 	 * asset posseduto dallo user
@@ -49,7 +42,6 @@ public class AsetOwnId implements Serializable{
 	 /**
 	 * @return asset
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
 	public Asset getAsset() {
 		return this.asset;
 	}
@@ -64,7 +56,6 @@ public class AsetOwnId implements Serializable{
 	 /**
 	 * @return userAccount
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
 	public UserAccount getUserAccount() {
 		return this.userAccount;
 	}

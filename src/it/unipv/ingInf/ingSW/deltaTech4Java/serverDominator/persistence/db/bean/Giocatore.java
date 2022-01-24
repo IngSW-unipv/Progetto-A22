@@ -2,27 +2,12 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean
 
 import java.time.LocalDateTime;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 /**
  * Relazione che associa i giocatori con le partite
  * @author ME
  * @version 1.0
  * @see GiocatoreId
  */
-@Entity
-@Table(name = "GIOCATORE")
-@AssociationOverrides({
-    @AssociationOverride(name = "primaryKey.partita",
-        joinColumns = @JoinColumn(name = "idPartita")),
-    @AssociationOverride(name = "primaryKey.userAccount",
-        joinColumns = @JoinColumn(name = "USERNAME")) })
 public class Giocatore{
 
 	/**
@@ -67,7 +52,6 @@ public class Giocatore{
 	/**
 	 * @return identificativo del giocatore 
 	 */
-	@EmbeddedId
 	public GiocatoreId getPrimaryKey() {
 		return this.primaryKey;
 	}
@@ -82,7 +66,6 @@ public class Giocatore{
 	/**
 	 * @return partita del giocatore
 	 */
-	@Transient
 	public Partita getPartita() {
 		return this.primaryKey.getPartita();
 	}
@@ -97,7 +80,6 @@ public class Giocatore{
 	/**
 	 * @return UserAccount che gioca la partita
 	 */
-	@Transient
 	public UserAccount getUserAccount() {
 		return this.primaryKey.getUserAccount();
 	}

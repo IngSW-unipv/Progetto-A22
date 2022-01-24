@@ -1,16 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Obiettivi di punteggio
  * @author ME
  * @version 1.0
  * @see Obiettivi
  */
-@Entity
-@Table(name = "OB_PUNTEGGIO")
 public class ObPunteggio extends Obiettivi{
 
 	/**

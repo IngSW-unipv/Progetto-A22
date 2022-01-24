@@ -1,9 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
-
 /**
  * Partite che si avviano
  * @author ME
@@ -11,13 +7,7 @@ import javax.persistence.ManyToOne;
  * @see UserAccount
  * @see Partita
  */
-@Embeddable
-/* 
- * @Embeddable
- * sta per che questa classe può essere incorporata in altre entity
- * 
- */
-public class GiocatoreId implements java.io.Serializable {
+public class GiocatoreId {
 
 	/**
 	 * userAccount associato al giocatore 
@@ -48,7 +38,6 @@ public class GiocatoreId implements java.io.Serializable {
 	/**
 	 * @return Partita
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
 	public Partita getPartita() {
 		return this.partita;
 	}
@@ -63,7 +52,6 @@ public class GiocatoreId implements java.io.Serializable {
 	/**
 	 * @return UserAccount
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
 	public UserAccount getUserAccount() {
 		return this.userAccount;
 	}

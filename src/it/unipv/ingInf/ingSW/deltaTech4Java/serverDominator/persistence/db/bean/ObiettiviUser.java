@@ -1,13 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 /**
  * Obiettivi di punteggio
  * @author ME
@@ -15,13 +7,6 @@ import javax.persistence.Transient;
  * @see ObiettiviUserId
  */
 
-@Entity
-@Table(name = "OBIETTIVI_USER")
-@AssociationOverrides({
-    @AssociationOverride(name = "primaryKey.obiettivi",
-        joinColumns = @JoinColumn(name = "idObiettivo")),
-    @AssociationOverride(name = "primaryKey.userAccount",
-        joinColumns = @JoinColumn(name = "USERNAME")) })
 public class ObiettiviUser {
 
 	/**
@@ -74,7 +59,6 @@ public class ObiettiviUser {
 	/**
 	 * @return ObiettiviUserId
 	 */
-	@EmbeddedId
 	public ObiettiviUserId getPrimaryKey() {
 		return this.primaryKey;
 	}
@@ -90,7 +74,6 @@ public class ObiettiviUser {
 	/**
 	 * @return Obiettivo
 	 */
-	@Transient
 	public Obiettivi getObiettivi() {
 		return this.primaryKey.getObiettivo();
 	}
@@ -106,7 +89,6 @@ public class ObiettiviUser {
 	/**
 	 * @return UserAccount
 	 */
-	@Transient
 	public UserAccount getUserAccount() {
 		return this.primaryKey.getUserAccount();
 	}

@@ -2,12 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean
 
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Qualunque obiettivo raggiungibele da gioco
@@ -16,8 +10,6 @@ import javax.persistence.Table;
  * @see Obiettivi
  * @see ArrayList
  */
-@Entity
-@Table(name = "OBIETTIVI")
 public class Obiettivi{
 
 	/**
@@ -72,8 +64,6 @@ public class Obiettivi{
 	/**
 	 * @return identificativo obiettivo
 	 */
-	@Id
-	@Column(name="idObiettivo")
 	public int getIdObiettivo() {
 		return this.idObiettivo;
 	}
@@ -119,8 +109,6 @@ public class Obiettivi{
 	/**
 	 * @return users a cui è associato l'obiettivo
 	 */
-	   @OneToMany(mappedBy = "primaryKey.obiettivi",
-	            cascade = CascadeType.ALL)
 	public ArrayList<ObiettiviUser> getObiettiviUsers() {
 		return this.obiettiviUsers;
 	}

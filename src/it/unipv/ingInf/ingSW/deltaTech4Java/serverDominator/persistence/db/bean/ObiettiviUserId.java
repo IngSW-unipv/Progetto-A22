@@ -1,10 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean;
 
-import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
 
 /**
  * Identificativo composto ObiettiviUser
@@ -13,13 +9,8 @@ import javax.persistence.ManyToOne;
  * @see UserAccount
  * @see Obiettivi
  */
-@Embeddable
-/* 
- * @Embeddable
- * sta per che questa classe può essere incorporata in altre entity
- * 
- */
-public class ObiettiviUserId implements Serializable {
+
+public class ObiettiviUserId {
 
 	/**
 	 * User Account
@@ -50,7 +41,6 @@ public class ObiettiviUserId implements Serializable {
 	/**
 	 * @return UserAccount (parte dell'id)
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
 	public UserAccount getUserAccount() {
 		return this.userAccount;
 	}
@@ -65,7 +55,6 @@ public class ObiettiviUserId implements Serializable {
 	/**
 	 * @return Obiettivi (parte dell'id)
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
 	public Obiettivi getObiettivo() {
 		return this.obiettivo;
 	}

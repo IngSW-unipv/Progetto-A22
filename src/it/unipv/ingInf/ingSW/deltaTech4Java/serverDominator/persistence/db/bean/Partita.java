@@ -4,13 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Partite che si avviano
@@ -19,32 +12,23 @@ import javax.persistence.Table;
  * @see Giocatore
  * @see ArrayList
  */
-@Entity
-@Table(name = "PARTITA")
 public class Partita{
 
 	/**
 	 * Id della partita
 	 */
-    @Id
-    @GeneratedValue
-    @Column(name = "idPartita")
 	private int idPartita;
 	/**
 	 * Inizio della partita
 	 */
-    @Column(name = "INIZIO")
 	private LocalDateTime inizio;
 	/**
 	 * Fine della partita
 	 */
-    @Column(name = "FINE")
 	private LocalDateTime fine;
 	/**
 	 * Lista giocatori della partita
 	 */
-	   @OneToMany(mappedBy = "primaryKey.partita",
-	            cascade = CascadeType.ALL)
 	private ArrayList<Giocatore> giocatores = new ArrayList<Giocatore>(0);
 
 	/**

@@ -60,6 +60,17 @@ public class UserAccount {
 	 */
 	public UserAccount() {
 	}
+	
+	/**
+	 * Crea User account con mny=punteggio=0
+	 * username dello userAccount
+	 * @param username
+	 */
+	public UserAccount(String username) {
+		this.username = username;
+		this.mny=0;
+		this.punteggio=0;
+	}
 
 	/**
 	 * Crea UserAccount

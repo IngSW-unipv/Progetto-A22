@@ -25,11 +25,16 @@ public class Account{
 	 * Password
 	 */
 	private String passw;
-
+	
+	/**
+	 * UserAccount associato All'account
+	 */
+	private UserAccount userAccount;
 	/**
 	 * Crea account vuoto
 	 */
 	public Account() {
+		this.userAccount=new UserAccount();
 	}
 
 	/**
@@ -40,6 +45,7 @@ public class Account{
 	public Account(String username, String passw) {
 		this.username = username;
 		this.passw = passw;
+		this.userAccount=new UserAccount(username);
 	}
 
 	/**
@@ -52,8 +58,15 @@ public class Account{
 		this.username = username;
 		this.email = email;
 		this.passw = passw;
+		this.userAccount=new UserAccount(username);
 	}
-
+	
+	public Account(UserAccount userAccount, String email, String passw) {
+		this.username = userAccount.getUsername();
+		this.email = email;
+		this.passw = passw;
+		this.userAccount=userAccount;
+	}
 	/**
 	 * @return username dell'account
 	 */
@@ -96,6 +109,20 @@ public class Account{
 	 */
 	public void setPassw(String passw) {
 		this.passw = passw;
+	}
+	/**
+	 * @return UserAccount associato all'Account
+	 */
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	/**
+	 * Setta UserAccount associato All'account
+	 * @param userAccount
+	 */
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 }

@@ -6,8 +6,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * stabilire connessione con il db
+ * @author ME
+ * @version 1.0
+ * @see Properties
+ * @see FileInputStream
+ */
 public class DbConnection {
 
+	/**
+	 * Connessione
+	 * @param conn
+	 * Percorso file delle prop
+	 * @param popFile
+	 * @return Connessione
+	 */
 	public static Connection startConnection(Connection conn, String popFile)
 	{
 		String DbDriver=null;
@@ -24,8 +38,6 @@ public class DbConnection {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-		
 		if ( isOpen(conn) )
 			closeConnection(conn);
 		try
@@ -36,7 +48,6 @@ public class DbConnection {
 			conn = DriverManager.getConnection(DbURL, username, password);// Apertura connessione
 
 		}
-		
 		catch (Exception e)
 		{
 			e.printStackTrace();
@@ -44,9 +55,14 @@ public class DbConnection {
 		}
 		return conn;
 	}
-
 	
-	
+	/**
+	 * stabilire se la connessione passata è aperta o no
+	 * @param conn
+	 * connesione
+	 * @return boolean
+	 * verro: conn is open; false:conn is not open
+	 */
 	public static boolean isOpen(Connection conn)
 	{
 		if (conn == null)
@@ -54,9 +70,11 @@ public class DbConnection {
 		else
 			return true;
 	}
-
 	
-	
+	/**
+	 * @param conn
+	 * @return
+	 */
 	public static Connection closeConnection(Connection conn)
 	{
 		if ( !isOpen(conn) )
@@ -74,6 +92,12 @@ public class DbConnection {
 		return conn;
 	}
 	
+	/**
+	 * le prop del file
+	 * @param fls
+	 * Percorco file delle Prop
+	 * @return Properties
+	 */
 	public static Properties loadPropertiesFile(String fls){
 		try {
 			Properties prop= new Properties();
@@ -88,9 +112,7 @@ public class DbConnection {
 		}
 		
 	}
-	
-	
-	
+/* prova
 	public static void main(String[] args) {
 		try {
 			Properties prop= new Properties();
@@ -108,5 +130,5 @@ public class DbConnection {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

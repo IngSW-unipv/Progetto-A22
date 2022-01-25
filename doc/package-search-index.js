@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean"},{"l":"it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.test.util"},{"l":"it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util"}];updateSearchResults();

@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util.DbConnection;
 
-public class DbConnectionTest {
+public class DbConnectionProva {
 
 	public static void main(String[] args) {
 		try {

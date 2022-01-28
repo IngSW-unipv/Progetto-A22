@@ -1,4 +1,4 @@
-package giocatore;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
 public abstract class Giocatore {
 	private int valuta_temp;

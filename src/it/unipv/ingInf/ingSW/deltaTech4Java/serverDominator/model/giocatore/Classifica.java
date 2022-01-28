@@ -1,4 +1,4 @@
-package giocatore;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

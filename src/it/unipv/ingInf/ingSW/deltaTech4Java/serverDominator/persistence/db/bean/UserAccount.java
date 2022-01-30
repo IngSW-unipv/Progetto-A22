@@ -28,8 +28,14 @@ public class UserAccount {
      */
 	private Integer punteggio;
 
+    /**
+     * Email dello user Account
+     */
     private String Email;
  
+    /**
+     * Password Dello UserAccount
+     */
     private String passw;
     
 	/**
@@ -235,18 +241,33 @@ public class UserAccount {
 		this.giocatores.remove(giocatore);
 	}
 
+	/**
+	 * ristitusce email Dello UserAccount
+	 * @return Email Dello UserAccount
+	 */
 	public String getEmail() {
 		return Email;
 	}
 
+	/**
+	 * Setta Email
+	 * @param email
+	 */
 	public void setEmail(String email) {
 		Email = email;
 	}
 
+	/**
+	 * @return Password 
+	 */
 	public String getPassw() {
 		return passw;
 	}
 
+	/**
+	 * Setta Password
+	 * @param passw
+	 */
 	public void setPassw(String passw) {
 		this.passw = passw;
 	}

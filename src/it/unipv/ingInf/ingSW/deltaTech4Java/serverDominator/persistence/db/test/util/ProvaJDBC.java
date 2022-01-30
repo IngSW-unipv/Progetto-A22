@@ -3,7 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.test
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class TestJDBC {
+public class ProvaJDBC {
 
 	public static void main(String[] args) {
 		String url="jdbc:mysql://localhost:3306/serverdomdb";

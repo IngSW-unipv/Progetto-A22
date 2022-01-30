@@ -12,7 +12,7 @@ import org.w3c.dom.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignupController implements Initializable {
+public class SignupController implements Initializable { //aggiunto extends Thread dopo per riutilizzabilità
 
     @FXML
     private Button button_signup;
@@ -33,7 +33,7 @@ public class SignupController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //toggle name String richiamato quando si logga
-                if(!tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()){ //se non sono vuoti
+                if(!tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()){ //controlla i field se non sono vuoti, ovvero non voglio che sia spazio vuoto
                     DBUtil.signUpUser(actionEvent, tf_username.getText(), tf_password.getText());
                 } else{
                     System.out.println("Inserisci tutti i dati");
@@ -48,8 +48,6 @@ public class SignupController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 DBUtil.changeScene(actionEvent, "sample.fxml", "Log in", null);
-
-
             }
         });
     }

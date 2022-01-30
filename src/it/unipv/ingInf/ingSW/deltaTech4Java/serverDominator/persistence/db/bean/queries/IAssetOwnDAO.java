@@ -20,6 +20,7 @@ public interface IAssetOwnDAO {
 	public ArrayList<AsetOwn> selectAll();
 	
 	/**
+	 * seleziona tutti gli asset posseduti dal UserAcocunt
 	 * @param assInput
 	 * account del giocatore di cui si vogliono conoscere gli assetOwn
 	 * @return tutti gli asset posseduti da assInput
@@ -27,21 +28,26 @@ public interface IAssetOwnDAO {
 	public ArrayList<Asset> selectByUserOwner(UserAccount assInput);
 	
 	/**
+	 * Seleziona Tutti i possessori dell'asset 
 	 * @param assInput
 	 * @return
 	 */
-	public ArrayList<UserAccount> selectByAssetOwnd(AsetOwn assInput);
+	public ArrayList<UserAccount> selectByAssetOwnd(Asset assInput);
 	
 	/**
+	 * Inserisce asset posseduto
+	 * se l'id dell' asset posseduto è già esistente alline la quantita con la nuova 
+	 * Quantità nell'asset e se essa è nulla elimina l'asset OWm
 	 * @param a
 	 * @return
 	 */
 	public boolean insertAssetOwn(AsetOwn a);
 	
 	/**
+	 * Aggiorna Asset Posseduto Dato il suo id
 	 * @param newA
 	 * @return
 	 */
-	public boolean updateAssetOwnId(AsetOwn newA);
+	public boolean updateAssetOwnById(AsetOwn newA);
 	
 }

@@ -16,7 +16,7 @@ import java.util.Properties;
 public class DbConnection {
 
 	/**
-	 * Avvio onnessione
+	 * Avvio Connessione
 	 * @param conn
 	 * Connection
 	 * @param popFile

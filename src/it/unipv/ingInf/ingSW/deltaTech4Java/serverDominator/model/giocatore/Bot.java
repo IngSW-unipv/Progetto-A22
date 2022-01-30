@@ -14,6 +14,6 @@ public class Bot extends Giocatore{
 	/** in fase di sviluppo*/
 	public void logicaAttacco() {
 	}
-
+// test. si può cancellare
 
 }

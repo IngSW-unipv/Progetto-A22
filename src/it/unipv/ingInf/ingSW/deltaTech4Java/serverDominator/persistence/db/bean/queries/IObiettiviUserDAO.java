@@ -26,7 +26,7 @@ public interface IObiettiviUserDAO {
 	 * @param assInput
 	 * @return Gli obiettivi di un singolo giocatore
 	 */
-	public ArrayList<ObiettiviUser> selectByUserId(UserAccount assInput);
+	public ArrayList<ObiettiviUser> selectByUserId(UserAccount accInput);
 	
 	/**
 	 * seleziona ObiettiviUser Conoscendo l'id Dell'obiettivo
@@ -34,14 +34,14 @@ public interface IObiettiviUserDAO {
 	 * obiettivo per cui si desidera fare la ricerca
 	 * @return tutti gli user che hanno lo stesso obiettivo
 	 */
-	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivi assInput);
+	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivi obInput);
 	
 	/**
 	 * Assegnare un obiettivo ad uno user
 	 * @param a
 	 * @return
 	 */
-	public boolean insertObiettiviUser(ObiettiviUser a);
+	public boolean insertObiettiviUser(ObiettiviUser o);
 	
 	/**
 	 * aggiornare un obiettivo assegnato a uno stesso user
@@ -49,5 +49,5 @@ public interface IObiettiviUserDAO {
 	 * obiettivoUse di interessato al cambiamento 
 	 * @return
 	 */
-	public boolean updateObiettiviUserbyId(ObiettiviUser newA);
+	public boolean updateStatoObiettiviUserbyId(ObiettiviUser newOU);
 }

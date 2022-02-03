@@ -188,4 +188,10 @@ public class Asset{
 		this.asetOwns.remove(asetOwns);
 	}
 
+	@Override
+	public String toString() {
+		return "Asset [idAsset=" + idAsset + ", costo=" + costo + ", nome=" + nome + ", descrizione=" + descrizione
+				+ ", livello=" + livello + "]";
+	}
+
 }

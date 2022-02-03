@@ -36,11 +36,10 @@ public interface IObiettiviDAO {
 	
 	/**
 	 * Aggiorna Obiettivo Dato il Suo id
-	 * @param oldO
 	 * @param newO
 	 * @return
 	 */
-	public boolean updateObiettiviById(Obiettivi oldO, Obiettivi newO);
+	public boolean updateObiettiviById( Obiettivi newO);
 	
 	/**
 	 * Aggiorna Obiettivi per Ricompensa
@@ -50,7 +49,7 @@ public interface IObiettiviDAO {
 	 * nuovo obettivo
 	 * @return
 	 */
-	public boolean updateAssetByRicompensa(Obiettivi oldR, Obiettivi newR);
+	public boolean updateRicompensaObiettivoByRicompensa(Obiettivi oldR, Obiettivi newR);
 	
 	/**
 	 * seleziona un obiettivo Dato l'identificativo dell'Obiettivo

@@ -34,13 +34,11 @@ public interface IAssetDAO {
 	
 	/**
 	 * Aggiorna Asset
-	 * @param oldA
-	 * Vecchio asset
 	 * @param newA
 	 * Nuovo asset
 	 * @return
 	 */
-	public boolean updateAssetById(Asset oldA, Asset newA);
+	public boolean updateAssetById(Asset newA);
 	
 	/**
 	 * Aggiorna prezzo asset
@@ -50,12 +48,12 @@ public interface IAssetDAO {
 	 * Nuovo prezo
 	 * @return
 	 */
-	public boolean updateAssetByPrice(Asset oldPrice, Asset newPrice);
+	public boolean updatePriceAssetByPrice(Asset oldPrice, Asset newPrice);
 	
 	/**
 	 * Reupera I dati dell'asset id Passato per argomento
 	 * @param Id
 	 * @return
 	 */
-	public Asset selectAssetById(Asset Id);
+	public Asset selectAssetById(Asset id);
 }

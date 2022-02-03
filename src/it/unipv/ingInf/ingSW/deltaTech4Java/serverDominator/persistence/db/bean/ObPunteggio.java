@@ -80,4 +80,9 @@ public class ObPunteggio extends Obiettivi{
 		this.punteggioObiettivo = punteggioObiettivo;
 	}
 
+	@Override
+	public String toString() {
+		return "ObPunteggio [punteggioObiettivo=" + punteggioObiettivo + "]"+super.toString();
+	}
+
 }

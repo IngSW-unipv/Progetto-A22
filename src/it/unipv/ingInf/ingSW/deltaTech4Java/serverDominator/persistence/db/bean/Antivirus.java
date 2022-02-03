@@ -117,4 +117,10 @@ public class Antivirus extends Asset{
 		this.tipo = tipo;
 	}
 
+	@Override
+	public String toString() {
+		return "Antivirus [capacitaDifensiva=" + capacitaDifensiva + ", tipo=" + tipo + "]" +super.toString();
+	}
+	
+
 }

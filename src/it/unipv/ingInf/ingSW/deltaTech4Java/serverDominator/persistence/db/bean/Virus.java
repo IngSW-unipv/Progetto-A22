@@ -116,4 +116,10 @@ public class Virus extends Asset {
 		this.tipo = tipo;
 	}
 
+	@Override
+	public String toString() {
+		return "Virus [capacitaOffensiva=" + capacitaOffensiva + ", tipo=" + tipo + "]"+ super.toString();
+	}
+	
+
 }

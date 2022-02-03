@@ -142,4 +142,11 @@ public class Obiettivi{
 	public void remuveObiettiviUsers(ObiettiviUser obiettiviUsers) {
 		this.obiettiviUsers.remove(obiettiviUsers);
 	}
+
+	@Override
+	public String toString() {
+		return "Obiettivi [idObiettivo=" + idObiettivo + ", descrizione=" + descrizione + ", ricompensa=" + ricompensa
+				+ "]";
+	}
+	
 }

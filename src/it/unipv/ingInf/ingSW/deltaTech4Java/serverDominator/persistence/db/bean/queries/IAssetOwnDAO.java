@@ -25,7 +25,7 @@ public interface IAssetOwnDAO {
 	 * account del giocatore di cui si vogliono conoscere gli assetOwn
 	 * @return tutti gli asset posseduti da assInput
 	 */
-	public ArrayList<Asset> selectByUserOwner(UserAccount assInput);
+	public ArrayList<AsetOwn> selectByUserOwner(UserAccount assInput);
 	
 	/**
 	 * Seleziona Tutti i possessori dell'asset 
@@ -48,6 +48,6 @@ public interface IAssetOwnDAO {
 	 * @param newA
 	 * @return
 	 */
-	public boolean updateAssetOwnById(AsetOwn newA);
+	public boolean updateQuantityAssetOwnById(AsetOwn newA);
 	
 }

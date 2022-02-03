@@ -11,11 +11,12 @@ import java.util.Properties;
  * @version 1.0
  * @see FetchPropertyFromFile
  * @see Properties
+ * @see Connection
  */
 public class DbConnection {
 
 	/**
-	 * Avvio onnessione
+	 * Avvio Connessione
 	 * @param conn
 	 * Connection
 	 * @param popFile
@@ -54,6 +55,37 @@ public class DbConnection {
 		}
 		return conn;
 	}
+	/**
+	 * Start Connection without Property File
+	 * @param conn
+	 * Connessione
+	 * @param DbDriver
+	 * J-drive
+	 * @param DbURL
+	 * schema location
+	 * @param username
+	 * Username to use
+	 * @param password
+	 * Password to use
+	 * @return connection opened 
+	 */
+	public static Connection startConnection(Connection conn, String DbDriver,String DbURL,String username,String password )
+	{
+		if ( isOpen(conn) )
+			closeConnection(conn);
+		
+		try
+		{
+			Class.forName(DbDriver);
+			conn = DriverManager.getConnection(DbURL, username, password);// Apertura connessione
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		return conn;
+	}
 	
 	/**
 	 * stabilire se la connessione passata è aperta o no
@@ -71,8 +103,10 @@ public class DbConnection {
 	}
 	
 	/**
+	 * Method to close a connection
 	 * @param conn
-	 * @return
+	 * Connection to close
+	 * @return Closed Connection
 	 */
 	public static Connection closeConnection(Connection conn)
 	{

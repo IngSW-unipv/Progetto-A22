@@ -42,10 +42,7 @@ public class UserAccount {
 	 * Gli asset posseduti dallo  UserAccount
 	 */
 	private ArrayList<AsetOwn> asetOwns = new ArrayList<AsetOwn>(0);
-	/**
-	 * Le partite giocate dallo UserAccount
-	 */
-	private ArrayList<Giocatore> giocatores = new ArrayList<Giocatore>(0);
+	
 	/**
 	 * Gli obiettivi associati Allo UserAccount
 	 */
@@ -94,12 +91,11 @@ public class UserAccount {
 	 * Obiettivi Dello UserAccounts
 	 */
 	public UserAccount(String username, int mny, Integer punteggio, 
-			ArrayList<AsetOwn> asetOwns, ArrayList<Giocatore> giocatores, ArrayList<ObiettiviUser> obiettiviUsers) {
+			ArrayList<AsetOwn> asetOwns, ArrayList<ObiettiviUser> obiettiviUsers) {
 		this.username = username;
 		this.mny = mny;
 		this.punteggio = punteggio;
 		this.asetOwns= asetOwns;
-		this.giocatores = giocatores;
 		this.obiettiviUsers = obiettiviUsers;
 	}
 	/**
@@ -165,23 +161,7 @@ public class UserAccount {
 	public void setAsetOwns(ArrayList<AsetOwn> asetOwns) {
 		this.asetOwns = asetOwns;
 	}
-	   
-	/**
-	 * @return partite giocate da UserAccount
-	 */
-
-	public ArrayList<Giocatore> getGiocatores() {
-		return this.giocatores;
-	}
-
-	/**
-	 * Setta partite giocate da UserAccount
-	 * @param giocatores
-	 */
-	public void setGiocatores(ArrayList<Giocatore> giocatores) {
-		this.giocatores = giocatores;
-	}
-
+	
 	/**
 	 * @return obiettivi di UserAccount
 	 */
@@ -225,21 +205,11 @@ public class UserAccount {
 	public void removeObiettiviUsers(ObiettiviUser obiettiviUsers) {
 		this.obiettiviUsers.remove(obiettiviUsers);
 	}
-	
-	/**
-	 * Aggiungi giocatore
-	 * @param obiettiviUsers
-	 */
-	public void addGiocatores(Giocatore giocatore) {
-		this.giocatores.add(giocatore);
-	}
+
 	/**
 	 * Togli giocatore
 	 * @param obiettiviUsers
 	 */
-	public void removeGiocatores(Giocatore giocatore) {
-		this.giocatores.remove(giocatore);
-	}
 
 	/**
 	 * ristitusce email Dello UserAccount

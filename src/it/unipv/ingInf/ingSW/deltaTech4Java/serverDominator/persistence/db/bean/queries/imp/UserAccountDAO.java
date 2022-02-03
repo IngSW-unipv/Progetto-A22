@@ -6,7 +6,15 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.queries.IUserAccountDAO;
-
+/**
+* UserAccount query
+* @author ME
+* @version 1.0
+* @see AsetOwn
+* @see ObiettiviUserDAO
+* @see UserAccount
+* @see IUserAccountDAO
+*/
 public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override

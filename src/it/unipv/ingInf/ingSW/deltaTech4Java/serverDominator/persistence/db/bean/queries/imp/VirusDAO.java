@@ -11,6 +11,15 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.queries.IAssetDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util.DbConnection;
 
+	/**
+	* AssetOwm query
+	* @author ME
+	* @version 1.0
+	* @see Asset
+	* @see Virus
+	* @see IAssetDAO
+	* @see DbConnection
+	*/
 public class VirusDAO implements IAssetDAO {
 	private Connection conn;
 	private String propConn;

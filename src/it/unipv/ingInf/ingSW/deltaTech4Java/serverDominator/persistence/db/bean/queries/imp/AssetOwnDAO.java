@@ -13,6 +13,15 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.queries.IAssetOwnDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util.DbConnection;
 
+/**
+ * AssetOwm query
+ * @author ME
+ * @version 1.0
+ * @see AsetOwn
+ * @see UserAcount
+ * @see IAssetOwnDAO
+ * @see Dbconnection 
+ */
 public class AssetOwnDAO implements IAssetOwnDAO {
 	private Connection conn;
 	private String propConn;

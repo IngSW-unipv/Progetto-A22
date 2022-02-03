@@ -10,6 +10,14 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.queries.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util.DbConnection;
 
+/**
+ * Obiettivi query
+ * @author ME
+ * @version 1.0
+ * @see Obiettivi
+ * @see IObiettiviDAO
+ * @see DbConnection
+ */
 public class ObiettiviDAO implements IObiettiviDAO {
 	private Connection conn;
 	private String propConn;

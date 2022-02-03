@@ -70,6 +70,7 @@ public abstract class Nodo implements INodo{
 		if(vicino.getPossessore()== possessore) {
 			check=false;
 		}
+		return check;
 		
 	}
 	public boolean conquista() {

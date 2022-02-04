@@ -13,7 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.bean.
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util.DbConnection;
 
 /**
- * AssetOwm query
+ * ObiettiviUser query
  * @author ME
  * @version 1.0
  * @see Obiettivi

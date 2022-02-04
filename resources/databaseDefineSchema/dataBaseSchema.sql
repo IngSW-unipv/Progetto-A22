@@ -232,70 +232,10 @@ BEGIN
     end if;
 END$$
 
-
-/*USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`ASET_Own_BEFORE_INSERT` $$
-USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`ASET_Own_BEFORE_INSERT` BEFORE INSERT ON `ASET_Own` FOR EACH ROW
-BEGIN
-declare manyGiocatore int;
-declare spesa int;
-SET manyGiocatore=(#soldiGiocatore
-		select MNY
-		from USER_ACCOUNT AS T1
-		where T1.USERNAME=new.USER_ACCOUNT_USERNAME);
-SET spesa=(#quanto spende nella tranzsazione
-			select Costo 
-            from Asset
-            where idAsset=new.ASSET_idAsset)*new.quantita;
-if manyGiocatore<spesa
-THEN 
-	KILL QUERY connection_id();
-ELSE 
-	UPDATE USER_ACCOUNT SET MNY=manyGiocatore-spesa 
-    WHERE USER_ACCOUNT.USERNAME=NEW.USER_ACCOUNT_USERNAME;
-end if;
-END$$
-
-
-USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`ASET_Own_BEFORE_UPDATE` $$
-USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`ASET_Own_BEFORE_UPDATE` BEFORE UPDATE ON `ASET_Own` FOR EACH ROW
-BEGIN
-declare manyGiocatore int;
-declare spesa int;
-declare QNT int;
-IF new.quantita>=OLD.quantita
-THEN
-	SET QNT=new.quantita-OLD.quantita;
-ELSE
-	SET QNT=0;
-END IF;
-SET manyGiocatore=(#soldiGiocatore
-		select MNY
-		from USER_ACCOUNT AS T1
-		where T1.USERNAME=new.USER_ACCOUNT_USERNAME);
-SET spesa=(#quanto spende nella tranzsazione
-			select Costo 
-            from Asset
-            where idAsset=new.ASSET_idAsset)*QNT;
-if manyGiocatore<spesa
-THEN 
-	KILL QUERY connection_id();
-ELSE 
-	UPDATE USER_ACCOUNT SET MNY=manyGiocatore-spesa 
-	WHERE USER_ACCOUNT.USERNAME=NEW.USER_ACCOUNT_USERNAME;
-		
-end if;
-END$$
-*/
-
 USE `ServerDomDB`$$
 DROP TRIGGER IF EXISTS `ServerDomDB`.`OBIETTIVI_USER_BEFORE_INSERT` $$
 USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`OBIETTIVI_USER_BEFORE_INSERT` BEFORE INSERT ON `OBIETTIVI_USER` FOR EACH ROW
-BEGIN
+CREATE DEFINER=`root`@`localhost` TRIGGER `OBIETTIVI_USER_BEFORE_INSERT` BEFORE INSERT ON `obiettivi_user` FOR EACH ROW BEGIN
 declare punteggioGiocatore int;
 declare punteggioObiettivo int;
 declare ricompensaData int;
@@ -307,11 +247,8 @@ SET punteggioGiocatore=(
 );
 SET punteggioObiettivo=(
 		SELECT PUNTEGGIO_OBIETTIVO 
-        FROM 
-        OBIETTIVI_USER 	AS T1
-        JOIN 
-		OB_PUNTEGGIO 	AS T2 
-			ON T2.OBIETTIVI_idObiettivo=new.OBIETTIVI_idObiettivo
+        from OB_PUNTEGGIO
+		where OBIETTIVI_idObiettivo=new.OBIETTIVI_idObiettivo
 );
 SET ricompensaData=(
 		SELECT ricompensa 

@@ -15,8 +15,8 @@ DROP SCHEMA IF EXISTS `ServerDomDB` ;
 -- -----------------------------------------------------
 -- Schema ServerDomDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ServerDomDB` DEFAULT CHARACTER SET utf8 ;
-USE `ServerDomDB` ;
+ CREATE SCHEMA IF NOT EXISTS `ServerDomDB` DEFAULT CHARACTER SET utf8 ;
+	USE `ServerDomDB` ;
 
 -- -----------------------------------------------------
 -- Table `ServerDomDB`.`USER_ACCOUNT`
@@ -71,7 +71,6 @@ CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ASET_Own` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `ServerDomDB`.`OBIETTIVI`

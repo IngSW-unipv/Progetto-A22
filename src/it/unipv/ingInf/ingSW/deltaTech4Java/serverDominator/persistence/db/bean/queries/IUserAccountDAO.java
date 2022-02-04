@@ -76,7 +76,7 @@ public interface IUserAccountDAO {
 	 * @param newPunteggio
 	 * @return
 	 */
-	public boolean updateUserAccountPunteggio(UserAccount us, String newPunteggio);
+	public boolean updateUserAccountPunteggio(UserAccount us, int newPunteggio);
 	
 	/**
 	 * aggiorna SOLDI dello user account 

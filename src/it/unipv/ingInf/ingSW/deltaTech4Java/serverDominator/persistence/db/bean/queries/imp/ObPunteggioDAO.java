@@ -23,6 +23,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.util.
 public class ObPunteggioDAO implements IObiettiviDAO {
 	private Connection conn;
 	private String propConn;
+	
 	public ObPunteggioDAO(String propConn) {
 		super();
 		this.propConn=propConn;

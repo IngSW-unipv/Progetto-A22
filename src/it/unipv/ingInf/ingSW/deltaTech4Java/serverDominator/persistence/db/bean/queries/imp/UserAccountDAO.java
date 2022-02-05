@@ -30,8 +30,41 @@ public class UserAccountDAO implements IUserAccountDAO {
 	
 	@Override
 	public boolean insetUserAccount(UserAccount us) {
-		// TODO Auto-generated method stub
-		return false;
+		conn=DbConnection.startConnection(conn,propConn);
+		PreparedStatement st1;
+
+		boolean esito=true;
+
+		try
+		{
+			String query1="INSERT USER_ACCOUNT (MNY, PUNTEGGIO, EMAIL,USERNAME,PASSW) VALUES(?,?,?,?,?)";
+			st1 = conn.prepareStatement(query1);
+			st1.setInt(1, us.getMny());
+			st1.setInt(2, us.getPunteggio());
+			st1.setString(3,us.getEmail());
+			st1.setString(4,us.getUsername());
+			st1.setString(5, us.getPassw());
+
+			st1.executeUpdate();
+			
+			ObiettiviUserDAO ob=new ObiettiviUserDAO(propConn);
+			
+			for(ObiettiviUser o : us.getObiettiviUsers()) {
+				ob.updateStatoObiettiviUserbyId(o);
+			}
+			
+			AssetOwnDAO as=new AssetOwnDAO(propConn);
+			for(AsetOwn a: us.getAsetOwns()) {
+				as.updateQuantityAssetOwnById(a);
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DbConnection.closeConnection(conn);
+		return esito;
 	}
 
 	@Override

@@ -148,16 +148,47 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 		PreparedStatement st1;
 
 		boolean esito=true;
+		if(this.existObiettiviUser(newOU)) {
+			try
+			{
+				String query1="UPDATE obiettivi_user SET STATO=? WHERE OBIETTIVI_idObiettivo=? AND USER_ACCOUNT_USERNAME=?";
+				st1 = conn.prepareStatement(query1);
+				st1.setString(1, newOU.getStato());
+				st1.setInt(2,newOU.getPrimaryKey().getObiettivo().getIdObiettivo());
+				st1.setString(3, newOU.getPrimaryKey().getUserAccount().getUsername());
+	
+				st1.executeUpdate();
+	
+			}catch (Exception e){
+				e.printStackTrace();
+				esito=false;
+			}
+		}
+		else {
+			esito=this.insertObiettiviUser(newOU);
+		}
+		DbConnection.closeConnection(conn);
+		return esito;
+	}
+	
+	public boolean existObiettiviUser(ObiettiviUser newOU) {
+		conn=DbConnection.startConnection(conn,propConn);
+		PreparedStatement st1;
+		ResultSet rs1;
+		boolean esito=true;
 
 		try
 		{
-			String query1="UPDATE obiettivi_user SET STATO=? WHERE OBIETTIVI_idObiettivo=? AND USER_ACCOUNT_USERNAME=?";
+			String query1="select count(*) FROM obiettivi_user WHERE OBIETTIVI_idObiettivo=? AND USER_ACCOUNT_USERNAME=?";
 			st1 = conn.prepareStatement(query1);
-			st1.setString(1, newOU.getStato());
-			st1.setInt(2,newOU.getPrimaryKey().getObiettivo().getIdObiettivo());
-			st1.setString(3, newOU.getPrimaryKey().getUserAccount().getUsername());
+			st1.setInt(1,newOU.getPrimaryKey().getObiettivo().getIdObiettivo());
+			st1.setString(2, newOU.getPrimaryKey().getUserAccount().getUsername());
 
-			st1.executeUpdate();
+			rs1=st1.executeQuery();
+			
+			if(rs1.getInt(1)<1) {
+				esito=false;
+			}
 
 		}catch (Exception e){
 			e.printStackTrace();

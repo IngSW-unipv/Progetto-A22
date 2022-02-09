@@ -15,8 +15,8 @@ DROP SCHEMA IF EXISTS `ServerDomDB` ;
 -- -----------------------------------------------------
 -- Schema ServerDomDB
 -- -----------------------------------------------------
- CREATE SCHEMA IF NOT EXISTS `ServerDomDB` DEFAULT CHARACTER SET utf8 ;
-	USE `ServerDomDB` ;
+CREATE SCHEMA IF NOT EXISTS `ServerDomDB` DEFAULT CHARACTER SET utf8 ;
+USE `ServerDomDB` ;
 
 -- -----------------------------------------------------
 -- Table `ServerDomDB`.`USER_ACCOUNT`
@@ -39,12 +39,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `ServerDomDB`.`ASSET` ;
 
 CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ASSET` (
-  `idAsset` INT NOT NULL AUTO_INCREMENT,
+  `idAsset` INT NOT NULL ,
   `COSTO` INT NULL DEFAULT 1000000,
   `NOME` VARCHAR(20) NULL,
   `DESCRIZIONE` VARCHAR(200) NULL,
   `LIVELLO` INT NOT NULL,
-  PRIMARY KEY (`idAsset`))
+  PRIMARY KEY (`idAsset`,`LIVELLO`))
 ENGINE = InnoDB;
 
 
@@ -63,14 +63,15 @@ CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ASET_Own` (
   CONSTRAINT `fk_ASET_Own_ASSET1`
     FOREIGN KEY (`ASSET_idAsset`)
     REFERENCES `ServerDomDB`.`ASSET` (`idAsset`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_ASET_Own_USER_ACCOUNT1`
     FOREIGN KEY (`USER_ACCOUNT_USERNAME`)
     REFERENCES `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `ServerDomDB`.`OBIETTIVI`
@@ -99,50 +100,13 @@ CREATE TABLE IF NOT EXISTS `ServerDomDB`.`OBIETTIVI_USER` (
   CONSTRAINT `fk_OBIETTIVI_USER_USER_ACCOUNT1`
     FOREIGN KEY (`USER_ACCOUNT_USERNAME`)
     REFERENCES `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_OBIETTIVI_USER_OBIETTIVI1`
     FOREIGN KEY (`OBIETTIVI_idObiettivo`)
     REFERENCES `ServerDomDB`.`OBIETTIVI` (`idObiettivo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ServerDomDB`.`VIRUS`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`VIRUS` ;
-
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`VIRUS` (
-  `CAPACITA_OFFENSIVA` INT NOT NULL,
-  `TIPO` VARCHAR(45) NULL,
-  `ASSET_idAsset` INT NOT NULL,
-  PRIMARY KEY (`ASSET_idAsset`),
-  INDEX `fk_VIRUS_ASSET_idx` (`ASSET_idAsset` ASC) VISIBLE,
-  CONSTRAINT `fk_VIRUS_ASSET`
-    FOREIGN KEY (`ASSET_idAsset`)
-    REFERENCES `ServerDomDB`.`ASSET` (`idAsset`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ServerDomDB`.`ANTIVIRUS`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`ANTIVIRUS` ;
-
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ANTIVIRUS` (
-  `CAPACITA_DIFENSIVA` INT NOT NULL,
-  `TIPO` VARCHAR(45) NULL,
-  `ASSET_idAsset` INT NOT NULL,
-  PRIMARY KEY (`ASSET_idAsset`),
-  CONSTRAINT `fk_ANTIVIRUS_ASSET1`
-    FOREIGN KEY (`ASSET_idAsset`)
-    REFERENCES `ServerDomDB`.`ASSET` (`idAsset`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -160,8 +124,8 @@ CREATE TABLE IF NOT EXISTS `ServerDomDB`.`OB_PUNTEGGIO` (
   CONSTRAINT `fk_OB_PUNTEGGIO_OBIETTIVI1`
     FOREIGN KEY (`OBIETTIVI_idObiettivo`)
     REFERENCES `ServerDomDB`.`OBIETTIVI` (`idObiettivo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 USE `ServerDomDB`;
@@ -169,9 +133,9 @@ USE `ServerDomDB`;
 DELIMITER $$
 
 USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`USER_ACCOUNT_BEFORE_UPDATE` $$
+DROP TRIGGER IF EXISTS `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` $$
 USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`USER_ACCOUNT_BEFORE_UPDATE` BEFORE UPDATE ON `USER_ACCOUNT` FOR EACH ROW
+CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` BEFORE UPDATE ON `USER_ACCOUNT` FOR EACH ROW
 BEGIN
 		IF 
 			OLD.PUNTEGGIO<>NEW.PUNTEGGIO
@@ -231,10 +195,12 @@ BEGIN
     end if;
 END$$
 
+
 USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`OBIETTIVI_USER_BEFORE_INSERT` $$
+DROP TRIGGER IF EXISTS `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO` $$
 USE `ServerDomDB`$$
-CREATE DEFINER=`root`@`localhost` TRIGGER `OBIETTIVI_USER_BEFORE_INSERT` BEFORE INSERT ON `obiettivi_user` FOR EACH ROW BEGIN
+CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO` BEFORE INSERT ON `OBIETTIVI_USER` FOR EACH ROW
+BEGIN
 declare punteggioGiocatore int;
 declare punteggioObiettivo int;
 declare ricompensaData int;
@@ -246,8 +212,8 @@ SET punteggioGiocatore=(
 );
 SET punteggioObiettivo=(
 		SELECT PUNTEGGIO_OBIETTIVO 
-        from OB_PUNTEGGIO
-		where OBIETTIVI_idObiettivo=new.OBIETTIVI_idObiettivo
+        FROM OB_PUNTEGGIO 	
+        WHERE OBIETTIVI_idObiettivo=new.OBIETTIVI_idObiettivo
 );
 SET ricompensaData=(
 		SELECT ricompensa 

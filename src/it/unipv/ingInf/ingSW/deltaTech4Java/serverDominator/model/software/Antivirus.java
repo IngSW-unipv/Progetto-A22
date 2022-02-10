@@ -18,7 +18,7 @@ public class Antivirus extends Software{
 		val_atk= 0;
 		val_def= super.getLivello();
 		super.setMax_lvl(5);
-		super.setId(0);
+		super.setNome("Antivirus");
 		super.setTemp_richiesto(20);
 		super.setQuantità(quantità);
 	}

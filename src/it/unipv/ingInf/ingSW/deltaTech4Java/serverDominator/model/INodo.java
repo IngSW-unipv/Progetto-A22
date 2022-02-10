@@ -1,5 +1,8 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
+
 /**
  * @author Luca Casto 
  * v1.0
@@ -7,8 +10,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
  */
 public interface INodo {
 	
-	public boolean conquista();
-	public void potenzia_risorsa();
-	public boolean attaccabile();
-	public void crea_software();
+	public void potenzia_risorsa(String nome);
+	public void crea_software(String nome, int quantità);
 }

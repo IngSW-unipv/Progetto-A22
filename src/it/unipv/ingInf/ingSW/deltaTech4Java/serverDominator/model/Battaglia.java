@@ -9,6 +9,10 @@ public class Battaglia {
 		this.attaccante=attaccante;
 		this.difensore=difensore;
 	}
+	public boolean attaccabile{
+		
+	}
+	
 	public boolean calcola_vincitore() {
 		
 	}

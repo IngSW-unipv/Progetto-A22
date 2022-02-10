@@ -11,7 +11,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
 public abstract class Software {
 	private int livello;
 	private int max_lvl;
-	private int id;
+	private String nome;
 	private int quantità;
 	private int temp_richiesto;
 	
@@ -39,12 +39,13 @@ public abstract class Software {
 		this.max_lvl = max_lvl;
 	}
 
-	public int getId() {
-		return id;
+	
+	public String getNome() {
+		return nome;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public int getQuantità() {

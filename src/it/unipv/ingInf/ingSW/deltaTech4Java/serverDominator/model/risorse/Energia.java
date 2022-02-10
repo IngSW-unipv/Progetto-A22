@@ -19,6 +19,7 @@ public class Energia extends Risorse{
 		if (livello_risorsa>= super.MAX_LVL) {
 			super.setLivello_risorsa(10);
 		}
+		super.setNome("Energia");
 		e_disponibile= INCREMENTATORE_EN *super.getLivello_risorsa();
 		super.setE_richiesta(0);
 		super.setTempo_richiesto(0);

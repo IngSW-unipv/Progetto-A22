@@ -16,7 +16,7 @@ public class Virus extends Software{
 	public Virus (int livello, int quantità) {
 		super(livello);
 		super.setMax_lvl(5);
-		super.setId(1);
+		super.setNome("Virus");
 		super.setTemp_richiesto(20);
 		val_def=0;
 		val_atk= super.getLivello();

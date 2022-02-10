@@ -10,6 +10,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 
 public abstract class Risorse {
 	private int livello_risorsa;
+	private String nome;
 	protected final int MAX_LVL=10;
 	private int e_richiesta;
 	private int tempo_richiesto;
@@ -46,6 +47,12 @@ public abstract class Risorse {
 		return livello_risorsa;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public void setLivello_risorsa(int livello_risorsa) {
 		this.livello_risorsa = livello_risorsa;
 	}

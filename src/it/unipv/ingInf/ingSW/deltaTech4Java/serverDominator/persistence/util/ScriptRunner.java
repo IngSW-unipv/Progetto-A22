@@ -47,9 +47,8 @@ public class ScriptRunner {
     private final boolean stopOnError;
     private final boolean autoCommit;
 
-    //@SuppressWarnings("UseOfSystemOutOrSystemErr")
     private PrintWriter logWriter = null;
-    //@SuppressWarnings("UseOfSystemOutOrSystemErr")
+    
     private PrintWriter errorLogWriter = null;
 
     private String delimiter = DEFAULT_DELIMITER;

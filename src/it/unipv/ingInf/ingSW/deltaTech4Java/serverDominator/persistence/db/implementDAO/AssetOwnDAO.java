@@ -86,7 +86,11 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 				AsetOwn d=new AsetOwn(c, rs1.getInt(3));
 				result.add(d);
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+			DbConnection.closeConnection(conn);
+			return null;
+			}
 
 		DbConnection.closeConnection(conn);
 		return result;

@@ -4,11 +4,11 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 public class UserAccountInfo {
-	private static final String PROP_USERNAME="UserAccount.username";
-	private static final String PROP_PASSWORD="UserAccount.passw";
-	private static final String PROP_MNY="UserAccount.mny";
-	private static final String PROP_PUNTEGGIO="UserAccount.punteggio";
-	private static final String FILE_NAME = "resources/config/persistence/UserAccount";
+	public static final String PROP_USERNAME="UserAccount.username";
+	public static final String PROP_PASSWORD="UserAccount.passw";
+	public static final String PROP_MNY="UserAccount.mny";
+	public static final String PROP_PUNTEGGIO="UserAccount.punteggio";
+	public static final String FILE_NAME = "resources/config/persistence/UserAccount";
 	
 	/**
 	 * salva Obiettivi user nel file predefinito

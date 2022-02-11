@@ -42,15 +42,15 @@ public class AssetOwnFileSystemDAO {
      * @param fileName
      * percorso del file in cui si vogliono salvare
      */
-    public static void saveInCsvFile(ArrayList<AsetOwn> asetOwns,String fileName) {
+    public static boolean saveInCsvFile(ArrayList<AsetOwn> asetOwns,String fileName) {
     	File fls=new File(fileName);
     	if (!fls.exists()) {
-    		saveFile(getAssetListWithoutDuplicate(asetOwns),fileName);
+    		return saveFile(getAssetListWithoutDuplicate(asetOwns),fileName);
     	}
     	else {
     		ArrayList<AsetOwn> ass=readAssetOwnFromCsvFile(fileName);
     		ass.addAll(asetOwns);
-    		saveFile(getAssetListWithoutDuplicate(ass), fileName);
+    		return saveFile(getAssetListWithoutDuplicate(ass), fileName);
     	}
     }
 
@@ -59,15 +59,15 @@ public class AssetOwnFileSystemDAO {
      * salva assetOwn n un percorso redefinito
      * @param asetOwns
      */
-    public static void saveInCsvFile(ArrayList<AsetOwn> asetOwns) {
+    public static boolean saveInCsvFile(ArrayList<AsetOwn> asetOwns) {
        	File fls=new File(FILE_NAME);
     	if (!fls.exists()) {
-    		saveFile(getAssetListWithoutDuplicate(asetOwns),FILE_NAME);
+    		return saveFile(getAssetListWithoutDuplicate(asetOwns),FILE_NAME);
     	}
     	else {
     		ArrayList<AsetOwn> ass=readAssetOwnFromCsvFile(FILE_NAME);
     		ass.addAll(asetOwns);
-    		saveFile(getAssetListWithoutDuplicate(ass), FILE_NAME);
+    		return saveFile(getAssetListWithoutDuplicate(ass), FILE_NAME);
     	}
     }
     /**
@@ -77,8 +77,9 @@ public class AssetOwnFileSystemDAO {
     public static ArrayList<AsetOwn> readAssetOwnFromCsvFile() {
     	return readAssetOwnFromCsvFile(FILE_NAME);
     }
-	private static void saveFile(ArrayList<AsetOwn> asetOwns,String fileName) {
-		
+    
+	private static boolean saveFile(ArrayList<AsetOwn> asetOwns,String fileName) {
+		boolean ris=true;
 		FileWriter fileWriter = null;
 		asetOwns=getAssetListWithoutDuplicate(asetOwns);
 		
@@ -105,7 +106,7 @@ public class AssetOwnFileSystemDAO {
 			}
 	
 		} catch (Exception e) {
-			
+			ris=false;
 			System.err.println("Error in CsvFileWriter !!!");
 			e.printStackTrace();
 			
@@ -122,6 +123,7 @@ public class AssetOwnFileSystemDAO {
 				e.printStackTrace();
 			}     
 		}
+		return ris;
 	}
 	
 	/**
@@ -148,11 +150,16 @@ public class AssetOwnFileSystemDAO {
 				String[] tokens = line.split(COMMA_DELIMITER);
 				
 				if (tokens.length == 6) {
-					
+					try {
 					Asset a =new Asset(Integer.valueOf(tokens[ID]),Integer.valueOf(tokens[COSTO]),tokens[NOME],tokens[DESCRIZIONE],Integer.valueOf(tokens[LIVELLO]));
 					AsetOwn ao = new AsetOwn(new AsetOwnId(a, null), Integer.valueOf(tokens[QUANTITA]));
 					AsetOwn.add(ao);
 					AsetOwn=getAssetListWithoutDuplicate(AsetOwn);
+					}
+					//ignora righe che generano ecezzioni
+					catch (Exception e) {
+						continue;
+					}
 				}
 			}
 		}catch (Exception e) {
@@ -177,6 +184,7 @@ public class AssetOwnFileSystemDAO {
 		
 		return AsetOwn;
 	}
+	
 
 	private static ArrayList<AsetOwn>  getAssetListWithoutDuplicate(ArrayList<AsetOwn> ass){
 		ArrayList<AsetOwn> newList=new ArrayList<AsetOwn>();
@@ -205,7 +213,7 @@ public class AssetOwnFileSystemDAO {
 						newList.get(i).getQuantita()!=newList.get(j).getQuantita()
 						) {
 							newList.get(i).setQuantita(newList.get(j).getQuantita());
-							newList.remove(j);
+							newList.remove(i);
 					}
 				}
 		}

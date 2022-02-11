@@ -7,8 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
 /**
  * @author ME
@@ -37,15 +38,15 @@ public class ObiettiviUserFileSistemDAO {
      * @param fileName
      * percorso del file in cui si vogliono salvare
      */
-    public static void saveObUserInCsvFile(ArrayList<ObiettiviUser> obUser,String fileName) {
+    public static boolean saveObUserInCsvFile(ArrayList<ObiettiviUser> obUser,String fileName) {
     	File fls=new File(fileName);
     	if (!fls.exists()) {
-    		saveFile(getObiettiviListWithoutDuplicate(obUser),fileName);
+    		return saveFile(getObiettiviListWithoutDuplicate(obUser),fileName);
     	}
     	else {
     		ArrayList<ObiettiviUser> ob=readObUserFromCsvFile(fileName);
     		ob.addAll(obUser);
-    		saveFile(getObiettiviListWithoutDuplicate(ob), fileName);
+    		return saveFile(getObiettiviListWithoutDuplicate(ob), fileName);
     	}
     }
 
@@ -55,20 +56,32 @@ public class ObiettiviUserFileSistemDAO {
      * @param obUser
      * Lista obiettivi user da salvate 
      */
-    public static void saveObUserInCsvFile(ArrayList<ObiettiviUser> obUser) {
+    public static boolean saveObUserInCsvFile(ArrayList<ObiettiviUser> obUser) {
        	File fls=new File(FILE_NAME);
     	if (!fls.exists()) {
-    		saveFile(getObiettiviListWithoutDuplicate(obUser),FILE_NAME);
+    		return saveFile(getObiettiviListWithoutDuplicate(obUser),FILE_NAME);
     	}
     	else {
     		ArrayList<ObiettiviUser> ass=readObUserFromCsvFile(FILE_NAME);
     		ass.addAll(obUser);
-    		saveFile(getObiettiviListWithoutDuplicate(ass), FILE_NAME);
+    		return saveFile(getObiettiviListWithoutDuplicate(ass), FILE_NAME);
     	}
     }
-
-	private static void saveFile(ArrayList<ObiettiviUser> obUser,String fileName) {
-		
+    
+    /**
+     * prendi obiettivi user da file csv predefinito
+     * @return
+     */
+    public static ArrayList<ObiettiviUser> readObUserFromCsvFile(){
+    	return readObUserFromCsvFile(FILE_NAME);
+    }
+    
+	/**
+	 * @param obUser
+	 * @param fileName
+	 */
+	private static boolean saveFile(ArrayList<ObiettiviUser> obUser,String fileName) {
+		boolean ris=true;
 		FileWriter fileWriter = null;
 		obUser=getObiettiviListWithoutDuplicate(obUser);
 		try {
@@ -90,7 +103,7 @@ public class ObiettiviUserFileSistemDAO {
 			}
 	
 		} catch (Exception e) {
-			
+			ris=false;
 			System.err.println("Error in CsvFileWriter !!!");
 			e.printStackTrace();
 			
@@ -102,11 +115,12 @@ public class ObiettiviUserFileSistemDAO {
 				fileWriter.flush();
 				fileWriter.close();
 				
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				System.err.println("Error while flushing/closing fileWriter !!!");
 				e.printStackTrace();
-			}     
+			}  
 		}
+		return ris;
 	}
 	
 	/**
@@ -132,11 +146,14 @@ public class ObiettiviUserFileSistemDAO {
 				String[] tokens = line.split(COMMA_DELIMITER);
 				
 				if (tokens.length == 4) {
-					
+					try {
 					Obiettivi o =new Obiettivi(Integer.valueOf(tokens[ID]),tokens[DESCRIZIONE],Integer.valueOf(tokens[RICOMPENSA]));
 					ObiettiviUser ou = new ObiettiviUser(o,null, tokens[STATO]);
 					ObiettiviUser.add(ou);
 					ObiettiviUser=getObiettiviListWithoutDuplicate(ObiettiviUser);
+					}catch (Exception e) {
+						continue;
+					}
 				}
 			}
 		}catch (Exception e) {
@@ -198,4 +215,13 @@ public class ObiettiviUserFileSistemDAO {
 		
 	}
 	
+	public static void main(String[] args) {
+		ArrayList<ObiettiviUser> obu=readObUserFromCsvFile();
+		obu.add(new ObiettiviUser());
+		saveObUserInCsvFile(obu);
+		for(ObiettiviUser o:obu)
+			o.setUserAccount(new UserAccount());
+		for(ObiettiviUser o:obu)
+			System.out.println(o.toString());
+	}
 }

@@ -1,2 +1,4 @@
 it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
 it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObPunteggioDAO
+obiettiviDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
+obiettiviDiPunteggioDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObPunteggioDAO

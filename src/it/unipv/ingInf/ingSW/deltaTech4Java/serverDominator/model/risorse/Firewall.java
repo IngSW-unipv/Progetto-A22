@@ -18,6 +18,7 @@ public class Firewall extends Risorse{
 		if (livello_risorsa>= super.MAX_LVL) {
 			super.setLivello_risorsa(MAX_FIREWALL);
 		}
+		super.setNome("Firewall");
 		this.effetto();
 	}
 /**metodo che per ogni livello della risorsa specifica le sue caratteristiche

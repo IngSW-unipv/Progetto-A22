@@ -50,25 +50,21 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccount(UserAccount us) {
-		if (	
-				(
-					UserAccountInfo.saveUserAccountData(us)
-					&&
-					ObiettiviUserFileSistemDAO.saveObUserInCsvFile(us.getObiettiviUsers())
-					&&
-					AssetOwnFileSystemDAO.saveInCsvFile(us.getAsetOwns())
-				)
-					||
-					this.us.updateUserAccount(us)
-			) return true;
-			
-			return false;
+		return ((UserAccountInfo.saveUserAccountData(us) && ObiettiviUserFileSistemDAO.saveObUserInCsvFile(us.getObiettiviUsers())&&AssetOwnFileSystemDAO.saveInCsvFile(us.getAsetOwns()))|| this.us.updateUserAccount(us)); 
 	}
 
 	@Override
 	public boolean updateUserAccountUsername(UserAccount us, String newUsername) {
-		return this.us.updateUserAccountUsername(us,newUsername);
-			
+		boolean ris=true;
+		if( !this.us.updateUserAccountUsername(us,newUsername)) {
+			ris=false;
+		}
+		else {
+			UserAccount usa=UserAccountInfo.getUserAccountData();
+			usa.setUsername(newUsername);
+			UserAccountInfo.saveUserAccountData(usa);
+		}
+		return ris;
 	}
 
 	@Override
@@ -90,7 +86,16 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean chengeUserAccountPassword(UserAccount us, String newPassword) {
-		return this.us.chengeUserAccountPassword(us, newPassword);
+		boolean ris=true;
+		if(!this.us.chengeUserAccountPassword(us, newPassword)) {
+			ris=false;
+		}
+		else {
+			UserAccount usa=UserAccountInfo.getUserAccountData();
+			usa.setPassw(newPassword);
+			UserAccountInfo.saveUserAccountData(usa);
+		}
+		return ris;
 	}
 
 	@Override
@@ -109,38 +114,51 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	@Override
 	public ArrayList<ObiettiviUser> getObiettiviUserByUserAccount(UserAccount us) {
 		UserAccount uss=UserAccountInfo.getUserAccountData();
-		if(this.us.getObiettiviUserByUserAccount(us)==null&&us.getUsername()==uss.getUsername()&&us.getPassw()==uss.getPassw()) {
-			ArrayList<ObiettiviUser> ObUs=ObiettiviUserFileSistemDAO.readObUserFromCsvFile();
+		ArrayList<ObiettiviUser> ObUs;
+		ObUs=this.us.getObiettiviUserByUserAccount(us);
+		if(ObUs==null&&us.getUsername()==uss.getUsername()&&us.getPassw()==uss.getPassw()) {
+			ObUs=ObiettiviUserFileSistemDAO.readObUserFromCsvFile();
 			for(ObiettiviUser obs: ObUs) {
 				obs.setUserAccount(uss);
 			}
-			return ObUs;
 		}
-		return this.us.getObiettiviUserByUserAccount(us);
+		else {
+			ObiettiviUserFileSistemDAO.saveObUserInCsvFile(ObUs);
+		}
+		return ObUs;
 	}
 
-	@SuppressWarnings("finally")
 	@Override
 	public boolean updateUserAccountPunteggio(UserAccount us, int newPunteggio) {
-		
+		boolean ris=true;
 		try {
-			PropertiesFile.addPropertieInFile(UserAccountInfo.PROP_PUNTEGGIO, String.valueOf(newPunteggio),UserAccountInfo.FILE_NAME);
-		} 
-		finally {
-			return this.us.updateUserAccountPunteggio(us, newPunteggio);
+			ris=PropertiesFile.addPropertieInFile(UserAccountInfo.PROP_PUNTEGGIO, String.valueOf(newPunteggio),UserAccountInfo.FILE_NAME);
+		} catch (Exception e) {
+			ris=false;
 		}
+		return (this.us.updateUserAccountPunteggio(us, newPunteggio)||ris);
 		
 	}
 
-	@SuppressWarnings("finally")
 	@Override
 	public boolean updateUserAccountMny(UserAccount us, int newmny) {
+		boolean ris=true;
+		if(!this.us.updateUserAccountMny(us, newmny)){
+			try {
+				ris=PropertiesFile.addPropertieInFile(UserAccountInfo.PROP_MNY, String.valueOf(newmny),UserAccountInfo.FILE_NAME);
+			} 
+			catch (Exception e) {
+				ris=false;
+				System.err.println("impossibile aggiornare filesystem");
+			}
+		}
 		try {
 			PropertiesFile.addPropertieInFile(UserAccountInfo.PROP_MNY, String.valueOf(newmny),UserAccountInfo.FILE_NAME);
 		} 
-		finally {
-			return this.us.updateUserAccountMny(us, newmny);
+		catch (Exception e) {
+			System.err.println("impossibile aggiornare filesystem");
 		}
+		return ris;
 	}
 
 }

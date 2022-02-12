@@ -21,11 +21,11 @@ public interface IAssetOwnDAO {
 	
 	/**
 	 * seleziona tutti gli asset posseduti dal UserAcocunt
-	 * @param assInput
+	 * @param user
 	 * account del giocatore di cui si vogliono conoscere gli assetOwn
 	 * @return tutti gli asset posseduti da assInput
 	 */
-	public ArrayList<AsetOwn> selectByUserOwner(UserAccount assInput);
+	public ArrayList<AsetOwn> selectByUserOwner(UserAccount user);
 	
 	/**
 	 * Seleziona Tutti i possessori dell'asset 

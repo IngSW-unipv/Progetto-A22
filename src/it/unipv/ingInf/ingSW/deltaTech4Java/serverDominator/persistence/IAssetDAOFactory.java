@@ -4,6 +4,10 @@ import java.lang.reflect.Constructor;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class IAssetDAOFactory {
 	private static IAssetDAO ass=null;
 	

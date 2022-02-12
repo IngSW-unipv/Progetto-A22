@@ -10,7 +10,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
 
 /**
  * <h1>La facciata a cui si deve riferire se si vogliono fare operazione sulla persistenza </h1></br>
- * @author ME 
+ * @author TawaHabib 
  * @version 1.0
  * @see IAssetDAO
  * @see IAssetOwnDAO
@@ -242,7 +242,7 @@ public class PersistenceFacade{
 	 * @see ObiettiviUser
 	 * @return
 	 * Vero se l'assegnazione è andata a buon fine 
-	 * Fasso se l'assegnazione è fallita
+	 * </br>Fasso se l'assegnazione è fallita
 	 */
 	public boolean insertObiettiviUser(ObiettiviUser o){
 		return this.obiettiviUser.insertObiettiviUser(o);

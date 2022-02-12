@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Qualunque obiettivo raggiungibele da gioco
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Obiettivi
  * @see ArrayList

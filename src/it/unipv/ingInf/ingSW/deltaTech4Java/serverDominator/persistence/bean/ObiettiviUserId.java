@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Identificativo composto ObiettiviUser
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see UserAccount
  * @see Obiettivi

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 /**
  * stabilire connessione con il db
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see PropertiesFile
  * @see Properties
@@ -51,7 +51,7 @@ public class DbConnection {
 		try
 		{
 			Class.forName(DbDriver);
-			conn = DriverManager.getConnection(DbURL, username, password);// Apertura connessione
+			conn = DriverManager.getConnection(DbURL, username, password);
 		}
 		catch (Exception e)
 		{

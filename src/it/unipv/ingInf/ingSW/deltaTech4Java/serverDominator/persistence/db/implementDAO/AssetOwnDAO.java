@@ -15,7 +15,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbC
 
 /**
  * AssetOwm query
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see AsetOwn
  * @see UserAcount

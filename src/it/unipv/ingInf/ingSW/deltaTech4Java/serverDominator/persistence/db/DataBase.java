@@ -1,14 +1,23 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db;
 
+import java.sql.Connection;
+
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ExecuteSQLfiel;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * Classe per creare il database MySQL
+ * @author TawaHabib
+ *
+ */
 public class DataBase {
 	
+
+	private static final String CONFIGURATION_FILE_NAME ="resources/config/persistence/dataBase/connWith_root";
+	
 	private static final String FIRST_CONFIGURATION_PROPERTIE_NAME ="primaConfigurazione";
-	
-	private static final String FIRST_CONFIGURATION_PROPERTIE_FILE_NAME ="resources/config/persistence/dataBase/connWith_root";
-	
+		
 	private static final String CREATE_SCHEMA_FILE_NAME ="resources/databaseDefineSchema/dataBaseSchema.sql";
 	
 	private static final String POPOLA_SCHEMA_FILE_NAME ="resources/databaseDefineSchema/popolaSchema.sql";
@@ -19,17 +28,75 @@ public class DataBase {
 	
 	private static final String FIRST_CONFIGURATION_PASSWORD_PROPERTIE ="password";
 	
-	public static boolean createDataBase() {
+	/**
+	 * Metodo per capire se è la prima volta che l'utente accede al gioco  oppure no;
+	 * </br>
+	 * @return
+	 * Vero--> se è il primo acesso quindi se si deve creare il dataBase
+	 * </br>Flaso--> se non è il primo acesso quindi se l'utente ha gia creato ilk database tramite l'appliativo
+	 */
+	@SuppressWarnings("unused")
+	public static boolean isItTheFirstTime() {
+		Connection conn=null;
+		DbConnection.startConnection(conn, "resources/config/persistence/dataBase/connWith_sd_sys");
+		int a ;
 		try {
-			String us=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+			a =Integer.getInteger(PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PROPERTIE_NAME, CONFIGURATION_FILE_NAME));
+			if(a!=1)
+				return false;
+		}catch (Exception e) {
+			if(conn!=null) 
+				return false;
+		}		
+		return true;
+	}
+	
+	/* 
+	 * Permessi che l user deve avere per creare il db:
+	 * Alter, create, create user, drop, grant option, insert, references, select, trigger, update	 *
+	 */
+	/**
+	 * Metodo per creare il database
+	 * @param ip 
+	 * </br>Indirizzo ip dell'stanze in cui si deve creare il data base
+	 * @param port 
+	 * </br>Numero di porta 
+	 * @param Username
+	 * </br>Username con cui accedere per creare il db
+	 * @param password
+	 * </br>password associata allo username con cui accedere per creare il db
+	 * @return
+	 * Vero se il db è stato creato o se il db esiste già
+	 * </br>Falso se il db non è stato reato
+	 */
+	public static boolean createDataBase(String ip, String port,String Username,String password) {
+		if(!setConfigParameter(ip, port, Username, password)) {
+			System.err.println("Impossibile accettare i dati inseriti");
+			return false;
+		}
+		return createDataBase();
+	}
+	
+	
+	
+	private static boolean setConfigParameter(String ip, String port,String Username,String password) {
+		if(!setMySqlUrl(ip, port)||!setPassword(password)||!setUsername(Username))
+			return false;
+		return true;
+	}
+	
+	
+	private static boolean createDataBase() {
+		try {
+			String us=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, CONFIGURATION_FILE_NAME);
 			if(us.length()<2) {
-				System.err.println("controlla username");
+				System.err.println("username sembra troppo corto");
 			}
 		} catch (Exception e) {
 			System.err.println("problem with configuration file");
 		}
 		try {
-			String url=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+			String url=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, CONFIGURATION_FILE_NAME);
 			if(url.length()<18) {
 				System.err.println("Url sembra scoretta");
 			}
@@ -37,44 +104,36 @@ public class DataBase {
 			System.err.println("problem with configuration file");
 		}
 		try {
-			String pass=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+			String pass=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, CONFIGURATION_FILE_NAME);
 			if(pass.length()<1) {
 				System.err.println("password non impostata");
 			}
 		} catch (Exception e) {
 			System.err.println("problem with configuration file");
 		}
-		Integer a=0;
-		try {
-			a=Integer.getInteger(PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PROPERTIE_NAME, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME));
-		} catch (Exception e) {
-			System.err.println("problem with configuration file");
-		}
-		switch (a) {
-		case 1: {
+		
+		if (isItTheFirstTime())
+		{
 			try {
-				ExecuteSQLfiel.executeSqlFile(CREATE_SCHEMA_FILE_NAME, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+				ExecuteSQLfiel.executeSqlFile(CREATE_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
 			} catch (Exception e) {
 				System.err.println("problemi when i tray to create schema");
 				return false;
 			}
 			try {
-				ExecuteSQLfiel.executeSqlFile(POPOLA_SCHEMA_FILE_NAME, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
-				PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PROPERTIE_NAME, "55", FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+				ExecuteSQLfiel.executeSqlFile(POPOLA_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
+				PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PROPERTIE_NAME, "55", CONFIGURATION_FILE_NAME);
 			} catch (Exception e) {
 				System.err.println("problem when i try to populates schema");
 			}		
 		}
-		default:
-			System.err.println("database already exists");
-		}
 		return true;
 	}
 	
-	public static boolean setMySqlUrl(String ip, String port) {
+	private static boolean setMySqlUrl(String ip, String port) {
 		String url="jdbc:mysql://"+ip+":"+port;
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url, CONFIGURATION_FILE_NAME);
 			return true;
 		} catch (Exception e) {
 			System.err.println("CANNOT SAVE");
@@ -82,9 +141,9 @@ public class DataBase {
 		}
 	}
 	
-	public static boolean setUsername(String Username) {
+	private static boolean setUsername(String Username) {
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, Username, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, Username, CONFIGURATION_FILE_NAME);
 			return true;
 		} catch (Exception e) {
 			System.err.println("CANNOT SAVE");
@@ -92,9 +151,9 @@ public class DataBase {
 		}	
 	}
 	
-	public static boolean setPassword(String password) {
+	private static boolean setPassword(String password) {
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PASSWORD_PROPERTIE, password, FIRST_CONFIGURATION_PROPERTIE_FILE_NAME);
+			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PASSWORD_PROPERTIE, password, CONFIGURATION_FILE_NAME);
 			return true;
 		} catch (Exception e) {
 			System.err.println("CANNOT SAVE");

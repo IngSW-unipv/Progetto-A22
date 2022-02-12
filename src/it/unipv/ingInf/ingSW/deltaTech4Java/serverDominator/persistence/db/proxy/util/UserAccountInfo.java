@@ -3,6 +3,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.prox
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class UserAccountInfo {
 	public static final String PROP_USERNAME="UserAccount.username";
 	public static final String PROP_PASSWORD="UserAccount.passw";

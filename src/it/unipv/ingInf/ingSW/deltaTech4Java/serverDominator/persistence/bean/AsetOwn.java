@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Relazione che associa gli asset al UserAccount
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Asset
  * @see AssetOwnId

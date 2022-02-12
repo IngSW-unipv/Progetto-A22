@@ -13,7 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Ass
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
 /**
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see AsetOwn
  */

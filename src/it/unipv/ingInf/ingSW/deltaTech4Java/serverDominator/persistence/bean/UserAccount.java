@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * UserAccount
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Obiettivi
  * @see AsetOwn

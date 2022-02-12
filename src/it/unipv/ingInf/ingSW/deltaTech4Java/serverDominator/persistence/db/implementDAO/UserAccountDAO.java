@@ -12,7 +12,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 /**
 * UserAccount query
-* @author ME
+* @author TawaHabib
 * @version 1.0
 * @see AsetOwn
 * @see ObiettiviUserDAO

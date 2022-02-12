@@ -6,6 +6,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObietti
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class DBObiettiviDOAFactory {
 	
 	private static IObiettiviDAO obiettiviDiPunteggioDAO;

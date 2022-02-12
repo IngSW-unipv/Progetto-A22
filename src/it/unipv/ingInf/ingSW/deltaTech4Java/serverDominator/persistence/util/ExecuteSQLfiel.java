@@ -12,7 +12,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.exeption
 
 
 /**
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Connection
  * @see DbConnection

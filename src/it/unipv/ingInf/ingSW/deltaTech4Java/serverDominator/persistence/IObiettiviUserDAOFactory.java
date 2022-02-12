@@ -5,6 +5,10 @@ import java.lang.reflect.Constructor;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class IObiettiviUserDAOFactory {
 	private static IObiettiviUserDAO Own=null;
 	

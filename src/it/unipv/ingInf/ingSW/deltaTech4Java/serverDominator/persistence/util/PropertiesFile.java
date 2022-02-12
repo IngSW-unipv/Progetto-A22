@@ -8,7 +8,7 @@ import java.util.Properties;
 
 /**
  * Acesso a un prop file  
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Properties
  * @see FileReader
@@ -49,9 +49,9 @@ public class PropertiesFile {
 	/**
 	 * Salva le proprità passate in un file. 
 	 * Scenari possibibli (che vengono gestiti):
-	 * 1: file esiste vuoto	--> carico le prop passate
-	 * 2: file esiste e dentro ha delle prop --> carico lo prop passate e se ci sono conflitti valgono le nuove prop
-	 * 3: file non esiste--> creao il file com percorso passato e carico le prop 
+	 * </BR>1: file esiste vuoto	--> carico le prop passate
+	 * </BR>2: file esiste e dentro ha delle prop --> carico lo prop passate e se ci sono conflitti valgono le nuove prop
+	 * </BR>3: file non esiste--> creao il file com percorso passato e carico le prop 
 	 * @param propertie
 	 * le proprietà
 	 * @param perco

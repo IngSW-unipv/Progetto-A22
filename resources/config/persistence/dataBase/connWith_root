@@ -1,7 +1,5 @@
 primaConfigurazione=1
 driver=com.mysql.cj.jdbc.Driver
-url=jdbc:mysql://
-ip=
-port=
+url=
 username=
 password=

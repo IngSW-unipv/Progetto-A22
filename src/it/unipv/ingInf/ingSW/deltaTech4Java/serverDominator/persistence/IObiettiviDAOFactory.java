@@ -3,6 +3,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class IObiettiviDAOFactory {
 	
 	public static IObiettiviDAO getIObiettiviDAO() {

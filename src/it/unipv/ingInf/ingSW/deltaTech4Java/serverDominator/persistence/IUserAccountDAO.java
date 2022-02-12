@@ -7,7 +7,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obi
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 /**
  * Obiettivi query
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see UserAccount
  * @see ObiettiviUser

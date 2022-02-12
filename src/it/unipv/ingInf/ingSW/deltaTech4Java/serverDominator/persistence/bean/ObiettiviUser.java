@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Obiettivi di punteggio
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see ObiettiviUserId
  */

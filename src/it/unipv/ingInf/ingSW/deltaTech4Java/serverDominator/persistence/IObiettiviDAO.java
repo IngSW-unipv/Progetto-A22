@@ -6,7 +6,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obi
 
 /**
  * Obiettivi query
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Obiettivi
  *

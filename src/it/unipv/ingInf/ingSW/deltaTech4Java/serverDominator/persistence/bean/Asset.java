@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Qualunque asset aquistabile nel gioco 
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see AsetOwn
  */

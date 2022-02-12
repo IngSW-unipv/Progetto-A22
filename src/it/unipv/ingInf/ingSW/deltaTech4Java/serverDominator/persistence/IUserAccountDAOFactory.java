@@ -4,6 +4,10 @@ import java.lang.reflect.Constructor;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class IUserAccountDAOFactory {
 	private static IUserAccountDAO usDao;
 	private static final String PROPERTYNAME="userAccountDAO.class.name";

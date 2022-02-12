@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Identificativo composto di asset own
- * @author ME
+ * @author TawaHabib
  * @version 1.0
  * @see Asset
  * @see UserAccount

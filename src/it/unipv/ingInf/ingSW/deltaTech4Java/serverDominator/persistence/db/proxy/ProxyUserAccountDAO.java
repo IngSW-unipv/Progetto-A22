@@ -12,6 +12,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.proxy
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.proxy.util.UserAccountInfo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * @author TawaHabib
+ *
+ */
 public class ProxyUserAccountDAO implements IUserAccountDAO {
 	private UserAccountDAO us;
 	

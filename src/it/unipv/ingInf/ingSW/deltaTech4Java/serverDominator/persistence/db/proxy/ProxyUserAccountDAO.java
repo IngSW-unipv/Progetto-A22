@@ -70,18 +70,17 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	@Override
 	public UserAccount getUserAccountById(UserAccount us) {
 		UserAccount uss=this.us.getUserAccountById(us);
-		if(uss==null) {
-			us=UserAccountInfo.getUserAccountData();
-			us.setAsetOwns(AssetOwnFileSystemDAO.readAssetOwnFromCsvFile());
-			us.setObiettiviUsers(ObiettiviUserFileSistemDAO.readObUserFromCsvFile());
-			return us;
+		
+		if(uss==null&&us.getUsername().equals(UserAccountInfo.getUserAccountData().getUsername())&&us.getPassw().equals(UserAccountInfo.getUserAccountData().getPassw())) {
+			uss=UserAccountInfo.getUserAccountData();
+			uss.setAsetOwns(AssetOwnFileSystemDAO.readAssetOwnFromCsvFile());
+			uss.setObiettiviUsers(ObiettiviUserFileSistemDAO.readObUserFromCsvFile());
+			return uss;
+		}else {
+			if(uss!=null)
+				UserAccountInfo.saveUserAccountData(uss);
 		}
-		UserAccountInfo.saveUserAccountData(uss);
-		ObiettiviUserFileSistemDAO.saveObUserInCsvFile(uss.getObiettiviUsers());
-		AssetOwnFileSystemDAO.saveInCsvFile(uss.getAsetOwns());
-		return uss;
-			
-			
+		return uss;			
 	}
 
 	@Override
@@ -91,7 +90,8 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 			ris=false;
 		}
 		else {
-			UserAccount usa=UserAccountInfo.getUserAccountData();
+			UserAccount usa=new UserAccount();
+			usa=UserAccountInfo.getUserAccountData();
 			usa.setPassw(newPassword);
 			UserAccountInfo.saveUserAccountData(usa);
 		}

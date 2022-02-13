@@ -1,5 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.proxy.util;
 
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
@@ -44,8 +45,8 @@ public class UserAccountInfo {
 		try {
 			PropertiesFile.addPropertieInFile(PROP_USERNAME, us.getUsername(), fls);
 			PropertiesFile.addPropertieInFile(PROP_PASSWORD, us.getPassw(), fls);
-			PropertiesFile.addPropertieInFile(PROP_MNY, String.valueOf(us.getMny()), fls);
-			PropertiesFile.addPropertieInFile(PROP_PUNTEGGIO, String.valueOf(us.getPunteggio()), fls);
+			PropertiesFile.addPropertieInFile(PROP_MNY, String.valueOf(us.getMny()!=null?us.getMny().intValue():0), fls);
+			PropertiesFile.addPropertieInFile(PROP_PUNTEGGIO, String.valueOf((us.getPunteggio()!=null ? us.getPunteggio().intValue() :0)), fls);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,8 +65,9 @@ public class UserAccountInfo {
 			UserAccount uss=new UserAccount(PropertiesFile.getPropertieFromFile(PROP_USERNAME, fls));
 			
 			uss.setPassw(PropertiesFile.getPropertieFromFile(PROP_PASSWORD, fls));
-			uss.setPunteggio(Integer.getInteger(PropertiesFile.getPropertieFromFile(PROP_PUNTEGGIO, fls)));
-			Integer a=Integer.getInteger(PropertiesFile.getPropertieFromFile(PROP_MNY, fls));
+			String punteggio=PropertiesFile.getPropertieFromFile(PROP_PUNTEGGIO, fls);
+			uss.setPunteggio(Integer.valueOf(punteggio));
+			Integer a=Integer.valueOf(PropertiesFile.getPropertieFromFile(PROP_MNY, fls));
 			uss.setMny(a);
 			
 			return uss;
@@ -77,5 +79,8 @@ public class UserAccountInfo {
 	}
 	public static void main(String[] args) {
 		UserAccount us=getUserAccountData();
+		System.out.println(us.toString());
+		System.out.println("%d"+ Integer.valueOf("5412"));
 	}
+	
 }

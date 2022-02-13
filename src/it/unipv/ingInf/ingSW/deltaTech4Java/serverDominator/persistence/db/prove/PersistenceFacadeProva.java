@@ -9,15 +9,17 @@ public class PersistenceFacadeProva {
 
 	public static void main(String[] args) {
 		PersistenceFacade p=PersistenceFacade.getInstance();
-		UserAccount tawa= new UserAccount("Tawa","123456789");
+		
+		UserAccount tawa= new UserAccount("Tawa","g1513g456789");//getuserAccount from db
 		tawa=p.getUserAccountById(tawa);
-		tawa.toString();
+		System.out.println(tawa.toString());
 		for(ObiettiviUser o: tawa.getObiettiviUsers()) {
-			o.toString();
+			System.out.println(o.toString());
 		}
 		for(AsetOwn a:tawa.getAsetOwns()) {
-			a.toString();
+			System.out.println(a.toString());;
 		}
+		if(p.chengeUserAccountPassword(tawa, "g1513g456789")) System.out.println("ok");;
 	}
 
 }

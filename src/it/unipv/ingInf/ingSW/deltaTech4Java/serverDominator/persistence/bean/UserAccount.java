@@ -26,7 +26,7 @@ public class UserAccount {
     /**
      * Soldi associati al giocatore 
      */
-	private int mny;
+	private Integer mny;
     
     /**
      * Punteggio del giocatore 
@@ -101,7 +101,7 @@ public class UserAccount {
 	 * @param username
 	 * @param mny
 	 */
-	public UserAccount(String username, int mny) {
+	public UserAccount(String username, Integer mny) {
 		this.username = username;
 		this.mny = mny;
 	}
@@ -121,7 +121,7 @@ public class UserAccount {
 	 * @param obiettiviUsers
 	 * Obiettivi Dello UserAccounts
 	 */
-	public UserAccount(String username, int mny, Integer punteggio, 
+	public UserAccount(String username, Integer mny, Integer punteggio, 
 			ArrayList<AsetOwn> asetOwns, ArrayList<ObiettiviUser> obiettiviUsers) {
 		this.username = username;
 		this.mny = mny;
@@ -149,7 +149,7 @@ public class UserAccount {
 	/**
 	 * @return Soldi in possesso dello User Account
 	 */
-	public int getMny() {
+	public Integer getMny() {
 		return this.mny;
 	}
 
@@ -157,7 +157,7 @@ public class UserAccount {
 	 * Setta soldi in possesso dello User Account
 	 * @param mny
 	 */
-	public void setMny(int mny) {
+	public void setMny(Integer mny) {
 		this.mny = mny;
 	}
 
@@ -273,10 +273,12 @@ public class UserAccount {
 	public void setPassw(String passw) {
 		this.passw = passw;
 	}
-
+	
+	
 	@Override
-	public int hashCode() {
-		return Objects.hash(email, mny, passw, punteggio, username);
+	public String toString() {
+		return "UserAccount [username=" + username + ", mny=" + mny + ", punteggio=" + punteggio + ", email=" + email
+				+ ", passw=" + passw + "]";
 	}
 
 	@Override

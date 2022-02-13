@@ -124,11 +124,6 @@ public class ObiettiviUser {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(primaryKey, stato);
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

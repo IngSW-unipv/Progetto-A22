@@ -22,7 +22,7 @@ public class AsetOwn{
 	/**
 	 * Quantita posseduta
 	 */
-	private int quantita;
+	private Integer quantita;
 
 	/**
 	 * Crea AssetOwn vuoto
@@ -46,7 +46,7 @@ public class AsetOwn{
 	 * @param userAccount
 	 * @param quantita
 	 */
-	public AsetOwn(AsetOwnId id, int quantita) {
+	public AsetOwn(AsetOwnId id, Integer quantita) {
 		this.primaryKey  = id;
 		this.quantita = quantita;
 	}
@@ -97,7 +97,7 @@ public class AsetOwn{
 	 * @return quantita posseduta
 	 */
 	
-	public int getQuantita() {
+	public Integer getQuantita() {
 		return this.quantita;
 	}
 
@@ -105,18 +105,13 @@ public class AsetOwn{
 	 * setta quantita
 	 * @param quantita
 	 */
-	public void setQuantita(int quantita) {
+	public void setQuantita(Integer quantita) {
 		this.quantita = quantita;
 	}
 
 	@Override
 	public String toString() {
 		return "AsetOwn [quantita=" + quantita + "]"+ primaryKey.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(primaryKey, quantita);
 	}
 
 	@Override

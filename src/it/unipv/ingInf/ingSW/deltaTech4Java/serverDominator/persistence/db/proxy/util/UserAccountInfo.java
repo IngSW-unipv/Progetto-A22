@@ -10,7 +10,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
 public class UserAccountInfo {
 	public static final String PROP_USERNAME="UserAccount.username";
 	public static final String PROP_PASSWORD="UserAccount.passw";
-	public static final String PROP_MNY="UserAccount.mny";
+	public static final String PROP_MNY="UserAccount.mon";
 	public static final String PROP_PUNTEGGIO="UserAccount.punteggio";
 	public static final String FILE_NAME = "resources/config/persistence/UserAccount";
 	
@@ -62,14 +62,20 @@ public class UserAccountInfo {
 	public static UserAccount getUserAccountData(String fls) {
 		try {
 			UserAccount uss=new UserAccount(PropertiesFile.getPropertieFromFile(PROP_USERNAME, fls));
-			uss.setMny(Integer.getInteger(PropertiesFile.getPropertieFromFile(PROP_MNY, fls)));
+			
 			uss.setPassw(PropertiesFile.getPropertieFromFile(PROP_PASSWORD, fls));
 			uss.setPunteggio(Integer.getInteger(PropertiesFile.getPropertieFromFile(PROP_PUNTEGGIO, fls)));
+			Integer a=Integer.getInteger(PropertiesFile.getPropertieFromFile(PROP_MNY, fls));
+			uss.setMny(a);
+			
 			return uss;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public static void main(String[] args) {
+		UserAccount us=getUserAccountData();
 	}
 }

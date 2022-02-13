@@ -15,12 +15,12 @@ public class Asset{
 	/**
 	 * identificativo dell'asset
 	 */
-	private int idAsset;
+	private Integer idAsset;
 	
 	/**
 	 * costo dell'asset
 	 */
-	private int costo;
+	private Integer costo;
 	
 	/**
 	 * nome dell'asset
@@ -35,7 +35,7 @@ public class Asset{
 	/**
 	 * livello dell'asset
 	 */
-	private int livello;
+	private Integer livello;
 	
 	/**
 	 * Associazione uno a molti con AssetOun
@@ -54,7 +54,7 @@ public class Asset{
 	 * @param livello
 	 * @param costo
 	 */
-	public Asset(int idAsset, int livello, int costo) {
+	public Asset(Integer idAsset, Integer livello, Integer costo) {
 		this.idAsset = idAsset;
 		this.livello = livello;
 		this.costo=costo;
@@ -68,7 +68,7 @@ public class Asset{
 	 * @param descrizione
 	 * @param livello
 	 */
-	public Asset(int idAsset, int costo, String nome, String descrizione, int livello) {
+	public Asset(Integer idAsset, Integer costo, String nome, String descrizione, Integer livello) {
 		this.idAsset = idAsset;
 		this.costo = costo;
 		this.nome = nome;
@@ -80,7 +80,7 @@ public class Asset{
 	 * @return id dell'asset
 	 */
 
-	public int getIdAsset() {
+	public Integer getIdAsset() {
 		return this.idAsset;
 	}
 
@@ -88,14 +88,14 @@ public class Asset{
 	 * settare l'id dell'asset
 	 * @param idAsset
 	 */
-	public void setIdAsset(int idAsset) {
+	public void setIdAsset(Integer idAsset) {
 		this.idAsset = idAsset;
 	}
 
 	/**
 	 * @return Costo dell'asset
 	 */
-	public int getCosto() {
+	public Integer getCosto() {
 		return this.costo;
 	}
 
@@ -103,7 +103,7 @@ public class Asset{
 	 * settare costo dell'asset
 	 * @param costo
 	 */
-	public void setCosto(int costo) {
+	public void setCosto(Integer costo) {
 		this.costo = costo;
 	}
 
@@ -140,7 +140,7 @@ public class Asset{
 	/**
 	 * @return livello dell'asset
 	 */
-	public int getLivello() {
+	public Integer getLivello() {
 		return this.livello;
 	}
 
@@ -148,7 +148,7 @@ public class Asset{
 	 * settare livello asset
 	 * @param livello
 	 */
-	public void setLivello(int livello) {
+	public void setLivello(Integer livello) {
 		this.livello = livello;
 	}
     /**
@@ -193,11 +193,6 @@ public class Asset{
 	public String toString() {
 		return "Asset [idAsset=" + idAsset + ", costo=" + costo + ", nome=" + nome + ", descrizione=" + descrizione
 				+ ", livello=" + livello + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(costo, descrizione, idAsset, livello, nome);
 	}
 
 	@Override

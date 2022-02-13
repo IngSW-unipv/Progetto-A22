@@ -159,7 +159,9 @@ public class UserAccountDAO implements IUserAccountDAO {
 				break;
 				
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			
+			e.printStackTrace();}
 
 		DbConnection.closeConnection(conn);
 		return result;
@@ -181,8 +183,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 			st1.setString(3, us.getPassw());
 
 			st1.executeUpdate();
-			
-			us.setPassw(newPassword);
+
 			
 		}catch (Exception e){
 			e.printStackTrace();

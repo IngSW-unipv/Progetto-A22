@@ -72,10 +72,6 @@ public class ObiettiviUserId {
 		return "ObiettiviUserId [userAccount[ " + userAccount.getUsername() + "] ," + obiettivo.toString() + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(obiettivo, userAccount);
-	}
 
 	@Override
 	public boolean equals(Object obj) {

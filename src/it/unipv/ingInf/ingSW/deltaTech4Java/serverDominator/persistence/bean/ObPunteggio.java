@@ -1,6 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
 
-import java.util.Objects;
 
 /**
  * Obiettivi di punteggio
@@ -13,7 +12,7 @@ public class ObPunteggio extends Obiettivi{
 	/**
 	 * Punteggio necessario per raggiungere l'obiettivo
 	 */
-	private int punteggioObiettivo;
+	private Integer punteggioObiettivo;
 
 	/**
 	 * Crea obiettivo di punteggio vuoto
@@ -27,7 +26,7 @@ public class ObPunteggio extends Obiettivi{
 	 * @param obiettivi
 	 * @param punteggioObiettivo
 	 */
-	public ObPunteggio(Obiettivi obiettivi, int punteggioObiettivo) {
+	public ObPunteggio(Obiettivi obiettivi, Integer punteggioObiettivo) {
 		super(	obiettivi.getIdObiettivo(),obiettivi.getDescrizione(),
 				obiettivi.getRicompensa(),obiettivi.getObiettiviUsers());
 		this.punteggioObiettivo = punteggioObiettivo;
@@ -36,7 +35,7 @@ public class ObPunteggio extends Obiettivi{
 	/**
 	 * @return identificatore obiettivo di punteggio
 	 */
-	public int getObiettiviIdObiettivo() {
+	public Integer getObiettiviIdObiettivo() {
 		return super.getIdObiettivo();
 	}
 
@@ -45,7 +44,7 @@ public class ObPunteggio extends Obiettivi{
 	 *Cambia l'identificativo dell' obiettivo punteggio
 	 *@param idObiettivo
 	 */
-	public void setIdObiettivo(int obiettiviIdObiettivo) {
+	public void setIdObiettivo(Integer obiettiviIdObiettivo) {
 		super.setIdObiettivo(obiettiviIdObiettivo);
 	}
 
@@ -70,7 +69,7 @@ public class ObPunteggio extends Obiettivi{
 	/**
 	 * @return Punteggio necessario per raggiungere l'obiettivo
 	 */
-	public int getPunteggioObiettivo() {
+	public Integer getPunteggioObiettivo() {
 		return this.punteggioObiettivo;
 	}
 
@@ -78,7 +77,7 @@ public class ObPunteggio extends Obiettivi{
 	 * Cambia punteggio necessario per raggiungere l'obiettivo
 	 * @param punteggioObiettivo
 	 */
-	public void setPunteggioObiettivo(int punteggioObiettivo) {
+	public void setPunteggioObiettivo(Integer punteggioObiettivo) {
 		this.punteggioObiettivo = punteggioObiettivo;
 	}
 
@@ -87,13 +86,6 @@ public class ObPunteggio extends Obiettivi{
 		return "ObPunteggio [punteggioObiettivo=" + punteggioObiettivo + "]"+super.toString();
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(punteggioObiettivo);
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {

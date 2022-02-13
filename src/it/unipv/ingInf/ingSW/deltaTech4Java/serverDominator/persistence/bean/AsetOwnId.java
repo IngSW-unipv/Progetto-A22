@@ -70,10 +70,6 @@ public class AsetOwnId{
 		return "AsetOwnId [ "+ asset.toString() + ", userAccount[" + userAccount.getUsername() + "]]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(asset, userAccount);
-	}
 
 	@Override
 	public boolean equals(Object obj) {

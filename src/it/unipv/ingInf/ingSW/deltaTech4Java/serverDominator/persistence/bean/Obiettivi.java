@@ -16,7 +16,7 @@ public class Obiettivi {
 	/**
 	 * Identificativo dell'obiettivo
 	 */
-	private int idObiettivo;
+	private Integer idObiettivo;
 	/**
 	 * Descrizione dell'obiettivo
 	 */
@@ -24,7 +24,7 @@ public class Obiettivi {
 	/**
 	 * Ricompenza data al compiemento dell'obiettivo
 	 */
-	private int ricompensa;
+	private Integer ricompensa;
 	/**
 	 * 
 	 */
@@ -42,7 +42,7 @@ public class Obiettivi {
 	 * @param descrizione
 	 * @param ricompensa
 	 */
-	public Obiettivi(int idObiettivo, String descrizione, int ricompensa) {
+	public Obiettivi(Integer idObiettivo, String descrizione, Integer ricompensa) {
 		this.idObiettivo = idObiettivo;
 		this.descrizione = descrizione;
 		this.ricompensa = ricompensa;
@@ -55,7 +55,7 @@ public class Obiettivi {
 	 * @param ricompensa
 	 * @param obiettiviUsers
 	 */
-	public Obiettivi(int idObiettivo, String descrizione, int ricompensa, ArrayList<ObiettiviUser> obiettiviUsers) {
+	public Obiettivi(Integer idObiettivo, String descrizione, Integer ricompensa, ArrayList<ObiettiviUser> obiettiviUsers) {
 		this.idObiettivo = idObiettivo;
 		this.descrizione = descrizione;
 		this.ricompensa = ricompensa;
@@ -65,7 +65,7 @@ public class Obiettivi {
 	/**
 	 * @return identificativo obiettivo
 	 */
-	public int getIdObiettivo() {
+	public Integer getIdObiettivo() {
 		return this.idObiettivo;
 	}
 
@@ -73,7 +73,7 @@ public class Obiettivi {
 	 * Setta identificativo obiettivo
 	 * @param idObiettivo
 	 */
-	public void setIdObiettivo(int idObiettivo) {
+	public void setIdObiettivo(Integer idObiettivo) {
 		this.idObiettivo = idObiettivo;
 	}
 
@@ -95,7 +95,7 @@ public class Obiettivi {
 	/**
 	 * @return Ricompenza data al compiemento dell'obiettivo
 	 */
-	public int getRicompensa() {
+	public Integer getRicompensa() {
 		return this.ricompensa;
 	}
 
@@ -103,7 +103,7 @@ public class Obiettivi {
 	 * Setta ricompenza data al compiemento dell'obiettivo
 	 * @param ricompensa
 	 */
-	public void setRicompensa(int ricompensa) {
+	public void setRicompensa(Integer ricompensa) {
 		this.ricompensa = ricompensa;
 	}
 
@@ -148,11 +148,6 @@ public class Obiettivi {
 	public String toString() {
 		return "Obiettivi [idObiettivo=" + idObiettivo + ", descrizione=" + descrizione + ", ricompensa=" + ricompensa
 				+ "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(descrizione, idObiettivo, ricompensa);
 	}
 
 	@Override

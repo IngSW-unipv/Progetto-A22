@@ -142,9 +142,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 		try
 		{
-			String query="SELECT * "
-						+ "FROM USER_ACCOUNT"
-						+ "WHERE USERNAME=? and PASSW=?";
+			String query="SELECT * FROM serverDomDB.USER_ACCOUNT WHERE USERNAME=? and PASSW=?";
 			st1=conn.prepareStatement(query);
 			st1.setString(1, us.getUsername());
 			st1.setString(2, us.getPassw());

@@ -77,6 +77,7 @@ public class PropertiesFile {
 		    ou= new FileWriter(perco);
 		    propertie.store(ou,null);	
 		    ou.close();
+		    System.err.println("tt'apposto "+perco);
 		}
 		return ris;
 	}

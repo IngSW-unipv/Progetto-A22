@@ -40,8 +40,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		try
 		{
-			String query="SELECT * "
-						+ "FROM ASET_OWN JOIN ASSET on idAsset=Asset_idAsset";
+			String query="SELECT * FROM ASET_OWN JOIN ASSET on idAsset=Asset_idAsset";
 			st1=conn.createStatement();
 			rs1=st1.executeQuery(query);
 
@@ -69,15 +68,11 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		try
 		{
-			String query="SELECT * "
-						+ "FROM ASET_OWN JOIN ASSET on idAsset=Asset_idAsset"
-						+ "JOIN  USER_ACCOUNT ON USER_ACCOUNT_USERNAME=USERNAME"
-						+ "WHERE USER_ACCOUNT_USERNAME=? and Passw=?";
+			String query="SELECT *  FROM ASET_OWN JOIN ASSET on idAsset=Asset_idAsset JOIN  USER_ACCOUNT ON USER_ACCOUNT_USERNAME=USERNAME WHERE USER_ACCOUNT_USERNAME=? and Passw=?";
 			st1=conn.prepareStatement(query);
 			st1.setString(1, assInput.getUsername());
 			st1.setString(2, assInput.getPassw());
 			rs1=st1.executeQuery();
-
 			while(rs1.next())
 			{
 				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),rs1.getString(6),rs1.getString(7),rs1.getInt(8));
@@ -106,8 +101,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		try
 		{
-			String query="SELECT * "
-						+ "FROM ASET_OWN WHERE ASSET_idAsset=?";
+			String query="SELECT * FROM ASET_OWN WHERE ASSET_idAsset=?";
 			st1=conn.prepareStatement(query);
 			st1.setInt(1, assInput.getIdAsset());
 			rs1=st1.executeQuery();

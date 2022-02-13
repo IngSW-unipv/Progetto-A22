@@ -38,8 +38,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 		try
 		{
-			String query="SELECT * "
-					+ "FROM obiettivi JOIN obiettivi_user on idObiettivo=OBIETTIVI_idObiettivo";
+			String query="SELECT * FROM obiettivi JOIN obiettivi_user on idObiettivo=OBIETTIVI_idObiettivo";
 			st1=conn.createStatement();
 			rs1=st1.executeQuery(query);
 
@@ -66,10 +65,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 		try
 		{
-			String query="SELECT * "+
-					"FROM obiettivi_user JOIN obiettivi on idObiettivo=OBIETTIVI_idObiettivo "+
-					"JOIN  USER_ACCOUNT ON USER_ACCOUNT_USERNAME=USERNAME"+
-					"WHERE USERNAME=? and Passw=?";
+			String query="SELECT * FROM obiettivi_user JOIN obiettivi on idObiettivo=OBIETTIVI_idObiettivo JOIN  USER_ACCOUNT ON USER_ACCOUNT_USERNAME=USERNAME WHERE USERNAME=? and Passw=?";
 			st1=conn.prepareStatement(query);
 			st1.setString(1, accInput.getUsername());
 			st1.setString(2, accInput.getPassw());
@@ -98,8 +94,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 		try
 		{
-			String query="SELECT * "
-						+ "FROM obiettivi_user WHERE OBIETTIVI_idObiettivo=?";
+			String query="SELECT * FROM obiettivi_user WHERE OBIETTIVI_idObiettivo=?";
 			st1=conn.prepareStatement(query);
 			st1.setInt(1, obInput.getIdObiettivo());
 			rs1=st1.executeQuery();

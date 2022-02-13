@@ -1,5 +1,6 @@
-primaConfigurazione=1
+#Sun Feb 13 18:56:25 CET 2022
+primaConfigurazione=55
+password=12345678
 driver=com.mysql.cj.jdbc.Driver
-url=
-username=
-password=
+url=jdbc\:mysql\://localhost\:3306
+username=root

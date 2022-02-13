@@ -13,6 +13,10 @@ import java.util.Objects;
  * @see ObiettiviUser
  * @see ArrayList
  */
+/**
+ * @author TAWADROS
+ *
+ */
 public class UserAccount {
     /**
      * Username di UserAccount
@@ -32,7 +36,7 @@ public class UserAccount {
     /**
      * Email dello user Account
      */
-    private String Email;
+    private String email;
  
     /**
      * Password Dello UserAccount
@@ -55,6 +59,32 @@ public class UserAccount {
 	public UserAccount() {
 	}
 	
+	/**
+	 * crea user Acount solo con username e password
+	 * @param username
+	 * @param passw
+	 */
+	public UserAccount(String username, String passw) {
+		this.punteggio=0;
+		this.username = username;
+		this.passw = passw;
+		this.mny=0;
+	} 
+
+	/**
+	 * crea useraccount con username, email , passw
+	 * @param username
+	 * @param email
+	 * @param passw
+	 */
+	public UserAccount(String username, String email, String passw) {
+		this.punteggio=0;
+		this.mny=0;
+		this.username = username;
+		this.email = email;
+		this.passw = passw;
+	}
+
 	/**
 	 * Crea User account con mny=punteggio=0
 	 * username dello userAccount
@@ -99,6 +129,7 @@ public class UserAccount {
 		this.asetOwns= asetOwns;
 		this.obiettiviUsers = obiettiviUsers;
 	}
+	
 	/**
 	 * @return username associato allo UserAccount
 	 */
@@ -217,7 +248,7 @@ public class UserAccount {
 	 * @return Email Dello UserAccount
 	 */
 	public String getEmail() {
-		return Email;
+		return this.email;
 	}
 
 	/**
@@ -225,14 +256,14 @@ public class UserAccount {
 	 * @param email
 	 */
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	/**
 	 * @return Password 
 	 */
 	public String getPassw() {
-		return passw;
+		return this.passw;
 	}
 
 	/**
@@ -245,7 +276,7 @@ public class UserAccount {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Email, mny, passw, punteggio, username);
+		return Objects.hash(email, mny, passw, punteggio, username);
 	}
 
 	@Override
@@ -257,7 +288,7 @@ public class UserAccount {
 		if (getClass() != obj.getClass())
 			return false;
 		UserAccount other = (UserAccount) obj;
-		return Objects.equals(Email, other.Email) && mny == other.mny && Objects.equals(passw, other.passw)
+		return Objects.equals(email, other.email) && mny == other.mny && Objects.equals(passw, other.passw)
 				&& Objects.equals(punteggio, other.punteggio) && Objects.equals(username, other.username);
 	}
 	

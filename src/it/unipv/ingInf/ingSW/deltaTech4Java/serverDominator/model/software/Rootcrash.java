@@ -18,7 +18,7 @@ public class Rootcrash extends Software {
 	public Rootcrash (int livello, int quantità) {
 		super(livello);
 		super.setMax_lvl(3);
-		super.setId(2);
+		super.setNome("Rootcrash");
 		if(super.getLivello()> super.getMax_lvl() ) {
 			super.setLivello(3);
 		}

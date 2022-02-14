@@ -19,7 +19,7 @@ public class Cpu extends Risorse{
 		if (livello_risorsa>= super.MAX_LVL) {
 			super.setLivello_risorsa(10);
 		}
-		
+		super.setNome("Cpu");
 		this.effetto();
 		//per test
 /*		System.out.println("livelli sbloccati:");

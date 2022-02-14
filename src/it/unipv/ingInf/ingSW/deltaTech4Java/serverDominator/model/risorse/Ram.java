@@ -18,6 +18,7 @@ public class Ram extends Risorse{
 		if (livello_risorsa>= super.MAX_LVL) {
 			super.setLivello_risorsa(10);
 		}
+		super.setNome("Ram");
 		this.effetto();
 	}
 	

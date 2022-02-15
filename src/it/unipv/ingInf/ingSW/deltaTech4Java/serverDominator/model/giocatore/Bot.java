@@ -1,5 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+
 public class Bot extends Giocatore{
 	
 	/**Permette di creare un oggetto Bot passando come parametro il suo nome*/

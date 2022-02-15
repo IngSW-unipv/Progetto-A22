@@ -1,20 +1,30 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+
 public abstract class Giocatore {
-	private int valuta_temp;
+	private int punteggio;
 	private String nome;
 
 	public Giocatore(String nome) {
 		this.nome=nome;
-		valuta_temp=0;
+		punteggio=0;
+	}
+	public Giocatore() {
+		this.nome=null;
+		punteggio=0;
+	}
+	public Giocatore(Giocatore user) {
+		this.nome=user.getNome();
+		this.punteggio=user.getPunteggio();
 	}
 	/**Restituisce il valore della valuta temporanea*/
-	public int getValuta_temp() {
-		return valuta_temp;
+	public int getPunteggio() {
+		return punteggio;
 	}
 	/**Aggiorna la valuta temporanea con il valore passato come parrametro*/
-	public void setValuta_temp(int valuta_temp) {
-		this.valuta_temp = valuta_temp;
+	public void setPunteggio(int punteggio) {
+		this.punteggio =punteggio;
 	}
 	/**Restituisce il nome del Giocatore*/
 	public String getNome() {
@@ -23,5 +33,9 @@ public abstract class Giocatore {
 	/**Aggiorna il nome con la stringa passata come parrametro*/
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public void aggiornaPunteggio(int punteggio) {
+		this.punteggio+=punteggio;
 	}
 }

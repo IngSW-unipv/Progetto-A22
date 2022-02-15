@@ -358,8 +358,7 @@ class PersistenceFacadeTest {
 	@Test
 	void testUpdateUserAccountUsername() {
 		UserAccount uss=us.get(0);
-		uss.setUsername("vuyyig");
-		assertTrue(p.updateUserAccount(uss));
+		assertTrue(p.updateUserAccountUsername(uss,"hhvhv"));
 	}
 
 	/**

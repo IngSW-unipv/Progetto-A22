@@ -12,7 +12,7 @@ public class Timer {
 			return false;
 		}
 	}
-	public boolean creazioneSoftware(int tempo){
+	/*public boolean creazioneSoftware(int tempo){
 		try {
 		    TimeUnit.SECONDS.sleep(tempo);
 		    return true;
@@ -39,5 +39,5 @@ public class Timer {
 			System.out.println("errore timer");
 			return false;
 		}
-	}
+	}*/
 }

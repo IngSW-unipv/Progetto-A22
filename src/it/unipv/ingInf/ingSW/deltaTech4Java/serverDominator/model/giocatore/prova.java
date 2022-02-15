@@ -23,7 +23,7 @@ public class Prova {
 		prova.aggiungiUtente(prova3);
 		System.out.println(prova.toString());
 		System.out.println(prova.getLunghezzaClassifica());*/
-		prova5.potenziamentoRisorsa(10);
-		prova5.creazioneSoftware(20);
+		prova5.timer(10);
+		prova5.countdown(20);
 	}
 }

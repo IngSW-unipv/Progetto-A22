@@ -19,6 +19,20 @@ public class Mercato {
 		quantitaAntivirus=0;
 		quantitaRootcrash=0;
 	}
+	public Mercato(int prezzoRam, int quantitaRam,int prezzoCpu, int quantitaCpu, int prezzoEnergia, int quantitaEnergia,int prezzoVirus, int quantitaVirus, int prezzoAntivirus, int quantitaAntivirus, int prezzoRootcrash, int quantitaRootcrash) {
+		this.prezzoRam=prezzoRam;
+		this.prezzoCpu=prezzoCpu; 
+		this.prezzoEnergia=prezzoEnergia;
+		this.prezzoVirus=prezzoVirus;
+		this.prezzoAntivirus=prezzoAntivirus;
+		this.prezzoRootcrash=prezzoRootcrash;
+		this.quantitaRam=quantitaRam;
+		this.quantitaCpu=quantitaCpu;
+		this.quantitaEnergia=quantitaEnergia;
+		this.quantitaVirus=quantitaVirus;
+		this.quantitaAntivirus=quantitaAntivirus;
+		this.quantitaRootcrash=quantitaRootcrash;
+	}
 	
 	public void compraSoftware(Utente user, Base nodo, int quantita, String software) {
 		if(software=="virus") {

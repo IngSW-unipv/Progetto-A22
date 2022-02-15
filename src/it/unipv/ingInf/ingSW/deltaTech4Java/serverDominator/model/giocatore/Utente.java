@@ -1,5 +1,8 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
+
 public class Utente extends Giocatore implements Comparable<Utente>{
 
 	int punteggio, valuta;

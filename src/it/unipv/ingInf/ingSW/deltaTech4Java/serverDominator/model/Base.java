@@ -121,4 +121,11 @@ public class Base extends Nodo{
 		return risorse[3].getLivello_risorsa();
 	}
 	
+	public int getTipiSoftware() {
+		return TIPI_SOFTWARE;
+	}
+	
+	public int getTipiRisorse() {
+		return TIPI_RISORSE;
+	}
 }

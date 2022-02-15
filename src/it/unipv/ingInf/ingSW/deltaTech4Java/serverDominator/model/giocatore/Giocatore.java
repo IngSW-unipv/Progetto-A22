@@ -1,5 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+
 public abstract class Giocatore {
 	private int punteggio;
 	private String nome;

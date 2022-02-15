@@ -152,11 +152,11 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		boolean esito=true;
 		if(this.existObiettiviUser(newA)) {
+			conn=DbConnection.startConnection(conn,propConn);
 			try
 			{
-				String query1="UPDATE ASET_OWN SET QUANTITA=? WHERE ASSET_idAsset=? AND USER_ACCOUNT_USERNAME=?"
-						//+ "VALUES (?,?,?,?,?)"
-						;
+				String query1="UPDATE ASET_OWN SET QUANTITA=? WHERE ASSET_idAsset=? AND USER_ACCOUNT_USERNAME=?";
+				
 				st1 = conn.prepareStatement(query1);
 				st1.setInt(1, newA.getQuantita());
 				st1.setInt(2,newA.getPrimaryKey().getAsset().getIdAsset());
@@ -186,15 +186,18 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		try
 		{
-			String query1="select count(*) FROM AsetOwn WHERE ASSET_idAsset=? AND USER_ACCOUNT_USERNAME=?";
+			String query1="select count(*) FROM Aset_Own WHERE ASSET_idAsset=? AND USER_ACCOUNT_USERNAME=?";
 			st1 = conn.prepareStatement(query1);
 			st1.setInt(1,newOU.getPrimaryKey().getAsset().getIdAsset());
 			st1.setString(2, newOU.getPrimaryKey().getUserAccount().getUsername());
 
 			rs1=st1.executeQuery();
-			
-			if(rs1.getInt(1)<1) {
-				esito=false;
+			while(rs1.next())
+			{
+				if(rs1.getInt(1)<1) {
+					esito=false;
+				}
+				break;
 			}
 
 		}catch (Exception e){

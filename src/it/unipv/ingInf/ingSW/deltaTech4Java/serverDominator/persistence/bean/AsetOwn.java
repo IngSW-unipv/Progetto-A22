@@ -50,6 +50,10 @@ public class AsetOwn{
 		this.primaryKey  = id;
 		this.quantita = quantita;
 	}
+	public AsetOwn(Asset aid, UserAccount ucc,Integer quantita) {
+		this.primaryKey  = new AsetOwnId(aid,ucc);
+		this.quantita = quantita;
+	}
 	/**
 	 * @return id AssetOwm
 	 */

@@ -122,11 +122,11 @@ public class AssetDAO implements IAssetDAO {
 		{
 			String query="UPDATE ASSET SET COSTO=?,NOME=?,DESCRIZIONE=?,LIVELLO=? WHERE idAsset=?";
 			st1 = conn.prepareStatement(query);
-			st1.setInt(5, newA.getIdAsset());
 			st1.setInt(1,newA.getCosto());
 			st1.setString(2,newA.getNome());
 			st1.setString(3,newA.getDescrizione());
 			st1.setInt(4,newA.getLivello());
+			st1.setInt(5, newA.getIdAsset());
 
 			st1.executeUpdate();
 
@@ -177,7 +177,7 @@ public class AssetDAO implements IAssetDAO {
 			String query="SELECT * FROM ASSET WHERE idAsset=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setInt(1, id.getCosto());
+			st1.setInt(1, id.getIdAsset());
 
 			rs1=st1.executeQuery();
 
@@ -186,8 +186,10 @@ public class AssetDAO implements IAssetDAO {
 				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),rs1.getString(3),rs1.getString(4),rs1.getInt(5));
 
 				result=a;
+				break;
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();}
 
 		DbConnection.closeConnection(conn);
 		return result;

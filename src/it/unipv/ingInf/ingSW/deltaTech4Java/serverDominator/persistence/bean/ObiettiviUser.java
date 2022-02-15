@@ -1,6 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
 
-import java.util.Objects;
 
 /**
  * Obiettivi di punteggio
@@ -132,7 +131,10 @@ public class ObiettiviUser {
 		if (getClass() != obj.getClass())
 			return false;
 		ObiettiviUser other = (ObiettiviUser) obj;
-		return Objects.equals(primaryKey, other.primaryKey) && Objects.equals(stato, other.stato);
+		if( primaryKey.getObiettivo().equals(other.getPrimaryKey().getObiettivo())&& stato.equals(other.getStato())&&primaryKey.getUserAccount().equals(other.getPrimaryKey().getUserAccount()))
+			return true;
+		else
+			return false;
 	}
 
 }

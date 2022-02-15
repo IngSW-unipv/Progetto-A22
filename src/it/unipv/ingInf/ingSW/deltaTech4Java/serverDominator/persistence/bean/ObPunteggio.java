@@ -91,12 +91,10 @@ public class ObPunteggio extends Obiettivi{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		ObPunteggio other = (ObPunteggio) obj;
-		return punteggioObiettivo == other.punteggioObiettivo;
+		return 
+				(punteggioObiettivo.equals(other.getPunteggioObiettivo())&&
+				super.equals(other.getObiettivi()));
 	}
 
 }

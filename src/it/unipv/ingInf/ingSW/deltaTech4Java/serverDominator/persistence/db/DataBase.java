@@ -39,9 +39,9 @@ public class DataBase {
 	public static boolean isItTheFirstTime() {
 		Connection conn=null;
 		DbConnection.startConnection(conn, "resources/config/persistence/dataBase/connWith_sd_sys");
-		int a ;
+		Integer a ;
 		try {
-			a =Integer.getInteger(PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PROPERTIE_NAME, CONFIGURATION_FILE_NAME));
+			a =Integer.valueOf(PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PROPERTIE_NAME, CONFIGURATION_FILE_NAME));
 			if(a!=1)
 				return false;
 		}catch (Exception e) {

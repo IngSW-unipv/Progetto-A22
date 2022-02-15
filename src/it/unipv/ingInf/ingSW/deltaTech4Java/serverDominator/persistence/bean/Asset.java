@@ -2,7 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
 
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Qualunque asset aquistabile nel gioco 
@@ -204,8 +203,8 @@ public class Asset{
 		if (getClass() != obj.getClass())
 			return false;
 		Asset other = (Asset) obj;
-		return costo == other.costo && Objects.equals(descrizione, other.descrizione) && idAsset == other.idAsset
-				&& livello == other.livello && Objects.equals(nome, other.nome);
+		return (costo == other.costo && descrizione.equals(other.descrizione)  && idAsset == other.idAsset
+				&& livello == other.livello && nome.equals(other.nome));
 	}
 
 }

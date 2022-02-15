@@ -151,8 +151,8 @@ public class PersistenceFacade{
 	 * Lista Obiettivi che hanno la stessa ricompenza dell'obiettivo argomento
 	 */
 	public ArrayList<Obiettivi> selectObiettiviByRicompensa(Obiettivi obRi){
-		this.obiettivi=IObiettiviDAOFactory.getIObiettiviDAO(obRi);
-		return obiettivi.selectByRicompensa(obRi);
+		IObiettiviDAO o=IObiettiviDAOFactory.getIObiettiviDAO(obRi);
+		return o.selectByRicompensa(obRi);
 	}
 	
 	/**
@@ -164,8 +164,8 @@ public class PersistenceFacade{
 	 * Falso se loperazione è fallita
 	 */
 	public boolean insertObiettivo(Obiettivi a){
-		this.obiettivi=IObiettiviDAOFactory.getIObiettiviDAO(a);
-		return this.obiettivi.insertObiettivo(a);
+		IObiettiviDAO o=IObiettiviDAOFactory.getIObiettiviDAO(a);
+		return o.insertObiettivo(a);
 	}
 	
 	/**
@@ -178,8 +178,8 @@ public class PersistenceFacade{
 	 * </br>Falso se l'operazione è fallita
 	 */
 	public boolean updateObiettiviByObiettivoId( Obiettivi newO){
-		this.obiettivi=IObiettiviDAOFactory.getIObiettiviDAO(newO);
-		return this.obiettivi.updateObiettiviById(newO);
+		IObiettiviDAO o=IObiettiviDAOFactory.getIObiettiviDAO(newO);
+		return o.updateObiettiviById(newO);
 	}
 	
 	/**

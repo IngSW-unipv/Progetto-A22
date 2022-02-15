@@ -1,7 +1,5 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.prove.quesrie;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.persistenceTest.prove.quesrie;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAccountDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAccountDAOFactory;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.UserAccountDAO;
 

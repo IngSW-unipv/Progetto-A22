@@ -1,7 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 /**
@@ -150,17 +149,15 @@ public class Obiettivi {
 				+ "]";
 	}
 
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Obiettivi obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		Obiettivi other = (Obiettivi) obj;
-		return Objects.equals(descrizione, other.descrizione) && idObiettivo == other.idObiettivo
-				&& ricompensa == other.ricompensa;
+		if (idObiettivo == other.getIdObiettivo()&&this.descrizione.equals(other.getDescrizione())&&this.ricompensa.equals(other.getRicompensa()))
+			return true;
+		return false;
 	}
 	
 	

@@ -66,15 +66,16 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 
 		try
 		{
-			String query="SELECT * from ob_punteggio AS T1 JOIN OBIETTIVI AS T2 ON where RICOMPENSA=?";
+			String query="SELECT * from ob_punteggio AS T1 JOIN OBIETTIVI AS T2  ON OBIETTIVI_idObiettivo=idObiettivo where RICOMPENSA=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, obRi.getRicompensa());
-			rs1=st1.executeQuery(query);
+			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
 				Obiettivi ob=new Obiettivi(rs1.getInt(3), rs1.getString(4),rs1.getInt(5));
 				ObPunteggio a=new ObPunteggio(ob, rs1.getInt(2));
+				//System.out.println(a.toString());
 
 				result.add(a);
 			}
@@ -105,7 +106,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 				st2.setInt(1, o.getObiettivi().getIdObiettivo());
 				st2.setInt(2,o.getPunteggioObiettivo());
 	
-				st2.executeUpdate(query2);
+				st2.executeUpdate();
 	
 			}catch (Exception e){
 				
@@ -138,7 +139,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 				st2.setInt(2, o.getObiettivi().getIdObiettivo());
 				st2.setInt(1,o.getPunteggioObiettivo());
 	
-				st2.executeUpdate(query2);
+				st2.executeUpdate();
 	
 			}catch (Exception e){
 				
@@ -167,7 +168,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 
 		try
 		{
-			String query= "SELECT * FROM OBIETTIVI join ob_punteggio on (OBIETTIVI_idPunteggio=idPunteggio) WHERE idObiettivo=? ";
+			String query= "SELECT * FROM OBIETTIVI join ob_punteggio on (OBIETTIVI_idObiettivo=idObiettivo) WHERE idObiettivo=? ";
 			st1=conn.prepareStatement(query);
 			st1.setInt(1, Id.getIdObiettivo());
 			rs1=st1.executeQuery();

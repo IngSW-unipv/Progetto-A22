@@ -33,17 +33,7 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	
 	@Override
 	public boolean insetUserAccount(UserAccount us) {
-		if (	
-			(
-				UserAccountInfo.saveUserAccountData(us)
-				&&
-				ObiettiviUserFileSistemDAO.saveObUserInCsvFile(us.getObiettiviUsers())
-				&&
-				AssetOwnFileSystemDAO.saveInCsvFile(us.getAsetOwns())
-			)
-				||
-				this.us.insetUserAccount(us)
-		) return true;
+		if (this.us.insetUserAccount(us)) return true;
 		
 		return false;
 	}

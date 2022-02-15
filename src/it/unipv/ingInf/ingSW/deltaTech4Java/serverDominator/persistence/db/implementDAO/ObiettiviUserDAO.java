@@ -144,6 +144,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 		boolean esito=true;
 		if(this.existObiettiviUser(newOU)) {
+			conn=DbConnection.startConnection(conn,propConn);
 			try
 			{
 				String query1="UPDATE obiettivi_user SET STATO=? WHERE OBIETTIVI_idObiettivo=? AND USER_ACCOUNT_USERNAME=?";
@@ -180,11 +181,12 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			st1.setString(2, newOU.getPrimaryKey().getUserAccount().getUsername());
 
 			rs1=st1.executeQuery();
-			
-			if(rs1.getInt(1)<1) {
-				esito=false;
+			while(rs1.next()) {
+				if(rs1.getInt(1)<1) {
+					esito=false;
+				}
+				break;
 			}
-
 		}catch (Exception e){
 			e.printStackTrace();
 			esito=false;

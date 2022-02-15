@@ -1,7 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * UserAccount
@@ -290,8 +289,9 @@ public class UserAccount {
 		if (getClass() != obj.getClass())
 			return false;
 		UserAccount other = (UserAccount) obj;
-		return Objects.equals(email, other.email) && mny == other.mny && Objects.equals(passw, other.passw)
-				&& Objects.equals(punteggio, other.punteggio) && Objects.equals(username, other.username);
+		if(username.equals(other.getUsername())) 
+			return true ;
+		return false;
 	}
 	
 	

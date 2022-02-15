@@ -88,7 +88,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 
 		try
 		{
-			String query="INSERT INTO ASSET (idOiettivo,DESCRIZIONE,RICOMPENSA) VALUES(?,?,?)";
+			String query="INSERT INTO OBIETTIVI (idObiettivo,DESCRIZIONE,RICOMPENSA) VALUES(?,?,?)";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, a.getIdObiettivo());
 			st1.setString(2,a.getDescrizione());

@@ -30,6 +30,7 @@ public class Timer {
                 tempo--;
 
                 if (tempo < 0) {
+                	/*stampa tempo scaduto usata per test*/
                     System.out.println("Tempo scaduto");
                     scheduler.shutdown();
                 }

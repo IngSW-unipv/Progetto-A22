@@ -39,13 +39,14 @@ public class Cloud extends Nodo {
 		if(nome!="Firewall") {
 			System.out.println("risorsa non potenziabile");
 		}else {
-//fare timer basato su risorse[3].getTempo_richiesto();
+/**start timer per potenziamento firewall*/
+			super.time1.countdown(risorse[3].getTempo_richiesto());
+			super.time1.timer(risorse[3].getTempo_richiesto());
 			check=risorse[3].potenziamento();
 		}
 		if(check) {
 			System.out.println("potenziamento eseguito");
 		} else System.out.println("potenziamento fallito");
-		
 		
 	}
 	
@@ -57,6 +58,9 @@ public class Cloud extends Nodo {
 		}else {
 			n_soft=quantità+super.getSoftware_disponibile();
 			if(n_soft<=super.getSoftware_max()) {
+			/**start timer per creazione software*/
+				super.time2.countdown(antivirus.getTemp_richiesto()*quantità);
+				super.time2.timer(antivirus.getTemp_richiesto()*quantità);
 				antivirus= new Antivirus(1,quantità);
 				check=true;
 				super.setSoftware_disponibile(n_soft);
@@ -67,5 +71,40 @@ public class Cloud extends Nodo {
 		} else System.out.println("azione non eseguita");
 		
 	}
+
+/**getter and setter*/
+	
+	
+	public int getLvl_cpu() {
+		return risorse[0].getLivello_risorsa();
+	}
+	
+	public Software getAntivirus() {
+		return antivirus;
+	}
+
+	public int getLvl_ram() {
+		return risorse[1].getLivello_risorsa();
+	}
+
+	public int getE_disponibile() {
+		return risorse[2].getStat1();
+	}
+	
+	public int getLvl_firewall() {
+		return risorse[3].getLivello_risorsa();
+	}
+	public int getBonus_def() {
+		return risorse[3].getStat1();
+	}
+	
+	public void setBonus_def(int bonus_def) {
+		risorse[3].setStat1(bonus_def);;
+	}
+	
+	public int getVal_def() {
+		return antivirus.getVal_def();
+	}
+
 	
 }

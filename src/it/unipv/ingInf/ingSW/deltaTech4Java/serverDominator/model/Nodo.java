@@ -1,5 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+/**
+ * @author Luca Casto 
+ * v1.0
+ * prima versione classe astratta dei nodi base e cloud.
+ */
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Software;
 
@@ -104,7 +110,7 @@ public abstract class Nodo implements INodo{
 	public void setLvl_firewall(int lvl_firewall) {
 		this.lvl_firewall = lvl_firewall;
 	}
-
+/**getter astratto per restituire i valori dei software delle classi specializzate*/
 	public abstract Software[] getStats_software_creati(); 
 		
 }

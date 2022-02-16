@@ -19,11 +19,12 @@ public class Cloud extends Nodo {
 		this.inizializza_risorse();
 		stats_software_creati= new Software[1];
 	}
-	
+/** inizializza un vettore di Risorse con livelli che possono essere 0 o 1
+* NB: 0=cpu, 1=ram, 2=energia,3=firewall
+*/	
+
 	public void inizializza_risorse() {
-		/** inizializza un vettore di Risorse
-		 * NB: 0=cpu, 1=ram, 2=energia,3=firewall
-		 */
+		
 		int casual;
 		risorse[0]=new Cpu(casual=(int)(Math.random()*2));
 		super.setLvl_cpu(risorse[0].getLivello_risorsa());
@@ -34,13 +35,14 @@ public class Cloud extends Nodo {
 		risorse[3]=new Firewall(casual=(int)(Math.random()*2));
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
-	
+/** metodo per il potenziamento della risorsa firewall
+ */
 	public void potenzia_risorsa(String nome) {
 		boolean check=false;
 		if(nome!="Firewall") {
 			System.out.println("risorsa non potenziabile");
 		}else {
-/**start timer per potenziamento firewall*/
+			/**start timer per potenziamento firewall*/
 			super.time1.countdown(risorse[3].getTempo_richiesto());
 			super.time1.timer(risorse[3].getTempo_richiesto());
 			check=risorse[3].potenziamento();
@@ -50,7 +52,9 @@ public class Cloud extends Nodo {
 		} else System.out.println("potenziamento fallito");
 		
 	}
-	
+/**metodo perla creazione di software, in particolare il nodo cloud può creare solo antivirus
+ * in quantità limitata.
+ */
 	public void crea_software(String nome, int quantità) {
 		boolean check=false;
 		int n_soft;
@@ -74,8 +78,7 @@ public class Cloud extends Nodo {
 	}
 
 /**getter and setter*/
-	
-	
+		
 	public int getLvl_cpu() {
 		return risorse[0].getLivello_risorsa();
 	}

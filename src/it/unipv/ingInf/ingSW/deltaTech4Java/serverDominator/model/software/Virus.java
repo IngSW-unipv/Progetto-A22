@@ -23,7 +23,7 @@ public class Virus extends Software{
 		super.setQuantità(quantità);
 		
 	}
-
+/**getter and setter */
 	public int getVal_def() {
 		return val_def;
 	}

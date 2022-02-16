@@ -22,6 +22,9 @@ public class Ram extends Risorse{
 		this.effetto();
 	}
 	
+/**aggiorna, in funzione del livello risorsa, le caratteristiche
+ * che vengono sbloccate e i requisiti per il livello successivo
+ */
 	public void effetto() {
 		switch ( super.getLivello_risorsa() ) {
 		case 0: max_software=0;

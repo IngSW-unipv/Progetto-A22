@@ -22,7 +22,8 @@ public class Antivirus extends Software{
 		super.setTemp_richiesto(20);
 		super.setQuantità(quantità);
 	}
-
+/**getter and setter */
+	
 	public int getVal_def() {
 		return val_def;
 	}

@@ -27,6 +27,7 @@ public class Rootcrash extends Software {
 		super.setTemp_richiesto(40);
 		super.setQuantità(quantità);
 	}
+/**getter and setter*/
 	
 	public int getVal_def() {
 		return val_def;

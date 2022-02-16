@@ -1,5 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+/**
+ * @author Luca Casto 
+ * v1.0
+ *coordinate di un nodo
+ */
+
 public class Coordinate {
 	private int x;
 	private int y;

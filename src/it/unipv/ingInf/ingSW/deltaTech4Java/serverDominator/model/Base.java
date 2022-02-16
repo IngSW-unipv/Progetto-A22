@@ -1,5 +1,14 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+/**
+ * @author Luca Casto 
+ * v1.0
+ * prima versione della classe Base, nodo principale di ogni giocatore.
+ */
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
@@ -22,14 +31,16 @@ public class Base extends Nodo{
 		risorse=new Risorse[TIPI_RISORSE];
 		this.inizializza_risorse();
 	}
-
+/** inizializza un vettore di software*/
+	
 	public void inizializza_software() {
 		/** inizializza un vettore di Software  */
 		stats_software_creati[0]=new Antivirus(0,0);
 		stats_software_creati[1]=new Virus(0,0);
 		stats_software_creati[2]=new Rootcrash(0,0);
 	}
-
+/** inizializza un vettore di risorse*/
+	
 	public void inizializza_risorse() {
 		/** inizializza un vettore di Risorse
 		 * NB: 0=cpu, 1=ram, 2=energia,3=firewall
@@ -43,8 +54,14 @@ public class Base extends Nodo{
 		risorse[3]=new Firewall(0);
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
-		
+
+/** metodo usato per il potenziamento di una risorsa generica
+ * aggiorna le statistiche della risorsa passata e i valori necessari
+ * per il livello successivo
+ */
 	public void potenzia_risorsa(String nome) {
+	/**metodo usato per potenziare le singole risorse passate da interfaccia*/
+		
 		boolean check=false;
 		int en_usata, i;
 		for(i=0; i<TIPI_RISORSE;i++) {
@@ -65,6 +82,8 @@ public class Base extends Nodo{
 	}
 	
 	public void crea_software(String nome, int quantità) {
+	/**metodo per la creazione di nuovo software, con aggiornamento della quantità totali*/
+		
 		boolean check=false;
 		int n_soft;
 		int i;
@@ -101,7 +120,8 @@ public class Base extends Nodo{
 		} else System.out.println("azione non eseguita");	
 	}
 	
-
+/**getter and setter*/
+	
 	public int getSoftware_max() {
 		return risorse[1].getStat1();
 	}

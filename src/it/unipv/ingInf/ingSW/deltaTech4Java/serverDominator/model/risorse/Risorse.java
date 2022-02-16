@@ -69,6 +69,10 @@ public abstract class Risorse {
 		return tempo_richiesto;
 	}
 
+	public int getMAX_LVL() {
+		return MAX_LVL;
+	}
+	
 	public void setTempo_richiesto(int tempo_richiesto) {
 		this.tempo_richiesto = tempo_richiesto;
 	}
@@ -98,10 +102,6 @@ public abstract class Risorse {
 
 	public void setStat3(int stat3) {
 		this.stat3 = stat3;
-	}
-	
-	public int getMAX_LVL() {
-		return MAX_LVL;
 	}
 	
 	

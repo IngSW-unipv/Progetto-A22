@@ -30,7 +30,7 @@ public class Cpu extends Risorse{
 */
 	}
 /**aggiorna, in funzione del livello risorsa, le caratteristiche
- * che vengono sbloccate e i requisitiper il livello successivo
+ * che vengono sbloccate e i requisiti per il livello successivo
  */
 	public void effetto() {
 		switch ( super.getLivello_risorsa() ) {

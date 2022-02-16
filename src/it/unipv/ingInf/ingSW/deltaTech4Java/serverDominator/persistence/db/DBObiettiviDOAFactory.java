@@ -7,6 +7,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obi
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
+ * Classe responsabile della creazione deli obiettivi dao relativi a salvare le info nel db
  * @author TawaHabib
  *
  */
@@ -21,6 +22,7 @@ public class DBObiettiviDOAFactory {
 	
 	
 	/**
+	 * Crea  dataBase Obiettivi Dao generico ()
 	 * @return
 	 */
 	public static IObiettiviDAO getIObiettiviDAO() {
@@ -42,17 +44,22 @@ public class DBObiettiviDOAFactory {
 	}
 	
 	/**
+	 * Creao Obiettivi Dao specifico all'obeittivo passato per argomento </br>con unn file di connessione predefinito
 	 * @param ob
-	 * @return
+	 * obiettivo di cui si vogliono salcare il info nel db
+	 * @return IObiettiviDAO pecifico per salvare correttamento l'obiettivo passato per argomento
 	 */
 	public static IObiettiviDAO getIObiettiviDAO(Obiettivi ob) {
 		return getIObiettiviDAO(ob, connectionFilePth);
 	}
 
 	/**
+	 * Crea IObiettioviDAO specifico del obiettivo argomento </br> Con file di configurazione a scielta
 	 * @param ob
+	 * obiettivo di cui si vogliono salcare il info nel db
 	 * @param fileConnPath
-	 * @return
+	 * file di configurazione della connessione
+	 * @return IObiettiviDAO pecifico per salvare correttamento l'obiettivo passato per argomento
 	 */
 	@SuppressWarnings("rawtypes")
 	public static IObiettiviDAO getIObiettiviDAO(Obiettivi ob, String fileConnPath){

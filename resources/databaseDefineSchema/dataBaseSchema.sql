@@ -156,24 +156,23 @@ SET ricompensaData=(
 		AND 
 		T1.USER_ACCOUNT_USERNAME=NEW.USERNAME
 );
-
-IF OLD.PUNTEGGIO<>NEW.PUNTEGGIO
+IF OLD.PUNTEGGIO<>NEW.PUNTEGGIO AND ricompensaData>0
 THEN
-	SET NEW.MNY=OLD.MNY+ricompensaData;
-    
+	
 	UPDATE obiettivi_user set stato='COMPLETATO' 
-    WHERE USER_ACCOUNT_USERNAME=NEW.USERNAME 
-    AND OBIETTIVI_idObiettivo 
-		in
-			(select 
-				T3.idObiettivo
-			from 
-				OB_PUNTEGGIO 		AS T2 
-				JOIN 
-				OBIETTIVI 		AS T3 ON(T2.OBIETTIVI_idObiettivo=T3.idObiettivo) 
+    WHERE	USER_ACCOUNT_USERNAME=NEW.USERNAME 
+			AND OBIETTIVI_idObiettivo 
+			in(
+                select 
+					T3.idObiettivo
+				from 
+					OB_PUNTEGGIO 	AS T2 
+					JOIN 
+					OBIETTIVI 		AS T3 ON(T2.OBIETTIVI_idObiettivo=T3.idObiettivo) 
 			WHERE 
 				T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
 			);
+            SET NEW.MNY=OLD.MNY+ricompensaData;
     end if;
 END$$
 

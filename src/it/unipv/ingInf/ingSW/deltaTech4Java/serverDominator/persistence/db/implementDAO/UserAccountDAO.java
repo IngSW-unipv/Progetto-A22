@@ -222,7 +222,6 @@ public class UserAccountDAO implements IUserAccountDAO {
 			st1.setString(3, us.getPassw());
 
 			st1.executeUpdate();
-			us.setPunteggio(newPunteggio);
 
 		}catch (Exception e){
 			e.printStackTrace();

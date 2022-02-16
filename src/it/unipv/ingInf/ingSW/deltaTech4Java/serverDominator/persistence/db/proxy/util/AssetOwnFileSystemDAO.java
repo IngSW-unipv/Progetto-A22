@@ -13,6 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Ass
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
 /**
+ * Salvataggio Asset Posseduto dal giocatore nel file system
  * @author TawaHabib
  * @version 1.0
  * @see AsetOwn

@@ -32,8 +32,8 @@ public class DataBase {
 	 * Metodo per capire se è la prima volta che l'utente accede al gioco  oppure no;
 	 * </br>
 	 * @return
-	 * Vero--> se è il primo acesso quindi se si deve creare il dataBase
-	 * </br>Flaso--> se non è il primo acesso quindi se l'utente ha gia creato ilk database tramite l'appliativo
+	 * Vero se è il primo acesso quindi se si deve creare il dataBase
+	 * </br>Flaso se non è il primo acesso quindi se l'utente ha gia creato ilk database tramite l'appliativo
 	 */
 	@SuppressWarnings("unused")
 	public static boolean isItTheFirstTime() {

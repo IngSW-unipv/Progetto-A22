@@ -9,9 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
@@ -143,6 +145,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.getInstance()}.
 	 */
+	@Disabled
 	@Test
 	void testGetInstance() {
 		assertEquals(p, PersistenceFacade.getInstance());
@@ -150,6 +153,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.selectAssetByPrice(Asset)}.
 	 */
+	
 	@Test
 	void testSelectAssetByPrice() {
 		assertEquals(p.selectAssetByPrice(ass.get(1)).get(0), ass.get(1));
@@ -158,6 +162,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.insertAsset(Asset)}.
 	 */
+	
 	@Test
 	void testInsertAsset() {
 		assertFalse(p.insertAsset(ass.get(1)));
@@ -167,6 +172,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.updateAssetById(Asset)}.
 	 */
+	
 	@Test
 	void testUpdateAssetById() {
 		ass.get(0).setDescrizione("provaUpdate");
@@ -176,6 +182,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.updatePriceAssetByPrice(Asset, Asset)}.
 	 */
+	
 	@Test
 	void testUpdatePriceAssetByPrice() {
 		assertTrue(p.updatePriceAssetByPrice(ass.get(0), ass.get(0)));
@@ -185,6 +192,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.selectAssetByAssetId(Asset)}.
 	 */
+	
 	@Test
 	void testSelectAssetByAssetId() {
 		assertNotEquals(p.selectAssetByAssetId(ass.get(0)),(ass.get(1)));
@@ -194,6 +202,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.insertAssetOwn(AsetOwn)}.
 	 */
+	
 	@Test
 	void testInsertAssetOwn() {
 		assertTrue(p.insertAssetOwn(new AsetOwn(ass.get(0),us.get(0),3)));
@@ -202,6 +211,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.updateQuantityAssetOwnByAssetOwnId(AsetOwn)}.
 	 */
+	
 	@Test
 	void testUpdateQuantityAssetOwnByAssetOwnId() {
 		assertTrue(p.updateQuantityAssetOwnByAssetOwnId(us.get(3).getAsetOwns().get(0)));
@@ -210,6 +220,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.selectObiettiviByRicompensa(Obiettivi)}.
 	 */
+	
 	@Test
 	void testSelectObiettiviByRicompensa() {
 		assertEquals(p.selectObiettiviByRicompensa(obp.get(0)).get(0), obp.get(0));
@@ -255,10 +266,10 @@ class PersistenceFacadeTest {
 	void testSelectObiettiviByObiettiviId() {
 		assertEquals(obp.get(1), p.selectObiettiviByObiettiviId(obp.get(1)));
 	}
-
 	/**
 	 * Test method for {PersistenceFacade.selectObiettiviUserByUserId(UserAccount)}.
 	 */
+	
 	@Test
 	void testSelectObiettiviUserByUserId() {
 		boolean risult1=false;
@@ -294,6 +305,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.selectObiettiviUserByObiettiviId(Obiettivi)}.
 	 */
+	
 	@Test
 	void testSelectObiettiviUserByObiettiviId() {
 		boolean ris=false;
@@ -315,16 +327,20 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.insertObiettiviUser(ObiettiviUser)}.
 	 */
+	
 	@Test
 	void testInsertObiettiviUser() {
+		//assegno obiettivo che non esiste 
 		assertFalse(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(6,"LEGA 6",600),us.get(3),"NON COMPLETATO")));
 		p.insertObiettivo(new Obiettivi(7,"LEGA 7",300));
+		//assegno obiettivo che esiste
 		assertTrue(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(7,"LEGA 7",300),us.get(3),"NON COMPLETATO")));
 	}
 
 	/**
 	 * Test method for {PersistenceFacade.updateStatoObiettiviUserbyObiettiviUserId(ObiettiviUser)}.
 	 */
+	@Ignore
 	@Test
 	void testUpdateStatoObiettiviUserbyObiettiviUserId() {
 		ObiettiviUser ob=us.get(0).getObiettiviUsers().get(0);
@@ -335,6 +351,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.insetUserAccount(UserAccount)}.
 	 */
+	@Ignore
 	@Test
 	void testInsetUserAccount() {
 		assertTrue(p.insetUserAccount(new UserAccount("Username1","email1","pssword1")));
@@ -355,6 +372,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.updateUserAccountUsername(UserAccount, java.lang.String)}.
 	 */
+	@Ignore
 	@Test
 	void testUpdateUserAccountUsername() {
 		UserAccount uss=us.get(0);
@@ -364,6 +382,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.getUserAccountById(UserAccount)}.
 	 */
+	@Ignore
 	@Test
 	void testGetUserAccountById() {
 		UserAccount user=us.get(0);

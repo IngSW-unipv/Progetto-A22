@@ -137,61 +137,43 @@ DROP TRIGGER IF EXISTS `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` $$
 USE `ServerDomDB`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` BEFORE UPDATE ON `USER_ACCOUNT` FOR EACH ROW
 BEGIN
-		IF 
-			OLD.PUNTEGGIO<>NEW.PUNTEGGIO
-			AND 
-			(select count(*)
-				from 	
-						OBIETTIVI_USER	 	AS T1 
-						JOIN 
-						OB_PUNTEGGIO 		AS T2 
-							ON(T1.OBIETTIVI_idObiettivo=T2.OBIETTIVI_idObiettivo) 
-				WHERE 
-						T1.STATO='NON COMPLETATO' 
-						AND 
-						T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
-						AND 
-						T1.USER_ACCOUNT_USERNAME=NEW.USERNAME
-				)>0
-	THEN
-		SET NEW.MNY=OLD.MNY+
-            (#RICOMPENSA DEL GIOCATORE 
-            SELECT SUM(R)
-            FROM
-					(
-						select 
-								T1.USER_ACCOUNT_USERNAME,SUM(T3.RICOMPENSA) AS R
-						from 	
-								OBIETTIVI_USER	 	AS T1 
-								JOIN 
-								OB_PUNTEGGIO 		AS T2 
-									ON(T1.OBIETTIVI_idObiettivo=T2.OBIETTIVI_idObiettivo) 
-								JOIN 
-								OBIETTIVI 		AS T3 
-									ON(T1.OBIETTIVI_idObiettivo=T3.idObiettivo) 
-						WHERE 
-								T1.STATO='NON COMPLETATO' 
-								AND 
-								T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
-								AND 
-								T1.USER_ACCOUNT_USERNAME=NEW.USERNAME
-						GROUP BY T1.USER_ACCOUNT_USERNAME
-						)AS T5
-					);
-		UPDATE obiettivi_user set stato='COMPLETATO' 
-        WHERE USER_ACCOUNT_USERNAME=NEW.USERNAME 
-        AND OBIETTIVI_idObiettivo 
-				in
-							(	select 
-										T3.idObiettivo
-								from 
-										OB_PUNTEGGIO 		AS T2 
-										JOIN 
-										OBIETTIVI 		AS T3 
-											ON(T2.OBIETTIVI_idObiettivo=T3.idObiettivo) 
-								WHERE 
-										T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
-							);
+declare ricompensaData int;
+SET ricompensaData=(
+	select 
+		SUM(T3.RICOMPENSA)
+	from 	
+		OBIETTIVI_USER	 	AS T1 
+		JOIN 
+		OB_PUNTEGGIO 		AS T2 
+		ON(T1.OBIETTIVI_idObiettivo=T2.OBIETTIVI_idObiettivo) 
+		JOIN 
+		OBIETTIVI 		AS T3 
+		ON(T1.OBIETTIVI_idObiettivo=T3.idObiettivo) 
+	WHERE 
+		T1.STATO='NON COMPLETATO' 
+		AND 
+		T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
+		AND 
+		T1.USER_ACCOUNT_USERNAME=NEW.USERNAME
+);
+
+IF OLD.PUNTEGGIO<>NEW.PUNTEGGIO
+THEN
+	SET NEW.MNY=OLD.MNY+ricompensaData;
+    
+	UPDATE obiettivi_user set stato='COMPLETATO' 
+    WHERE USER_ACCOUNT_USERNAME=NEW.USERNAME 
+    AND OBIETTIVI_idObiettivo 
+		in
+			(select 
+				T3.idObiettivo
+			from 
+				OB_PUNTEGGIO 		AS T2 
+				JOIN 
+				OBIETTIVI 		AS T3 ON(T2.OBIETTIVI_idObiettivo=T3.idObiettivo) 
+			WHERE 
+				T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
+			);
     end if;
 END$$
 

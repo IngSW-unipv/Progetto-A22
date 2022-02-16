@@ -51,7 +51,7 @@ class PersistenceFacadeTest {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		//DataBase.createDataBase("localhost", "3306","root","12345678");
+		DataBase.createDataBase("localhost", "3306","root","12345678");
 	}
 	@BeforeEach
 	void setUp() throws Exception {

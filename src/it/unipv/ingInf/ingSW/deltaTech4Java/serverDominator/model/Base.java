@@ -129,5 +129,19 @@ public class Base extends Nodo{
 	public int getLvl_firewall() {
 		return risorse[3].getLivello_risorsa();
 	}
+
+	public Software[] getStats_software_creati() {
+		return stats_software_creati;
+	}
+	public int getLvl_max_cpu() {
+		return risorse[0].getMAX_LVL();
+	}
 	
+	public int getLvl_max_ram() {
+		return risorse[1].getMAX_LVL();
+	}
+	
+	public int getLvl_max_firewall() {
+		return risorse[3].getMAX_LVL();
+	}
 }

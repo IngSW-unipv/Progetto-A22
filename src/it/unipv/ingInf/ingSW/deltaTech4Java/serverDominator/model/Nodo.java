@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Software;
 
 public abstract class Nodo implements INodo{
 	private Coordinate coordinate;
@@ -9,7 +10,6 @@ public abstract class Nodo implements INodo{
 	private int software_disponibile;
 	private int software_max;
 	private int bonus_def;
-	private int val_def, val_atkv, val_atkr;
 	private int e_disponibile;
 	private int lvl_cpu, lvl_ram, lvl_firewall;
 	protected Timer time1, time2; 
@@ -20,6 +20,7 @@ public abstract class Nodo implements INodo{
 		software_disponibile=0;
 		this.time1=new Timer();
 		this.time2= new Timer();
+		
 }
 		
 /**getter and setter*/
@@ -104,29 +105,6 @@ public abstract class Nodo implements INodo{
 		this.lvl_firewall = lvl_firewall;
 	}
 
-	public int getVal_def() {
-		return val_def;
-	}
-
-	public void setVal_def(int val_def) {
-		this.val_def = val_def;
-	}
-
-	public int getVal_atkv() {
-		return val_atkv;
-	}
-
-	public void setVal_atkv(int val_atkv) {
-		this.val_atkv = val_atkv;
-	}
-
-	public int getVal_atkr() {
-		return val_atkr;
-	}
-
-	public void setVal_atkr(int val_atkr) {
-		this.val_atkr = val_atkr;
-	}
-	
-	
+	public abstract Software[] getStats_software_creati(); 
+		
 }

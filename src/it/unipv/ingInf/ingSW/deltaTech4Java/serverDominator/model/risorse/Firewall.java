@@ -76,4 +76,8 @@ public class Firewall extends Risorse{
 		this.bonus_def = bonus_def;
 	}
 	
+	public int getMAX_LVL() {
+		return MAX_FIREWALL;
+	}
+	
 }

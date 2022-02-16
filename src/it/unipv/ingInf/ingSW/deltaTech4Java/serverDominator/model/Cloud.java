@@ -5,7 +5,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 
 public class Cloud extends Nodo {
-	private Software antivirus;
+	private Software[] stats_software_creati;
 	private Risorse[] risorse;
 	private final int TIPI_RISORSE=4;
 	
@@ -17,20 +17,21 @@ public class Cloud extends Nodo {
 		super.setSoftware_max(20);
 		risorse= new Risorse[TIPI_RISORSE];
 		this.inizializza_risorse();
+		stats_software_creati= new Software[1];
 	}
 	
 	public void inizializza_risorse() {
 		/** inizializza un vettore di Risorse
 		 * NB: 0=cpu, 1=ram, 2=energia,3=firewall
 		 */
-//implementare funzione random tra 0 e 1 per ogni risorsa
-		risorse[0]=new Cpu(0);
+		int casual;
+		risorse[0]=new Cpu(casual=(int)(Math.random()*2));
 		super.setLvl_cpu(risorse[0].getLivello_risorsa());
-		risorse[1]=new Ram(0);
+		risorse[1]=new Ram(casual=(int)(Math.random()*2));
 		super.setLvl_ram(risorse[1].getLivello_risorsa());
 		risorse[2]=new Energia(1);
 		super.setE_disponibile(risorse[2].getStat1());
-		risorse[3]=new Firewall(0);
+		risorse[3]=new Firewall(casual=(int)(Math.random()*2));
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 	
@@ -59,9 +60,9 @@ public class Cloud extends Nodo {
 			n_soft=quantità+super.getSoftware_disponibile();
 			if(n_soft<=super.getSoftware_max()) {
 			/**start timer per creazione software*/
-				super.time2.countdown(antivirus.getTemp_richiesto()*quantità);
-				super.time2.timer(antivirus.getTemp_richiesto()*quantità);
-				antivirus= new Antivirus(1,quantità);
+				super.time2.countdown(stats_software_creati[0].getTemp_richiesto()*quantità);
+				super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantità);
+				stats_software_creati[0]= new Antivirus(1,quantità);
 				check=true;
 				super.setSoftware_disponibile(n_soft);
 			}else System.out.println("spazio non sufficiente per la creazione");
@@ -80,7 +81,7 @@ public class Cloud extends Nodo {
 	}
 	
 	public Software getAntivirus() {
-		return antivirus;
+		return stats_software_creati[0];
 	}
 
 	public int getLvl_ram() {
@@ -102,8 +103,8 @@ public class Cloud extends Nodo {
 		risorse[3].setStat1(bonus_def);;
 	}
 	
-	public int getVal_def() {
-		return antivirus.getVal_def();
+	public Software[] getStats_software_creati() {
+		return stats_software_creati;
 	}
 
 	

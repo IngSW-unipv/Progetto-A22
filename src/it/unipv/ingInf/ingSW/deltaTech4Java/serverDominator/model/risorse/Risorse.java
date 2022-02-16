@@ -100,5 +100,9 @@ public abstract class Risorse {
 		this.stat3 = stat3;
 	}
 	
+	public int getMAX_LVL() {
+		return MAX_LVL;
+	}
+	
 	
 }

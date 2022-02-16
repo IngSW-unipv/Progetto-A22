@@ -43,7 +43,7 @@ public class Base extends Nodo{
 		risorse[3]=new Firewall(0);
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
-	
+		
 	public void potenzia_risorsa(String nome) {
 		boolean check=false;
 		int en_usata, i;
@@ -52,7 +52,9 @@ public class Base extends Nodo{
 				if(risorse[i].getE_richiesta()<= risorse[2].getStat1()) {
 			en_usata= risorse[2].getStat1()-risorse[i].getE_richiesta();
 			risorse[2].setStat1(en_usata);
-//fare partire un timer basato su risorsa.getTempo_richiesto();
+	/*start countdown per potenziamento risorsa*/
+			super.time1.countdown(risorse[i].getTempo_richiesto()); //countdown per visualizzazione a schermo
+			super.time1.timer(risorse[i].getTempo_richiesto());		//timer per attesa operazione
 			check= risorse[i].potenziamento(); 
 				}
 			}
@@ -71,14 +73,21 @@ public class Base extends Nodo{
 		if(n_soft<=risorse[1].getStat1()) {
 			for(i=0;i<TIPI_SOFTWARE;i++) {
 				if(stats_software_creati[i].getNome()==nome) {
+					quantità=stats_software_creati[i].getQuantità()+quantità;
 					switch(i) {
 					case 0: 
+						super.time2.countdown(stats_software_creati[0].getTemp_richiesto()* quantità);
+						super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantità);
 						stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantità);
 						break;
 					case 1: 
+						super.time2.countdown(stats_software_creati[1].getTemp_richiesto()*quantità);
+						super.time2.timer(stats_software_creati[1].getTemp_richiesto()*quantità);
 						stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantità);
 						break;
 					case 2:
+						super.time2.countdown(stats_software_creati[2].getTemp_richiesto()*quantità);
+						super.time2.timer(stats_software_creati[2].getTemp_richiesto()*quantità);
 						stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantità);
 						break;
 					}
@@ -121,11 +130,4 @@ public class Base extends Nodo{
 		return risorse[3].getLivello_risorsa();
 	}
 	
-	public int getTipiSoftware() {
-		return TIPI_SOFTWARE;
-	}
-	
-	public int getTipiRisorse() {
-		return TIPI_RISORSE;
-	}
 }

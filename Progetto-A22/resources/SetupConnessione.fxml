@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginsignup.SetupController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="621.0">
+         <children>
+            <AnchorPane layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="tf_port" layoutX="364.0" layoutY="130.0" />
+            <TextField fx:id="tf_username" layoutX="364.0" layoutY="174.0" />
+            <TextField fx:id="tf_ip" layoutX="364.0" layoutY="87.0" />
+            <TextField fx:id="tf_password" layoutX="364.0" layoutY="216.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="87.0" prefHeight="26.0" prefWidth="70.0" text="IP" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="129.0" prefHeight="26.0" prefWidth="70.0" text="PORT" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="173.0" prefHeight="26.0" prefWidth="70.0" text="Username" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="215.0" prefHeight="26.0" prefWidth="70.0" text="Password" />
+            <Button fx:id="button_setup" layoutX="266.0" layoutY="312.0" mnemonicParsing="false" text="SET UP" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

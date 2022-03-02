@@ -1,5 +1,9 @@
 package com.example.loginsignup;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,9 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 public class SetupController {
 
 
@@ -55,7 +56,7 @@ public class SetupController {
             button_setup.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    Database.creaDataBase(actionEvent, tf_ip.getText(), tf_port.getText(), tf_username.getText(), tf_password.getText()); //passo tutto da DBUtil per il login
+                    DataBase.createDataBase(tf_ip.getText(), tf_port.getText(), tf_username.getText(), tf_password.getText()); //passo tutto da DBUtil per il login
                 }
             });
 
@@ -63,3 +64,4 @@ public class SetupController {
         }
 
     }
+}

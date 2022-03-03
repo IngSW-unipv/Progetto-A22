@@ -13,27 +13,28 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Ass
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
 /**
- * Salvataggio Asset Posseduto dal giocatore nel file system
+ * Salvataggio Asset Posseduto dal giocatore nel file system 
+ * (file semistrutturato, tipo csv)
  * @author TawaHabib
  * @version 1.0
  * @see AsetOwn
  */
 public class AssetOwnFileSystemDAO {
 
-	private static final String COMMA_DELIMITER = ",";
+	public static final String COMMA_DELIMITER = ",";
 	
-	private static final String LINE_SEPARATOR = "\n";
+	public static final String LINE_SEPARATOR = "\n";
 
-	private static final String FILE_NAME = "resources/config/persistence/playerAssetOwn";
+	public static final String FILE_NAME = "resources/config/persistence/playerAssetOwn";
 
-	private static final String FILE_HEADER = "ID, LIVELLO , COSTO, QUANTITA, DESCRIZIONE, NOME";
+	public static final String FILE_HEADER = "ID, LIVELLO , COSTO, QUANTITA, DESCRIZIONE, NOME";
 	
-    private static final int ID = 0;
-    private static final int LIVELLO = 1;
-    private static final int COSTO = 2;
-    private static final int QUANTITA = 3; 
-    private static final int DESCRIZIONE = 4;
-    private static final int NOME = 5;
+	public static final int ID = 0;
+	public static final int LIVELLO = 1;
+	public static final int COSTO = 2;
+	public static final int QUANTITA = 3; 
+	public static final int DESCRIZIONE = 4;
+	public static final int NOME = 5;
     
     
     /**

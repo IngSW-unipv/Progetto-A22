@@ -68,7 +68,7 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 			return uss;
 		}else {
 			if(uss!=null)
-				UserAccountInfo.saveUserAccountData(uss);
+			UserAccountInfo.saveUserAccountData(uss);
 		}
 		return uss;			
 	}

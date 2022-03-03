@@ -19,18 +19,18 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
  *
  */
 public class ObiettiviUserFileSistemDAO {
-	private static final String COMMA_DELIMITER = ",";
+	public static final String COMMA_DELIMITER = ",";
 	
-	private static final String LINE_SEPARATOR = "\n";
+	public static final String LINE_SEPARATOR = "\n";
 
-	private static final String FILE_NAME = "resources/config/persistence/obiettiviPlayer";
+	public static final String FILE_NAME = "resources/config/persistence/obiettiviPlayer";
 
-	private static final String FILE_HEADER = "ID, DESCRIZIONE, STATO, RICOMPENSA";
+	public static final String FILE_HEADER = "ID, DESCRIZIONE, STATO, RICOMPENSA";
 	
-    private static final int ID = 0;
-    private static final int DESCRIZIONE = 1;
-    private static final int STATO = 2;
-    private static final int RICOMPENSA = 3; 
+	public static final int ID = 0;
+	public static final int DESCRIZIONE = 1;
+	public static final int STATO = 2;
+	public static final int RICOMPENSA = 3; 
     
     /**
      * slva Obiettivi in file semistrutturato

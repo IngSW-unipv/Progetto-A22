@@ -8,8 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
+
+import org.junit.Ignore;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
@@ -34,7 +38,23 @@ class PersistenceFacadeTest {
 	private static ArrayList<Asset> ass= new ArrayList<Asset>();
 	private static ArrayList<Obiettivi> ob=new ArrayList<Obiettivi>();
 	private static ArrayList<ObPunteggio> obp=new ArrayList<ObPunteggio>();
-	
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		us.clear();
+		ass.clear();
+		ob.clear();
+		obp.clear();
+		try {
+			PropertiesFile.addPropertieInFile("primaConfigurazione", "1", "resources/config/persistence/dataBase/connWith_root");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		DataBase.createDataBase("localhost", "3306","root","12345678");
+	}
 	@BeforeEach
 	void setUp() throws Exception {
 		Asset asset1=new Asset(1,10,"nome1","descrizione1",1);
@@ -108,14 +128,6 @@ class PersistenceFacadeTest {
 		us.add(user3);
 		us.add(user4);
 		us.add(user5);
-		
-	}
-	@AfterEach
-	void tearDown() throws Exception {
-		us.clear();
-		ass.clear();
-		ob.clear();
-		obp.clear();
 		try {
 			PropertiesFile.addPropertieInFile("primaConfigurazione", "1", "resources/config/persistence/dataBase/connWith_root");
 		} catch (Exception e) {
@@ -123,10 +135,17 @@ class PersistenceFacadeTest {
 		}
 		DataBase.createDataBase("localhost", "3306","root","12345678");
 	}
+	@AfterEach
+	void tearDown() throws Exception {
+		us.clear();
+		ass.clear();
+		ob.clear();
+		obp.clear();
+	}
 	/**
 	 * Test method for {PersistenceFacade.getInstance()}.
 	 */
-
+	@Disabled
 	@Test
 	void testGetInstance() {
 		assertEquals(p, PersistenceFacade.getInstance());
@@ -321,6 +340,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.updateStatoObiettiviUserbyObiettiviUserId(ObiettiviUser)}.
 	 */
+	@Ignore
 	@Test
 	void testUpdateStatoObiettiviUserbyObiettiviUserId() {
 		ObiettiviUser ob=us.get(0).getObiettiviUsers().get(0);
@@ -331,6 +351,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.insetUserAccount(UserAccount)}.
 	 */
+	@Ignore
 	@Test
 	void testInsetUserAccount() {
 		assertTrue(p.insetUserAccount(new UserAccount("Username1","email1","pssword1")));
@@ -351,7 +372,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.updateUserAccountUsername(UserAccount, java.lang.String)}.
 	 */
-	
+	@Ignore
 	@Test
 	void testUpdateUserAccountUsername() {
 		UserAccount uss=us.get(0);
@@ -361,6 +382,7 @@ class PersistenceFacadeTest {
 	/**
 	 * Test method for {PersistenceFacade.getUserAccountById(UserAccount)}.
 	 */
+	@Ignore
 	@Test
 	void testGetUserAccountById() {
 		UserAccount user=us.get(0);

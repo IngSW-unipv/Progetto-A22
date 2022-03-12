@@ -1,5 +1,12 @@
 package mappa;
 
+/**
+ * @author Matteo Para 
+ * v0.1
+ * Esecuzione interfaccia grafica
+ * 
+ */
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -22,6 +29,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+
 public class Main extends Application {
 
     enum Action {TerrainDrawing, Move, PoliticalDrawing, BuildingDraw, Selector}
@@ -36,7 +45,7 @@ public class Main extends Application {
         launch(args);	// fa partire la funzione start di JavaFX
     }
 
-    public void addType(HBox controls, HexType type, Action action){	// HBOX è un contenitore orizzontale (VBOX verticale)
+    public void addType(HBox controls, HexType type, Action action){	// HBOX ï¿½ un contenitore orizzontale (VBOX verticale)
         Button button = new Button(type.getName()); // do al bottone il nome del type
         button.setOnMouseClicked(event -> {
             currentAction = action; // setta la Action che ho passato al metodo addType
@@ -71,7 +80,7 @@ public class Main extends Application {
         controls.setPadding(new Insets(10)); // margini del testo dentro al bottone
     }
 
-    public void addState(HBox politicalControls){ // menù per aggiungere uno stato
+    public void addState(HBox politicalControls){ // menï¿½ per aggiungere uno stato
         
     	VBox vbox = new VBox();
         
@@ -121,7 +130,7 @@ public class Main extends Application {
         stage.showAndWait();
     }
 
-    public void addTerrain(HBox terrainControls){ // menù per aggiungere un terreno
+    public void addTerrain(HBox terrainControls){ // menï¿½ per aggiungere un terreno
         VBox vbox = new VBox();
         HBox name = new HBox();
         Label nameLabel = new Label("Name:  ");
@@ -160,9 +169,9 @@ public class Main extends Application {
         buttonBox.setAlignment(Pos.CENTER);	// posizione del tasto submit all'interno della HBox
 
         vbox.setPadding(new Insets(20));
-        vbox.getChildren().addAll(name, color,cost, buttonBox); // buttonBox è il Submit
+        vbox.getChildren().addAll(name, color,cost, buttonBox); // buttonBox ï¿½ il Submit
         vbox.setAlignment(Pos.CENTER_RIGHT);
-        Stage stage = new Stage();	// Stage è il pop-up
+        Stage stage = new Stage();	// Stage ï¿½ il pop-up
         stage.setScene(new Scene(vbox));	// pubblica la VBox dentro allo Stage 
 
         submitButton.setOnMouseClicked(event -> {
@@ -181,7 +190,7 @@ public class Main extends Application {
         VBox holder = new VBox();
         BorderPane borderPane = new BorderPane();
 
-        // Canvas è lo spazio in cui disegna gli esagoni
+        // Canvas ï¿½ lo spazio in cui disegna gli esagoni
         Canvas basicCanvas = new Canvas(980, 600);
         GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
 
@@ -218,7 +227,7 @@ public class Main extends Application {
         setUpControls(buildingControls);
 
         /*
-        moveButton.setOnMouseClicked(new onMouseClick() {   // questo è scritto in Java7
+        moveButton.setOnMouseClicked(new onMouseClick() {   // questo ï¿½ scritto in Java7
         	@override
         	public void onClick(Event event) {
         		currentAction = Action.Move;

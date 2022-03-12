@@ -6,136 +6,165 @@
 -- 8.0.XX
 -- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- Schema serverdomdb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `serverdomdb` ;
 
 -- -----------------------------------------------------
--- Schema ServerDomDB
+-- Schema serverdomdb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `ServerDomDB` ;
+CREATE SCHEMA IF NOT EXISTS `serverdomdb` DEFAULT CHARACTER SET utf8 ;
+USE `serverdomdb` ;
 
 -- -----------------------------------------------------
--- Schema ServerDomDB
+-- Table `serverdomdb`.`lingua`
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ServerDomDB` DEFAULT CHARACTER SET utf8 ;
-USE `ServerDomDB` ;
+DROP TABLE IF EXISTS `serverdomdb`.`lingua` ;
+
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`lingua` (
+  `CHIAVE` VARCHAR(60) NOT NULL,
+  `TIPO` ENUM('INTERNO', 'ESTERNO') NULL DEFAULT 'INTERNO',
+  `ITALIANO` VARCHAR(200) unique NULL,
+  `ENGLISH` VARCHAR(200)  unique NULL,
+  PRIMARY KEY (`CHIAVE`))
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
--- Table `ServerDomDB`.`USER_ACCOUNT`
+-- Table `serverdomdb`.`asset`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`USER_ACCOUNT` ;
+DROP TABLE IF EXISTS `serverdomdb`.`asset` ;
 
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`USER_ACCOUNT` (
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`asset` (
+  `idAsset` INT NOT NULL,
+  `COSTO` INT NULL DEFAULT '1000000',
+  `NOME` VARCHAR(60) NOT NULL,
+  `DESCRIZIONE` VARCHAR(60) NOT NULL,
+  `LIVELLO` INT NOT NULL,
+  PRIMARY KEY (`idAsset`),
+  INDEX `fk_asset_LINGUA1` (`DESCRIZIONE` ASC) VISIBLE,
+  INDEX `fk_asset_LINGUA2` (`NOME` ASC) VISIBLE,
+  CONSTRAINT `fk_asset_LINGUA1`
+    FOREIGN KEY (`DESCRIZIONE`)
+    REFERENCES `serverdomdb`.`lingua` (`CHIAVE`),
+  CONSTRAINT `fk_asset_LINGUA2`
+    FOREIGN KEY (`NOME`)
+    REFERENCES `serverdomdb`.`lingua` (`CHIAVE`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `serverdomdb`.`user_account`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `serverdomdb`.`user_account` ;
+
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`user_account` (
   `USERNAME` VARCHAR(20) NOT NULL,
-  `MNY` INT NOT NULL DEFAULT 0,
-  `PUNTEGGIO` INT NULL DEFAULT 0,
-  `EMAIL` VARCHAR(45) NULL,
-  `PASSW` VARCHAR(45) NULL,
+  `MNY` INT NOT NULL DEFAULT '0',
+  `PUNTEGGIO` INT NULL DEFAULT '0',
+  `EMAIL` VARCHAR(45) NULL DEFAULT NULL,
+  `PASSW` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`USERNAME`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServerDomDB`.`ASSET`
+-- Table `serverdomdb`.`aset_own`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`ASSET` ;
+DROP TABLE IF EXISTS `serverdomdb`.`aset_own` ;
 
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ASSET` (
-  `idAsset` INT NOT NULL ,
-  `COSTO` INT NULL DEFAULT 1000000,
-  `NOME` VARCHAR(20) NULL,
-  `DESCRIZIONE` VARCHAR(200) NULL,
-  `LIVELLO` INT NOT NULL,
-  PRIMARY KEY (`idAsset`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ServerDomDB`.`ASET_Own`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`ASET_Own` ;
-
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`ASET_Own` (
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`aset_own` (
   `ASSET_idAsset` INT NOT NULL,
   `USER_ACCOUNT_USERNAME` VARCHAR(20) NOT NULL,
-  `QUANTITA` INT NULL DEFAULT 0,
+  `QUANTITA` INT NULL DEFAULT '0',
   PRIMARY KEY (`ASSET_idAsset`, `USER_ACCOUNT_USERNAME`),
   INDEX `fk_ASET_Own_ASSET1_idx` (`ASSET_idAsset` ASC) VISIBLE,
   INDEX `fk_ASET_Own_USER_ACCOUNT1_idx` (`USER_ACCOUNT_USERNAME` ASC) VISIBLE,
   CONSTRAINT `fk_ASET_Own_ASSET1`
     FOREIGN KEY (`ASSET_idAsset`)
-    REFERENCES `ServerDomDB`.`ASSET` (`idAsset`)
+    REFERENCES `serverdomdb`.`asset` (`idAsset`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_ASET_Own_USER_ACCOUNT1`
     FOREIGN KEY (`USER_ACCOUNT_USERNAME`)
-    REFERENCES `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`)
+    REFERENCES `serverdomdb`.`user_account` (`USERNAME`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServerDomDB`.`OBIETTIVI`
+-- Table `serverdomdb`.`obiettivi`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`OBIETTIVI` ;
+DROP TABLE IF EXISTS `serverdomdb`.`obiettivi` ;
 
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`OBIETTIVI` (
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`obiettivi` (
   `idObiettivo` INT NOT NULL,
-  `DESCRIZIONE` VARCHAR(200) NOT NULL,
+  `DESCRIZIONE` VARCHAR(60) NOT NULL,
   `RICOMPENSA` INT NOT NULL,
-  PRIMARY KEY (`idObiettivo`))
+  PRIMARY KEY (`idObiettivo`),
+  INDEX `fk_obiettivi_LINGUA1` (`DESCRIZIONE` ASC) VISIBLE,
+  CONSTRAINT `fk_obiettivi_LINGUA1`
+    FOREIGN KEY (`DESCRIZIONE`)
+    REFERENCES `serverdomdb`.`lingua` (`CHIAVE`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ServerDomDB`.`OBIETTIVI_USER`
+-- Table `serverdomdb`.`ob_punteggio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`OBIETTIVI_USER` ;
+DROP TABLE IF EXISTS `serverdomdb`.`ob_punteggio` ;
 
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`OBIETTIVI_USER` (
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`ob_punteggio` (
+  `OBIETTIVI_idObiettivo` INT NOT NULL,
+  `PUNTEGGIO_OBIETTIVO` INT NOT NULL,
+  PRIMARY KEY (`OBIETTIVI_idObiettivo`),
+  UNIQUE INDEX `PUNTEGGIO_OBIETTIVO_UNIQUE` (`PUNTEGGIO_OBIETTIVO` ASC) VISIBLE,
+  INDEX `fk_OB_PUNTEGGIO_OBIETTIVI1_idx` (`OBIETTIVI_idObiettivo` ASC) VISIBLE,
+  CONSTRAINT `fk_OB_PUNTEGGIO_OBIETTIVI1`
+    FOREIGN KEY (`OBIETTIVI_idObiettivo`)
+    REFERENCES `serverdomdb`.`obiettivi` (`idObiettivo`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `serverdomdb`.`obiettivi_user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `serverdomdb`.`obiettivi_user` ;
+
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`obiettivi_user` (
   `STATO` ENUM('COMPLETATO', 'NON COMPLETATO') NOT NULL DEFAULT 'NON COMPLETATO',
   `USER_ACCOUNT_USERNAME` VARCHAR(20) NOT NULL,
   `OBIETTIVI_idObiettivo` INT NOT NULL,
   PRIMARY KEY (`USER_ACCOUNT_USERNAME`, `OBIETTIVI_idObiettivo`),
   INDEX `fk_OBIETTIVI_USER_OBIETTIVI1_idx` (`OBIETTIVI_idObiettivo` ASC) VISIBLE,
-  CONSTRAINT `fk_OBIETTIVI_USER_USER_ACCOUNT1`
-    FOREIGN KEY (`USER_ACCOUNT_USERNAME`)
-    REFERENCES `ServerDomDB`.`USER_ACCOUNT` (`USERNAME`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
   CONSTRAINT `fk_OBIETTIVI_USER_OBIETTIVI1`
     FOREIGN KEY (`OBIETTIVI_idObiettivo`)
-    REFERENCES `ServerDomDB`.`OBIETTIVI` (`idObiettivo`)
+    REFERENCES `serverdomdb`.`obiettivi` (`idObiettivo`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_OBIETTIVI_USER_USER_ACCOUNT1`
+    FOREIGN KEY (`USER_ACCOUNT_USERNAME`)
+    REFERENCES `serverdomdb`.`user_account` (`USERNAME`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `ServerDomDB`.`OB_PUNTEGGIO`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ServerDomDB`.`OB_PUNTEGGIO` ;
-
-CREATE TABLE IF NOT EXISTS `ServerDomDB`.`OB_PUNTEGGIO` (
-  `OBIETTIVI_idObiettivo` INT NOT NULL,
-  `PUNTEGGIO_OBIETTIVO` INT NOT NULL,
-  PRIMARY KEY (`OBIETTIVI_idObiettivo`),
-  INDEX `fk_OB_PUNTEGGIO_OBIETTIVI1_idx` (`OBIETTIVI_idObiettivo` ASC) VISIBLE,
-  UNIQUE INDEX `PUNTEGGIO_OBIETTIVO_UNIQUE` (`PUNTEGGIO_OBIETTIVO` ASC) VISIBLE,
-  CONSTRAINT `fk_OB_PUNTEGGIO_OBIETTIVI1`
-    FOREIGN KEY (`OBIETTIVI_idObiettivo`)
-    REFERENCES `ServerDomDB`.`OBIETTIVI` (`idObiettivo`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-USE `ServerDomDB`;
+USE `serverdomdb`;
 
 DELIMITER $$
 
-USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` $$
-USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` BEFORE UPDATE ON `USER_ACCOUNT` FOR EACH ROW
+USE `serverdomdb`$$
+DROP TRIGGER IF EXISTS `serverdomdb`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO` $$
+USE `serverdomdb`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `serverdomdb`.`CONTROLLO_RAGGIUNGIMENTO_OBIETTIVO`
+BEFORE UPDATE ON `serverdomdb`.`user_account`
+FOR EACH ROW
 BEGIN
 declare ricompensaData int;
 SET ricompensaData=(
@@ -158,7 +187,6 @@ SET ricompensaData=(
 );
 IF OLD.PUNTEGGIO<>NEW.PUNTEGGIO AND ricompensaData>0
 THEN
-	
 	UPDATE obiettivi_user set stato='COMPLETATO' 
     WHERE	USER_ACCOUNT_USERNAME=NEW.USERNAME 
 			AND OBIETTIVI_idObiettivo 
@@ -177,10 +205,14 @@ THEN
 END$$
 
 
-USE `ServerDomDB`$$
-DROP TRIGGER IF EXISTS `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO` $$
-USE `ServerDomDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ServerDomDB`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO` BEFORE INSERT ON `OBIETTIVI_USER` FOR EACH ROW
+USE `serverdomdb`$$
+DROP TRIGGER IF EXISTS `serverdomdb`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO` $$
+USE `serverdomdb`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `serverdomdb`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO`
+BEFORE INSERT ON `serverdomdb`.`obiettivi_user`
+FOR EACH ROW
 BEGIN
 declare punteggioGiocatore int;
 declare punteggioObiettivo int;
@@ -217,10 +249,8 @@ END$$
 
 
 DELIMITER ;
-SET SQL_MODE = '';
 DROP USER IF EXISTS sd_sys;
 
-SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 CREATE USER 'sd_sys' IDENTIFIED BY '12345678';
 
 GRANT SELECT, UPDATE, insert, alter, create, delete, DROP ON `ServerDomDB`.* TO 'sd_sys';

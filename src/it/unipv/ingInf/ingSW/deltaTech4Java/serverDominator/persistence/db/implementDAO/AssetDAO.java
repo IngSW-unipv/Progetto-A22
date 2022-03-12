@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 
 /**
@@ -29,11 +31,11 @@ public class AssetDAO implements IAssetDAO {
 	@Override
 	public ArrayList<Asset> selectAll() {
 		ArrayList<Asset> result = new ArrayList<>();
-
+		DBLinguaManager lingua=new DBLinguaManager(propConn);
 		conn=DbConnection.startConnection(conn,propConn);
 		Statement st1;
 		ResultSet rs1;
-
+		
 		try
 		{
 			st1 = conn.createStatement();
@@ -42,7 +44,8 @@ public class AssetDAO implements IAssetDAO {
 
 			while(rs1.next())
 			{
-				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),rs1.getString(3),rs1.getString(4),rs1.getInt(5));
+				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),lingua.getLanguageValueByKay(rs1.getString(3), LanguageFiles.getCurrentLanguage()) ,
+						lingua.getLanguageValueByKay(rs1.getString(4),LanguageFiles.getCurrentLanguage()),rs1.getInt(5));
 
 				result.add(a);
 			}
@@ -55,7 +58,8 @@ public class AssetDAO implements IAssetDAO {
 	@Override
 	public ArrayList<Asset> selectByPrice(Asset assInput) {
 		ArrayList<Asset> result = new ArrayList<>();
-
+		DBLinguaManager lingua=new DBLinguaManager(propConn);
+		
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
@@ -71,18 +75,23 @@ public class AssetDAO implements IAssetDAO {
 
 			while(rs1.next())
 			{
-				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),rs1.getString(3),rs1.getString(4),rs1.getInt(5));
+				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),lingua.getLanguageValueByKay(rs1.getString(3),LanguageFiles.getCurrentLanguage()),
+						lingua.getLanguageValueByKay(rs1.getString(4),LanguageFiles.getCurrentLanguage()),rs1.getInt(5));
 
 				result.add(a);
 			}
-		}catch (Exception e){e.printStackTrace();}
+		}catch (Exception e){
+			e.printStackTrace();
+			}
 
 		DbConnection.closeConnection(conn);
 		return result;
 	}
 
+	/*ATTENZIONE: L'ASSET DEVE CONTENERE IL VALORE DEL NOME E IL VALORE DELLA DESCRIZIONE E NON UNA CHIAVE!!!*/
 	@Override
 	public boolean insertAsset(Asset a) {
+		DBLinguaManager lingua=new DBLinguaManager(propConn);
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
 
@@ -90,14 +99,12 @@ public class AssetDAO implements IAssetDAO {
 
 		try
 		{
-			String query1="insert  into asset values (?,?,?,?,?)"
-					//+ "VALUES (?,?,?,?,?)"
-					;
+			String query1="insert  into asset values (?,?,?,?,?)";
 			st1 = conn.prepareStatement(query1);
 			st1.setInt		(1, a.getIdAsset());
 			st1.setInt		(2,a.getCosto());
-			st1.setString	(3,a.getNome());
-			st1.setString	(4,a.getDescrizione());
+			st1.setString	(3,lingua.getLanguageKayByValue(a.getNome(), LanguageFiles.getCurrentLanguage()) );
+			st1.setString	(4,lingua.getLanguageKayByValue(a.getDescrizione(), LanguageFiles.getCurrentLanguage()));
 			st1.setInt		(5,a.getLivello());
 
 			st1.executeUpdate();
@@ -110,9 +117,10 @@ public class AssetDAO implements IAssetDAO {
 		DbConnection.closeConnection(conn);
 		return esito;
 	}
-	
+	/*ATTENZIONE: L'ASSET DEVE CONTENERE IL VALORE DEL NOME E IL VALORE DELLA DESCRIZIONE E NON UNA CHIAVE!!!*/
 	@Override
 	public boolean updateAssetById(Asset newA) {
+		DBLinguaManager lingua=new DBLinguaManager(propConn);
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
 
@@ -123,8 +131,8 @@ public class AssetDAO implements IAssetDAO {
 			String query="UPDATE ASSET SET COSTO=?,NOME=?,DESCRIZIONE=?,LIVELLO=? WHERE idAsset=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1,newA.getCosto());
-			st1.setString(2,newA.getNome());
-			st1.setString(3,newA.getDescrizione());
+			st1.setString(2,lingua.getLanguageKayByValue(newA.getNome(), LanguageFiles.getCurrentLanguage()) );
+			st1.setString(3,lingua.getLanguageKayByValue(newA.getDescrizione(), LanguageFiles.getCurrentLanguage()) );
 			st1.setInt(4,newA.getLivello());
 			st1.setInt(5, newA.getIdAsset());
 
@@ -167,6 +175,7 @@ public class AssetDAO implements IAssetDAO {
 	@Override
 	public Asset selectAssetById(Asset id) {
 		Asset result=null;
+		DBLinguaManager lingua=new DBLinguaManager(propConn);
 
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
@@ -183,7 +192,9 @@ public class AssetDAO implements IAssetDAO {
 
 			while(rs1.next())
 			{
-				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),rs1.getString(3),rs1.getString(4),rs1.getInt(5));
+				Asset a=new Asset(rs1.getInt(1), rs1.getInt(2),
+						lingua.getLanguageValueByKay(rs1.getString(3), LanguageFiles.getCurrentLanguage()) ,
+						lingua.getLanguageValueByKay(rs1.getString(4), LanguageFiles.getCurrentLanguage()),rs1.getInt(5));
 
 				result=a;
 				break;

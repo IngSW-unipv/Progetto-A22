@@ -7,7 +7,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.imple
 
 
 
-public class AsetDAOProva {
+public class ProvaAsetDAO {
 
 	public static void main(String[] args) {
 		AssetDAO fdao=new AssetDAO("resources/config/persistence/dataBase/connWith_sd_sys");

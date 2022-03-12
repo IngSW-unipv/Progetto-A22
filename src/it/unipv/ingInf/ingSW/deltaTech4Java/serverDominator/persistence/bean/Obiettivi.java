@@ -155,7 +155,7 @@ public class Obiettivi {
 		if (obj == null)
 			return false;
 		Obiettivi other = (Obiettivi) obj;
-		if (idObiettivo == other.getIdObiettivo()&&this.descrizione.equals(other.getDescrizione())&&this.ricompensa.equals(other.getRicompensa()))
+		if (idObiettivo == other.getIdObiettivo()&&this.descrizione.equalsIgnoreCase(other.getDescrizione())&&this.ricompensa.equals(other.getRicompensa()))
 			return true;
 		return false;
 	}

@@ -1,9 +1,14 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 /**
@@ -93,6 +98,31 @@ public class PropertiesFile {
 	public static String getPropertieFromFile(String KeyProp, String percFile) throws IOException{
 		Properties p=loadPropertiesFromFile(percFile);
 		return p.getProperty(KeyProp);
+	}
+	
+	/**
+	 * Prende le proprità contenute in un xml file
+	 * @param filePath
+	 * @return {@link Properties} salvate  nel file il cui percorso relativo </br> quello passato nell'argometo
+	 * @throws Exception
+	 * @throws FileNotFoundException
+	 */
+	public static Properties  getPropertiesFromXMLFile(String filePath) throws Exception, FileNotFoundException{
+		Properties p=new Properties();
+		InputStream in = new FileInputStream(filePath);
+		p.loadFromXML(in);
+		return p;
+	}
+	/**
+	 * @param filePath
+	 * @param prop
+	 * @param comment
+	 * @throws IOException
+	 */
+	public static void savePropertiesInXMLFile(String filePath,Properties prop, String comment) throws IOException  {
+		Properties p=new Properties();
+		OutputStream out = new FileOutputStream(filePath);
+		p.storeToXML(out,comment);
 	}
 	/* prova
 	public static void main(String[] args) {

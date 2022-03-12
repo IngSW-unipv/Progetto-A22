@@ -1,5 +1,21 @@
-
+-- -----------------------------------------------------
+-- Data for table `ServerDomDB`.`LINGUA`
+-- -----------------------------------------------------
+START TRANSACTION;
 USE `ServerDomDB`;
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'nome1', 'INTERNO','ITnome1','ENnome1');
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'nome2', 'INTERNO','ITnome2','ENnome2');
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'nome3', 'INTERNO','ITnome3','ENnome3');
+
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'descrizione1', 'INTERNO','ITdescrizione1','ENdescrizione1');
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'descrizione2', 'INTERNO','ITdescrizione2','ENdescrizione2');
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'descrizione3', 'INTERNO','ITdescrizione3','ENdescrizione3');
+
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'LEGA 1', 'INTERNO','IT LEGA 1','EN LEGA 1');
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'LEGA 2', 'INTERNO','IT LEGA 2','EN LEGA 2');
+INSERT INTO `ServerDomDB`.`LINGUA` (`CHIAVE`,`TIPO`,`ITALIANO`,`ENGLISH`)VALUES( 'LEGA 3', 'INTERNO','IT LEGA 3','EN LEGA 3');
+COMMIT;
+
 -- -----------------------------------------------------
 -- Data for table `ServerDomDB`.`USER_ACCOUNT`
 -- -----------------------------------------------------
@@ -88,7 +104,3 @@ INSERT INTO `ServerDomDB`.`OBIETTIVI_USER` (`STATO`, `USER_ACCOUNT_USERNAME`, `O
 INSERT INTO `ServerDomDB`.`OBIETTIVI_USER` (`STATO`, `USER_ACCOUNT_USERNAME`, `OBIETTIVI_idObiettivo`) VALUES (DEFAULT, 'MatC', 3);
 
 COMMIT;
-
-
-
-

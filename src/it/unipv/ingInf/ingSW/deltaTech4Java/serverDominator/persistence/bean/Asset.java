@@ -203,8 +203,8 @@ public class Asset{
 		if (getClass() != obj.getClass())
 			return false;
 		Asset other = (Asset) obj;
-		return (costo == other.costo && descrizione.equals(other.descrizione)  && idAsset == other.idAsset
-				&& livello == other.livello && nome.equals(other.nome));
+		return (costo == other.costo && descrizione.equalsIgnoreCase(other.descrizione)  && idAsset == other.idAsset
+				&& livello == other.livello && nome.equalsIgnoreCase(other.nome));
 	}
 
 }

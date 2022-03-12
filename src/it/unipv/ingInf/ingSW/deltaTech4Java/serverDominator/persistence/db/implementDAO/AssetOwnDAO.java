@@ -7,10 +7,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetOwnDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 
 /**
@@ -33,7 +35,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	@Override
 	public ArrayList<AsetOwn> selectAll() {
 		ArrayList<AsetOwn> result = new ArrayList<>();
-
+		DBLinguaManager man=new DBLinguaManager(propConn);
 		conn=DbConnection.startConnection(conn,propConn);
 		Statement st1;
 		ResultSet rs1;
@@ -46,7 +48,9 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 			while(rs1.next())
 			{
-				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),rs1.getString(6),rs1.getString(7),rs1.getInt(8));
+				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),
+						man.getLanguageValueByKay(rs1.getString(6), LanguageFiles.getCurrentLanguage()) ,
+						man.getLanguageValueByKay(rs1.getString(7), LanguageFiles.getCurrentLanguage()),rs1.getInt(8));
 				UserAccount b =new UserAccount(rs1.getString(2),0);
 				AsetOwnId c= new AsetOwnId(a,b);
 				AsetOwn d=new AsetOwn(c, rs1.getInt(3));
@@ -61,6 +65,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	@Override
 	public ArrayList<AsetOwn> selectByUserOwner(UserAccount assInput) {
 		ArrayList<AsetOwn> result = new ArrayList<>();
+		DBLinguaManager man=new DBLinguaManager(propConn);
 
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
@@ -75,7 +80,9 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			rs1=st1.executeQuery();
 			while(rs1.next())
 			{
-				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),rs1.getString(6),rs1.getString(7),rs1.getInt(8));
+				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),
+						man.getLanguageValueByKay(rs1.getString(6), LanguageFiles.getCurrentLanguage()) ,
+						man.getLanguageValueByKay(rs1.getString(7), LanguageFiles.getCurrentLanguage()),rs1.getInt(8));
 				UserAccount b =new UserAccount(rs1.getString(9), rs1.getInt(10));
 				AsetOwnId c= new AsetOwnId(a,b);
 				AsetOwn d=new AsetOwn(c, rs1.getInt(3));
@@ -126,9 +133,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		try
 		{
-			String query1="insert  into ASET_OWN (ASSET_idAsset,USER_ACCOUNT_USERNAME,QUANTITA)values (?,?,?)"
-					//+ "VALUES (?,?,?,?,?)"
-					;
+			String query1="insert  into ASET_OWN (ASSET_idAsset,USER_ACCOUNT_USERNAME,QUANTITA)values (?,?,?)";
 			st1 = conn.prepareStatement(query1);
 			st1.setInt(1, a.getPrimaryKey().getAsset().getIdAsset());
 			st1.setString(2,a.getPrimaryKey().getUserAccount().getUsername());
@@ -147,11 +152,10 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 	@Override
 	public boolean updateQuantityAssetOwnById(AsetOwn newA) {
-		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
-		if(this.existObiettiviUser(newA)) {
+		if(this.existAssetOwn(newA)) {
 			conn=DbConnection.startConnection(conn,propConn);
 			try
 			{
@@ -178,7 +182,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 		
 	}
 	
-	public boolean existObiettiviUser(AsetOwn newOU) {
+	public boolean existAssetOwn(AsetOwn newOU) {
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
 		ResultSet rs1;

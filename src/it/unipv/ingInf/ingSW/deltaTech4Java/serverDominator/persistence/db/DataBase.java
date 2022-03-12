@@ -1,6 +1,8 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ExecuteSQLfiel;
@@ -88,16 +90,45 @@ public class DataBase {
 		return createDataBase();
 	}
 	
+	/**
+	 * recupera la posizione della colonna di interesse locata nello schema passato e nella tabella passata
+	 * @param schema
+	 * @param table
+	 * @param colomn
+	 * @param connectionFilePath
+	 * @return
+	 */
+	public static int getColumnPosition(String schema, String table,String colomn, Connection conn) {
+		int result=0;
+		PreparedStatement st1;
+		ResultSet rs1=null;
+		try
+		{
+			
+			String query="SELECT Ordinal_Position FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME=?";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, schema);
+			st1.setString(2, table);
+			st1.setString(3, colomn);
+			rs1=st1.executeQuery();
+			rs1.next();
+			int a=rs1.getInt(1);
+			result=a>0?a:0;
+			
+		}catch (Exception e){
+			e.printStackTrace();
+			}
+		return result;
+	}
 	
-	
-	private static boolean setConfigParameter(String ip, String port,String Username,String password) {
+	public static boolean setConfigParameter(String ip, String port,String Username,String password) {
 		if(!setMySqlUrl(ip, port)||!setPassword(password)||!setUsername(Username))
 			return false;
 		return true;
 	}
 	
 	
-	private static boolean createDataBase() {
+	public static boolean createDataBase() {
 		try {
 			String us=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, CONFIGURATION_FILE_NAME);
 			if(us.length()<2) {

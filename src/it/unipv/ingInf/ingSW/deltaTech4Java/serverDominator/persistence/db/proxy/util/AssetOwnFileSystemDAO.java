@@ -139,7 +139,7 @@ public class AssetOwnFileSystemDAO {
 		
 		BufferedReader fileReader = null;
 		
-		ArrayList<AsetOwn> AsetOwn = new ArrayList<AsetOwn> ();
+		ArrayList<AsetOwn> asetOwn = new ArrayList<AsetOwn> ();
 		
 		try {
 			
@@ -155,8 +155,8 @@ public class AssetOwnFileSystemDAO {
 					try {
 					Asset a =new Asset(Integer.valueOf(tokens[ID]),Integer.valueOf(tokens[COSTO]),tokens[NOME],tokens[DESCRIZIONE],Integer.valueOf(tokens[LIVELLO]));
 					AsetOwn ao = new AsetOwn(new AsetOwnId(a, null), Integer.valueOf(tokens[QUANTITA]));
-					AsetOwn.add(ao);
-					AsetOwn=getAssetListWithoutDuplicate(AsetOwn);
+					asetOwn.add(ao);
+					asetOwn=getAssetListWithoutDuplicate(asetOwn);
 					}
 					//ignora righe che generano ecezzioni
 					catch (Exception e) {
@@ -184,7 +184,7 @@ public class AssetOwnFileSystemDAO {
 			}
 		}
 		
-		return AsetOwn;
+		return asetOwn;
 	}
 	
 

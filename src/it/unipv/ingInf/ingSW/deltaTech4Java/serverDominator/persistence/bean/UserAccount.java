@@ -12,10 +12,6 @@ import java.util.ArrayList;
  * @see ObiettiviUser
  * @see ArrayList
  */
-/**
- * @author TAWADROS
- *
- */
 public class UserAccount {
     /**
      * Username di UserAccount

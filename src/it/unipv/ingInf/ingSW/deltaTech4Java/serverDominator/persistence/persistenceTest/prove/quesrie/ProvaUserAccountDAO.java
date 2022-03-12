@@ -3,7 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.persist
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.UserAccountDAO;
 
-public class UserAccountDAOprova {
+public class ProvaUserAccountDAO {
 
 	public static void main(String[] args) {
 		UserAccountDAO a=new UserAccountDAO("resources/config/persistence/dataBase/connWith_sd_sys");

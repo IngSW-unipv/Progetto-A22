@@ -8,10 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
+import java.util.Properties;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
@@ -20,6 +23,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObP
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
@@ -35,18 +39,19 @@ class PersistenceFacadeTest {
 	private static ArrayList<Obiettivi> ob=new ArrayList<Obiettivi>();
 	private static ArrayList<ObPunteggio> obp=new ArrayList<ObPunteggio>();
 	
+	
 	@BeforeEach
 	void setUp() throws Exception {
-		Asset asset1=new Asset(1,10,"nome1","descrizione1",1);
-		Asset asset2=new Asset(2,20,"nome2","descrizione2",1);
-		Asset asset3=new Asset(3,30,"nome3","descrizione3",1);
+		Asset asset1=new Asset(1,10,"Ennome1","ENdescrizione1",1);
+		Asset asset2=new Asset(2,20,"ennome2","Endescrizione2",1);
+		Asset asset3=new Asset(3,30,"ENnome3","ENdescrizione3",1);
 		ass.add(asset3);
 		ass.add(asset2);
 		ass.add(asset1);
 		
-		Obiettivi ob1=new Obiettivi(1,"LEGA 1",100);
-		Obiettivi ob2=new Obiettivi(2,"LEGA 2",200);
-		Obiettivi ob3=new Obiettivi(3,"LEGA 3",400);
+		Obiettivi ob1=new Obiettivi(1,"EN LEGA 1",100);
+		Obiettivi ob2=new Obiettivi(2,"EN LEGA 2",200);
+		Obiettivi ob3=new Obiettivi(3,"EN LEGA 3",400);
 		ob.add(ob3);
 		ob.add(ob2);
 		ob.add(ob1);
@@ -108,6 +113,29 @@ class PersistenceFacadeTest {
 		us.add(user3);
 		us.add(user4);
 		us.add(user5);
+		try {
+			PropertiesFile.addPropertieInFile("primaConfigurazione", "1", "resources/config/persistence/dataBase/connWith_root");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		DataBase.createDataBase("localhost", "3306","root","12345678");
+		DBLinguaManager man=new DBLinguaManager("resources/config/persistence/dataBase/connWith_sd_sys");
+		Properties p=null;
+		/*contenuto sporco di current Languesge 
+		 * ENGLISH
+		 * LEGA5=En lega 5
+		 * LEGA6=En lega 6
+		 * LEGA7=En lega 7
+		 * asset4=en Asset 4
+		 * hkgyfyi=en hkgyfyi
+		 */
+		try {
+			p=PropertiesFile.loadPropertiesFromFile("resources/language/currentLanguage");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		man.insertLanguegeList(p, LanguageFiles.getCurrentLanguage());
+
 		
 	}
 	@AfterEach
@@ -116,12 +144,6 @@ class PersistenceFacadeTest {
 		ass.clear();
 		ob.clear();
 		obp.clear();
-		try {
-			PropertiesFile.addPropertieInFile("primaConfigurazione", "1", "resources/config/persistence/dataBase/connWith_root");
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		DataBase.createDataBase("localhost", "3306","root","12345678");
 	}
 	/**
 	 * Test method for {PersistenceFacade.getInstance()}.
@@ -147,7 +169,7 @@ class PersistenceFacadeTest {
 	@Test
 	void testInsertAsset() {
 		assertFalse(p.insertAsset(ass.get(1)));
-		assertTrue(p.insertAsset(new Asset(4,50,"asset4","hkgyfyi",5)));
+		assertTrue(p.insertAsset(new Asset(4,50,"en asset 4","en hkgyfyi",5)));
 	}
 
 	/**
@@ -156,8 +178,10 @@ class PersistenceFacadeTest {
 	
 	@Test
 	void testUpdateAssetById() {
-		ass.get(0).setDescrizione("provaUpdate");
+		ass.get(0).setDescrizione("endescrizione3");
 		assertTrue(p.updateAssetById(ass.get(0)));
+		ass.get(0).setDescrizione("descrizione1");
+		assertFalse(p.updateAssetById(ass.get(0)));
 	}
 
 	/**
@@ -215,7 +239,8 @@ class PersistenceFacadeTest {
 	
 	@Test
 	void testInsertObiettivo() {
-		assertTrue(p.insertObiettivo(new Obiettivi(5,"LEGA 5",400)));
+		
+		assertTrue(p.insertObiettivo(new Obiettivi(5,"en LEGA 5",400)));
 	}
 
 	/**
@@ -227,6 +252,7 @@ class PersistenceFacadeTest {
 		ObPunteggio ob= obp.get(0);
 		ob.setRicompensa(500);
 		assertTrue(p.updateObiettiviByObiettivoId(ob));
+		
 		assertEquals(p.selectObiettiviByObiettiviId(ob), ob);
 	}
 
@@ -312,10 +338,10 @@ class PersistenceFacadeTest {
 	@Test
 	void testInsertObiettiviUser() {
 		//assegno obiettivo che non esiste 
-		assertFalse(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(6,"LEGA 6",600),us.get(3),"NON COMPLETATO")));
-		p.insertObiettivo(new Obiettivi(7,"LEGA 7",300));
+		assertFalse(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(6,"LEGA6",600),us.get(3),"NON COMPLETATO")));
+		p.insertObiettivo(new Obiettivi(7,"en LEGA 7",300));
 		//assegno obiettivo che esiste
-		assertTrue(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(7,"LEGA 7",300),us.get(3),"NON COMPLETATO")));
+		assertTrue(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(7,"en LEGA7",300),us.get(3),"NON COMPLETATO")));
 	}
 
 	/**

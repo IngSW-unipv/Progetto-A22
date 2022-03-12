@@ -4,7 +4,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObP
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
 
-public class DBObiettiviFactoryDAOProva {
+public class ProvaDBObiettiviFactoryDAO {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

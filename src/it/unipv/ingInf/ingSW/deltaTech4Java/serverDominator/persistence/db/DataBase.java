@@ -14,20 +14,39 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
  *
  */
 public class DataBase {
-	
-
+	/**
+	 * File di configuarazione in cui vengono salvati i dati per connettersi al db e crearlo
+	 */
 	private static final String CONFIGURATION_FILE_NAME ="resources/config/persistence/dataBase/connWith_root";
 	
+	/**
+	 * Proprità nel file di configurazione per indicare e è la prima volta.
+	 */
 	private static final String FIRST_CONFIGURATION_PROPERTIE_NAME ="primaConfigurazione";
 		
+	/**
+	 * File dello script per creare lo schema
+	 */
 	private static final String CREATE_SCHEMA_FILE_NAME ="resources/databaseDefineSchema/dataBaseSchema.sql";
 	
+	/**
+	 * File dello script per popolare  lo schema
+	 */
 	private static final String POPOLA_SCHEMA_FILE_NAME ="resources/databaseDefineSchema/popolaSchema.sql";
 	
+	/**
+	 * Chiave della proprità nel file di configurazione che ha la URL.
+	 */
 	private static final String FIRST_CONFIGURATION_URL_PROPERTIE ="url";
 	
+	/**
+	 * Chiave della proprità nel file di configurazione che ha la username con il quale connettersi.
+	 */
 	private static final String FIRST_CONFIGURATION_USERNAME_PROPERTIE ="username";
 	
+	/**
+	 * Chiave della proprità della password nel file di configurazione che ha la username con il quale connettersi
+	 */
 	private static final String FIRST_CONFIGURATION_PASSWORD_PROPERTIE ="password";
 	
 	/**
@@ -37,18 +56,17 @@ public class DataBase {
 	 * Vero se è il primo acesso quindi se si deve creare il dataBase
 	 * </br>Flaso se non è il primo acesso quindi se l'utente ha gia creato ilk database tramite l'appliativo
 	 */
-	@SuppressWarnings("unused")
 	public static boolean isItTheFirstTime() {
 		Connection conn=null;
 		DbConnection.startConnection(conn, "resources/config/persistence/dataBase/connWith_sd_sys");
 		Integer a ;
 		try {
 			a =Integer.valueOf(PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PROPERTIE_NAME, CONFIGURATION_FILE_NAME));
-			if(a!=1)
+			if(a!=1&&conn==null)
 				return false;
 		}catch (Exception e) {
-			if(conn!=null) 
-				return false;
+			e.getMessage();
+			e.printStackTrace();
 		}		
 		return true;
 	}
@@ -69,7 +87,7 @@ public class DataBase {
 	 * UPDATE
 	 */
 	/**
-	 * Metodo per creare il database
+	 * Metodo per creare il database in um MySql server
 	 * @param ip 
 	 * </br>Indirizzo ip dell'stanze in cui si deve creare il data base
 	 * @param port 
@@ -84,19 +102,37 @@ public class DataBase {
 	 */
 	public static boolean createDataBase(String ip, String port,String Username,String password) {
 		if(!setConfigParameter(ip, port, Username, password)) {
-			System.err.println("Impossibile accettare i dati inseriti");
+			System.err.println("Impossibile slvare i dati inseriti");
 			return false;
 		}
 		return createDataBase();
 	}
-	
 	/**
-	 * recupera la posizione della colonna di interesse locata nello schema passato e nella tabella passata
+	 * Metodo per creare il data base secondo i parametri passati
+	 * @param url 
+	 * </br>&emsp;&emsp;Url del db; <b>NON</b> deve avere lo schema;
+	 * </br><b> Esempio di MySQL:</b> 
+	 * </br>&emsp;&emsp;jdbc:mysql://localhost:3306
+	 * </br><b> Esempio di oracle:</b> 
+	 * </br>&emsp;&emsp;jdbc:oracle:thin:@localhost:1521 
+	 * @param Username
+	 * @param password
+	 * @return boolean
+	 */
+	public static boolean createDataBase(String url,String Username,String password) {
+		if(!setConfigParameter(url, Username, password)) {
+			System.err.println("Impossibile slvare i dati inseriti");
+			return false;
+		}
+		return createDataBase();
+	}
+	/**
+	 * Recupera la posizione della colonna di interesse locata nello schema passato e nella tabella passata
 	 * @param schema
 	 * @param table
 	 * @param colomn
 	 * @param connectionFilePath
-	 * @return
+	 * @return column position
 	 */
 	public static int getColumnPosition(String schema, String table,String colomn, Connection conn) {
 		int result=0;
@@ -121,13 +157,40 @@ public class DataBase {
 		return result;
 	}
 	
+	/**
+	 * Metodo che setta i paramenti per la connessione al db Mysql 
+	 * @param ip
+	 * @param port
+	 * @param Username
+	 * @param password
+	 * @return boolean
+	 */
 	public static boolean setConfigParameter(String ip, String port,String Username,String password) {
-		if(!setMySqlUrl(ip, port)||!setPassword(password)||!setUsername(Username))
+		if(!setUrl(ip, port)||!setPassword(password)||!setUsername(Username))
+			return false;
+		return true;
+	}
+	/**
+	 * Metodo che setta i parametri per la connessione secondo la url passata</br>
+	 * NB: la url non deve contenere uno schema e deve essere compatibile con </br>
+	 * il db utilizzato; di lascia la responsabilità a chu usa questo metodo </br>
+	 * di fare i controlli per la correttezza della url 
+	 * @param url
+	 * @param Username
+	 * @param password
+	 * @return boolean
+	 */
+	public static boolean setConfigParameter(String url,String Username,String password) {
+		if(!setUrl(url)||!setPassword(password)||!setUsername(Username))
 			return false;
 		return true;
 	}
 	
-	
+	/**
+	 * Metodo per creare un database secondo le proprietà presenti nel file 
+	 * {@link CONFIGURATION_FILE_NAME}
+	 * @return boolean
+	 */
 	public static boolean createDataBase() {
 		try {
 			String us=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, CONFIGURATION_FILE_NAME);
@@ -162,6 +225,8 @@ public class DataBase {
 				System.err.println("Problemi quando tento di creare lo schema.CONTROLLA CORRETTAZZA DI USERNAME E PASSWORD"
 						+ "\nAssicurati che lo user che utilizzi abbia i seguenti privilegi:"
 						+ "\n\tALTER\n\tCREATE\n\tCREATE USER\n\tCREATE VIEW\n\tDELETE\n \tDROP\n\tGRANT OPTION\n\tINSERT\n\tREFERENCES\n\tSELECT\n\tTRIGGER\n\tUPDATE");
+				e.getMessage();
+				e.printStackTrace();
 				return false;
 			}
 			try {
@@ -169,20 +234,36 @@ public class DataBase {
 				PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PROPERTIE_NAME, "55", CONFIGURATION_FILE_NAME);
 			} catch (Exception e) {
 				System.err.println("Problemi Quando si cerca di popolare lo schema");
+				e.getMessage();
+				e.printStackTrace();
 			}		
 		}
 		return true;
 	}
 	
-	private static boolean setMySqlUrl(String ip, String port) {
+	private static boolean setUrl(String ip, String port) {
 		String url="jdbc:mysql://"+ip+":"+port;
+		boolean ris=true;
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url, CONFIGURATION_FILE_NAME);
-			return true;
+			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url.toString(), CONFIGURATION_FILE_NAME);
+			
 		} catch (Exception e) {
 			System.err.println("Non posso salvare URL");
-			return false;
+			ris= false;
 		}
+		return ris;
+	}
+	
+	private static boolean setUrl(String url) {
+		boolean ris=true;
+		try {
+			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url.toString(), CONFIGURATION_FILE_NAME);
+			
+		} catch (Exception e) {
+			System.err.println("Non posso salvare URL");
+			ris= false;
+		}
+		return ris;
 	}
 	
 	private static boolean setUsername(String Username) {

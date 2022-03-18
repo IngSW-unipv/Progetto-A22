@@ -9,7 +9,7 @@ Server Dominator is a strategic, management game in real time.
 Each player manages his own base node and conquers opponent nodes using malwares.
 
 ## Other Languages
-- [Leggi questo documento in Italiano](./resources/init/It.md)
+- [Leggi questo documento in Italiano](./resources/gitHubREADME/It.md)
 
 ## Required
 <details>

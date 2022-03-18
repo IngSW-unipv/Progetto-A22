@@ -6,8 +6,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
 
 
 /**
+ * Classe responsabile della creazione di {@link IObiettiviUserDAO}
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class IObiettiviUserDAOFactory {
 	private static IObiettiviUserDAO Own=null;

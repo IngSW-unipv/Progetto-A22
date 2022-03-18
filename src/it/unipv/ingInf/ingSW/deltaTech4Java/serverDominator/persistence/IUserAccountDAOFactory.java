@@ -5,12 +5,13 @@ import java.lang.reflect.Constructor;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
+ * Classe responsabile della creazione di {@link IUserAccountDAO}
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class IUserAccountDAOFactory {
 	private static IUserAccountDAO usDao;
-	private static final String PROPERTYNAME="userAccountDAO.class.name";
+	private static final String PROPERTYNAME="IUserAccountDAO.class.name";
 	public static final String FILE_NAME="resources/config/persistence/persistenceFactoryConfig";
 	private static final String DEFAULT_CONN_PROPERTY_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
 	

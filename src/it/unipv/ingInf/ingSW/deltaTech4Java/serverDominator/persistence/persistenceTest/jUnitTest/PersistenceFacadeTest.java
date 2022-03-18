@@ -122,7 +122,7 @@ class PersistenceFacadeTest {
 		DBLinguaManager man=new DBLinguaManager("resources/config/persistence/dataBase/connWith_sd_sys");
 		Properties p=null;
 		/*contenuto sporco di current Languesge 
-		 * ENGLISH
+		 * #ENGLISH
 		 * LEGA5=En lega 5
 		 * LEGA6=En lega 6
 		 * LEGA7=En lega 7

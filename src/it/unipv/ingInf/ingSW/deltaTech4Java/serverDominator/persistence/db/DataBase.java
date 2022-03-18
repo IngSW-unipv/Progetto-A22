@@ -9,9 +9,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Exe
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
- * Classe per creare il database MySQL
+ * Classe con utilità per il database
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class DataBase {
 	/**
@@ -285,4 +285,9 @@ public class DataBase {
 			return false;
 		}
 	}
+	/*
+	public static void main(String[] args) {
+		setUrl("jdbc:mysql://localhost:3306".toString());
+	}
+	*/
 }

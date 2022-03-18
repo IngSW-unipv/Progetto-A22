@@ -16,7 +16,7 @@ public class DBObiettiviDOAFactory {
 	private static IObiettiviDAO obiettiviDiPunteggioDAO;
 	private static final String OBIETTIVI_DEFAULT="obiettiviDiPunteggioDAO.class.name";
 	
-	private static final String propertieDBObiettiviDOAFactory="resources/config/persistence/dataBase/obiettiviFactoryConfig";
+	private static final String propertieDBObiettiviDOAFactory="resources/config/persistence/persistenceFactoryConfig";
 	
 	private static final String connectionFilePth="resources/config/persistence/dataBase/connWith_sd_sys";
 	

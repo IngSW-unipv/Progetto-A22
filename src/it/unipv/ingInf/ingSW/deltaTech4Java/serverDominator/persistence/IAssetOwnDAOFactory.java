@@ -5,8 +5,9 @@ import java.lang.reflect.Constructor;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
+ * Classe responsabile della creazione di {@link IObiettiviDAO}
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class IAssetOwnDAOFactory {
 	

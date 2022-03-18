@@ -5,8 +5,9 @@ import java.lang.reflect.Constructor;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
+ * Classe responsabile della creazione di {@link IAssetDAO}
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class IAssetDAOFactory {
 	private static IAssetDAO ass=null;

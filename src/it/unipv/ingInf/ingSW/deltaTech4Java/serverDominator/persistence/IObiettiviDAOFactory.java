@@ -4,8 +4,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obi
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
 
 /**
+ * Classe responsabile della creazione di {@link IObiettiviDAO}
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class IObiettiviDAOFactory {
 	

@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
@@ -25,6 +26,8 @@ public class PersistenceFacade{
 	private IObiettiviDAO obiettivi;
 	private IObiettiviUserDAO obiettiviUser;
 	private IUserAccountDAO userAccount;
+	private  ILanguageManager linguaMan;
+	
 	public static PersistenceFacade instance;
 	
 	private PersistenceFacade() {
@@ -33,6 +36,7 @@ public class PersistenceFacade{
 		this.obiettivi=IObiettiviDAOFactory.getIObiettiviDAO();
 		this.obiettiviUser=IObiettiviUserDAOFactory.getIObiettiviUserDAO();
 		this.userAccount=IUserAccountDAOFactory.getUserAccountDAO();
+		this.linguaMan=ILanguageManagerFactory.getILanguageManager();
 		instance=this;
 	}
 	
@@ -375,6 +379,51 @@ public class PersistenceFacade{
 		return this.userAccount.updateUserAccountMny(us, newmny);
 	}
 	
+	/**
+	 * Recupera la lista delle lingue disponibili
+	 * @return Lingue disponibili
+	 */
+	public ArrayList<String> getAviableLanguage(){
+		return this.linguaMan.getAviableLanguage();
+	}
 	
+	/**
+	 * Recupera la chiave dato il suo valore in una data lingua
+	 * @param value
+	 * @param lingua
+	 * @return
+	 */
+	public String getLanguageKayByValue(String value, String lingua) {
+		return this.linguaMan.getLanguageKayByValue(value, lingua);
+	}
+	
+	/**
+	 * Recupera la valore che ha la chiave passata chiave in una data lingua
+	 * @param kay
+	 * @param lingua
+	 * @return
+	 */
+	public String getLanguageValueByKay(String kay, String lingua) {
+		return this.linguaMan.getLanguageValueByKay(kay, lingua);
+	}
+
+	/**
+	 * Inserimento di una nuova Lingua
+	 * @param list
+	 * @param lingua
+	 * @return
+	 */
+	public boolean insertLanguegeList(Properties list, String lingua) {
+		return this.linguaMan.insertLanguegeList(list, lingua);
+	}
+	
+	/**
+	 * Recupero le coppie chiave valore di una lingua
+	 * @param lingua
+	 * @return
+	 */
+	public Properties getLanguegeList (String lingua) {
+		return this.linguaMan.getLanguegeList(lingua);
+	}
 	
 }

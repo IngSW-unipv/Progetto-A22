@@ -2,8 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.prox
 
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
@@ -54,54 +52,17 @@ public class UserAccountInfo {
 		if(!us.getUsername().equals(ussAccount.getUsername())) {
 			File assetFile=new File(AssetOwnFileSystemDAO.FILE_NAME);
 			File obiettiviFile=new File(ObiettiviUserFileSistemDAO.FILE_NAME);
-			FileWriter fileWriter=null ;
+			File usFile=new File(UserAccountInfo.FILE_NAME) ;
 			/*
 			 *elimino il file degli asset 
 			 */
-			if(assetFile.exists()) {
-				try {
-					fileWriter =new FileWriter(AssetOwnFileSystemDAO.FILE_NAME);
-					fileWriter.append("");
-					
-				} catch (Exception e) {
-					System.err.println("Error while opening/writeing "+AssetOwnFileSystemDAO.FILE_NAME);
-					e.printStackTrace();
-				}finally {
-					try {
-						
-						fileWriter.flush();
-						fileWriter.close();
-						
-					} catch (IOException e) {
-						System.err.println("Error while flushing/closing fileWriter !!!");
-						e.printStackTrace();
-					}     
-				}
-				
-			}
+			assetFile.deleteOnExit();
 			/*
 			 *elimino i file degli obiettivi 
 			 */
-			if(obiettiviFile.exists()) {
-					try {
-						fileWriter =new FileWriter(ObiettiviUserFileSistemDAO.FILE_NAME);
-						fileWriter.append("");
-						
-					} catch (Exception e) {
-						System.err.println("Error while opening/writeing "+ObiettiviUserFileSistemDAO.FILE_NAME);
-						e.printStackTrace();
-					}finally {
-						try {
-							
-							fileWriter.flush();
-							fileWriter.close();
-							
-						} catch (IOException e) {
-							System.err.println("Error while flushing/closing fileWriter "+ObiettiviUserFileSistemDAO.FILE_NAME);
-							e.printStackTrace();
-						}     
-					}
-			}
+			obiettiviFile.deleteOnExit();
+			
+			usFile.deleteOnExit();
 		}
 				
 		try {

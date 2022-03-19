@@ -18,10 +18,28 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
  */
 public class FilesLanguageManager implements ILanguageManager {
 	public static String currentLanguageFile="resources\\language\\currentLanguage";
-	public static String availableGameLanguages="resources\\language\\availableGameLanguages";
+	public static final String CONN_DEF_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
 	public static String languageFolder="resources\\language\\";
 	public static String defaultLingua="ENGLISH";
+	private DBLinguaManager man;
 	
+	public FilesLanguageManager(String lingua) {
+		this.man=new DBLinguaManager(CONN_DEF_FILE);
+		try {
+			PropertiesFile.savePropertyInFile(this.man.getLanguegeList(lingua), languageFolder+lingua);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		setCurrentLanguege(lingua);
+	}
+	public FilesLanguageManager() {
+		this.man=new DBLinguaManager(CONN_DEF_FILE);
+		try {
+			PropertiesFile.savePropertyInFile(this.man.getLanguegeList(getCurrentLanguage()), languageFolder+getCurrentLanguage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Recupera la lingua corrente; di defoult recupera la lingua presente in currentLanguageFile;
 	 * </br>se il file non presente lo crea e ci mette Inglese
@@ -69,7 +87,23 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		return lingua;
 	}
-	
+	 
+	 public static void setCurrentLanguege(String lingua) {
+		 FileWriter write=null;
+		 try {
+			 	write=new FileWriter(FilesLanguageManager.currentLanguageFile);
+				write.append(lingua);
+			} catch (Exception e1) {
+			}finally {
+				try {
+					write.flush();
+					write.close();
+				} catch (Exception e1) {
+					System.err.println("\t Error while try to close  "+FilesLanguageManager.currentLanguageFile);				
+				}
+			}
+	 }
+	 
 	/**
 	 * @param language
 	 * @return
@@ -107,26 +141,54 @@ public class FilesLanguageManager implements ILanguageManager {
 	@Override
 	public ArrayList<String> getAviableLanguage(){
 		ArrayList<String> result=new ArrayList<String>();
+		try {
+			result=man.getAviableLanguage();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 	@Override
 	public String getLanguageKayByValue(String value, String lingua) {
-		String result="";
-		return result;
+		return this.man.getLanguageKayByValue(value, lingua);
 	}
 	@Override
 	public String getLanguageValueByKay(String kay, String lingua) {
-		String result="";
-		return result;
+		String ris="";
+		try {
+			ris=PropertiesFile.getPropertieFromFile(kay, languageFolder+lingua);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ris;
 	}
 	@Override
 	public boolean insertLanguegeList(Properties list, String lingua) {
 		boolean result=true;
+		if(list.isEmpty()) {
+			return result;
+		}else {
+			try {
+				man.insertLanguegeList(list, lingua);
+				PropertiesFile.savePropertyInFile(list, languageFolder+lingua);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result=false;
+			}
+		}
 		return result;
 	}
 	@Override
 	public Properties getLanguegeList (String lingua) {
 		Properties result=new Properties();
+		try {
+			result=PropertiesFile.loadPropertiesFromFile(languageFolder+lingua);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result.isEmpty()) {
+			result=man.getLanguegeList(lingua);
+		}
 		return result;
 	}
 	

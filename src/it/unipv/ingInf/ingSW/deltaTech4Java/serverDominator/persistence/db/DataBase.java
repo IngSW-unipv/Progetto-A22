@@ -3,9 +3,12 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Properties;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.CryptoUtil;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ExecuteSQLfiel;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.FileToString;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
@@ -61,7 +64,8 @@ public class DataBase {
 		DbConnection.startConnection(conn, "resources/config/persistence/dataBase/connWith_sd_sys");
 		Integer a ;
 		try {
-			a =Integer.valueOf(PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PROPERTIE_NAME, CONFIGURATION_FILE_NAME));
+			Properties p=PropertiesFile.loadPropertiesFromCriptedFile(CONFIGURATION_FILE_NAME);
+			a =Integer.valueOf(p.getProperty(FIRST_CONFIGURATION_PROPERTIE_NAME));
 			if(a!=1&&conn==null)
 				return false;
 		}catch (Exception e) {
@@ -121,7 +125,7 @@ public class DataBase {
 	 */
 	public static boolean createDataBase(String url,String Username,String password) {
 		if(!setConfigParameter(url, Username, password)) {
-			System.err.println("Impossibile slvare i dati inseriti");
+			System.err.println("DataBase.class:Impossibile slvare i dati inseriti");
 			return false;
 		}
 		return createDataBase();
@@ -192,8 +196,15 @@ public class DataBase {
 	 * @return boolean
 	 */
 	public static boolean createDataBase() {
+		Properties p=null;
 		try {
-			String us=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, CONFIGURATION_FILE_NAME);
+			p=PropertiesFile.loadPropertiesFromCriptedFile(CONFIGURATION_FILE_NAME);
+		} catch (Exception e) {
+			System.err.println("Problems With properties File Impossibile Creare il DB");
+			return false;
+		}
+		try {
+			String us=p.getProperty(FIRST_CONFIGURATION_USERNAME_PROPERTIE);
 			if(us.length()<2) {
 				System.err.println("username sembra troppo corto");
 			}
@@ -201,20 +212,20 @@ public class DataBase {
 			System.err.println("problem with configuration file");
 		}
 		try {
-			String url=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_URL_PROPERTIE, CONFIGURATION_FILE_NAME);
+			String url=p.getProperty(FIRST_CONFIGURATION_URL_PROPERTIE);
 			if(url.length()<16) {
 				System.err.println("Url sembra scoretta");
 			}
 		} catch (Exception e) {
-			System.err.println("problem with configuration file");
+			System.err.println("DataBase.class: problem with configuration file");
 		}
 		try {
-			String pass=PropertiesFile.getPropertieFromFile(FIRST_CONFIGURATION_PASSWORD_PROPERTIE, CONFIGURATION_FILE_NAME);
+			String pass=p.getProperty(FIRST_CONFIGURATION_PASSWORD_PROPERTIE);
 			if(pass.length()<1) {
-				System.err.println("password non impostata");
+				System.err.println("DataBase.class: password non impostata");
 			}
 		} catch (Exception e) {
-			System.err.println("problem with configuration file");
+			System.err.println("DataBase.class: problem with configuration file");
 		}
 	
 		if (isItTheFirstTime())
@@ -222,7 +233,7 @@ public class DataBase {
 			try {
 				ExecuteSQLfiel.executeSqlFile(CREATE_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
 			} catch (Exception e) {
-				System.err.println("Problemi quando tento di creare lo schema.CONTROLLA CORRETTAZZA DI USERNAME E PASSWORD"
+				System.err.println("DataBase.class: Problemi quando tento di creare lo schema.CONTROLLA CORRETTAZZA DI USERNAME E PASSWORD"
 						+ "\nAssicurati che lo user che utilizzi abbia i seguenti privilegi:"
 						+ "\n\tALTER\n\tCREATE\n\tCREATE USER\n\tCREATE VIEW\n\tDELETE\n \tDROP\n\tGRANT OPTION\n\tINSERT\n\tREFERENCES\n\tSELECT\n\tTRIGGER\n\tUPDATE");
 				e.getMessage();
@@ -231,9 +242,11 @@ public class DataBase {
 			}
 			try {
 				ExecuteSQLfiel.executeSqlFile(POPOLA_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
-				PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PROPERTIE_NAME, "55", CONFIGURATION_FILE_NAME);
+				Properties p1=new Properties();
+				p1.put(FIRST_CONFIGURATION_PROPERTIE_NAME, "55");
+				PropertiesFile.savePropertyInCriptedFile(p1, CONFIGURATION_FILE_NAME);
 			} catch (Exception e) {
-				System.err.println("Problemi Quando si cerca di popolare lo schema");
+				System.err.println("DataBase.class: Problemi Quando si cerca di popolare lo schema");
 				e.getMessage();
 				e.printStackTrace();
 			}		
@@ -244,11 +257,13 @@ public class DataBase {
 	private static boolean setUrl(String ip, String port) {
 		String url="jdbc:mysql://"+ip+":"+port;
 		boolean ris=true;
+		Properties p=new Properties();
+		p.put(FIRST_CONFIGURATION_URL_PROPERTIE,url);
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url.toString(), CONFIGURATION_FILE_NAME);
+			PropertiesFile.savePropertyInCriptedFile(p, CONFIGURATION_FILE_NAME);
 			
 		} catch (Exception e) {
-			System.err.println("Non posso salvare URL");
+			System.err.println("DataBase.class: Non posso salvare URL");
 			ris= false;
 		}
 		return ris;
@@ -256,38 +271,48 @@ public class DataBase {
 	
 	private static boolean setUrl(String url) {
 		boolean ris=true;
+		Properties p=new Properties();
+		p.put(FIRST_CONFIGURATION_URL_PROPERTIE,url.toString());
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_URL_PROPERTIE, url.toString(), CONFIGURATION_FILE_NAME);
+			PropertiesFile.savePropertyInCriptedFile(p, CONFIGURATION_FILE_NAME);
 			
 		} catch (Exception e) {
-			System.err.println("Non posso salvare URL");
+			System.err.println("DataBase.class: Non posso salvare URL");
 			ris= false;
 		}
 		return ris;
 	}
 	
 	private static boolean setUsername(String Username) {
+		Properties p=new Properties();
+		p.put(FIRST_CONFIGURATION_USERNAME_PROPERTIE,Username);
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_USERNAME_PROPERTIE, Username, CONFIGURATION_FILE_NAME);
+			PropertiesFile.savePropertyInCriptedFile(p, CONFIGURATION_FILE_NAME);
 			return true;
 		} catch (Exception e) {
-			System.err.println("Non posso salvare Username");
+			System.err.println("DataBase.class: Non posso salvare Username");
 			return false;
 		}	
 	}
 	
 	private static boolean setPassword(String password) {
+		Properties p=new Properties();
+		p.put(FIRST_CONFIGURATION_PASSWORD_PROPERTIE,password);
 		try {
-			PropertiesFile.addPropertieInFile(FIRST_CONFIGURATION_PASSWORD_PROPERTIE, password, CONFIGURATION_FILE_NAME);
+			PropertiesFile.savePropertyInCriptedFile(p, CONFIGURATION_FILE_NAME);
 			return true;
 		} catch (Exception e) {
-			System.err.println("Non posso salvare Password");
+			System.err.println("DataBase.class: Non posso salvare Password");
 			return false;
 		}
 	}
-	/*
+	///*
 	public static void main(String[] args) {
-		setUrl("jdbc:mysql://localhost:3306".toString());
+		try {
+			System.out.println(CryptoUtil.decrypt(FileToString.transformFileToString(CONFIGURATION_FILE_NAME)));
+		} catch (Exception e) {
+			// TODO: handle exception
+		};
 	}
-	*/
+	//*/
 }

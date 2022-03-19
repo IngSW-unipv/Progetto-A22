@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviUserDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
@@ -48,7 +48,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			DBLinguaManager man=new DBLinguaManager(propConn);
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(1),man.getLanguageValueByKay(rs1.getString(2), LanguageFiles.getCurrentLanguage()) ,rs1.getInt(3));
+				Obiettivi a=new Obiettivi(rs1.getInt(1),man.getLanguageValueByKay(rs1.getString(2), FilesLanguageManager.getCurrentLanguage()) ,rs1.getInt(3));
 				UserAccount b =new UserAccount(rs1.getString(5));
 				ObiettiviUser c=new ObiettiviUser(a,b,rs1.getString(4));
 				result.add(c);
@@ -78,7 +78,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(4),man.getLanguageValueByKay(rs1.getString(5),LanguageFiles.getCurrentLanguage()),rs1.getInt(6));
+				Obiettivi a=new Obiettivi(rs1.getInt(4),man.getLanguageValueByKay(rs1.getString(5),FilesLanguageManager.getCurrentLanguage()),rs1.getInt(6));
 				UserAccount b =new UserAccount(rs1.getString(7), rs1.getInt(8));
 				ObiettiviUser c=new ObiettiviUser(a,b,rs1.getString(1));
 				result.add(c);

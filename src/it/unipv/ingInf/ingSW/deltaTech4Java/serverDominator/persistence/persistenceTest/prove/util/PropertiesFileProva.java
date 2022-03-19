@@ -1,7 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.persistenceTest.prove.util;
 
-
-import java.io.IOException;
 import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
@@ -17,7 +15,7 @@ public class PropertiesFileProva {
 
 			PropertiesFile.savePropertyInFile(p, "resources/config/persistence/dataBase/connWith_root");
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	

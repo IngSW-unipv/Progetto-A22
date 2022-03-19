@@ -31,7 +31,7 @@ public class DbConnection {
 		String password=null;
 		Properties prop=null;
 		try {
-			prop=PropertiesFile.loadPropertiesFromFile(popFile);
+			prop=PropertiesFile.loadPropertiesFromCriptedFile(popFile);
 		} catch (Exception e) {
 			System.err.println("Invalid percorso file: "+popFile);
 		}

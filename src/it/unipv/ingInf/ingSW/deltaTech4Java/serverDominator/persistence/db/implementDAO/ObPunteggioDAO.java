@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
@@ -36,7 +36,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 	public ArrayList<Obiettivi> selectAll() {
 		ArrayList<Obiettivi> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		int column =man.exists(LanguageFiles.getCurrentLanguage())? man.getLanguegePosition(LanguageFiles.getCurrentLanguage())+1:0;
+		int column =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
 		
 		conn=DbConnection.startConnection(conn,propConn);
 		Statement st1;
@@ -64,7 +64,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 	public ArrayList<Obiettivi> selectByRicompensa(Obiettivi obRi) {
 		ArrayList<Obiettivi> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		int column =man.exists(LanguageFiles.getCurrentLanguage())? man.getLanguegePosition(LanguageFiles.getCurrentLanguage())+1:0;
+		int column =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
@@ -182,7 +182,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 			while(rs1.next())
 			{
 				
-				Obiettivi a=new Obiettivi(rs1.getInt(1),lingua.getLanguageValueByKay(rs1.getString(2), LanguageFiles.getCurrentLanguage()) ,rs1.getInt(3));
+				Obiettivi a=new Obiettivi(rs1.getInt(1),lingua.getLanguageValueByKay(rs1.getString(2), FilesLanguageManager.getCurrentLanguage()) ,rs1.getInt(3));
 				risult=new ObPunteggio(a, rs1.getInt(5));
 				if(++i>0) {
 					break;

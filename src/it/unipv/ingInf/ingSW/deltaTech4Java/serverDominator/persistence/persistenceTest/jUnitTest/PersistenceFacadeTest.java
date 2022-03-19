@@ -14,7 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
@@ -114,14 +114,17 @@ class PersistenceFacadeTest {
 		us.add(user4);
 		us.add(user5);
 		try {
-			PropertiesFile.addPropertieInFile("primaConfigurazione", "1", "resources/config/persistence/dataBase/connWith_root");
+			Properties p=new Properties();
+			p.put("primaConfigurazione", "1");
+			PropertiesFile.savePropertyInCriptedFile(p, "resources/config/persistence/dataBase/connWith_root");
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		DataBase.createDataBase("localhost", "3306","root","12345678");
+		DataBase.createDataBase("localhost", "3306","admin","123456789");
 		DBLinguaManager man=new DBLinguaManager("resources/config/persistence/dataBase/connWith_sd_sys");
 		Properties p=null;
-		/*contenuto sporco di current Languesge 
+		/*contenuto di current Languesge 
 		 * #ENGLISH
 		 * LEGA5=En lega 5
 		 * LEGA6=En lega 6
@@ -134,7 +137,7 @@ class PersistenceFacadeTest {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		man.insertLanguegeList(p, LanguageFiles.getCurrentLanguage());
+		man.insertLanguegeList(p, FilesLanguageManager.getCurrentLanguage());
 
 		
 	}

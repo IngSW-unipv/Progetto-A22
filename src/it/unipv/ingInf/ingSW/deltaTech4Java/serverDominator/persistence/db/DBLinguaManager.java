@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 
@@ -220,7 +221,7 @@ public class DBLinguaManager implements ILanguageManager{
 	/*prova*/
 	public static void main(String[] args) {
 		DBLinguaManager man= new DBLinguaManager("resources/config/persistence/dataBase/connWith_sd_sys");
-		System.out.println(man.getLanguageKayByValue("EN LEGA 1",ILanguageManager.getCurrentLanguage())); 
+		System.out.println(man.getLanguageKayByValue("EN LEGA 1",FilesLanguageManager.getCurrentLanguage())); 
 		System.out.println(man.getLanguegePosition("itALIano"));
 		System.out.println(man.getLanguageValueByKay("nome1", "Italiano"));
 		man.createNewLingua("HF\"GDF");

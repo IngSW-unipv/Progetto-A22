@@ -32,7 +32,7 @@ public class CryptoUtil {
     }
     
     /**
-     * Metodo per decifrare una stringa in mainera simmetrica con chiave e IV di default.
+     * Metodo per decifrare una stringa con chiave e IV di default.
      * @param mssCrittato
      * Testo in cifrato
      * @return Testo Cifrato
@@ -94,7 +94,7 @@ public class CryptoUtil {
     }
 /* PROVA
     public static void main(String[] args) {
-        try {
+       try {
             String s = FileToString.transformFileToString("in.txt");
             String res = encrypt(KEY, IV, s);
             PrintWriter writer = new PrintWriter("out.txt");
@@ -108,7 +108,19 @@ public class CryptoUtil {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             System.exit(1);
+    
+        
         }
+    	String s;
+		try {
+			s = FileToString.transformFileToString("resources/config/persistence/dataBase/connWith_root");
+			String res = encrypt(KEY, IV, s);
+			System.out.println(res);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     }
  //*/
 }

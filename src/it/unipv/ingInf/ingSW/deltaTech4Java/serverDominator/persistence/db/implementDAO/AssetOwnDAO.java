@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetOwnDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.LanguageFiles;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
@@ -49,8 +49,8 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			while(rs1.next())
 			{
 				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),
-						man.getLanguageValueByKay(rs1.getString(6), LanguageFiles.getCurrentLanguage()) ,
-						man.getLanguageValueByKay(rs1.getString(7), LanguageFiles.getCurrentLanguage()),rs1.getInt(8));
+						man.getLanguageValueByKay(rs1.getString(6), FilesLanguageManager.getCurrentLanguage()) ,
+						man.getLanguageValueByKay(rs1.getString(7), FilesLanguageManager.getCurrentLanguage()),rs1.getInt(8));
 				UserAccount b =new UserAccount(rs1.getString(2),0);
 				AsetOwnId c= new AsetOwnId(a,b);
 				AsetOwn d=new AsetOwn(c, rs1.getInt(3));
@@ -81,8 +81,8 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			while(rs1.next())
 			{
 				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),
-						man.getLanguageValueByKay(rs1.getString(6), LanguageFiles.getCurrentLanguage()) ,
-						man.getLanguageValueByKay(rs1.getString(7), LanguageFiles.getCurrentLanguage()),rs1.getInt(8));
+						man.getLanguageValueByKay(rs1.getString(6), FilesLanguageManager.getCurrentLanguage()) ,
+						man.getLanguageValueByKay(rs1.getString(7), FilesLanguageManager.getCurrentLanguage()),rs1.getInt(8));
 				UserAccount b =new UserAccount(rs1.getString(9), rs1.getInt(10));
 				AsetOwnId c= new AsetOwnId(a,b);
 				AsetOwn d=new AsetOwn(c, rs1.getInt(3));

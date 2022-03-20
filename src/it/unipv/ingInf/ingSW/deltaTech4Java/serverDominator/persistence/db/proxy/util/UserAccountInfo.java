@@ -2,8 +2,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.prox
 
 
 import java.io.File;
+import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.CryptoUtil;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
@@ -44,7 +46,10 @@ public class UserAccountInfo {
 	 * @return
 	 */
 	public static boolean saveUserAccountData(UserAccount us, String fls) {
-		UserAccount ussAccount=getUserAccountData(fls);
+		File file=new File(fls);
+		UserAccount ussAccount=us;
+		if(file.exists())
+			ussAccount=getUserAccountData(fls);
 		/*
 		 * si deve eliminare tutti i file riguardanti lo user account quando
 		 * si salvano le informazioni di un'altro user accout
@@ -56,20 +61,22 @@ public class UserAccountInfo {
 			/*
 			 *elimino il file degli asset 
 			 */
-			assetFile.deleteOnExit();
+			assetFile.delete();
 			/*
 			 *elimino i file degli obiettivi 
 			 */
-			obiettiviFile.deleteOnExit();
+			obiettiviFile.delete();
 			
-			usFile.deleteOnExit();
+			usFile.delete();
 		}
-				
+		
 		try {
-			PropertiesFile.addPropertieInFile(PROP_USERNAME, us.getUsername(), fls);
-			PropertiesFile.addPropertieInFile(PROP_PASSWORD, us.getPassw(), fls);
-			PropertiesFile.addPropertieInFile(PROP_MNY, String.valueOf(us.getMny()!=null?us.getMny().intValue():0), fls);
-			PropertiesFile.addPropertieInFile(PROP_PUNTEGGIO, String.valueOf((us.getPunteggio()!=null ? us.getPunteggio().intValue() :0)), fls);
+			Properties propAccount=new Properties();
+			propAccount.put(PROP_USERNAME, us.getUsername());
+			propAccount.put(PROP_PASSWORD, CryptoUtil.encrypt(us.getPassw()));
+			propAccount.put(PROP_MNY, String.valueOf(us.getMny()!=null?us.getMny().intValue():0));
+			propAccount.put(PROP_PUNTEGGIO, String.valueOf((us.getPunteggio()!=null ? us.getPunteggio().intValue() :0)));
+			PropertiesFile.savePropertyInFile(propAccount, fls);
 			AssetOwnFileSystemDAO.saveInCsvFile(us.getAsetOwns());
 			ObiettiviUserFileSistemDAO.saveObUserInCsvFile(us.getObiettiviUsers());
 			return true;
@@ -88,7 +95,11 @@ public class UserAccountInfo {
 	public static UserAccount getUserAccountData(String fls) {
 		try {
 			UserAccount uss=new UserAccount(PropertiesFile.getPropertieFromFile(PROP_USERNAME, fls));
-			uss.setPassw(PropertiesFile.getPropertieFromFile(PROP_PASSWORD, fls));
+			String pssw=PropertiesFile.getPropertieFromFile(PROP_PASSWORD, fls);
+			if(pssw!=null&&!pssw.isEmpty()&&pssw.getBytes().length %4==0)
+				uss.setPassw(CryptoUtil.decrypt(pssw));
+			else
+				uss.setPassw(pssw);
 			String punteggio=PropertiesFile.getPropertieFromFile(PROP_PUNTEGGIO, fls);
 			uss.setPunteggio(punteggio==null?0:Integer.valueOf(punteggio));
 			int a=PropertiesFile.getPropertieFromFile(PROP_MNY, fls)==null?0:Integer.valueOf(PropertiesFile.getPropertieFromFile(PROP_MNY, fls));
@@ -102,9 +113,17 @@ public class UserAccountInfo {
 		}
 	}
 	public static void main(String[] args) {
-		UserAccount us=getUserAccountData();
-		System.out.println(us.toString());
-		System.out.println("%d"+ Integer.valueOf("5412"));
+		//System.out.println(getUserAccountData().getPassw());
+		saveUserAccountData(new UserAccount("Twaasda","12sfbshndgjmdjhsgjhaj34"));
+		try {
+			System.out.println(PropertiesFile.getPropertieFromFile(PROP_PASSWORD, FILE_NAME).getBytes().length%8+ " "+3%2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//UserAccount us=getUserAccountData();
+		//System.out.println(us.toString());
+		//System.out.println("%d"+ Integer.valueOf("5412"));
 	}
 	
 }

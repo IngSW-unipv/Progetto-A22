@@ -33,8 +33,10 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	
 	@Override
 	public boolean insetUserAccount(UserAccount us) {
-		if (this.us.insetUserAccount(us)) return true;
-		
+		if (this.us.insetUserAccount(us)) {
+			UserAccountInfo.saveUserAccountData(us);
+			return true;
+		}
 		return false;
 	}
 
@@ -139,14 +141,14 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 			} 
 			catch (Exception e) {
 				ris=false;
-				System.err.println("impossibile aggiornare filesystem");
+				System.err.println("ProxyUserAccountDAO.updateUserAccountMny: impossibile aggiornare filesystem");
 			}
 		}
 		try {
 			PropertiesFile.addPropertieInFile(UserAccountInfo.PROP_MNY, String.valueOf(newmny),UserAccountInfo.FILE_NAME);
 		} 
 		catch (Exception e) {
-			System.err.println("impossibile aggiornare filesystem");
+			System.err.println("ProxyUserAccountDAO.updateUserAccountMny: impossibile aggiornare filesystem");
 		}
 		return ris;
 	}

@@ -17,9 +17,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
  * @version 1.0
  */
 public class FilesLanguageManager implements ILanguageManager {
-	public static String currentLanguageFile="resources\\language\\currentLanguage";
+	public static String currentLanguageFile="resources/language/currentLanguage";
 	public static final String CONN_DEF_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
-	public static String languageFolder="resources\\language\\";
+	public static String languageFolder="resources/language/";
 	public static String defaultLingua="ENGLISH";
 	private DBLinguaManager man;
 	
@@ -112,7 +112,7 @@ public class FilesLanguageManager implements ILanguageManager {
 		String filePath=null;
 		File fls=new File(FilesLanguageManager.languageFolder+language);
 		if(fls.exists()) {
-			filePath=FilesLanguageManager.languageFolder+language+".properties";
+			filePath=FilesLanguageManager.languageFolder+language;
 		}
 		return filePath;
 	}

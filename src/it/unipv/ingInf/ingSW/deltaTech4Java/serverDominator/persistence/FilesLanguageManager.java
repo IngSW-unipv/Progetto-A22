@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
@@ -20,7 +21,7 @@ public class FilesLanguageManager implements ILanguageManager {
 	public static String currentLanguageFile="resources/language/currentLanguage";
 	public static final String CONN_DEF_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
 	public static String languageFolder="resources/language/";
-	public static String defaultLingua="ENGLISH";
+	//private static String ppp0p="ENGLISH";
 	private DBLinguaManager man;
 	
 	public FilesLanguageManager(String lingua) {
@@ -47,7 +48,7 @@ public class FilesLanguageManager implements ILanguageManager {
 	 */
 	 public static String getCurrentLanguage() {
 		BufferedReader fileReader = null;
-		String lingua=defaultLingua;
+		String lingua=Locale.getDefault().getDisplayLanguage();
 		try {
 			fileReader = new BufferedReader(new FileReader(FilesLanguageManager.currentLanguageFile));
 			lingua=fileReader.readLine();
@@ -66,7 +67,7 @@ public class FilesLanguageManager implements ILanguageManager {
 					System.err.println("\t tring to crate file "+FilesLanguageManager.currentLanguageFile);
 					write=new FileWriter(FilesLanguageManager.currentLanguageFile);
 					write.append(lingua);
-					System.err.println("\t file created with defaultLingua="+defaultLingua);
+					System.err.println("\t file created with default lingua="+Locale.getDefault().getDisplayLanguage());
 				} catch (Exception e1) {
 					System.err.println("\t Error while try to create  "+FilesLanguageManager.currentLanguageFile);
 				}finally {
@@ -83,7 +84,7 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
 		if(lingua.length()<3) {
-			lingua=defaultLingua;
+			lingua=Locale.getDefault().getDisplayLanguage();
 		}
 		return lingua;
 	}

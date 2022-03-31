@@ -17,6 +17,7 @@ import javax.swing.border.EtchedBorder;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
+import serverDominator.config.model.ScriptCreator;
 import serverDominator.config.viw.ConfigFrame;
 
 public class Controller {
@@ -85,8 +86,8 @@ public class Controller {
 	}
 	
 	private void initListenersPanelConfig() {
-		//cfgFrame.getPanelConfig().getButtonAvanti().setEnabled(false);
-		
+		cfgFrame.getPanelConfig().getRadioButtonJavaFx().setSelected(true);
+		cfgFrame.getPanelConfig().getTextUrlToDataBase().setText("jdbc:mysql://<ip>:<port>");
 		cfgFrame.getPanelConfig().getButtonIndietro().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -135,6 +136,16 @@ public class Controller {
 			DataBase.createDataBase(cfgFrame.getPanelConfig().getTextUrlToDataBase().getText(), 
 					cfgFrame.getPanelConfig().getTextUserName().getText(), 
 					String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword())) ;
+			if(cfgFrame.getPanelConfig().getRadioButtonJavaFx().isEnabled()) {
+				ScriptCreator.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText());
+				try {
+					ScriptCreator.runShellScript();
+					cfgFrame.dispose();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		});
 	}
 	

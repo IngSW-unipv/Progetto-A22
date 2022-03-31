@@ -13,7 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLin
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
- * classe con utilità per i file delle lingue
+ * Classe che gestisce i file delle lingue
  * @author TawaHabib
  * @version 1.0
  */
@@ -24,6 +24,11 @@ public class FilesLanguageManager implements ILanguageManager {
 	//private static String ppp0p="ENGLISH";
 	private DBLinguaManager man;
 	
+	/**
+	 * Crea FilesLanguageManager della lingua passata 
+	 * @param lingua
+	 * Lingua principale che si gestisce  
+	 */
 	public FilesLanguageManager(String lingua) {
 		this.man=new DBLinguaManager(CONN_DEF_FILE);
 		try {
@@ -33,6 +38,11 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		setCurrentLanguege(lingua);
 	}
+	
+	/**
+	 * Crea FilesLanguageManager, aggiornando  il contenuto
+	 * del file che gestisce la lingua corrente con il dataBase
+	 */
 	public FilesLanguageManager() {
 		this.man=new DBLinguaManager(CONN_DEF_FILE);
 		try {
@@ -41,12 +51,13 @@ public class FilesLanguageManager implements ILanguageManager {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * Recupera la lingua corrente; di defoult recupera la lingua presente in currentLanguageFile;
-	 * </br>se il file non presente lo crea e ci mette Inglese
+	 * </br>se il file non presente lo crea e ci mette la lingua del sistema 
 	 * @return Lingua Corrente 
 	 */
-	 public static String getCurrentLanguage() {
+	public static String getCurrentLanguage() {
 		BufferedReader fileReader = null;
 		String lingua=Locale.getDefault().getDisplayLanguage();
 		try {
@@ -89,7 +100,12 @@ public class FilesLanguageManager implements ILanguageManager {
 		return lingua;
 	}
 	 
-	 public static void setCurrentLanguege(String lingua) {
+	/**
+	 * Metodo per settare la lingua corrente a quella passata per argomento
+	 * @param lingua
+	 * Nuova lingua corrente
+	 */
+	public static void setCurrentLanguege(String lingua) {
 		 FileWriter write=null;
 		 try {
 			 	write=new FileWriter(FilesLanguageManager.currentLanguageFile);
@@ -106,8 +122,12 @@ public class FilesLanguageManager implements ILanguageManager {
 	 }
 	 
 	/**
+	 * Metodo per conoscere il percorso (relativo) del file che 
+	 * contene le coppe chiave-valore della lingua passata 
 	 * @param language
+	 * Lingua di cui si vuole conoscere il percorso
 	 * @return
+	 * Percorso relativo del file 
 	 */
 	public static String  getLanguageFilePath(String language) {
 		String filePath=null;
@@ -117,9 +137,14 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		return filePath;
 	}
+	
 	/**
+	 * Metodo per recuperare le coppie chiave valore contenute nel file 
+	 * che è associato alla lingua passata per argiomento
 	 * @param language
+	 * lingua di cui si vogliono 
 	 * @return
+	 * Coppie chiave valore  contenute nel file che conosce la lingua argomento
 	 */
 	public static Properties getPropertiesLanguage(String language) {
 		Properties prop=null;
@@ -139,6 +164,7 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		return prop;
 	}
+	
 	@Override
 	public ArrayList<String> getAviableLanguage(){
 		ArrayList<String> result=new ArrayList<String>();
@@ -149,10 +175,12 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		return result;
 	}
+	
 	@Override
 	public String getLanguageKayByValue(String value, String lingua) {
 		return this.man.getLanguageKayByValue(value, lingua);
 	}
+	
 	@Override
 	public String getLanguageValueByKay(String kay, String lingua) {
 		String ris="";
@@ -163,6 +191,7 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		return ris;
 	}
+	
 	@Override
 	public boolean insertLanguegeList(Properties list, String lingua) {
 		boolean result=true;
@@ -179,6 +208,7 @@ public class FilesLanguageManager implements ILanguageManager {
 		}
 		return result;
 	}
+	
 	@Override
 	public Properties getLanguegeList (String lingua) {
 		Properties result=new Properties();

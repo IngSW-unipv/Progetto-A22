@@ -10,9 +10,23 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObi
  */
 public class IObiettiviDAOFactory {
 	
+	/**
+	 * Metodo che crea IObiettiviDAO che serve per accedere un obiettivo di default
+	 * @return IObiettiviDAO
+	 */
 	public static IObiettiviDAO getIObiettiviDAO() {
 		return DBObiettiviDOAFactory.getIObiettiviDAO();
 	}
+	
+	
+	/**
+	 * Metodo che crea IObiettiviDAO che serve per accedere  
+	 * alll'oggetto mappato (passato come argomento)
+	 * @param ob
+	 * oggetto mappato
+	 * @return
+	 * IObiettiviDAO che accede alla tabella che viene mappata dall'oggetto 
+	 */
 	public static IObiettiviDAO getIObiettiviDAO(Obiettivi ob) {
 		return DBObiettiviDOAFactory.getIObiettiviDAO(ob);
 	}

@@ -22,10 +22,18 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	private static final String FILE_NAME="resources/config/persistence/dataBase/connWith_sd_sys";
 	
 	
+	/**
+	 * Crea proxy con connection file path quello passato come argomento
+	 * @param fileFath
+	 * Connection file path
+	 */
 	public ProxyUserAccountDAO(String fileFath) {
 		us=new UserAccountDAO(fileFath);
 	}
 	
+	/**
+	 * Crea proxy con connection file path di default
+	 */
 	public ProxyUserAccountDAO() {
 		us=new UserAccountDAO(FILE_NAME);
 	}

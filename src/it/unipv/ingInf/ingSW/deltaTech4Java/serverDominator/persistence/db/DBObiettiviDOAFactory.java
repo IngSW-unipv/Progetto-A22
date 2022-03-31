@@ -9,7 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
 /**
  * Classe responsabile della creazione deli obiettivi dao relativi a salvare le info nel db
  * @author TawaHabib
- *
+ * @version 1.0
  */
 public class DBObiettiviDOAFactory {
 	

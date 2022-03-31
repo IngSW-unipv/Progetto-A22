@@ -20,7 +20,9 @@ public class IObiettiviUserDAOFactory {
 	private static final String DEFAULT_CONN_PROPERTY_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
 	
 	/**
-	 * @return IAssetDAO
+	 * Metodo che crea un IObiettiviUserDAO di default,
+	 * secondo il contenuto del file di configurazione di persistence
+	 * @return IObiettiviUserDAO
 	 */
 	public static IObiettiviUserDAO getIObiettiviUserDAO() {
 		if(Own==null) {

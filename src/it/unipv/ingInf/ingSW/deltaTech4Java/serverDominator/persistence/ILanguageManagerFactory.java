@@ -12,7 +12,9 @@ public class ILanguageManagerFactory {
 	private static final String PROPERTIE_FACTORY="resources/config/persistence/persistenceFactoryConfig";
 	
 	/**
-	 * @return IAssetDAO
+	 * Metodo che crea un ILanguageManager di defaoult,
+	 * secondo il contenuto del file di config di persistence 
+	 * @return ILanguageManager
 	 */
 	public static ILanguageManager getILanguageManager() {
 		if(linguaMan==null) {
@@ -22,7 +24,7 @@ public class ILanguageManagerFactory {
 				@SuppressWarnings("rawtypes")
 				Constructor c = Class.forName(className).getConstructor(className.getClass());
 				
-				linguaMan=(ILanguageManager)c.newInstance();
+				linguaMan=(ILanguageManager)c.newInstance(FilesLanguageManager.getCurrentLanguage());
 				
 			} catch (Exception e) {
 				e.printStackTrace();

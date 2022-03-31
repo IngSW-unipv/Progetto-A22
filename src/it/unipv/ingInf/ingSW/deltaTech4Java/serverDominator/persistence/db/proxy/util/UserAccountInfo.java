@@ -11,6 +11,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
 /**
  * Salvataggio informazioni dello user account nel file system
  * @author TawaHabib
+ * @version 1.0
  */
 public class UserAccountInfo {
 	public static final String PROP_USERNAME="UserAccount.username";

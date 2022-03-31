@@ -15,6 +15,11 @@ public class IUserAccountDAOFactory {
 	public static final String FILE_NAME="resources/config/persistence/persistenceFactoryConfig";
 	private static final String DEFAULT_CONN_PROPERTY_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
 	
+	/**
+	 * Metodo che crea un IUserAccountDAO di default,
+	 * secondo il contenuto del file di configurazione di persistence
+	 * @return IUserAccountDAO
+	 */
 	public static IUserAccountDAO getUserAccountDAO() {
 		if(usDao==null) {
 			String className;

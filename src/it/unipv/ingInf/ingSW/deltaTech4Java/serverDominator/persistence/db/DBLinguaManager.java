@@ -22,6 +22,10 @@ public class DBLinguaManager implements ILanguageManager{
 	private Connection conn;
 	private String propConn;
 	
+	/**
+	 * Crea DBLinguaManager con il connection file path quello passato come argomento
+	 * @param propConn
+	 */
 	public DBLinguaManager(String propConn) {
 		this.propConn=propConn;
 	}

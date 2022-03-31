@@ -20,7 +20,8 @@ public class IAssetOwnDAOFactory {
 	private static final String DEFAULT_CONN_PROPERTY_FILE="resources/config/persistence/dataBase/connWith_sd_sys";
 	
 	/**
-	 * @return IAssetDAO
+	 * Metodo che crea un IAssetOwnDAO di default (secondo il contenuto del file di configurazione di persistence
+	 * @return IAssetOwnDAO
 	 */
 	public static IAssetOwnDAO getIAssetDAO() {
 		if(Own==null) {

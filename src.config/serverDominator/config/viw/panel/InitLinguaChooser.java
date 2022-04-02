@@ -23,6 +23,11 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * Sceglitore di lingue
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class InitLinguaChooser extends JPanel{
 	private static final long serialVersionUID = 1L;
 	

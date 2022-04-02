@@ -16,3 +16,6 @@ InitLinguaChooser.listaLingue.Titolo=Scegli La lingua
 Controller.err.LinguaNonSelezionata=Si deve selezionare una lingua
 Controller.err.dataBaseCreator=Problemi quando fi cerca di creare la base dei dati
 Controller.err.RunnerFileCreate=Impossibile creare lo script di configurazione
+RunPanel.lable.titolo=Benvenuto nella baracca
+RunPanel.button.run=Inizia a guicare
+OnlyDescription.lable.descrizione=Configurazione gioco avvenuta con sucesso

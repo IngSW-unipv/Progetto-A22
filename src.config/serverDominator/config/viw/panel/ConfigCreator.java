@@ -22,6 +22,11 @@ import java.util.Properties;
 
 import javax.swing.ButtonGroup;
 
+/**
+ * Panello per creazione del DataBase e per aquisire il percorso di una cartella
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class ConfigCreator extends JPanel {
 
 	/**
@@ -300,6 +305,9 @@ public class ConfigCreator extends JPanel {
 		this.lablePathToJavaFXLib = lablePathToJavaFXLib;
 	}
 
+	/**
+	 * @return
+	 */
 	public JLabel getLableUrlToDataBase() {
 		return lableUrlToDataBase;
 	}

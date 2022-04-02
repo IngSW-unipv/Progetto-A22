@@ -25,7 +25,7 @@ public class DataBase {
 	/**
 	 * Proprità nel file di configurazione per indicare e è la prima volta.
 	 */
-	private static final String FIRST_CONFIGURATION_PROPERTIE_NAME ="primaConfigurazione";
+	public static final String FIRST_CONFIGURATION_PROPERTIE_NAME ="primaConfigurazione";
 		
 	/**
 	 * File dello script per creare lo schema
@@ -61,18 +61,21 @@ public class DataBase {
 	 */
 	public static boolean isItTheFirstTime() {
 		Connection conn=null;
-		DbConnection.startConnection(conn, "resources/config/persistence/dataBase/connWith_sd_sys");
+		conn=DbConnection.startConnection(conn, "resources/config/persistence/dataBase/connWith_sd_sys");
+		if(conn!=null) {
+			return false;
+		}
 		Integer a ;
 		try {
 			Properties p=PropertiesFile.loadPropertiesFromCriptedFile(CONFIGURATION_FILE_NAME);
 			a =Integer.valueOf(p.getProperty(FIRST_CONFIGURATION_PROPERTIE_NAME));
-			if(a!=1&&conn==null)
-				return false;
+			if(a==1)
+				return true;
 		}catch (Exception e) {
 			e.getMessage();
 			e.printStackTrace();
 		}		
-		return true;
+		return false;
 	}
 	
 	/* 
@@ -196,6 +199,7 @@ public class DataBase {
 	 * @return boolean
 	 */
 	public static boolean createDataBase() {
+		boolean result=true;
 		Properties p=null;
 		try {
 			p=PropertiesFile.loadPropertiesFromCriptedFile(CONFIGURATION_FILE_NAME);
@@ -207,6 +211,7 @@ public class DataBase {
 			String us=p.getProperty(FIRST_CONFIGURATION_USERNAME_PROPERTIE);
 			if(us.length()<2) {
 				System.err.println("username sembra troppo corto");
+				result=false;
 			}
 		} catch (Exception e) {
 			System.err.println("problem with configuration file");
@@ -249,9 +254,10 @@ public class DataBase {
 				System.err.println("DataBase.class: Problemi Quando si cerca di popolare lo schema");
 				e.getMessage();
 				e.printStackTrace();
+				result =false;
 			}		
 		}
-		return true;
+		return result;
 	}
 	
 	private static boolean setUrl(String ip, String port) {

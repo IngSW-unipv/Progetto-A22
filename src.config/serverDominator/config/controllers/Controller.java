@@ -20,6 +20,11 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Pro
 import serverDominator.config.model.ScriptCreator;
 import serverDominator.config.viw.ConfigFrame;
 
+/**
+ * Controller per la configuarazione del progetto
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class Controller {
 	public static final String LinguaNonSelezionata="Controller.err.LinguaNonSelezionata";
 	public static final String NoDaaBaseCreate="Controller.err.dataBaseCreator";
@@ -41,6 +46,7 @@ public class Controller {
 	
 	private void initListenersPanelBenvenuto() {
 		cfgFrame.getPanelBenvenuto().getIndietroBott().setEnabled(false);
+		cfgFrame.getPanelBenvenuto().getListaLingue().setSelectedValue(FilesLanguageManager.getCurrentLanguage(), true);
 		//String selectedItem = cfgFrame.getPanelBenvenuto().getListaLingue().getSelectedValue();
 		cfgFrame.getPanelBenvenuto().getAvantiBott().addActionListener(new ActionListener() {
 			
@@ -133,19 +139,27 @@ public class Controller {
 		});
 		cfgFrame.getPanelConfig().getButtonAvanti().addActionListener(e->
 		{
-			DataBase.createDataBase(cfgFrame.getPanelConfig().getTextUrlToDataBase().getText(), 
+			
+			Properties p=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
+			boolean result=DataBase.createDataBase(cfgFrame.getPanelConfig().getTextUrlToDataBase().getText(), 
 					cfgFrame.getPanelConfig().getTextUserName().getText(), 
-					String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword())) ;
-			if(cfgFrame.getPanelConfig().getRadioButtonJavaFx().isEnabled()) {
-				ScriptCreator.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText());
-				try {
-					ScriptCreator.runShellScript();
-					cfgFrame.dispose();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword()));
+			System.out.println(cfgFrame.getPanelConfig().getTextPassword().getPassword());
+			if(!result) {
+				JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti"));
+			}else {
+				if(cfgFrame.getPanelConfig().getRadioButtonJavaFx().isEnabled()) {
+					if(!ScriptCreator.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
+						JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
+					}else {
+						cfgFrame.loadRunPanel();
+					}
+					
+				}else {
+					cfgFrame.loadDescriptionPanel();
 				}
 			}
+			
 		});
 	}
 	

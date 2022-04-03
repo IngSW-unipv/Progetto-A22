@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.swing.JFileChooser;
@@ -41,6 +42,7 @@ public class Controller {
 	private void initListeners() {
 		this.initListenersPanelBenvenuto();
 		this.initListenersPanelConfig();
+		this.initListenersRunPanel();
 		
 	}
 	
@@ -81,6 +83,8 @@ public class Controller {
 		        	   	FilesLanguageManager.setCurrentLanguege(cfgFrame.getPanelBenvenuto().getListaLingue().getSelectedValue());
 		        	   	cfgFrame.firstPanelCreator();
 		        	   	cfgFrame.secondPanelCreator();
+		        	   	cfgFrame.runPanelCreator();
+		        	   	cfgFrame.onlyDescriptionPanelCreator();
 		        	   	cfgFrame.loadFirstPanel();
 		        	   	initListeners();
 		        	   	cfgFrame.getPanelBenvenuto().getListaLingue().setSelectedValue(FilesLanguageManager.getCurrentLanguage(), true);
@@ -94,12 +98,6 @@ public class Controller {
 	private void initListenersPanelConfig() {
 		cfgFrame.getPanelConfig().getRadioButtonJavaFx().setSelected(true);
 		cfgFrame.getPanelConfig().getTextUrlToDataBase().setText("jdbc:mysql://<ip>:<port>");
-		cfgFrame.getPanelConfig().getButtonIndietro().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cfgFrame.restartFirstPanel();;			
-				}
-			});
 		
 		cfgFrame.getPanelConfig().getButtonIndietro().addActionListener(new ActionListener() {
 			@Override
@@ -108,58 +106,86 @@ public class Controller {
 				}
 			});
 		
-		cfgFrame.getPanelConfig().getButtonNavigateInFileSys().addActionListener(e -> 	
-		{
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setBounds(1, 0, 500, 308);
-			fileChooser.setBackground(UIManager.getColor("CheckBoxMenuItem.acceleratorForeground"));
-			fileChooser.setMultiSelectionEnabled(false);
-			fileChooser.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			fileChooser.setFileHidingEnabled(true);
-			fileChooser.showOpenDialog(new JFrame());
-			File dir = fileChooser.getSelectedFile();
-			cfgFrame.getPanelConfig().getTextToJavaFxLibPath().setText(dir.getAbsolutePath().toString());
-			
-		});
-		
-		cfgFrame.getPanelConfig().getRadioButtonjreFull().addActionListener(e->
-		{
-			cfgFrame.getPanelConfig().getButtonNavigateInFileSys().setEnabled(false);
-			cfgFrame.getPanelConfig().getTextToJavaFxLibPath().setEditable(false);
-			cfgFrame.getPanelConfig().getLablePathToJavaFXLib().setEnabled(false);
-			
-		});
-		
-		cfgFrame.getPanelConfig().getRadioButtonJavaFx().addActionListener(e->
-		{
-			cfgFrame.getPanelConfig().getButtonNavigateInFileSys().setEnabled(true);
-			cfgFrame.getPanelConfig().getTextToJavaFxLibPath().setEditable(true);
-			cfgFrame.getPanelConfig().getLablePathToJavaFXLib().setEnabled(true);
-		});
-		cfgFrame.getPanelConfig().getButtonAvanti().addActionListener(e->
-		{
-			
-			Properties p=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
-			boolean result=DataBase.createDataBase(cfgFrame.getPanelConfig().getTextUrlToDataBase().getText(), 
-					cfgFrame.getPanelConfig().getTextUserName().getText(), 
-					String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword()));
-			System.out.println(cfgFrame.getPanelConfig().getTextPassword().getPassword());
-			if(!result) {
-				JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti"));
-			}else {
-				if(cfgFrame.getPanelConfig().getRadioButtonJavaFx().isEnabled()) {
-					if(!ScriptCreator.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
-						JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
-					}else {
-						cfgFrame.loadRunPanel();
-					}
-					
-				}else {
-					cfgFrame.loadDescriptionPanel();
+		cfgFrame.getPanelConfig().getButtonIndietro().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cfgFrame.restartFirstPanel();;			
 				}
+			});
+		
+		cfgFrame.getPanelConfig().getButtonNavigateInFileSys().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setBounds(1, 0, 500, 308);
+				fileChooser.setBackground(UIManager.getColor("CheckBoxMenuItem.acceleratorForeground"));
+				fileChooser.setMultiSelectionEnabled(false);
+				fileChooser.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				fileChooser.setFileHidingEnabled(true);
+				fileChooser.showOpenDialog(new JFrame());
+				File dir = fileChooser.getSelectedFile();
+				cfgFrame.getPanelConfig().getTextToJavaFxLibPath().setText(dir.getAbsolutePath().toString());
 			}
 			
+		});
+		
+		cfgFrame.getPanelConfig().getRadioButtonjreFull().addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cfgFrame.getPanelConfig().getButtonNavigateInFileSys().setEnabled(false);
+				cfgFrame.getPanelConfig().getTextToJavaFxLibPath().setEditable(false);
+				cfgFrame.getPanelConfig().getLablePathToJavaFXLib().setEnabled(false);
+			}
+			
+		});
+		
+		cfgFrame.getPanelConfig().getRadioButtonJavaFx().addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cfgFrame.getPanelConfig().getButtonNavigateInFileSys().setEnabled(true);
+				cfgFrame.getPanelConfig().getTextToJavaFxLibPath().setEditable(true);
+				cfgFrame.getPanelConfig().getLablePathToJavaFXLib().setEnabled(true);
+			}
+		});
+		
+		cfgFrame.getPanelConfig().getButtonAvanti().addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				Properties p=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
+				boolean result=DataBase.createDataBase(cfgFrame.getPanelConfig().getTextUrlToDataBase().getText(), 
+						cfgFrame.getPanelConfig().getTextUserName().getText(), 
+						String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword()));
+				System.out.println(cfgFrame.getPanelConfig().getTextPassword().getPassword());
+				if(!result) {
+					JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti"));
+				}else {
+					if(!cfgFrame.getPanelConfig().getRadioButtonjreFull().isSelected()) {
+						if(!ScriptCreator.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
+							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
+						}else {
+							cfgFrame.loadRunPanel();
+						}
+					}else {
+						cfgFrame.loadDescriptionPanel();
+					}
+				}
+			}	
+		});
+	}
+	
+	private void initListenersRunPanel() {
+		cfgFrame.getRunPanel().getRunButton().addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ScriptCreator.runShellScript();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		});
 	}
 	

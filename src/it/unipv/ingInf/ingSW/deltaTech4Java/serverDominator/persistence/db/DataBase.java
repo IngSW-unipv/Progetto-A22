@@ -211,7 +211,6 @@ public class DataBase {
 			String us=p.getProperty(FIRST_CONFIGURATION_USERNAME_PROPERTIE);
 			if(us.length()<2) {
 				System.err.println("username sembra troppo corto");
-				result=false;
 			}
 		} catch (Exception e) {
 			System.err.println("problem with configuration file");

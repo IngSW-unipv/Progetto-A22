@@ -32,7 +32,7 @@ public class OnlyDescription extends JPanel {
 		label = new Label(p.getProperty(KEY_LABLE,"Gioco configurato con sucesso"));
 		springLayout.putConstraint(SpringLayout.NORTH, label, 122, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.WEST, label, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, label, 559, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.EAST, label, 740, SpringLayout.WEST, this);
 		label.setAlignment(Label.CENTER);
 		add(label);
 	}

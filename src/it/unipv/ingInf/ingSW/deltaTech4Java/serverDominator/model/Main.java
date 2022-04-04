@@ -1,11 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		
 		switch(x_max) {

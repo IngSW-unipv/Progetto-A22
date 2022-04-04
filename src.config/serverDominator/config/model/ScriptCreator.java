@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 /**
  * <h5>Classe con utililità per la creazione ed esecuzione di uno script per lanciare un jar con java Fx</h5>
  * @author TawaHabib
+ * @version 1.0
  */
 public class ScriptCreator {
 	                                                                                                                                             

@@ -16,3 +16,6 @@ InitLinguaChooser.listaLingue.Titolo=Elige el idioma
 Controller.err.LinguaNonSelezionata=Tienes que elegir una idioma
 Controller.err.dataBaseCreator=Fallo en a creacion del DataBase
 Controller.err.RunnerFileCreate=Fallo en la creacion de lo escript configuración
+RunPanel.lable.titolo=Empezar a jugar
+RunPanel.button.run=Empieza
+OnlyDescription.lable.descrizione=Configuración del juego terminada

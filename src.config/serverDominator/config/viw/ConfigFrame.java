@@ -13,6 +13,8 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLan
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.FileToString;
 import serverDominator.config.viw.panel.ConfigCreator;
 import serverDominator.config.viw.panel.InitLinguaChooser;
+import serverDominator.config.viw.panel.OnlyDescription;
+import serverDominator.config.viw.panel.RunPanel;
 
 public class ConfigFrame extends JFrame {
 
@@ -23,24 +25,9 @@ public class ConfigFrame extends JFrame {
 	private static final String LINGUE_DISPONIBILI_FILE_PATH = "resources/language/LingueDisponibili";
 	private InitLinguaChooser panelBenvenuto=null;
 	private ConfigCreator panelConfig=null;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					
-					ConfigFrame frame = new ConfigFrame();
-					frame.setVisible(true);
-					//frame.loadSecondPanel();
-					//frame.loadFirstPanel();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private RunPanel runPanel=null;
+	private OnlyDescription onlyDescriptionPanel=null;
+
 
 	/**
 	 * Create the frame.
@@ -58,8 +45,10 @@ public class ConfigFrame extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 783, 333);
-		firstPanelCreator();
-		secondPanelCreator();
+		this.firstPanelCreator();
+		this.secondPanelCreator();
+		this.runPanelCreator();
+		this.onlyDescriptionPanelCreator();
 	}
 	
 	public void firstPanelCreator() {
@@ -75,6 +64,14 @@ public class ConfigFrame extends JFrame {
 		}
 		
 		panelBenvenuto = new InitLinguaChooser(myList, FilesLanguageManager.getCurrentLanguage());
+	}
+	
+	public void runPanelCreator() {
+		runPanel=new RunPanel();
+	}
+	
+	public void onlyDescriptionPanelCreator() {
+		onlyDescriptionPanel=new OnlyDescription();
 	}
 	
 	public void secondPanelCreator() {
@@ -94,6 +91,19 @@ public class ConfigFrame extends JFrame {
 		}
 		changePanel(panelConfig);
 	}
+	public void loadRunPanel() {
+		if(runPanel==null) {
+			runPanelCreator();
+		}
+		changePanel(runPanel);
+	}
+	
+	public void loadDescriptionPanel() {
+		if(onlyDescriptionPanel==null) {
+			onlyDescriptionPanelCreator();
+		}
+		changePanel(onlyDescriptionPanel);
+	}
 	
 	public void restartFirstPanel() {
 		if(panelBenvenuto==null) {
@@ -106,19 +116,6 @@ public class ConfigFrame extends JFrame {
 		panelConfig=new ConfigCreator();
 		panelConfig.repaint();
 		this.repaint();
-	}
-	public void changePanel(JPanel panel) {
-		try {
-			this.getContentPane().removeAll();
-			this.getContentPane().add(panel);
-			this.revalidate();
-			panel.repaint();
-			this.repaint();
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}catch(Error e) {
-			e.printStackTrace();
-		}
 	}
 
 	public InitLinguaChooser getPanelBenvenuto() {
@@ -135,6 +132,55 @@ public class ConfigFrame extends JFrame {
 
 	public void setPanelConfig(ConfigCreator panelConfig) {
 		this.panelConfig = panelConfig;
+	}
+	
+	public RunPanel getRunPanel() {
+		return runPanel;
+	}
+
+	public void setRunPanel(RunPanel runPanel) {
+		this.runPanel = runPanel;
+	}
+
+	public OnlyDescription getOnlyDescriptionPanel() {
+		return onlyDescriptionPanel;
+	}
+
+	public void setOnlyDescriptionPanel(OnlyDescription onlyDescriptionPanel) {
+		this.onlyDescriptionPanel = onlyDescriptionPanel;
+	}
+	
+	public void changePanel(JPanel panel) {
+		try {
+			this.getContentPane().removeAll();
+			this.getContentPane().add(panel);
+			this.revalidate();
+			panel.repaint();
+			this.repaint();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}catch(Error e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					
+					ConfigFrame frame = new ConfigFrame();
+					frame.setVisible(true);
+					//frame.loadSecondPanel();
+					//frame.loadFirstPanel();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 }

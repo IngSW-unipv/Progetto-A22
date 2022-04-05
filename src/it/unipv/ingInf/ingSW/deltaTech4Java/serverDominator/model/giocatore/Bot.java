@@ -6,49 +6,66 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
 public class Bot extends Giocatore implements Runnable{
+	
+	private Base baseUtente, baseBot;
 	
 	/**Permette di creare un oggetto Bot passando come parametro il suo nome*/
 	public Bot(String nome) {
 		super(nome);
+		baseUtente=new Base();
+		baseBot=new Base();
 	}
 	/** Permette di creare un oggetto Bot il cui nome sarà "botX" dove X è il numero passato come parametro*/
 	public Bot(int num) {
-
 		super("bot"+String.format("%03d",num));
+		baseUtente=new Base();
+	}
+	
+	public void aggiornaBasi(Base baseUtente, Base baseBot) {
+		this.setBaseUtente(baseUtente);
+		this.setBaseBot(baseBot);
+	}
+	
+	public void setBaseBot(Base baseBot){
+		this.baseBot=baseBot;
+	}
+	
+	public void setBaseUtente(Base baseUtente){
+		this.baseUtente=baseUtente;
 	}
 	/** in fase di sviluppo*/
 	public void logicaAttacco() {
 	}
 	
-	public void run(Base bot, Base utente) {
+	@Override
+	public void run() {
 		final int logica=(int)(Math.random()*3);
 		int statsTotalit=0;
-		statsTotalit+=bot.getLvl_max_cpu();
-		statsTotalit+=bot.getLvl_max_ram();
-		statsTotalit+=bot.getLvl_max_firewall();
+		statsTotalit+=baseBot.getLvl_max_cpu();
+		statsTotalit+=baseBot.getLvl_max_ram();
+		statsTotalit+=baseBot.getLvl_max_firewall();
 		final int statsTotali=statsTotalit;
 		int statsUtenteTotali=0;
-        statsUtenteTotali+=utente.getLvl_cpu();
-        statsUtenteTotali+=utente.getLvl_ram();
-        statsUtenteTotali+=utente.getLvl_firewall();
+        statsUtenteTotali+=baseUtente.getLvl_cpu();
+        statsUtenteTotali+=baseUtente.getLvl_ram();
+        statsUtenteTotali+=baseUtente.getLvl_firewall();
         int statsBotTotali=0;
-        statsBotTotali+=bot.getLvl_cpu();
-        statsBotTotali+=bot.getLvl_ram();
-        statsBotTotali+=bot.getLvl_firewall();
+        statsBotTotali+=baseBot.getLvl_cpu();
+        statsBotTotali+=baseBot.getLvl_ram();
+        statsBotTotali+=baseBot.getLvl_firewall();
 		
 		switch(logica) {
 		case 0:{
 	            if(statsUtenteTotali>statsBotTotali) {
 	                for(;statsBotTotali>statsUtenteTotali;statsBotTotali++) {
-	                	bot.potenzia_risorsa("energia");
+	                	baseBot.potenzia_risorsa("energia");
 	                	int casualita=(int)(Math.random()*3);
 	                	switch(casualita) {
-	                		case 0:bot.potenzia_risorsa("ram");
-	                		case 1:bot.potenzia_risorsa("cpu");
-	                		case 2:bot.potenzia_risorsa("firewall");
+	                		case 0:baseBot.potenzia_risorsa("ram");
+	                		case 1:baseBot.potenzia_risorsa("cpu");
+	                		case 2:baseBot.potenzia_risorsa("firewall");
 	                		}
 	                	}
 	                }
@@ -56,45 +73,45 @@ public class Bot extends Giocatore implements Runnable{
 		case 1:{
 	            if(statsUtenteTotali>statsBotTotali) {
 	                for(;statsBotTotali>statsUtenteTotali;statsBotTotali++) {
-	                	bot.potenzia_risorsa("energia");
-	                	if(bot.getLvl_cpu()==bot.getLvl_ram()&&bot.getLvl_ram()==bot.getLvl_firewall()) {
+	                	baseBot.potenzia_risorsa("energia");
+	                	if(baseBot.getLvl_cpu()==baseBot.getLvl_ram()&&baseBot.getLvl_ram()==baseBot.getLvl_firewall()) {
 	                		int casualita=(int)(Math.random()*3);
 	                		switch(casualita) {
-	                			case 0:bot.potenzia_risorsa("ram");
-	                			case 1:bot.potenzia_risorsa("cpu");
-	                			case 2:bot.potenzia_risorsa("firewall");
+	                			case 0:baseBot.potenzia_risorsa("ram");
+	                			case 1:baseBot.potenzia_risorsa("cpu");
+	                			case 2:baseBot.potenzia_risorsa("firewall");
 	                			}
 	                		}
 	                	else {
-	                		if(bot.getLvl_cpu()==bot.getLvl_ram())
-	                			if(bot.getLvl_ram()>bot.getLvl_firewall())
-	                				bot.potenzia_risorsa("firewall");
+	                		if(baseBot.getLvl_cpu()==baseBot.getLvl_ram())
+	                			if(baseBot.getLvl_ram()>baseBot.getLvl_firewall())
+	                				baseBot.potenzia_risorsa("firewall");
 	                			else {
 	                				int casualita=(int)(Math.random()*2);
 	                        		switch(casualita) {
-	                        		case 0:bot.potenzia_risorsa("cpu");
-	                        		case 1:bot.potenzia_risorsa("ram");
+	                        		case 0:baseBot.potenzia_risorsa("cpu");
+	                        		case 1:baseBot.potenzia_risorsa("ram");
 	                        		}
 	                			}
 	                		else {
-	                			if(bot.getLvl_cpu()==bot.getLvl_firewall())
-	                				if(bot.getLvl_cpu()>bot.getLvl_ram())
-	                					bot.potenzia_risorsa("ram");
+	                			if(baseBot.getLvl_cpu()==baseBot.getLvl_firewall())
+	                				if(baseBot.getLvl_cpu()>baseBot.getLvl_ram())
+	                					baseBot.potenzia_risorsa("ram");
 	                				else {
 	                    				int casualita=(int)(Math.random()*2);
 	                            		switch(casualita) {
-	                            			case 0:bot.potenzia_risorsa("cpu");
-	                            			case 1:bot.potenzia_risorsa("firewall");
+	                            			case 0:baseBot.potenzia_risorsa("cpu");
+	                            			case 1:baseBot.potenzia_risorsa("firewall");
 	                            			}
 	                    				}
 	                			else {
-	                				if(bot.getLvl_ram()>bot.getLvl_cpu())
-	                					bot.potenzia_risorsa("cpu");
+	                				if(baseBot.getLvl_ram()>baseBot.getLvl_cpu())
+	                					baseBot.potenzia_risorsa("cpu");
 	                				else {
 	                					int casualita=(int)(Math.random()*2);
 	                            		switch(casualita) {
-	                            			case 0:bot.potenzia_risorsa("ram");
-	                            			case 1:bot.potenzia_risorsa("firewall");
+	                            			case 0:baseBot.potenzia_risorsa("ram");
+	                            			case 1:baseBot.potenzia_risorsa("firewall");
 	                            			}
 	                				}
 	                			}
@@ -104,21 +121,16 @@ public class Bot extends Giocatore implements Runnable{
 	            }
 		}
 		case 2:{
-	        	bot.setLvl_cpu(utente.getLvl_cpu());
-	            bot.setLvl_ram(utente.getLvl_ram());
-	            bot.setLvl_firewall(utente.getLvl_firewall());
-	            statsBotTotali+=bot.getLvl_cpu();
-	            statsBotTotali+=bot.getLvl_ram();
-	            statsBotTotali+=bot.getLvl_firewall();
+	        	baseBot.setLvl_cpu(baseUtente.getLvl_cpu());
+	            baseBot.setLvl_ram(baseUtente.getLvl_ram());
+	            baseBot.setLvl_firewall(baseUtente.getLvl_firewall());
+	            statsBotTotali+=baseBot.getLvl_cpu();
+	            statsBotTotali+=baseBot.getLvl_ram();
+	            statsBotTotali+=baseBot.getLvl_firewall();
 			}
 		}
 	if (statsBotTotali==statsTotali)
 		return;
-	}
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/**Migliora le risorse del bot progressivamente al giocatore quindi la somma complessiva dei livelli 

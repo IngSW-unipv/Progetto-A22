@@ -15,11 +15,22 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Rootcrash;
 
+
 public class Base extends Nodo{
 	private Software[] stats_software_creati;
 	private final int TIPI_SOFTWARE=3;
 	private Risorse[] risorse;
 	private final int TIPI_RISORSE=4;
+	
+	public Base() {
+		super.setDist_base(0);
+		super.setPossessore(null);
+		super.setSoftware_disponibile(0);
+		stats_software_creati= new Software[TIPI_SOFTWARE];
+		this.inizializza_software();
+		risorse=new Risorse[TIPI_RISORSE];
+		this.inizializza_risorse();
+	}
 	
 	public Base (Giocatore possessore) {
 		super.setDist_base(1);

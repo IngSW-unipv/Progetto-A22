@@ -2,6 +2,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Classifica {
 	
 	private List<Giocatore> lista;

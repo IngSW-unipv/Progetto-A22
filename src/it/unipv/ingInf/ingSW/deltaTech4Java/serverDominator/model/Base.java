@@ -21,8 +21,7 @@ public class Base extends Nodo{
 	private Risorse[] risorse;
 	private final int TIPI_RISORSE=4;
 	
-	public Base (Coordinate coordinate, Giocatore possessore) {
-		super(coordinate);
+	public Base (Giocatore possessore) {
 		super.setDist_base(1);
 		super.setPossessore(possessore);
 		super.setSoftware_disponibile(0);

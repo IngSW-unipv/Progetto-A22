@@ -4,37 +4,53 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class Main {
-
-	public static void main(String[] args) {
-
+	
+	public static void main(int x_max, int y_max, String utente) {
+		
+		int n_basi;
+		Giocatore[] giocatori;
+		Mappa tabellone;
+		Battaglia fight;
+		
+		n_basi= 3;
+		giocatori= new Giocatore[n_basi+1];
 		
 		switch(x_max) {
 		case 15:
-			n_basi= 3;
-			giocatori= new Giocatore[n_basi];
-			giocatori[0].setNome(player);
-			giocatori[1].setNome("lonfo");
-			giocatori[2].setNome("bobby");
-			
-			c_basi= new Coordinate[n_basi];
-			c_basi[0].setX(3);
-			c_basi[0].setY(1);
-			c_basi[1].setX(11);
-			c_basi[1].setY(1);
-			c_basi[2].setX(7);
-			c_basi[2].setY(8);
-			
-			for(i=0; i<n_basi; i++) {
-				nodi_mappa[i]= new Base(c_basi[i], giocatori[i]);
-			}
+			giocatori[0]= new Sistema();
+			giocatori[1]= new Utente(utente);
+			giocatori[2]=new Bot("bob");
+			giocatori[3]= new Bot("sandra");
 			break;
 		case 20:
 			n_basi=5;
+			giocatori= new Giocatore[n_basi+1];
+			giocatori[0]= new Sistema();
+			giocatori[1]= new Utente(utente);
+			giocatori[2]= new Bot("bob");
+			giocatori[3]= new Bot("sandra");
+			giocatori[4]= new Bot("roger");
+			giocatori[5]= new Bot("max");
 			break;
 		case 30:
 			n_basi=10;
+			giocatori= new Giocatore[n_basi+1];
+			giocatori[0]= new Sistema();
+			giocatori[1]= new Utente(utente);
+			giocatori[2]= new Bot("bob");
+			giocatori[3]= new Bot("sandra");
+			giocatori[4]= new Bot("roger");
+			giocatori[5]= new Bot("max");
+			giocatori[6]= new Bot("jupiter");
+			giocatori[7]= new Bot("alex");
+			giocatori[8]= new Bot("lonfo");
+			giocatori[9]= new Bot("max");
+			giocatori[10]=new Bot("alice");
 			break;
 		}
+		tabellone= new Mappa(x_max, y_max, giocatori);
+		tabellone.assegnamento(n_basi, giocatori);
+		
 	}
 
 }

@@ -1,5 +1,12 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+/**
+ * @author Luca Casto 
+ * v1.0
+ * prima versione della classe Cloud, nodo necessario al miglioramento
+ * delle risorse del nodo base.
+ */
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
@@ -9,10 +16,18 @@ public class Cloud extends Nodo {
 	private Risorse[] risorse;
 	private final int TIPI_RISORSE=4;
 	
-	public Cloud (Coordinate coordinate, Giocatore possessore) {
-		super(coordinate);
+	public Cloud (Giocatore possessore) {
 		super.setDist_base(0);
 		super.setPossessore(possessore);
+		super.setSoftware_disponibile(0);
+		super.setSoftware_max(20);
+		risorse= new Risorse[TIPI_RISORSE];
+		this.inizializza_risorse();
+		stats_software_creati= new Software[1];
+	}
+	
+	public Cloud () {
+		super.setDist_base(0);
 		super.setSoftware_disponibile(0);
 		super.setSoftware_max(20);
 		risorse= new Risorse[TIPI_RISORSE];

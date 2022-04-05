@@ -18,8 +18,8 @@ public class Test {
 		
 		giallo=new Utente("giallo");
 		rosso=new Utente("rosso");
-		b1=new Base(x1,giallo);
-		b2= new Base(x4,rosso);
+		b1=new Base(giallo);
+		b2= new Base(rosso);
 		
 		
 		

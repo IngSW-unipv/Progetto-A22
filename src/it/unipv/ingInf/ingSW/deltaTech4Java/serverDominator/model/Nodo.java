@@ -21,8 +21,7 @@ public abstract class Nodo implements INodo{
 	protected Timer time1, time2; 
 /**time1 usato per risorse, time 2 usato per software*/
 	
-	public Nodo (Coordinate coordinate) {
-		this.coordinate=coordinate;
+	public Nodo () {
 		software_disponibile=0;
 		this.time1=new Timer();
 		this.time2= new Timer();

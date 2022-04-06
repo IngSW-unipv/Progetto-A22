@@ -19,7 +19,7 @@ public class Main {
 		case 15:
 			giocatori[0]= new Sistema();
 			giocatori[1]= new Utente(utente);
-			giocatori[2]=new Bot("bob");
+			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
 			break;
 		case 20:
@@ -52,5 +52,6 @@ public class Main {
 		tabellone.assegnamento(n_basi, giocatori);
 		
 	}
+	
 
 }

@@ -10,7 +10,6 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Software;
 
 public abstract class Nodo implements INodo{
-	private Coordinate coordinate;
 	private int dist_base;
 	private Giocatore possessore;
 	private int software_disponibile;
@@ -30,14 +29,6 @@ public abstract class Nodo implements INodo{
 		
 /**getter and setter*/
 	
-	public Coordinate getCoordinate() {
-		return coordinate;
-	}
-
-	public void setCoordinate(Coordinate coordinate) {
-		this.coordinate = coordinate;
-	}
-
 	public int getDist_base() {
 		return dist_base;
 	}

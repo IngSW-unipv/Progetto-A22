@@ -33,7 +33,7 @@ public class Base extends Nodo{
 	}
 	
 	public Base (Giocatore possessore) {
-		super.setDist_base(1);
+		super.setDist_base(0);
 		super.setPossessore(possessore);
 		super.setSoftware_disponibile(0);
 		stats_software_creati= new Software[TIPI_SOFTWARE];

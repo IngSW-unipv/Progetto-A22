@@ -3,16 +3,18 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 /**
  * @author Luca Casto 
  * v1.0
- *coordinate di un nodo
+ *coordinate di una base, usate come indice per il veloce ritrovamento nella mappa
  */
 
 public class Coordinate {
 	private int x;
 	private int y;
+	private String nome;
 	
-	public Coordinate(int x, int y) {
+	public Coordinate(int x, int y, String nome) {
 		this.x=x;
 		this.y=y;
+		this.nome= nome;
 	}
 /**getter and setter*/
 
@@ -31,5 +33,13 @@ public class Coordinate {
 	public void setY(int y) {
 		this.y = y;
 	}
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	
 }

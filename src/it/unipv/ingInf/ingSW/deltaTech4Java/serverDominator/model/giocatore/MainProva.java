@@ -27,11 +27,47 @@ public class MainProva {
 		n_basi= 3;
 		giocatori= new Giocatore[n_basi+1];
 		tabellone= new mappaProva(x_max, y_max, n_basi, utente.getNome());
-		giocatori=tabellone.getListaGiocatori();
+		giocatori=this.creazioneGiocatori(utente.getNome(), x_max, y_max);
 		mercato=new Mercato();
 		//avvio thread
 	}
-
+	
+	public Giocatore[] creazioneGiocatori(String utente, int x_max, int n_basi) {
+		switch(x_max) {
+		case 15:
+			giocatori[0]= new Sistema();
+			giocatori[1]= new Utente(utente);
+			giocatori[2]=new Bot("bob");
+			giocatori[3]= new Bot("sandra");
+			break;
+		case 20:
+			n_basi=5;
+			giocatori= new Giocatore[n_basi+1];
+			giocatori[0]= new Sistema();
+			giocatori[1]= new Utente(utente);
+			giocatori[2]= new Bot("bob");
+			giocatori[3]= new Bot("sandra");
+			giocatori[4]= new Bot("roger");
+			giocatori[5]= new Bot("max");
+			break;
+		case 30:
+			n_basi=10;
+			giocatori= new Giocatore[n_basi+1];
+			giocatori[0]= new Sistema();
+			giocatori[1]= new Utente(utente);
+			giocatori[2]= new Bot("bob");
+			giocatori[3]= new Bot("sandra");
+			giocatori[4]= new Bot("roger");
+			giocatori[5]= new Bot("max");
+			giocatori[6]= new Bot("jupiter");
+			giocatori[7]= new Bot("alex");
+			giocatori[8]= new Bot("lonfo");
+			giocatori[9]= new Bot("max");
+			giocatori[10]=new Bot("alice");
+			break;
+		}
+		return giocatori;
+	}
 	public void potenziamento(String risorsa){
 		switch(risorsa) {
 			tabellone.trovaBase(utente).potenzia_risorsa(risorsa);

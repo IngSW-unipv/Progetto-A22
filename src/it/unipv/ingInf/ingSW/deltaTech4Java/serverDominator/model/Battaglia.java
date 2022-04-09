@@ -54,6 +54,9 @@ public class Battaglia {
 	public boolean calcola_vincitore() {
 		int attacco, difesa;
 		boolean successo=false;
+		
+	// avvia timer dist_min*tempo unita;
+		
 		attacco= sel_attaccanti[1].getQuantità() * sel_attaccanti[1].getVal_atk();
 		difesa=aggiorna_firewall()+sel_difensori[0].getVal_def();
 		if(attacco>difesa) {

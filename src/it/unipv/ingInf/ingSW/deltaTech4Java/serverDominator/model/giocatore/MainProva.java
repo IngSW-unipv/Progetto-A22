@@ -68,6 +68,7 @@ public class MainProva {
 		}
 		return giocatori;
 	}
+	
 	public void potenziamento(String risorsa){
 		switch(risorsa) {
 			tabellone.trovaBase(utente).potenzia_risorsa(risorsa);
@@ -104,5 +105,12 @@ public class MainProva {
 		return esito;
 	}
 	//opzioni
+	//il colore va al giocatore o al nodo? per ora è al nodo
+	//0=possessore, 2=colore, 3=tipologia nodo, 4=livello cpu, 5=livello ram, 6=livello energia, 7=livello firewall, 8=livello virus, 9=quantita virus, 10=livello antivirus, 11= quantita antivirus, 12= livello rootcrash, 13=quanita rootcrash
+	public String[] getProprieta(int coordX, int coordY) {
+		String[] proprieta;
+		
+		return proprieta;
+	}
 
 }

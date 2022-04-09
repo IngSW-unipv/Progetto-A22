@@ -17,6 +17,7 @@ public class Cloud extends Nodo {
 	private final int TIPI_RISORSE=4;
 	
 	public Cloud (Giocatore possessore) {
+		super.setTipologia("cloud");
 		super.setDist_base(0);
 		super.setPossessore(possessore);
 		super.setSoftware_disponibile(0);
@@ -27,6 +28,7 @@ public class Cloud extends Nodo {
 	}
 	
 	public Cloud () {
+		super.setTipologia("cloud");
 		super.setDist_base(0);
 		super.setSoftware_disponibile(0);
 		super.setSoftware_max(20);

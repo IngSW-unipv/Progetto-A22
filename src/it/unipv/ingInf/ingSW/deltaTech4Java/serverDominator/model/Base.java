@@ -23,6 +23,7 @@ public class Base extends Nodo{
 	private final int TIPI_RISORSE=4;
 	
 	public Base() {
+		super.setTipologia("base");
 		super.setDist_base(0);
 		super.setPossessore(null);
 		super.setSoftware_disponibile(0);
@@ -33,6 +34,7 @@ public class Base extends Nodo{
 	}
 	
 	public Base (Giocatore possessore) {
+		super.setTipologia("base");
 		super.setDist_base(0);
 		super.setPossessore(possessore);
 		super.setSoftware_disponibile(0);

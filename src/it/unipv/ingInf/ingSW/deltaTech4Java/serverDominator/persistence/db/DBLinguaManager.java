@@ -137,7 +137,7 @@ public class DBLinguaManager implements ILanguageManager{
 	@Override
 	public Properties getLanguegeList (String lingua) {
 		Properties result=new Properties();
-		String s1="SELECT * from LINGUA WHERE";
+		String s1="SELECT * from LINGUA";
 		int position=this.getLanguegePosition(lingua);
 		conn=DbConnection.startConnection(conn,propConn);
 		PreparedStatement st1;

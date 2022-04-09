@@ -17,12 +17,12 @@ public class ScriptCreator {
 	/**
 	 * Nome dello script di default 
 	 */
-	private static String SCRIPT_NAME="ServerDominatorScript";
+	public static String SCRIPT_NAME="ServerDominatorScript";
 	
 	/**
 	 * Nome di default del jar da eseguire 
 	 */
-	private static String JAR_NAME="./sdMap";
+	public static String JAR_NAME="./sdMap";
 
 	/**
 	 * Crea uno script per con nome di default e con 
@@ -54,7 +54,22 @@ public class ScriptCreator {
 		 //System.out.println(result);
 		 return result;
 	 }
-	 
+	
+	/**
+	 * Metodo che crea il comando per l'esecuzione di un Jar senza argomenti 
+	 * alla VM di JavaFx
+	 * @param pathToJarApp
+	 * Il jar da eseguire; NON deve contenere l'estinzione '.jar' 
+	 * @return 
+	 * Il comando neccessario per l'esecuzione
+	 */
+	public static String createCMDToRunFxApp(String pathToJarApp){
+		 String result="java -jar "+
+				 Paths.get(pathToJarApp).toString()+".jar";
+		 //System.out.println(result);
+		 return result;
+	 }
+	
 	/**
 	 * Metodo necessario per la creazione di uno script shell
 	 * @param cmd

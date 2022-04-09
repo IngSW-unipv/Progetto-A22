@@ -168,7 +168,10 @@ public class Controller {
 							cfgFrame.loadRunPanel();
 						}
 					}else {
-						cfgFrame.loadDescriptionPanel();
+						if(!ScriptCreator.createScript(ScriptCreator.createCMDToRunFxApp(ScriptCreator.JAR_NAME), ScriptCreator.SCRIPT_NAME))
+							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
+						else
+							cfgFrame.loadRunPanel();
 					}
 				}
 			}	

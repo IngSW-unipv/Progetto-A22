@@ -16,11 +16,15 @@ public class Mappa {
 	private Coordinate[] basi;
 	private int x_max, y_max, n_basi;
 	private String[] vicini;
+	private Coordinate[] confini; 
+	private int xsup, xinf, ysup, yinf;
+	//tempo unitario da mettere nel main...=10
+	private int t_unitario;
 	
-		
 	public Mappa(int x_max, int y_max, Giocatore[] giocatori) {
 		this.x_max= x_max;
 		this.y_max=y_max;
+		t_unitario= 10;
 		int i,j;
 		
 		map= new Nodo[x_max][y_max];
@@ -32,6 +36,7 @@ public class Mappa {
 		}
 		
 		vicini= new String[6];
+		confini= new Coordinate[6];
 	}
 	
 	public void assegnamento(int n_basi, Giocatore[] giocatori) {
@@ -89,29 +94,6 @@ public class Mappa {
 			break;
 		}
 	}
-
-	public boolean attaccabile(int x, int y, Giocatore player) {
-	/**metodo con il quale si controlla se due nodi sono prossimi
-	 * tra loro, ossia se nelle vicinanze del nodo bersaglio esiste almeno 
-	 * un nodo posseduto dal giocatore.
-	 */
-		boolean prox=false;
-		int i;
-				
-		vicini[0]=map[x-1][y].getPossessore().getNome();
-		vicini[1]=map[x+1][y].getPossessore().getNome();
-		vicini[2]=map[x][y+1].getPossessore().getNome();
-		vicini[3]=map[x][y-1].getPossessore().getNome();
-		vicini[4]=map[x+1][y-1].getPossessore().getNome();
-		vicini[5]=map[x-1][y+1].getPossessore().getNome();
-		
-		for(i=0;i<6;i++) {
-			if(vicini[i]== player.getNome() ) {
-				prox=true;
-			}
-		}
-		return prox;
-	}
 	
 	public Nodo trovabase( Giocatore player) {
 	/** metodo usato per la ricerca della base del giocatore attaccante
@@ -130,41 +112,84 @@ public class Mappa {
 		return map[x][y];
 	}
 	
-	public void dist_minima(int x, int y, Giocatore player) {
+	public boolean attaccabile(int x, int y, Giocatore player) {
+	/**metodo con il quale si controlla se due nodi sono prossimi
+	 * tra loro, ossia se nelle vicinanze del nodo bersaglio esiste almeno 
+	 * un nodo posseduto dal giocatore.
+	 * Inoltre essendo i confini della mappa adiacenti tra loro, si controlla
+	 * se le coordinate sforino dalla mappa per rientrare dal lato opposto.
+	 */
+		boolean prox=false;
+		int i;
+		
+		if(x+1> x_max) {
+			xsup= 0;
+		} else xsup= x+1;
+		
+		if (x-1<0) {
+			xinf=x_max;
+		} else xinf=x-1;
+		
+		if(y+1> y_max) {
+			ysup=0;
+		} else ysup=y+1;
+		
+		if (y-1<0) {
+			yinf=y_max;
+		} else yinf= y-1;
+
+		vicini[0]=map[xinf][y].getPossessore().getNome();	
+		vicini[1]=map[xsup][y].getPossessore().getNome();
+		vicini[2]=map[x][ysup].getPossessore().getNome();
+		vicini[3]=map[x][yinf].getPossessore().getNome();
+		vicini[4]=map[xsup][yinf].getPossessore().getNome();
+		vicini[5]=map[xinf][ysup].getPossessore().getNome();
+		
+		for(i=0;i<6;i++) {
+			if(vicini[i]== player.getNome() ) {
+				prox=true;
+			}
+		}
+		return prox;
+	}
+	
+	public Nodo dist_minima(int x, int y, Giocatore player) {
 	/**metodo per il calcolo della distanza minima dalla base
 	 * usato per calcolare il tempo necessario per l'attacco.
 	 */
-		Coordinate[] confini;
-		confini= new Coordinate[6];
-		int i, dist_min;
+		int i, temp, dist_min;
+
+			confini[0]= new Coordinate(xinf,y, vicini[0]);
+			confini[1]= new Coordinate(xsup,y, vicini[1]);
+			confini[2]= new Coordinate(x, ysup, vicini[2]);
+			confini[3]= new Coordinate(x, yinf, vicini[3]);
+			confini[4]= new Coordinate(xsup,yinf, vicini[4]);
+			confini[5]= new Coordinate(xinf,ysup, vicini[5]);	
 		
-		if(this.attaccabile(x, y, player) ) {
-			confini[0]= new Coordinate(x-1,y, vicini[0]);
-			confini[1]= new Coordinate(x+1,y, vicini[1]);
-			confini[2]= new Coordinate(x, y+1, vicini[2]);
-			confini[3]= new Coordinate(x, y-1, vicini[3]);
-			confini[4]= new Coordinate(x+1,y-1, vicini[4]);
-			confini[5]= new Coordinate(x-1,y+1, vicini[5]);
-		}
 		dist_min=10000;
+		temp=0;
 		
 		for(i=0;i<6;i++) {
 			if(confini[i].getNome()==player.getNome() ) {
 				if(dist_min > map[confini[i].getX()][confini[i].getY()].getDist_base() ) {
 					
 					dist_min=map[confini[i].getX()][confini[i].getY()].getDist_base();
+					temp= i;
 				}
 			}
 		}
-	/* distanza minima poi deve essere moltiplicato per tempo unitario
-	 *  da definire, cosi facendo troviamo il tempo che ci impiegherà l'attacco
-	 *  ad arrivare a destinazione 
-	 */
-
+		
+		return map[confini[temp].getX()][confini[temp].getY()];
+	
 	}
 	
-	public void aggiornastati(int x, int y, Nodo attaccante) {
-		
+	public void aggiornastati(Nodo bersaglio, Nodo partenza) {
+		bersaglio.setDist_base(partenza.getDist_base()+1);
+		bersaglio.setPossessore(partenza.getPossessore());
+	}
+	
+	public Nodo getNodo(int x, int y) {
+		return map[x][y];
 	}
 	
 }

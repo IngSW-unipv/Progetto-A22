@@ -50,8 +50,38 @@ public class Main {
 		}
 		tabellone= new Mappa(x_max, y_max, giocatori);
 		tabellone.assegnamento(n_basi, giocatori);
-		
+		 tabellone.dist_minima(3,4, giocatori[1]).getDist_base();
 	}
+//solo per studio metodo
 	
+	public boolean avvioBattaglia(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
+		int punti, valuta; //dovranno essere inizializati correttamente tramite un metodo del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
+		
+		Nodo bersaglio=tabellone.getNodo(x,y);
+		Nodo partenza;
+		
+		boolean esito=tabellone.attaccabile(tabellone.trovaBase(attaccante),bersaglio);
+		if(esito) {
+			
+			//per il timer usare il seguente metodo
+			// tempo timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
+			
+			fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
+			fight.selezione(quantitaV, quantitaR);
+			//timer
+			esito=fight.calcola_vincitore();
+			tabellone.aggiornastati(bersaglio, partenza);
+			if(esito)
+				
+				bersaglio.setPossessore(tabellone.trovaBase(attaccante).getPossessore());
+		}
+		if(attaccante.getNome().equals(utente.getNome())) {
+			if(esito)
+				utente.aggiornaPunteggio(punti);
+				utente.aggiornaValuta(valuta);
+			//else? si tolgono punti in caso di sconfitta?
+		}
+		return esito;
+	}
 
 }

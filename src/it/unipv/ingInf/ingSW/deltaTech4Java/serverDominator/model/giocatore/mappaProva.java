@@ -58,9 +58,7 @@ public class mappaProva {
 			break;
 		}
 	}
-	public Giocatore[] getListaGiocatori(){
-		return giocatori;
-	}
+	
 	public boolean attaccabile(int x, int y, Giocatore player) {
 	/**metodo con il quale si controlla se due nodi sono prossimi
 	 * tra loro, ossia se nelle vicinanze del nodo bersaglio esiste almeno 

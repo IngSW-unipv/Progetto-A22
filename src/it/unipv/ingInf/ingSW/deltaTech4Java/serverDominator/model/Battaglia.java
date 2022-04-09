@@ -71,7 +71,7 @@ public class Battaglia {
 		String report;
 		if(calcola_vincitore()) {
 			report="Hai conquistato il nodo";
-		}else report="Non sei riuscitoa conquistare il nodo";
+		}else report="Non hai conquistare il nodo";
 		
 		return report;
 	}

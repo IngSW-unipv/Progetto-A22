@@ -18,13 +18,10 @@ public class Mappa {
 	private String[] vicini;
 	private Coordinate[] confini; 
 	private int xsup, xinf, ysup, yinf;
-	//tempo unitario da mettere nel main...=10
-	private int t_unitario;
-	
+
 	public Mappa(int x_max, int y_max, Giocatore[] giocatori) {
 		this.x_max= x_max;
 		this.y_max=y_max;
-		t_unitario= 10;
 		int i,j;
 		
 		map= new Nodo[x_max][y_max];

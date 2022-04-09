@@ -113,9 +113,6 @@ public abstract class Nodo implements INodo{
 		return possessore.getColore();
 	}
 	
-	public String getTipologia() {
-		return tipologia;
-	}
 	
 /**getter astratto per restituire i valori dei software delle classi specializzate*/
 	public abstract Software[] getStats_software_creati(); 

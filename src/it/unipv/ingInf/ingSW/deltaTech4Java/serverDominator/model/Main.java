@@ -55,31 +55,36 @@ public class Main {
 //solo per studio metodo
 	
 	public boolean avvioBattaglia(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
+/** il seguente metodo, gestisce le operazioni preliminari e successive alla battaglia
+ * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
+ */
 		int punti, valuta; //dovranno essere inizializati correttamente tramite un metodo del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
-		
-		Nodo bersaglio=tabellone.getNodo(x,y);
-		Nodo partenza;
-		
-		boolean esito=tabellone.attaccabile(tabellone.trovaBase(attaccante),bersaglio);
+		int t_timer;
+
+		boolean esito=tabellone.attaccabile(x,y, attaccante);
 		if(esito) {
-			
-			//per il timer usare il seguente metodo
-			// tempo timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
-			
-			fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
+			t_timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
+			//	fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
+			fight=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y));
 			fight.selezione(quantitaV, quantitaR);
-			//timer
+			
+//timer
+			
 			esito=fight.calcola_vincitore();
-			tabellone.aggiornastati(bersaglio, partenza);
-			if(esito)
+			if(esito) {
+				tabellone.aggiornastati(tabellone.getNodo(x,y), tabellone.dist_minima(x,y,attaccante));
+		// richiamo metodo per sommare le risorse del nodo bersaglio al nodo base attaccante
 				
-				bersaglio.setPossessore(tabellone.trovaBase(attaccante).getPossessore());
+			}
+				
 		}
+		
+		// if sottostante necessario??? 
 		if(attaccante.getNome().equals(utente.getNome())) {
 			if(esito)
 				utente.aggiornaPunteggio(punti);
 				utente.aggiornaValuta(valuta);
-			//else? si tolgono punti in caso di sconfitta?
+		//else? si tolgono punti in caso di sconfitta?
 		}
 		return esito;
 	}

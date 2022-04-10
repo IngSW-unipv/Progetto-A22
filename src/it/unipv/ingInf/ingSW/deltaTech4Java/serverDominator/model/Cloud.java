@@ -83,7 +83,7 @@ public class Cloud extends Nodo {
 			/**start timer per creazione software*/
 				super.time2.countdown(stats_software_creati[0].getTemp_richiesto()*quantità);
 				super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantità);
-				stats_software_creati[0]= new Antivirus(1,quantità);
+				stats_software_creati[0]= new Antivirus(1,n_soft);
 				check=true;
 				super.setSoftware_disponibile(n_soft);
 			}else System.out.println("spazio non sufficiente per la creazione");
@@ -120,12 +120,16 @@ public class Cloud extends Nodo {
 	}
 	
 	public void setBonus_def(int bonus_def) {
-		risorse[3].setStat1(bonus_def);;
+		risorse[3].setStat1(bonus_def);
 	}
 	
 	public Software[] getStats_software_creati() {
 		return stats_software_creati;
 	}
-
+	
+	public int getQnt_antivirusvirus() {
+		return super.getSoftware_disponibile();
+	}
+	
 	
 }

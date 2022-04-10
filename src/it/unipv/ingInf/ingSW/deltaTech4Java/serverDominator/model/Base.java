@@ -176,4 +176,27 @@ public class Base extends Nodo{
 	public int getLvl_max_firewall() {
 		return risorse[3].getMAX_LVL();
 	}
+	
+	public int getLvl_virus() {
+		return risorse[0].getStat2();
+	}
+	
+	public int getQnt_virus() {
+		return stats_software_creati[1].getQuantità();
+	}
+
+	public int getLvl_antivirusvirus() {
+		return risorse[0].getStat1();
+	}
+	
+	public int getQnt_antivirusvirus() {
+		return stats_software_creati[0].getQuantità();
+	}
+	public int getLvl_rootcrash() {
+		return risorse[0].getStat3();
+	}
+	
+	public int getQnt_rootcrash() {
+		return stats_software_creati[3].getQuantità();
+	}
 }

@@ -54,7 +54,7 @@ public class Main extends Application {
 
         controls.getChildren().add(button); // aggiunge il bottone al layout grafico
     }
-
+/*
     public void setUpTerrains(HBox terrainControls){					// costruisce la HBOX con i tipi di terreno
         addType(terrainControls, new Terrain("Ocean", "#2273B8"), Action.TerrainDrawing);
         addType(terrainControls, new Terrain("Land", 1, "#F2CB84"), Action.TerrainDrawing);
@@ -62,7 +62,7 @@ public class Main extends Application {
         addType(terrainControls, new Terrain("Forest", 2, "#558B29"), Action.TerrainDrawing);
         addType(terrainControls, new Terrain("Desert", 4, "#DE8D3A"), Action.TerrainDrawing);
     }
-
+*/
     public void setUpStates(HBox politicalControls){					// costruisce la HBOX con i tipi di Stato
         addType(politicalControls, new State("Roman Empire", "#66023C") ,Action.PoliticalDrawing);
         addType(politicalControls, new State("Han Empire", "#0031BF") ,Action.PoliticalDrawing);
@@ -211,7 +211,7 @@ public class Main extends Application {
 
         controls.getChildren().addAll(terrainControls, actionControls, politicalControls, buildingControls); //aggiungo le HBox alla VBox
 
-        setUpTerrains(terrainControls);  // aggiunge i bottoni del terreno
+       // setUpTerrains(terrainControls);  // aggiunge i bottoni del terreno
         setUpControls(terrainControls);	// aggiunge le spaziature, i margini, etc...
 
         // bottoni di azione

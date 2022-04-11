@@ -1,4 +1,4 @@
-package com.example.loginsignup;
+package setupcontroller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

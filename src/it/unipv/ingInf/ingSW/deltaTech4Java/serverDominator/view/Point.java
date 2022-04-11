@@ -1,4 +1,4 @@
-package mappa;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 public class Point {
     double x;

@@ -1,4 +1,4 @@
-package com.example.fxmltojavafx;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;

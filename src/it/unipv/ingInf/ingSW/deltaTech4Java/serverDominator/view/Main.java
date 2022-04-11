@@ -1,4 +1,4 @@
-package mappa;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 /**
  * @author Matteo Para 
@@ -62,7 +62,7 @@ public class Main extends Application {
         addType(terrainControls, new Terrain("Forest", 2, "#558B29"), Action.TerrainDrawing);
         addType(terrainControls, new Terrain("Desert", 4, "#DE8D3A"), Action.TerrainDrawing);
     }
-*/
+
     public void setUpStates(HBox politicalControls){					// costruisce la HBOX con i tipi di Stato
         addType(politicalControls, new State("Roman Empire", "#66023C") ,Action.PoliticalDrawing);
         addType(politicalControls, new State("Han Empire", "#0031BF") ,Action.PoliticalDrawing);
@@ -129,7 +129,7 @@ public class Main extends Application {
 
         stage.showAndWait();
     }
-
+    */
     public void addTerrain(HBox terrainControls){ // men� per aggiungere un terreno
         VBox vbox = new VBox();
         HBox name = new HBox();
@@ -212,19 +212,19 @@ public class Main extends Application {
         controls.getChildren().addAll(terrainControls, actionControls, politicalControls, buildingControls); //aggiungo le HBox alla VBox
 
        // setUpTerrains(terrainControls);  // aggiunge i bottoni del terreno
-        setUpControls(terrainControls);	// aggiunge le spaziature, i margini, etc...
+       // setUpControls(terrainControls);	// aggiunge le spaziature, i margini, etc...
 
         // bottoni di azione
         Label actionTypes = new Label("Action Types");
         Button moveButton = new Button("Move");
         actionControls.getChildren().addAll(actionTypes, moveButton);
-        setUpControls(actionControls);
+       // setUpControls(actionControls);
 
-        setUpStates(politicalControls);	// aggiunge i bottoni degli stati
-        setUpControls(politicalControls);
+        //setUpStates(politicalControls);	// aggiunge i bottoni degli stati
+       // setUpControls(politicalControls);
 
-        setUpBuildings(buildingControls); // aggiunge i bottoni delle costruzioni
-        setUpControls(buildingControls);
+        //setUpBuildings(buildingControls); // aggiunge i bottoni delle costruzioni
+       // setUpControls(buildingControls);
 
         /*
         moveButton.setOnMouseClicked(new onMouseClick() {   // questo � scritto in Java7
@@ -281,7 +281,7 @@ public class Main extends Application {
 
         Menu stateMenu = new Menu("State");
         MenuItem addStateItem = new MenuItem("Add");
-        addStateItem.setOnAction(event -> addState(politicalControls));
+        //addStateItem.setOnAction(event -> addState(politicalControls));
         stateMenu.getItems().add(addStateItem);
 
         Menu terrainMenu = new Menu("Terrain");

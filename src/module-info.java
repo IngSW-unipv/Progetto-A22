@@ -1,5 +1,5 @@
 module CiaoFX {
 	requires javafx.controls;
 	
-	opens mappa to javafx.graphics, javafx.fxml;
+	opens it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view to javafx.graphics, javafx.fxml;
 }

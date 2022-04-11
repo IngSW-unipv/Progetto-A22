@@ -93,33 +93,33 @@ public class Base extends Nodo{
 		} else System.out.println("potenziamento fallito");
 	}
 	
-	public void crea_software(String nome, int quantità) {
+	public void crea_software(String nome, int quantita) {
 	/**metodo per la creazione di nuovo software, con aggiornamento della quantità totali*/
 		
 		boolean check=false;
 		int n_soft;
 		int i;
 		
-		n_soft=super.getSoftware_disponibile() + quantità;
+		n_soft=super.getSoftware_disponibile() + quantita;
 		if(n_soft<=risorse[1].getStat1()) {
 			for(i=0;i<TIPI_SOFTWARE;i++) {
 				if(stats_software_creati[i].getNome()==nome) {
-					quantità=stats_software_creati[i].getQuantità()+quantità;
+					quantita=stats_software_creati[i].getQuantita()+quantita;
 					switch(i) {
 					case 0: 
-						super.time2.countdown(stats_software_creati[0].getTemp_richiesto()* quantità);
-						super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantità);
-						stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantità);
+						super.time2.countdown(stats_software_creati[0].getTemp_richiesto()* quantita);
+						super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantita);
+						stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
 						break;
 					case 1: 
-						super.time2.countdown(stats_software_creati[1].getTemp_richiesto()*quantità);
-						super.time2.timer(stats_software_creati[1].getTemp_richiesto()*quantità);
-						stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantità);
+						super.time2.countdown(stats_software_creati[1].getTemp_richiesto()*quantita);
+						super.time2.timer(stats_software_creati[1].getTemp_richiesto()*quantita);
+						stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
 						break;
 					case 2:
-						super.time2.countdown(stats_software_creati[2].getTemp_richiesto()*quantità);
-						super.time2.timer(stats_software_creati[2].getTemp_richiesto()*quantità);
-						stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantità);
+						super.time2.countdown(stats_software_creati[2].getTemp_richiesto()*quantita);
+						super.time2.timer(stats_software_creati[2].getTemp_richiesto()*quantita);
+						stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
 						break;
 					}
 					super.setSoftware_disponibile(n_soft);
@@ -165,6 +165,7 @@ public class Base extends Nodo{
 	public Software[] getStats_software_creati() {
 		return stats_software_creati;
 	}
+	
 	public int getLvl_max_cpu() {
 		return risorse[0].getMAX_LVL();
 	}
@@ -182,7 +183,7 @@ public class Base extends Nodo{
 	}
 	
 	public int getQnt_virus() {
-		return stats_software_creati[1].getQuantità();
+		return stats_software_creati[1].getQuantita();
 	}
 
 	public int getLvl_antivirusvirus() {
@@ -190,13 +191,13 @@ public class Base extends Nodo{
 	}
 	
 	public int getQnt_antivirusvirus() {
-		return stats_software_creati[0].getQuantità();
+		return stats_software_creati[0].getQuantita();
 	}
 	public int getLvl_rootcrash() {
 		return risorse[0].getStat3();
 	}
 	
 	public int getQnt_rootcrash() {
-		return stats_software_creati[3].getQuantità();
+		return stats_software_creati[3].getQuantita();
 	}
 }

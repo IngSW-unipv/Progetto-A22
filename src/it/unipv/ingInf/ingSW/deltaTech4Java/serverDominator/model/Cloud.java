@@ -69,7 +69,7 @@ public class Cloud extends Nodo {
 		} else System.out.println("potenziamento fallito");
 		
 	}
-/**metodo perla creazione di software, in particolare il nodo cloud puï¿½ creare solo antivirus
+/**metodo perla creazione di software, in particolare il nodo cloud può creare solo antivirus
  * in quantitï¿½ limitata.
  */
 	public void crea_software(String nome, int quantita) {

@@ -14,6 +14,8 @@ public class MainDefinitivo {
 	private Battaglia fight;
 	private Mercato mercato;
 	private Utente utente;
+	private int t_unitario; 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -22,6 +24,7 @@ public class MainDefinitivo {
 	//selezione utente
 		//selezione lingua
 	public void avvioPartita(int x_max, int y_max) {
+		t_unitario=10;
 		n_basi= 3;
 		giocatori= new Giocatore[n_basi+1];
 		giocatori=this.creazioneGiocatori(utente.getNome(), x_max, y_max);
@@ -48,7 +51,9 @@ public class MainDefinitivo {
 		/** il seguente metodo, gestisce le operazioni preliminari e successive alla battaglia
 		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
 		 */
-				int punti, valuta; //dovranno essere inizializati correttamente tramite un metodo del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
+				int punti, valuta; 
+		//le quantità di software dovranno essere inizializati correttamente tramite un metodo
+		//del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
 				int t_timer;
 
 				boolean esito=tabellone.attaccabile(x,y, attaccante);

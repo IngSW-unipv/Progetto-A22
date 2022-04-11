@@ -1,14 +1,33 @@
 package mappa;
 
 import java.io.Serializable;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class HexData implements Serializable {  // definisce le caratteristiche dell'esagono
     private static final long serialVersionUID = 1L;
+    
     Terrain terrain;
     State state;
     Building building;
+    
     Player player;
+    public Nodo nodo;
+    
+    
 
+    public HexData(Nodo nodo) {
+		super();
+		this.nodo = nodo;
+	}
+    
+    public boolean isBase() {
+    	if(nodo instanceof Base) {
+    		return true;
+    	}
+    	return false;
+    }
+
+	
     public void setTerrain(Terrain terrain){
         if(this.terrain == terrain){
             this.terrain = null;
@@ -35,7 +54,8 @@ public class HexData implements Serializable {  // definisce le caratteristiche 
             this.building = building;
         }
     }
-
+	
+    
     public void setPlayer(Player player) {	// associa il giocatore
         if(this.player == player){
             this.player = null;

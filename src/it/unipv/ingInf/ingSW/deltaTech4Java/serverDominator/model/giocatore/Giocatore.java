@@ -6,7 +6,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Gioc
 public abstract class Giocatore {
 	private int punteggio;
 	private String nome;
-	private Colore colore;
+	private String colore;
 
 	public Giocatore(String nome) {
 		this.nome=nome;
@@ -41,10 +41,14 @@ public abstract class Giocatore {
 		this.punteggio+=punteggio;
 	}
 	
-	public void setColore(Colore colore) {
+	public void setColore(String colore) {
 		this.colore=colore;
 	}
-	public Colore getColore() {
+	/*public Colore getColore() {
+		return colore;
+	}*/
+	
+	public String getColore() {
 		return colore;
 	}
 }

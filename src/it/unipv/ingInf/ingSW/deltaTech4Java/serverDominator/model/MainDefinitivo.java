@@ -120,4 +120,12 @@ public class MainDefinitivo {
 		}
 		return giocatori;
 	}
+	
+	public int getX_max() {
+		return tabellone.getX_max();
+	}
+	
+	public int getY_max() {
+		return tabellone.getY_max();
+	}
 }

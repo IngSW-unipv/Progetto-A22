@@ -179,4 +179,12 @@ public class MappaDefinitiva {
 		public Nodo getNodo(int x, int y) {
 			return map[x][y];
 		}
+		
+		public int getX_max() {
+			return x_max;
+		}
+		
+		public int getY_max() {
+			return y_max;
+		}
 }

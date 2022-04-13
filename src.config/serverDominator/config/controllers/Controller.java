@@ -18,7 +18,7 @@ import javax.swing.border.EtchedBorder;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
-import serverDominator.config.model.ScriptCreator;
+import serverDominator.config.model.ScriptsFacade;
 import serverDominator.config.viw.ConfigFrame;
 
 /**
@@ -162,13 +162,13 @@ public class Controller {
 					JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti"));
 				}else {
 					if(!cfgFrame.getPanelConfig().getRadioButtonjreFull().isSelected()) {
-						if(!ScriptCreator.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
+						if(!ScriptsFacade.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
 							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
 						}else {
 							cfgFrame.loadRunPanel();
 						}
 					}else {
-						if(!ScriptCreator.createScript(ScriptCreator.createCMDToRunFxApp(ScriptCreator.JAR_NAME), ScriptCreator.SCRIPT_NAME))
+						if(!ScriptsFacade.createScript(ScriptsFacade.createCMDToRunFxApp(ScriptsFacade.JAR_NAME), ScriptsFacade.SCRIPT_NAME))
 							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
 						else
 							cfgFrame.loadRunPanel();
@@ -183,7 +183,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ScriptCreator.runShellScript();
+					ScriptsFacade.runShellScript();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

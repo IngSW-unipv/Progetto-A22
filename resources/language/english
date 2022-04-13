@@ -1,6 +1,6 @@
 config.creator.bottone.indietro=<< BACK
 config.creator.bottone.avanti=OK
-config.creator.bottone.naviga=navigate 
+config.creator.bottone.naviga=Browse 
 config.creator.lable.scegliereTipologiaDiJre=JRE THAT YOU USE
 config.creator.lable.pathToJavaFxLib=path to the JavaFX 'lib' folder
 config.creator.lable.dataBaseUrl=DataBase URL

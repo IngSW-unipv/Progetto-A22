@@ -5,7 +5,7 @@ import java.util.Properties;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 import serverDominator.config.controllers.Controller;
-import serverDominator.config.model.ScriptCreator;
+import serverDominator.config.model.ScriptsFacade;
 import serverDominator.config.viw.ConfigFrame;
 
 public class AppLauncher {
@@ -20,7 +20,7 @@ public class AppLauncher {
 		//System.out.println(ctx);
 		p.clear();
 		if(ctx!=1) {
-			ScriptCreator.runShellScript();
+			ScriptsFacade.runShellScript();
 		}else {
 			p.put(CONTEXT, "5");
 			PropertiesFile.savePropertyInFile(p, PROP_FILE);

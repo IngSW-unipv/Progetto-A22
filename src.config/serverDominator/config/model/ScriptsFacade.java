@@ -1,18 +1,19 @@
 package serverDominator.config.model;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Paths;
+
+import serverDominator.config.model.cmdCreator.CmdCreatorFactory;
+import serverDominator.config.model.fileExtention.FileExtentionFactory;
+import serverDominator.config.model.scripts.ScriptCreator;
+import serverDominator.config.model.scripts.ScriptRunner;
 
 /**
  * <h5>Classe con utililità per la creazione ed esecuzione di uno script per lanciare un jar con java Fx</h5>
  * @author TawaHabib
  * @version 1.0
  */
-public class ScriptCreator {
+public class ScriptsFacade {
 	                                                                                                                                             
 	/**
 	 * Nome dello script di default 
@@ -46,13 +47,7 @@ public class ScriptCreator {
 	 * Il comando neccessario per l'esecuzione
 	 */
 	public static String createCMDToRunFxApp(String pathToFxLib,String pathToJarApp){
-		 
-		 String result="java --module-path "+
-				 "\""+Paths.get(pathToFxLib).toString()+"\""+
-				 " --add-modules javafx.controls,javafx.base,javafx.graphics -jar "+
-				 Paths.get(pathToJarApp).toString()+".jar";
-		 //System.out.println(result);
-		 return result;
+		 return CmdCreatorFactory.getCmdCreator(CmdCreatorFactory.CMD_NOT_FULL, pathToFxLib, pathToJarApp).createCmd();
 	 }
 	
 	/**
@@ -64,10 +59,7 @@ public class ScriptCreator {
 	 * Il comando neccessario per l'esecuzione
 	 */
 	public static String createCMDToRunFxApp(String pathToJarApp){
-		 String result="java -jar "+
-				 Paths.get(pathToJarApp).toString()+".jar";
-		 //System.out.println(result);
-		 return result;
+		 return CmdCreatorFactory.getCmdCreator(CmdCreatorFactory.CMD_FULL, "", pathToJarApp).createCmd();
 	 }
 	
 	/**
@@ -81,35 +73,7 @@ public class ScriptCreator {
 	 * Flaso se c'è qualcosa che è andato storto
 	 */
 	public static boolean createScript(String cmd, String fileName) {
-		boolean result=true;
-		
-	    BufferedWriter writer=null;
-		try {
-			File file=new File(fileName+getScriptFileExtension() );
-			if(file.exists()) {
-				file.delete();
-			}
-			fileName.replaceAll(".", "");
-			writer = new BufferedWriter(new FileWriter(fileName+getScriptFileExtension()));
-			String cmd1=new String(cmd.getBytes(Charset.forName("utf-8")));
-			//System.out.println(cmd1.toString());
-			writer.write(cmd1);
-		} catch (IOException e) {
-			result=false;
-			e.printStackTrace();
-		}finally {
-			if(writer!=null) {
-				try {
-					writer.flush();
-					writer.close();
-					File file=new File(fileName+getScriptFileExtension() );
-					file.setExecutable(true);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return result;
+		return ScriptCreator.createScript(cmd, fileName);
 	}
 	
 	/**
@@ -117,7 +81,7 @@ public class ScriptCreator {
 	 * @throws IOException
 	 */
 	public static void runShellScript() throws IOException {
-		runShellScript(SCRIPT_NAME+getScriptFileExtension());
+		ScriptRunner.runShellScript(SCRIPT_NAME+getScriptFileExtension());
 	}
 	
 	/**
@@ -127,10 +91,7 @@ public class ScriptCreator {
 	 * @throws IOException
 	 */
 	public static void runShellScript(String ScriptPath) throws IOException {
-		String[] cmd=new String[]{ScriptPath};
-		ProcessBuilder process=new ProcessBuilder(cmd);
-		@SuppressWarnings("unused")
-		Process p=process.start();
+		ScriptRunner.runShellScript(ScriptPath);
 	}
 	
 	/**
@@ -141,15 +102,7 @@ public class ScriptCreator {
 	 * Estensione dello script 
 	 */
 	public static String getScriptFileExtension() {
-		String result="";
-		String os=System.getProperty("os.name");
-		if(os.startsWith("Windo")||os.startsWith("windo")) {
-			result=".bat";
-		}
-		if(os.contains("MAC")||os.contains("mac")||os.contains("Linu")||os.contains("linu")) {
-			result=".sh";
-		}
-		return result;
+		return FileExtentionFactory.getIFileExtensionStrategy().getFileExtension();
 	}
 	
 	//@SuppressWarnings("static-access")
@@ -157,11 +110,11 @@ public class ScriptCreator {
 		//ScriptCreator m = new ScriptCreator();
 		File fls=new File("C:/Users/TAWADROS/eclipse-workspace/provaJar/lib/java fx/win/lib");
 		if(fls.exists())
-			ScriptCreator.createScript("C:/Users/TAWADROS/eclipse-workspace/provaJar/lib/java fx/win/lib");
+			ScriptsFacade.createScript("C:/Users/TAWADROS/eclipse-workspace/provaJar/lib/java fx/win/lib");
 	/*synchronized (m) {
 		      m.wait(300);
 		    }*/
-		ScriptCreator.runShellScript();
+		ScriptsFacade.runShellScript();
 		//System.out.println(Paths.get("C:/Users/TAWADROS/eclipse-workspace/provaJar/lib/java fx/win/lib").toString());
 	}
 }

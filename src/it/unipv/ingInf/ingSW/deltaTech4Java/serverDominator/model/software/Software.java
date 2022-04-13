@@ -3,7 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
 /**
  * @author Luca Casto 
  * v1.0
- * astrazione delle unità da combattimento
+ * astrazione delle unitï¿½ da combattimento
  * usate nel gioco server dominator, 
  * usata astrazione per software aggiuntivi in versioni successive
  */
@@ -12,11 +12,11 @@ public abstract class Software {
 	private int livello;
 	private int max_lvl;
 	private String nome;
-	private int quantità;
+	private int quantita;
 	private int temp_richiesto;
 	
-	public Software(int livello) {
-		this.livello= livello;
+	public Software(int livello) { // costruttore della classe Software
+		this.livello = livello;
 	}
 
 	public abstract int getVal_def();
@@ -48,12 +48,12 @@ public abstract class Software {
 		this.nome = nome;
 	}
 
-	public int getQuantità() {
-		return quantità;
+	public int getQuantita() {
+		return quantita;
 	}
 
-	public void setQuantità(int quantità) {
-		this.quantità = quantità;
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
 	}
 
 	public int getTemp_richiesto() {

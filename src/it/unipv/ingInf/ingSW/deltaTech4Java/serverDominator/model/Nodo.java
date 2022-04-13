@@ -17,7 +17,8 @@ public abstract class Nodo implements INodo{
 	private int bonus_def;
 	private int e_disponibile;
 	private int lvl_cpu, lvl_ram, lvl_firewall;
-	protected Timer time1, time2; 
+	protected Timer time1, time2;
+	private String tipologia;
 /**time1 usato per risorse, time 2 usato per software*/
 	
 	public Nodo () {
@@ -28,6 +29,13 @@ public abstract class Nodo implements INodo{
 }
 		
 /**getter and setter*/
+	public void setTipologia(String tipologia) {
+		this.tipologia=tipologia;
+	}
+	
+	public String getTipologia() {
+		return tipologia;
+	}
 	
 	public int getDist_base() {
 		return dist_base;
@@ -100,6 +108,12 @@ public abstract class Nodo implements INodo{
 	public void setLvl_firewall(int lvl_firewall) {
 		this.lvl_firewall = lvl_firewall;
 	}
+	
+	public Colore getColore() {
+		return possessore.getColore();
+	}
+	
+	
 /**getter astratto per restituire i valori dei software delle classi specializzate*/
 	public abstract Software[] getStats_software_creati(); 
 		

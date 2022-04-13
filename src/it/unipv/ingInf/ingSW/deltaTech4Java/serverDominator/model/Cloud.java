@@ -17,6 +17,7 @@ public class Cloud extends Nodo {
 	private final int TIPI_RISORSE=4;
 	
 	public Cloud (Giocatore possessore) {
+		super.setTipologia("cloud");
 		super.setDist_base(0);
 		super.setPossessore(possessore);
 		super.setSoftware_disponibile(0);
@@ -27,6 +28,7 @@ public class Cloud extends Nodo {
 	}
 	
 	public Cloud () {
+		super.setTipologia("cloud");
 		super.setDist_base(0);
 		super.setSoftware_disponibile(0);
 		super.setSoftware_max(20);
@@ -68,20 +70,20 @@ public class Cloud extends Nodo {
 		
 	}
 /**metodo perla creazione di software, in particolare il nodo cloud può creare solo antivirus
- * in quantità limitata.
+ * in quantitï¿½ limitata.
  */
-	public void crea_software(String nome, int quantità) {
+	public void crea_software(String nome, int quantita) {
 		boolean check=false;
 		int n_soft;
 		if(nome!="Antivirus") {
 			System.out.println("software non disponibile in nodo cloud");
 		}else {
-			n_soft=quantità+super.getSoftware_disponibile();
+			n_soft=quantita+super.getSoftware_disponibile();
 			if(n_soft<=super.getSoftware_max()) {
 			/**start timer per creazione software*/
-				super.time2.countdown(stats_software_creati[0].getTemp_richiesto()*quantità);
-				super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantità);
-				stats_software_creati[0]= new Antivirus(1,quantità);
+				super.time2.countdown(stats_software_creati[0].getTemp_richiesto()*quantita);
+				super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantita);
+				stats_software_creati[0]= new Antivirus(1,n_soft);
 				check=true;
 				super.setSoftware_disponibile(n_soft);
 			}else System.out.println("spazio non sufficiente per la creazione");
@@ -118,12 +120,16 @@ public class Cloud extends Nodo {
 	}
 	
 	public void setBonus_def(int bonus_def) {
-		risorse[3].setStat1(bonus_def);;
+		risorse[3].setStat1(bonus_def);
 	}
 	
 	public Software[] getStats_software_creati() {
 		return stats_software_creati;
 	}
-
+	
+	public int getQnt_antivirusvirus() {
+		return super.getSoftware_disponibile();
+	}
+	
 	
 }

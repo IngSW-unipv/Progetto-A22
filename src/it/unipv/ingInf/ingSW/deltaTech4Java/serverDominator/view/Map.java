@@ -1,4 +1,4 @@
-package mappa;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

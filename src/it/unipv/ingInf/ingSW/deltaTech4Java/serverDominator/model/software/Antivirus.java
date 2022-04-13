@@ -13,14 +13,14 @@ public class Antivirus extends Software{
 	private int val_atk;
 	private int val_def;
 	
-	public Antivirus(int livello, int quantità) {
+	public Antivirus(int livello, int quantita) {
 		super(livello);
 		val_atk= 0;
 		val_def= super.getLivello();
 		super.setMax_lvl(5);
 		super.setNome("Antivirus");
 		super.setTemp_richiesto(20);
-		super.setQuantità(quantità);
+		super.setQuantita(quantita);
 	}
 /**getter and setter */
 	

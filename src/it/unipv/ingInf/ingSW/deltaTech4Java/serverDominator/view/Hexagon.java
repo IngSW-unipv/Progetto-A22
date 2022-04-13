@@ -1,7 +1,8 @@
-package mappa;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import java.io.Serializable;
 import java.util.Objects;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class Hexagon implements Serializable {
     private static final long serialVersionUID = 1L;

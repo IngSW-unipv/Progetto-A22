@@ -1,4 +1,4 @@
-package mappa;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 
 
@@ -7,12 +7,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud;
+
 /**
  * @author para
  *
  */
 public class MapData {
-    HashMap<Hexagon, HexData> data;  // data è l'hashMap che contiene tutti gli esagoni ed il rispettivo tipo
+    HashMap<Hexagon, HexData> data;  // data ï¿½ l'hashMap che contiene tutti gli esagoni ed il rispettivo tipo
     Orientation layout_pointy = new Orientation(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,  Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
     List<Hexagon> directions = Arrays.asList(new Hexagon(1,0), new Hexagon(1,-1), new Hexagon(0,-1), new Hexagon(-1,0), new Hexagon(-1,1), new Hexagon(0,1)); // direzioni dall'esagono 0,0 
     Layout layout = new Layout(layout_pointy, new Point(25,25), new Point(25,25));  // dimensioni degli esagoni
@@ -24,7 +26,7 @@ public class MapData {
         for (int r = 0; r < 15; r++) {
             int r_offset = (int) Math.floor(r/2);	// !!! da capire !!!
             for (int q = -r_offset; q < 22 - r_offset; q++) { // sfasamento della riga
-                data.put(new Hexagon(q, r), new HexData());
+                data.put(new Hexagon(q, r), new HexData(new Cloud()));
             }
         }
     }

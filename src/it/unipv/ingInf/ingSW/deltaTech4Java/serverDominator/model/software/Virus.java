@@ -13,14 +13,14 @@ public class Virus extends Software{
 	private int val_def;
 	private int val_atk;
 		
-	public Virus (int livello, int quantità) {
+	public Virus (int livello, int quantita) {
 		super(livello);
 		super.setMax_lvl(5);
 		super.setNome("Virus");
 		super.setTemp_richiesto(20);
 		val_def=0;
 		val_atk= super.getLivello();
-		super.setQuantità(quantità);
+		super.setQuantita(quantita);
 		
 	}
 /**getter and setter */

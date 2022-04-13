@@ -68,6 +68,7 @@ public class MainProva {
 		}
 		return giocatori;
 	}
+	
 	public void potenziamento(String risorsa){
 		switch(risorsa) {
 			tabellone.trovaBase(utente).potenzia_risorsa(risorsa);
@@ -104,5 +105,36 @@ public class MainProva {
 		return esito;
 	}
 	//opzioni
+	//il colore va al giocatore o al nodo? per ora è al nodo
+	//0=possessore, 2=colore, 3=tipologia nodo, 4=livello cpu, 5=livello ram, 6=livello energia, 7=livello firewall, 8=livello virus, 9=quantita virus, 10=livello antivirus, 11= quantita antivirus, 12= livello rootcrash, 13=quanita rootcrash
+	public String[] getProprieta(int coordX, int coordY) {
+		String[] proprieta;
+		String tipo="cloud";
+		proprieta=new String[13];
+		proprieta[0]=tabellone.getNodo(coordX, coordY).getPossessore().getNome();
+		proprieta[1]=tabellone.getNodo(coordX, coordY).getColore();
+		proprieta[2]=tabellone.getNodo(coordX, coordY).getTipologia();
+		proprieta[3]=(String) String.valueOf(tabellone.getNodo(coordX, coordY).getLvl_cpu());
+		proprieta[4]=(String) String.valueOf(tabellone.getNodo(coordX, coordY).getLvl_ram());
+		proprieta[5]=(String) String.valueOf(tabellone.getNodo(coordX, coordY).getE_disponibile());
+		proprieta[6]=(String) String.valueOf(tabellone.getNodo(coordX, coordY).getLvl_firewall());
+		if("cloud".compareTo(tabellone.getNodo(coordX, coordY).getTipologia())) {
+			proprieta[7]=String.valueOf(0);
+			proprieta[8]=String.valueOf(0);
+			proprieta[9]=String.valueOf(1);
+			proprieta[10]=String.valueOf(tabellone.getNodo(coordX, coordY).getQnt_antivirus());
+			proprieta[11]=String.valueOf(0);
+			proprieta[12]=String.valueOf(0);
+		}
+		else {
+			proprieta[7]=String.valueOf(tabellone.getNodo(coordX, coordY).getLvl_virus());
+			proprieta[8]=String.valueOf(tabellone.getNodo(coordX, coordY).getQnt_virus());
+			proprieta[9]=String.valueOf(tabellone.getNodo(coordX, coordY).getLvl_antivirus());
+			proprieta[10]=String.valueOf(tabellone.getNodo(coordX, coordY).getQnt_antivirus());
+			proprieta[11]=String.valueOf(tabellone.getNodo(coordX, coordY).getLvl_rootcrash());
+			proprieta[12]=String.valueOf(tabellone.getNodo(coordX, coordY).getQnt_rootcrash());
+		}
+		return proprieta;
+	}
 
 }

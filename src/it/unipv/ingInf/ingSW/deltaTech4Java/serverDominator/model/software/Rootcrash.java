@@ -15,7 +15,7 @@ public class Rootcrash extends Software {
 	private int val_def;
 	private int val_atk;
 	
-	public Rootcrash (int livello, int quantità) {
+	public Rootcrash (int livello, int quantita) {
 		super(livello);
 		super.setMax_lvl(3);
 		super.setNome("Rootcrash");
@@ -25,7 +25,7 @@ public class Rootcrash extends Software {
 		val_atk= 3*super.getLivello();
 		val_def= 0;
 		super.setTemp_richiesto(40);
-		super.setQuantità(quantità);
+		super.setQuantita(quantita);
 	}
 /**getter and setter*/
 	

@@ -31,7 +31,7 @@ public class DBObiettiviDOAFactory {
 				String className=PropertiesFile.getPropertieFromFile(OBIETTIVI_DEFAULT, propertieDBObiettiviDOAFactory);
 				
 				@SuppressWarnings("rawtypes")
-				Constructor c = Class.forName(className).getConstructor(className.getClass());
+				Constructor c = Class.forName(className).getConstructor(String.class);
 				
 				obiettiviDiPunteggioDAO=(IObiettiviDAO)c.newInstance(connectionFilePth);
 				

@@ -4,9 +4,9 @@ import java.nio.file.Paths;
 
 public class FullStrategy implements ICmdCreatorStrategy {
 	private String jarPath;
-	public FullStrategy(String jarPath) {
+	/*public FullStrategy(String jarPath) {
 		this.jarPath=jarPath;
-	}
+	}*/
 	
 	public FullStrategy(String fxpath,String jarPath) {
 		this.jarPath=jarPath;

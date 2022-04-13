@@ -22,7 +22,7 @@ public class ILanguageManagerFactory {
 				String className=PropertiesFile.getPropertieFromFile(ASSET_DAO_DEFAULT, PROPERTIE_FACTORY);
 				
 				@SuppressWarnings("rawtypes")
-				Constructor c = Class.forName(className).getConstructor(className.getClass());
+				Constructor c = Class.forName(className).getConstructor(String.class);
 				
 				linguaMan=(ILanguageManager)c.newInstance(FilesLanguageManager.getCurrentLanguage());
 				

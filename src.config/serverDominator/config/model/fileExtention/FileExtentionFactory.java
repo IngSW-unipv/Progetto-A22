@@ -25,7 +25,7 @@ public class FileExtentionFactory {
 			String className=PropertiesFile.getPropertieFromFile(STRATEGY_PROP+(os), PROPERTIE_FACTORY);
 			System.out.println(className);
 			@SuppressWarnings("rawtypes")
-			Constructor c = Class.forName(className).getConstructor(className.getClass());
+			Constructor c = Class.forName(className).getConstructor(String.class);
 			
 			result=(IFileExtensionStrategy)c.newInstance("");
 

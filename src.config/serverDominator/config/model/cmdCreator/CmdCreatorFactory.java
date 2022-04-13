@@ -27,7 +27,7 @@ public class CmdCreatorFactory {
 				String className=PropertiesFile.getPropertieFromFile(witch, PROPERTIE_FACTORY);
 				
 				@SuppressWarnings("rawtypes")
-				Constructor c = Class.forName(className).getConstructor(className.getClass());
+				Constructor c = Class.forName(className).getConstructor(String.class,String.class);
 				
 				result=(ICmdCreatorStrategy)c.newInstance(fxPath,jarPath);
 
@@ -37,5 +37,7 @@ public class CmdCreatorFactory {
 			}
 			return result;
 		}
-	
+	public static void main(String[] args) {
+		getCmdCreator(CMD_FULL,"","");
+	}
 }

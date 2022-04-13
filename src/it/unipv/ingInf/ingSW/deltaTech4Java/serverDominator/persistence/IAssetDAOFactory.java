@@ -28,7 +28,7 @@ public class IAssetDAOFactory {
 				String className=PropertiesFile.getPropertieFromFile(ASSET_DAO_DEFAULT, PROPERTIE_FACTORY);
 				
 				@SuppressWarnings("rawtypes")
-				Constructor c = Class.forName(className).getConstructor(className.getClass());
+				Constructor c = Class.forName(className).getConstructor(String.class);
 				
 				ass=(IAssetDAO)c.newInstance(DEFAULT_CONN_PROPERTY_FILE);
 				

@@ -26,7 +26,7 @@ public class IUserAccountDAOFactory {
 			try {
 					className=PropertiesFile.getPropertieFromFile(PROPERTYNAME, FILE_NAME);
 					@SuppressWarnings("rawtypes")
-					Constructor c = Class.forName(className).getConstructor(className.getClass());
+					Constructor c = Class.forName(className).getConstructor(String.class);
 					usDao=(IUserAccountDAO)c.newInstance(DEFAULT_CONN_PROPERTY_FILE);
 
 			} catch (Exception e) {

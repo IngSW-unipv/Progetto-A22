@@ -30,7 +30,7 @@ public class IObiettiviUserDAOFactory {
 				String className=PropertiesFile.getPropertieFromFile(OBIETTIVI_USER_DAO_DEFAULT, PROPERTIE_FACTORY);
 				
 				@SuppressWarnings("rawtypes")
-				Constructor c = Class.forName(className).getConstructor(className.getClass());
+				Constructor c = Class.forName(className).getConstructor(String.class);
 				
 				Own=(IObiettiviUserDAO)c.newInstance(DEFAULT_CONN_PROPERTY_FILE);
 				

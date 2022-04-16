@@ -73,7 +73,7 @@ public class ScriptsFacade {
 	 * Flaso se c'è qualcosa che è andato storto
 	 */
 	public static boolean createScript(String cmd, String fileName) {
-		return ScriptCreator.createScript(cmd, fileName);
+		return ScriptCreator.createScript(cmd, fileName+FileExtentionFactory.getIFileExtensionStrategy().getFileExtension());
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class ScriptsFacade {
 	 * @throws IOException
 	 */
 	public static void runShellScript(String ScriptPath) throws IOException {
-		ScriptRunner.runShellScript(ScriptPath);
+		ScriptRunner.runShellScript(ScriptPath+FileExtentionFactory.getIFileExtensionStrategy().getFileExtension());
 	}
 	
 	/**

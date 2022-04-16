@@ -43,7 +43,6 @@ public class Base extends Nodo{
 		risorse=new Risorse[TIPI_RISORSE];
 		this.inizializza_risorse();
 	}
-/** inizializza un vettore di software*/
 	
 	public void inizializza_software() {
 		/** inizializza un vettore di Software  */
@@ -51,7 +50,6 @@ public class Base extends Nodo{
 		stats_software_creati[1]=new Virus(0,0);
 		stats_software_creati[2]=new Rootcrash(0,0);
 	}
-/** inizializza un vettore di risorse*/
 	
 	public void inizializza_risorse() {
 		/** inizializza un vettore di Risorse
@@ -67,13 +65,12 @@ public class Base extends Nodo{
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 
-/** metodo usato per il potenziamento di una risorsa generica
- * aggiorna le statistiche della risorsa passata e i valori necessari
- * per il livello successivo
- */
+
 	public void potenzia_risorsa(String nome) {
-	/**metodo usato per potenziare le singole risorse passate da interfaccia*/
-		
+		/** metodo usato per il potenziamento di una risorsa generica
+		 * aggiorna le statistiche della risorsa passata e i valori necessari
+		 * per il livello successivo
+		 */	
 		boolean check=false;
 		int en_usata, i;
 		for(i=0; i<TIPI_RISORSE;i++) {

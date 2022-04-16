@@ -30,4 +30,16 @@ public class Colore {
 		blu=0x3399FF;
 	}
 	
+	public static final String GRIGIO = "#D4D4D4";
+	public static final String GIALLO = "#FFFF00";
+	public static final String ARANCIO = "#FF8000";
+	public static final String VERDE = "#00FF00";
+	public static final String ROSSO = "#FF0000";
+	public static final String VIOLA = "#4000FF";
+	public static final String VERDE_SCURO = "#006633";
+	public static final String ROSA = "#FF4ADB";
+	public static final String ROSA_SCURO = "#B5739D";
+	public static final String AZZURRO = "#00FFFF";
+	public static final String BLU = "#3399FF";
+	
 }

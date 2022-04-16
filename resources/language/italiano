@@ -19,3 +19,4 @@ Controller.err.RunnerFileCreate=Impossibile creare lo script di configurazione
 RunPanel.lable.titolo=Benvenuto nella baracca
 RunPanel.button.run=Inizia a guicare
 OnlyDescription.lable.descrizione=Configurazione gioco avvenuta con sucesso
+Controller.err.libNoSelect=Cartella 'lib' di java fx scorretta o non selezionata

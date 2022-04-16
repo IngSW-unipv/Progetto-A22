@@ -19,3 +19,4 @@ Controller.err.RunnerFileCreate=Fallo en la creacion de lo escript configuración
 RunPanel.lable.titolo=Empezar a jugar
 RunPanel.button.run=Empieza
 OnlyDescription.lable.descrizione=Configuración del juego terminada
+Controller.err.libNoSelect=Carpeta 'lib' de java fx incorrecta o no seleccionada

@@ -152,11 +152,29 @@ Adesso devi installare questo progetto!
 
 Questo è tutto!
 ## Configurazione 
-########################TODO########################
-
-
-## Iniziare a giocare 
-########################TODO########################
+1. Eseguire 'jar name' con doppio clic oppure eseguilo con il seguente comando
+	<code>java -jar 'jar name'</code>
+2. Scegli la tua lingua
+3. Scegli il tipo di JRE che usi (full or not full) 
+4. Insirisci l'ip e la prorta per MySql Server
+5. Insirisci lo username e la password di un amministratore; l'amministratore deve avere il seguenti permessi: 	 
+ 	 * ALTER
+	 * CREATE
+	 * CREATE USER
+	 * CREATE VIEW
+	 * DELETE
+	 * DROP
+	 * GRANT OPTION
+	 * INSERT
+	 * REFERENCES
+	 * SELECT
+	 * TRIGGER
+	 * UPDATE
+6. <b>Fai questo punto solo se hai scelto jre e javaFX</b>: inserire la cartella 'lib' di java fx
+7. Clicca conferma e avvia il gioco con l'apposito bottone
+## Iniziare a giocare
+Eseguire 'jar name' con doppio clic oppure eseguilo con il seguente comando 
+	<code>java -jar 'jar name'</code>
 
 
 ## Studenti di Delta Tech 4 Java

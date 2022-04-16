@@ -154,9 +154,29 @@ Now you have to download this project!
 
 That's all!
 ## Configure ServerDominator
-########################TODO########################
+1. Run 'jar name' jar with doble clic or execute it with the flowing comand 
+	<code>java -jar 'jar name'</code>
+2. Choose your languege and press "next" button
+3. Choose the your JRE type (full or not full) 
+4. Insert ip and port to your MySql Server 
+5. Insert admin's username and password; admin must have to the following permission: 	 
+ 	 * ALTER
+	 * CREATE
+	 * CREATE USER
+	 * CREATE VIEW
+	 * DELETE
+	 * DROP
+	 * GRANT OPTION
+	 * INSERT
+	 * REFERENCES
+	 * SELECT
+	 * TRIGGER
+	 * UPDATE
+6. <b>Do this point only if you choose jre and javaFX</b>: insert the path to lib foldr in the javaFx package  
+7. Press ok button and if you want run the project pressing run button
 ## Run ServerDominator
-########################TODO########################
+Run 'jar name' jar with doble clic or execute it with the flowing comand 
+	<code>java -jar 'jar name'</code>
 ## Delta Tech 4 Java students 
 <details>
 <summary>

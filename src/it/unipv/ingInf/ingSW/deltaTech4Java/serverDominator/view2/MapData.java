@@ -22,7 +22,7 @@ public class MapData {
     Layout layout = new Layout(layout_pointy, new Point(25,25), new Point(25,25));  // dimensioni degli esagoni
     
     
-    System.out.println("layout = " );
+   // System.out.println("layout = " );
 
     public MapData(Nodo[][] nodi){
         data = new HashMap<>();

@@ -109,7 +109,7 @@ public abstract class Nodo implements INodo{
 		this.lvl_firewall = lvl_firewall;
 	}
 	
-	public Colore getColore() {
+	public String getColore() {
 		return possessore.getColore();
 	}
 	

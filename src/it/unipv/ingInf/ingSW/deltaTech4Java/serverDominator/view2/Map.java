@@ -42,12 +42,12 @@ class BasicMap extends Map {
 		}
 	}
 
-	public void drawHex(List<Point> points, Color colore, Color bordo) {
+	public void drawHex(List<Point> points, String colore, Color bordo) {
 		double[] x = points.stream().mapToDouble(Point::getX).toArray();
 		double[] y = points.stream().mapToDouble(Point::getY).toArray();
 
 		gc.setStroke(bordo);
-		gc.setFill(colore != null ? colore : Color.WHITE);
+		gc.setFill(colore != null ? Color.web(colore) : Color.WHITE);
 		gc.strokePolygon(x, y, 6);
 		gc.fillPolygon(x, y, 6);
 

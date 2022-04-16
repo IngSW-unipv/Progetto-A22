@@ -46,6 +46,9 @@ public class Main extends Application {
 		
 	}
 
+	private final Insets STANDARD_PADDING = new Insets(10);
+	
+	
 	private Pair<Integer, Integer> getDimensioniMappa(LivelloDiGioco livello) {
 		int xMax, yMax;
 		switch (livello) {
@@ -84,21 +87,23 @@ public class Main extends Application {
 			// qui da inserire l'azione che si deve compiere quando click on "Attacca!"
 		}));
 		setUpControls.setSpacing(10); 				// spazio tra un bottone e l'altro
-        setUpControls.setPadding(new Insets(10)); 	// margini del testo dentro al bottone
+        setUpControls.setPadding(STANDARD_PADDING); 	// margini del testo dentro al bottone
 	}
 
 	@Override
 	public void start(Stage primaryStage) { // start della costruzione grafica
 		primaryStage.setTitle("Server Dominator");
+		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Easy);
 
 		VBox holder = new VBox();
 		BorderPane borderPane = new BorderPane();
 
 		// Canvass = Sfondo rettangolare su cui vengono disegnati rettangoli
 		int bordo , larghezzaE , altezzaE;
-		bordo = 10;
-		larghezzaE = 25;
-		Canvas basicCanvas = new Canvas(700, 410);
+		bordo = 0;
+		larghezzaE = 45;
+		altezzaE = 40; 
+		Canvas basicCanvas = new Canvas(dimensioneMappa.getValue()*larghezzaE+bordo, dimensioneMappa.getKey()*altezzaE+bordo);
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
 		
 		
@@ -109,6 +114,7 @@ public class Main extends Application {
 		HBox datiNodo = new HBox();
 		Label coordinate = new Label();
 		datiNodo.getChildren().add(coordinate);
+		datiNodo.setPadding(STANDARD_PADDING);
 		
 		
 		controls.getChildren().addAll(datiNodo, terrainControls); // aggiungo le HBox alla VBox
@@ -116,7 +122,10 @@ public class Main extends Application {
 		setUpControls(terrainControls); // aggiunge le spaziature, i margini, etc...
 
 		Sistema sistema = new Sistema();
-		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Easy);
+		Utente utente = new Utente("matte");
+		utente.setColore(Colore.AZZURRO);
+		
+		
 		
 		System.out.println(dimensioneMappa.getKey() + " " + dimensioneMappa.getValue());
 		
@@ -126,7 +135,13 @@ public class Main extends Application {
 		//	System.out.println(i);
 			for (int j = 0; j < nodiTest[i].length; j++) {
 		//		System.out.println(j);
-				nodiTest[i][j] = new Cloud(sistema);
+				if(i == 3 && j ==1 ) {
+					nodiTest[i][j] = new Base(utente);
+				}
+				else {
+					nodiTest[i][j] = new Cloud(sistema);
+				}
+				
 			}
 		}
 
@@ -161,19 +176,28 @@ public class Main extends Application {
 		
 		//definisco: colore sfondo di pane; arrotondamento angoli; 
 		pane.setBackground(new Background(new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(-10))) ); 
-		pane.setPadding(new Insets(5));
+		pane.setPadding(STANDARD_PADDING);
 
 		// Adding Checkboxes to a VBox on Right
-		VBox mapTypesBox = new VBox();
-		mapTypesBox.setSpacing(5);
-		mapTypesBox.setPadding(new Insets(40));
+		VBox controlloBattaglia = new VBox();
+		controlloBattaglia.setSpacing(5);
+		controlloBattaglia.setPadding(STANDARD_PADDING);
+		
+		// aggiungiamo progressBar nella VBOX
+		HBox progress1 = new HBox();
+		progress1.setSpacing(5);
+		ProgressBar pb1 = new ProgressBar(0);
+		Label batt1 = new Label("Battaglia 1");
+		progress1.getChildren().addAll(batt1,pb1);
+		controlloBattaglia.getChildren().add(progress1);
+		
 
 		// Setting BorderPane
 		BorderPane.setMargin(pane, new Insets(20));
 		borderPane.setTop(menuBar);
 		borderPane.setCenter(pane);
 		borderPane.setBottom(controls);
-		borderPane.setRight(mapTypesBox);
+		borderPane.setRight(controlloBattaglia);
 		
 		
 		// Adding MenuBar and BorderPane to a VBox Holder
@@ -188,8 +212,11 @@ public class Main extends Application {
 		
 		pane.setOnMouseClicked(event -> {
 			Hexagon est = mapData.pixelToHex(new Point(event.getX(), event.getY()));
-			System.out.println(mapData.getHexData(est).nodo);
-			coordinate.setText("Coordinate: " + est.x + " " + est.y);
+			HexData data = mapData.getHexData(est);
+			Nodo nodo = data.nodo;
+
+			coordinate.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: " + nodo.getPossessore().getNome() + " SWdisp: " + nodo.getSoftware_disponibile());
+			
 			basicMap.drawMap(est);
 		});
 

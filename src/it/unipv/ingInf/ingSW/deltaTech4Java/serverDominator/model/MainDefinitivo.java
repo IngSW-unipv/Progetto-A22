@@ -63,8 +63,8 @@ public class MainDefinitivo {
 				boolean esito=tabellone.attaccabile(x,y, attaccante);
 				if(esito) {
 					t_timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
-					//	fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
-					fight=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y));
+					// fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
+					// fight=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y));
 					fight.selezione(quantitaV, quantitaR);
 					
 		//timer

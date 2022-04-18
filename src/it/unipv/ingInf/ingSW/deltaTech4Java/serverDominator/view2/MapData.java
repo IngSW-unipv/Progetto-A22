@@ -17,9 +17,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class MapData {
     HashMap<Hexagon, HexData> data;  //  l'hashMap che contiene tutti gli esagoni ed il rispettivo tipo
+    
     Orientation layout_pointy = new Orientation(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,  Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
     List<Hexagon> directions = Arrays.asList(new Hexagon(1,0), new Hexagon(1,-1), new Hexagon(0,-1), new Hexagon(-1,0), new Hexagon(-1,1), new Hexagon(0,1)); // direzioni dall'esagono 0,0 
-    Layout layout = new Layout(layout_pointy, new Point(25,25), new Point(25,25));  // dimensioni degli esagoni
+    Layout layout = new Layout(layout_pointy, new Point(25,25), new Point(25,25));  // definisco orientation, size e origin
     
     
    // System.out.println("layout = " );
@@ -27,10 +28,12 @@ public class MapData {
     public MapData(Nodo[][] nodi){
         data = new HashMap<>();
 
-        //Rectangle Map 15 x 22 - posizionamento dei centri degli esagoni
-        for (int r = 0; r < nodi.length; r++) {
-            int r_offset = (int) Math.floor(r/2);	// !!! da capire !!!
-            for (int q = -r_offset; q < nodi[r].length - r_offset; q++) { // sfasamento della riga
+   // Creazione delle coordinate per una matrice di tipo Nodo[i][j]
+        
+        for (int r = 0; r < nodi.length; r++) { 							//nodi.length è il valore massimo di i
+        																	// nodi[i].length è il valore massimo di j
+            int r_offset = (int) Math.floor(r/2);							// Math.floor(r/2) = parte intera del valore di r/2 
+            for (int q = -r_offset; q < nodi[r].length - r_offset; q++) { 	// costruzione esagoni orizzontali con coordinata x sfasata
             	data.put(new Hexagon(q, r), new HexData(nodi[r][q + r_offset]));
             }
         }
@@ -45,7 +48,7 @@ public class MapData {
     }
 
 
-    Point hex_to_pixel(Hexagon h) {  // metodo per calcolare il pixel corrispondente al centro di un determinato esagono
+    Point hex_to_pixel(Hexagon h) {  			// metodo per calcolare il pixel corrispondente al centro di un determinato esagono
         Orientation M = layout.orientation;
         double x = (M.f0 * h.x + M.f1 * h.y) * layout.size.x;
         double y = (M.f2 * h.x + M.f3 * h.y) * layout.size.y;
@@ -54,8 +57,7 @@ public class MapData {
 
     Point hex_corner_offset(int corner) { // restituisce un punto 
         Point size = layout.size;
-        double angle = 2.0 * Math.PI *
-                (layout.orientation.start_angle + corner) / 6;
+        double angle = 2.0 * Math.PI * (layout.orientation.start_angle + corner) / 6;
         return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));
     }
 

@@ -5,6 +5,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
  * v0.1
  * Esecuzione interfaccia grafica
  * 
+ * La mappa viene ricreata ogni volta che cambia il possessore di un qualsiasi nodo.
+ * 
+ * Le progressBar vengono create ad ogni avvio di battaglia
+ * 
+ * I log vengono scritti ad ogni creazione, avvio battaglia, conclusione battaglia 
+ * 
+ * 
  */
 
 import javafx.animation.AnimationTimer;
@@ -35,6 +42,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
@@ -84,30 +92,36 @@ public class Main extends Application {
 	// costruisce la HBOX con i controlli di gioco
 	public void setUpControls(HBox setUpControls) {
 		addType(setUpControls, "Attacca!", (event -> {
-			// qui da inserire l'azione che si deve compiere quando click on "Attacca!"
+			
+			// qui va inserita l'azione da compiere quando click on "Attacca!"
+			
 		}));
-		setUpControls.setSpacing(10); 				// spazio tra un bottone e l'altro
+		setUpControls.setSpacing(10); 					// spazio tra un bottone e l'altro
         setUpControls.setPadding(STANDARD_PADDING); 	// margini del testo dentro al bottone
 	}
 
 	@Override
-	public void start(Stage primaryStage) { // start della costruzione grafica
+	public void start(Stage primaryStage) { 			// start della costruzione grafica
 		primaryStage.setTitle("Server Dominator");
-		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Easy);
+		primaryStage.setIconified(false);				// se TRUE lo avvia ridotto a icona
+		primaryStage.setFullScreen(false);				// apre in full screen
+		primaryStage.setX(0);							// definisce la coordinata X dell'angolo in alto a sinistra della finestra
+		primaryStage.setY(0);							// definisce la coordinata Y dell'angolo in alto a sinistra della finestra
+		
+		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Hard);
 
 		VBox holder = new VBox();
 		BorderPane borderPane = new BorderPane();
 
 		// Canvass = Sfondo rettangolare su cui vengono disegnati rettangoli
-		int bordo , larghezzaE , altezzaE;
-		bordo = 0;
-		larghezzaE = 45;
-		altezzaE = 40; 
-		Canvas basicCanvas = new Canvas(dimensioneMappa.getValue()*larghezzaE+bordo, dimensioneMappa.getKey()*altezzaE+bordo);
+		double bordoLarghezza , bordoAltezza , larghezzaE , altezzaE;
+		bordoLarghezza = 8;
+		bordoAltezza = 0;
+		larghezzaE = 44.5;
+		altezzaE = 39.4; 
+		Canvas basicCanvas = new Canvas(dimensioneMappa.getValue()*larghezzaE+bordoLarghezza, dimensioneMappa.getKey()*altezzaE+bordoAltezza);
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
-		
-		
-		
+				
 		// VBox che contiene le HBox sotto alla mappa
 		VBox controls = new VBox();
 		HBox terrainControls = new HBox();
@@ -117,33 +131,39 @@ public class Main extends Application {
 		datiNodo.setPadding(STANDARD_PADDING);
 		
 		
-		controls.getChildren().addAll(datiNodo, terrainControls); // aggiungo le HBox alla VBox
+		controls.getChildren().addAll(datiNodo, terrainControls); // aggiungo le HBox datiNodo, terrainControls alla VBox controls
 
 		setUpControls(terrainControls); // aggiunge le spaziature, i margini, etc...
 
-		Sistema sistema = new Sistema();
-		Utente utente = new Utente("matte");
-		utente.setColore(Colore.AZZURRO);
+		Sistema sistema = new Sistema(); sistema.colore = Colore.GRIGIO;
+		Utente utente = new Utente("user"); utente.colore = Colore.GIALLO;
+		
+		MainDefinitivo main = new MainDefinitivo();
+		main.avvioPartita(30, 20, "Matteo");
+		Giocatore[] giocatori = main.getGiocatori();
+		
+		Mappa mappa = new Mappa(30, 20, giocatori);
+		mappa.assegnamento(10, giocatori);
 		
 		
 		
-		System.out.println(dimensioneMappa.getKey() + " " + dimensioneMappa.getValue());
+		
+		// definiamo i nodi base
+		
+		/* Rilevo il numero di basi da piazzare numBasi
+		 * Nel ciclo di creazione del vettore nodi verifico se un nodo ha le coordinate di una base
+		 * Se si allora recupero il nome del giocatore Giocatore.getNome(giocatore); di quella base
+		 * Definisco il nodo come base del Giocatore giocatore
+		 * Assegno il colore al nodo i,j
+		 * nodo[i][j].colore = getColorePossessore(giocatore);
+		 */
 		
 		// creo vettore di nodi X TEST!
-		Nodo[][] nodiTest = new Nodo[dimensioneMappa.getKey()][dimensioneMappa.getValue()];
-		for (int i = 0; i < nodiTest.length; i++) {
-		//	System.out.println(i);
-			for (int j = 0; j < nodiTest[i].length; j++) {
-		//		System.out.println(j);
-				if(i == 3 && j ==1 ) {
-					nodiTest[i][j] = new Base(utente);
-				}
-				else {
-					nodiTest[i][j] = new Cloud(sistema);
-				}
+		
+		// !!!! Occorre normalizzare le coordinate !!!!
+		Nodo[][] nodiTest = mappa.getMap();
+		
 				
-			}
-		}
 
 		MapData mapData = new MapData(nodiTest);
 
@@ -175,8 +195,8 @@ public class Main extends Application {
 		pane.getChildren().addAll(basicCanvas);
 		
 		//definisco: colore sfondo di pane; arrotondamento angoli; 
-		pane.setBackground(new Background(new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(-10))) ); 
-		pane.setPadding(STANDARD_PADDING);
+		pane.setBackground(new Background(new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(-10,-10,0,-10))) ); 
+		//pane.setPadding(STANDARD_PADDING);
 
 		// Adding Checkboxes to a VBox on Right
 		VBox controlloBattaglia = new VBox();

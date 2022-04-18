@@ -37,7 +37,7 @@ class BasicMap extends Map {
 				drawHex(mapData.getPoints(entry.getKey()), entry.getValue().nodo.getColore(), Color.RED);
 				
 			} else {
-				drawHex(mapData.getPoints(entry.getKey()), entry.getValue().nodo.getColore(), Color.WHITE);
+				drawHex(mapData.getPoints(entry.getKey()), entry.getValue().nodo.getColore(), Color.BLACK);
 			}
 		}
 	}
@@ -50,6 +50,7 @@ class BasicMap extends Map {
 		gc.setFill(colore != null ? Color.web(colore) : Color.WHITE);
 		gc.strokePolygon(x, y, 6);
 		gc.fillPolygon(x, y, 6);
+		
 
 	}
 }

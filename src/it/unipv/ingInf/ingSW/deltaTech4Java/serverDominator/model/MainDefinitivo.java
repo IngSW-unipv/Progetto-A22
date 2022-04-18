@@ -1,5 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+import java.util.Collections;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
@@ -23,12 +25,12 @@ public class MainDefinitivo {
 	
 	//selezione utente
 		//selezione lingua
-	public void avvioPartita(int x_max, int y_max) {
+	public void avvioPartita(int x_max, int y_max, String nomeUtente) {
 		t_unitario=10;
 		n_basi= 3;
-		giocatori= new Giocatore[n_basi+1];
-		giocatori=this.creazioneGiocatori(utente.getNome(), x_max, y_max);
-		tabellone= new MappaDefinitiva(x_max, y_max, giocatori);
+		giocatori = new Giocatore[n_basi+1];
+		giocatori = this.creazioneGiocatori(nomeUtente, x_max, y_max);
+		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
 	}
 	
@@ -41,18 +43,20 @@ public class MainDefinitivo {
 	}
 	
 	public void acquistoMercato(int quantita, String oggetto) {
-		if(quantita==-1)
-			mercato.compraRisorse(utente, tabellone.trovaBase(utente), oggetto);
-		else
-			mercato.compraSoftware(utente, tabellone.trovaBase(utente), quantita, oggetto);
+		//if(quantita==-1)
+			//mercato.compraRisorse(utente, tabellone.trovaBase(utente), oggetto);
+		//else
+			//mercato.compraSoftware(utente, tabellone.trovaBase(utente), quantita, oggetto);
 	}
+
+	/** il seguente metodo, gestisce le operazioni preliminari e successive alla battaglia
+		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
+		 */	
 	
 	public boolean avvioBattaglia(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
-		/** il seguente metodo, gestisce le operazioni preliminari e successive alla battaglia
-		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
-		 */
+
 				int punti, valuta; 
-		//le quantità di software dovranno essere inizializati correttamente tramite un metodo
+		//le quantitï¿½ di software dovranno essere inizializati correttamente tramite un metodo
 		//del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
 				int t_timer;
 
@@ -76,26 +80,29 @@ public class MainDefinitivo {
 				
 				// if sottostante necessario??? 
 				if(attaccante.getNome().equals(utente.getNome())) {
-					if(esito)
-						utente.aggiornaPunteggio(punti);
-						utente.aggiornaValuta(valuta);
+					if(esito) {
+						//utente.aggiornaPunteggio(punti);
+						//utente.aggiornaValuta(valuta);
+					}
 				//else? si tolgono punti in caso di sconfitta?
 				}
 				return esito;
 			}
 	
-	public Giocatore[] creazioneGiocatori(String utente, int x_max, int n_basi) {
+	public Giocatore[] creazioneGiocatori(String utente, int x_max, int n_basi) {  // MP: n_basi credo sia superfluo...
+		Collections.shuffle(Colore.colori);
 		switch(x_max) {
 		case 15:
-			giocatori[0]= new Sistema();
-			giocatori[1]= new Utente(utente);
-			giocatori[2]=new Bot("bob");
+			n_basi=3;
+			giocatori[0]= new Sistema(); giocatori[0].colore = Colore.GRIGIO;
+			giocatori[1]= new Utente(utente); 
+			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
 			break;
 		case 20:
 			n_basi=5;
 			giocatori= new Giocatore[n_basi+1];
-			giocatori[0]= new Sistema();
+			giocatori[0]= new Sistema(); giocatori[0].colore = Colore.GRIGIO;
 			giocatori[1]= new Utente(utente);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -105,7 +112,7 @@ public class MainDefinitivo {
 		case 30:
 			n_basi=10;
 			giocatori= new Giocatore[n_basi+1];
-			giocatori[0]= new Sistema();
+			giocatori[0]= new Sistema(); giocatori[0].colore = Colore.GRIGIO;
 			giocatori[1]= new Utente(utente);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -114,11 +121,17 @@ public class MainDefinitivo {
 			giocatori[6]= new Bot("jupiter");
 			giocatori[7]= new Bot("alex");
 			giocatori[8]= new Bot("lonfo");
-			giocatori[9]= new Bot("max");
+			giocatori[9]= new Bot("mara");
 			giocatori[10]=new Bot("alice");
 			break;
 		}
+		
+		for (int i = 1; i < giocatori.length; i++) {
+			giocatori[i].colore = Colore.colori.get(i-1);
+			
+		}
 		return giocatori;
+	
 	}
 	
 	public int getX_max() {
@@ -127,5 +140,13 @@ public class MainDefinitivo {
 	
 	public int getY_max() {
 		return tabellone.getY_max();
+	}
+	
+	public MappaDefinitiva getTabellone() {
+		return tabellone;
+	}
+	
+	public Giocatore[] getGiocatori() {
+		return giocatori;
 	}
 }

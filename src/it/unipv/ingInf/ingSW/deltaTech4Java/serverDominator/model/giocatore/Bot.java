@@ -12,12 +12,13 @@ public class Bot extends Giocatore implements Runnable{
 	private Base baseUtente, baseBot;
 	
 	/**Permette di creare un oggetto Bot passando come parametro il suo nome*/
+	
 	public Bot(String nome) {
 		super(nome);
 		baseUtente=new Base();
 		baseBot=new Base();
 	}
-	/** Permette di creare un oggetto Bot il cui nome sarà "botX" dove X è il numero passato come parametro*/
+	/** Permette di creare un oggetto Bot il cui nome sarï¿½ "botX" dove X ï¿½ il numero passato come parametro*/
 	public Bot(int num) {
 		super("bot"+String.format("%03d",num));
 		baseUtente=new Base();
@@ -134,11 +135,11 @@ public class Bot extends Giocatore implements Runnable{
 	}
 	
 	/**Migliora le risorse del bot progressivamente al giocatore quindi la somma complessiva dei livelli 
-	 * delle risorse del giocatore sarà pari la somma complessiva dei livelli delle risorse del bot.
+	 * delle risorse del giocatore sarï¿½ pari la somma complessiva dei livelli delle risorse del bot.
 	 * Le logiche di miglioramento possibili sono 3 e viene decisa casualmente.
-	 * Prima logica: decide casualmente cosa potenziare (quindi può presentarsi una notevole differenza tra i livelli delle risorse)
-	 * Seconda logica: l'ordine di potenziamento delle risorse è casuale ma i loro livelli saranno lineari (se
-	 *  	cpu=1, ram=1, frw=1 deciderà casualmente cosa portare al livello 2 e il miglioramento successivo verrà 
+	 * Prima logica: decide casualmente cosa potenziare (quindi puï¿½ presentarsi una notevole differenza tra i livelli delle risorse)
+	 * Seconda logica: l'ordine di potenziamento delle risorse ï¿½ casuale ma i loro livelli saranno lineari (se
+	 *  	cpu=1, ram=1, frw=1 deciderï¿½ casualmente cosa portare al livello 2 e il miglioramento successivo verrï¿½ 
 	 *  	scelto solo tra le due risorse rimaste al livello 1 per poi potenziare infine l'ultima risorsa all'1 
 	 *  	per poi ricominciare la logica allo stesso modo).
 	 *  Terza logica: i miglioramenti del bot copiano i miglioramenti eseguiti dall'utente
@@ -276,11 +277,11 @@ public class Bot extends Giocatore implements Runnable{
 	
 	
 	/**Migliora le risorse del bot progressivamente al giocatore quindi la somma complessiva dei livelli 
-	 * delle risorse del giocatore sarà pari la somma complessiva dei livelli delle risorse del bot.
+	 * delle risorse del giocatore sarï¿½ pari la somma complessiva dei livelli delle risorse del bot.
 	 * Le logiche di miglioramento possibili sono 3 e viene decisa in base al valore intero dato in input.
-	 * Prima logica: decide casualmente cosa potenziare (quindi può presentarsi una notevole differenza tra i livelli delle risorse)
-	 * Seconda logica: l'ordine di potenziamento delle risorse è casuale ma i loro livelli saranno lineari (se
-	 *  	cpu=1, ram=1, frw=1 deciderà casualmente cosa portare al livello 2 e il miglioramento successivo verrà 
+	 * Prima logica: decide casualmente cosa potenziare (quindi puï¿½ presentarsi una notevole differenza tra i livelli delle risorse)
+	 * Seconda logica: l'ordine di potenziamento delle risorse ï¿½ casuale ma i loro livelli saranno lineari (se
+	 *  	cpu=1, ram=1, frw=1 deciderï¿½ casualmente cosa portare al livello 2 e il miglioramento successivo verrï¿½ 
 	 *  	scelto solo tra le due risorse rimaste al livello 1 per poi potenziare infine l'ultima risorsa all'1 
 	 *  	per poi ricominciare la logica allo stesso modo).
 	 *  Terza logica: i miglioramenti del bot copiano i miglioramenti eseguiti dall'utente

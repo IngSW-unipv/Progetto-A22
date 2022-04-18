@@ -57,8 +57,10 @@ public class MapData {
 
     Point hex_corner_offset(int corner) { // restituisce un punto 
         Point size = layout.size;
-        double angle = 2.0 * Math.PI * (layout.orientation.start_angle + corner) / 6;
-        return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));
+        double angle = 2.0 * Math.PI * (layout.orientation.start_angle + corner) / 6; 	// angle = 1/6 angolo giro (2*pi/6)
+        																				// start_angle = 0.5*2*pi = 180°
+        return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));			// corner 0 ha size.x = -25 ; size.y = 0
+        																				// corner 1 ha size.x = -25 ; size.y = 0
     }
 
     List<Point> getPoints(Hexagon h) {

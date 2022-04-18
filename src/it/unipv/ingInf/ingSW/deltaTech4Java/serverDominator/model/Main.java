@@ -18,7 +18,9 @@ public class Main {
 		switch(x_max) {
 		case 15:
 			giocatori[0]= new Sistema();
-			giocatori[1]= new Utente(utente);
+			giocatori[1]= new Utente(utente); giocatori[1].setColore("#FFFF00");
+			
+			
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
 			break;

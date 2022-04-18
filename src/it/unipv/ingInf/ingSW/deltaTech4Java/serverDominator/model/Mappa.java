@@ -24,10 +24,10 @@ public class Mappa {
 		this.y_max=y_max;
 		int i,j;
 		
-		map= new Nodo[x_max][y_max];
+		map = new Nodo[y_max][x_max];
 		
-		for(i=0; i<x_max; i++) {
-			for(j=0; j<y_max; j++ ) {
+		for(i=0; i<y_max; i++) {
+			for(j=0; j<x_max; j++ ) {
 				map[i][j]= new Cloud(giocatori[0]);
 			} 
 		}
@@ -35,30 +35,32 @@ public class Mappa {
 		vicini= new String[6];
 		confini= new Coordinate[6];
 	}
+
+	/** metodo usato per assegnare le basi ai giocatori/bot, nella mappa di gioco
+	 * selezionando in base alla difficoltï¿½ scelta
+	 */	
 	
 	public void assegnamento(int n_basi, Giocatore[] giocatori) {
-	/** metodo usato per assegnare le basi ai giocatori/bot, nella mappa di gioco
-	 * selezionando in base alla difficoltà scelta
-	 */
+
 		this.n_basi=n_basi;
 		basi= new Coordinate[n_basi];
 		
 		switch(n_basi) {
 		case(3):
-			map[3][1]= new Base(giocatori[1]);
-			map[11][1]= new Base(giocatori[2]);
-			map[7][8]= new Base(giocatori[3]);
+			map[1][3]= new Base(giocatori[1]);
+			map[1][11]= new Base(giocatori[2]);
+			map[8][7]= new Base(giocatori[3]);
 			
 			basi[0]= new Coordinate(3,1,giocatori[1].getNome());
 			basi[1]= new Coordinate(11,1, giocatori[2].getNome());
 			basi[2]= new Coordinate(7,8,giocatori[3].getNome());
 			break;
 		case(5):
-			map[4][2]=new Base(giocatori[1]);
-			map[12][2]= new Base(giocatori[2]);
-			map[1][7]= new Base(giocatori[3]);
-			map[16][7]= new Base(giocatori[4]);
-			map[8][12]= new Base(giocatori[5]);
+			map[2][4]=new Base(giocatori[1]);
+			map[2][12]= new Base(giocatori[2]);
+			map[7][1]= new Base(giocatori[3]);
+			map[7][16]= new Base(giocatori[4]);
+			map[12][8]= new Base(giocatori[5]);
 			
 			basi[0]= new Coordinate(4,2,giocatori[1].getNome());
 			basi[1]= new Coordinate(12,2, giocatori[2].getNome());
@@ -67,16 +69,16 @@ public class Mappa {
 			basi[4]=new Coordinate(8,12, giocatori[5].getNome());
 			break;
 		case(10):
-			map[6][2]= new Base(giocatori[1]);
-			map[15][3]= new Base(giocatori[2]);
-			map[21][2]= new Base(giocatori[3]);
-			map[4][11]= new Base(giocatori[4]);
+			map[2][6]= new Base(giocatori[1]);
+			map[3][15]= new Base(giocatori[2]);
+			map[2][21]= new Base(giocatori[3]);
+			map[11][4]= new Base(giocatori[4]);
 			map[10][10]= new Base(giocatori[5]);
-			map[19][12]= new Base(giocatori[6]);
-			map[27][11]= new Base(giocatori[7]);
-			map[7][18]= new Base(giocatori[8]);
+			map[12][19]= new Base(giocatori[6]);
+			map[11][27]= new Base(giocatori[7]);
+			map[18][7]= new Base(giocatori[8]);
 			map[16][16]= new Base(giocatori[9]);
-			map[23][17]= new Base(giocatori[10]);
+			map[17][23]= new Base(giocatori[10]);
 			
 			basi[0]= new Coordinate(6,2,giocatori[1].getNome());
 			basi[1]= new Coordinate(15,3, giocatori[2].getNome());
@@ -187,6 +189,10 @@ public class Mappa {
 	
 	public Nodo getNodo(int x, int y) {
 		return map[x][y];
+	}
+	
+	public Nodo[][] getMap() {
+		return map;
 	}
 	
 }

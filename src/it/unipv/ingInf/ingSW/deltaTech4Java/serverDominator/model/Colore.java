@@ -1,5 +1,8 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * @author Luca Casto 
  * v1.0
@@ -41,5 +44,7 @@ public class Colore {
 	public static final String ROSA_SCURO = "#B5739D";
 	public static final String AZZURRO = "#00FFFF";
 	public static final String BLU = "#3399FF";
+	
+	public static ArrayList<String> colori = new ArrayList( Arrays.asList(GIALLO , ARANCIO , VERDE , ROSSO , VIOLA , VERDE_SCURO , ROSA , ROSA_SCURO , AZZURRO , BLU));
 	
 }

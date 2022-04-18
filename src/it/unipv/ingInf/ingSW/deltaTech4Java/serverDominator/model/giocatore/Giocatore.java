@@ -4,9 +4,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Colore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
 public abstract class Giocatore {
-	private int punteggio;
-	private String nome;
-	private String colore;
+	public int punteggio;
+	public String nome;
+	public String colore;
 
 	public Giocatore(String nome) {
 		this.nome=nome;

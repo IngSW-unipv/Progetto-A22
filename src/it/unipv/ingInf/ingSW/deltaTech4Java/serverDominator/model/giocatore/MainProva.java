@@ -105,7 +105,9 @@ public class MainProva {
 		return esito;
 	}
 	//opzioni
-	//il colore va al giocatore o al nodo? per ora è al nodo
+	//il colore va al giocatore o al nodo? per ora ï¿½ al nodo
+	
+	// MATTEO P : credo si debba assegnare il colore al possessore, poi dare due tonalitÃ  diverse se BASE o CLOUD
 	//0=possessore, 2=colore, 3=tipologia nodo, 4=livello cpu, 5=livello ram, 6=livello energia, 7=livello firewall, 8=livello virus, 9=quantita virus, 10=livello antivirus, 11= quantita antivirus, 12= livello rootcrash, 13=quanita rootcrash
 	public String[] getProprieta(int coordX, int coordY) {
 		String[] proprieta;

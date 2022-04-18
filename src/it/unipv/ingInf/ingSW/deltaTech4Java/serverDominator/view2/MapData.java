@@ -63,7 +63,7 @@ public class MapData {
         																				// corner 1 ha size.x = -25 ; size.y = 0
     }
 
-    List<Point> getPoints(Hexagon h) {
+    List<Point> getPoints(Hexagon h) {											// creo lista dei 6 vertici dell'esagono h
         List<Point> corners = new ArrayList<>();
         Point center = hex_to_pixel(h);
         for (int i = 0; i < 6; i++) {
@@ -73,7 +73,7 @@ public class MapData {
         return corners;
     }
 
-    Hexagon pixelToHex(Point p){
+    Hexagon pixelToHex(Point p){				// trasforma coordinate in pixel, in coordinate puntuali (25,25) -> (0,0)
         Orientation M = layout.orientation;
 
         Point pt = new Point((p.getX() - layout.origin.x) / layout.size.x,

@@ -40,28 +40,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 
 public class Main extends Application {
-	public static String ATTACCO_KEY="serverDominator.viw.map.attacco";
-	public static String FILE_KEY="serverDominator.viw.map.file";
-	public static String SAVE_KEY="serverDominator.viw.map.save";
-	public static String OPEN_KEY="serverDominator.viw.map.open";
-	public static String COORDINATE_KEY="serverDominator.viw.map.coordinate";
-	public static String SW_DISP_KEY="serverDominator.viw.map.swDisp";
-	public static String STATE_KEY="serverDominator.viw.map.state";
-	public static String ADD_KEY="serverDominator.viw.map.add";
-	public static String BATTAGLIA_KEY="serverDominator.viw.map.battaglia";
-	public static String POSSESSORE_KEY="serverDominator.viw.map.possessore";
-	
+
 	enum LivelloDiGioco {
 		Easy, Medium, Hard
 		
@@ -104,15 +91,10 @@ public class Main extends Application {
 
 	// costruisce la HBOX con i controlli di gioco
 	public void setUpControls(HBox setUpControls) {
-<<<<<<< HEAD
 		addType(setUpControls, "Attacca!", (event -> {
 			
 			// qui va inserita l'azione da compiere quando click on "Attacca!"
 			
-=======
-		addType(setUpControls, PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(ATTACCO_KEY, "Attacca!"), (event -> {
-			// qui da inserire l'azione che si deve compiere quando click on "Attacca!"
->>>>>>> refs/remotes/origin/main
 		}));
 		setUpControls.setSpacing(10); 					// spazio tra un bottone e l'altro
         setUpControls.setPadding(STANDARD_PADDING); 	// margini del testo dentro al bottone
@@ -196,21 +178,13 @@ public class Main extends Application {
 
 		// MenuBar
 		MenuBar menuBar = new MenuBar();
-		Menu fileMenu = new Menu(
-				PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(FILE_KEY,  "File")
-				);
-		MenuItem saveItem = new MenuItem(
-				PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(SAVE_KEY,"Save")
-				);
-		MenuItem openItem = new MenuItem(
-				PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(OPEN_KEY,"Open")
-				);
+		Menu fileMenu = new Menu("File");
+		MenuItem saveItem = new MenuItem("Save");
+		MenuItem openItem = new MenuItem("Open");
 		fileMenu.getItems().addAll(saveItem, openItem);
 
 		Menu stateMenu = new Menu("State");
-		MenuItem addStateItem = new MenuItem(
-				PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(ADD_KEY,"Add")
-				);
+		MenuItem addStateItem = new MenuItem("Add");
 		// addStateItem.setOnAction(event -> addState(politicalControls));
 		stateMenu.getItems().add(addStateItem);
 
@@ -233,11 +207,7 @@ public class Main extends Application {
 		HBox progress1 = new HBox();
 		progress1.setSpacing(5);
 		ProgressBar pb1 = new ProgressBar(0);
-		Label batt1 = new Label(
-				PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(BATTAGLIA_KEY,"Battaglia")+
-				//TODO: Qui bisogna rifare di modo da rendere il numero di battagli dinamico (giocatore--> più battaglie attive)
-				""
-				);
+		Label batt1 = new Label("Battaglia 1");
 		progress1.getChildren().addAll(batt1,pb1);
 		controlloBattaglia.getChildren().add(progress1);
 		
@@ -265,16 +235,7 @@ public class Main extends Application {
 			HexData data = mapData.getHexData(est);
 			Nodo nodo = data.nodo;
 
-			coordinate.setText(
-						PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(COORDINATE_KEY,"Coordinate: " )+
-						est.x +
-						" , " + 
-						est.y + 
-						PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(POSSESSORE_KEY," Possessore: ") +
-						nodo.getPossessore().getNome() +
-						PersistenceFacade.getInstance().getLanguegeList(FilesLanguageManager.getCurrentLanguage()).getProperty(SW_DISP_KEY," SWdisp: ") +
-						nodo.getSoftware_disponibile()
-					);
+			coordinate.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: " + nodo.getPossessore().getNome() + " SWdisp: " + nodo.getSoftware_disponibile());
 			
 			basicMap.drawMap(est);
 		});

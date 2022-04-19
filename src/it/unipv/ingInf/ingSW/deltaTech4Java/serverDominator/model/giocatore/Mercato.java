@@ -2,11 +2,8 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 
-public class Mercato implements Runnable {
-	int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus, prezzoAntivirus;
-	int prezzoRootcrash, quantitaRam, quantitaCpu, quantitaEnergia, quantitaVirus, quantitaAntivirus, quantitaRootcrash;
-	int quantita;
-	Base utente;
+public class Mercato {
+	int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus, prezzoAntivirus, prezzoRootcrash, quantitaRam, quantitaCpu, quantitaEnergia, quantitaVirus, quantitaAntivirus, quantitaRootcrash;
 	
 	public Mercato() {
 		prezzoRam=0;
@@ -21,10 +18,7 @@ public class Mercato implements Runnable {
 		quantitaVirus=0;
 		quantitaAntivirus=0;
 		quantitaRootcrash=0;
-		
-		utente= new Base();
 	}
-	
 	public Mercato(int prezzoRam, int quantitaRam,int prezzoCpu, int quantitaCpu, int prezzoEnergia, int quantitaEnergia,int prezzoVirus, int quantitaVirus, int prezzoAntivirus, int quantitaAntivirus, int prezzoRootcrash, int quantitaRootcrash) {
 		this.prezzoRam=prezzoRam;
 		this.prezzoCpu=prezzoCpu; 
@@ -38,12 +32,9 @@ public class Mercato implements Runnable {
 		this.quantitaVirus=quantitaVirus;
 		this.quantitaAntivirus=quantitaAntivirus;
 		this.quantitaRootcrash=quantitaRootcrash;
-		
-		utente = new Base();
 	}
 	
 	public void compraSoftware(Utente user, Base nodo, int quantita, String software) {
-		
 		if(software=="virus") {
 				if(user.getValuta()>=prezzoVirus*quantita&&quantitaVirus>0);
 					nodo.crea_software(software, quantita);
@@ -79,15 +70,4 @@ public class Mercato implements Runnable {
 		}
 	}
 	
-	
-	/* da main chiamato setquantita, poi controllo soldi, e avvio run;
-	 * stesa logica di main definitivo per l'acquisto
-	 */
-	
-	/* getprezzi, setquantita,  
-	 * 
-	 */
-	public void run() {
-		
-	}
 }

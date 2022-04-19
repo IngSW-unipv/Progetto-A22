@@ -32,6 +32,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -103,6 +104,17 @@ public class Main extends Application {
 		setUpControls.setSpacing(10); // spazio tra un bottone e l'altro
 		setUpControls.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
 	}
+	
+	public void firewallAction(HBox firewallAction) {
+		addType(firewallAction, "+Firewall", (event -> {
+
+			// qui va inserita l'azione da compiere quando click on "Attacca!"
+
+		}));
+		firewallAction.setSpacing(0); // spazio tra un bottone e l'altro
+		//firewallAction.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+	}
+
 
 	@Override
 	public void start(Stage primaryStage) { // start della costruzione grafica
@@ -137,7 +149,7 @@ public class Main extends Application {
 		larghezzaE = 44.5;
 		altezzaE = 39.4;
 		Canvas basicCanvas = new Canvas(dimensioneMappa.getValue() * larghezzaE + bordoLarghezza,
-				dimensioneMappa.getKey() * altezzaE + bordoAltezza);
+										dimensioneMappa.getKey() * altezzaE + bordoAltezza);
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
 
 		// sottoMappa : HBox che contiene le VBox battaglie e action sotto alla mappa
@@ -156,19 +168,20 @@ public class Main extends Application {
 		battaglie.getChildren().addAll(titoloBattaglie,batt1);
 
 		// VBox "controlli" che contiene le azioni di gioco
-		Label azione = new Label("AZIONI DI GIOCO");
+		
 		VBox controlli = new VBox();
-		 
+		Label azione = new Label("AZIONI DI GIOCO");
+		azione.setMinWidth(100);
 		HBox attaccoDifesa = new HBox();
-		
-		
-		
+		attaccoDifesa.setMinWidth(100);		
 		HBox datiNodo = new HBox();
 		Label coordinate = new Label();
-		datiNodo.getChildren().add(coordinate);
 		datiNodo.setPadding(STANDARD_PADDING);
-		controlli.getChildren().addAll(datiNodo, attaccoDifesa); // aggiungo le HBox datiNodo, terrainControls alla VBox controls 
-		setUpControls(attaccoDifesa); // aggiunge le spaziature, i margini, etc...
+		
+		
+		datiNodo.getChildren().add(coordinate);
+		controlli.getChildren().addAll(azione, datiNodo, attaccoDifesa); // aggiungo le HBox datiNodo, attaccoDifesa alla VBox controlli 
+		setUpControls(attaccoDifesa); // aggiunge bottone
 
 		sottoMappa.getChildren().addAll(battaglie,controlli);
 
@@ -186,25 +199,65 @@ public class Main extends Application {
 		destraMappa.setSpacing(5);
 		destraMappa.setPadding(STANDARD_PADDING);
 
-		// aggiungiamo NODE INFO nella VBOX
 		HBox nodeInfo = new HBox();
-		Label batt1l = new Label("Node Info");
 		nodeInfo.setSpacing(5);
 		nodeInfo.setMinWidth(200);
 		nodeInfo.setAlignment(Pos.BASELINE_CENTER);
-		nodeInfo.getChildren().addAll(batt1l);
-		
-		HBox ownerDistance = new HBox();
-		VBox nodeOwner = new VBox();
-		Label owner = new Label("Node owner");
-		nodeOwner.getChildren().add(owner);
-		
-		VBox distance = new VBox();
-		Label Distance = new Label("Distance");
-		distance.getChildren().add(Distance);
+		nodeInfo.setPadding(STANDARD_PADDING);
 		
 
-		destraMappa.getChildren().add(nodeInfo);
+		HBox ownerDistance = new HBox();
+		Label batt1l = new Label("Node Info");
+		//ownerDistance.minWidth(200);
+		
+		VBox nodeOwner = new VBox();
+		HBox hNodeOwner = new HBox();
+		hNodeOwner.setAlignment(Pos.BASELINE_CENTER);
+		hNodeOwner.minWidth(100);
+		hNodeOwner.setPadding(STANDARD_PADDING);
+		Label owner = new Label("Node owner");
+		HBox isOwner = new HBox();
+		isOwner.setAlignment(Pos.BASELINE_CENTER);
+		Label isOwnerL = new Label();
+						
+		VBox distance = new VBox();
+		HBox hDistance = new HBox();
+		hDistance.setAlignment(Pos.BASELINE_CENTER);
+		hDistance.setPadding(STANDARD_PADDING);
+		hDistance.setMinWidth(100);
+		Label Distance = new Label("Distance");
+		HBox isDistance = new HBox();
+		isDistance.setAlignment(Pos.BASELINE_CENTER);
+		Label isDistanceL = new Label();
+		
+		
+		HBox firewall = new HBox();
+		//firewall.setPadding(STANDARD_PADDING);
+		VBox fwLVL = new VBox();
+		HBox hFwLVL = new HBox();
+		hFwLVL.setPadding(STANDARD_PADDING);
+		hFwLVL.setMinWidth(100);
+		Label FwLVL = new Label("Firewall LVL");
+		
+		
+		VBox fwAction = new VBox();
+		fwAction.setAlignment(Pos.TOP_LEFT);
+		HBox hFwAction = new HBox();
+		hFwAction.setPadding(STANDARD_PADDING);
+		firewallAction(hFwAction);
+		
+		nodeInfo.getChildren().add(batt1l);
+		hNodeOwner.getChildren().add(owner);
+		isOwner.getChildren().add(isOwnerL);
+		nodeOwner.getChildren().addAll(hNodeOwner,isOwner);
+		hDistance.getChildren().add(Distance);
+		distance.getChildren().add(hDistance);
+		ownerDistance.getChildren().addAll(nodeOwner,distance);
+		hFwLVL.getChildren().add(FwLVL);
+		fwLVL.getChildren().add(hFwLVL);
+		fwAction.getChildren().add(hFwAction);
+		firewall.getChildren().addAll(fwLVL,fwAction);
+		destraMappa.getChildren().addAll(nodeInfo,ownerDistance,firewall);
 
 		// Setting BorderPane
 		BorderPane.setMargin(pane, new Insets(20));
@@ -267,6 +320,10 @@ public class Main extends Application {
 
 			coordinate.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: " + nodo.getPossessore().getNome()
 					+ " SWdisp: " + nodo.getSoftware_disponibile());
+			
+			isOwnerL.setText(nodo.getPossessore().getNome());
+			
+			isDistanceL.setText(String.valueOf(nodo.getDist_base()));
 
 			basicMap.drawMap(est);
 		});

@@ -19,3 +19,4 @@ Controller.err.RunnerFileCreate=Unable to create setup script
 RunPanel.lable.titolo=Start playing
 RunPanel.button.run=Run the game
 OnlyDescription.lable.descrizione=Done game setup
+Controller.err.libNoSelect=Incorrect or unselected javafx 'lib' folder

@@ -1,1 +1,1 @@
-java --module-path "" --add-modules javafx.controls,javafx.base,javafx.graphics -jar .\sdMap.jar
+java -jar .\sdMap.jar

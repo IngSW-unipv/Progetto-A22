@@ -38,6 +38,6 @@ public class CmdCreatorFactory {
 			return result;
 		}
 	public static void main(String[] args) {
-		getCmdCreator(CMD_FULL,"","");
+		System.out.println(getCmdCreator(CMD_NOT_FULL,"","").toString());
 	}
 }

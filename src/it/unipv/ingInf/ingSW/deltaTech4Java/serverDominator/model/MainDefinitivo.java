@@ -9,7 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sist
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.mappaProva;
 
-public class MainDefinitivo {
+public class MainDefinitivo extends Thread {
 	private MappaDefinitiva tabellone;
 	private int n_basi;
 	private Giocatore[] giocatori;
@@ -17,6 +17,7 @@ public class MainDefinitivo {
 	private Mercato mercato;
 	private Utente utente;
 	private int t_unitario; 
+	private Thread t1;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -32,6 +33,8 @@ public class MainDefinitivo {
 		giocatori = this.creazioneGiocatori(nomeUtente, x_max, y_max);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
+		t1 = new Thread();
+		
 	}
 	
 	public void potenziamento(String risorsa){
@@ -53,23 +56,34 @@ public class MainDefinitivo {
 		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
 		 */	
 	
+<<<<<<< HEAD
 	public boolean avvioBattaglia(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
 
+=======
+	synchronized public boolean avvioBattaglia(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
+		/** il seguente metodo, gestisce le operazioni preliminari e successive alla battaglia
+		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
+		 */
+		
+>>>>>>> refs/remotes/origin/main
 				int punti, valuta; 
 		//le quantit� di software dovranno essere inizializati correttamente tramite un metodo
 		//del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
 				int t_timer;
-
 				boolean esito=tabellone.attaccabile(x,y, attaccante);
 				if(esito) {
 					t_timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
+<<<<<<< HEAD
 					// fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
 					// fight=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y));
+=======
+					//	fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
+					fight=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y), t_timer);
+					
+>>>>>>> refs/remotes/origin/main
 					fight.selezione(quantitaV, quantitaR);
-					
-		//timer
-					
-					esito=fight.calcola_vincitore();
+					t1=new Thread(fight);
+					esito= fight.getEsito();
 					if(esito) {
 						tabellone.aggiornastati(tabellone.getNodo(x,y), tabellone.dist_minima(x,y,attaccante));
 				// richiamo metodo per sommare le risorse del nodo bersaglio al nodo base attaccante

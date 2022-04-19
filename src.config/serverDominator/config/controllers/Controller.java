@@ -30,6 +30,7 @@ public class Controller {
 	public static final String LinguaNonSelezionata="Controller.err.LinguaNonSelezionata";
 	public static final String NoDaaBaseCreate="Controller.err.dataBaseCreator";
 	public static final String NoRunFileCreate="Controller.err.RunnerFileCreate";
+	public static final String NoLibSelected="Controller.err.libNoSelect";
 	
 	private ConfigFrame cfgFrame;
 	
@@ -162,10 +163,15 @@ public class Controller {
 					JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti"));
 				}else {
 					if(!cfgFrame.getPanelConfig().getRadioButtonjreFull().isSelected()) {
-						if(!ScriptsFacade.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
-							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
+						File fls=new File(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText());
+						if(!fls.exists()||!fls.isDirectory()) {
+							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoLibSelected, "Attenzione: scegliere la cartella lib di java fx"));
 						}else {
-							cfgFrame.loadRunPanel();
+							if(!ScriptsFacade.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
+								JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
+							}else {
+								cfgFrame.loadRunPanel();
+							}
 						}
 					}else {
 						if(!ScriptsFacade.createScript(ScriptsFacade.createCMDToRunFxApp(ScriptsFacade.JAR_NAME), ScriptsFacade.SCRIPT_NAME))
@@ -184,6 +190,7 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					ScriptsFacade.runShellScript();
+					cfgFrame.dispose();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

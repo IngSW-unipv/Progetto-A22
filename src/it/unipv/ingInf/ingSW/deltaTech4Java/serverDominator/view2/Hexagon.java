@@ -6,7 +6,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class Hexagon  {
     
-    int x, y, z;
+    public int x;
+	public int y;
+	int z;
 
     public Hexagon(int x, int y) {
         this.x = x;

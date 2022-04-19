@@ -73,7 +73,7 @@ public class MapData {
         return corners;
     }
 
-    Hexagon pixelToHex(Point p){				// trasforma coordinate in pixel, in coordinate puntuali (25,25) -> (0,0)
+    public Hexagon pixelToHex(Point p){				// trasforma coordinate in pixel, in coordinate puntuali (25,25) -> (0,0)
         Orientation M = layout.orientation;
 
         Point pt = new Point((p.getX() - layout.origin.x) / layout.size.x,
@@ -85,7 +85,7 @@ public class MapData {
         return new Hexagon((int) Math.round(q), (int) Math.round(r));
     }
 
-    HexData getHexData(Hexagon a){
+    public HexData getHexData(Hexagon a){
         return data.get(a);
     }
 

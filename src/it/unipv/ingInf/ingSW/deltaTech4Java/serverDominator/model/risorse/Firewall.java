@@ -21,10 +21,12 @@ public class Firewall extends Risorse{
 		super.setNome("Firewall");
 		this.effetto();
 	}
-/**metodo che per ogni livello della risorsa specifica le sue caratteristiche
- * e il necessario per il livello successivo
- */
+
 	public void effetto() {
+		/**metodo che per ogni livello della risorsa specifica le sue caratteristiche
+		 * e il necessario per il livello successivo
+		 */
+		
 		switch ( super.getLivello_risorsa() ) {
 		case 0: bonus_def=0;
 				super.setE_richiesta(10);

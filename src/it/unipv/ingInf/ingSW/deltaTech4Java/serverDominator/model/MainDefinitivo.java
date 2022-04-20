@@ -9,29 +9,37 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sist
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.mappaProva;
 
-public class MainDefinitivo {
+public class MainDefinitivo extends Thread{
 	private MappaDefinitiva tabellone;
 	private int n_basi;
 	private Giocatore[] giocatori;
-	private Battaglia fight;
 	private Mercato mercato;
 	private Utente utente;
 	private int t_unitario; 
 	
+	private Battaglia[] fight;
+	private int maxbattle=6;
+	private int count;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 	}
+	
 	
 	//selezione utente
 		//selezione lingua
+	
 	public void avvioPartita(int x_max, int y_max, String nomeUtente) {
 		t_unitario=10;
 		n_basi= 3;
 		giocatori = new Giocatore[n_basi+1];
-		giocatori = this.creazioneGiocatori(nomeUtente, x_max, y_max);
+		giocatori = this.creazioneGiocatori(nomeUtente, x_max);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
+		
+		fight= new Battaglia[maxbattle];
+		
 	}
 	
 	public void potenziamento(String risorsa){
@@ -49,52 +57,43 @@ public class MainDefinitivo {
 			//mercato.compraSoftware(utente, tabellone.trovaBase(utente), quantita, oggetto);
 	}
 
-	/** il seguente metodo, gestisce le operazioni preliminari e successive alla battaglia
-		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.		
-		 */	
+		
 	
-	public boolean avvioBattaglia(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
-
-				int punti, valuta; 
-		//le quantit� di software dovranno essere inizializati correttamente tramite un metodo
-		//del controllore che restituisce il numero di virus e rootcrash che l'utente seleziona in fase di attacco dall'interfaccia grafica
-				int t_timer;
-
-				boolean esito=tabellone.attaccabile(x,y, attaccante);
-				if(esito) {
-					t_timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
-					// fight=new Battaglia(tabellone.trovaBase(attaccante), bersaglio);
-					// fight=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y));
-					fight.selezione(quantitaV, quantitaR);
-					
-		//timer
-					
-					esito=fight.calcola_vincitore();
-					if(esito) {
-						tabellone.aggiornastati(tabellone.getNodo(x,y), tabellone.dist_minima(x,y,attaccante));
-				// richiamo metodo per sommare le risorse del nodo bersaglio al nodo base attaccante
-						
-					}
-						
-				}
-				
-				// if sottostante necessario??? 
-				if(attaccante.getNome().equals(utente.getNome())) {
-					if(esito) {
-						//utente.aggiornaPunteggio(punti);
-						//utente.aggiornaValuta(valuta);
-					}
-				//else? si tolgono punti in caso di sconfitta?
-				}
-				return esito;
+	public void battlecheck(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
+		/** il seguente metodo, gestisce le operazioni preliminari alla battaglia
+		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.
+		 * le quantita di software dovranno essere inizializati correttamente tramite un metodo del controllore 
+		 * che restituisce il numero di virus e rootcrash che l'utente seleziona 
+		 * in fase di attacco dall'interfaccia grafica	
+		 */
+	
+		int t_timer;
+		if(maxbattle>0) {
+			if(tabellone.attaccabile(x,y, attaccante)) {
+				t_timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
+				fight[maxbattle]=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y), t_timer);
+				fight[maxbattle].setPartenza(tabellone.dist_minima(x, y, attaccante));
+				fight[maxbattle].selezione(quantitaV, quantitaR);
+				count=maxbattle;
+				maxbattle--;
 			}
+		}
+		
+	}
+		
+	public void avvioBattaglia(Giocatore attaccante, int x, int y) {
+		fight[count].start();
+		maxbattle++;
+		fight[count].getReport();
+	}
 	
-	public Giocatore[] creazioneGiocatori(String utente, int x_max, int n_basi) {  // MP: n_basi credo sia superfluo...
+	public Giocatore[] creazioneGiocatori(String utente, int x_max) {  
 		Collections.shuffle(Colore.colori);
 		switch(x_max) {
 		case 15:
 			n_basi=3;
-			giocatori[0]= new Sistema(); giocatori[0].colore = Colore.GRIGIO;
+			giocatori[0]= new Sistema(); 
+			giocatori[0].colore = Colore.GRIGIO;
 			giocatori[1]= new Utente(utente); 
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -102,7 +101,8 @@ public class MainDefinitivo {
 		case 20:
 			n_basi=5;
 			giocatori= new Giocatore[n_basi+1];
-			giocatori[0]= new Sistema(); giocatori[0].colore = Colore.GRIGIO;
+			giocatori[0]= new Sistema();
+			giocatori[0].colore = Colore.GRIGIO;
 			giocatori[1]= new Utente(utente);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -112,7 +112,8 @@ public class MainDefinitivo {
 		case 30:
 			n_basi=10;
 			giocatori= new Giocatore[n_basi+1];
-			giocatori[0]= new Sistema(); giocatori[0].colore = Colore.GRIGIO;
+			giocatori[0]= new Sistema(); 
+			giocatori[0].colore = Colore.GRIGIO;
 			giocatori[1]= new Utente(utente);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");

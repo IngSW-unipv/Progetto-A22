@@ -15,7 +15,7 @@ public abstract class Software {
 	private int quantita;
 	private int temp_richiesto;
 	
-	public Software(int livello) { // costruttore della classe Software
+	public Software(int livello) { 
 		this.livello = livello;
 	}
 

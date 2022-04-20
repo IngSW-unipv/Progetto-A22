@@ -24,9 +24,10 @@ public class Energia extends Risorse{
 		super.setE_richiesta(0);
 		super.setTempo_richiesto(0);
 	}
-/** aggiorna il valore di energia utilizzabile*/
 	
 	public void effetto() {
+		/** aggiorna il valore di energia utilizzabile*/
+
 		e_disponibile= e_disponibile +INCREMENTATORE_EN;
 		//per test
 		//System.out.println("il valore di energia è:"+e_disponibile);

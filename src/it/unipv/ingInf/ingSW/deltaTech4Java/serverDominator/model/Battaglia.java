@@ -8,26 +8,38 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
 
 
-public class Battaglia {
+public class Battaglia extends Thread{
 	private Nodo attaccante;
 	private Nodo difensore;
 	private Software[] sel_attaccanti;
 	private Software[] sel_difensori;
+	
+	private boolean esito;
+	private Timer time;
+	private int t_timer;
+	private String report;
+	private Nodo partenza;
 		
-	public Battaglia(Nodo attaccante, Nodo difensore) {
+	public Battaglia(Nodo attaccante, Nodo difensore, int t_timer) {
 		this.attaccante=attaccante;
 		this.difensore=difensore;
+		this.t_timer= t_timer;
 		sel_attaccanti= attaccante.getStats_software_creati();
 		sel_difensori=difensore.getStats_software_creati();
+		time= new Timer();
+	
 	}
-/**necessario selezionare i software da mandare all'attacco del nodo bersaglio.
- * questo metodo prepara i dati necessari al calcolo del vincitore
- * @param quantità_v: rappresenta la quantità selezionata dal giocatore di Virus da mandare in attacco
- * @param quantità_r: rappresenta la quantità selezionata dal giocatore di Rootcrash da mandare all'attacco, max 1.
- */
+
 	public void selezione(int quantita_v, int quantita_r) {
+		/**necessario selezionare i software da mandare all'attacco del nodo bersaglio.
+		 * questo metodo prepara i dati necessari al calcolo del vincitore
+		 * @param quantità_v: rappresenta la quantità selezionata dal giocatore di Virus da mandare in attacco
+		 * @param quantità_r: rappresenta la quantità selezionata dal giocatore di Rootcrash da mandare all'attacco, max 1.
+		 */
+		
 		int[] disp;
 		int q_root, q_virus;
 		disp=new int [2];
@@ -47,19 +59,22 @@ public class Battaglia {
 		}
 	}
 	
-/**metodo per calcolare gli effetti del software Rootcrash
- */
+
 	public int aggiorna_firewall() {
-		Firewall temp;
+		/**metodo per calcolare gli effetti del software Rootcrash
+		 */
+		Firewall temp;		
 		temp= new Firewall(difensore.getLvl_firewall()-sel_attaccanti[2].getVal_atk());
 		return temp.getStat1();
 	}	
 	
-/**calcola il vincitore dello scontro confrontando i valori di attacco e di difesa
- * dei nodi coinvolti. L'attacco parte sempre dal nodo base, anche se l'attacco è possibile
- * solo se il nodo difensore è vicino ad almeno un nodo dell'attaccante.
- */
+
 	public boolean calcola_vincitore() {
+		/**calcola il vincitore dello scontro confrontando i valori di attacco e di difesa
+		 * dei nodi coinvolti. L'attacco parte sempre dal nodo base, anche se l'attacco è possibile
+		 * solo se il nodo difensore è vicino ad almeno un nodo dell'attaccante.
+		 */
+		
 		int attacco, difesa;
 		boolean successo=false;
 		attacco= sel_attaccanti[1].getQuantita() * sel_attaccanti[1].getVal_atk();
@@ -70,15 +85,55 @@ public class Battaglia {
 		return successo;
 	}
 	
-/**stampa il report di fine battaglia
-*/
-	public String stampa_report() {
+
+	public String stampa_report(boolean esito) {
+		/**stampa il report di fine battaglia
+		*/
 		String report;
-		if(calcola_vincitore()) {
-			report="Hai conquistato il nodo";
-		}else report="Non hai conquistare il nodo";
+		if(esito) {
+			report="Hai conquistato il nodo"+difensore.getPossessore().getNome();
+		}else report="Non hai conquistare il nodo"+difensore.getPossessore().getNome();
 		
 		return report;
 	}
+	
+	public void aggiornastati() {
+		difensore.setDist_base(partenza.getDist_base()+1);
+		difensore.setPossessore(partenza.getPossessore());
+		attaccante.getPossessore().aggiornaPunteggio(10);
+		attaccante.getPossessore().aggiornaValuta(10);
+	}
+	
+	
+	public void run() {
+		/**esecuzione battaglia in thread separato dal main
+		 * per far si che si possano eseguire più battaglie
+		 */
+		
+		time.countdown(t_timer);
+		time.timer(t_timer);
+		esito= this.calcola_vincitore();
+		report=stampa_report(esito);
+		if(esito) {
+			this.aggiornastati();
+		}
+	}
+
+/** getter and setter*/
+	
+	public boolean getEsito() {
+		return esito;
+	}
+
+	public String getReport() {
+		return report;
+	}
+
+	public void setPartenza(Nodo partenza) {
+		this.partenza = partenza;
+	}
+	
+	
+		
 	
 }

@@ -29,10 +29,12 @@ public class Cpu extends Risorse{
 		System.out.println("rootcrash lvl"+ rootcrash);
 */
 	}
-/**aggiorna, in funzione del livello risorsa, le caratteristiche
- * che vengono sbloccate e i requisiti per il livello successivo
- */
+
 	public void effetto() {
+		/**aggiorna, in funzione del livello risorsa, le caratteristiche
+		 * che vengono sbloccate e i requisiti per il livello successivo
+		 */
+		
 		switch ( super.getLivello_risorsa() ) {
 		case 0: antivirus=0;
 				virus=0;

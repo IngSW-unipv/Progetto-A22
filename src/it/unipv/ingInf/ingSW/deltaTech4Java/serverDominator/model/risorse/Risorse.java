@@ -23,9 +23,10 @@ public abstract class Risorse {
 		e_richiesta=0;
 		tempo_richiesto=0;
 	}
-/**aggiorna il livello delle risorse, generico per tutte le risorse */
 	
 	public boolean potenziamento() {
+		/**aggiorna il livello delle risorse, generico per tutte le risorse */
+
 		boolean powerup=false;
 		int i;
 		i=livello_risorsa+1;

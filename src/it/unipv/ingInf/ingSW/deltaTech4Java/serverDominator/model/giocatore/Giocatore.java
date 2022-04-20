@@ -7,14 +7,17 @@ public abstract class Giocatore {
 	public int punteggio;
 	public String nome;
 	public String colore;
+	private int valuta;
 
 	public Giocatore(String nome) {
 		this.nome=nome;
 		punteggio=0;
+		valuta=0;
 	}
 	public Giocatore() {
 		this.nome=null;
 		punteggio=0;
+		valuta=0;
 	}
 	public Giocatore(Giocatore user) {
 		this.nome=user.getNome();
@@ -51,4 +54,11 @@ public abstract class Giocatore {
 	public String getColore() {
 		return colore;
 	}
+	public int getValuta() {
+		return valuta;
+	}
+	public void aggiornaValuta(int valuta) {
+		this.valuta += valuta;
+	}
+	
 }

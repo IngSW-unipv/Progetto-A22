@@ -27,7 +27,7 @@ public abstract class Giocatore implements Runnable{
 	public int getPunteggio() {
 		return punteggio;
 	}
-	/**Aggiorna la valuta temporanea con il valore passato come parrametro*/
+	/**Aggiorna la valuta temporanea con il valore passato come parametro*/
 	public void setPunteggio(int punteggio) {
 		this.punteggio =punteggio;
 	}
@@ -35,7 +35,7 @@ public abstract class Giocatore implements Runnable{
 	public String getNome() {
 		return nome;
 	}
-	/**Aggiorna il nome con la stringa passata come parrametro*/
+	/**Aggiorna il nome con la stringa passata come parametro*/
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

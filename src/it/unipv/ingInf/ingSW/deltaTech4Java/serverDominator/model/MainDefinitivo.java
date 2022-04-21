@@ -16,10 +16,13 @@ public class MainDefinitivo extends Thread{
 	private Mercato mercato;
 	private Utente utente;
 	private int t_unitario; 
+	Thread threadBot[];
 	
 	private Battaglia[] fight;
 	private int maxbattle=6;
 	private int count;
+	private int tempoAggiornamento;
+	private boolean giocoAttivo=false;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -30,7 +33,8 @@ public class MainDefinitivo extends Thread{
 	//selezione utente
 		//selezione lingua
 	
-	public void avvioPartita(int x_max, int y_max, String nomeUtente) {
+	public void avvioPartita(int x_max, int y_max, String nomeUtente) throws InterruptedException {
+		giocoAttivo=true;
 		t_unitario=10;
 		n_basi= 3;
 		giocatori = new Giocatore[n_basi+1];
@@ -39,6 +43,13 @@ public class MainDefinitivo extends Thread{
 		mercato=new Mercato();
 		
 		fight= new Battaglia[maxbattle];
+		
+		this.avvioBot(tempoAggiornamento);
+		
+		
+		//gioco finito
+		giocoAttivo=false;
+		this.stopBot();
 		
 	}
 	
@@ -149,5 +160,26 @@ public class MainDefinitivo extends Thread{
 	
 	public Giocatore[] getGiocatori() {
 		return giocatori;
+	}
+	
+	@SuppressWarnings("static-access")
+	public void avvioBot(int tempo) throws InterruptedException {
+		int i;
+		for(i=1; i<=n_basi; i++) {
+			threadBot[i]=new Thread(giocatori[i]);
+			threadBot[i].start();
+		}
+		while(giocoAttivo) {	
+			for(i=1; i<=n_basi; i++) {
+				threadBot[i].sleep(tempo);
+			}
+		}
+	}
+	
+	public void stopBot() throws InterruptedException {
+		int i;
+		for(i=1; i<=n_basi; i++) {
+			threadBot[i].interrupt();;
+		}
 	}
 }

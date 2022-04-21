@@ -16,6 +16,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -94,7 +95,7 @@ public class Main extends Application {
 	}
 
 	// botte ATTACCA! con l'evento mouseOnClick da aggiungere
-	
+
 	public void setUpControls(HBox setUpControls) {
 		addType(setUpControls, "Attacca!", (event -> {
 
@@ -104,36 +105,37 @@ public class Main extends Application {
 		setUpControls.setSpacing(10); // spazio tra un bottone e l'altro
 		setUpControls.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
 	}
-	
+
 	public void firewallAction(HBox firewallAction) {
 		addType(firewallAction, "+Firewall", (event -> {
 
 			// qui va inserita l'azione da compiere quando click on "+Firewall"
 
 		}));
-		//firewallAction.setSpacing(0); // spazio tra un bottone e l'altro
-		//firewallAction.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+		// firewallAction.setSpacing(0); // spazio tra un bottone e l'altro
+		// firewallAction.setPadding(STANDARD_PADDING); // margini del testo dentro al
+		// bottone
 	}
-	
+
 	public void ramAction(HBox ramActionButton) {
 		addType(ramActionButton, "+RAM", (event -> {
 
 			// qui va inserita l'azione da compiere quando click on "+RAM"
 
 		}));
-		//ramActionButton.setSpacing(0); // spazio tra un bottone e l'altro
-		//ramActionButton.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+		// ramActionButton.setSpacing(0); // spazio tra un bottone e l'altro
+		// ramActionButton.setPadding(STANDARD_PADDING); // margini del testo dentro al
+		// bottone
 	}
-	
+
 	public void cpuAction(HBox cpuActionButton) {
 		addType(cpuActionButton, "+RAM", (event -> {
 
 			// qui va inserita l'azione da compiere quando click on "+CPU"
 
 		}));
-		
-	}
 
+	}
 
 	@Override
 	public void start(Stage primaryStage) { // start della costruzione grafica
@@ -156,8 +158,8 @@ public class Main extends Application {
 		// addStateItem.setOnAction(event -> addState(politicalControls));
 		stateMenu.getItems().add(addStateItem);
 		menuBar.getMenus().addAll(fileMenu, stateMenu);
-		
-		
+
+		// finestra di gioco
 		VBox holder = new VBox();
 		BorderPane borderPane = new BorderPane();
 
@@ -168,131 +170,49 @@ public class Main extends Application {
 		larghezzaE = 44.5;
 		altezzaE = 39.4;
 		Canvas basicCanvas = new Canvas(dimensioneMappa.getValue() * larghezzaE + bordoLarghezza,
-										dimensioneMappa.getKey() * altezzaE + bordoAltezza);
+				dimensioneMappa.getKey() * altezzaE + bordoAltezza);
+
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
-
-		// sottoMappa : HBox che contiene le VBox battaglie e action sotto alla mappa
-		HBox sottoMappa = new HBox();
-		
-		// VBox che contiene le battaglie
-		VBox battaglie = new VBox();
-		battaglie.setSpacing(5);
-		battaglie.setPadding(STANDARD_PADDING);
-		Label titoloBattaglie = new Label("BATTAGLIE IN CORSO");
-		HBox batt1 = new HBox();
-		batt1.setSpacing(5);
-		ProgressBar pb1 = new ProgressBar(0);
-		Label batt1Lb = new Label("Battaglia 1");
-		batt1.getChildren().addAll(batt1Lb, pb1);
-		battaglie.getChildren().addAll(titoloBattaglie,batt1);
-
-		// VBox "controlli" che contiene le azioni di gioco
-		
-		VBox controlli = new VBox();
-		Label azione = new Label("AZIONI DI GIOCO");
-		azione.setMinWidth(100);
-		HBox attaccoDifesa = new HBox();
-		attaccoDifesa.setMinWidth(100);		
-		HBox datiNodo = new HBox();
-		Label coordinate = new Label();
-		datiNodo.setPadding(STANDARD_PADDING);
-		
-		
-		datiNodo.getChildren().add(coordinate);
-		controlli.getChildren().addAll(azione, datiNodo, attaccoDifesa); // aggiungo le HBox datiNodo, attaccoDifesa alla VBox controlli 
-		setUpControls(attaccoDifesa); // aggiunge bottone
-
-		sottoMappa.getChildren().addAll(battaglie,controlli);
+		basicGC.setFill(null);
 
 		// Adding Canvases to BorderPane
-		Pane pane = new Pane();
-		pane.getChildren().addAll(basicCanvas);
+		ScrollPane centerPane = new ScrollPane();
+		centerPane.setContent(basicCanvas);
+		centerPane.setStyle("-fx-background: rgb(20,20,20)");
 
 		// definisco: colore sfondo di pane; arrotondamento angoli;
-		pane.setBackground(new Background(
-				new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(-10, -10, 0, -10))));
-		// pane.setPadding(STANDARD_PADDING);
+		centerPane.setBackground(
+				new Background(new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		centerPane.setPadding(STANDARD_PADDING);
 
-		// VBox destraMappa
-		
+		// Pane parte a destra della mappa
+
+		Pane dmPane = new Pane();
+		dmPane.setBackground(
+				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+
 		VBox destraMappa = new VBox();
 		destraMappa.setSpacing(5);
 		destraMappa.setPadding(STANDARD_PADDING);
-		
+
 		HBox title = new HBox();
 		title.setAlignment(Pos.BASELINE_CENTER);
-		Label Title = new Label("Info Nodo");
-		title.getChildren().add(Title);
-		
-		/*
-		HBox nodeInfo = new HBox();
-		nodeInfo.setSpacing(5);
-		nodeInfo.setMinWidth(200);
-		nodeInfo.setAlignment(Pos.BASELINE_CENTER);
-		nodeInfo.setPadding(STANDARD_PADDING);
-		
+		// title.setBackground(new Background(new BackgroundFill(Color.web("#e51400"),
+		// new CornerRadii(10), STANDARD_PADDING)));
 
-		HBox ownerDistance = new HBox();
-		Label nodeInfoL = new Label("Node Info");
-		//ownerDistance.minWidth(200);
-		
-		
-		VBox nodeOwner = new VBox();
-		HBox hNodeOwner = new HBox();
-		hNodeOwner.setAlignment(Pos.BASELINE_CENTER);
-		hNodeOwner.minWidth(100);
-		hNodeOwner.setPadding(STANDARD_PADDING);
-		Label owner = new Label("Node owner");
-		HBox isOwner = new HBox();
-		isOwner.setAlignment(Pos.BASELINE_CENTER);
-		Label isOwnerL = new Label();
-		
-		
-		VBox distance = new VBox();
-		HBox hDistance = new HBox();
-		hDistance.setAlignment(Pos.BASELINE_CENTER);
-		hDistance.setPadding(STANDARD_PADDING);
-		hDistance.setMinWidth(100);
-		Label Distance = new Label("Distance");
-		HBox isDistance = new HBox();
-		isDistance.setAlignment(Pos.BASELINE_CENTER);
-		Label isDistanceL = new Label();
-		
-		
-		HBox firewall = new HBox();
-		//firewall.setPadding(STANDARD_PADDING);
-		VBox fwLVL = new VBox();
-		HBox hFwLVL = new HBox();
-		hFwLVL.setPadding(STANDARD_PADDING);
-		hFwLVL.setMinWidth(100);
-		hFwLVL.setMaxWidth(100);
-		hFwLVL.setAlignment(Pos.BOTTOM_LEFT);
-		Label FwLvlL = new Label("Firewall LVL");
-		//FwLVL.setAlignment(Pos.TOP_RIGHT); questo allineamento non incide
-		
-		 
-		
-		
-		VBox fwAction = new VBox();
-		HBox hFwAction = new HBox();
-		hFwAction.setPadding(STANDARD_PADDING);
-		hFwAction.setSpacing(0);
-		hFwAction.setMinWidth(100);
-		hFwAction.setAlignment(Pos.BASELINE_LEFT);
-		firewallAction(hFwAction);
-		*/
-		
-		
+		Label Title = new Label("Info Nodo");
+
+		title.getChildren().add(Title);
+
+		HBox gridBox = new HBox();
+
 		GridPane gDx = new GridPane();
 		gDx.setPrefSize(200, 300);
-		gDx.setPadding(new Insets(0,10,10,10));
+		gDx.setPadding(new Insets(0, 10, 10, 10));
 		gDx.setVgap(5);
 		gDx.setHgap(20);
 		gDx.setAlignment(Pos.BASELINE_LEFT);
-		
-			
-		Label title1 = new Label("-----------");
-		Label title2 = new Label("-----------");
+
 		Label owner = new Label("Node owner:");
 		Label isOwnerL = new Label();
 		Label distance = new Label("Distance:");
@@ -309,44 +229,115 @@ public class Main extends Application {
 		HBox cpuActionBox = new HBox();
 		cpuActionBox.setAlignment(Pos.BASELINE_LEFT);
 		ramAction(cpuActionBox);
-		
+
 		gDx.add(owner, 0, 0);
 		gDx.add(isOwnerL, 1, 0);
 		gDx.add(distance, 0, 1);
 		gDx.add(isDistance, 1, 1);
-		
+
 		gDx.add(fwLVL, 0, 2);
 		gDx.add(hFwAction, 1, 2);
 		gDx.add(ramLvl, 0, 3);
 		gDx.add(ramActionBox, 1, 3);
 		gDx.add(cpuLvl, 0, 4);
 		gDx.add(cpuActionBox, 1, 4);
-		
-		
-		/*
-		nodeInfo.getChildren().add(new Label("Label Test"));
-		hNodeOwner.getChildren().add(new Label("NULL"));
-		isOwner.getChildren().add(isOwnerL);
-		nodeOwner.getChildren().addAll(hNodeOwner,isOwner);
-		hDistance.getChildren().add(Distance);
-		distance.getChildren().add(hDistance);
-		ownerDistance.getChildren().addAll(nodeOwner,distance);
-		hFwLVL.getChildren().add(FwLVL);
-		fwLVL.getChildren().add(hFwLVL);
-		fwAction.getChildren().add(hFwAction);
-		firewall.getChildren().addAll(fwLVL,fwAction);
-		*/
-		
-		destraMappa.getChildren().addAll(title,gDx); /*,nodeInfo,ownerDistance,firewall*/
-		
 
+		gridBox.getChildren().add(gDx);
+		destraMappa.getChildren().addAll(title, gridBox);
+		dmPane.getChildren().addAll(destraMappa); /* ,nodeInfo,ownerDistance,firewall */
+
+		// sottoMappa : HBox che contiene le VBox battaglie e action sotto alla mappa
+
+		HBox sottoMappa = new HBox();
+
+		// Pane battle che contiene le battaglie
+
+		Pane battlePane = new Pane();
+
+		battlePane.setBackground(
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		battlePane.setPadding(STANDARD_PADDING);
+
+		VBox battaglie = new VBox();
+		battaglie.setSpacing(0);
+		battaglie.setPadding(STANDARD_PADDING);
+		battaglie.setMaxWidth(390);
+		Label titoloBattaglie = new Label("BATTAGLIE IN CORSO");
+		HBox batt1 = new HBox();
+		batt1.setSpacing(0);
+		ProgressBar pb1 = new ProgressBar(0);
+		Label batt1Lb = new Label("Battaglia 1");
+		batt1.getChildren().addAll(batt1Lb, pb1);
+		battaglie.getChildren().addAll(titoloBattaglie, batt1);
+		battlePane.getChildren().add(battaglie);
+
+		// Pane control - contiene le azioni di gioco
+
+		Pane controlPane = new Pane();
+
+		controlPane.setBackground(
+				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 10))));
+		controlPane.setPadding(STANDARD_PADDING);
+
+		VBox controlli = new VBox();
+		controlli.setMaxWidth(390);
+		controlli.setPadding(STANDARD_PADDING);
+		HBox hAzione = new HBox();
+		hAzione.setPadding(STANDARD_PADDING);
+		hAzione.setMinWidth(controlli.getWidth());
+		hAzione.setAlignment(Pos.CENTER);
+		hAzione.setBackground(
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+
+		Label azione = new Label("AZIONI DI GIOCO");
+		azione.setBackground(
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+
+		hAzione.getChildren().add(azione);
+		HBox attaccoDifesa = new HBox();
+		attaccoDifesa.setMinWidth(100);
+		HBox datiNodo = new HBox();
+		Label coordinate = new Label();
+		datiNodo.setPadding(STANDARD_PADDING);
+
+		datiNodo.getChildren().add(coordinate);
+		controlli.getChildren().addAll(hAzione, datiNodo, attaccoDifesa);
+		setUpControls(attaccoDifesa);
+
+		controlPane.getChildren().add(controlli);
+
+		// Pane market
+
+		Pane marketPane = new Pane();
+		marketPane.setBackground(
+				new Background(new BackgroundFill(Color.web("#e1d5e7"), new CornerRadii(10), new Insets(0, 0, 0, 10))));
+		marketPane.setPadding(STANDARD_PADDING);
+
+		VBox market = new VBox();
+		market.setPadding(STANDARD_PADDING);
+
+		HBox mTitle = new HBox();
+		Label marketTitle = new Label("MARKET");
+
+		mTitle.getChildren().add(marketTitle);
+		market.getChildren().add(mTitle);
+		marketPane.getChildren().add(market);
+		HBox.setHgrow(marketPane, Priority.ALWAYS);
+		HBox.setHgrow(controlPane, Priority.ALWAYS);
+		HBox.setHgrow(battlePane, Priority.ALWAYS);
+		sottoMappa.getChildren().addAll(battlePane, controlPane, marketPane);
+
+// ------------------------------------------ //
 
 		// Setting BorderPane
-		BorderPane.setMargin(pane, new Insets(20));
+
 		borderPane.setTop(menuBar);
-		borderPane.setCenter(pane);
+		borderPane.setCenter(centerPane);
+		BorderPane.setMargin(centerPane, new Insets(10));
 		borderPane.setBottom(sottoMappa);
-		borderPane.setRight(destraMappa);
+		BorderPane.setMargin(sottoMappa, new Insets(0, 10, 10, 10));
+		borderPane.setRight(dmPane);
+		BorderPane.setMargin(dmPane, new Insets(10, 10, 10, 0));
 
 		// Adding MenuBar and BorderPane to a VBox Holder
 		holder.getChildren().addAll(menuBar, borderPane);
@@ -395,19 +386,25 @@ public class Main extends Application {
 		 * terrainMap.selected = newValue; mapChange = true; });
 		 */
 
-		pane.setOnMouseClicked(event -> {
+		centerPane.setOnMouseClicked(event -> {
 			Hexagon est = mapData.pixelToHex(new Point(event.getX(), event.getY()));
+
 			HexData data = mapData.getHexData(est);
-			Nodo nodo = data.nodo;
-
-			coordinate.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: " + nodo.getPossessore().getNome()
-					+ " SWdisp: " + nodo.getSoftware_disponibile());
 			
-			isOwnerL.setText(nodo.getPossessore().getNome());
-			
-			//isDistanceL.setText(String.valueOf(nodo.getDist_base()));
+			// controllo se il click avviene fuori dagli esagoni
+			if (data != null) {
+				Nodo nodo = data.nodo;
 
-			basicMap.drawMap(est);
+				coordinate.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: "
+						+ nodo.getPossessore().getNome() + " SWdisp: " + nodo.getSoftware_disponibile());
+
+				isOwnerL.setText(nodo.getPossessore().getNome());
+
+				// isDistanceL.setText(String.valueOf(nodo.getDist_base()));
+
+				basicMap.drawMap(est);
+
+			}
 		});
 
 		primaryStage.setScene(new Scene(holder));

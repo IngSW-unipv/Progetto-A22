@@ -108,11 +108,30 @@ public class Main extends Application {
 	public void firewallAction(HBox firewallAction) {
 		addType(firewallAction, "+Firewall", (event -> {
 
-			// qui va inserita l'azione da compiere quando click on "Attacca!"
+			// qui va inserita l'azione da compiere quando click on "+Firewall"
 
 		}));
-		firewallAction.setSpacing(0); // spazio tra un bottone e l'altro
+		//firewallAction.setSpacing(0); // spazio tra un bottone e l'altro
 		//firewallAction.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+	}
+	
+	public void ramAction(HBox ramActionButton) {
+		addType(ramActionButton, "+RAM", (event -> {
+
+			// qui va inserita l'azione da compiere quando click on "+RAM"
+
+		}));
+		//ramActionButton.setSpacing(0); // spazio tra un bottone e l'altro
+		//ramActionButton.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+	}
+	
+	public void cpuAction(HBox cpuActionButton) {
+		addType(cpuActionButton, "+RAM", (event -> {
+
+			// qui va inserita l'azione da compiere quando click on "+CPU"
+
+		}));
+		
 	}
 
 
@@ -195,10 +214,17 @@ public class Main extends Application {
 		// pane.setPadding(STANDARD_PADDING);
 
 		// VBox destraMappa
+		
 		VBox destraMappa = new VBox();
 		destraMappa.setSpacing(5);
 		destraMappa.setPadding(STANDARD_PADDING);
-
+		
+		HBox title = new HBox();
+		title.setAlignment(Pos.BASELINE_CENTER);
+		Label Title = new Label("Info Nodo");
+		title.getChildren().add(Title);
+		
+		/*
 		HBox nodeInfo = new HBox();
 		nodeInfo.setSpacing(5);
 		nodeInfo.setMinWidth(200);
@@ -207,8 +233,9 @@ public class Main extends Application {
 		
 
 		HBox ownerDistance = new HBox();
-		Label batt1l = new Label("Node Info");
+		Label nodeInfoL = new Label("Node Info");
 		//ownerDistance.minWidth(200);
+		
 		
 		VBox nodeOwner = new VBox();
 		HBox hNodeOwner = new HBox();
@@ -219,7 +246,8 @@ public class Main extends Application {
 		HBox isOwner = new HBox();
 		isOwner.setAlignment(Pos.BASELINE_CENTER);
 		Label isOwnerL = new Label();
-						
+		
+		
 		VBox distance = new VBox();
 		HBox hDistance = new HBox();
 		hDistance.setAlignment(Pos.BASELINE_CENTER);
@@ -237,17 +265,67 @@ public class Main extends Application {
 		HBox hFwLVL = new HBox();
 		hFwLVL.setPadding(STANDARD_PADDING);
 		hFwLVL.setMinWidth(100);
-		Label FwLVL = new Label("Firewall LVL");
+		hFwLVL.setMaxWidth(100);
+		hFwLVL.setAlignment(Pos.BOTTOM_LEFT);
+		Label FwLvlL = new Label("Firewall LVL");
+		//FwLVL.setAlignment(Pos.TOP_RIGHT); questo allineamento non incide
+		
+		 
 		
 		
 		VBox fwAction = new VBox();
-		fwAction.setAlignment(Pos.TOP_LEFT);
 		HBox hFwAction = new HBox();
 		hFwAction.setPadding(STANDARD_PADDING);
+		hFwAction.setSpacing(0);
+		hFwAction.setMinWidth(100);
+		hFwAction.setAlignment(Pos.BASELINE_LEFT);
 		firewallAction(hFwAction);
+		*/
 		
-		nodeInfo.getChildren().add(batt1l);
-		hNodeOwner.getChildren().add(owner);
+		
+		GridPane gDx = new GridPane();
+		gDx.setPrefSize(200, 300);
+		gDx.setPadding(new Insets(0,10,10,10));
+		gDx.setVgap(5);
+		gDx.setHgap(20);
+		gDx.setAlignment(Pos.BASELINE_LEFT);
+		
+			
+		Label title1 = new Label("-----------");
+		Label title2 = new Label("-----------");
+		Label owner = new Label("Node owner:");
+		Label isOwnerL = new Label();
+		Label distance = new Label("Distance:");
+		Label isDistance = new Label("NO DATA");
+		Label fwLVL = new Label("Firewall LVL");
+		HBox hFwAction = new HBox();
+		hFwAction.setAlignment(Pos.BASELINE_LEFT);
+		firewallAction(hFwAction);
+		Label ramLvl = new Label("Ram LVL");
+		HBox ramActionBox = new HBox();
+		ramActionBox.setAlignment(Pos.BASELINE_LEFT);
+		ramAction(ramActionBox);
+		Label cpuLvl = new Label("CPU LVL");
+		HBox cpuActionBox = new HBox();
+		cpuActionBox.setAlignment(Pos.BASELINE_LEFT);
+		ramAction(cpuActionBox);
+		
+		gDx.add(owner, 0, 0);
+		gDx.add(isOwnerL, 1, 0);
+		gDx.add(distance, 0, 1);
+		gDx.add(isDistance, 1, 1);
+		
+		gDx.add(fwLVL, 0, 2);
+		gDx.add(hFwAction, 1, 2);
+		gDx.add(ramLvl, 0, 3);
+		gDx.add(ramActionBox, 1, 3);
+		gDx.add(cpuLvl, 0, 4);
+		gDx.add(cpuActionBox, 1, 4);
+		
+		
+		/*
+		nodeInfo.getChildren().add(new Label("Label Test"));
+		hNodeOwner.getChildren().add(new Label("NULL"));
 		isOwner.getChildren().add(isOwnerL);
 		nodeOwner.getChildren().addAll(hNodeOwner,isOwner);
 		hDistance.getChildren().add(Distance);
@@ -257,7 +335,11 @@ public class Main extends Application {
 		fwLVL.getChildren().add(hFwLVL);
 		fwAction.getChildren().add(hFwAction);
 		firewall.getChildren().addAll(fwLVL,fwAction);
-		destraMappa.getChildren().addAll(nodeInfo,ownerDistance,firewall);
+		*/
+		
+		destraMappa.getChildren().addAll(title,gDx); /*,nodeInfo,ownerDistance,firewall*/
+		
+
 
 		// Setting BorderPane
 		BorderPane.setMargin(pane, new Insets(20));
@@ -323,7 +405,7 @@ public class Main extends Application {
 			
 			isOwnerL.setText(nodo.getPossessore().getNome());
 			
-			isDistanceL.setText(String.valueOf(nodo.getDist_base()));
+			//isDistanceL.setText(String.valueOf(nodo.getDist_base()));
 
 			basicMap.drawMap(est);
 		});

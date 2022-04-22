@@ -132,7 +132,7 @@ public class Cloud extends Nodo {
 		return stats_software_creati;
 	}
 	
-	public int getQnt_antivirusvirus() {
+	public int getQnt_antivirus() {
 		return super.getSoftware_disponibile();
 	}
 	

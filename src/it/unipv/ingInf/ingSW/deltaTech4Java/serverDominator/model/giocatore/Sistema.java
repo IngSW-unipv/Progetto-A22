@@ -16,4 +16,11 @@ public class Sistema extends Giocatore {
 		super.setPunteggio(0);
 		super.setColore(Colore.GRIGIO);
 	}
+
+	@Override
+	public void run() {
+	/** il giocatore sistema non fa nulla serve solo 
+	 * per inizializzare i nodi cloud all'inizio della partita
+	 */
+	}
 }

@@ -184,11 +184,11 @@ public class Base extends Nodo{
 		return stats_software_creati[1].getQuantita();
 	}
 
-	public int getLvl_antivirusvirus() {
+	public int getLvl_antivirus() {
 		return risorse[0].getStat1();
 	}
 	
-	public int getQnt_antivirusvirus() {
+	public int getQnt_antivirus() {
 		return stats_software_creati[0].getQuantita();
 	}
 	public int getLvl_rootcrash() {

@@ -1,20 +1,17 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import java.util.Collections;
-
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.mappaProva;
 
 public class MainDefinitivo extends Thread{
 	private MappaDefinitiva tabellone;
 	private int n_basi;
 	private Giocatore[] giocatori;
 	private Mercato mercato;
-	private Utente utente; //ATTENZIONE: non viene inizializzato da nessuna parte 
 	private int t_unitario, t_timer;
 	Thread threadBot[];
 	
@@ -27,13 +24,14 @@ public class MainDefinitivo extends Thread{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//prova 1:avvio partita
-		MainDefinitivo main = new MainDefinitivo();
+/*		MainDefinitivo main = new MainDefinitivo();
 		try {
 			main.avvioPartita(30, 20, "Matteo");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+*/		
 	}
 	
 	
@@ -43,12 +41,9 @@ public class MainDefinitivo extends Thread{
 	public void avvioPartita(int x_max, int y_max, String nomeUtente) throws InterruptedException {
 		giocoAttivo=true;
 		t_unitario=10;
-		n_basi= 3;
-		giocatori = new Giocatore[n_basi+1];
-		giocatori = this.creazioneGiocatori(nomeUtente, x_max);
+		this.creazioneGiocatori(nomeUtente, x_max);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
-		
 		fight= new Battaglia[maxbattle];
 		
 		this.avvioBot(tempoAggiornamento);
@@ -60,11 +55,13 @@ public class MainDefinitivo extends Thread{
 	
 	}
 
-	public Giocatore[] creazioneGiocatori(String utente, int x_max) {  
+	public void creazioneGiocatori(String utente, int x_max) {  
 		Collections.shuffle(Colore.colori);
+				
 		switch(x_max) {
 		case 15:
 			n_basi=3;
+			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
 			giocatori[0].colore = Colore.GRIGIO;
 			giocatori[1]= new Utente(utente); 
@@ -104,7 +101,6 @@ public class MainDefinitivo extends Thread{
 			giocatori[i].colore = Colore.colori.get(i-1);
 			
 		}
-		return giocatori;
 	
 	}
 
@@ -112,12 +108,11 @@ public class MainDefinitivo extends Thread{
 	public void avvioBot(int tempo) throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
-			threadBot[i]=new Thread(giocatori[i]);
-			threadBot[i].start();
+			giocatori[i].start();
 		}
 		while(giocoAttivo) {	
 			for(i=2; i<=n_basi; i++) {
-				threadBot[i].sleep(tempo);
+				giocatori[i].start();
 			}
 		}
 	}
@@ -125,7 +120,7 @@ public class MainDefinitivo extends Thread{
 	public void stopBot() throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
-			threadBot[i].interrupt();
+			giocatori[i].interrupt();
 		}
 	}
 	

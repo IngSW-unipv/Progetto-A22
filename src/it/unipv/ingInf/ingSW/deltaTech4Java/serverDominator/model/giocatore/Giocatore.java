@@ -1,9 +1,8 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Colore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
-public abstract class Giocatore implements Runnable{
+public abstract class Giocatore extends Thread{
 	public int punteggio;
 	public String nome;
 	public String colore;

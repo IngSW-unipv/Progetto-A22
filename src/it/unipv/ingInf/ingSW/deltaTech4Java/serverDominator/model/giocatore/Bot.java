@@ -1,13 +1,12 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 
-public class Bot extends Giocatore implements Runnable{
+public class Bot extends Giocatore{
 	
 	private Base baseUtente, baseBot;
 	

@@ -358,10 +358,17 @@ public class Main extends Application {
 		utente.colore = Colore.GIALLO;
 
 		MainDefinitivo main = new MainDefinitivo();
-		main.avvioPartita(30, 20, "Matteo");
+		
+		try {
+			main.avvioPartita(30, 20, "Matteo");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Giocatore[] giocatori = main.getGiocatori();
 
-		Mappa mappa = new Mappa(30, 20, giocatori);
+		MappaDefinitiva mappa = new MappaDefinitiva(30, 20, giocatori);
 		mappa.assegnamento(10, giocatori);
 
 		// definiamo i nodi base
@@ -378,6 +385,7 @@ public class Main extends Application {
 
 		// !!!! Occorre normalizzare le coordinate !!!!
 		Nodo[][] nodiTest = mappa.getMap();
+		
 
 		MapData mapData = new MapData(nodiTest);
 

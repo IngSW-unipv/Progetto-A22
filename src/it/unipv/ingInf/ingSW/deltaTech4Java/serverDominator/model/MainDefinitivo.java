@@ -43,14 +43,14 @@ public class MainDefinitivo extends Thread{
 		mercato=new Mercato();
 		
 		fight= new Battaglia[maxbattle];
-		
+	
 		this.avvioBot(tempoAggiornamento);
 		
 		
 		//gioco finito
 		giocoAttivo=false;
 		this.stopBot();
-		
+	
 	}
 	
 	public void potenziamento(String risorsa){

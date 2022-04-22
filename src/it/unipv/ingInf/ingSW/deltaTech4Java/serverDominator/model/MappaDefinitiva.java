@@ -187,4 +187,10 @@ public class MappaDefinitiva {
 		public int getY_max() {
 			return y_max;
 		}
+
+		public Nodo[][] getMap() {
+			return map;
+		}
+		
+		
 }

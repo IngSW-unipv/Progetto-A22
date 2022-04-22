@@ -19,7 +19,6 @@ public class MainDefinitivo extends Thread{
 	Thread threadBot[];
 	
 	private Battaglia[] fight;
-	private String[] report;
 	private int maxbattle=7;
 	private int count;
 	private int tempoAggiornamento;
@@ -44,8 +43,7 @@ public class MainDefinitivo extends Thread{
 		mercato=new Mercato();
 		
 		fight= new Battaglia[maxbattle];
-		report= new String[maxbattle];
-	
+		
 		this.avvioBot(tempoAggiornamento);
 		
 		

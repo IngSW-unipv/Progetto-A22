@@ -18,9 +18,12 @@ public class ObserverPunteggio implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		PersistenceFacade.getInstance().updateUserAccountPunteggio(osOsservato, (int)evt.getNewValue());
-		osOsservato=PersistenceFacade.getInstance().getUserAccountById(osOsservato);
-		Giocatore g=(Giocatore)evt.getSource();
-		g.aggiornaPunteggio(osOsservato.getMny()-g.getValuta());
+		if(evt.getSource().getClass().isAssignableFrom(Giocatore.class)) {
+			PersistenceFacade.getInstance().updateUserAccountPunteggio(osOsservato, (int)evt.getNewValue());
+			osOsservato=PersistenceFacade.getInstance().getUserAccountById(osOsservato);
+			Giocatore g=(Giocatore)evt.getSource();
+			g.aggiornaPunteggio(osOsservato.getMny()-g.getValuta());
+		}
+		
 	}
 }

@@ -24,7 +24,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -42,6 +44,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Optional;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
@@ -85,29 +88,30 @@ public class Main extends Application {
 		launch(args); // fa partire la funzione start di JavaFX
 	}
 
-	public void addType(HBox controls, String titolo, EventHandler<? super MouseEvent> event) { // HBOX � un contenitore
-																								// orizzontale (VBOX
-																								// verticale)
-		Button button = new Button(titolo); // do al bottone il nome
+	public void addType(HBox controls, String titolo, EventHandler<? super MouseEvent> event) { 
+		
+		Button button = new Button(titolo); 
 		button.setOnMouseClicked(event);
 
-		controls.getChildren().add(button); // aggiunge il bottone al layout grafico
+		controls.getChildren().add(button); 
 	}
 
-	// botte ATTACCA! con l'evento mouseOnClick da aggiungere
+	// bottone ATTACCA! con l'evento mouseOnClick da aggiungere
 
-	public void setUpControls(HBox setUpControls) {
-		addType(setUpControls, "Attacca!", (event -> {
+	public void selectMalware(HBox setUpControls) {
+		addType(setUpControls, "attack", (event -> {
 
-			// qui va inserita l'azione da compiere quando click on "Attacca!"
+			PopUp.selectMalware();
 
 		}));
 		setUpControls.setSpacing(10); // spazio tra un bottone e l'altro
 		setUpControls.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
 	}
 
-	public void firewallAction(HBox firewallAction) {
-		addType(firewallAction, "+Firewall", (event -> {
+	public void development(HBox firewallAction) {
+		addType(firewallAction, "develop new software", (event -> {
+			
+			PopUp.development();
 
 			// qui va inserita l'azione da compiere quando click on "+Firewall"
 
@@ -117,19 +121,18 @@ public class Main extends Application {
 		// bottone
 	}
 
-	public void ramAction(HBox ramActionButton) {
-		addType(ramActionButton, "+RAM", (event -> {
+	public void powerUp(HBox hBox) {
+		addType(hBox, "power-up!", (event -> {
 
-			// qui va inserita l'azione da compiere quando click on "+RAM"
+			PopUp.powerUp();
 
 		}));
-		// ramActionButton.setSpacing(0); // spazio tra un bottone e l'altro
-		// ramActionButton.setPadding(STANDARD_PADDING); // margini del testo dentro al
-		// bottone
+		hBox.setSpacing(0); 
+		hBox.setPadding(STANDARD_PADDING); 
 	}
 
-	public void cpuAction(HBox cpuActionButton) {
-		addType(cpuActionButton, "+RAM", (event -> {
+	public void market(HBox hBox) {
+		addType(hBox, "market", (event -> {
 
 			// qui va inserita l'azione da compiere quando click on "+CPU"
 
@@ -144,6 +147,7 @@ public class Main extends Application {
 		primaryStage.setFullScreen(false); // apre in full screen
 		primaryStage.setX(0); // definisce la coordinata X dell'angolo in alto a sinistra della finestra
 		primaryStage.setY(0); // definisce la coordinata Y dell'angolo in alto a sinistra della finestra
+		//primaryStage.centerOnScreen();
 
 		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Hard);
 
@@ -178,7 +182,7 @@ public class Main extends Application {
 		// Adding Canvases to BorderPane
 		ScrollPane centerPane = new ScrollPane();
 		centerPane.setContent(basicCanvas);
-		centerPane.setStyle("-fx-background: rgb(20,20,20)");
+		centerPane.setStyle("-fx-background:rgb(20,20,20);-fx-background-radius:1em");
 
 		// definisco: colore sfondo di pane; arrotondamento angoli;
 		centerPane.setBackground(
@@ -219,16 +223,13 @@ public class Main extends Application {
 		Label isDistance = new Label("NO DATA");
 		Label fwLVL = new Label("Firewall LVL");
 		HBox hFwAction = new HBox();
-		hFwAction.setAlignment(Pos.BASELINE_LEFT);
-		firewallAction(hFwAction);
+		
 		Label ramLvl = new Label("Ram LVL");
 		HBox ramActionBox = new HBox();
-		ramActionBox.setAlignment(Pos.BASELINE_LEFT);
-		ramAction(ramActionBox);
+		
 		Label cpuLvl = new Label("CPU LVL");
 		HBox cpuActionBox = new HBox();
-		cpuActionBox.setAlignment(Pos.BASELINE_LEFT);
-		ramAction(cpuActionBox);
+		
 
 		gDx.add(owner, 0, 0);
 		gDx.add(isOwnerL, 1, 0);
@@ -271,47 +272,56 @@ public class Main extends Application {
 		battaglie.getChildren().addAll(titoloBattaglie, batt1);
 		battlePane.getChildren().add(battaglie);
 
-		// Pane control - contiene le azioni di gioco
+		// Pane action - contiene le azioni di gioco
 
-		Pane controlPane = new Pane();
+		Pane action = new Pane();
 
-		controlPane.setBackground(
+		action.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 10))));
-		controlPane.setPadding(STANDARD_PADDING);
+		action.setPadding(STANDARD_PADDING);
 
 		VBox controlli = new VBox();
-		controlli.setMaxWidth(390);
 		controlli.setPadding(STANDARD_PADDING);
-		HBox hAzione = new HBox();
-		hAzione.setPadding(STANDARD_PADDING);
-		hAzione.setMinWidth(controlli.getWidth());
-		hAzione.setAlignment(Pos.CENTER);
-		hAzione.setBackground(
+		
+		HBox actionTitle = new HBox();
+		actionTitle.setPadding(STANDARD_PADDING);
+		actionTitle.setAlignment(Pos.CENTER);
+		actionTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 
-		Label azione = new Label("AZIONI DI GIOCO");
+		Label azione = new Label("Action");
 		azione.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 
-		hAzione.getChildren().add(azione);
-		HBox attaccoDifesa = new HBox();
-		attaccoDifesa.setMinWidth(100);
-		HBox datiNodo = new HBox();
-		Label coordinate = new Label();
-		datiNodo.setPadding(STANDARD_PADDING);
+		actionTitle.getChildren().add(azione);
+		
+		HBox actionMarket = new HBox();
+		actionMarket.setPadding(STANDARD_PADDING);
+		Label actionMarketL = new Label();
+		actionMarket.getChildren().add(actionMarketL);
+		
+		HBox powerUp = new HBox();
+		powerUp.setPadding(STANDARD_PADDING);
+		Label powerUpL = new Label();
+		powerUp.getChildren().add(powerUpL);
+		
+		HBox dev = new HBox();
+		dev.setPadding(STANDARD_PADDING);
+		Label develop = new Label();
+		dev.getChildren().add(develop);
+		development(dev);
+		
+		controlli.getChildren().addAll(actionTitle, powerUp, actionMarket, dev);
+		selectMalware(actionMarket);
 
-		datiNodo.getChildren().add(coordinate);
-		controlli.getChildren().addAll(hAzione, datiNodo, attaccoDifesa);
-		setUpControls(attaccoDifesa);
+		action.getChildren().add(controlli);
 
-		controlPane.getChildren().add(controlli);
+		// Pane statsNode
 
-		// Pane market
-
-		Pane marketPane = new Pane();
-		marketPane.setBackground(
+		Pane statsNode = new Pane();
+		statsNode.setBackground(
 				new Background(new BackgroundFill(Color.web("#e1d5e7"), new CornerRadii(10), new Insets(0, 0, 0, 10))));
-		marketPane.setPadding(STANDARD_PADDING);
+		statsNode.setPadding(STANDARD_PADDING);
 
 		VBox market = new VBox();
 		market.setPadding(STANDARD_PADDING);
@@ -321,11 +331,11 @@ public class Main extends Application {
 
 		mTitle.getChildren().add(marketTitle);
 		market.getChildren().add(mTitle);
-		marketPane.getChildren().add(market);
-		HBox.setHgrow(marketPane, Priority.ALWAYS);
-		HBox.setHgrow(controlPane, Priority.ALWAYS);
+		statsNode.getChildren().add(market);
+		HBox.setHgrow(statsNode, Priority.ALWAYS);
+		HBox.setHgrow(action, Priority.ALWAYS);
 		HBox.setHgrow(battlePane, Priority.ALWAYS);
-		sottoMappa.getChildren().addAll(battlePane, controlPane, marketPane);
+		sottoMappa.getChildren().addAll(statsNode, battlePane, action);
 
 // ------------------------------------------ //
 
@@ -395,7 +405,7 @@ public class Main extends Application {
 			if (data != null) {
 				Nodo nodo = data.nodo;
 
-				coordinate.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: "
+				powerUpL.setText("Coordinate: " + est.x + " , " + est.y + " Possessore: "
 						+ nodo.getPossessore().getNome() + " SWdisp: " + nodo.getSoftware_disponibile());
 
 				isOwnerL.setText(nodo.getPossessore().getNome());

@@ -361,7 +361,7 @@ public class Main extends Application {
 		
 		try {
 			main.avvioPartita(30, 20, "Matteo");
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

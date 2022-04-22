@@ -54,4 +54,10 @@ public class Utente extends Giocatore implements Comparable<Utente>{
 		return this.punteggio-obj.getPunteggio();
 	}
 
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

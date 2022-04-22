@@ -26,7 +26,14 @@ public class MainDefinitivo extends Thread{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		//prova 1:avvio partita
+		MainDefinitivo main = new MainDefinitivo();
+		try {
+			main.avvioPartita(30, 20, "Matteo");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -47,9 +54,9 @@ public class MainDefinitivo extends Thread{
 		this.avvioBot(tempoAggiornamento);
 		
 		
-		//gioco finito
+		/*/gioco finito
 		giocoAttivo=false;
-		this.stopBot();
+		this.stopBot();*/
 	
 	}
 
@@ -118,7 +125,7 @@ public class MainDefinitivo extends Thread{
 	public void stopBot() throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
-			threadBot[i].interrupt();;
+			threadBot[i].interrupt();
 		}
 	}
 	

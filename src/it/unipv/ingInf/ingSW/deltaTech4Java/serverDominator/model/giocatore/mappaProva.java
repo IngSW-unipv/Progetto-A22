@@ -3,7 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Battaglia;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Mappa;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 
 public class mappaProva {

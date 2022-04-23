@@ -92,7 +92,7 @@ public class Base extends Nodo{
 	}
 	
 	public void crea_software(String nome, int quantita) {
-	/**metodo per la creazione di nuovo software, con aggiornamento della quantità totali*/
+	/**metodo per la creazione di nuovo software, con aggiornamento della quantitï¿½ totali*/
 		
 		boolean check=false;
 		int n_soft;
@@ -196,6 +196,6 @@ public class Base extends Nodo{
 	}
 	
 	public int getQnt_rootcrash() {
-		return stats_software_creati[3].getQuantita();
+		return stats_software_creati[2].getQuantita();
 	}
 }

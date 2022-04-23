@@ -29,12 +29,12 @@ public class MapData {
         data = new HashMap<>();
 
    // Creazione delle coordinate per una matrice di tipo Nodo[i][j]
-        
-        for (int r = 0; r < nodi.length; r++) { 							//nodi.length è il valore massimo di i
+       System.out.println(nodi.length); 
+        for (int r = 0; r < nodi[0].length; r++) { 							//nodi.length è il valore massimo di i
         																	// nodi[i].length è il valore massimo di j
             int r_offset = (int) Math.floor(r/2);							// Math.floor(r/2) = parte intera del valore di r/2 
-            for (int q = -r_offset; q < nodi[r].length - r_offset; q++) { 	// costruzione esagoni orizzontali con coordinata x sfasata
-            	data.put(new Hexagon(q, r), new HexData(nodi[r][q + r_offset]));
+            for (int q = -r_offset; q < nodi.length - r_offset; q++) { 	// costruzione esagoni orizzontali con coordinata x sfasata
+            	data.put(new Hexagon(q, r), new HexData(nodi[q + r_offset][r]));
             }
         }
     }

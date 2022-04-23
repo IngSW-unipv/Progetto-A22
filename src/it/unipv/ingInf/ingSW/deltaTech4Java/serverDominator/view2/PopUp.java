@@ -17,11 +17,18 @@ public class PopUp {
 	public static String selectMalware() {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
+		
+		Label rc = new Label("rootCrash");
+		Label vr = new Label("Virus");
+		
+		Label rcQty = new Label("quantità rc"); // verrà sostituita con il bottone per la scelta di quantità rc
+		Label vrQty = new Label("quantità vr"); // verrà sostituita con il bottone per la scelta di quantità vr
 
 		/*
-		 * TextField text1 = new TextField(); TextField text2 = new TextField();
+		 * TextField text1 = new TextField(); 
+		 * TextField text2 = new TextField();
 		 */
-		Button button = new Button("Submit");
+		Button button = new Button("Fight");
 		button.setOnAction(e -> {
 			// username = text1.getText();
 			// password = text2.getText();

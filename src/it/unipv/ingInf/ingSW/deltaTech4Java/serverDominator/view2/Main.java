@@ -339,17 +339,67 @@ public class Main extends Application {
 
 		Pane yourBasePane = new Pane();
 		yourBasePane.setBackground(
-				new Background(new BackgroundFill(Color.web("#e1d5e7"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		yourBasePane.setPadding(STANDARD_PADDING);
 
 		VBox yb = new VBox();
 		yb.setPadding(STANDARD_PADDING);
 
 		HBox ybTitle = new HBox();
-		Label ybTitleL = new Label("MARKET");
-
+		ybTitle.setPadding(STANDARD_PADDING);
+		ybTitle.setAlignment(Pos.CENTER);
+		ybTitle.setBackground(
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		Label ybTitleL = new Label("Your Base Stats");
+		ybTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+		ybTitleL.setTextFill(Color.DARKGREEN);
+		
 		ybTitle.getChildren().add(ybTitleL);
-		yb.getChildren().add(ybTitleL);
+		
+		HBox hBg = new HBox();
+		hBg.setPadding(STANDARD_PADDING);
+		GridPane ybG = new GridPane();
+		ybG.setVgap(5);
+		ybG.setHgap(20);
+		ybG.setAlignment(Pos.BASELINE_LEFT);
+		
+		Label ybEnergy = new Label();
+		Label ybFwLvl = new Label();
+		Label ybRamLvl = new Label();
+		Label ybCpuLvl = new Label();
+		Label ybAv = new Label();
+		Label ybVr = new Label();
+		Label ybRc = new Label();
+		Label avQy = new Label();
+		Label vrQy = new Label();
+		Label rcQy = new Label();
+		
+		ybEnergy.setText("Energy: ");
+		ybFwLvl.setText("Firewall Lvl: ");
+		ybRamLvl.setText("Ram Lvl: ");
+		ybCpuLvl.setText("CPU Lvl: ");
+		ybAv.setText("Antivirus disp: ");
+		ybVr.setText("Virus disp: ");
+		ybRc.setText("Rootcrash disp: ");
+		avQy.setText("avQuantity");
+		vrQy.setText("vrQuantity");
+		rcQy.setText("rcQuantity");
+		
+		ybG.add(ybEnergy, 0, 0);
+		ybG.add(ybFwLvl, 0, 1);
+		ybG.add(ybRamLvl, 0, 2);
+		ybG.add(ybCpuLvl, 0, 3);
+		ybG.add(ybAv, 0, 4);
+		ybG.add(ybVr, 0, 5);
+		ybG.add(ybRc, 0, 6);
+		ybG.add(avQy, 1, 4);
+		ybG.add(vrQy, 1, 5);
+		ybG.add(rcQy, 1, 6);
+		
+		hBg.getChildren().add(ybG);
+
+		
+		yb.getChildren().addAll(ybTitle, hBg);
 		yourBasePane.getChildren().add(yb); 
 		
 // ------------------------------------------ //		
@@ -407,8 +457,6 @@ public class Main extends Application {
 
 		// !!!! Occorre normalizzare le coordinate !!!!
 		Nodo[][] nodiTest = mappa.getMap();
-		
-
 		MapData mapData = new MapData(nodiTest);
 
 		// Always Will be rendered basically - Ci si riporta sempre alla mappa di base
@@ -432,7 +480,10 @@ public class Main extends Application {
 			
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
 				Nodo nodo = data.nodo;
-
+				Base base = new Base();
+				
+		// ---- Valori in Stats Node ---------//
+				
 				titleL.setText("Stats Node: " + est.x + " , " + est.y);
 				owner.setText("Owner: " + nodo.getPossessore().getNome());
 				distance.setText("Base distance: " + nodo.getDist_base());
@@ -441,12 +492,6 @@ public class Main extends Application {
 				ramLvl.setText("Ram Level: " + String.valueOf(nodo.getLvl_ram()));
 				cpuLvl.setText("CPU Level: " + String.valueOf(nodo.getLvl_cpu()));
 				
-				//" SWdisp: " + nodo.getSoftware_disponibile());
-
-				
-
-				// isDistanceL.setText(String.valueOf(nodo.getDist_base()));
-
 				basicMap.drawMap(est);
 
 			}

@@ -17,14 +17,17 @@ public class PopUp {
 
 	// -> inserire le variabili di ritorno
 	int useRootcrash, useVirus;
-	
+	static int sX = 400;
+	static int sY = 400;
 	
 	
 	//intint qVs = get
 
 	public static void selectMalware() {
+
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setX(sX); stage.setY(sY);
 		
 		Base base = new Base();
 		int qRc = base.getQnt_rootcrash();
@@ -73,8 +76,10 @@ public class PopUp {
 	}
 
 	public static void development() {
+				
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setX(sX); stage.setY(sY);
 
 		/*
 		 * TextField text1 = new TextField(); TextField text2 = new TextField();
@@ -110,8 +115,10 @@ public class PopUp {
 	}
 	
 	public static void powerUp() {
+				
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setX(sX); stage.setY(sY);
 
 		/*
 		 * TextField text1 = new TextField(); TextField text2 = new TextField();
@@ -149,6 +156,7 @@ public class PopUp {
 	public static void market() {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setX(sX); stage.setY(sY);
 
 		/*
 		 * TextField text1 = new TextField(); TextField text2 = new TextField();

@@ -95,7 +95,12 @@ public class Main extends Application {
 
 	public void addType(HBox controls, String titolo, EventHandler<? super MouseEvent> event) { 
 		
-		Button button = new Button(titolo); 
+		Button button = new Button(titolo);
+		button.setStyle("-fx-background-color: #e51400; "
+				+ "-fx-text-fill: white; "
+				+ "-fx-font-weight: bold;"
+				+ "-fx-font-size: 1.1em; ");
+		//button.setStyle("-fx-background-color:linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);");
 		button.setOnMouseClicked(event);
 
 		controls.getChildren().add(button); 
@@ -108,8 +113,10 @@ public class Main extends Application {
 			popUp.selectMalware();
 
 		}));
-		hBox.setSpacing(10); // spazio tra un bottone e l'altro
+		hBox.setSpacing(0); // spazio tra un bottone e l'altro
+		hBox.setAlignment(Pos.BASELINE_CENTER);
 		hBox.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 	}
 
 	public void development(HBox hBox) {
@@ -120,9 +127,7 @@ public class Main extends Application {
 			// qui va inserita l'azione da compiere quando click on "development"
 
 		}));
-		// firewallAction.setSpacing(0); // spazio tra un bottone e l'altro
-		// firewallAction.setPadding(STANDARD_PADDING); // margini del testo dentro al
-		// bottone
+	
 	}
 
 	public void powerUp(HBox hBox) {
@@ -210,71 +215,51 @@ public class Main extends Application {
 		statsNodeVbox.setPadding(STANDARD_PADDING);
 
 		HBox statsNodeTitle = new HBox();
-		//statsNodeTitle.setPadding(STANDARD_PADDING);
-		//statsNodeTitle.setMaxWidth(statsNode.getWidth());
-		statsNodeTitle.setAlignment(Pos.BASELINE_CENTER);
-		//statsNodeTitle.setStyle("-fx-border-color: blue");
-		//statsNodeTitle.setStyle("-fx-background:rgb(0,44,40)");
-		// title.setBackground(new Background(new BackgroundFill(Color.web("#e51400"),
-		// new CornerRadii(10), STANDARD_PADDING)));
-
-		Label titleL = new Label("Info Nodo");
-		titleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-		titleL.setTextFill(Color.DARKGREEN);
-		
+			statsNodeTitle.setAlignment(Pos.BASELINE_CENTER);
+			statsNodeTitle.setPadding(STANDARD_PADDING);
+			statsNodeTitle.setBackground(
+					new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+			
+			Label titleL = new Label("Info Nodo");
+			titleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+			titleL.setTextFill(Color.DARKGREEN);
 		statsNodeTitle.getChildren().add(titleL);
 		
-		HBox coordinates = new HBox();
-		//coordinates.setPadding(STANDARD_PADDING);
-		//coordinates.setAlignment(Pos.BASELINE_CENTER);
-		Label coordL = new Label("<Coordinates>");
-		coordinates.getChildren().add(coordL);
-
+		
 		HBox gridBox = new HBox();
 		GridPane gDx = new GridPane();
-		//gDx.setPrefSize(200, 200);
-		//gDx.setPadding(STANDARD_PADDING);
+
 		gDx.setVgap(5);
-		gDx.setHgap(0);
+		gDx.setHgap(20);
 		gDx.setAlignment(Pos.BASELINE_LEFT);
 
-		Label owner = new Label("Node owner:");
-		Label isOwnerL = new Label();
-		Label distance = new Label("Distance:");
-		Label isDistance = new Label("NO DATA");
-		Label fwLVL = new Label("Firewall LVL");
-		HBox hFwAction = new HBox();
-		Label ramLvl = new Label("Ram LVL");
-		HBox ramActionBox = new HBox();
-		Label cpuLvl = new Label("CPU LVL");
-		HBox cpuActionBox = new HBox();
+		Label owner = new Label("Node owner");
+		Label distance = new Label("Distance");
+		Label energy = new Label("Energy");
+		Label fwLvl = new Label("Firewall Level");
+		Label ramLvl = new Label("Ram Level");
+		Label cpuLvl = new Label("CPU Level");
 		
 		gDx.add(owner, 0, 0);
-		gDx.add(isOwnerL, 1, 0);
 		gDx.add(distance, 0, 1);
-		gDx.add(isDistance, 1, 1);
-		gDx.add(fwLVL, 0, 2);
-		gDx.add(hFwAction, 1, 2);
-		gDx.add(ramLvl, 0, 3);
-		gDx.add(ramActionBox, 1, 3);
-		gDx.add(cpuLvl, 0, 4);
-		gDx.add(cpuActionBox, 1, 4);
+		gDx.add(energy, 0, 2);
+		gDx.add(fwLvl, 1, 0);
+		gDx.add(ramLvl, 1, 1);
+		gDx.add(cpuLvl, 1, 2);
 
 		gridBox.getChildren().add(gDx);
 		
 		HBox attack = new HBox();
-		attack.setPadding(STANDARD_PADDING);
-		//attack.setAlignment(Pos.BASELINE_CENTER);
+		attack.setPadding(new Insets(20, 10, 10, 10));
 		Label attackL = new Label();
 		attack.getChildren().add(attackL);
 		selectMalware(attack);
 		
 		HBox.setHgrow(statsNodeTitle, Priority.ALWAYS);
-		HBox.setHgrow(coordinates, Priority.ALWAYS);
 		HBox.setHgrow(gridBox, Priority.ALWAYS);
 		HBox.setHgrow(attack, Priority.ALWAYS);
 		
-		statsNodeVbox.getChildren().addAll(statsNodeTitle, coordinates, gridBox, attack);
+		statsNodeVbox.getChildren().addAll(statsNodeTitle, gridBox, attack);
 		statsNode.getChildren().addAll(statsNodeVbox); /* ,nodeInfo,ownerDistance,firewall */
 		
 		// ------------------------------------------ //
@@ -319,8 +304,11 @@ public class Main extends Application {
 		actionTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label actionTitleL = new Label("Action");
-		actionTitleL.setBackground(
-				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+		actionTitleL.setTextFill(Color.DARKGREEN);
+		
+		//actionTitleL.setBackground(
+			//	new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 
 		actionTitle.getChildren().add(actionTitleL);
 		
@@ -445,12 +433,17 @@ public class Main extends Application {
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
 				Nodo nodo = data.nodo;
 
-				coordL.setText("Coordinates: " + est.x + " , " + est.y);
-				isOwnerL.setText(" " + nodo.getPossessore().getNome());
+				titleL.setText("Stats Node: " + est.x + " , " + est.y);
+				owner.setText("Owner: " + nodo.getPossessore().getNome());
+				distance.setText("Base distance: " + nodo.getDist_base());
+				energy.setText("Energy: " + nodo.getE_disponibile());
+				fwLvl.setText("Firewall Level: " + String.valueOf(nodo.getLvl_firewall()));
+				ramLvl.setText("Ram Level: " + String.valueOf(nodo.getLvl_ram()));
+				cpuLvl.setText("CPU Level: " + String.valueOf(nodo.getLvl_cpu()));
 				
 				//" SWdisp: " + nodo.getSoftware_disponibile());
 
-				isOwnerL.setText(nodo.getPossessore().getNome());
+				
 
 				// isDistanceL.setText(String.valueOf(nodo.getDist_base()));
 

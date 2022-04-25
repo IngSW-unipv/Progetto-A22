@@ -385,6 +385,7 @@ public class Main extends Application {
 		
 		
 		Nodo baseUtente = main1.getTabellone().trovaBase(gioc[1]); 
+		Base baseU = new Base(baseUtente.getPossessore());
 				
 		ybEnergy.setText("Energy: ");
 		ybFwLvl.setText("Firewall Lvl: ");
@@ -396,16 +397,14 @@ public class Main extends Application {
 		avQy.setText("" + baseUtente.getSoftware_disponibile());
 		vrQy.setText("" + baseUtente.getSoftware_disponibile());
 		rcQy.setText("" + baseUtente.getSoftware_disponibile());
-		
 
-		
 		ybG.add(ybEnergy, 0, 0); 	ybG.add(new Label("" + baseUtente.getE_disponibile()), 1, 0);
 		ybG.add(ybFwLvl, 0, 1); 	ybG.add(new Label ("" + baseUtente.getLvl_firewall()), 1, 1);
 		ybG.add(ybRamLvl, 0, 2); 	ybG.add(new Label ("" + baseUtente.getLvl_ram()), 1, 2);
 		ybG.add(ybCpuLvl, 0, 3); 	ybG.add(new Label ("" + baseUtente.getLvl_cpu()), 1, 3);
-		ybG.add(ybAv, 0, 4); 		ybG.add(avQy, 1, 4);
-		ybG.add(ybVr, 0, 5); 		ybG.add(vrQy, 1, 5);
-		ybG.add(ybRc, 0, 6); 		ybG.add(rcQy, 1, 6);
+		ybG.add(ybAv, 0, 4); 		ybG.add(new Label ("" + baseU.getQnt_antivirus()), 1, 4);
+		ybG.add(ybVr, 0, 5); 		ybG.add(new Label ("" + baseU.getQnt_virus()), 1, 5);
+		ybG.add(ybRc, 0, 6); 		ybG.add(new Label ("" + baseU.getQnt_rootcrash()), 1, 6);
 		
 		
 		

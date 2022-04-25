@@ -386,7 +386,7 @@ public class Main extends Application {
 		
 		Nodo baseUtente = main1.getTabellone().trovaBase(gioc[1]); 
 				
-		ybEnergy.setText("Energy: " + baseUtente.getE_disponibile());
+		ybEnergy.setText("Energy: ");
 		ybFwLvl.setText("Firewall Lvl: ");
 		ybRamLvl.setText("Ram Lvl: ");
 		ybCpuLvl.setText("CPU Lvl: ");

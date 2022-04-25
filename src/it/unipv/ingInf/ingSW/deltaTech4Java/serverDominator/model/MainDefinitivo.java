@@ -18,8 +18,8 @@ public class MainDefinitivo extends Thread{
 	private Battaglia[] fight;
 	private int maxbattle=7;
 	private int count;
-	private int tempoAggiornamento;
-	private boolean giocoAttivo=false;
+	//private int tempoAggiornamento;
+	//private boolean giocoAttivo=false;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -39,14 +39,14 @@ public class MainDefinitivo extends Thread{
 		//selezione lingua
 	
 	public void avvioPartita(int x_max, int y_max, String nomeUtente) throws InterruptedException {
-		giocoAttivo=true;
+		//giocoAttivo=true;
 		t_unitario=10;
 		this.creazioneGiocatori(nomeUtente, x_max);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
 		fight= new Battaglia[maxbattle];
 		
-		//this.avvioBot(tempoAggiornamento);  Matteo P. L'ho commentato perchè mi blocca dentro al while di avvioBot
+		this.avvioBot();  //Matteo P. L'ho commentato perchè mi blocca dentro al while di avvioBot
 		
 		
 		/*/gioco finito
@@ -105,15 +105,10 @@ public class MainDefinitivo extends Thread{
 	}
 
 	@SuppressWarnings("static-access")
-	public void avvioBot(int tempo) throws InterruptedException {
+	public void avvioBot(/*int tempo*/) throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
 			giocatori[i].start();
-		}
-		while(giocoAttivo) {	
-			for(i=2; i<=n_basi; i++) {
-				giocatori[i].start();
-			}
 		}
 	}
 	

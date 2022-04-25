@@ -5,11 +5,15 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2.MapData.Layout;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -28,11 +32,14 @@ public class PopUp {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(sX); stage.setY(sY);
+
 		
 		Base base = new Base();
 		int qRc = base.getQnt_rootcrash();
 		int qVr = base.getQnt_virus();
 		int useRc, useVr;
+		
+		VBox atck = new VBox();
 		
 		Label rc = new Label("Rootcrash: ");
 		Label vr = new Label("Virus:     ");
@@ -41,15 +48,14 @@ public class PopUp {
 		Label use1 = new Label("Use: ");
 		Label use2 = new Label("Use: ");
 		TextField useRcTf = new TextField(); useRcTf.setMaxWidth(50);
-		TextField useVrTf = new TextField(); useVrTf.setMaxWidth(50);
+		TextField useVrTf = new TextField(); useVrTf.setMaxWidth(500);
 		NumberSpinner useRcNs = new NumberSpinner();
+		NumberSpinner useVrNs = new NumberSpinner();
 		
-		Button button = new Button("Fight");
-		button.setOnAction(e -> {
-			stage.close();
-		});
-	
+		HBox gB = new HBox();
+		
 		GridPane layout = new GridPane();
+		layout.setMinSize(400, 80);
 
 		layout.setPadding(new Insets(10, 10, 10, 10));
 		layout.setVgap(5);
@@ -62,11 +68,30 @@ public class PopUp {
 		layout.add(vr, 0, 1);
 		layout.add(vrQty, 1, 1);
 		layout.add(use2, 2, 1);
-		layout.add(useVrTf, 3, 1);
-
-		layout.add(button, 1, 3);								
+		layout.add(useVrNs, 3, 1);
+		//layout.add(button, 1, 3);
 		
-		Scene scene = new Scene(layout, 220, 150);
+		gB.getChildren().add(layout);
+		
+		HBox bA = new HBox();
+		bA.setPadding(new Insets(0,10,10,10));
+		bA.setAlignment(Pos.BASELINE_CENTER);
+				
+		Button button = new Button("Fight");
+		button.setPrefSize(200, 20);
+		button.setAlignment(Pos.BASELINE_CENTER);
+		button.getStyleClass().add("redbutton");
+		HBox.setHgrow(button, Priority.ALWAYS);
+		
+		button.setOnAction(e -> {
+			stage.close();
+		});
+	
+		bA.getChildren().add(button);
+		bA.getStyleClass().add("redbutton");		
+		atck.getChildren().addAll(gB, bA);		
+		
+		Scene scene = new Scene(atck, 350, 160);
 		stage.setTitle("Seleziona Malware");
 		stage.setScene(scene);						// va sempre assegnata una scena allo Stage
 		stage.showAndWait();

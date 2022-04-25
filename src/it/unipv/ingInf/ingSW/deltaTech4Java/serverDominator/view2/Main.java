@@ -96,12 +96,7 @@ public class Main extends Application {
 	public void addType(HBox controls, String titolo, EventHandler<? super MouseEvent> event) { 
 		
 		Button button = new Button(titolo);
-		/*button.setStyle("-fx-background-color: #e51400; "
-				+ "-fx-text-fill: white; "
-				+ "-fx-font-weight: bold;"
-				+ "-fx-font-size: 1.1em; "); */
 		button.getStyleClass().add("green");
-		//button.setStyle("-fx-background-color:linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);");
 		button.setOnMouseClicked(event);
 
 		controls.getChildren().add(button); 
@@ -392,28 +387,28 @@ public class Main extends Application {
 		Nodo baseUtente = main1.getTabellone().trovaBase(gioc[1]); 
 				
 		ybEnergy.setText("Energy: " + baseUtente.getE_disponibile());
-		ybFwLvl.setText("Firewall Lvl: " );
+		ybFwLvl.setText("Firewall Lvl: ");
 		ybRamLvl.setText("Ram Lvl: ");
 		ybCpuLvl.setText("CPU Lvl: ");
 		ybAv.setText("Antivirus disp: ");
 		ybVr.setText("Virus disp: ");
 		ybRc.setText("Rootcrash disp: ");
-		avQy.setText("avQuantity");
-		vrQy.setText("vrQuantity");
-		rcQy.setText("rcQuantity");
+		avQy.setText("" + baseUtente.getSoftware_disponibile());
+		vrQy.setText("" + baseUtente.getSoftware_disponibile());
+		rcQy.setText("" + baseUtente.getSoftware_disponibile());
 		
 
 		
-		ybG.add(ybEnergy, 0, 0);
-		ybG.add(ybFwLvl, 0, 1);
-		ybG.add(ybRamLvl, 0, 2);
-		ybG.add(ybCpuLvl, 0, 3);
-		ybG.add(ybAv, 0, 4);
-		ybG.add(ybVr, 0, 5);
-		ybG.add(ybRc, 0, 6);
-		ybG.add(avQy, 1, 4);
-		ybG.add(vrQy, 1, 5);
-		ybG.add(rcQy, 1, 6);
+		ybG.add(ybEnergy, 0, 0); 	ybG.add(new Label("" + baseUtente.getE_disponibile()), 1, 0);
+		ybG.add(ybFwLvl, 0, 1); 	ybG.add(new Label ("" + baseUtente.getLvl_firewall()), 1, 1);
+		ybG.add(ybRamLvl, 0, 2); 	ybG.add(new Label ("" + baseUtente.getLvl_ram()), 1, 2);
+		ybG.add(ybCpuLvl, 0, 3); 	ybG.add(new Label ("" + baseUtente.getLvl_cpu()), 1, 3);
+		ybG.add(ybAv, 0, 4); 		ybG.add(avQy, 1, 4);
+		ybG.add(ybVr, 0, 5); 		ybG.add(vrQy, 1, 5);
+		ybG.add(ybRc, 0, 6); 		ybG.add(rcQy, 1, 6);
+		
+		
+		
 		
 		hBg.getChildren().add(ybG);
 

@@ -86,7 +86,7 @@ public class Main extends Application {
 			yMax = 20;
 			break;
 		}
-		return new Pair<>(yMax, xMax);
+		return new Pair<>(xMax, yMax);
 	}
 
 	public static void main(String[] args) {
@@ -96,10 +96,11 @@ public class Main extends Application {
 	public void addType(HBox controls, String titolo, EventHandler<? super MouseEvent> event) { 
 		
 		Button button = new Button(titolo);
-		button.setStyle("-fx-background-color: #e51400; "
+		/*button.setStyle("-fx-background-color: #e51400; "
 				+ "-fx-text-fill: white; "
 				+ "-fx-font-weight: bold;"
-				+ "-fx-font-size: 1.1em; ");
+				+ "-fx-font-size: 1.1em; "); */
+		button.getStyleClass().add("green");
 		//button.setStyle("-fx-background-color:linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);");
 		button.setOnMouseClicked(event);
 
@@ -159,9 +160,16 @@ public class Main extends Application {
 		primaryStage.setX(0); // definisce la coordinata X dell'angolo in alto a sinistra della finestra
 		primaryStage.setY(0); // definisce la coordinata Y dell'angolo in alto a sinistra della finestra
 		//primaryStage.centerOnScreen();
-
+		
 		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Hard);
-
+		MainDefinitivo main1 = new MainDefinitivo();
+		try {
+			main1.avvioPartita(dimensioneMappa.getKey(), dimensioneMappa.getValue(), "Matteo");
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		System.out.println(dimensioneMappa.getKey() + "" +  dimensioneMappa.getValue());
 		// MenuBar
 		MenuBar menuBar = new MenuBar();
 		Menu fileMenu = new Menu("File");
@@ -184,8 +192,8 @@ public class Main extends Application {
 		bordoAltezza = 0;
 		larghezzaE = 44.5;
 		altezzaE = 39.4;
-		Canvas basicCanvas = new Canvas(dimensioneMappa.getValue() * larghezzaE + bordoLarghezza,
-				dimensioneMappa.getKey() * altezzaE + bordoAltezza);
+		Canvas basicCanvas = new Canvas(dimensioneMappa.getKey() * larghezzaE + bordoLarghezza,
+				dimensioneMappa.getValue() * altezzaE + bordoAltezza);
 
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
 		basicGC.setFill(null);
@@ -374,8 +382,17 @@ public class Main extends Application {
 		Label vrQy = new Label();
 		Label rcQy = new Label();
 		
-		ybEnergy.setText("Energy: ");
-		ybFwLvl.setText("Firewall Lvl: ");
+		 
+		int baseUtenteX; int baseUtenteY; 
+		
+		Giocatore[] gioc = main1.getGiocatori();
+		String nomeGioc = gioc[1].getNome();
+		
+		
+		Nodo baseUtente = main1.getTabellone().trovaBase(gioc[1]); 
+				
+		ybEnergy.setText("Energy: " + baseUtente.getE_disponibile());
+		ybFwLvl.setText("Firewall Lvl: " );
 		ybRamLvl.setText("Ram Lvl: ");
 		ybCpuLvl.setText("CPU Lvl: ");
 		ybAv.setText("Antivirus disp: ");
@@ -384,6 +401,8 @@ public class Main extends Application {
 		avQy.setText("avQuantity");
 		vrQy.setText("vrQuantity");
 		rcQy.setText("rcQuantity");
+		
+
 		
 		ybG.add(ybEnergy, 0, 0);
 		ybG.add(ybFwLvl, 0, 1);
@@ -423,25 +442,13 @@ public class Main extends Application {
 
 		// Adding MenuBar and BorderPane to a VBox Holder
 		holder.getChildren().addAll(menuBar, borderPane);
-
-		Sistema sistema = new Sistema();
-		sistema.colore = Colore.GRIGIO;
-		Utente utente = new Utente("user");
-		utente.colore = Colore.GIALLO;
-
-		MainDefinitivo main = new MainDefinitivo();
 		
-		try {
-			main.avvioPartita(30, 20, "Matteo");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Giocatore[] giocatori = main.getGiocatori();
+// ------------------------------------------ //		
 
-		MappaDefinitiva mappa = new MappaDefinitiva(30, 20, giocatori);
-		mappa.assegnamento(10, giocatori);
+	
+
+		MappaDefinitiva mappa = new MappaDefinitiva(dimensioneMappa.getKey(), dimensioneMappa.getValue(), gioc);
+		mappa.assegnamento(gioc.length-1, gioc);
 
 		// definiamo i nodi base
 
@@ -497,7 +504,9 @@ public class Main extends Application {
 			}
 		});
 
-		primaryStage.setScene(new Scene(holder));
+		Scene scena = new Scene(holder);
+		scena.getStylesheets().add("application.css");
+		primaryStage.setScene(scena);
 		primaryStage.show();
 
 		new AnimationTimer() {

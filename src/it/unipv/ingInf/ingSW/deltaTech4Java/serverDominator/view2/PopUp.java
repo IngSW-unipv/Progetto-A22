@@ -42,6 +42,7 @@ public class PopUp {
 		Label use2 = new Label("Use: ");
 		TextField useRcTf = new TextField(); useRcTf.setMaxWidth(50);
 		TextField useVrTf = new TextField(); useVrTf.setMaxWidth(50);
+		NumberSpinner useRcNs = new NumberSpinner();
 		
 		Button button = new Button("Fight");
 		button.setOnAction(e -> {
@@ -57,7 +58,7 @@ public class PopUp {
 		layout.add(rc, 0, 0);
 		layout.add(rcQty, 1, 0);
 		layout.add(use1, 2, 0);
-		layout.add(useRcTf, 3, 0);
+		layout.add(useRcNs, 3, 0);
 		layout.add(vr, 0, 1);
 		layout.add(vrQty, 1, 1);
 		layout.add(use2, 2, 1);

@@ -46,7 +46,7 @@ public class MainDefinitivo extends Thread{
 		mercato=new Mercato();
 		fight= new Battaglia[maxbattle];
 		
-		this.avvioBot(tempoAggiornamento);
+		//this.avvioBot(tempoAggiornamento);  Matteo P. L'ho commentato perchÃ¨ mi blocca dentro al while di avvioBot
 		
 		
 		/*/gioco finito
@@ -101,7 +101,7 @@ public class MainDefinitivo extends Thread{
 			giocatori[i].colore = Colore.colori.get(i-1);
 			
 		}
-	
+		
 	}
 
 	@SuppressWarnings("static-access")
@@ -128,7 +128,7 @@ public class MainDefinitivo extends Thread{
 	
 	public boolean powerupCheck(int x, int y){
 		/** metodo chiamato dopo che l'utente ha selezionato un nodo di
-		 * sua proprietà, abilita il pulsante per eventuali potenziamenti risorse.
+		 * sua proprietï¿½, abilita il pulsante per eventuali potenziamenti risorse.
 		 */
 		boolean checkp= false;
 		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
@@ -150,7 +150,7 @@ public class MainDefinitivo extends Thread{
 	
 	public boolean softcheck(int x, int y) {
 		/** il metodo viene lanciato quando l'utente clicca su un nodo
-		 * di sua proprietà, e abilita il pulsante per la creazione software.
+		 * di sua proprietï¿½, e abilita il pulsante per la creazione software.
 		 */
 		boolean checks=false;
 		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
@@ -180,10 +180,10 @@ public class MainDefinitivo extends Thread{
 //---------------metodi per battaglia-------------//
 		
 	public boolean nodecheck(Giocatore attaccante, int x, int y) {
-		/** metodo per il controllo se un nodo è attaccabile,
+		/** metodo per il controllo se un nodo ï¿½ attaccabile,
 		 * controlla anche se lo spazio disponibile per gli attacchi simultanei
-		 * non è vuoto.
-		 * NB: un utente può eseguire 6 attacchi simultaneamente.
+		 * non ï¿½ vuoto.
+		 * NB: un utente puï¿½ eseguire 6 attacchi simultaneamente.
 		 * metodo eseguito quando un utente clicca su un nodo
 		 */
 		boolean checkf=false;
@@ -217,7 +217,7 @@ public class MainDefinitivo extends Thread{
 			
 	public void avvioBattaglia(Giocatore attaccante, int x, int y) {
 		/** metodo che lancia il thread relativo alla singola battaglia, 
-		 * successivo ai controlli di prossimità e numeri di attacchi contemporanei,
+		 * successivo ai controlli di prossimitï¿½ e numeri di attacchi contemporanei,
 		 * questo metodo viene lanciato quando l'utente clicca su conferma, per confermare i
 		 * software da inviare in battaglia.
 		 */

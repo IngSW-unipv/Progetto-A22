@@ -33,7 +33,7 @@ public class Base extends Nodo{
 		this.inizializza_risorse();
 	}
 	
-	public Base (Giocatore possessore) {
+	public Base(Giocatore possessore) {
 		super.setTipologia("base");
 		super.setDist_base(0);
 		super.setPossessore(possessore);

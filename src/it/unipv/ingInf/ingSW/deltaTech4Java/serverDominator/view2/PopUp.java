@@ -195,13 +195,18 @@ public class PopUp {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(sX); stage.setY(sY);
 		
-		int cpuLvl, fwLvl, ramLvl, eLvl, rcBuy, vrBuy, avBuy, initRcQ, initVrQ, initAvQ;
+		int cpuAdd, cpuFinal, fwAdd, fwFinal, ramAdd, ramFinal, eAdd, eFinal, xS, yS;
+		cpuAdd = 0; cpuFinal = 0; fwAdd = 0; fwFinal = 0; ramAdd = 0; ramFinal = 0; eAdd = 0; eFinal = 0;
+		xS = 20; yS = 10;
 		
-
 		VBox vM = new VBox();
 		
 		HBox hMktP = new HBox();
 		
+		GridPane mktP = new GridPane();
+		mktP.setPadding(new Insets(10, 10, 10, 10));
+		mktP.setVgap(5);
+		mktP.setHgap(5);
 		
 		Label rcQty = new Label("Ho " + String.valueOf(baseUtente.getQnt_rootcrash()) + " rootcrash, ne compro ");
 		Label vrQty = new Label("Ho " + String.valueOf(baseUtente.getQnt_virus()) + " virus, ne compro ");
@@ -209,12 +214,90 @@ public class PopUp {
 		NumberSpinner buyRcNs = new NumberSpinner();
 		NumberSpinner buyVrNs = new NumberSpinner();
 		NumberSpinner buyAvNs = new NumberSpinner();
+		Label cpuPlus= new Label("Actual CPU level: " + baseUtente.getLvl_cpu());
 		
+		HBox cpuAdjust = new HBox();
+			Button cpuInc = new Button("CPU+1");
+			Button cpuDec = new Button("CPU-1");
+			Label cpuResult = new Label(" add: " + cpuAdd + " Up to: " + cpuFinal);
+		Label fwPlus= new Label();
 		
-		GridPane mktP = new GridPane();
-		mktP.setPadding(new Insets(10, 10, 10, 10));
-		mktP.setVgap(5);
-		mktP.setHgap(5);
+		HBox fwAdjust = new HBox();
+			Button fwInc = new Button("FWL+1");
+			Button fwDec = new Button("FWL-1");
+			Label fwResult = new Label(" add: " + fwAdd + " Up to: " + fwFinal);
+		
+		Label ramPlus= new Label();
+		HBox ramAdjust = new HBox();
+			Button ramInc = new Button("RAM+1");ramInc.setPrefSize(xS, yS);
+			Button ramDec = new Button("RAM-1"); ramDec.setPrefSize(xS, yS);
+			Label ramResult = new Label(" add: " + ramAdd + " Up to: " + ramFinal);
+		
+		Label ePlus= new Label();
+		HBox eAdjust = new HBox();
+			Button eInc = new Button("EGY+1"); eInc.setPrefSize(xS, yS);
+			Button eDec = new Button("EGY-1"); eDec.setPrefSize(xS, yS);
+			Label eResult = new Label(" add: " + eAdd + " Up to: " + eFinal);
+		
+		cpuInc.setOnAction(e -> {
+			/*			++cpuAdd ;
+			cpuFinal = baseUtente.getLvl_cpu() + cpuAdd;*/
+			stage.close();
+		});
+		
+		cpuDec.setOnAction(e -> {
+/*			--cpuAdd ;
+			cpuFinal = baseUtente.getLvl_cpu() + cpuAdd;*/
+			stage.close();
+		});
+		
+		cpuAdjust.getChildren().addAll(cpuInc, cpuDec, cpuResult);
+		cpuAdjust.setSpacing(8.0);
+		
+		fwInc.setOnAction(e -> {
+/*			++fwAdd ;
+			cpuFinal = baseUtente.getLvl_firewall() + fwAdd;*/
+			stage.close();
+		});
+		
+		fwDec.setOnAction(e -> {
+/*		--fwAdd ;
+			cpuFinal = baseUtente.getLvl_firewall() + fwAdd;*/
+			stage.close();
+		});
+		
+		fwAdjust.getChildren().addAll(fwInc, fwDec, fwResult);
+		fwAdjust.setSpacing(8.0);
+		
+		ramInc.setOnAction(e -> {
+			/*			++ramAdd ;
+			ramFinal = baseUtente.getLvl_ram() + ramAdd; */
+			stage.close();
+		});
+		
+		ramDec.setOnAction(e -> {
+			/*			--ramAdd ;
+			ramFinal = baseUtente.getLvl_ram() + ramAdd; */
+			stage.close();
+		});
+		
+		ramAdjust.getChildren().addAll(ramInc, ramDec, ramResult);
+		ramAdjust.setSpacing(8.0);
+		
+		eInc.setOnAction(e -> {
+/*			++eAdd ;
+			eFinal = baseUtente.getE_disponibile() + eAdd; */
+			stage.close();
+		});
+		
+		eDec.setOnAction(e -> {
+			/*			--eAdd ;
+			eFinal = baseUtente.getE_disponibile() + eAdd;*/
+			stage.close();
+		});
+		
+		eAdjust.getChildren().addAll(eInc, eDec, eResult);
+		eAdjust.setSpacing(8.0);
 		
 		mktP.add(rcQty, 0, 0);
 		mktP.add(buyRcNs, 1, 0);
@@ -222,6 +305,11 @@ public class PopUp {
 		mktP.add(buyVrNs, 1, 1);
 		mktP.add(avQty, 0, 2);
 		mktP.add(buyAvNs, 1, 2);
+		mktP.add(cpuPlus, 0, 3); mktP.add(cpuAdjust, 1, 3);
+		mktP.add(fwPlus, 0, 4); mktP.add(fwAdjust, 1, 4);
+		mktP.add(ramPlus, 0, 5); mktP.add(ramAdjust, 1, 5);
+		mktP.add(ePlus, 0, 6); mktP.add(eAdjust, 1, 6);
+		
 		
 		hMktP.getChildren().add(mktP);
 		

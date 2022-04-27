@@ -322,16 +322,16 @@ public class Main extends Application {
 
 		actionPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		actionPane.setPadding(STANDARD_PADDING);
+		//actionPane.setPadding(STANDARD_PADDING);
 		
 
 		VBox controlli = new VBox();
 		controlli.setPadding(STANDARD_PADDING);
-		
+		controlli.setTranslateX(170);
 				
 		HBox actionTitle = new HBox();
 		actionTitle.setPadding(STANDARD_PADDING);
-		actionTitle.setPrefSize(300.0, 40.0);
+		actionTitle.setPrefSize(200.0, 30.0);
 		
 		actionTitle.setAlignment(Pos.CENTER);
 		actionTitle.setBackground(
@@ -339,35 +339,33 @@ public class Main extends Application {
 		Label actionTitleL = new Label("Action");
 		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		actionTitleL.setTextFill(Color.DARKGREEN);
-		
-		//actionTitleL.setBackground(
-			//	new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 
 		actionTitle.getChildren().add(actionTitleL);
 		
+			
 		HBox actionMarket = new HBox();
-		actionMarket.setPadding(STANDARD_PADDING);
+		//actionMarket.setPadding(STANDARD_PADDING);
 		Label actionMarketL = new Label();
 		actionMarket.getChildren().add(actionMarketL);
 		market(actionMarket, bU);
 		
 		HBox powerUp = new HBox();
-		powerUp.setPadding(STANDARD_PADDING);
-		powerUp.setBackground(
-				new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		//powerUp.setPadding(STANDARD_PADDING);
+		//powerUp.setBackground(
+				//new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label powerUpL = new Label();
 		powerUp.getChildren().add(powerUpL);
 		powerUp(powerUp, bU);
 		
 		HBox dev = new HBox();
-		dev.setPadding(STANDARD_PADDING);
+		//dev.setPadding(STANDARD_PADDING);
 		Label develop = new Label();
 		dev.getChildren().add(develop);
 		development(dev, bU);
 		
-		actionTitle.setAlignment(Pos.CENTER);
+		//actionTitle.setAlignment(Pos.CENTER);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
-		controlli.setAlignment(Pos.CENTER_RIGHT);
+		//controlli.setAlignment(Pos.CENTER_RIGHT);
 		actionPane.getChildren().add(controlli);
 
 		// ------------------------------------------ //
@@ -381,15 +379,17 @@ public class Main extends Application {
 
 		VBox yb = new VBox();
 		yb.setPadding(STANDARD_PADDING);
+		yb.setTranslateX(10);
 
 		HBox ybTitle = new HBox();
 		ybTitle.setPadding(STANDARD_PADDING);
-		ybTitle.setAlignment(Pos.CENTER);
+		//ybTitle.setAlignment(Pos.CENTER);
 		ybTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label ybTitleL = new Label("Your Base Stats");
 		ybTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		ybTitleL.setTextFill(Color.DARKGREEN);
+		ybTitleL.setAlignment(Pos.CENTER);
 		
 		ybTitle.getChildren().add(ybTitleL);
 		

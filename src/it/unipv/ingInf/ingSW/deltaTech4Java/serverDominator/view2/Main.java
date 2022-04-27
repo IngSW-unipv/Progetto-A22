@@ -18,8 +18,10 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -64,6 +66,11 @@ public class Main extends Application {
 
 	}
 
+	
+	
+	
+	
+	
 	private final Insets STANDARD_PADDING = new Insets(10);
 	PopUp popUp = new PopUp();
 
@@ -88,6 +95,8 @@ public class Main extends Application {
 		}
 		return new Pair<>(xMax, yMax);
 	}
+	
+	
 
 	public static void main(String[] args) {
 		launch(args); // fa partire la funzione start di JavaFX
@@ -96,55 +105,63 @@ public class Main extends Application {
 	public void addType(HBox controls, String titolo, EventHandler<? super MouseEvent> event) { 
 		
 		Button button = new Button(titolo);
-		button.getStyleClass().add("green");
+		button.getStyleClass().add("redbutton");
 		button.setOnMouseClicked(event);
 
 		controls.getChildren().add(button); 
 	}
 
 	
-	public void selectMalware(HBox hBox) {
+	public void selectMalware(HBox hBox, Base bU) {
 		addType(hBox, "attack", (event -> {
 
-			popUp.selectMalware();
+			popUp.selectMalware(bU);
 
 		}));
-		hBox.setSpacing(0); // spazio tra un bottone e l'altro
+		hBox.setSpacing(0); 
 		hBox.setAlignment(Pos.BASELINE_CENTER);
-		hBox.setPadding(STANDARD_PADDING); // margini del testo dentro al bottone
+		hBox.setPadding(STANDARD_PADDING); 
 		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 	}
 
-	public void development(HBox hBox) {
-		addType(hBox, "develop new software", (event -> {
+	public void development(HBox hBox, Base bU) {
+		addType(hBox, "develop software", (event -> {
 			
-			popUp.development();
+			popUp.development(bU);
 
 			// qui va inserita l'azione da compiere quando click on "development"
 
 		}));
-	
+		hBox.setSpacing(0); 
+		hBox.setAlignment(Pos.BASELINE_CENTER);
+		hBox.setPadding(STANDARD_PADDING); 
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 	}
 
-	public void powerUp(HBox hBox) {
+	public void powerUp(HBox hBox, Base bU) {
 		addType(hBox, "power-up!", (event -> {
 
-			popUp.powerUp();
+			popUp.powerUp(bU);
 
 		}));
 		hBox.setSpacing(0); 
+		hBox.setAlignment(Pos.BASELINE_CENTER);
 		hBox.setPadding(STANDARD_PADDING); 
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 	}
 
-	public void market(HBox hBox) {
+	public void market(HBox hBox, Base bU) {
 		addType(hBox, "market", (event -> {
 			
-			PopUp.market();
+			popUp.market(bU);
 
 			// qui va inserita l'azione da compiere quando click on "market"
 
 		}));
-
+		hBox.setSpacing(0); 
+		hBox.setAlignment(Pos.CENTER);
+		hBox.setPadding(STANDARD_PADDING); 
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(10,10, 10, 10))));
 	}
 
 	@Override
@@ -157,14 +174,21 @@ public class Main extends Application {
 		//primaryStage.centerOnScreen();
 		
 		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Hard);
-		MainDefinitivo main1 = new MainDefinitivo();
+		MainDefinitivo mainView = new MainDefinitivo();
 		try {
-			main1.avvioPartita(dimensioneMappa.getKey(), dimensioneMappa.getValue(), "Matteo");
+			mainView.avvioPartita(dimensioneMappa.getKey(), dimensioneMappa.getValue(), "Matteo");
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
-		System.out.println(dimensioneMappa.getKey() + "" +  dimensioneMappa.getValue());
+		
+		Giocatore[] gioc = mainView.getGiocatori();
+		Nodo baseU = mainView.getTabellone().trovaBase(gioc[1]);
+		Base bU = new Base(baseU.getPossessore());
+		MappaDefinitiva mappa = new MappaDefinitiva(dimensioneMappa.getKey(), dimensioneMappa.getValue(), gioc);
+		mappa.assegnamento(gioc.length-1, gioc);
+		
+		
 		// MenuBar
 		MenuBar menuBar = new MenuBar();
 		Menu fileMenu = new Menu("File");
@@ -173,7 +197,6 @@ public class Main extends Application {
 		fileMenu.getItems().addAll(saveItem, openItem);
 		Menu stateMenu = new Menu("State");
 		MenuItem addStateItem = new MenuItem("Add");
-		// addStateItem.setOnAction(event -> addState(politicalControls));
 		stateMenu.getItems().add(addStateItem);
 		menuBar.getMenus().addAll(fileMenu, stateMenu);
 
@@ -200,6 +223,9 @@ public class Main extends Application {
 		centerPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		centerPane.setPadding(STANDARD_PADDING);
+		centerPane.setFitToHeight(true);
+		centerPane.setFitToWidth(true);
+		System.out.println("" + centerPane.getBaselineOffset());
 
 
 
@@ -253,10 +279,10 @@ public class Main extends Application {
 		gridBox.getChildren().add(gDx);
 		
 		HBox attack = new HBox();
-		attack.setPadding(new Insets(20, 10, 10, 10));
+		attack.setPadding(new Insets(20, 20, 20, 20));
 		Label attackL = new Label();
 		attack.getChildren().add(attackL);
-		selectMalware(attack);
+		selectMalware(attack, bU);
 		
 		HBox.setHgrow(statsNodeTitle, Priority.ALWAYS);
 		HBox.setHgrow(gridBox, Priority.ALWAYS);
@@ -297,12 +323,16 @@ public class Main extends Application {
 		actionPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		actionPane.setPadding(STANDARD_PADDING);
+		
 
 		VBox controlli = new VBox();
 		controlli.setPadding(STANDARD_PADDING);
 		
+				
 		HBox actionTitle = new HBox();
 		actionTitle.setPadding(STANDARD_PADDING);
+		actionTitle.setPrefSize(300.0, 40.0);
+		
 		actionTitle.setAlignment(Pos.CENTER);
 		actionTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
@@ -319,21 +349,25 @@ public class Main extends Application {
 		actionMarket.setPadding(STANDARD_PADDING);
 		Label actionMarketL = new Label();
 		actionMarket.getChildren().add(actionMarketL);
-		market(actionMarket);
+		market(actionMarket, bU);
 		
 		HBox powerUp = new HBox();
 		powerUp.setPadding(STANDARD_PADDING);
+		powerUp.setBackground(
+				new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label powerUpL = new Label();
 		powerUp.getChildren().add(powerUpL);
-		powerUp(powerUp);
+		powerUp(powerUp, bU);
 		
 		HBox dev = new HBox();
 		dev.setPadding(STANDARD_PADDING);
 		Label develop = new Label();
 		dev.getChildren().add(develop);
-		development(dev);
+		development(dev, bU);
 		
+		actionTitle.setAlignment(Pos.CENTER);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
+		controlli.setAlignment(Pos.CENTER_RIGHT);
 		actionPane.getChildren().add(controlli);
 
 		// ------------------------------------------ //
@@ -379,14 +413,7 @@ public class Main extends Application {
 		
 		 
 		int baseUtenteX; int baseUtenteY; 
-		
-		Giocatore[] gioc = main1.getGiocatori();
-		String nomeGioc = gioc[1].getNome();
-		
-		
-		Nodo baseUtente = main1.getTabellone().trovaBase(gioc[1]); 
-		Base baseU = new Base(baseUtente.getPossessore());
-				
+
 		ybEnergy.setText("Energy: ");
 		ybFwLvl.setText("Firewall Lvl: ");
 		ybRamLvl.setText("Ram Lvl: ");
@@ -394,23 +421,19 @@ public class Main extends Application {
 		ybAv.setText("Antivirus disp: ");
 		ybVr.setText("Virus disp: ");
 		ybRc.setText("Rootcrash disp: ");
-		avQy.setText("" + baseUtente.getSoftware_disponibile());
-		vrQy.setText("" + baseUtente.getSoftware_disponibile());
-		rcQy.setText("" + baseUtente.getSoftware_disponibile());
+		avQy.setText("" + bU.getSoftware_disponibile());
+		vrQy.setText("" + bU.getSoftware_disponibile());
+		rcQy.setText("" + bU.getSoftware_disponibile());
 
-		ybG.add(ybEnergy, 0, 0); 	ybG.add(new Label("" + baseUtente.getE_disponibile()), 1, 0);
-		ybG.add(ybFwLvl, 0, 1); 	ybG.add(new Label ("" + baseUtente.getLvl_firewall()), 1, 1);
-		ybG.add(ybRamLvl, 0, 2); 	ybG.add(new Label ("" + baseUtente.getLvl_ram()), 1, 2);
-		ybG.add(ybCpuLvl, 0, 3); 	ybG.add(new Label ("" + baseUtente.getLvl_cpu()), 1, 3);
-		ybG.add(ybAv, 0, 4); 		ybG.add(new Label ("" + baseU.getQnt_antivirus()), 1, 4);
-		ybG.add(ybVr, 0, 5); 		ybG.add(new Label ("" + baseU.getQnt_virus()), 1, 5);
-		ybG.add(ybRc, 0, 6); 		ybG.add(new Label ("" + baseU.getQnt_rootcrash()), 1, 6);
-		
-		
-		
+		ybG.add(ybEnergy, 0, 0); 	ybG.add(new Label("" + bU.getE_disponibile()), 1, 0);
+		ybG.add(ybFwLvl, 0, 1); 	ybG.add(new Label ("" + bU.getLvl_firewall()), 1, 1);
+		ybG.add(ybRamLvl, 0, 2); 	ybG.add(new Label ("" + bU.getLvl_ram()), 1, 2);
+		ybG.add(ybCpuLvl, 0, 3); 	ybG.add(new Label ("" + bU.getLvl_cpu()), 1, 3);
+		ybG.add(ybAv, 0, 4); 		ybG.add(new Label ("" + bU.getQnt_antivirus()), 1, 4);
+		ybG.add(ybVr, 0, 5); 		ybG.add(new Label ("" + bU.getQnt_virus()), 1, 5);
+		ybG.add(ybRc, 0, 6); 		ybG.add(new Label ("" + bU.getQnt_rootcrash()), 1, 6);
 		
 		hBg.getChildren().add(ybG);
-
 		
 		yb.getChildren().addAll(ybTitle, hBg);
 		yourBasePane.getChildren().add(yb); 
@@ -439,10 +462,6 @@ public class Main extends Application {
 		
 // ------------------------------------------ //		
 
-	
-
-		MappaDefinitiva mappa = new MappaDefinitiva(dimensioneMappa.getKey(), dimensioneMappa.getValue(), gioc);
-		mappa.assegnamento(gioc.length-1, gioc);
 
 		// definiamo i nodi base
 
@@ -475,13 +494,41 @@ public class Main extends Application {
 		 * terrainMap.selected = newValue; mapChange = true; });
 		 */
 
+						
 		centerPane.setOnMouseClicked(event -> {
+			
 			Hexagon est = mapData.pixelToHex(new Point(event.getX(), event.getY()));
 			HexData data = mapData.getHexData(est);
 			
+	// ---------- sto provando a risolvere l'offset su scroll --------------//	
+			double[] h =  new double[1000];
+			double[] w = new double[1000];
+			int click = 0;
+			h[click] = centerPane.getHeight(); w[click] = centerPane.getWidth();
+			
+			if (data != null) {
+				++click;
+				
+				h[click] = centerPane.getHeight(); w[click] = centerPane.getWidth();				
+				
+				System.out.println("Dal click " + (click-1) + " al " + click + " -> diffHeight(): " + (h[click] - h[click-1]));
+				System.out.println("Dal click " + (click-1) + " al " + click + " -> diffWidth(): " + (w[click] - w[click-1]));
+				
+				System.out.println("centerPane.getWidth(): " + centerPane.getWidth() + "click: " + click);
+				
+			}
+			//System.out.println("getMinViewportHeight(): " + centerPane.getMinViewportHeight());
+			//System.out.println("getHvalue(): " + centerPane.getHvalue());
+			//System.out.println("getVvalue(): " + centerPane.getVvalue());
+			//System.out.println("diffHeight(): " + (scrollHeightAtOpen - centerPane.getHeight()));
+			//System.out.println("diffWidth(): " + (scrollWidthAtOpen - centerPane.getWidth()));
+			//System.out.println("getLayoutX(): " + centerPane.getLayoutX());
+			//System.out.println(": " + centerPane.);
+					
+	// -----------------------------------------------------------------------//
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
 				Nodo nodo = data.nodo;
-				Base base = new Base();
+				
 				
 		// ---- Valori in Stats Node ---------//
 				
@@ -492,7 +539,6 @@ public class Main extends Application {
 				fwLvl.setText("Firewall Level: " + String.valueOf(nodo.getLvl_firewall()));
 				ramLvl.setText("Ram Level: " + String.valueOf(nodo.getLvl_ram()));
 				cpuLvl.setText("CPU Level: " + String.valueOf(nodo.getLvl_cpu()));
-				
 				basicMap.drawMap(est);
 
 			}

@@ -73,6 +73,7 @@ public class NumberSpinner extends HBox {
         arrowUp.setId(ARROW);
         arrowUp.getElements().addAll(new MoveTo(-ARROW_SIZE, 0), new LineTo(ARROW_SIZE, 0),
                 new LineTo(0, -ARROW_SIZE), new LineTo(-ARROW_SIZE, 0));
+        
         // mouse clicks should be forwarded to the underlying button
         arrowUp.setMouseTransparent(true);
 

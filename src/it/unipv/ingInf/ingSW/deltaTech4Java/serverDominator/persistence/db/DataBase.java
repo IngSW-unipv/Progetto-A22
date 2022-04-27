@@ -133,6 +133,27 @@ public class DataBase {
 		}
 		return createDataBase();
 	}
+	
+	/**
+	 * Metodo per forzare la creazione del data base secondo i parametri passati
+	 * @param url 
+	 * </br>&emsp;&emsp;Url del db; <b>NON</b> deve avere lo schema;
+	 * </br><b> Esempio di MySQL:</b> 
+	 * </br>&emsp;&emsp;jdbc:mysql://localhost:3306
+	 * </br><b> Esempio di oracle:</b> 
+	 * </br>&emsp;&emsp;jdbc:oracle:thin:@localhost:1521 
+	 * @param Username
+	 * @param password
+	 * @return boolean
+	 */
+	public static boolean forceDataBaseCreation(String url,String Username,String password) {
+		if(!setConfigParameter(url, Username, password)) {
+			System.err.println("DataBase.class:Impossibile slvare i dati inseriti");
+			return false;
+		}
+		return forceDataBaseCreation();
+	}
+	
 	/**
 	 * Recupera la posizione della colonna di interesse locata nello schema passato e nella tabella passata
 	 * @param schema
@@ -232,31 +253,44 @@ public class DataBase {
 			System.err.println("DataBase.class: problem with configuration file");
 		}
 	
-		if (isItTheFirstTime())
-		{
-			try {
-				ExecuteSQLfiel.executeSqlFile(CREATE_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
-			} catch (Exception e) {
-				System.err.println("DataBase.class: Problemi quando tento di creare lo schema.CONTROLLA CORRETTAZZA DI USERNAME E PASSWORD"
-						+ "\nAssicurati che lo user che utilizzi abbia i seguenti privilegi:"
-						+ "\n\tALTER\n\tCREATE\n\tCREATE USER\n\tCREATE VIEW\n\tDELETE\n \tDROP\n\tGRANT OPTION\n\tINSERT\n\tREFERENCES\n\tSELECT\n\tTRIGGER\n\tUPDATE");
-				e.getMessage();
-				e.printStackTrace();
-				return false;
-			}
-			try {
-				ExecuteSQLfiel.executeSqlFile(POPOLA_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
-				Properties p1=new Properties();
-				p1.put(FIRST_CONFIGURATION_PROPERTIE_NAME, "55");
-				PropertiesFile.savePropertyInCriptedFile(p1, CONFIGURATION_FILE_NAME);
-			} catch (Exception e) {
-				System.err.println("DataBase.class: Problemi Quando si cerca di popolare lo schema");
-				e.getMessage();
-				e.printStackTrace();
-				result =false;
-			}		
+		if (isItTheFirstTime()){
+			result=DataBase.forceDataBaseCreation();		
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * Metodo per forzare la creazione del data base
+	 * @return
+	 * vero se il database viene creato 
+	 * <br>falso se il data base non è stato creato
+	 */
+	public static boolean forceDataBaseCreation() {
+		boolean result=true;
+		try {
+			ExecuteSQLfiel.executeSqlFile(CREATE_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
+		} catch (Exception e) {
+			System.err.println("DataBase.class: Problemi quando tento di creare lo schema.CONTROLLA CORRETTAZZA DI USERNAME E PASSWORD"
+					+ "\nAssicurati che lo user che utilizzi abbia i seguenti privilegi:"
+					+ "\n\tALTER\n\tCREATE\n\tCREATE USER\n\tCREATE VIEW\n\tDELETE\n \tDROP\n\tGRANT OPTION\n\tINSERT\n\tREFERENCES\n\tSELECT\n\tTRIGGER\n\tUPDATE");
+			e.getMessage();
+			e.printStackTrace();
+			return false;
+		}
+		try {
+			ExecuteSQLfiel.executeSqlFile(POPOLA_SCHEMA_FILE_NAME, CONFIGURATION_FILE_NAME);
+			Properties p1=new Properties();
+			p1.put(FIRST_CONFIGURATION_PROPERTIE_NAME, "55");
+			PropertiesFile.savePropertyInCriptedFile(p1, CONFIGURATION_FILE_NAME);
+		} catch (Exception e) {
+			System.err.println("DataBase.class: Problemi Quando si cerca di popolare lo schema");
+			e.getMessage();
+			e.printStackTrace();
+			result =false;
+		}
+		return result;
+		
 	}
 	
 	private static boolean setUrl(String ip, String port) {

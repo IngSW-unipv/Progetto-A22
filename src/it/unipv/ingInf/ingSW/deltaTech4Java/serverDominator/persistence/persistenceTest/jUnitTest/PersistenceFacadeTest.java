@@ -39,6 +39,16 @@ class PersistenceFacadeTest {
 	private static ArrayList<Obiettivi> ob=new ArrayList<Obiettivi>();
 	private static ArrayList<ObPunteggio> obp=new ArrayList<ObPunteggio>();
 	
+	/*IMPORTANTE: file che devono esistere e il loro contenuto 
+	 * #######currentLanguesge 
+	 * ENGLISH
+	 * #######testFile
+	 * LEGA5=En lega 5
+	 * LEGA6=En lega 6
+	 * LEGA7=En lega 7
+	 * asset4=en Asset 4
+	 * hkgyfyi=en hkgyfyi
+	 */
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -113,6 +123,7 @@ class PersistenceFacadeTest {
 		us.add(user3);
 		us.add(user4);
 		us.add(user5);
+		
 		try {
 			Properties p=new Properties();
 			p.put("primaConfigurazione", "1");
@@ -121,21 +132,14 @@ class PersistenceFacadeTest {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		DataBase.createDataBase("localhost", "3306","admin","123456789");
+		DataBase.forceDataBaseCreation("jdbc:mysql://localhost:3306","admin","123456789");
 		DBLinguaManager man=new DBLinguaManager("resources/config/persistence/dataBase/connWith_sd_sys");
 		Properties p=null;
-		/*contenuto di current Languesge 
-		 * #ENGLISH
-		 * LEGA5=En lega 5
-		 * LEGA6=En lega 6
-		 * LEGA7=En lega 7
-		 * asset4=en Asset 4
-		 * hkgyfyi=en hkgyfyi
-		 */
+	
 		try {
-			p=PropertiesFile.loadPropertiesFromFile("resources/language/currentLanguage");
+			p=PropertiesFile.loadPropertiesFromFile("resources/language/testFile");
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.err.println("configurazione errata!!!!!");
 		}
 		man.insertLanguegeList(p, FilesLanguageManager.getCurrentLanguage());
 

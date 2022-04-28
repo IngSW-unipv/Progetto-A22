@@ -66,11 +66,6 @@ public class Main extends Application {
 
 	}
 
-	
-	
-	
-	
-	
 	private final Insets STANDARD_PADDING = new Insets(10);
 	PopUp popUp = new PopUp();
 
@@ -96,7 +91,6 @@ public class Main extends Application {
 		return new Pair<>(xMax, yMax);
 	}
 	
-	
 
 	public static void main(String[] args) {
 		launch(args); // fa partire la funzione start di JavaFX
@@ -106,9 +100,13 @@ public class Main extends Application {
 		
 		Button button = new Button(titolo);
 		button.getStyleClass().add("redbutton");
+		//button.setPadding(new Insets(11,11,11,11));
 		button.setOnMouseClicked(event);
 
 		controls.getChildren().add(button); 
+		controls.setPadding(STANDARD_PADDING);
+		controls.setAlignment(Pos.CENTER);
+		controls.setSpacing(5);
 	}
 
 	
@@ -119,9 +117,9 @@ public class Main extends Application {
 
 		}));
 		hBox.setSpacing(0); 
-		hBox.setAlignment(Pos.BASELINE_CENTER);
+		hBox.setAlignment(Pos.CENTER);
 		hBox.setPadding(STANDARD_PADDING); 
-		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(8, 8, 8, 8))));
 	}
 
 	public void development(HBox hBox, Base bU) {
@@ -133,9 +131,9 @@ public class Main extends Application {
 
 		}));
 		hBox.setSpacing(0); 
-		hBox.setAlignment(Pos.BASELINE_CENTER);
+		hBox.setAlignment(Pos.CENTER);
 		hBox.setPadding(STANDARD_PADDING); 
-		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), STANDARD_PADDING)));
 	}
 
 	public void powerUp(HBox hBox, Base bU) {
@@ -147,7 +145,7 @@ public class Main extends Application {
 		hBox.setSpacing(0); 
 		hBox.setAlignment(Pos.BASELINE_CENTER);
 		hBox.setPadding(STANDARD_PADDING); 
-		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), STANDARD_PADDING)));
 	}
 
 	public void market(HBox hBox, Base bU) {
@@ -161,7 +159,7 @@ public class Main extends Application {
 		hBox.setSpacing(0); 
 		hBox.setAlignment(Pos.CENTER);
 		hBox.setPadding(STANDARD_PADDING); 
-		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(10,10, 10, 10))));
+		hBox.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), STANDARD_PADDING)));
 	}
 
 	@Override
@@ -229,11 +227,11 @@ public class Main extends Application {
 
 
 
-		// sottoMappa : HBox che contiene le VBox battaglie e action sotto alla mappa
+// sottoMappa : HBox che contiene le VBox battaglie e action sotto alla mappa
 
 		HBox sottoMappa = new HBox();
 
-		// Pane statsNode che contiene le proprietà del nodo
+	// Pane statsNode che contiene le proprietà del nodo
 
 		Pane statsNode = new Pane();
 		statsNode.setBackground(
@@ -247,7 +245,7 @@ public class Main extends Application {
 			statsNodeTitle.setAlignment(Pos.BASELINE_CENTER);
 			statsNodeTitle.setPadding(STANDARD_PADDING);
 			statsNodeTitle.setBackground(
-					new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+					new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(5,5,5,5))));
 			
 			Label titleL = new Label("Info Nodo");
 			titleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
@@ -279,7 +277,7 @@ public class Main extends Application {
 		gridBox.getChildren().add(gDx);
 		
 		HBox attack = new HBox();
-		attack.setPadding(new Insets(20, 20, 20, 20));
+		attack.setPadding(STANDARD_PADDING);
 		Label attackL = new Label();
 		attack.getChildren().add(attackL);
 		selectMalware(attack, bU);
@@ -289,11 +287,9 @@ public class Main extends Application {
 		HBox.setHgrow(attack, Priority.ALWAYS);
 		
 		statsNodeVbox.getChildren().addAll(statsNodeTitle, gridBox, attack);
-		statsNode.getChildren().addAll(statsNodeVbox); /* ,nodeInfo,ownerDistance,firewall */
+		statsNode.getChildren().addAll(statsNodeVbox); 
 		
-		// ------------------------------------------ //
-		
-		// Pane battle che contiene le battaglie
+	// Pane battle che contiene le battaglie //
 
 		Pane battlePane = new Pane();
 
@@ -313,64 +309,75 @@ public class Main extends Application {
 		batt1.getChildren().addAll(batt1Lb, pb1);
 		battaglie.getChildren().addAll(titoloBattaglie, batt1);
 		battlePane.getChildren().add(battaglie);
-
-		// ------------------------------------------ //
 		
-		// Pane action - contiene le azioni di gioco
+	// Pane action - contiene le azioni di gioco
 
+		
 		Pane actionPane = new Pane();
-
 		actionPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		//actionPane.setPadding(STANDARD_PADDING);
 		
-
+		AnchorPane anchor = new AnchorPane();
+		
+		AnchorPane.setTopAnchor(actionPane, 0d);
+		
 		VBox controlli = new VBox();
+		controlli.setMinWidth(200.0);
 		controlli.setPadding(STANDARD_PADDING);
-		controlli.setTranslateX(170);
-				
+		controlli.setAlignment(Pos.CENTER);
+						
 		HBox actionTitle = new HBox();
 		actionTitle.setPadding(STANDARD_PADDING);
-		actionTitle.setPrefSize(200.0, 30.0);
-		
+		//actionTitle.setPrefSize(200.0, 30.0);
 		actionTitle.setAlignment(Pos.CENTER);
 		actionTitle.setBackground(
-				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(5,5,5,5))));
 		Label actionTitleL = new Label("Action");
 		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		actionTitleL.setTextFill(Color.DARKGREEN);
 
 		actionTitle.getChildren().add(actionTitleL);
-		
-			
+					
 		HBox actionMarket = new HBox();
-		//actionMarket.setPadding(STANDARD_PADDING);
+		actionMarket.setPadding(STANDARD_PADDING);
+		actionMarket.setAlignment(Pos.TOP_CENTER);
 		Label actionMarketL = new Label();
 		actionMarket.getChildren().add(actionMarketL);
+		
 		market(actionMarket, bU);
 		
 		HBox powerUp = new HBox();
-		//powerUp.setPadding(STANDARD_PADDING);
-		//powerUp.setBackground(
-				//new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+		powerUp.setPadding(STANDARD_PADDING);
+		powerUp.setAlignment(Pos.BASELINE_CENTER);
+		powerUp.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label powerUpL = new Label();
 		powerUp.getChildren().add(powerUpL);
+		
 		powerUp(powerUp, bU);
 		
 		HBox dev = new HBox();
-		//dev.setPadding(STANDARD_PADDING);
+		dev.setPadding(STANDARD_PADDING);
+		dev.setAlignment(Pos.BASELINE_CENTER);
+		dev.setBackground(new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label develop = new Label();
 		dev.getChildren().add(develop);
+		
 		development(dev, bU);
 		
-		//actionTitle.setAlignment(Pos.CENTER);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
-		//controlli.setAlignment(Pos.CENTER_RIGHT);
 		actionPane.getChildren().add(controlli);
+		anchor.getChildren().add(actionPane);
 
-		// ------------------------------------------ //
+// ------------------------------------------ //		
 		
-		// Pane yourBase a destra della mappa 
+		HBox.setHgrow(statsNode, Priority.ALWAYS);
+		HBox.setHgrow(anchor, Priority.ALWAYS);
+		HBox.setHgrow(battlePane, Priority.ALWAYS);
+		sottoMappa.getChildren().addAll(statsNode, battlePane, anchor);
+
+// ------------------------------------------ //
+		
+	// Pane yourBase a destra della mappa 
 
 		Pane yourBasePane = new Pane();
 		yourBasePane.setBackground(
@@ -438,16 +445,9 @@ public class Main extends Application {
 		yb.getChildren().addAll(ybTitle, hBg);
 		yourBasePane.getChildren().add(yb); 
 		
-// ------------------------------------------ //		
-		
-		HBox.setHgrow(statsNode, Priority.ALWAYS);
-		HBox.setHgrow(actionPane, Priority.ALWAYS);
-		HBox.setHgrow(battlePane, Priority.ALWAYS);
-		sottoMappa.getChildren().addAll(statsNode, battlePane, actionPane);
 
-// ------------------------------------------ //
 
-		// Setting BorderPane
+	// Setting BorderPane
 
 		borderPane.setTop(menuBar);
 		borderPane.setCenter(centerPane);
@@ -457,27 +457,29 @@ public class Main extends Application {
 		borderPane.setRight(yourBasePane);
 		BorderPane.setMargin(yourBasePane, new Insets(10, 10, 10, 0));
 
-		// Adding MenuBar and BorderPane to a VBox Holder
+	// Adding MenuBar and BorderPane to a VBox Holder
+		
 		holder.getChildren().addAll(menuBar, borderPane);
 		
 // ------------------------------------------ //		
 
 
-		// definiamo i nodi base
+	// definiamo i nodi base
 
-		/*
+		/**
 		 * Rilevo il numero di basi da piazzare numBasi Nel ciclo di creazione del
 		 * vettore nodi verifico se un nodo ha le coordinate di una base Se si allora
 		 * recupero il nome del giocatore Giocatore.getNome(giocatore); di quella base
 		 * Definisco il nodo come base del Giocatore giocatore Assegno il colore al nodo
 		 * i,j nodo[i][j].colore = getColorePossessore(giocatore);
-		 */
+		 **/
 
 		// creo vettore di nodi X TEST!
 
 		// !!!! Occorre normalizzare le coordinate !!!!
-		Nodo[][] nodiTest = mappa.getMap();
-		MapData mapData = new MapData(nodiTest);
+		
+		Nodo[][] nodiView = mappa.getMap();
+		MapData mapData = new MapData(nodiView);
 
 		// Always Will be rendered basically - Ci si riporta sempre alla mappa di base
 
@@ -517,19 +519,13 @@ public class Main extends Application {
 				System.out.println("centerPane.getWidth(): " + centerPane.getWidth() + "click: " + click);
 				
 			}
-			//System.out.println("getMinViewportHeight(): " + centerPane.getMinViewportHeight());
-			//System.out.println("getHvalue(): " + centerPane.getHvalue());
-			//System.out.println("getVvalue(): " + centerPane.getVvalue());
-			//System.out.println("diffHeight(): " + (scrollHeightAtOpen - centerPane.getHeight()));
-			//System.out.println("diffWidth(): " + (scrollWidthAtOpen - centerPane.getWidth()));
-			//System.out.println("getLayoutX(): " + centerPane.getLayoutX());
-			//System.out.println(": " + centerPane.);
+		
 					
 	// -----------------------------------------------------------------------//
+			
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
 				Nodo nodo = data.nodo;
-				
-				
+					
 		// ---- Valori in Stats Node ---------//
 				
 				titleL.setText("Stats Node: " + est.x + " , " + est.y);

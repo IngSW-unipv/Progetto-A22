@@ -9,6 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2.MapData.Layout;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2.Main;
 import javafx.geometry.Insets;
@@ -307,6 +308,9 @@ public class PopUp {
 	}
 	
 	int cpuAdd, cpuFinal, fwAdd, fwFinal, ramAdd, ramFinal, eAdd, eFinal, xS, yS;
+	Mercato mkt = new Mercato();
+	int prAv = mkt.prezzoAntivirus;
+	
 	
 	public void market(Base baseUtente) {
 		Stage stage = new Stage();
@@ -318,8 +322,16 @@ public class PopUp {
 		
 		VBox vM = new VBox();
 		
-		HBox hMktP = new HBox();
+		HBox initBill = new HBox();
+		initBill.setPadding(STANDARD_PADDING);
+		Label initBillL = new Label("Il tuo saldo iniziale è: " + baseUtente.getPossessore().getValuta());
+		initBill.getChildren().add(initBillL);
 		
+		GridPane priceList = new GridPane();
+		priceList.setPadding(STANDARD_PADDING);
+		priceList.add(new Label("Antivirus: " + prAv), cpuFinal, cpuAdd);
+		
+		HBox hMktP = new HBox();
 		GridPane mktP = new GridPane();
 		mktP.setPadding(STANDARD_PADDING);
 		mktP.setVgap(5);
@@ -430,6 +442,11 @@ public class PopUp {
 		
 		hMktP.getChildren().add(mktP);
 		
+		HBox finalBill = new HBox();
+		finalBill.setPadding(STANDARD_PADDING);
+		Label finalBillL = new Label("Stai spendendo: xxx" + "Ti resterà: yyy");
+		finalBill.getChildren().add(finalBillL);
+		
 		HBox mB = new HBox();
 		mB.setAlignment(Pos.BASELINE_CENTER);
 		Button button = new Button("buy!");
@@ -444,7 +461,7 @@ public class PopUp {
 		});
 		
 		mB.getChildren().add(button);
-		vM.getChildren().addAll(hMktP, mB);
+		vM.getChildren().addAll(initBill, priceList, hMktP, finalBill, mB);
 	
 		Scene scene = new Scene(vM, sX, sY);
 		scene.getStylesheets().add("application.css");

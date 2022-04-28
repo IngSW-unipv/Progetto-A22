@@ -3,7 +3,15 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 
 public class Mercato {
-	int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus, prezzoAntivirus, prezzoRootcrash, quantitaRam, quantitaCpu, quantitaEnergia, quantitaVirus, quantitaAntivirus, quantitaRootcrash;
+	int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus;
+	public int prezzoAntivirus;
+	int prezzoRootcrash;
+	int quantitaRam;
+	int quantitaCpu;
+	int quantitaEnergia;
+	int quantitaVirus;
+	int quantitaAntivirus;
+	int quantitaRootcrash;
 	
 	public Mercato() {
 		prezzoRam=0;

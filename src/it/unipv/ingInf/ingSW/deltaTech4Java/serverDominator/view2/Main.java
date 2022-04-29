@@ -185,7 +185,9 @@ public class Main extends Application {
 		Base bU = new Base(baseU.getPossessore());
 		MappaDefinitiva mappa = new MappaDefinitiva(dimensioneMappa.getKey(), dimensioneMappa.getValue(), gioc);
 		mappa.assegnamento(gioc.length-1, gioc);
-		
+		Nodo[][] nodiView = mappa.getMap();
+		MapData mapData = new MapData(nodiView);
+		int ray = mapData.getRay();
 		
 		// MenuBar
 		MenuBar menuBar = new MenuBar();
@@ -199,31 +201,44 @@ public class Main extends Application {
 		menuBar.getMenus().addAll(fileMenu, stateMenu);
 
 		// finestra di gioco
+		
 		VBox holder = new VBox();
 		BorderPane borderPane = new BorderPane();
 
 		// Canvass = Sfondo rettangolare su cui vengono disegnati rettangoli
-		double bordoLarghezza, bordoAltezza, larghezzaE, altezzaE;
-		bordoLarghezza = 8;
-		bordoAltezza = 0;
-		larghezzaE = 44.5;
-		altezzaE = 39.4;
-		Canvas basicCanvas = new Canvas(dimensioneMappa.getKey() * larghezzaE + bordoLarghezza,
-				dimensioneMappa.getValue() * altezzaE + bordoAltezza);
+		
+		double bordoLarghezza, bordoAltezza, hexWidth, hexHight;
+				
+		hexWidth = (dimensioneMappa.getKey() * ray * Math.sqrt(3.0)) + ray;
+		hexHight = ray;
+		
+		if (dimensioneMappa.getValue() % 2 ==0 ) {
+			hexHight = dimensioneMappa.getValue() / 2 * ray * 3;
+		}
+		
+		else if ((dimensioneMappa.getValue() % 2 !=0) && (dimensioneMappa.getValue() > 1)){
+			hexHight = (dimensioneMappa.getValue() - 1) * ray * 3 + 0.5 * ray; 
+		}
+		
+		else {
+			hexHight = ray * 2;
+		}
+		
+		Canvas basicCanvas = new Canvas(hexWidth ,(hexHight + 12));
 
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
 		basicGC.setFill(null);
 
-		// Adding Canvases to BorderPane
+		// Adding Canvase to BorderPane
 		ScrollPane centerPane = new ScrollPane();
 		centerPane.setContent(basicCanvas);
-		centerPane.setStyle("-fx-background:rgb(20,20,20);-fx-background-radius:1em");
+		centerPane.setStyle("-fx-background:rgb(20,20,20);-fx-background-radius:1em");  
 		centerPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#b3c9ff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		centerPane.setPadding(STANDARD_PADDING);
-		centerPane.setFitToHeight(true);
-		centerPane.setFitToWidth(true);
-		System.out.println("" + centerPane.getBaselineOffset());
+		//centerPane.setFitToHeight(true);
+		//centerPane.setFitToWidth(true);
+		//System.out.println("" + centerPane.getBaselineOffset());
 
 
 
@@ -237,8 +252,10 @@ public class Main extends Application {
 		statsNode.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
 
+		HBox statsNodeHbox = new HBox();
+		statsNodeHbox.setAlignment(Pos.BASELINE_CENTER);
+		
 		VBox statsNodeVbox = new VBox();
-		statsNodeVbox.setSpacing(5);
 		statsNodeVbox.setPadding(STANDARD_PADDING);
 
 		HBox statsNodeTitle = new HBox();
@@ -252,13 +269,13 @@ public class Main extends Application {
 			titleL.setTextFill(Color.DARKGREEN);
 		statsNodeTitle.getChildren().add(titleL);
 		
-		
 		HBox gridBox = new HBox();
 		GridPane gDx = new GridPane();
 
 		gDx.setVgap(5);
 		gDx.setHgap(20);
-		gDx.setAlignment(Pos.BASELINE_LEFT);
+		gDx.setAlignment(Pos.CENTER);
+		gDx.setPadding(STANDARD_PADDING);
 
 		Label owner = new Label("Node owner");
 		Label distance = new Label("Distance");
@@ -280,14 +297,12 @@ public class Main extends Application {
 		attack.setPadding(STANDARD_PADDING);
 		Label attackL = new Label();
 		attack.getChildren().add(attackL);
+		
 		selectMalware(attack, bU);
 		
-		HBox.setHgrow(statsNodeTitle, Priority.ALWAYS);
-		HBox.setHgrow(gridBox, Priority.ALWAYS);
-		HBox.setHgrow(attack, Priority.ALWAYS);
-		
 		statsNodeVbox.getChildren().addAll(statsNodeTitle, gridBox, attack);
-		statsNode.getChildren().addAll(statsNodeVbox); 
+		statsNodeHbox.getChildren().add(statsNodeVbox);
+		statsNode.getChildren().addAll(statsNodeHbox); 
 		
 	// Pane battle che contiene le battaglie //
 
@@ -306,6 +321,7 @@ public class Main extends Application {
 		batt1.setSpacing(0);
 		ProgressBar pb1 = new ProgressBar(0);
 		Label batt1Lb = new Label("Battaglia 1");
+		
 		batt1.getChildren().addAll(batt1Lb, pb1);
 		battaglie.getChildren().addAll(titoloBattaglie, batt1);
 		battlePane.getChildren().add(battaglie);
@@ -371,8 +387,9 @@ public class Main extends Application {
 // ------------------------------------------ //		
 		
 		HBox.setHgrow(statsNode, Priority.ALWAYS);
-		HBox.setHgrow(anchor, Priority.ALWAYS);
 		HBox.setHgrow(battlePane, Priority.ALWAYS);
+		HBox.setHgrow(anchor, Priority.ALWAYS);
+		
 		sottoMappa.getChildren().addAll(statsNode, battlePane, anchor);
 
 // ------------------------------------------ //
@@ -478,8 +495,7 @@ public class Main extends Application {
 
 		// !!!! Occorre normalizzare le coordinate !!!!
 		
-		Nodo[][] nodiView = mappa.getMap();
-		MapData mapData = new MapData(nodiView);
+		
 
 		// Always Will be rendered basically - Ci si riporta sempre alla mappa di base
 

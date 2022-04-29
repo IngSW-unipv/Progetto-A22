@@ -16,20 +16,30 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
  */
 
 public class MapData {
-    HashMap<Hexagon, HexData> data;  //  l'hashMap che contiene tutti gli esagoni ed il rispettivo tipo
+    HashMap<Hexagon, HexData> data;  //  l'hashMap che contiene tutti gli esagoni ed il rispettivo dato
+    
+    int ray = 25;
     
     Orientation layout_pointy = new Orientation(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,  Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
     List<Hexagon> directions = Arrays.asList(new Hexagon(1,0), new Hexagon(1,-1), new Hexagon(0,-1), new Hexagon(-1,0), new Hexagon(-1,1), new Hexagon(0,1)); // direzioni dall'esagono 0,0 
-    Layout layout = new Layout(layout_pointy, new Point(25,25), new Point(25,25));  // definisco orientation, size e origin
+    Layout layout = new Layout(layout_pointy, new Point(ray,ray), new Point(ray,ray));  // definisco orientation, size e origin
     
     
    // System.out.println("layout = " );
 
+    public int getRay() {
+    	return this.ray;
+    }
+    
+    public void setRay(int ray) {
+    	this.ray = ray;
+    }
+    
     public MapData(Nodo[][] nodi){
         data = new HashMap<>();
 
    // Creazione delle coordinate per una matrice di tipo Nodo[i][j]
-       System.out.println(nodi.length); 
+   
         for (int r = 0; r < nodi[0].length; r++) { 							//nodi.length è il valore massimo di i
         																	// nodi[i].length è il valore massimo di j
             int r_offset = (int) Math.floor(r/2);							// Math.floor(r/2) = parte intera del valore di r/2 
@@ -58,9 +68,9 @@ public class MapData {
     Point hex_corner_offset(int corner) { // restituisce un punto 
         Point size = layout.size;
         double angle = 2.0 * Math.PI * (layout.orientation.start_angle + corner) / 6; 	// angle = 1/6 angolo giro (2*pi/6)
-        																				// start_angle = 0.5*2*pi = 180°
-        return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));			// corner 0 ha size.x = -25 ; size.y = 0
-        																				// corner 1 ha size.x = -25 ; size.y = 0
+        																				// start_angle = 0.5*2*pi/6 = 30°
+        return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));			// corner 0 ha size.x = 21.65 ; size.y = 12.5
+        																				// corner 1 ha size.x = 0 ; size.y = 25
     }
 
     List<Point> getPoints(Hexagon h) {											// creo lista dei 6 vertici dell'esagono h

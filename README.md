@@ -2,7 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Backend-java-FF334F)&emsp;
 ![JavaFX](https://img.shields.io/badge/Frontend-JavaFX-33FF93)
-![FXML](https://img.shields.io/badge/Frontend-FXML-33FF93)&emsp;
+![Swing](https://img.shields.io/badge/Frontend-Swing-33FF93)&emsp;
 ![MySql](https://img.shields.io/badge/Database-MySql-blue)
 
 Server Dominator is a strategic, management game in real time. 

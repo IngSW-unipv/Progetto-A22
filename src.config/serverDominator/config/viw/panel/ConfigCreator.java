@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -102,8 +103,13 @@ public class ConfigCreator extends JPanel {
 		this.textToJavaFxLibPath.setColumns(10);
 		
 		this.buttonNavigateInFileSys = new JButton(propLang.getProperty(CFG_CREATOR_buttonNavigateInFileSys_KEY_IN_FILE, "Naviga"));
-		this.lableTitle = DefaultComponentFactory.getInstance().createTitle(propLang.getProperty(CFG_CREATOR_lableTitle_KEY_IN_FILE,
-				"BENVENUTO IN SERVER DOMINATOR"));
+		try {
+			this.lableTitle = DefaultComponentFactory.getInstance().createTitle(new String(propLang.getProperty(CFG_CREATOR_lableTitle_KEY_IN_FILE)
+					.getBytes(),"UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			this.lableTitle=DefaultComponentFactory.getInstance().createTitle("BENVENUTO IN SERVER DOMINATOR");
+			e.printStackTrace();
+		}
 		this.lableTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		this.separator = new JSeparator();

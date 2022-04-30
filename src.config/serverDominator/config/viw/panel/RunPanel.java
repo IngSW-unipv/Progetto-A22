@@ -14,6 +14,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLan
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 import java.awt.event.ActionEvent;
 
 /**
@@ -41,10 +42,19 @@ public class RunPanel extends JPanel {
 	
 	private void init() {
 		Properties prop=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
-		titoloLabel = DefaultComponentFactory.getInstance().createTitle(prop.getProperty(KEY_titoloLabel, "Inizia a giocare"));
+		try {
+			titoloLabel = DefaultComponentFactory.getInstance().createTitle(new String(prop.getProperty(KEY_titoloLabel, "Inizia a giocare").getBytes(),"UTF-8"));
+		} catch (UnsupportedEncodingException e2) {
+			titoloLabel = DefaultComponentFactory.getInstance().createTitle("Inizia a giocare");
+
+		}
 		titoloLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		runButton = new JButton(prop.getProperty(KEY_runButton,"Esegui il gioco"));
+		try {
+			runButton = new JButton(new String(prop.getProperty(KEY_runButton).getBytes(),"UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			runButton = new JButton("Esegui il gioco");
+		}
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

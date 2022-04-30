@@ -4,6 +4,7 @@ package serverDominator.config.viw.panel;
 import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -100,7 +101,12 @@ public class InitLinguaChooser extends JPanel{
 		DefaultListModel<String> elements=new DefaultListModel<String>();
 		if(!c.isEmpty()) {
 			for(String s:c)	{
-				elements.addElement(s);
+				try {
+					elements.addElement(new String(s.getBytes(),"UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 

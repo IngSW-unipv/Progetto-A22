@@ -9,7 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAcc
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
 /**
 * UserAccount query
 * @author TawaHabib
@@ -30,7 +30,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 	
 	@Override
 	public boolean insetUserAccount(UserAccount us) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -63,13 +63,13 @@ public class UserAccountDAO implements IUserAccountDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
 	@Override
 	public boolean updateUserAccount(UserAccount us) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -102,13 +102,13 @@ public class UserAccountDAO implements IUserAccountDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
 	@Override
 	public boolean updateUserAccountUsername(UserAccount us, String newUsername) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -128,7 +128,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
@@ -136,7 +136,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 	public UserAccount getUserAccountById(UserAccount us) {
 		UserAccount result=null;
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -163,13 +163,13 @@ public class UserAccountDAO implements IUserAccountDAO {
 			
 			e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
 	@Override
 	public boolean chengeUserAccountPassword(UserAccount us, String newPassword) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -190,7 +190,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
@@ -208,7 +208,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccountPunteggio(UserAccount us, int newPunteggio) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -228,13 +228,13 @@ public class UserAccountDAO implements IUserAccountDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
 	@Override
 	public boolean updateUserAccountMny(UserAccount us, int newmny) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -256,7 +256,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 }

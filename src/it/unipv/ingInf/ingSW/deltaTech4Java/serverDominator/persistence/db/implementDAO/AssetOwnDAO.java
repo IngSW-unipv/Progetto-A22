@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetOwnDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetOwnDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
 
 /**
  * AssetOwm query
@@ -36,7 +36,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	public ArrayList<AsetOwn> selectAll() {
 		ArrayList<AsetOwn> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 
@@ -58,7 +58,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -67,7 +67,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 		ArrayList<AsetOwn> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -90,11 +90,11 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			}
 		}catch (Exception e){
 			e.printStackTrace();
-			DbConnection.closeConnection(conn);
+			//DbConnection.closeConnection(conn);
 			return null;
 			}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -102,7 +102,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	public ArrayList<UserAccount> selectByAssetOwnd(Asset assInput) {
 		ArrayList<UserAccount> result = new ArrayList<>();
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -120,13 +120,13 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
 	@Override
 	public boolean insertAssetOwn(AsetOwn a) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -146,7 +146,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
@@ -156,7 +156,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		boolean esito=true;
 		if(this.existAssetOwn(newA)) {
-			conn=DbConnection.startConnection(conn,propConn);
+			conn=ConnectionFactory.getIstance().getConnection(propConn);
 			try
 			{
 				String query1="UPDATE ASET_OWN SET QUANTITA=? WHERE ASSET_idAsset=? AND USER_ACCOUNT_USERNAME=?";
@@ -177,13 +177,13 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			esito=this.insertAssetOwn(newA);
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 		
 	}
 	
 	public boolean existAssetOwn(AsetOwn newOU) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 		boolean esito=true;
@@ -209,7 +209,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 }

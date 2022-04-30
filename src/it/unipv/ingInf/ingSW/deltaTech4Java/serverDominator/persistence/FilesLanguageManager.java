@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Properties;
@@ -132,8 +133,17 @@ public class FilesLanguageManager implements ILanguageManager {
 	 */
 	public static String  getLanguageFilePath(String language) {
 		String filePath=null;
-		File fls=new File(FilesLanguageManager.languageFolder+language);
-		if(fls.exists()) {
+		File fls=null;
+		try {
+			fls = new File(FilesLanguageManager.languageFolder+new String(language.getBytes(System.getProperty("file.encoding")),System.getProperty("file.encoding")));
+			System.out.println(fls.getName());
+			if(fls.exists())
+				System.out.println("lingua esiste");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(fls!=null&&fls.exists()) {
 			filePath=FilesLanguageManager.languageFolder+language;
 		}
 		return filePath;

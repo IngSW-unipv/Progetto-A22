@@ -5,6 +5,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -70,8 +71,8 @@ public class InitLinguaChooser extends JPanel{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.lableTtitolo = DefaultComponentFactory.getInstance().createTitle(poropLang.getProperty(InitLinguaChooser_lableTtitolo_KEY_IN_FILE, 
-				"BENVENUTO IN SERVER DOMINATR"));
+		this.lableTtitolo = DefaultComponentFactory.getInstance().createTitle(new String(poropLang.getProperty(InitLinguaChooser_lableTtitolo_KEY_IN_FILE, 
+				"BENVENUTO IN SERVER DOMINATR").getBytes(),StandardCharsets.UTF_8));
 		this.lableTtitolo.setFont(new Font("Arial Black", Font.BOLD, 13));
 		this.lableTtitolo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lableTtitolo.setBounds(10, 11, 755, 14);

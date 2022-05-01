@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Properties;
@@ -135,23 +137,23 @@ public class FilesLanguageManager implements ILanguageManager {
 		String filePath=null;
 		File fls=null;
 		try {
-			fls = new File(FilesLanguageManager.languageFolder+new String(language.getBytes(System.getProperty("file.encoding")),System.getProperty("file.encoding")));
+			fls = new File(FilesLanguageManager.languageFolder+new String(language.getBytes(),StandardCharsets.UTF_8));
 			System.out.println(fls.getName());
 			if(fls.exists())
 				System.out.println("lingua esiste");
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(fls!=null&&fls.exists()) {
-			filePath=FilesLanguageManager.languageFolder+language;
+			filePath=FilesLanguageManager.languageFolder+new String(language.getBytes(),StandardCharsets.UTF_8);
 		}
 		return filePath;
 	}
 	
 	/**
 	 * Metodo per recuperare le coppie chiave valore contenute nel file 
-	 * che � associato alla lingua passata per argiomento
+	 * che ï¿½ associato alla lingua passata per argiomento
 	 * @param language
 	 * lingua di cui si vogliono 
 	 * @return
@@ -236,6 +238,21 @@ public class FilesLanguageManager implements ILanguageManager {
 	
 	public static void main(String[] args) {
 		System.out.println(FilesLanguageManager.getCurrentLanguage());
+		System.out.println(getLanguageFilePath(getCurrentLanguage()));
+		Properties p=new Properties();
+		
+		
+		try {
+		//	p=PropertiesFile.loadPropertiesFromFile("connWith_sd_sys");
+			p=PropertiesFile.loadPropertiesFromCriptedFile("resources/config/persistence/dataBase/connWith_sd_sys");
+			System.out.println(p.toString());
+			p=PropertiesFile.loadPropertiesFromFile("connWith_root");
+			PropertiesFile.savePropertyInCriptedFile(p,"resources/config/persistence/dataBase/connWith_root");
+			System.out.println(p.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

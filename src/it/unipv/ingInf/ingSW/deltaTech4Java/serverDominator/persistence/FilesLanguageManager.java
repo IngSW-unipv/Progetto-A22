@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -138,9 +136,12 @@ public class FilesLanguageManager implements ILanguageManager {
 		File fls=null;
 		try {
 			fls = new File(FilesLanguageManager.languageFolder+new String(language.getBytes(),StandardCharsets.UTF_8));
-			System.out.println(fls.getName());
-			if(fls.exists())
-				System.out.println("lingua esiste");
+			if(!fls.exists()) {
+				filePath=languageFolder+"italiano";
+				System.err.println("LINGUA PASSATA: "+fls.getName()+"; ERR INFO:");
+				System.err.println("\tlingua non esiste");
+				System.err.println("\tPassato ITALIANO\n\tProcorso: "+filePath);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,22 +239,21 @@ public class FilesLanguageManager implements ILanguageManager {
 	
 	public static void main(String[] args) {
 		System.out.println(FilesLanguageManager.getCurrentLanguage());
+		//PROVA LINGUA NON ESISTE
+		System.out.println(getLanguageFilePath("ppp"));
+		//PROVA LINGUA NON ESISTE
 		System.out.println(getLanguageFilePath(getCurrentLanguage()));
-		Properties p=new Properties();
-		
-		
 		try {
-		//	p=PropertiesFile.loadPropertiesFromFile("connWith_sd_sys");
-			p=PropertiesFile.loadPropertiesFromCriptedFile("resources/config/persistence/dataBase/connWith_sd_sys");
-			System.out.println(p.toString());
-			p=PropertiesFile.loadPropertiesFromFile("connWith_root");
-			PropertiesFile.savePropertyInCriptedFile(p,"resources/config/persistence/dataBase/connWith_root");
-			System.out.println(p.toString());
+			Properties p=PropertiesFile.loadPropertiesFromFile("connWith_root");
+			PropertiesFile.savePropertyInCriptedFile(p, "resources/config/persistence/dataBase/connWith_root");
+			p.clear();
+			p=PropertiesFile.loadPropertiesFromFile("connWith_sd_sys");
+			PropertiesFile.savePropertyInCriptedFile(p, "resources/config/persistence/dataBase/connWith_sd_sys");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+					}
 
 }
 

@@ -8,7 +8,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Classe con utilità per la cifrare/decifcare 
+ * Classe con utilitï¿½ per la cifrare/decifcare 
  * @author TawaHabib
  * @version  1.0
  */
@@ -16,9 +16,7 @@ public class CryptoUtil {
     
 	private static final String ALGO = "AES";
     private static final String IV = "j1khb8BA6DB4H7N3";
-    private static final String KEY = "LJKhsmbdJGVAFSGWjdhlADBhlajkhhrwGHB0AS8148"
-    		+ "nwldfn7qAHGrèqAWRxzFNJKLAHDFOH13/$()%DABNKJQHnccv,mn<j"
-    		+ "gQGDHOUZ<.,B KKçENçNccfdykb,mvkchhchnqKBhfdac.HSbadnòj";
+    private static final String KEY = "MvWDFHfdfssvBWsfvdJ26QDafEv7963$%$sfv!Â£QWF%sfvwrfDHJ";
     
     /**
      * Metodo per cifrare una stringa in mainera simmetrica con chiave e IV di default.

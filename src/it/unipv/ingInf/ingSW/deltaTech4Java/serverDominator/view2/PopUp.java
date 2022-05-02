@@ -2,16 +2,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
 
 
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
-import javafx.application.Application;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2.MapData.Layout;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2.Main;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,7 +16,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -193,7 +185,7 @@ public class PopUp {
 		powerUpTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		Label powTitleL = new Label("Empower your BASE !");
-		powTitleL.getStylesheets().add("redbutton");
+		//powTitleL.getStylesheets().add("redbutton");
 		powTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		powTitleL.setTextFill(Color.DARKGREEN);
 		powerUpTitle.getChildren().add(powTitleL);

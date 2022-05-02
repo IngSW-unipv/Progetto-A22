@@ -16,20 +16,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-public class RightPane {
+public class BaseStatsPane {
 	
 	Base bU = new Base();
 	
 	public final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
 	
-	public  RightPane(Base bU) {
+	public  BaseStatsPane(Base bU) {
 		
 		this.bU = bU;
 		
 	}
 		
-	public Pane getRightPane(Base bU) {
+	public Pane getBsPane(Base bU) {
 
 		Pane yourBasePane = new Pane();
 		yourBasePane.setBackground(

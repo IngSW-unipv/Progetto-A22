@@ -40,7 +40,6 @@ public class BasicMap extends Map {
 		if(bordo != null) {
 			fillSelection = new Color(fillSelection.getRed()*0.8, fillSelection.getGreen()*0.8, fillSelection.getBlue()*0.8, 1);
 			
-			//System.out.println(fillSelection.getRed());
 		}
 		gc.setStroke(Color.BLACK); 
 		gc.setFill(fillSelection);

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Properties;
@@ -132,16 +133,28 @@ public class FilesLanguageManager implements ILanguageManager {
 	 */
 	public static String  getLanguageFilePath(String language) {
 		String filePath=null;
-		File fls=new File(FilesLanguageManager.languageFolder+language);
-		if(fls.exists()) {
-			filePath=FilesLanguageManager.languageFolder+language;
+		File fls=null;
+		try {
+			fls = new File(FilesLanguageManager.languageFolder+new String(language.getBytes(),StandardCharsets.UTF_8));
+			if(!fls.exists()) {
+				filePath=languageFolder+"italiano";
+				System.err.println("LINGUA PASSATA: "+fls.getName()+"; ERR INFO:");
+				System.err.println("\tlingua non esiste");
+				System.err.println("\tPassato ITALIANO\n\tProcorso: "+filePath);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(fls!=null&&fls.exists()) {
+			filePath=FilesLanguageManager.languageFolder+new String(language.getBytes(),StandardCharsets.UTF_8);
 		}
 		return filePath;
 	}
 	
 	/**
 	 * Metodo per recuperare le coppie chiave valore contenute nel file 
-	 * che � associato alla lingua passata per argiomento
+	 * che ï¿½ associato alla lingua passata per argiomento
 	 * @param language
 	 * lingua di cui si vogliono 
 	 * @return
@@ -226,7 +239,21 @@ public class FilesLanguageManager implements ILanguageManager {
 	
 	public static void main(String[] args) {
 		System.out.println(FilesLanguageManager.getCurrentLanguage());
-	}
+		//PROVA LINGUA NON ESISTE
+		System.out.println(getLanguageFilePath("ppp"));
+		//PROVA LINGUA NON ESISTE
+		System.out.println(getLanguageFilePath(getCurrentLanguage()));
+		try {
+			Properties p=PropertiesFile.loadPropertiesFromFile("connWith_root");
+			PropertiesFile.savePropertyInCriptedFile(p, "resources/config/persistence/dataBase/connWith_root");
+			p.clear();
+			p=PropertiesFile.loadPropertiesFromFile("connWith_sd_sys");
+			PropertiesFile.savePropertyInCriptedFile(p, "resources/config/persistence/dataBase/connWith_sd_sys");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					}
 
 }
 

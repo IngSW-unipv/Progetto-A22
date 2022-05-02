@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
 
 /**
  * classe che si ocupa della gestione delle lingue nel db
@@ -52,7 +52,7 @@ public class DBLinguaManager implements ILanguageManager{
 		String result="";
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
 		String s1="SELECT * from LINGUA WHERE "+lingua+"=?";
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		
@@ -70,7 +70,7 @@ public class DBLinguaManager implements ILanguageManager{
 			e.printStackTrace();
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 	@Override
@@ -79,7 +79,7 @@ public class DBLinguaManager implements ILanguageManager{
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
 		String s1="SELECT * from LINGUA WHERE CHIAVE=?";
 		int position=this.getLanguegePosition(lingua);
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		
@@ -96,7 +96,7 @@ public class DBLinguaManager implements ILanguageManager{
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -109,7 +109,7 @@ public class DBLinguaManager implements ILanguageManager{
 		if(!this.exists(lingua)) {
 			this.createNewLingua(lingua);
 		}
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		for (Entry<Object,Object> s:list.entrySet()) {
 			try {
@@ -131,7 +131,7 @@ public class DBLinguaManager implements ILanguageManager{
 				}
 			}
 		}
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 	@Override
@@ -139,7 +139,7 @@ public class DBLinguaManager implements ILanguageManager{
 		Properties result=new Properties();
 		String s1="SELECT * from LINGUA";
 		int position=this.getLanguegePosition(lingua);
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		
@@ -159,16 +159,16 @@ public class DBLinguaManager implements ILanguageManager{
 			e.printStackTrace();
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
 	public int getLanguegePosition(String lingua) {
 		int result =1;
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		int a=DataBase.getColumnPosition("serverdomdb", "LINGUA", lingua, conn);
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		result=a>0?a:1;
 		return result;
 	}
@@ -181,7 +181,7 @@ public class DBLinguaManager implements ILanguageManager{
 			return true;
 		}
 		lingua=lingua.replaceAll(ILanguageManager.invalidLinguaChar, "");
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		try
 		{
@@ -192,14 +192,14 @@ public class DBLinguaManager implements ILanguageManager{
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
 	public boolean exists(String lingua) {
 		boolean result=false;
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		try
@@ -218,7 +218,7 @@ public class DBLinguaManager implements ILanguageManager{
 				break;
 			}
 		}catch (Exception e){e.printStackTrace();}
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 	

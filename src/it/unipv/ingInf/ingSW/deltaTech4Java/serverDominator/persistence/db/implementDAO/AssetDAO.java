@@ -4,13 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
 
 /**
  * Asset query
@@ -27,12 +29,34 @@ public class AssetDAO implements IAssetDAO {
 		super();
 		this.propConn=propConn;
 	}
+	/*
+	 * Prova dopo aver fatto una nuova modalità di connessione 
+	 */
+	public static void main(String[] args) {
+		//first time=852608500 ns
+		AssetDAO ass=new AssetDAO("resources/config/persistence/dataBase/connWith_sd_sys");
+		LocalDateTime t0=LocalDateTime.now();
+		//first time =180956900 ns
+		for(Asset s:ass.selectAll()) {
+			s.toString();
+		}
+		System.out.println("first time: "+ Duration.between(t0, LocalDateTime.now()).toMillis());
+		
+		//second time 
+		AssetDAO ass2=new AssetDAO("resources/config/persistence/dataBase/connWith_sd_sys");
+		LocalDateTime t2=LocalDateTime.now();
+		//second  time 
+		for(Asset s:ass2.selectAll()) {
+			s.toString();
+		}
+		System.out.println("second time: "+ Duration.between(t2, LocalDateTime.now()).toMillis());
+	}
 	
 	@Override
 	public ArrayList<Asset> selectAll() {
 		ArrayList<Asset> result = new ArrayList<>();
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 		
@@ -51,7 +75,7 @@ public class AssetDAO implements IAssetDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 	
@@ -60,7 +84,7 @@ public class AssetDAO implements IAssetDAO {
 		ArrayList<Asset> result = new ArrayList<>();
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
 		
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -84,7 +108,7 @@ public class AssetDAO implements IAssetDAO {
 			e.printStackTrace();
 			}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -92,7 +116,7 @@ public class AssetDAO implements IAssetDAO {
 	@Override
 	public boolean insertAsset(Asset a) {
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -114,14 +138,14 @@ public class AssetDAO implements IAssetDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 	/*ATTENZIONE: L'ASSET DEVE CONTENERE IL VALORE DEL NOME E IL VALORE DELLA DESCRIZIONE E NON UNA CHIAVE!!!*/
 	@Override
 	public boolean updateAssetById(Asset newA) {
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -143,13 +167,13 @@ public class AssetDAO implements IAssetDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
 	@Override
 	public boolean updatePriceAssetByPrice(Asset oldPrice, Asset newPrice) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -168,7 +192,7 @@ public class AssetDAO implements IAssetDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
@@ -177,7 +201,7 @@ public class AssetDAO implements IAssetDAO {
 		Asset result=null;
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -202,7 +226,7 @@ public class AssetDAO implements IAssetDAO {
 		}catch (Exception e){
 			e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 

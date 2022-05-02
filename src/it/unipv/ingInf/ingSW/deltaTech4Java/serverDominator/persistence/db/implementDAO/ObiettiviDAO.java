@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
 
 /**
  * Obiettivi query
@@ -35,7 +35,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int posizioneColonna =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
 		
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 		
@@ -53,7 +53,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -63,7 +63,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int position =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
 		
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -82,7 +82,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 	/*
@@ -91,7 +91,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	 */
 	@Override
 	public boolean insertObiettivo(Obiettivi a) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -112,7 +112,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 	/*
@@ -121,7 +121,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	 */
 	@Override
 	public boolean updateObiettiviById(Obiettivi newO) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		
 		boolean esito=true;
@@ -144,13 +144,13 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
 	@Override
 	public boolean updateRicompensaObiettivoByRicompensa(Obiettivi oldR, Obiettivi newR) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -169,7 +169,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
@@ -178,7 +178,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 		Obiettivi risult=new Obiettivi();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int posizioneLingua =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -202,7 +202,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return risult;
 	
 	}

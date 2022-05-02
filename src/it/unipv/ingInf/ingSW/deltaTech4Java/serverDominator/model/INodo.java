@@ -11,5 +11,5 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 public interface INodo {
 	
 	public void potenzia_risorsa(String nome);
-	public void crea_software(String nome, int quantità);
+	public void crea_software(String nome, int quantita);
 }

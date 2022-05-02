@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public interface ILanguageManager {
-	public static final String invalidLinguaChar="[[^a-z]&&[^A-Z]&&[^ñ]]";
+	public static final String invalidLinguaChar="";
 	/**
 	 * Recupera la lista delle lingue disponibili
 	 * @return Lingue disponibili

@@ -1,5 +1,6 @@
 package serverDominator.config.controllers;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -7,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.swing.JFileChooser;
@@ -70,7 +72,14 @@ public class Controller {
 					} catch (Exception e2) {
 						// TODO: handle exception
 					}
-					JOptionPane.showMessageDialog(cfgFrame, p.getProperty(LinguaNonSelezionata, "Non è Stata Selezionata Una Lingua"));
+					try {
+						JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(LinguaNonSelezionata, "Non è Stata Selezionata Una Lingua").getBytes(),"UTF-8"));
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedEncodingException e1) {
+						JOptionPane.showMessageDialog(cfgFrame, "Non è Stata Selezionata Una Lingua");
+					}
 				}				
 			}
 		});
@@ -160,12 +169,25 @@ public class Controller {
 						String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword()));
 				System.out.println(cfgFrame.getPanelConfig().getTextPassword().getPassword());
 				if(!result) {
-					JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti"));
+					try {
+						JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(NoDaaBaseCreate, "Impossibile creare il dataBase.\n controlla i parametri inseriti").getBytes(),"UTF-8"));
+					} catch (HeadlessException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedEncodingException e1) {
+						JOptionPane.showMessageDialog(cfgFrame, "Impossibile creare il dataBase.\n controlla i parametri inseriti");
+
+					}
 				}else {
 					if(!cfgFrame.getPanelConfig().getRadioButtonjreFull().isSelected()) {
 						File fls=new File(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText());
 						if(!fls.exists()||!fls.isDirectory()) {
-							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoLibSelected, "Attenzione: scegliere la cartella lib di java fx"));
+							try {
+								JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(NoLibSelected, "Attenzione: scegliere la cartella lib di java fx").getBytes(),"UTF-8"));
+							} catch (HeadlessException | UnsupportedEncodingException e1) {
+								JOptionPane.showMessageDialog(cfgFrame, "Attenzione: scegliere la cartella lib di java fx");
+
+							}
 						}else {
 							if(!ScriptsFacade.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
 								JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
@@ -175,7 +197,11 @@ public class Controller {
 						}
 					}else {
 						if(!ScriptsFacade.createScript(ScriptsFacade.createCMDToRunFxApp(ScriptsFacade.JAR_NAME), ScriptsFacade.SCRIPT_NAME))
-							JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
+							try {
+								JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt.").getBytes(),"Utf-8"));
+							} catch (HeadlessException | UnsupportedEncodingException e1) {
+								JOptionPane.showMessageDialog(cfgFrame,"Impossibile creare lo Scipt.");
+							}
 						else
 							cfgFrame.loadRunPanel();
 					}

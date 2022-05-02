@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviUserDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
 
 /**
  * ObiettiviUser query
@@ -36,7 +36,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 	public ArrayList<ObiettiviUser> selectAll() {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 
@@ -55,7 +55,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -64,7 +64,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -85,7 +85,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 		
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
@@ -93,7 +93,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivi obInput) {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -114,13 +114,13 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			}
 		}catch (Exception e){e.printStackTrace();}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return result;
 	}
 
 	@Override
 	public boolean insertObiettiviUser(ObiettiviUser o) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -140,18 +140,18 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 
 	@Override
 	public boolean updateStatoObiettiviUserbyId(ObiettiviUser newOU) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
 		if(this.existObiettiviUser(newOU)) {
-			conn=DbConnection.startConnection(conn,propConn);
+			conn=ConnectionFactory.getIstance().getConnection(propConn);
 			try
 			{
 				String query1="UPDATE obiettivi_user SET STATO=? WHERE OBIETTIVI_idObiettivo=? AND USER_ACCOUNT_USERNAME=?";
@@ -170,12 +170,12 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 		else {
 			esito=this.insertObiettiviUser(newOU);
 		}
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 	
 	public boolean existObiettiviUser(ObiettiviUser newOU) {
-		conn=DbConnection.startConnection(conn,propConn);
+		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 		boolean esito=true;
@@ -199,7 +199,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			esito=false;
 		}
 
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return esito;
 	}
 }

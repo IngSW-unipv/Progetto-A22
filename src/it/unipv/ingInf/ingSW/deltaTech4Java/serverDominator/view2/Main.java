@@ -125,6 +125,7 @@ public class Main extends Application {
 			
 		h[click] = centerPane.getHeight(); w[click] = centerPane.getWidth();	
 
+		StatsNodePane sPane = new StatsNodePane(bU);
 		
 		centerPane.setOnMouseClicked(event -> {
 			
@@ -153,15 +154,15 @@ public class Main extends Application {
 					
 		// ---- Valori in Stats Node ---------//
 				
-				StatsNodePane sN = new StatsNodePane(bU);
+			
 				
-				sN.titleL.setText("Stats Node: " + est.x + " , " + est.y);
-				sN.owner.setText("Owner: " + nodo.getPossessore().getNome());
-				sN.distance.setText("Base distance: " + nodo.getDist_base());
-				sN.energy.setText("Energy: " + nodo.getE_disponibile());
-				sN.fwLvl.setText("Firewall Level: " + String.valueOf(nodo.getLvl_firewall()));
-				sN.ramLvl.setText("Ram Level: " + String.valueOf(nodo.getLvl_ram()));
-				sN.cpuLvl.setText("CPU Level: " + String.valueOf(nodo.getLvl_cpu()));
+				sPane.titleL.setText("Stats Node: " + est.x + " , " + est.y);
+				sPane.owner.setText("Owner: " + nodo.getPossessore().getNome());
+				sPane.distance.setText("Base distance: " + nodo.getDist_base());
+				sPane.energy.setText("Energy: " + nodo.getE_disponibile());
+				sPane.fwLvl.setText("Firewall Level: " + String.valueOf(nodo.getLvl_firewall()));
+				sPane.ramLvl.setText("Ram Level: " + String.valueOf(nodo.getLvl_ram()));
+				sPane.cpuLvl.setText("CPU Level: " + String.valueOf(nodo.getLvl_cpu()));
 				
 				basicMap.drawMap(est);
 
@@ -181,7 +182,7 @@ public class Main extends Application {
 
 		HBox sottoMappa = new HBox();
 
-		StatsNodePane sPane = new StatsNodePane(bU);
+		
 		Pane statsNodePane = new Pane();
 		statsNodePane = sPane.getSnPane(bU);
 		

@@ -38,10 +38,8 @@ public class StatsNodePane {
 
 	public Pane getSnPane(Base bU) {
 
-		Label titleL = new Label();
-		titleL = this.titleL;
-		Label owner = new Label();
-		owner = this.owner;
+		Label titleL = this.titleL;
+		Label owner =  this.owner;
 		Label distance = new Label();
 		distance = this.distance;
 		Label energy = new Label();

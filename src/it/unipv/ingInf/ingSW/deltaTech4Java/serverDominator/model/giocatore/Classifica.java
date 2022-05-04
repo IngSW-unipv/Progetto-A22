@@ -1,73 +1,153 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * @author Matteo c
+ * @author Luca c
+ * @version 1.0
+ * @since 1.0
+ */
 public class Classifica {
 	
 	private List<Giocatore> lista;
-	/** Permette di creare una classifica vuota*/
+	
+	public Classifica(Giocatore... giocatori) {
+		this.lista = new ArrayList<Giocatore>();
+		for (int i = 0; i < giocatori.length; i++)
+			this.lista.add(giocatori[i]);
+		
+		this.aggiornaClassifica();
+	}
+	
+	/**
+	 * Creare una classifica vuota
+	 */
 	public Classifica() {
 		this.lista=new ArrayList<>();
 	}
-	/** Passando come parametro una List di Utenti ne fa la classifica per punteggio*/
+	
+	/**
+	 * Passando come parametro una List di Utenti ne fa la classifica per punteggio
+	 * @param lista 
+	 * lista dei giocatori di cui si fuole fare la classifica
+	 */
 	public Classifica(List<Giocatore> lista) {
 		this.lista = new ArrayList<>();
 		this.lista=lista;
 		this.aggiornaClassifica();
 	}
-	/** Passando un Utente come parametro permette di aggiungerlo alla classifica. Una volta aggiunto la classifica si aggiorna.*/
+	
+	/**
+	 * Passando un Utente come parametro permette 
+	 * di aggiungerlo alla classifica. Una volta aggiunto la classifica si aggiorna.
+	 * @param user
+	 * User da aggiungere alla lista dei giocatori
+	 */
 	public void aggiungiUtente(Giocatore user) {
 		this.lista.add(user);
 		this.aggiornaClassifica();
 	}
-	/** Restituisce la posizione all'interno della classifica dell'Utente passato come parametro*/
+	
+	/**
+	 * Restituisce la posizione all'interno della classifica dell'Utente passato come parametro
+	 * @param user
+	 * giocatore di cui si vuole conoscere la posizione
+	 * @return
+	 * posizione del giocatore
+	 */
 	public int getPosizione(Giocatore user) {
-		return this.lista.indexOf(user);
+		return this.getPosizione(user.getNome());
 	}
-	/** Restituisce la posizione all'interno della classifica dell'Utente il cui nome è stato passato come paramtro*/
+	
+	/**
+	 * Restituisce la posizione all'interno della classifica dell'Utente il cui nome Ã¨ stato passato come paramtro
+	 * @param user
+	 * Nome del giocatore d'interesse
+	 * @return
+	 * posizione nella classifica
+	 */
 	public int getPosizione(String user) {
-		Giocatore prova=new Utente(user);
-		int risultato=this.lista.indexOf(prova);
-		if(risultato!=-1)
-			return risultato;
-		prova=new Bot(user);
+		int i=0;
+		for(Giocatore g:lista)
+			if(!user.equals(g.getNome()))
+				i++;
+			else
+				return i;
+		
+		int risultato=0;;
+		Giocatore prova=new Bot(user);
 		risultato=this.lista.indexOf(prova);
 		return risultato;
 	}
 	
-	/** Aggiorna l'ordine della classifica*/
+	/**
+	 * Aggiorna l'ordine della classifica 
+	 *(fatta in base al punteggio del giocatore interessato)
+	 */
 	public void aggiornaClassifica() {
-		//Collections.sort(List<lista>);
+		Collections.sort(lista);
 	}
-	/** restituisce la classifica*/
+	
+	/**
+	 * Recupera la lista ordinata dei giocatori in classifica
+	 * @return Classifica ordinata
+	 */
 	public List<Giocatore> getClassifica() {
+		this.aggiornaClassifica();
 		return lista; 
 	}
-	/** Sostituisce la classifica salvata con quella della List di Utenti passata come parametro*/
+	
+	/**
+	 * Sostituisce la classifica salvata con quella della List di Utenti passata come parametro
+	 * @param lista
+	 */
 	public void setClassifica(List<Giocatore> lista) {
 		this.lista = lista;
+		if(lista!=null)
+			this.aggiornaClassifica();
 	}
-	/** Restituisce il numero di Utenti contenuti nella classifica*/
+	
+	/**
+	 * Restituisce il numero di Utenti contenuti nella classifica
+	 * @return
+	 * numero di utenti in classifica
+	 */
 	public int getLunghezzaClassifica() {
 		return lista.size();
 	}
-	/**Permette di rimuovere dalla classifica l'Utente passato come parametro*/
+	
+	/**
+	 * Permette di rimuovere dalla classifica l'Utente passato come parametro
+	 * @param user
+	 */
 	public void removeUtente(Giocatore user) {
 		lista.remove(user);
 	}
-	/**Permette di rimuovere dalla classifica l'Utente la cui posizione all'interno della classifica è stato passato come parametro*/
+	
+	/**
+	 * Permette di rimuovere dalla classifica l'Utente la cui posizione 
+	 * Ã¨ stato passata come parametro
+	 * @param pos_user
+	 * posizione del giocatore da rimuovere
+	 */
 	public void removeUtente(int pos_user) {
 		lista.remove(pos_user);
 	}
 	
-	public void aggiornaGiocatore(Utente user) {
+	/**
+	 * Aggiorna punteggio del giocatore passato
+	 * @param user
+	 */
+	public void aggiornaGiocatore(Giocatore user) {
 		int i=this.getPosizione(user);
-		Giocatore copia= new Utente(lista.get(i).getNome());
-		copia.setPunteggio(lista.get(i).getPunteggio());
+		lista.get(i).setPunteggio(user.getPunteggio());
+		this.aggiornaClassifica();
 	}
 	
-	/** restituisce una stringa contenente la classifica*/
 	@Override
 	public String toString() {
 		String s = "Classifica:\n";
@@ -79,5 +159,7 @@ public class Classifica {
         return s;
 	}
 	
-	
+	public static void main(String[] args) {
+		
+	}
 }

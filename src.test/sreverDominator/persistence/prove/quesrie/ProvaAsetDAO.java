@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.persistenceTest.prove.quesrie;
+package sreverDominator.persistence.prove.quesrie;
 
 import java.util.ArrayList;
 

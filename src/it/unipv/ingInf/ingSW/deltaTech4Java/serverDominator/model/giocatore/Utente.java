@@ -2,10 +2,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 
-public class Utente extends Giocatore implements Comparable<Utente>{
+public class Utente extends Giocatore{
 
 	int punteggio, valuta;
-	/**Permette di creare un oggetto di tipo Utente il cui nome sarà quello passato come parametro*/
+	/**Permette di creare un oggetto di tipo Utente il cui nome sarï¿½ quello passato come parametro*/
 	public Utente(String nome) {
 		super(nome);
 		this.punteggio=0;
@@ -49,7 +49,8 @@ public class Utente extends Giocatore implements Comparable<Utente>{
 		this.punteggio+=punteggio;
 	}
 	/**Restituisce la differenza di punteggio tra l'Utente e l'Utente passato come parametro*/
-	public int compareTo(Utente obj) {
+	@Override
+	public int compareTo(Giocatore obj) {
 		return this.punteggio-obj.getPunteggio();
 	}
 
@@ -58,5 +59,6 @@ public class Utente extends Giocatore implements Comparable<Utente>{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

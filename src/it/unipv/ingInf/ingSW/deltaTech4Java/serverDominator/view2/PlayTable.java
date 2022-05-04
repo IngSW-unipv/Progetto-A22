@@ -16,6 +16,7 @@ public class PlayTable {
 	Pair<Integer, Integer> dimTable;
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	Canvas basicCanvas;
+	ScrollPane scrollPane;
 	
 	public PlayTable(Pair<Integer, Integer> dimensioni) {
 		
@@ -42,8 +43,8 @@ public class PlayTable {
 		centerPane.setFitToHeight(true);
 		centerPane.setFitToWidth(true);
 		centerPane.setPannable(true);
-		
-		return centerPane;
+		scrollPane=centerPane;
+		return scrollPane;
 	}
 	
 	public Canvas getTableCanvas(Pair<Integer, Integer> dimensioni, int ray) {
@@ -69,6 +70,23 @@ public class PlayTable {
 		
 		return basicCanvas;
 	}
+	
+	public Pair<Integer, Integer> getDimTable() {
+		return dimTable;
+	}
+
+	public void setDimTable(Pair<Integer, Integer> dimTable) {
+		this.dimTable = dimTable;
+	}
+
+	public void setBasicCanvas(Canvas basicCanvas) {
+		this.basicCanvas = basicCanvas;
+	}
+
+	public ScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
 	public Canvas getBasicCanvas() {
 		return basicCanvas;
 	}

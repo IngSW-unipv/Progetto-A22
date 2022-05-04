@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.persistenceTest.prove.util;
+package sreverDominator.persistence.prove.util;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.FileToString;
 

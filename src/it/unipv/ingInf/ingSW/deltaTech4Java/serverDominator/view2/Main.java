@@ -125,10 +125,25 @@ public class Main extends Application {
 		h[click] = centerPane.getHeight(); w[click] = centerPane.getWidth();	
 
 		StatsNodePane sPane = new StatsNodePane(bU);
-		
+		//offset scroll risolto
 		centerPane.setOnMouseClicked(event -> {
-			
-			Hexagon est = mapData.pixelToHex(new Point(event.getX(), event.getY()));
+			double xMouse=event.getX();
+			double yMouse=event.getY();
+			double xBase=pt.getBasicCanvas().getWidth()-(pt.getScrollPane().getViewportBounds().getMaxX()-pt.getScrollPane().getViewportBounds().getMinX());
+			double yBase=pt.getBasicCanvas().getHeight()-(pt.getScrollPane().getViewportBounds().getMaxY()-pt.getScrollPane().getViewportBounds().getMinY());
+			double xOffset=(pt.getScrollPane().getHvalue()/pt.getScrollPane().getHmax())*xBase;
+			double yOffset=(pt.getScrollPane().getVvalue()/pt.getScrollPane().getVmax())*yBase;
+			System.out.println(
+					"----inizio---\n"
+					+pt.getScrollPane().getViewportBounds().toString()+"\n"
+					+"\nxScorriBarra,yScorriBarra\t"+pt.getScrollPane().getHvalue()+","+pt.getScrollPane().getVvalue()
+					+"\nxMaouse,yMaouse\t"+xMouse+","+yMouse
+					+"\nxBase,yBase\t"+xBase+","+yBase
+					+"\nxOffset,yOffset\t"+xOffset+","+yOffset+"\n"
+					+"----fine---");
+			Hexagon est = mapData.pixelToHex(new Point(xMouse+xOffset,yMouse+yOffset));
+			System.out.println("vvVAlue"+pt.getScrollPane().vvalueProperty().doubleValue()+"\nvvMax"+pt.getScrollPane().vmaxProperty()
+					+"\n pane size: "+pt.getScrollPane().getViewportBounds());
 			HexData data = mapData.getHexData(est);
 			
 	// ---------- sto provando a risolvere l'offset su scroll --------------//	

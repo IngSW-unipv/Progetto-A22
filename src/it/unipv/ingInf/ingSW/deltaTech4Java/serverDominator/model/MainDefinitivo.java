@@ -108,6 +108,7 @@ public class MainDefinitivo extends Thread{
 	public void avvioBot(/*int tempo*/) throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
+			giocatori[i].setMap(tabellone);
 			giocatori[i].start();
 		}
 	}
@@ -123,7 +124,7 @@ public class MainDefinitivo extends Thread{
 	
 	public boolean powerupCheck(int x, int y){
 		/** metodo chiamato dopo che l'utente ha selezionato un nodo di
-		 * sua propriet�, abilita il pulsante per eventuali potenziamenti risorse.
+		 * sua proprieta, abilita il pulsante per eventuali potenziamenti risorse.
 		 */
 		boolean checkp= false;
 		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
@@ -145,7 +146,7 @@ public class MainDefinitivo extends Thread{
 	
 	public boolean softcheck(int x, int y) {
 		/** il metodo viene lanciato quando l'utente clicca su un nodo
-		 * di sua propriet�, e abilita il pulsante per la creazione software.
+		 * di sua proprieta e abilita il pulsante per la creazione software.
 		 */
 		boolean checks=false;
 		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
@@ -175,10 +176,10 @@ public class MainDefinitivo extends Thread{
 //---------------metodi per battaglia-------------//
 		
 	public boolean nodecheck(Giocatore attaccante, int x, int y) {
-		/** metodo per il controllo se un nodo � attaccabile,
+		/** metodo per il controllo se un nodo e' attaccabile,
 		 * controlla anche se lo spazio disponibile per gli attacchi simultanei
-		 * non � vuoto.
-		 * NB: un utente pu� eseguire 6 attacchi simultaneamente.
+		 * non e' vuoto.
+		 * NB: un utente puo' eseguire 6 attacchi simultaneamente.
 		 * metodo eseguito quando un utente clicca su un nodo
 		 */
 		boolean checkf=false;
@@ -201,7 +202,7 @@ public class MainDefinitivo extends Thread{
 		 */
 	
 		if(this.nodecheck(attaccante, x, y)){
-			t_timer=t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base();
+			t_timer=t_unitario+(t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base() );
 			fight[maxbattle]=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y), t_timer);
 			fight[maxbattle].setPartenza(tabellone.dist_minima(x, y, attaccante));
 			fight[maxbattle].selezione(quantitaV, quantitaR);

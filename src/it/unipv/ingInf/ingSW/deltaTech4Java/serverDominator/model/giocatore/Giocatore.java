@@ -1,5 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
 public abstract class Giocatore extends Thread{
@@ -7,6 +8,7 @@ public abstract class Giocatore extends Thread{
 	public String nome;
 	public String colore;
 	private int valuta;
+	private MappaDefinitiva map;
 
 	public Giocatore(String nome) {
 		this.nome=nome;
@@ -60,4 +62,7 @@ public abstract class Giocatore extends Thread{
 		this.valuta += valuta;
 	}
 	
+	public void setMap(MappaDefinitiva map) {
+		this.map = map;
+	} 
 }

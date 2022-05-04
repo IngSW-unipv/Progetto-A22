@@ -191,6 +191,10 @@ public class MappaDefinitiva {
 		public Nodo[][] getMap() {
 			return map;
 		}
+
+		public Coordinate[] getBasi() {
+			return basi;
+		}
 		
 		
 }

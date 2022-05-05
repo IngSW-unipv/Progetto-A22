@@ -1,4 +1,15 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+
+import java.util.ArrayList;
+
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.ActionPane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.BaseStatsPane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.BattlePane;
 
 /**
  * @author Matteo Para 
@@ -19,16 +30,15 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
 import javafx.scene.control.MenuBar;
-import javafx.scene.layout.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-
-import java.util.ArrayList;
-
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
 public class Main extends Application {
 

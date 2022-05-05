@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.event.EventHandler;

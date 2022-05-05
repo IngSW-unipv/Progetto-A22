@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

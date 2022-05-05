@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;

@@ -1,6 +1,7 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.AddType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -20,7 +21,11 @@ public class ActionPane {
 	Base bU = new Base();
 	HBox hB = new HBox();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
-	
+	Pane actionPane;
+	Label actionTitleL;
+	Label actionMarketL;
+	Label powerUpL;
+	Label develop ;
 	public ActionPane(Base bU) {
 		this.bU = bU;
 	}
@@ -29,7 +34,7 @@ public class ActionPane {
 		
 		AddType aT = new AddType();
 		
-		Pane actionPane = new Pane();
+		actionPane = new Pane();
 		actionPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 
@@ -44,7 +49,7 @@ public class ActionPane {
 		actionTitle.setAlignment(Pos.CENTER);
 		actionTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(5, 5, 5, 5))));
-		Label actionTitleL = new Label("Action");
+		actionTitleL = new Label("Action");
 		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		actionTitleL.setTextFill(Color.DARKGREEN);
 
@@ -53,7 +58,7 @@ public class ActionPane {
 		HBox actionMarket = new HBox();
 		actionMarket.setPadding(STANDARD_PADDING);
 		actionMarket.setAlignment(Pos.TOP_CENTER);
-		Label actionMarketL = new Label();
+		actionMarketL = new Label();
 		actionMarket.getChildren().add(actionMarketL);
 
 		aT.launchMarket(actionMarket, bU);
@@ -63,7 +68,7 @@ public class ActionPane {
 		powerUp.setAlignment(Pos.BASELINE_CENTER);
 		powerUp.setBackground(
 				new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		Label powerUpL = new Label();
+		powerUpL = new Label();
 		powerUp.getChildren().add(powerUpL);
 
 		aT.launchPowerUp(powerUp, bU);
@@ -73,7 +78,7 @@ public class ActionPane {
 		dev.setAlignment(Pos.BASELINE_CENTER);
 		dev.setBackground(
 				new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		Label develop = new Label();
+		develop = new Label();
 		dev.getChildren().add(develop);
 
 		aT.launchDevelopment(dev, bU);
@@ -82,6 +87,66 @@ public class ActionPane {
 		actionPane.getChildren().add(controlli);
 
 		return actionPane;
+	}
+
+	public Base getbU() {
+		return bU;
+	}
+
+	public void setbU(Base bU) {
+		this.bU = bU;
+	}
+
+	public HBox gethB() {
+		return hB;
+	}
+
+	public void sethB(HBox hB) {
+		this.hB = hB;
+	}
+
+	public Pane getActionPane() {
+		return actionPane;
+	}
+
+	public void setActionPane(Pane actionPane) {
+		this.actionPane = actionPane;
+	}
+
+	public Label getActionTitleL() {
+		return actionTitleL;
+	}
+
+	public void setActionTitleL(Label actionTitleL) {
+		this.actionTitleL = actionTitleL;
+	}
+
+	public Label getActionMarketL() {
+		return actionMarketL;
+	}
+
+	public void setActionMarketL(Label actionMarketL) {
+		this.actionMarketL = actionMarketL;
+	}
+
+	public Label getPowerUpL() {
+		return powerUpL;
+	}
+
+	public void setPowerUpL(Label powerUpL) {
+		this.powerUpL = powerUpL;
+	}
+
+	public Label getDevelop() {
+		return develop;
+	}
+
+	public void setDevelop(Label develop) {
+		this.develop = develop;
+	}
+
+	public Insets getSTANDARD_PADDING() {
+		return STANDARD_PADDING;
 	}
 	
 }

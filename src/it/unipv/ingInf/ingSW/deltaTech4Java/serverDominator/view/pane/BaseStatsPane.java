@@ -1,8 +1,9 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view2;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -18,20 +19,21 @@ import javafx.scene.text.FontWeight;
 
 public class BaseStatsPane {
 	
-	Base bU = new Base();
+	Base nodeBase = new Base();
+	Pane yourBasePane;
+	Button buttonTitle;
 	
 	public final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
 	
 	public  BaseStatsPane(Base bU) {
 		
-		this.bU = bU;
-		
+		this.nodeBase = bU;
 	}
 		
 	public Pane getBsPane(Base bU) {
 
-		Pane yourBasePane = new Pane();
+		yourBasePane = new Pane();
 		yourBasePane.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		yourBasePane.setPadding(STANDARD_PADDING);
@@ -45,12 +47,12 @@ public class BaseStatsPane {
 		// ybTitle.setAlignment(Pos.CENTER);
 		ybTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		Label ybTitleL = new Label("Your Base Stats");
-		ybTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-		ybTitleL.setTextFill(Color.DARKGREEN);
-		ybTitleL.setAlignment(Pos.CENTER);
+		buttonTitle = new Button("Your Base Stats");
+		buttonTitle.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+		buttonTitle.setTextFill(Color.DARKGREEN);
+		buttonTitle.setAlignment(Pos.CENTER);
 
-		ybTitle.getChildren().add(ybTitleL);
+		ybTitle.getChildren().add(buttonTitle);
 
 		HBox hBg = new HBox();
 		hBg.setPadding(STANDARD_PADDING);
@@ -103,5 +105,30 @@ public class BaseStatsPane {
 
 		return yourBasePane;
 	}
+
+	public Base getNodeBase() {
+		return nodeBase;
+	}
+
+	public void setNodeBase(Base bU) {
+		this.nodeBase = bU;
+	}
+
+	public Pane getYourBasePane() {
+		return yourBasePane;
+	}
+
+	public void setYourBasePane(Pane yourBasePane) {
+		this.yourBasePane = yourBasePane;
+	}
+
+	public Button getButtonTitle() {
+		return buttonTitle;
+	}
+
+	public void setButtonTitle(Button buttonTitle) {
+		this.buttonTitle = buttonTitle;
+	}
+	
 
 }

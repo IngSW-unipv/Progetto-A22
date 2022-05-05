@@ -22,8 +22,8 @@ public class Test3 {
 		Coordinate c1;
 		Nodo n;
 		Giocatore g,s;
-		s= new Utente("sistema");
-		g= new Utente("giorgiooooo");
+		s= new Utente("sistema",0);
+		g= new Utente("giorgiooooo",10);
 		c1= new Coordinate(0,0);
 		n= new Base(g);
 		

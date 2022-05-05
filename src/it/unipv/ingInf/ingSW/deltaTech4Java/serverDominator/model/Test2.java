@@ -23,7 +23,7 @@ public class Test2 {
 		
 		c1=new Coordinate(0,1);
 		c2= new Coordinate (2,2);
-		pluto=new Utente("pluto");
+		pluto=new Utente("pluto",20);
 		n= new Base(pluto);
 		
 		map1.put(c1, n);

@@ -10,8 +10,8 @@ public class Test {
 		Nodo b1,b2,c1,c2;
 		Giocatore giallo, rosso;
 			
-		giallo=new Utente("giallo");
-		rosso=new Utente("rosso");
+		giallo=new Utente("giallo", 5);
+		rosso=new Utente("rosso", 10);
 		b1=new Base(giallo);
 		b2= new Base(rosso);
 		

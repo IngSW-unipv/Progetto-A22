@@ -38,10 +38,10 @@ public class MainDefinitivo extends Thread{
 	//selezione utente
 		//selezione lingua
 	
-	public void avvioPartita(int x_max, int y_max, String nomeUtente) throws InterruptedException {
+	public void avvioPartita(int x_max, int y_max, String nomeUtente, int valuta) throws InterruptedException {
 		//giocoAttivo=true;
 		t_unitario=10;
-		this.creazioneGiocatori(nomeUtente, x_max);
+		this.creazioneGiocatori(nomeUtente, x_max, valuta);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
 		fight= new Battaglia[maxbattle];
@@ -55,7 +55,7 @@ public class MainDefinitivo extends Thread{
 	
 	}
 
-	public void creazioneGiocatori(String utente, int x_max) {  
+	public void creazioneGiocatori(String utente, int x_max, int valuta) {  
 		Collections.shuffle(Colore.colori);
 				
 		switch(x_max) {
@@ -64,7 +64,7 @@ public class MainDefinitivo extends Thread{
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
 			giocatori[0].colore = Colore.GRIGIO;
-			giocatori[1]= new Utente(utente); 
+			giocatori[1]= new Utente(utente, valuta); 
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
 			break;
@@ -73,7 +73,7 @@ public class MainDefinitivo extends Thread{
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema();
 			giocatori[0].colore = Colore.GRIGIO;
-			giocatori[1]= new Utente(utente);
+			giocatori[1]= new Utente(utente, valuta);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
 			giocatori[4]= new Bot("roger");
@@ -84,7 +84,7 @@ public class MainDefinitivo extends Thread{
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
 			giocatori[0].colore = Colore.GRIGIO;
-			giocatori[1]= new Utente(utente);
+			giocatori[1]= new Utente(utente, valuta);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
 			giocatori[4]= new Bot("roger");

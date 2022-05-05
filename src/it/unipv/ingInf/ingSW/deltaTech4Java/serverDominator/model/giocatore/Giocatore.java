@@ -104,13 +104,18 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	}
 	
 	/**
-	 * regcupera la valuta (temporanea) che posside il giocatore
+	 * regcupera la valuta che posside il giocatore
 	 * @return
 	 * 
 	 */
 	public int getValuta() {
 		return deltaCoin;
 	}
+	
+	public void setValuta(int deltaCoin) {
+		this.deltaCoin = deltaCoin;
+	}
+
 	/**
 	 * incrementa/decrementa la valuta associata al giocatore
 	 * @param valuta

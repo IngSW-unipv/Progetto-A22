@@ -4,56 +4,20 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Uten
 
 public class Utente extends Giocatore{
 
-	int punteggio, valuta;
 	/**Permette di creare un oggetto di tipo Utente il cui nome sar� quello passato come parametro*/
-	public Utente(String nome) {
+	public Utente(String nome, int valuta) {
 		super(nome);
-		this.punteggio=0;
-		this.valuta=0;
+		super.setPunteggio(0);
+		super.setValuta(valuta);;
 	}
 	
 	public Utente() {
 		super();
-		this.punteggio=0;
-		this.valuta=0;
+		super.setPunteggio(0);
+		super.setValuta(0);
 	}
 	
-	public Utente(Utente user) {
-		super(user.getNome());
-		this.punteggio=user.getPunteggio();
-		this.valuta=user.getValuta();
-	}
 	
-	/**Restituisce il punteggio dell'Utente*/
-	public int getPunteggio() {
-		return punteggio;
-	}
-	/**Aggiorna il punteggio dell'Utente con il valore passato come parametro*/
-	public void setPunteggio(int punteggio) {
-		this.punteggio = punteggio;
-	}
-	
-	public int getValuta() {
-		return valuta;
-	}
-	
-	public void setValuta(int valuta) {
-		this.valuta=valuta;
-	}
-	
-	public void aggiornaValuta(int valuta) {
-		this.valuta+=valuta;
-	}
-	/**Aggiunge al punteggio dell'Utente il valore passato come parametro*/
-	public void aggiornaPunteggio(int punteggio) {
-		this.punteggio+=punteggio;
-	}
-	/**Restituisce la differenza di punteggio tra l'Utente e l'Utente passato come parametro*/
-	@Override
-	public int compareTo(Giocatore obj) {
-		return this.punteggio-obj.getPunteggio();
-	}
-
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

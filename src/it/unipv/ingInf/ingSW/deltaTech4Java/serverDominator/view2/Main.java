@@ -83,7 +83,7 @@ public class Main extends Application {
 		
 		MainDefinitivo mainView = new MainDefinitivo();
 		try {
-			mainView.avvioPartita(dimensioneMappa.getKey(), dimensioneMappa.getValue(), "Matteo");
+			mainView.avvioPartita(dimensioneMappa.getKey(), dimensioneMappa.getValue(), "Matteo", 10);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

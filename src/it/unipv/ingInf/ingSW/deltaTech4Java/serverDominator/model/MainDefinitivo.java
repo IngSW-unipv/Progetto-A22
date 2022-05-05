@@ -2,6 +2,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import java.util.Collections;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
@@ -14,6 +15,7 @@ public class MainDefinitivo extends Thread{
 	private Mercato mercato;
 	private int t_unitario, t_timer;
 	Thread threadBot[];
+	private Classifica classifica;
 	
 	private Battaglia[] fight;
 	private int maxbattle=7;
@@ -44,6 +46,7 @@ public class MainDefinitivo extends Thread{
 		this.creazioneGiocatori(nomeUtente, x_max, valuta);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
+		classifica= new Classifica(giocatori);
 		fight= new Battaglia[maxbattle];
 		
 		this.avvioBot();  //Matteo P. L'ho commentato perchè mi blocca dentro al while di avvioBot
@@ -222,9 +225,22 @@ public class MainDefinitivo extends Thread{
 		 * del thread di battaglia
 		 */
 		maxbattle++;
+		classifica.aggiornaClassifica();
 		System.out.println( fight[count].getReport() );
 	}
-			
+//-------------metodi di fine partita------------//
+	public Classifica gameover() {
+		/** metodo usato alla fine della partita per restituire la classifica finale della partita
+		 * e stampare a video il nome del giocatore vincitore
+		 */
+		Giocatore vincitore;
+		vincitore= classifica.getVincitore();
+		
+		System.out.println("il vincitore e': " + vincitore.getNome());
+		
+		return classifica;
+	}
+	
 /**getter and setter */
 	
 	public int getX_max() {

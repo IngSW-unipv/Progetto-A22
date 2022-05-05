@@ -158,6 +158,9 @@ public class Classifica {
         }
         return s;
 	}
+	public Giocatore getVincitore() {
+		return lista.get(0);
+	}
 	
 	public static void main(String[] args) {
 		

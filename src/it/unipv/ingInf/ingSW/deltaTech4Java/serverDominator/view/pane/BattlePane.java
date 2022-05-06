@@ -62,7 +62,7 @@ class Battaglia extends ProgressBar implements Comparable<Battaglia>{
 public class BattlePane {
 
 	
-	Base bU = new Base();
+	private Base bU = new Base();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
 	public BattlePane(Base bU) {
@@ -70,17 +70,17 @@ public class BattlePane {
 		this.bU = bU;
 	
 	}
-	Pane battlePane;
+	private Pane battlePane;
 	
-	Label titoloBattaglie;
+	private Label titoloBattaglie;
 	
-	List<Battaglia> battle;
+	private List<Battaglia> battle;
 	
-	GridPane battles;
+	private GridPane battles;
 	
-	HBox battleTitle;
+	private HBox battleTitle;
 	
-	VBox battaglie;
+	private VBox battaglie;
 	
 	
 	

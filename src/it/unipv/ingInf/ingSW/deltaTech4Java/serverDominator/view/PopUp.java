@@ -2,8 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 
 
-import java.math.RoundingMode;
-
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.Development;
@@ -11,23 +9,6 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.Market;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.Powerup;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.Selectmalware;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class PopUp {
 
@@ -47,14 +28,14 @@ public class PopUp {
 	public void selectMalware(Base baseUtente) {
 		Selectmalware sm= new Selectmalware(baseUtente);
 		
-		sm.selectMalware(baseUtente);
+		sm.selectMalware();
 		
 	}
 
 	public void development(Base baseUtente) {
 		
 		Development dvl= new Development(baseUtente);
-		dvl.development(baseUtente);
+		dvl.development();
 		// -> inserire le variabili di ritorno
 		// TODO
 		
@@ -64,7 +45,7 @@ public class PopUp {
 		
 		Powerup pu=new Powerup(baseUtente);
 		
-		pu.powerUp(baseUtente);
+		pu.powerUp();
 				
 	}
 	
@@ -74,8 +55,7 @@ public class PopUp {
 		// -> inserire le variabili di ritorno
 		// TODO
 		
-		Mercato m1=new Mercato();
-		Market m=new Market(m1);
-		m.market(baseUtente);
+		Market m=new Market(baseUtente);
+		m.market();
 	}
 }

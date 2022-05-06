@@ -1,7 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
 
+import java.math.BigDecimal;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,14 +23,19 @@ public class Development {
 	public static int sY = 400;	
 	public static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
 	private Base baseUtente;
+	private NumberSpinner quantitaRootCrash;
+	private NumberSpinner quantitaVirus;
+	private NumberSpinner quantitaAntivirus;
 	
+	private Button buttonDevelop;
+	Stage stage;
 	public Development(Base baseUtente) {
 		this.baseUtente=baseUtente;
 	}
 	
-	public void development(Base baseUtente) {
+	public void development() {
 		
-		Stage stage = new Stage();
+		stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(sX); stage.setY(sY);
 
@@ -52,31 +61,86 @@ public class Development {
 		Label rcQty = new Label("Own " + String.valueOf(baseUtente.getQnt_rootcrash()) + " rootcrash, dev ");
 		Label vrQty = new Label("Own " + String.valueOf(baseUtente.getQnt_virus()) + " virus, dev ");
 		Label avQty = new Label("Own " + String.valueOf(baseUtente.getQnt_antivirus()) + " antivirus, dev ");
-		NumberSpinner buyRcNs = new NumberSpinner();
-		NumberSpinner buyVrNs = new NumberSpinner();
-		NumberSpinner buyAvNs = new NumberSpinner();
+		quantitaRootCrash = new NumberSpinner(0, baseUtente.getSpazio_Ram());
+		quantitaVirus = new NumberSpinner(0, baseUtente.getSpazio_Ram());
+		quantitaAntivirus = new NumberSpinner(0, baseUtente.getSpazio_Ram());
+		quantitaRootCrash.getNumberField().setDisable(true);
+		quantitaVirus.getNumberField().setDisable(true);
+		quantitaAntivirus.getNumberField().setDisable(true);
+		int max=baseUtente.getSpazio_Ram();
+		quantitaRootCrash.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	int aumento=quantitaRootCrash.getStepWitdhProperty().get().intValue();
+            	if((quantitaRootCrash.getNumber().intValue()+aumento)<=max) {
+            		quantitaRootCrash.increment();
+                    ae.consume();
+            	}else {
+            		int maxSelection=max-quantitaVirus.getNumber().intValue()-quantitaAntivirus.getNumber().intValue();
+            		maxSelection=maxSelection>0?maxSelection:0;
+            		quantitaRootCrash.setNumber(BigDecimal.valueOf(maxSelection));
+            	}
+        		quantitaVirus.setNumber(BigDecimal.valueOf(0));
+        		quantitaAntivirus.setNumber(BigDecimal.valueOf(0));
+            }
+        });
+        
+		quantitaVirus.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent ae) {
+            	int aumento=quantitaVirus.getStepWitdhProperty().get().intValue();
+            	if((quantitaVirus.getNumber().intValue()+aumento)<=max) {
+            		quantitaVirus.increment();
+            		ae.consume();
+            	}else {
+            		int maxSelection=max;
+            		maxSelection=maxSelection>0?maxSelection:0;
+            		quantitaVirus.setNumber(BigDecimal.valueOf(maxSelection));
+            	}
+            	quantitaRootCrash.setNumber(BigDecimal.valueOf(0));
+        		quantitaAntivirus.setNumber(BigDecimal.valueOf(0));
+            }
+        });
+		
+		quantitaAntivirus.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent ae) {
+            	int aumento=quantitaAntivirus.getStepWitdhProperty().get().intValue();
+            	if((quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
+            		quantitaAntivirus.increment();
+                    ae.consume();
+            	}else {
+            		int maxSelection=max;
+            		maxSelection=maxSelection>0?maxSelection:0;
+            		quantitaAntivirus.setNumber(BigDecimal.valueOf(maxSelection));
+            	}
+        		quantitaRootCrash.setNumber(BigDecimal.valueOf(0));
+        		quantitaVirus.setNumber(BigDecimal.valueOf(0));
+            }
+        });
+		/*NumberSpinner listeners per max quantita*/ 
 		
 		HBox devB = new HBox();
-		Button button = new Button("Develop!");
-		button.setPrefSize(200, 20);
-		button.setAlignment(Pos.BASELINE_CENTER);
-		button.setPadding(STANDARD_PADDING);
-		button.getStyleClass().add("redbutton");
-		button.setOnAction(e -> {
-			// username = text1.getText();
-			// password = text2.getText();
+		devB.setAlignment(Pos.BASELINE_CENTER);
+		buttonDevelop = new Button("Develop!");
+		buttonDevelop.setPrefSize(200, 20);
+		buttonDevelop.setAlignment(Pos.BASELINE_CENTER);
+		buttonDevelop.setPadding(STANDARD_PADDING);
+		buttonDevelop.getStyleClass().add("redbutton");
+		buttonDevelop.setOnAction(e -> {
 			stage.close();
 		});
 		
 		layout.add(avQty, 0	, 0);
-		layout.add(buyAvNs, 1, 0);
+		layout.add(quantitaAntivirus, 1, 0);
 		layout.add(vrQty, 0, 1);
-		layout.add(buyVrNs, 1, 1);
+		layout.add(quantitaVirus, 1, 1);
 		layout.add(rcQty, 0, 2);
-		layout.add(buyRcNs, 1, 2);
+		layout.add(quantitaRootCrash, 1, 2);
 		
 		devG.getChildren().add(layout);
-		devB.getChildren().add(button);
+		devB.getChildren().add(buttonDevelop);
 		dev.getChildren().addAll(devTitle, devG, devB);
 		
 		Scene scene = new Scene(dev, sX, sY);
@@ -84,9 +148,62 @@ public class Development {
 		stage.setTitle("Development");
 		stage.setScene(scene);
 		stage.showAndWait();
+	}
 
-		// -> inserire le variabili di ritorno
-		// TODO
+	public Base getBaseUtente() {
+		return baseUtente;
+	}
+
+	public void setBaseUtente(Base baseUtente) {
+		this.baseUtente = baseUtente;
+	}
+
+	public NumberSpinner getQuantitaRootCrash() {
+		return quantitaRootCrash;
+	}
+
+	public NumberSpinner getQuantitaVirus() {
+		return quantitaVirus;
+	}
+
+	public NumberSpinner getQuantitaAntivirus() {
+		return quantitaAntivirus;
+	}
+
+	public Button getDevelopButton() {
+		return buttonDevelop;
+	}
+
+	public void setButton(Button button) {
+		this.buttonDevelop = button;
+	}
+
+	public Button getButtonDevelop() {
+		return buttonDevelop;
+	}
+
+	public void setButtonDevelop(Button buttonDevelop) {
+		this.buttonDevelop = buttonDevelop;
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+	public void setQuantitaRootCrash(NumberSpinner quantitaRootCrash) {
+		this.quantitaRootCrash = quantitaRootCrash;
+	}
+
+	public void setQuantitaVirus(NumberSpinner quantitaVirus) {
+		this.quantitaVirus = quantitaVirus;
+	}
+
+	public void setQuantitaAntivirus(NumberSpinner quantitaAntivirus) {
+		this.quantitaAntivirus = quantitaAntivirus;
 	}
 
 }

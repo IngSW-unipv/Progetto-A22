@@ -1,7 +1,8 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
 
+import java.math.BigDecimal;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PopUp;
 import javafx.event.ActionEvent;
@@ -17,21 +18,25 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Market {
-	int cpuAdd, cpuFinal, fwAdd, fwFinal, ramAdd, ramFinal, eAdd, eFinal, xS, yS;
-	int  cpuMax=10, fwMax=9, ramMax=10, eMax=10;
+	private int cpuAdd, cpuFinal, fwAdd, fwFinal, ramAdd, ramFinal, eAdd, eFinal, xS, yS;
+	private int  cpuMax=10, fwMax=9, ramMax=10, eMax=10;
 	
-	Mercato mkt;
-	int prAv;
-	Button button;
-	NumberSpinner quantitaRootCrash;
-	NumberSpinner quantitaVirus;
-	NumberSpinner quantitaAntivirus ;
-	public Market(Mercato mkt) {
-		this.mkt=mkt;
-		prAv=mkt.prezzoAntivirus;
+	private int prAv;
+	private Button buttonPay;
+	private NumberSpinner quantitaRootCrash;
+	private NumberSpinner quantitaVirus;
+	private NumberSpinner quantitaAntivirus ;
+	private Base baseUtente;
+	
+	public Market(Base baseUtente) {
+		this.baseUtente=baseUtente;
+		this.cpuMax=baseUtente.getLvl_max_cpu();
+		fwMax=baseUtente.getLvl_max_firewall();
+		ramMax=baseUtente.getLvl_max_ram();
+		eMax=ramMax;
 	}
 	
-	public void market(Base baseUtente) {
+	public void market() {
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(PopUp.sX); stage.setY(PopUp.sY);
@@ -73,7 +78,9 @@ public class Market {
 		quantitaAntivirus = new NumberSpinner();
 		quantitaAntivirus.setMax(max);
 		quantitaAntivirus.setMin(0);
-				
+		quantitaRootCrash.getNumberField().setDisable(true);
+		quantitaVirus.getNumberField().setDisable(true);
+		quantitaAntivirus.getNumberField().setDisable(true);
 		/*NumberSpinner listeners per max quantita*/ 
 		quantitaRootCrash.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
 
@@ -83,6 +90,10 @@ public class Market {
             	if((quantitaRootCrash.getNumber().intValue()+quantitaVirus.getNumber().intValue()+quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
             		quantitaRootCrash.increment();
                     ae.consume();
+            	}else {
+            		int maxSelection=max-quantitaVirus.getNumber().intValue()-quantitaAntivirus.getNumber().intValue();
+            		maxSelection=maxSelection>0?maxSelection:0;
+            		quantitaRootCrash.setNumber(BigDecimal.valueOf(maxSelection));
             	}
             }
         });
@@ -94,6 +105,10 @@ public class Market {
             	if((quantitaRootCrash.getNumber().intValue()+quantitaVirus.getNumber().intValue()+quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
             		quantitaVirus.increment();
                     ae.consume();
+            	}else {
+            		int maxSelection=max-quantitaRootCrash.getNumber().intValue()-quantitaAntivirus.getNumber().intValue();
+            		maxSelection=maxSelection>0?maxSelection:0;
+            		quantitaVirus.setNumber(BigDecimal.valueOf(maxSelection));
             	}
             }
         });
@@ -105,6 +120,10 @@ public class Market {
             	if((quantitaRootCrash.getNumber().intValue()+quantitaVirus.getNumber().intValue()+quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
             		quantitaAntivirus.increment();
                     ae.consume();
+            	}else {
+            		int maxSelection=max-quantitaRootCrash.getNumber().intValue()-quantitaVirus.getNumber().intValue();
+            		maxSelection=maxSelection>0?maxSelection:0;
+            		quantitaAntivirus.setNumber(BigDecimal.valueOf(maxSelection));
             	}
             }
         });
@@ -244,18 +263,18 @@ public class Market {
 		
 		HBox mB = new HBox();
 		mB.setAlignment(Pos.BASELINE_CENTER);
-		button = new Button("buy!");
-		button.setPrefSize(200, 20);
-		button.setAlignment(Pos.BASELINE_CENTER);
-		button.getStyleClass().add("redbutton");
+		buttonPay = new Button("buy!");
+		buttonPay.setPrefSize(200, 20);
+		buttonPay.setAlignment(Pos.BASELINE_CENTER);
+		buttonPay.getStyleClass().add("redbutton");
 
-		button.setOnAction(e -> {
+		buttonPay.setOnAction(e -> {
 			// username = text1.getText();
 			// password = text2.getText();
 			stage.close();
 		});
 		
-		mB.getChildren().add(button);
+		mB.getChildren().add(buttonPay);
 		vM.getChildren().addAll(initBill, priceList, hMktP, finalBill, mB);
 	
 		Scene scene = new Scene(vM, PopUp.sX, PopUp.sY);
@@ -263,31 +282,49 @@ public class Market {
 		stage.setTitle("Market");
 		stage.setScene(scene);
 		stage.showAndWait();
-
-		// -> inserire le variabili di ritorno
-		// TODO
 	}
-	public int getCpuAdd() {
+
+	public int getQuantitaRootCrash() {
+		return quantitaRootCrash.getNumberField().getNumber().intValue();
+	}
+	public int getQuantitaAntivirus() {
+		return quantitaAntivirus.getNumberField().getNumber().intValue();
+	}
+	public int getQuantitaVirus() {
+		return quantitaVirus.getNumberField().getNumber().intValue();
+	}
+	public int getLivelloCPU() {
 		return cpuAdd;
 	}
+	public int getLivelloFirewall() {
+		return fwAdd;
+	}
+	public int getLivelloRam() {
+		return ramAdd;
+	}
+	public int getLivelloEnergiata() {
+		return eAdd;
+	}
+	public Button getButtonPay() {
+		return buttonPay;
+	}
+	
+	public void setQuantitaVirus(NumberSpinner quantitaVirus) {
+		this.quantitaVirus = quantitaVirus;
+	}
+	
 	public void setCpuAdd(int cpuAdd) {
 		this.cpuAdd = cpuAdd;
 	}
-	public int getFwAdd() {
-		return fwAdd;
-	}
+
 	public void setFwAdd(int fwAdd) {
 		this.fwAdd = fwAdd;
 	}
-	public int getRamAdd() {
-		return ramAdd;
-	}
+
 	public void setRamAdd(int ramAdd) {
 		this.ramAdd = ramAdd;
 	}
-	public int geteAdd() {
-		return eAdd;
-	}
+
 	public void seteAdd(int eAdd) {
 		this.eAdd = eAdd;
 	}
@@ -351,47 +388,23 @@ public class Market {
 	public void seteMax(int eMax) {
 		this.eMax = eMax;
 	}
-	public Mercato getMkt() {
-		return mkt;
-	}
-	public void setMkt(Mercato mkt) {
-		this.mkt = mkt;
-	}
 	public int getPrAv() {
 		return prAv;
 	}
 	public void setPrAv(int prAv) {
 		this.prAv = prAv;
 	}
-	public Button getButton() {
-		return button;
-	}
-	public void setButton(Button button) {
-		this.button = button;
-	}
 
-	public NumberSpinner getQuantitaRootCrash() {
-		return quantitaRootCrash;
+	public void setButtonPay(Button button) {
+		this.buttonPay = button;
 	}
 
 	public void setQuantitaRootCrash(NumberSpinner quantitaRootCrash) {
 		this.quantitaRootCrash = quantitaRootCrash;
 	}
 
-	public NumberSpinner getQuantitaVirus() {
-		return quantitaVirus;
-	}
-
-	public void setQuantitaVirus(NumberSpinner quantitaVirus) {
-		this.quantitaVirus = quantitaVirus;
-	}
-
-	public NumberSpinner getQuantitaAntivirus() {
-		return quantitaAntivirus;
-	}
-
 	public void setQuantitaAntivirus(NumberSpinner quantitaAntivirus) {
 		this.quantitaAntivirus = quantitaAntivirus;
 	}
-	
+
 }

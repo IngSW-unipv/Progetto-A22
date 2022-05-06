@@ -43,7 +43,11 @@ public class NumberSpinner extends HBox {
     public NumberSpinner(BigDecimal value, BigDecimal stepWidth) {
         this(value, stepWidth, NumberFormat.getInstance());
     }
-
+    public NumberSpinner(int min,int max) {
+    	this(BigDecimal.ZERO, BigDecimal.ONE);
+    	this.max=max;
+    	this.min=min;
+    }
     public NumberSpinner(BigDecimal value, BigDecimal stepWidth, NumberFormat nf) {
         super();
         this.setId(NUMBER_SPINNER);

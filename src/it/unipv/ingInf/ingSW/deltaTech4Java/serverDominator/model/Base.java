@@ -65,6 +65,22 @@ public class Base extends Nodo{
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 
+	public void compra_risorsa(String nome) {
+		/**metodo usato per il potenziamento tramite mercato
+		 * di una risorsa generica. Aggiorna le statistiche della risorsa
+		 * passata e i valori necessari per il livello successivo
+		 */
+		boolean check=false;
+		int i;
+		for(i=0; i<TIPI_RISORSE;i++) {
+			if(risorse[i].getNome()==nome) {
+				check= risorse[i].potenziamento(); 
+			}
+		}
+		if(check) {
+			System.out.println("potenziamento eseguito");
+		} else System.out.println("potenziamento fallito");
+	}
 
 	public void potenzia_risorsa(String nome) {
 		/** metodo usato per il potenziamento di una risorsa generica
@@ -77,12 +93,12 @@ public class Base extends Nodo{
 		for(i=0; i<TIPI_RISORSE;i++) {
 			if(risorse[i].getNome()==nome) {
 				if(risorse[i].getE_richiesta()<= risorse[2].getStat1()) {
-			en_usata= risorse[2].getStat1()-risorse[i].getE_richiesta();
-			risorse[2].setStat1(en_usata);
-	/*start countdown per potenziamento risorsa*/
-			super.time1.countdown(risorse[i].getTempo_richiesto()); //countdown per visualizzazione a schermo
-			super.time1.timer(risorse[i].getTempo_richiesto());		//timer per attesa operazione
-			check= risorse[i].potenziamento(); 
+						en_usata= risorse[2].getStat1()-risorse[i].getE_richiesta();
+						risorse[2].setStat1(en_usata);
+						/*start countdown per potenziamento risorsa*/
+						super.time1.countdown(risorse[i].getTempo_richiesto()); //countdown per visualizzazione a schermo
+						super.time1.timer(risorse[i].getTempo_richiesto());		//timer per attesa operazione
+						check= risorse[i].potenziamento(); 
 				}
 			}
 		}
@@ -173,6 +189,9 @@ public class Base extends Nodo{
 	
 	public int getLvl_max_ram() {
 		return risorse[1].getMAX_LVL();
+	}
+	public int getSpazio_Ram() {
+		return risorse[1].getStat1()-super.getSoftware_disponibile();
 	}
 	
 	public int getLvl_max_firewall() {

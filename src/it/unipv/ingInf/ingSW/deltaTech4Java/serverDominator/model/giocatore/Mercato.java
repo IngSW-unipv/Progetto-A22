@@ -43,10 +43,13 @@ public class Mercato {
 	}
 	
 	public void compraSoftware(Utente user, Base nodo, int quantita, String software) {
-		if(software=="virus") {
-				if(user.getValuta()>=prezzoVirus*quantita&&quantitaVirus>0);
-					nodo.crea_software(software, quantita);
-					quantitaVirus-=quantita;
+		if (quantita>nodo.getSpazio_Ram()) {
+			quantita=nodo.getSpazio_Ram();
+		}
+		if(software=="virus") {	
+			if(user.getValuta()>=prezzoVirus*quantita&&quantitaVirus>0);
+				nodo.crea_software(software, quantita);
+				quantitaVirus-=quantita;
 		}
 		if(software=="antivirus") {
 			if(user.getValuta()>=prezzoAntivirus*quantita&&quantitaAntivirus>0);
@@ -63,17 +66,17 @@ public class Mercato {
 	public void compraRisorse(Utente user, Base nodo, String risorsa) {
 		if(risorsa=="ram") {
 			if(user.getValuta()>=prezzoRam&&quantitaRam>0);
-				nodo.potenzia_risorsa(risorsa);
+				nodo.compra_risorsa(risorsa);
 				quantitaRam--;
 		}
 		if(risorsa=="cpu") {
 			if(user.getValuta()>=prezzoCpu&&quantitaCpu>0);
-				nodo.potenzia_risorsa(risorsa);
+				nodo.compra_risorsa(risorsa);
 				quantitaCpu--;
 		}
 		if(risorsa=="energia") {
 			if(user.getValuta()>=prezzoEnergia&&quantitaEnergia>0);
-				nodo.potenzia_risorsa(risorsa);
+				nodo.compra_risorsa(risorsa);
 				quantitaEnergia--;
 		}
 	}

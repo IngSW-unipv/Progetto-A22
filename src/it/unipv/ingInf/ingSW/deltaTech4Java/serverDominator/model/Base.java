@@ -147,6 +147,9 @@ public class Base extends Nodo{
 	public int getE_disponibile() {
 		return risorse[2].getStat1();
 	}
+	public int getE_lvl() {
+		return risorse[2].getLivello_risorsa();
+	}
 	
 	public int getLvl_cpu() {
 		return risorse[0].getLivello_risorsa();
@@ -198,4 +201,5 @@ public class Base extends Nodo{
 	public int getQnt_rootcrash() {
 		return stats_software_creati[2].getQuantita();
 	}
+	
 }

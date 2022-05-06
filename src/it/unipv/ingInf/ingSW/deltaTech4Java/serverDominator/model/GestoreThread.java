@@ -6,7 +6,7 @@ public class GestoreThread {
 	
 	//prova
 	public void avvioThread(Bot bot, Base baseUtente, Base baseBot){
-		bot.aggiornaBasi(baseUtente, baseBot);
+		//bot.aggiornaBasi(baseUtente, baseBot);
 		Thread t1 = new Thread(bot);
 		t1.start();
 	}

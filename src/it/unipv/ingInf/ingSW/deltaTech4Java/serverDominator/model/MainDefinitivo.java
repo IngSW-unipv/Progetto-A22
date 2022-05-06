@@ -108,7 +108,7 @@ public class MainDefinitivo extends Thread{
 	}
 
 	@SuppressWarnings("static-access")
-	public void avvioBot(/*int tempo*/) throws InterruptedException {
+	public void avvioBot() throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
 			giocatori[i].setMap(tabellone);

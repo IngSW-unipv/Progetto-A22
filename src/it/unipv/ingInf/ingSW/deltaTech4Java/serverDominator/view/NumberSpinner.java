@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javax.swing.JSpinner;
 
 public class NumberSpinner extends HBox {
 	
@@ -34,7 +33,9 @@ public class NumberSpinner extends HBox {
     private final Button decrementButton;
     private final NumberBinding buttonHeight;
     private final NumberBinding spacing;
-
+    private int max;
+    private int min;
+    
     public NumberSpinner() {
         this(BigDecimal.ZERO, BigDecimal.ONE);
     }
@@ -104,8 +105,13 @@ public class NumberSpinner extends HBox {
         incrementButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ae) {
-                increment();
-                ae.consume();
+            	if(numberField.getNumber().intValue()+stepWitdhProperty.getValue().intValue()<max) {
+            		increment();
+                    ae.consume();
+            	}else{
+            		numberField.setNumber(BigDecimal.valueOf(max));
+            		ae.consume();
+            	}
             }
         });
 
@@ -127,8 +133,14 @@ public class NumberSpinner extends HBox {
 
             @Override
             public void handle(ActionEvent ae) {
-                decrement();
-                ae.consume();
+            	if(numberField.getNumber().intValue()-stepWitdhProperty.getValue().intValue()>=min) {
+            		decrement();
+                    ae.consume();
+            	}else{
+            		numberField.setNumber(BigDecimal.valueOf(min));
+            		ae.consume();
+            	}
+                
             }
         });
 
@@ -143,7 +155,7 @@ public class NumberSpinner extends HBox {
     /**
      * increment number value by stepWidth
      */
-    private void increment() {
+    public void increment() {
         BigDecimal value = numberField.getNumber();
         value = value.add(stepWitdhProperty.get());
         numberField.setNumber(value);
@@ -152,7 +164,7 @@ public class NumberSpinner extends HBox {
     /**
      * decrement number value by stepWidth
      */
-    private void decrement() {
+    public void decrement() {
         BigDecimal value = numberField.getNumber();
         value = value.subtract(stepWitdhProperty.get());
         numberField.setNumber(value);
@@ -177,6 +189,51 @@ public class NumberSpinner extends HBox {
         System.out.println("buttonDec (layout)=" + decrementButton.getLayoutBounds());
         System.out.println("binding=" + buttonHeight.toString());
         System.out.println("spacing=" + spacing.toString());
-    }	
+    }
+    
+	public int getMax() {
+		return max;
+	}
+
+	public void setMax(int max) {
+		this.max = max;
+	}
+
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
+	}
+
+	public Button getIncrementButton() {
+		return incrementButton;
+	}
+
+	public Button getDecrementButton() {
+		return decrementButton;
+	}
+
+	public NumberTextField getNumberField() {
+		return numberField;
+	}
+
+	public void setNumberField(NumberTextField numberField) {
+		this.numberField = numberField;
+	}
+
+	public String getBUTTONS_BOX() {
+		return BUTTONS_BOX;
+	}
+
+	public double getARROW_SIZE() {
+		return ARROW_SIZE;
+	}
+
+	public ObjectProperty<BigDecimal> getStepWitdhProperty() {
+		return stepWitdhProperty;
+	}
+	
 
 }

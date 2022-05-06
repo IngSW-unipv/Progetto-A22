@@ -9,8 +9,11 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Background;
@@ -26,25 +29,17 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
-class Battaglia implements Comparable<Battaglia>{
+class Battaglia extends ProgressBar implements Comparable<Battaglia>{
 
-	private ProgressBar progressBar;
 	private String title;
-	
-	public Battaglia(ProgressBar progressBar, String title) {
+	private long duration=0;
+	ProgressBar ps;
+	Button btn;
+	public Battaglia(String title,long millis) {
 		super();
-		this.progressBar = progressBar;
-		this.title = title;
+		this.title=title;
+		this.duration=millis;
 	}
-
-	public ProgressBar getProgressBar() {
-		return progressBar;
-	}
-
-	public void setProgressBar(ProgressBar progressBar) {
-		this.progressBar = progressBar;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -55,9 +50,9 @@ class Battaglia implements Comparable<Battaglia>{
 
 	@Override
 	public int compareTo(Battaglia o) {
-		if(progressBar.getProgress()>o.getProgressBar().getProgress())
+		if(this.getProgress()>o.getProgress())
 			return -1;
-		if(progressBar.getProgress()<o.getProgressBar().getProgress())
+		if(this.getProgress()<o.getProgress())
 			return 1;
 		return 0;
 	}
@@ -90,8 +85,11 @@ public class BattlePane {
 	
 	
 	public Pane getBattlePain(Base bU) {
-				addbattaglia("prova", 3000);
-				addbattaglia("prova1", 3000);
+		if(battlePane==null)
+			rifai();
+		else
+			if(battle!=null)
+				Collections.sort(this.battle);
 		return battlePane;
 	}
 	
@@ -101,21 +99,25 @@ public class BattlePane {
 			this.battle=new ArrayList<Battaglia>();
 		}
 		/*-----Darivedere perchè non funziona la progress bar*/
-		ProgressBar battle = new ProgressBar();
-		Battaglia battaglia=new Battaglia(battle, titoloProgressBar);
-		Timeline timeline = new Timeline(
-				new KeyFrame(Duration.ZERO, new KeyValue(battaglia.getProgressBar().progressProperty(), 0)),
-				new KeyFrame(Duration.millis(5), e-> {
-					battaglia.getProgressBar().setProgress((5/millis)+battaglia.getProgressBar().getProgress());
-					}, new KeyValue(battaglia.getProgressBar().progressProperty(), 1))    
-			    );
-			    timeline.setCycleCount(Animation.INDEFINITE);
-			    timeline.play();
-		
+		ProgressBar progress = new ProgressBar();
+        progress.setMinWidth(200);
+        progress.setMaxWidth(Double.MAX_VALUE);
+        IntegerProperty seconds = new SimpleIntegerProperty();
+        progress.progressProperty().bind(seconds.divide(60.0));
+        Timeline timeline = new Timeline(
+            new KeyFrame(Duration.ZERO, new KeyValue(seconds, 0)),
+            new KeyFrame(Duration.millis(millis), e-> {
+            }, new KeyValue(seconds, 60))   
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+	        
+		Battaglia battaglia=new Battaglia(titoloProgressBar,millis);
 		this.battle.add(battaglia);
 		Collections.sort(this.battle);
 		rifai();
 	}
+	
 	private void rifai() {
 
 		battlePane = new Pane();
@@ -145,7 +147,8 @@ public class BattlePane {
 		battles.setAlignment(Pos.BASELINE_CENTER);
 		battles.setPadding(STANDARD_PADDING);
 		battles.setVgap(5);
-		
+		if(battle==null)
+			battle=new ArrayList<Battaglia>(0);
 		for(int i=0;i<this.battle.size();i++) {
 			Label title = new Label(this.battle.get(i).getTitle());
 			title.setTextFill(Color.web("FFFF00"));
@@ -160,6 +163,66 @@ public class BattlePane {
 		battaglie.getChildren().addAll(battleTitle, battles);
 		battlePane.getChildren().add(battaglie);
 		battlePane.setBackground(new Background(new BackgroundFill(Color.web("#262626"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
+	}
+
+	public Base getbU() {
+		return bU;
+	}
+
+	public void setbU(Base bU) {
+		this.bU = bU;
+	}
+
+	public Pane getBattlePane() {
+		return battlePane;
+	}
+
+	public void setBattlePane(Pane battlePane) {
+		this.battlePane = battlePane;
+	}
+
+	public Label getTitoloBattaglie() {
+		return titoloBattaglie;
+	}
+
+	public void setTitoloBattaglie(Label titoloBattaglie) {
+		this.titoloBattaglie = titoloBattaglie;
+	}
+
+	public List<Battaglia> getBattle() {
+		return battle;
+	}
+
+	public void setBattle(List<Battaglia> battle) {
+		this.battle = battle;
+	}
+
+	public GridPane getBattles() {
+		return battles;
+	}
+
+	public void setBattles(GridPane battles) {
+		this.battles = battles;
+	}
+
+	public HBox getBattleTitle() {
+		return battleTitle;
+	}
+
+	public void setBattleTitle(HBox battleTitle) {
+		this.battleTitle = battleTitle;
+	}
+
+	public VBox getBattaglie() {
+		return battaglie;
+	}
+
+	public void setBattaglie(VBox battaglie) {
+		this.battaglie = battaglie;
+	}
+
+	public Insets getSTANDARD_PADDING() {
+		return STANDARD_PADDING;
 	}
 	
 }

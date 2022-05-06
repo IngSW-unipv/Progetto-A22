@@ -3,8 +3,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 
 import java.math.RoundingMode;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.Market;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,11 +30,11 @@ public class PopUp {
 
 	// NOTA: le variabili di ritorno sono definite allì'interno di ogni PopUp
 	int useRootcrash, useVirus;
-	static int sX = 400;
-	static int sY = 400;	
+	public static int sX = 400;
+	public static int sY = 400;	
 	NumberSpinner useRcNs = new NumberSpinner();
 	NumberSpinner useVrNs = new NumberSpinner();
-	final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
+	public static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
 	
 	
 	public void selectMalware(Base baseUtente) {
@@ -305,6 +307,7 @@ public class PopUp {
 	
 	
 	public void market(Base baseUtente) {
+		/*
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(sX); stage.setY(sY);
@@ -463,5 +466,10 @@ public class PopUp {
 
 		// -> inserire le variabili di ritorno
 		// TODO
+		 
+		// */
+		Mercato m1=new Mercato();
+		Market m=new Market(m1);
+		m.market(baseUtente);
 	}
 }

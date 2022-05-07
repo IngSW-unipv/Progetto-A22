@@ -194,11 +194,13 @@ public class MainDefinitivo extends Thread{
 		return check;
 	}
 	
-	public void acquistoMercato(int quantita, String oggetto) {
-		//if(quantita==-1)
-			//mercato.compraRisorse(utente, tabellone.trovaBase(utente), oggetto);
-		//else
-			//mercato.compraSoftware(utente, tabellone.trovaBase(utente), quantita, oggetto);
+	/**Metodo per comprare software e potenziamenti dal mercato, in input bisogna passare il giocatore che vuole comprare il potenziamento, la quantita e il nome 
+	 * dell'oggetto da potenziare. La quantita deve essere settata a -1 se si vuole acquistare un potenziamento risorsa*/
+	public void acquistoMercato(Giocatore utente, int quantita, String oggetto) {
+		if(quantita==-1)
+			mercato.compraRisorse(utente, tabellone.trovaBase(utente), oggetto);
+		else
+			mercato.compraSoftware(utente, tabellone.trovaBase(utente), quantita, oggetto);
 	}
 
 //---------------metodi per battaglia-------------//

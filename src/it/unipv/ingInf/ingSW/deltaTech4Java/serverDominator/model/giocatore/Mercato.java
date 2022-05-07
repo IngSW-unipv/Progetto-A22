@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 
 public class Mercato {
 	int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus;
@@ -42,7 +43,7 @@ public class Mercato {
 		this.quantitaRootcrash=quantitaRootcrash;
 	}
 	
-	public void compraSoftware(Utente user, Base nodo, int quantita, String software) {
+	public void compraSoftware(Giocatore user, Nodo nodo, int quantita, String software) {
 		int valuta;
 		if (quantita>nodo.getSpazio_Ram()) {
 			quantita=nodo.getSpazio_Ram();
@@ -73,7 +74,7 @@ public class Mercato {
 		}
 	}
 	
-	public void compraRisorse(Utente user, Base nodo, String risorsa) {
+	public void compraRisorse(Giocatore user, Nodo nodo, String risorsa) {
 		int valuta;
 		
 		if(risorsa=="ram") {

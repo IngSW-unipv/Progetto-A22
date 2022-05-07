@@ -28,7 +28,7 @@ public class ComponentCreator {
 	public HBox createHbox(Pos alignmant) {
 		HBox bA = new HBox();
 		bA.setFillHeight(false);	
-		bA.setMaxWidth(200);
+		bA.setMaxWidth(Double.MAX_VALUE);
 		bA.setAlignment(alignmant);
 		bA.autosize();
 		return bA;
@@ -36,7 +36,7 @@ public class ComponentCreator {
 	
 	public Label lableCreator(Pos alignmant) {
 		Label lbl = new Label();
-		lbl.setMaxWidth(200);
+		//lbl.setMaxWidth(200);
 		lbl.setAlignment(alignmant);
 		lbl.autosize();
 		lbl.setFont(Font.font("Cambria", 22));

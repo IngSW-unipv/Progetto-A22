@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -71,15 +72,14 @@ public class Market {
 		xS = 20; yS = 10;
 		
 		VBox vM = new VBox();
-		
+		vM.setPrefWidth(800);
 		HBox initBill = new HBox();
 		initBill.setPadding(PopUpFacade.STANDARD_PADDING);
-		Label saldoAttuale = new Label("Il tuo saldo iniziale è:  " + baseUtente.getPossessore().getValuta());
-		initBill.getChildren().add(saldoAttuale);
 		
-		GridPane priceList = new GridPane();
-		priceList.setPadding(PopUpFacade.STANDARD_PADDING);
-		priceList.add(new Label("Antivirus: " + prAv), cpuFinal, cpuAdd);
+		Label saldoAttuale=new Label();
+		saldoAttuale.setFont(Font.font("Cambria", 22));
+		setLableText(saldoAttuale, "Saldo attuale   " + baseUtente.getPossessore().getValuta()+80000);
+		initBill.getChildren().add(saldoAttuale);
 		
 		HBox hMktP = new HBox();
 		GridPane mktP = new GridPane();
@@ -341,7 +341,7 @@ public class Market {
 		pay.setAlignment(Pos.TOP_CENTER);
 		pay.getChildren().add(buttonPay);
 		vM.setAlignment(Pos.BASELINE_CENTER);
-		vM.getChildren().addAll(initBill, priceList, hMktP, finalBill,pay);
+		vM.getChildren().addAll(initBill, hMktP, finalBill,pay);
 		
 		Scene scene = new Scene(vM, PopUpFacade.sX, PopUpFacade.sY);
 		scene.getStylesheets().add("application.css");

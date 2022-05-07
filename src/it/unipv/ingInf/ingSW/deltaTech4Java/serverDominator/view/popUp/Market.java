@@ -1,10 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PopUp;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -27,19 +28,46 @@ public class Market {
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus ;
 	private Base baseUtente;
-	
+	private Mercato mercato;
+	private int total;
+	private int subTotalRootCrash;
+	private int subTotalVirus;
+	private int subTotalAntivirus ;
 	public Market(Base baseUtente) {
+		istance(new Mercato(), baseUtente);
+	}
+	
+	public Market(Mercato mercato, Base baseUtente) {
+		istance(mercato, baseUtente);
+	}
+	
+	public Market() {
+		super();
+	}
+	private void istance(Mercato mercato, Base baseUtente) {
 		this.baseUtente=baseUtente;
 		this.cpuMax=baseUtente.getLvl_max_cpu();
 		fwMax=baseUtente.getLvl_max_firewall();
 		ramMax=baseUtente.getLvl_max_ram();
 		eMax=ramMax;
+		this.mercato=mercato;
+		total=0;
+		subTotalRootCrash=0;
+		subTotalVirus=0;
+		subTotalAntivirus=0;
+		
+	}
+	
+	public void market(Base baseUtente) {
+		istance(new Mercato(), baseUtente);
+		market();
 	}
 	
 	public void market() {
+		Label finalBillL = new Label("Stai spendendo: 0" + "Ti resterà: "+baseUtente.getPossessore().getValuta());
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setX(PopUp.sX); stage.setY(PopUp.sY);
+		stage.setX(PopUpFacade.sX); stage.setY(PopUpFacade.sY);
 		
 		cpuAdd = 0; cpuFinal = 0; fwAdd = 0; fwFinal = 0; ramAdd = 0; ramFinal = 0; eAdd = 0; eFinal = 0;
 		xS = 20; yS = 10;
@@ -47,17 +75,17 @@ public class Market {
 		VBox vM = new VBox();
 		
 		HBox initBill = new HBox();
-		initBill.setPadding(PopUp.STANDARD_PADDING);
+		initBill.setPadding(PopUpFacade.STANDARD_PADDING);
 		Label saldoAttuale = new Label("Il tuo saldo iniziale è:  " + baseUtente.getPossessore().getValuta());
 		initBill.getChildren().add(saldoAttuale);
 		
 		GridPane priceList = new GridPane();
-		priceList.setPadding(PopUp.STANDARD_PADDING);
+		priceList.setPadding(PopUpFacade.STANDARD_PADDING);
 		priceList.add(new Label("Antivirus: " + prAv), cpuFinal, cpuAdd);
 		
 		HBox hMktP = new HBox();
 		GridPane mktP = new GridPane();
-		mktP.setPadding(PopUp.STANDARD_PADDING);
+		mktP.setPadding(PopUpFacade.STANDARD_PADDING);
 		mktP.setVgap(5);
 		mktP.setHgap(5);
 		
@@ -86,45 +114,56 @@ public class Market {
 
             @Override
             public void handle(ActionEvent ae) {
-            	int aumento=quantitaRootCrash.getStepWitdhProperty().get().intValue();
-            	if((quantitaRootCrash.getNumber().intValue()+quantitaVirus.getNumber().intValue()+quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
-            		quantitaRootCrash.increment();
-                    ae.consume();
-            	}else {
-            		int maxSelection=max-quantitaVirus.getNumber().intValue()-quantitaAntivirus.getNumber().intValue();
-            		maxSelection=maxSelection>0?maxSelection:0;
-            		quantitaRootCrash.setNumber(BigDecimal.valueOf(maxSelection));
-            	}
+            	total-=mercato.getCostoRootcrash(getQuantitaRootCrash());
+            	aumentoLogica(max, quantitaRootCrash, quantitaAntivirus, quantitaVirus);
+            	total+=mercato.getCostoRootcrash(getQuantitaRootCrash());
+            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	ae.consume();
+            }
+        });
+		quantitaRootCrash.getDecrementButton().setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	total-=mercato.getCostoRootcrash(getQuantitaRootCrash());
+            	diminuzioneLogica(quantitaRootCrash);
+            	total+=mercato.getCostoRootcrash(getQuantitaRootCrash());
+            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	ae.consume();
             }
         });
         
 		quantitaVirus.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ae) {
-            	int aumento=quantitaVirus.getStepWitdhProperty().get().intValue();
-            	if((quantitaRootCrash.getNumber().intValue()+quantitaVirus.getNumber().intValue()+quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
-            		quantitaVirus.increment();
-                    ae.consume();
-            	}else {
-            		int maxSelection=max-quantitaRootCrash.getNumber().intValue()-quantitaAntivirus.getNumber().intValue();
-            		maxSelection=maxSelection>0?maxSelection:0;
-            		quantitaVirus.setNumber(BigDecimal.valueOf(maxSelection));
+            	total-=mercato.getCostoVirus(getQuantitaVirus());
+            	aumentoLogica(max, quantitaVirus, quantitaAntivirus, quantitaRootCrash);
+            	total+=mercato.getCostoVirus(getQuantitaVirus());
+            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	ae.consume();
             	}
+            
+        });
+		quantitaVirus.getDecrementButton().setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	total-=mercato.getCostoVirus(getQuantitaVirus());
+            	diminuzioneLogica(quantitaVirus);
+            	total+=mercato.getCostoVirus(getQuantitaVirus());
+            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	ae.consume();
             }
         });
 		
 		quantitaAntivirus.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ae) {
-            	int aumento=quantitaAntivirus.getStepWitdhProperty().get().intValue();
-            	if((quantitaRootCrash.getNumber().intValue()+quantitaVirus.getNumber().intValue()+quantitaAntivirus.getNumber().intValue()+aumento)<=max) {
-            		quantitaAntivirus.increment();
-                    ae.consume();
-            	}else {
-            		int maxSelection=max-quantitaRootCrash.getNumber().intValue()-quantitaVirus.getNumber().intValue();
-            		maxSelection=maxSelection>0?maxSelection:0;
-            		quantitaAntivirus.setNumber(BigDecimal.valueOf(maxSelection));
-            	}
+            	total-=mercato.getCostoAntivirus(getQuantitaAntivirus());
+            	aumentoLogica(max, quantitaAntivirus, quantitaVirus,quantitaRootCrash);
+            	total+=mercato.getCostoAntivirus(getQuantitaAntivirus());
+            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	ae.consume();
             }
         });
 		
@@ -236,6 +275,7 @@ public class Market {
 				++eAdd;
 			}	
 			eResult.setText(" add: " + eAdd + " Up to: " + eFinal);
+			
 
 		});
 		
@@ -257,8 +297,7 @@ public class Market {
 		hMktP.getChildren().add(mktP);
 		
 		HBox finalBill = new HBox();
-		finalBill.setPadding(PopUp.STANDARD_PADDING);
-		Label finalBillL = new Label("Stai spendendo: xxx" + "Ti resterà: yyy");
+		finalBill.setPadding(PopUpFacade.STANDARD_PADDING);
 		finalBill.getChildren().add(finalBillL);
 		
 		HBox mB = new HBox();
@@ -277,13 +316,41 @@ public class Market {
 		mB.getChildren().add(buttonPay);
 		vM.getChildren().addAll(initBill, priceList, hMktP, finalBill, mB);
 	
-		Scene scene = new Scene(vM, PopUp.sX, PopUp.sY);
+		Scene scene = new Scene(vM, PopUpFacade.sX, PopUpFacade.sY);
 		scene.getStylesheets().add("application.css");
 		stage.setTitle("Market");
 		stage.setScene(scene);
 		stage.showAndWait();
 	}
-
+	private void aumentoLogica(int sumMax,NumberSpinner target,NumberSpinner... controllers) {
+		{
+        	int aumento=target.getStepWitdhProperty().get().intValue();
+        	int totalControll=0;
+        	for (NumberSpinner c:controllers) {
+        		totalControll+=c.getNumber().intValue();
+			}
+        	if((target.getNumber().intValue()+totalControll+aumento)<=sumMax) {
+        		target.increment();
+        	}else {
+        		int maxSelection=sumMax-totalControll;
+        		maxSelection=maxSelection>0?maxSelection:0;
+        		target.setNumber(BigDecimal.valueOf(maxSelection));
+        	}
+        }
+	}
+	private void aggiornaTotale(Label l,int spesa, int rimanenza) {
+		l.setText("Stai spendendo: "+ spesa + "Ti resterà: "+rimanenza);
+		
+	}
+	private void diminuzioneLogica(NumberSpinner target) {
+		int diminuzione=target.getStepWitdhProperty().get().intValue();
+    	if((target.getNumber().intValue()-diminuzione)>=target.getMin()) {
+    		target.decrement();
+    	}else {
+    		target.setNumber(BigDecimal.valueOf(target.getMin()));
+    	}
+    	
+	}
 	public int getQuantitaRootCrash() {
 		return quantitaRootCrash.getNumberField().getNumber().intValue();
 	}

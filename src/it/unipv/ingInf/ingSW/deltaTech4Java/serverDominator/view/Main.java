@@ -11,6 +11,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.ActionPane
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.BaseStatsPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.BattlePane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.StatsNodePane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
 
 /**
  * @author Matteo Para 
@@ -49,7 +50,7 @@ public class Main extends Application {
 	}
 
 	public final Insets STANDARD_PADDING = new Insets(10);
-	PopUp popUp = new PopUp();
+	PopUpFacade popUp = new PopUpFacade();
 
 	private Pair<Integer, Integer> getDimensioniMappa(LivelloDiGioco livello) {
 		int xMax, yMax;

@@ -1,7 +1,10 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -58,7 +61,14 @@ public class ActionPane {
 		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
 		actionMarket.setSpacing(10);
 		actionMarket.getChildren().add(actionMarketL);
-		
+		actionMarketL.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	p.market(bU);
+            }
+		});
 		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
 		powerUp.getChildren().add(powerUpL);

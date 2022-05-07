@@ -36,6 +36,14 @@ public class Powerup {
 		cpuAdd = 0; cpuFinal = 0; fwAdd = 0; fwFinal = 0; ramAdd = 0; ramFinal = 0; eAdd = 0; eFinal = 0;
 		
 	}
+	public Powerup() {
+		cpuAdd = 0; cpuFinal = 0; fwAdd = 0; fwFinal = 0; ramAdd = 0; ramFinal = 0; eAdd = 0; eFinal = 0;
+		
+	}
+	public void powerUp(Base baseUtente) {
+		this.baseUtente=baseUtente;
+		powerUp();
+	}
 	
 	public void powerUp() {
 		

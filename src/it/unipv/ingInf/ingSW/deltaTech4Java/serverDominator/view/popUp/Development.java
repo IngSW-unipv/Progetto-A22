@@ -32,7 +32,15 @@ public class Development {
 	public Development(Base baseUtente) {
 		this.baseUtente=baseUtente;
 	}
+	public Development() {
+		super();
+	}
 	
+	public void development(Base baseUtente) {
+		this.baseUtente=baseUtente;
+		development();
+		
+	}
 	public void development() {
 		
 		stage = new Stage();

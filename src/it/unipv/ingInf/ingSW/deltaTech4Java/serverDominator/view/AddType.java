@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,7 +19,7 @@ public class AddType {
 	Button button;
 	String titolo;
 	HBox hB ;
-	PopUp pU = new PopUp() ;
+	PopUpFacade pU = new PopUpFacade() ;
 	Base bU ;
 	
 	public AddType() {

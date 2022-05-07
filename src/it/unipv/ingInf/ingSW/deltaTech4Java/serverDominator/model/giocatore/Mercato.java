@@ -101,5 +101,71 @@ public class Mercato {
 			quantitaEnergia--;
 		}
 	}
+	public int getCostoRam(int quantita) {
+		return prezzoRam*quantita;
+	}
+	public int getCostoCpu(int quantita) {
+		return prezzoCpu*quantita;
+	}
+	public int getCostoEnergia(int quantita) {
+		return prezzoEnergia*quantita;
+	}
+	public int getCostoVirus(int quantita) {
+		return prezzoVirus*quantita;
+	}
+	public int getCostoAntivirus(int quantita) {
+		return prezzoAntivirus*quantita;
+	}
+	public int getCostoRootcrash(int quantita) {
+		return prezzoRootcrash*quantita;
+	}
+	/**
+	 * Recupera il prezzo unitario della ram
+	 * @return
+	 * prezzoRam
+	 */
+	public int getPrezzoRam() {
+		return prezzoRam;
+	}
+	/**
+	 * Recupera il prezzo unitario della cpu
+	 * @return
+	 * prezzoCpu
+	 */
+	public int getPrezzoCpu() {
+		return prezzoCpu;
+	}
+	/**
+	 * Recupera il prezzo unitario della energia
+	 * @return
+	 * prezzoEnergia
+	 */
+	public int getPrezzoEnergia() {
+		return prezzoEnergia;
+	}
+	/**
+	 * Recupera il prezzo unitario di Virus
+	 * @return
+	 * prezzoVirus
+	 */
+	public int getPrezzoVirus() {
+		return prezzoVirus;
+	}
+	/**
+	 * Recupera il prezzo unitario di antivirus
+	 * @return
+	 * prezzoAntivirus
+	 */
+	public int getPrezzoAntivirus() {
+		return prezzoAntivirus;
+	}
+	/**
+	 * Recupera il prezzo unitario di Rootcrash
+	 * @return
+	 * prezzoRootcrash
+	 */
+	public int getPrezzoRootcrash() {
+		return prezzoRootcrash;
+	}
 	
 }

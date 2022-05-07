@@ -47,7 +47,7 @@ public class Bot extends Giocatore{
 		this.setMap(map);
 		this.datiBase();
 		this.cambiaTarget();
-		while(map.getNodo(base.getX(), base.getY()).getPossessore().getNome()==this.getNome() ) {
+		while(map.getNodo(base.getX(), base.getY()).getPossessore().getNome().equals(this.getNome())) {
 			time.timer(30);
 			this.comportamento();
 		}

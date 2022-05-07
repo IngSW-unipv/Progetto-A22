@@ -58,6 +58,19 @@ public class MainDefinitivo extends Thread{
 	
 	}
 
+//---------------metodi generici--------------------//
+	public void sceltabase(int scelta) {
+		/** metodo usato nel caso l'utente abbia più di una base
+		 * in questo caso deve selezionarne una dalla quale partiranno
+		 * gli attacchi
+		 */
+		if(tabellone.getContabasi()>0) {
+			tabellone.setScelta(scelta);
+		} else 
+			System.out.println("nessuna altra base conquistata");
+		
+	}
+
 	public void creazioneGiocatori(String utente, int x_max, int valuta) {  
 		Collections.shuffle(Colore.colori);
 				
@@ -168,7 +181,19 @@ public class MainDefinitivo extends Thread{
 	}
 		
 //------------- metodi per mercato------------//
-		
+	public boolean marketcheck(int x, int y) {
+		/**metodo per la scelta della base in cui si vuole comprare
+		 * risorse o software dal mercato
+		 */
+		boolean check=false;
+		if(tabellone.getNodo(x, y).getTipologia().equals("base")) {
+			if(tabellone.getNodo(x, y).getPossessore().equals(giocatori[1])) {
+				check=true;
+			}
+		}
+		return check;
+	}
+	
 	public void acquistoMercato(int quantita, String oggetto) {
 		//if(quantita==-1)
 			//mercato.compraRisorse(utente, tabellone.trovaBase(utente), oggetto);
@@ -223,9 +248,15 @@ public class MainDefinitivo extends Thread{
 		 * software da inviare in battaglia.
 		 */
 		fight[count].start();
-		/*le due istruzioni seguenti sono da lanciare una volta terminato l'esecuzione
+		/*le  istruzioni seguenti sono da lanciare una volta terminato l'esecuzione
 		 * del thread di battaglia
 		 */
+		if(fight[count].getEsito()) {
+			if(tabellone.getNodo(x, y).getTipologia().equals("base")) {
+			tabellone.aggiornabasi(x,y, attaccante);
+			tabellone.checkbasi(attaccante);
+			}
+		}
 		maxbattle++;
 		classifica.aggiornaClassifica();
 		System.out.println( fight[count].getReport() );

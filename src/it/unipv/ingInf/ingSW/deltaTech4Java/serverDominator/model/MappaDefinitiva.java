@@ -5,6 +5,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Gioc
 public class MappaDefinitiva {
 	private Nodo[][] map;
 	private Coordinate[] basi;
+	private Coordinate[] basiutente;
+	private int contabasi;
+	private int sceltabase;
 	private int x_max, y_max, n_basi;
 	private String[] vicini;
 	private Coordinate[] confini; 
@@ -25,6 +28,9 @@ public class MappaDefinitiva {
 		this.assegnamento(n_basi, giocatori);
 		vicini= new String[6];
 		confini= new Coordinate[6];
+		basiutente= new Coordinate[n_basi];
+		sceltabase=0;
+		
 	}
 	
 	public void assegnamento(int n_basi, Giocatore[] giocatori) {
@@ -83,6 +89,31 @@ public class MappaDefinitiva {
 			}
 		}
 	
+	public void aggiornabasi(int x, int y, Giocatore attaccante) {
+	
+		int i;
+		for(i=0;i<n_basi;i++) {
+			if(basi[i].getX()==x && basi[i].getY()==y) {
+				basi[i].setNome(attaccante.getNome());
+			}
+		}
+	}
+	
+	public void checkbasi(Giocatore player) {
+		int i;
+		int x,y;
+		contabasi=0;
+		
+		for(i=0;i<n_basi; i++) {
+			if(basi[i].getNome().equals(player.getNome()) ) {
+				x=basi[i].getX();
+				y=basi[i].getY();	
+				basiutente[contabasi]= new Coordinate(x, y, player.getNome());
+				contabasi++;
+			} 
+		}
+	}
+	
 	public Nodo trovaBase( Giocatore player) {
 		/** metodo usato per la ricerca della base del giocatore attaccante
 		 * nel caso di battaglia (memo: gli attacchi partono sempre da una base).
@@ -91,12 +122,17 @@ public class MappaDefinitiva {
 			int x,y;
 			x=3;
 			y=1;
-			for(i=0;i<n_basi; i++) {
-				if(basi[i].getNome()==player.getNome() ) {
-					x=basi[i].getX();
-					y=basi[i].getY();
-				} 
-			}
+			if(sceltabase!=0) {
+				x=basiutente[sceltabase].getX();
+				y=basiutente[sceltabase].getY();
+			}else 
+				for(i=0;i<n_basi; i++) {
+					if(basi[i].getNome().equals(player.getNome()) ) {
+						x=basi[i].getX();
+						y=basi[i].getY();	
+					} 
+				}
+			
 			return map[x][y];
 		}
 	
@@ -195,6 +231,22 @@ public class MappaDefinitiva {
 		public Coordinate[] getBasi() {
 			return basi;
 		}
-		
+
+		public int getScelta() {
+			return sceltabase;
+		}
+
+		public void setScelta(int scelta) {
+			this.sceltabase = scelta;
+		}
+
+		public int getContabasi() {
+			return contabasi;
+		}
+
+		public Coordinate[] getBasiutente() {
+			return basiutente;
+		}
+
 		
 }

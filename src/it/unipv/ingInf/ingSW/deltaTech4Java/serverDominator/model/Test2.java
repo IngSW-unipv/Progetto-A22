@@ -16,14 +16,17 @@ public class Test2 {
 		Map<Coordinate, String> map2;
 		Coordinate c1, c2;
 		Nodo n;
-		Giocatore pluto;
+		Giocatore pluto, pippo;
 	
 		map1= new Hashtable<Coordinate, Nodo>();
 		map2= new Hashtable<Coordinate, String>();
 		
 		c1=new Coordinate(0,1);
 		c2= new Coordinate (2,2);
+		
 		pluto=new Utente("pluto",20);
+
+		
 		n= new Base(pluto);
 		
 		map1.put(c1, n);
@@ -32,6 +35,7 @@ public class Test2 {
 		
 		String test = map2.get(c2);
 		System.out.println(test);
+	
+		
 	}
-
 }

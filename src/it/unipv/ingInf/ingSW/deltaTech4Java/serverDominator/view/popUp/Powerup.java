@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -165,12 +166,8 @@ public class Powerup {
 		energiaHbox.getChildren().addAll(energiaInc, energiaDec, energiaResult);
 		energiaHbox.setSpacing(8.0);
 		
-		HBox pUButton = new HBox();
-		pUButton.setAlignment(Pos.BASELINE_CENTER);
-		buttonPowerUp = new Button("powerUp!");
-		buttonPowerUp.setPrefSize(200, 20);
-		buttonPowerUp.setAlignment(Pos.BASELINE_CENTER);
-		buttonPowerUp.getStyleClass().add("redbutton");
+		HBox pUButton = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		buttonPowerUp = ComponentCreator.getIstance().createButton("powerUp!", Pos.BASELINE_CENTER);
 		
 		buttonPowerUp.setOnAction(e -> {
 			// username = text1.getText();

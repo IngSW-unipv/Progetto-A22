@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,9 +20,9 @@ import javafx.scene.text.FontWeight;
 
 public class BaseStatsPane {
 	
-	Base nodeBase = new Base();
-	Pane yourBasePane;
-	Button buttonTitle;
+	private Base nodeBase = new Base();
+	private Pane yourBasePane;
+	private Button buttonTitle;
 	
 	public final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
@@ -41,19 +42,12 @@ public class BaseStatsPane {
 		VBox yb = new VBox();
 		yb.setPadding(STANDARD_PADDING);
 		yb.setTranslateX(10);
-
-		HBox ybTitle = new HBox();
-		ybTitle.setPadding(STANDARD_PADDING);
-		// ybTitle.setAlignment(Pos.CENTER);
-		ybTitle.setBackground(
-				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		buttonTitle = new Button("Your Base Stats");
-		buttonTitle.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-		buttonTitle.setTextFill(Color.DARKGREEN);
-		buttonTitle.setAlignment(Pos.CENTER);
-
+		
+		HBox ybTitle = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		buttonTitle = ComponentCreator.getIstance().createButton("Your Base Stats", Pos.BASELINE_CENTER);
+		buttonTitle.setStyle("-fx-background-color:  #FAF9F6; -fx-background-radius: 15px; -fx-text-fill: #006400 ;");
 		ybTitle.getChildren().add(buttonTitle);
-
+//Color.DARKGREEN.get;
 		HBox hBg = new HBox();
 		hBg.setPadding(STANDARD_PADDING);
 		GridPane ybG = new GridPane();

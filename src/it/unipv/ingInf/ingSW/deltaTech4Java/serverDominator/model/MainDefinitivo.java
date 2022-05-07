@@ -195,7 +195,7 @@ public class MainDefinitivo extends Thread{
 		return checkf;
 	}
 		
-	public void battlecheck(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
+	public int battlecheck(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
 		/** il seguente metodo, gestisce le operazioni preliminari alla battaglia
 		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.
 		 * le quantita di software dovranno essere inizializati correttamente tramite un metodo del controllore 
@@ -203,7 +203,7 @@ public class MainDefinitivo extends Thread{
 		 * in fase di attacco dall'interfaccia grafica.
 		 * il metodo viene lanciato quando il giocatore clicca sul pulsante attacca
 		 */
-	
+		t_timer=0;
 		if(this.nodecheck(attaccante, x, y)){
 			t_timer=t_unitario+(t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base() );
 			fight[maxbattle]=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y), t_timer);
@@ -211,12 +211,14 @@ public class MainDefinitivo extends Thread{
 			fight[maxbattle].selezione(quantitaV, quantitaR);
 			count=maxbattle;
 			maxbattle--;
-		}		
+			
+		}
+		return t_timer; 
 	}
 			
 	public void avvioBattaglia(Giocatore attaccante, int x, int y) {
 		/** metodo che lancia il thread relativo alla singola battaglia, 
-		 * successivo ai controlli di prossimit� e numeri di attacchi contemporanei,
+		 * successivo ai controlli di prossimita e numeri di attacchi contemporanei,
 		 * questo metodo viene lanciato quando l'utente clicca su conferma, per confermare i
 		 * software da inviare in battaglia.
 		 */

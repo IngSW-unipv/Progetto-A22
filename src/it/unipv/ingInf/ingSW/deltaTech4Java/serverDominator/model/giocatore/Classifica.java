@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * @author Matteo c
- * @author Luca c
  * @version 1.0
  * @since 1.0
  */

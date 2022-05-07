@@ -65,10 +65,12 @@ public class Base extends Nodo{
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 
-	public void compra_risorsa(String nome) {
+	public boolean compra_risorsa(String nome) {
 		/**metodo usato per il potenziamento tramite mercato
 		 * di una risorsa generica. Aggiorna le statistiche della risorsa
-		 * passata e i valori necessari per il livello successivo
+		 * passata e i valori necessari per il livello successivo.
+		 * Questo metodo è usato anche per il potenziamento successivo alla
+		 * conquista di un nodo cloud.
 		 */
 		boolean check=false;
 		int i;
@@ -77,9 +79,8 @@ public class Base extends Nodo{
 				check= risorse[i].potenziamento(); 
 			}
 		}
-		if(check) {
-			System.out.println("potenziamento eseguito");
-		} else System.out.println("potenziamento fallito");
+		
+		return check;
 	}
 
 	public void potenzia_risorsa(String nome) {
@@ -107,6 +108,41 @@ public class Base extends Nodo{
 		} else System.out.println("potenziamento fallito");
 	}
 	
+	public boolean compra_software(String nome, int quantita) {
+		/**metodo per la creazione di nuovo software tramite negozio, 
+		 * con aggiornamento della quantita' totali
+		 */
+
+		boolean check=false;
+		int n_soft;
+		int i;
+		
+		if(quantita>this.getSpazio_Ram()) {
+			quantita=this.getSpazio_Ram();
+		}
+		for(i=0;i<TIPI_SOFTWARE;i++) {
+			if(stats_software_creati[i].getNome()==nome) {
+				n_soft=super.getSoftware_disponibile()+quantita;
+				quantita=stats_software_creati[i].getQuantita()+quantita;
+				switch(i) {
+				case 0: 
+					stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
+					break;
+				case 1: 
+					stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
+					break;
+				case 2:
+					stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
+					break;
+				}
+				super.setSoftware_disponibile(n_soft);
+				check= true;
+			}
+		}
+		
+		return check;
+	}
+	
 	public void crea_software(String nome, int quantita) {
 	/**metodo per la creazione di nuovo software, con aggiornamento della quantitï¿½ totali*/
 		
@@ -123,17 +159,24 @@ public class Base extends Nodo{
 					case 0: 
 						super.time2.countdown(stats_software_creati[0].getTemp_richiesto()* quantita);
 						super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantita);
-						stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
+						if(this.getSpazio_Ram()-quantita>=0) {
+							stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
+						}
+						
 						break;
 					case 1: 
 						super.time2.countdown(stats_software_creati[1].getTemp_richiesto()*quantita);
 						super.time2.timer(stats_software_creati[1].getTemp_richiesto()*quantita);
-						stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
+						if(this.getSpazio_Ram()-quantita>=0) {
+							stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
+						}
 						break;
 					case 2:
 						super.time2.countdown(stats_software_creati[2].getTemp_richiesto()*quantita);
 						super.time2.timer(stats_software_creati[2].getTemp_richiesto()*quantita);
-						stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
+						if(this.getSpazio_Ram()-quantita>=0) {
+							stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
+						}
 						break;
 					}
 					super.setSoftware_disponibile(n_soft);

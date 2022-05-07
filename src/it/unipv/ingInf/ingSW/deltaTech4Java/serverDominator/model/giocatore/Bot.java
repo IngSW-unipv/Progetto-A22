@@ -1,5 +1,12 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+/**
+ * @author Luca Casto 
+ * v1.0
+ * prima versione della classe Bot, simulatore di giocatore reale, 
+ * con scelta di comportamenti randomici.
+ */
+
 import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

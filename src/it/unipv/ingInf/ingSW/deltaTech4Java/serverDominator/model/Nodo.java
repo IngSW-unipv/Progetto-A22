@@ -27,6 +27,22 @@ public abstract class Nodo implements INodo{
 		this.time2= new Timer();
 		
 }
+	public boolean compra_risorsa(String nome) {
+		/**metodi da usare per il mercato, al momento specializzati 
+		 * solo per il nodo base. Metodo usato anche per il potenziamento
+		 * immediato dopo la conquista di un nodo cloud.
+		 */
+		boolean check=false;
+		
+		return check;
+	}
+	public boolean compra_software(String nome, int quantita) {
+		/**metodi da usare per il mercato, al momento specializzati 
+		 * solo per il nodo base
+		 */
+		boolean check=false;
+		return check;
+	}
 		
 /**getter and setter*/
 	public void setTipologia(String tipologia) {

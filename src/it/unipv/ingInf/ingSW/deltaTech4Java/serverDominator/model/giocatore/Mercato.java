@@ -43,41 +43,62 @@ public class Mercato {
 	}
 	
 	public void compraSoftware(Utente user, Base nodo, int quantita, String software) {
+		int valuta;
 		if (quantita>nodo.getSpazio_Ram()) {
 			quantita=nodo.getSpazio_Ram();
 		}
 		if(software=="virus") {	
 			if(user.getValuta()>=prezzoVirus*quantita&&quantitaVirus>0);
-				nodo.crea_software(software, quantita);
+				if(nodo.compra_software(software, quantita) ) {
+					valuta=user.getValuta()-prezzoVirus*quantita;
+					user.setValuta(valuta);
+				}
 				quantitaVirus-=quantita;
 		}
 		if(software=="antivirus") {
 			if(user.getValuta()>=prezzoAntivirus*quantita&&quantitaAntivirus>0);
-				nodo.crea_software(software, quantita);
-				quantitaAntivirus-=quantita;
+			if(nodo.compra_software(software, quantita) ) {
+				valuta=user.getValuta()-prezzoAntivirus*quantita;
+				user.setValuta(valuta);
+			}
+			quantitaAntivirus-=quantita;
 		}
 		if(software=="rootcrash") {
 			if(user.getValuta()>=prezzoRootcrash*quantita&&quantitaRootcrash>0);
-				nodo.crea_software(software, quantita);
-				quantitaRootcrash-=quantita;
+			if(nodo.compra_software(software, quantita) ) {
+				valuta=user.getValuta()-prezzoRootcrash*quantita;
+				user.setValuta(valuta);
+			}
+			quantitaRootcrash-=quantita;
 		}
 	}
 	
 	public void compraRisorse(Utente user, Base nodo, String risorsa) {
+		int valuta;
+		
 		if(risorsa=="ram") {
 			if(user.getValuta()>=prezzoRam&&quantitaRam>0);
-				nodo.compra_risorsa(risorsa);
+				if(nodo.compra_risorsa(risorsa) ) {
+					valuta=user.getValuta()-prezzoRam;
+					user.setValuta(valuta);
+				}
 				quantitaRam--;
 		}
 		if(risorsa=="cpu") {
 			if(user.getValuta()>=prezzoCpu&&quantitaCpu>0);
-				nodo.compra_risorsa(risorsa);
-				quantitaCpu--;
+			if(nodo.compra_risorsa(risorsa) ) {
+				valuta=user.getValuta()-prezzoCpu;
+				user.setValuta(valuta);
+			}
+			quantitaCpu--;
 		}
 		if(risorsa=="energia") {
 			if(user.getValuta()>=prezzoEnergia&&quantitaEnergia>0);
-				nodo.compra_risorsa(risorsa);
-				quantitaEnergia--;
+			if(nodo.compra_risorsa(risorsa) ) {
+				valuta=user.getValuta()-prezzoEnergia;
+				user.setValuta(valuta);
+			}
+			quantitaEnergia--;
 		}
 	}
 	

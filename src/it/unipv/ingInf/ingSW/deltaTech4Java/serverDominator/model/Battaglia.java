@@ -101,7 +101,19 @@ public class Battaglia extends Thread{
 		difensore.setDist_base(partenza.getDist_base()+1);
 		difensore.setPossessore(partenza.getPossessore());
 		attaccante.getPossessore().aggiornaPunteggio(10);
-		attaccante.getPossessore().aggiornaValuta(10);
+		
+		if (difensore.getTipologia()=="cloud") {
+			
+			attaccante.compra_risorsa("Energia");
+			
+			if(difensore.getLvl_cpu()>0) {
+				attaccante.compra_risorsa("Cpu");
+			}
+			if(difensore.getLvl_ram()>0) {
+				attaccante.compra_risorsa("Ram");
+			}
+			
+		}
 	}
 	
 	

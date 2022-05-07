@@ -1,9 +1,10 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.AddType;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -23,17 +24,16 @@ public class ActionPane {
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	Pane actionPane;
 	Label actionTitleL;
-	Label actionMarketL;
-	Label powerUpL;
-	Label develop ;
+	Button actionMarketL;
+	Button powerUpL;
+	Button develop ;
+	
 	public ActionPane(Base bU) {
 		this.bU = bU;
 	}
 
 	public Pane getActionPane(Base bU) {
-		
-		AddType aT = new AddType();
-		
+			
 		actionPane = new Pane();
 		actionPane.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
@@ -43,52 +43,40 @@ public class ActionPane {
 		controlli.setPadding(STANDARD_PADDING);
 		controlli.setAlignment(Pos.CENTER);
 
-		HBox actionTitle = new HBox();
+		HBox actionTitle = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		actionTitle.setPadding(STANDARD_PADDING);
-		// actionTitle.setPrefSize(200.0, 30.0);
-		actionTitle.setAlignment(Pos.CENTER);
 		actionTitle.setBackground(
 				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(5, 5, 5, 5))));
 		actionTitleL = new Label("Action");
 		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		actionTitleL.setTextFill(Color.DARKGREEN);
-
 		actionTitle.getChildren().add(actionTitleL);
 
-		HBox actionMarket = new HBox();
-		actionMarket.setPadding(STANDARD_PADDING);
-		actionMarket.setAlignment(Pos.TOP_CENTER);
-		actionMarketL = new Label();
+		
+		HBox actionMarket = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		
+		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
+		actionMarket.setSpacing(10);
 		actionMarket.getChildren().add(actionMarketL);
-
-		aT.launchMarket(actionMarket, bU);
-
-		HBox powerUp = new HBox();
-		powerUp.setPadding(STANDARD_PADDING);
-		powerUp.setAlignment(Pos.BASELINE_CENTER);
-		powerUp.setBackground(
-				new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		powerUpL = new Label();
+		
+		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
 		powerUp.getChildren().add(powerUpL);
 
-		aT.launchPowerUp(powerUp, bU);
-
-		HBox dev = new HBox();
-		dev.setPadding(STANDARD_PADDING);
-		dev.setAlignment(Pos.BASELINE_CENTER);
-		dev.setBackground(
-				new Background(new BackgroundFill(Color.web("#e51400"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		develop = new Label();
+		
+		HBox dev = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
 		dev.getChildren().add(develop);
 
-		aT.launchDevelopment(dev, bU);
-
+		controlli.setSpacing(10);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
 		actionPane.getChildren().add(controlli);
 
 		return actionPane;
 	}
 
+	
+	
 	public Base getbU() {
 		return bU;
 	}
@@ -121,27 +109,27 @@ public class ActionPane {
 		this.actionTitleL = actionTitleL;
 	}
 
-	public Label getActionMarketL() {
+	public Button getActionMarketL() {
 		return actionMarketL;
 	}
 
-	public void setActionMarketL(Label actionMarketL) {
+	public void setActionMarketL(Button actionMarketL) {
 		this.actionMarketL = actionMarketL;
 	}
 
-	public Label getPowerUpL() {
+	public Button getPowerUpL() {
 		return powerUpL;
 	}
 
-	public void setPowerUpL(Label powerUpL) {
+	public void setPowerUpL(Button powerUpL) {
 		this.powerUpL = powerUpL;
 	}
 
-	public Label getDevelop() {
+	public Button getDevelop() {
 		return develop;
 	}
 
-	public void setDevelop(Label develop) {
+	public void setDevelop(Button develop) {
 		this.develop = develop;
 	}
 

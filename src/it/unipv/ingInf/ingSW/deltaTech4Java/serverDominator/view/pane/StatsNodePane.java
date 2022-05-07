@@ -1,8 +1,11 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PopUp;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,23 +22,20 @@ import javafx.scene.text.FontWeight;
 public class StatsNodePane {
 	
 	public StatsNodePane(Base bU) {
-		
 		this.bU = bU;
-	
 	}	
 	
-	Base bU = new Base();
-	HBox hB = new HBox();
+	private Base bU = new Base();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
-	Label titleL = new Label("Info Nodo");
-	Label owner = new Label("Node owner");
-	Label distance = new Label("Distance");
-	Label energy = new Label("Energy");
-	Label fwLvl = new Label("Firewall Level");
-	Label ramLvl = new Label("Ram Level");
-	Label cpuLvl = new Label("CPU Level");
-	PopUp pU = new PopUp();
-
+	private Label titleL = new Label("Info Nodo");
+	private Label owner = new Label("Node owner");
+	private Label distance = new Label("Distance");
+	private Label energy = new Label("Energy");
+	private Label fwLvl = new Label("Firewall Level");
+	private Label ramLvl = new Label("Ram Level");
+	private Label cpuLvl = new Label("CPU Level");
+	private Button buttonAttacca;
+	
 	public Pane getSnPane(Base bU) {
 
 		Label titleL = this.titleL;
@@ -50,10 +50,8 @@ public class StatsNodePane {
 		ramLvl = this.ramLvl;
 		Label cpuLvl = new Label();
 		cpuLvl = this.cpuLvl;
-		Label attackL = new Label();
-
-		AddType aT = new AddType();
-
+		buttonAttacca =ComponentCreator.getIstance().createButton("attack", Pos.BASELINE_CENTER);
+		
 		Pane statsNode = new Pane();
 		statsNode.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
@@ -90,11 +88,10 @@ public class StatsNodePane {
 
 		gridBox.getChildren().add(gDx);
 
-		HBox attack = new HBox();
+		HBox attack =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		attack.setPadding(STANDARD_PADDING);
-		attack.getChildren().add(attackL);
+		attack.getChildren().add(buttonAttacca);
 
-		aT.launchMalware(attack, bU);
 
 		statsNodeVbox.getChildren().addAll(statsNodeTitle, gridBox, attack);
 		statsNodeHbox.getChildren().add(statsNodeVbox);
@@ -107,4 +104,69 @@ public class StatsNodePane {
 		title.setText(null);
 		this.titleL = title ;
 	}
+
+	public Label getTitleL() {
+		return titleL;
+	}
+
+	public void setTitleL(Label titleL) {
+		this.titleL = titleL;
+	}
+
+	public Label getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Label owner) {
+		this.owner = owner;
+	}
+
+	public Label getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Label distance) {
+		this.distance = distance;
+	}
+
+	public Label getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(Label energy) {
+		this.energy = energy;
+	}
+
+	public Label getFwLvl() {
+		return fwLvl;
+	}
+
+	public void setFwLvl(Label fwLvl) {
+		this.fwLvl = fwLvl;
+	}
+
+	public Label getRamLvl() {
+		return ramLvl;
+	}
+
+	public void setRamLvl(Label ramLvl) {
+		this.ramLvl = ramLvl;
+	}
+
+	public Label getCpuLvl() {
+		return cpuLvl;
+	}
+
+	public void setCpuLvl(Label cpuLvl) {
+		this.cpuLvl = cpuLvl;
+	}
+
+	public Button getButtonAttacca() {
+		return buttonAttacca;
+	}
+
+	public void setButtonAttacca(Button buttonAttacca) {
+		this.buttonAttacca = buttonAttacca;
+	}
+	
 }

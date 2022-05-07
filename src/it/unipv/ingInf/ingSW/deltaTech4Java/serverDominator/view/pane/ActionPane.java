@@ -73,11 +73,27 @@ public class ActionPane {
 		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
 		powerUp.getChildren().add(powerUpL);
 
+		powerUpL.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	p.powerUp(bU);
+            }
+		});
 		
 		HBox dev = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
 		dev.getChildren().add(develop);
+		develop.setOnAction(new EventHandler<ActionEvent>() {
 
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	p.development(bU);
+            }
+		});
+		
 		controlli.setSpacing(10);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
 		actionPane.getChildren().add(controlli);

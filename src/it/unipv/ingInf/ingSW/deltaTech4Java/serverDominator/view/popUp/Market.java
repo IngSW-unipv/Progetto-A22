@@ -1,11 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -28,11 +28,9 @@ public class Market {
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus ;
 	private Base baseUtente;
-	private Mercato mercato;
+	private Mercato mercato=new Mercato(2,0,2,0,2,0,2,0,2,0,2,0);
 	private int total;
-	private int subTotalRootCrash;
-	private int subTotalVirus;
-	private int subTotalAntivirus ;
+	
 	public Market(Base baseUtente) {
 		istance(new Mercato(), baseUtente);
 	}
@@ -52,9 +50,6 @@ public class Market {
 		eMax=ramMax;
 		this.mercato=mercato;
 		total=0;
-		subTotalRootCrash=0;
-		subTotalVirus=0;
-		subTotalAntivirus=0;
 		
 	}
 	
@@ -64,7 +59,10 @@ public class Market {
 	}
 	
 	public void market() {
-		Label finalBillL = new Label("Stai spendendo: 0" + "Ti resterà: "+baseUtente.getPossessore().getValuta());
+		Label finalBillL =ComponentCreator.getIstance().lableCreator(Pos.BASELINE_LEFT);
+		setLableText(finalBillL, "Totale carrello" );
+		Label totaleCarrello=ComponentCreator.getIstance().lableCreator(Pos.BASELINE_RIGHT);
+		setLableText(totaleCarrello, String.valueOf(total) );
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(PopUpFacade.sX); stage.setY(PopUpFacade.sY);
@@ -117,7 +115,7 @@ public class Market {
             	total-=mercato.getCostoRootcrash(getQuantitaRootCrash());
             	aumentoLogica(max, quantitaRootCrash, quantitaAntivirus, quantitaVirus);
             	total+=mercato.getCostoRootcrash(getQuantitaRootCrash());
-            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	setLableText(totaleCarrello,String.valueOf(total));
             	ae.consume();
             }
         });
@@ -128,7 +126,7 @@ public class Market {
             	total-=mercato.getCostoRootcrash(getQuantitaRootCrash());
             	diminuzioneLogica(quantitaRootCrash);
             	total+=mercato.getCostoRootcrash(getQuantitaRootCrash());
-            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	setLableText(totaleCarrello,String.valueOf(total));
             	ae.consume();
             }
         });
@@ -139,7 +137,7 @@ public class Market {
             	total-=mercato.getCostoVirus(getQuantitaVirus());
             	aumentoLogica(max, quantitaVirus, quantitaAntivirus, quantitaRootCrash);
             	total+=mercato.getCostoVirus(getQuantitaVirus());
-            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	setLableText(totaleCarrello,String.valueOf(total) );
             	ae.consume();
             	}
             
@@ -151,7 +149,7 @@ public class Market {
             	total-=mercato.getCostoVirus(getQuantitaVirus());
             	diminuzioneLogica(quantitaVirus);
             	total+=mercato.getCostoVirus(getQuantitaVirus());
-            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	setLableText(totaleCarrello,String.valueOf(total) );
             	ae.consume();
             }
         });
@@ -162,7 +160,18 @@ public class Market {
             	total-=mercato.getCostoAntivirus(getQuantitaAntivirus());
             	aumentoLogica(max, quantitaAntivirus, quantitaVirus,quantitaRootCrash);
             	total+=mercato.getCostoAntivirus(getQuantitaAntivirus());
-            	aggiornaTotale(finalBillL, total, (baseUtente.getPossessore().getValuta()-total));
+            	setLableText(totaleCarrello, String.valueOf(total));
+            	ae.consume();
+            }
+        });
+		quantitaAntivirus.getDecrementButton().setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	total-=mercato.getCostoAntivirus(getQuantitaAntivirus());
+            	diminuzioneLogica(quantitaAntivirus);
+            	total+=mercato.getCostoAntivirus(getQuantitaAntivirus());
+            	setLableText(totaleCarrello,String.valueOf(total) );
             	ae.consume();
             }
         });
@@ -194,18 +203,23 @@ public class Market {
 		cpuInc.setOnAction(e -> {
 			if(++cpuAdd==1&&cpuAdd+baseUtente.getLvl_cpu()<=cpuMax) {
 				cpuFinal = baseUtente.getLvl_cpu() + cpuAdd;
-				cpuResult.setText(" add: " + cpuAdd + " Up to: " + cpuFinal);
+				total+=mercato.getCostoCpu(1);
 			}else {
 				--cpuAdd;
 			}
+			setLableText(totaleCarrello,String.valueOf(total));
+			cpuResult.setText(" add: " + cpuAdd + " Up to: " + cpuFinal);
+
 		});
 		
 		cpuDec.setOnAction(e -> {
 			if(--cpuAdd>=0){
-			cpuFinal = baseUtente.getLvl_cpu() + cpuAdd;
+				cpuFinal = baseUtente.getLvl_cpu() + cpuAdd;
+				total=total-mercato.getCostoCpu(1);
 			}else {
 				++cpuAdd;
 			}
+			setLableText(totaleCarrello,String.valueOf(total));
 			cpuResult.setText(" add: " + cpuAdd + " Up to: " + cpuFinal);
 
 		});
@@ -214,19 +228,25 @@ public class Market {
 		cpuAdjust.setSpacing(8.0);
 		
 		fwInc.setOnAction(e -> {
-		if(++fwAdd==1&&fwAdd+baseUtente.getLvl_firewall()<=fwMax) {
-			fwFinal = baseUtente.getLvl_firewall() + fwAdd;
-		}else {
-			fwAdd--;
-		}
-		fwResult.setText(" add: " + fwAdd + " Up to: " + fwFinal);
+			if(++fwAdd==1&&fwAdd+baseUtente.getLvl_firewall()<=fwMax) {
+				fwFinal = baseUtente.getLvl_firewall() + fwAdd;
+				//TODO: PRENDESE IL COSTO DEL FW
+				total+=mercato.getCostoCpu(1);
+			}else {
+				fwAdd--;
+			}
+			setLableText(totaleCarrello,String.valueOf(total));
+			fwResult.setText(" add: " + fwAdd + " Up to: " + fwFinal);
 		});
 		
 		fwDec.setOnAction(e -> {
 			if(--fwAdd >=0){
 				cpuFinal = baseUtente.getLvl_firewall() + fwAdd;
+				//TODO: PRENDESE IL COSTO DEL FW
+				total-=mercato.getCostoCpu(1);
 			}else
 				fwAdd++;
+			setLableText(totaleCarrello,String.valueOf(total));
 			fwResult.setText(" add: " + fwAdd + " Up to: " + fwFinal);
 		});
 		
@@ -234,21 +254,27 @@ public class Market {
 		fwAdjust.setSpacing(8.0);
 		
 		ramInc.setOnAction(e -> {
-			if(++ramAdd==1&&ramAdd+baseUtente.getLvl_ram()<=ramMax) {
-				ramFinal = baseUtente.getLvl_ram() + ramAdd; 
-			}else {
-				ramAdd--;
+			if(ramAdd==0) {
+				total+=mercato.getCostoRam(1);
 			}
-			 ;
+			ramAdd=1;
+			ramFinal = baseUtente.getLvl_ram() + ramAdd; 
+			if(ramFinal>=baseUtente.getLvl_max_ram()) {
+				ramFinal--;
+			}
+			setLableText(totaleCarrello,String.valueOf(total));
 			ramResult.setText(" add: " + ramAdd + " Up to: " + ramFinal);
+		
 		});
 		
 		ramDec.setOnAction(e -> {
 			if(--ramAdd>=0 ){
 				ramFinal = baseUtente.getLvl_ram() + ramAdd; 
+				total-=mercato.getCostoRam(1);
 			}
 			else 
 				ramAdd++;
+			setLableText(totaleCarrello,String.valueOf(total));
 			ramResult.setText(" add: " + ramAdd + " Up to: " + ramFinal);
 
 		});
@@ -260,10 +286,12 @@ public class Market {
 			int i=baseUtente.getE_lvl();
 			if(++eAdd==1&&i+eAdd<eMax) {
 				eFinal = baseUtente.getE_lvl() + eAdd; 
+				total+=mercato.getCostoEnergia(eAdd);
 
 			}else {
 				eAdd--;
 			}
+			setLableText(totaleCarrello,String.valueOf(total));
 			eResult.setText(" add: " + eAdd + " Up to: " + eFinal);
 		});
 		
@@ -271,12 +299,12 @@ public class Market {
 			
 			if(--eAdd>=0) {
 				eFinal = baseUtente.getE_lvl() + eAdd;
+				total-=mercato.getCostoEnergia(1);
 			}else {
 				++eAdd;
 			}	
 			eResult.setText(" add: " + eAdd + " Up to: " + eFinal);
-			
-
+			setLableText(totaleCarrello, String.valueOf(total));
 		});
 		
 		eAdjust.getChildren().addAll(eInc, eDec, eResult);
@@ -295,27 +323,26 @@ public class Market {
 		
 		
 		hMktP.getChildren().add(mktP);
-		
-		HBox finalBill = new HBox();
-		finalBill.setPadding(PopUpFacade.STANDARD_PADDING);
-		finalBill.getChildren().add(finalBillL);
-		
-		HBox mB = new HBox();
-		mB.setAlignment(Pos.BASELINE_CENTER);
-		buttonPay = new Button("buy!");
-		buttonPay.setPrefSize(200, 20);
-		buttonPay.setAlignment(Pos.BASELINE_CENTER);
-		buttonPay.getStyleClass().add("redbutton");
-
+		buttonPay = ComponentCreator.getIstance().createButton("buy!", Pos.BASELINE_CENTER);
 		buttonPay.setOnAction(e -> {
 			// username = text1.getText();
 			// password = text2.getText();
 			stage.close();
 		});
+		buttonPay.setPrefWidth(200);
+		buttonPay.setPrefHeight(20);
+		HBox finalBill = new HBox();
+		finalBill.setPadding(PopUpFacade.STANDARD_PADDING);
+		finalBill.setSpacing(30);
+		finalBill.getChildren().addAll(finalBillL,totaleCarrello,buttonPay);
+		HBox pay = ComponentCreator.getIstance().createHbox(Pos.CENTER_RIGHT);
+		pay.prefWidth(500);
+		pay.autosize();
+		pay.setAlignment(Pos.TOP_CENTER);
+		pay.getChildren().add(buttonPay);
+		vM.setAlignment(Pos.BASELINE_CENTER);
+		vM.getChildren().addAll(initBill, priceList, hMktP, finalBill,pay);
 		
-		mB.getChildren().add(buttonPay);
-		vM.getChildren().addAll(initBill, priceList, hMktP, finalBill, mB);
-	
 		Scene scene = new Scene(vM, PopUpFacade.sX, PopUpFacade.sY);
 		scene.getStylesheets().add("application.css");
 		stage.setTitle("Market");
@@ -338,8 +365,8 @@ public class Market {
         	}
         }
 	}
-	private void aggiornaTotale(Label l,int spesa, int rimanenza) {
-		l.setText("Stai spendendo: "+ spesa + "Ti resterà: "+rimanenza);
+	private void setLableText(Label l,String stringTxt) {
+		l.setText(stringTxt);
 		
 	}
 	private void diminuzioneLogica(NumberSpinner target) {

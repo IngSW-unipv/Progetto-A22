@@ -2,7 +2,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 public class ComponentCreator {
 	private static ComponentCreator istance=null;
@@ -30,5 +32,14 @@ public class ComponentCreator {
 		bA.setAlignment(alignmant);
 		bA.autosize();
 		return bA;
+	}
+	
+	public Label lableCreator(Pos alignmant) {
+		Label lbl = new Label();
+		lbl.setMaxWidth(200);
+		lbl.setAlignment(alignmant);
+		lbl.autosize();
+		lbl.setFont(Font.font("Cambria", 22));
+		return lbl;
 	}
 }

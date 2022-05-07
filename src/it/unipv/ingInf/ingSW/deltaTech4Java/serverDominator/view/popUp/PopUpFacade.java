@@ -67,7 +67,7 @@ public class PopUpFacade {
 		// -> inserire le variabili di ritorno
 		// TODO
 		
-		Market m=new Market(baseUtente);
+		Market m=new Market(new Mercato(2,0,2,0,2,0,2,0,2,0,2,0),baseUtente);
 		m.market();
 	}
 }

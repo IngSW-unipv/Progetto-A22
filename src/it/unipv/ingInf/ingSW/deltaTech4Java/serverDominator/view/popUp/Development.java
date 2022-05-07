@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -51,15 +52,14 @@ public class Development {
 		dev.setAlignment(Pos.TOP_CENTER);
 		dev.setPadding(STANDARD_PADDING);
 		
-		HBox devTitle = new HBox();
-		devTitle.setPadding(STANDARD_PADDING);
+		HBox devTitle = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		Label devTitleL = new Label("Develop your Base!");
 		devTitle.getChildren().add(devTitleL);
 		
 		
 		HBox devG = new HBox();
 		devG.setPadding(STANDARD_PADDING);
-		devG.setAlignment(Pos.BASELINE_LEFT);
+		devG.setAlignment(Pos.BASELINE_CENTER);
 		
 		GridPane layout = new GridPane();
 		layout.setPadding(STANDARD_PADDING);
@@ -129,13 +129,9 @@ public class Development {
         });
 		/*NumberSpinner listeners per max quantita*/ 
 		
-		HBox devB = new HBox();
-		devB.setAlignment(Pos.BASELINE_CENTER);
-		buttonDevelop = new Button("Develop!");
-		buttonDevelop.setPrefSize(200, 20);
-		buttonDevelop.setAlignment(Pos.BASELINE_CENTER);
-		buttonDevelop.setPadding(STANDARD_PADDING);
-		buttonDevelop.getStyleClass().add("redbutton");
+		HBox devB = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		buttonDevelop = ComponentCreator.getIstance().createButton("Develop!", Pos.BASELINE_CENTER);
+			
 		buttonDevelop.setOnAction(e -> {
 			stage.close();
 		});

@@ -3,6 +3,8 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -51,7 +53,14 @@ public class StatsNodePane {
 		Label cpuLvl = new Label();
 		cpuLvl = this.cpuLvl;
 		buttonAttacca =ComponentCreator.getIstance().createButton("attack", Pos.BASELINE_CENTER);
-		
+		buttonAttacca.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	p.selectMalware(bU);
+            }
+		});
 		Pane statsNode = new Pane();
 		statsNode.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 10, 0, 0))));

@@ -4,43 +4,30 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 
 public class Mercato {
-	int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus;
-	public int prezzoAntivirus;
-	int prezzoRootcrash;
-	int quantitaRam;
-	int quantitaCpu;
-	int quantitaEnergia;
-	int quantitaVirus;
-	int quantitaAntivirus;
-	int quantitaRootcrash;
+	private int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus;
+	private int prezzoAntivirus;
+	private int prezzoRootcrash;
+	private int prezzoFirewall;
+	
 	
 	public Mercato() {
-		prezzoRam=0;
-		prezzoCpu=0; 
-		prezzoEnergia=0;
-		prezzoVirus=0;
-		prezzoAntivirus=0;
-		prezzoRootcrash=0;
-		quantitaRam=0;
-		quantitaCpu=0;
-		quantitaEnergia=0;
-		quantitaVirus=0;
-		quantitaAntivirus=0;
-		quantitaRootcrash=0;
+		prezzoRam=10;
+		prezzoCpu=10; 
+		prezzoEnergia=10;
+		prezzoFirewall=10;
+		prezzoVirus=5;
+		prezzoAntivirus=5;
+		prezzoRootcrash=5;
+		
 	}
-	public Mercato(int prezzoRam, int quantitaRam,int prezzoCpu, int quantitaCpu, int prezzoEnergia, int quantitaEnergia,int prezzoVirus, int quantitaVirus, int prezzoAntivirus, int quantitaAntivirus, int prezzoRootcrash, int quantitaRootcrash) {
+	public Mercato(int prezzoRam,int prezzoCpu, int prezzoEnergia,int prezzoVirus, int prezzoAntivirus,  int prezzoRootcrash) {
 		this.prezzoRam=prezzoRam;
 		this.prezzoCpu=prezzoCpu; 
 		this.prezzoEnergia=prezzoEnergia;
 		this.prezzoVirus=prezzoVirus;
 		this.prezzoAntivirus=prezzoAntivirus;
 		this.prezzoRootcrash=prezzoRootcrash;
-		this.quantitaRam=quantitaRam;
-		this.quantitaCpu=quantitaCpu;
-		this.quantitaEnergia=quantitaEnergia;
-		this.quantitaVirus=quantitaVirus;
-		this.quantitaAntivirus=quantitaAntivirus;
-		this.quantitaRootcrash=quantitaRootcrash;
+		
 	}
 	
 	public void compraSoftware(Giocatore user, Nodo nodo, int quantita, String software) {
@@ -49,28 +36,28 @@ public class Mercato {
 			quantita=nodo.getSpazio_Ram();
 		}
 		if(software=="virus") {	
-			if(user.getValuta()>=prezzoVirus*quantita&&quantitaVirus>0);
+			if(user.getValuta()>=prezzoVirus*quantita);
 				if(nodo.compra_software(software, quantita) ) {
 					valuta=user.getValuta()-prezzoVirus*quantita;
 					user.setValuta(valuta);
 				}
-				quantitaVirus-=quantita;
+				
 		}
 		if(software=="antivirus") {
-			if(user.getValuta()>=prezzoAntivirus*quantita&&quantitaAntivirus>0);
+			if(user.getValuta()>=prezzoAntivirus*quantita);
 			if(nodo.compra_software(software, quantita) ) {
 				valuta=user.getValuta()-prezzoAntivirus*quantita;
 				user.setValuta(valuta);
 			}
-			quantitaAntivirus-=quantita;
+			
 		}
 		if(software=="rootcrash") {
-			if(user.getValuta()>=prezzoRootcrash*quantita&&quantitaRootcrash>0);
+			if(user.getValuta()>=prezzoRootcrash*quantita);
 			if(nodo.compra_software(software, quantita) ) {
 				valuta=user.getValuta()-prezzoRootcrash*quantita;
 				user.setValuta(valuta);
 			}
-			quantitaRootcrash-=quantita;
+			
 		}
 	}
 	
@@ -78,28 +65,36 @@ public class Mercato {
 		int valuta;
 		
 		if(risorsa=="ram") {
-			if(user.getValuta()>=prezzoRam&&quantitaRam>0);
+			if(user.getValuta()>=prezzoRam);
 				if(nodo.compra_risorsa(risorsa) ) {
 					valuta=user.getValuta()-prezzoRam;
 					user.setValuta(valuta);
 				}
-				quantitaRam--;
+				
 		}
 		if(risorsa=="cpu") {
-			if(user.getValuta()>=prezzoCpu&&quantitaCpu>0);
+			if(user.getValuta()>=prezzoCpu);
 			if(nodo.compra_risorsa(risorsa) ) {
 				valuta=user.getValuta()-prezzoCpu;
 				user.setValuta(valuta);
 			}
-			quantitaCpu--;
+			
 		}
 		if(risorsa=="energia") {
-			if(user.getValuta()>=prezzoEnergia&&quantitaEnergia>0);
+			if(user.getValuta()>=prezzoEnergia);
 			if(nodo.compra_risorsa(risorsa) ) {
 				valuta=user.getValuta()-prezzoEnergia;
 				user.setValuta(valuta);
 			}
-			quantitaEnergia--;
+			
+		}
+		if(risorsa=="Firewall") {
+			if(user.getValuta()>=prezzoFirewall);
+				if(nodo.compra_risorsa(risorsa) ) {
+					valuta=user.getValuta()-prezzoFirewall;
+					user.setValuta(valuta);
+				}
+				
 		}
 	}
 	public int getCostoRam(int quantita) {
@@ -167,6 +162,13 @@ public class Mercato {
 	 */
 	public int getPrezzoRootcrash() {
 		return prezzoRootcrash;
+	}
+	/**recupera il prezzo unitario di Firewall
+	 * @return
+	 * prezzoFirewall
+	 */
+	public int getPrezzoFirewall() {
+		return prezzoFirewall;
 	}
 	
 }

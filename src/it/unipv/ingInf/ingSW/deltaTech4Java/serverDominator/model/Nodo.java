@@ -129,7 +129,9 @@ public abstract class Nodo implements INodo{
 		return possessore.getColore();
 	}
 	
-	public abstract int getSpazio_Ram();
+	public  int getSpazio_Ram() {
+		return this.getSoftware_max()-this.getSoftware_disponibile();
+	}
 	
 	
 /**getter astratto per restituire i valori dei software delle classi specializzate*/

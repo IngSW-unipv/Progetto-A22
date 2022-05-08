@@ -4,70 +4,119 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
 import javafx.geometry.Insets;
-import javafx.scene.paint.Color;
 
 public class PopUpFacade {
 
 	public static int sX = 400;
 	public static int sY = 400;	
 	public static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
-	
-	Development developmentPopUp;
-	Market marketPopUp;
-	Powerup powerUpPopUp;
-	Selectmalware selectMalwarePopUp;
+	private Powerup popUpPowerup;
+	private Selectmalware popUpSelectmalware;
+	private Development popUpDevelopment;
+	private Market popUpMarket;
 	private Mercato mkt = new Mercato();
+	private  Base baseUtente;
 	
 	public PopUpFacade(Mercato mercato, Base baseUtente ) {
 		this.mkt=mercato;
-		this.developmentPopUp=new Development(baseUtente);
-		this.marketPopUp=new Market(baseUtente);
-		this.powerUpPopUp=new Powerup(baseUtente);
-		this.selectMalwarePopUp=new Selectmalware(baseUtente);
+		this.baseUtente=baseUtente;
 	}
 	
-	public PopUpFacade(Base baseUtente) {
-		this.developmentPopUp=new Development(baseUtente);
-		this.marketPopUp=new Market();
-		this.powerUpPopUp=new Powerup(baseUtente);
-		this.selectMalwarePopUp=new Selectmalware(baseUtente);
-	}
 	public PopUpFacade() {
 		super();
+		this.mkt=new Mercato();
 	}
-	public void selectMalware(Base baseUtente) {
-		Selectmalware sm= new Selectmalware(baseUtente);
-		
-		sm.selectMalware();
+
+	public void avviaSelectMalware(Base baseUtente) {
+		popUpSelectmalware= new Selectmalware(baseUtente);
+		popUpSelectmalware.selectMalware();
 		
 	}
 
-	public void development(Base baseUtente) {
-		
-		Development dvl= new Development(baseUtente);
-		dvl.development();
-		// -> inserire le variabili di ritorno
-		// TODO
-		
+	public void avviaDevelopment(Base baseUtente) {
+		popUpDevelopment= new Development(baseUtente);
+		popUpDevelopment.development();
 	}
 	
-	public void powerUp(Base baseUtente) {
-		
-		Powerup pu=new Powerup(baseUtente);
-		
-		pu.powerUp();
-				
+	public void avviaPowerUp(Base baseUtente) {
+		popUpPowerup=new Powerup(baseUtente);
+		popUpPowerup.powerUp();	
+	}
+	
+	public void avviaMarket(Base baseUtente) {
+		popUpMarket=new Market(mkt,baseUtente);
+		popUpMarket.market();
 	}
 	
 	
-	public void market(Base baseUtente) {
+	public void avviaSelectMalware() {
+		popUpSelectmalware= new Selectmalware(baseUtente);
+		popUpSelectmalware.selectMalware();
 		
-		// -> inserire le variabili di ritorno
-		// TODO
-		
-		Market m=new Market(new Mercato(2,0,2,0,2,0,2,0,2,0,2,0),baseUtente);
-		m.market();
 	}
+
+	public void avviaDevelopment() {
+		popUpDevelopment= new Development(baseUtente);
+		popUpDevelopment.development();
+	}
+	
+	public void avviaPowerUp() {
+		popUpPowerup=new Powerup(baseUtente);
+		popUpPowerup.powerUp();	
+	}
+	
+	public void avviaMarket() {
+		popUpMarket=new Market(mkt,baseUtente);
+		popUpMarket.market();
+	}
+
+	public Powerup getPopUpPowerup() {
+		return popUpPowerup;
+	}
+
+	public void setPopUpPowerup(Powerup popUpPowerup) {
+		this.popUpPowerup = popUpPowerup;
+	}
+
+	public Selectmalware getPopUpSelectmalware() {
+		return popUpSelectmalware;
+	}
+
+	public void setPopUpSelectmalware(Selectmalware popUpSelectmalware) {
+		this.popUpSelectmalware = popUpSelectmalware;
+	}
+
+	public Development getPopUpDevelopment() {
+		return popUpDevelopment;
+	}
+
+	public void setPopUpDevelopment(Development popUpDevelopment) {
+		this.popUpDevelopment = popUpDevelopment;
+	}
+
+	public Market getPopUpMarket() {
+		return popUpMarket;
+	}
+
+	public void setPopUpMarket(Market popUpMarket) {
+		this.popUpMarket = popUpMarket;
+	}
+
+	public Mercato getMkt() {
+		return mkt;
+	}
+
+	public void setMkt(Mercato mkt) {
+		this.mkt = mkt;
+	}
+
+	public Base getBaseUtente() {
+		return baseUtente;
+	}
+
+	public void setBaseUtente(Base baseUtente) {
+		this.baseUtente = baseUtente;
+	}
+	
 }

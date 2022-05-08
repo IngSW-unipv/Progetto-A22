@@ -58,7 +58,7 @@ public class StatsNodePane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.selectMalware(bU);
+            	p.avviaSelectMalware(bU);
             }
 		});
 		Pane statsNode = new Pane();

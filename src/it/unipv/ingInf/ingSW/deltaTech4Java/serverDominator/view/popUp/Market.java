@@ -29,7 +29,7 @@ public class Market {
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus ;
 	private Base baseUtente;
-	private Mercato mercato=new Mercato(2,0,2,0,2,0,2,0,2,0,2,0);
+	private Mercato mercato=new Mercato();
 	private int total;
 	
 	public Market(Base baseUtente) {
@@ -78,7 +78,7 @@ public class Market {
 		
 		Label saldoAttuale=new Label();
 		saldoAttuale.setFont(Font.font("Cambria", 22));
-		setLableText(saldoAttuale, "Saldo attuale   " + baseUtente.getPossessore().getValuta()+80000);
+		setLableText(saldoAttuale, "Il Tuo saldo\t\t" + baseUtente.getPossessore().getValuta());
 		initBill.getChildren().add(saldoAttuale);
 		
 		HBox hMktP = new HBox();
@@ -107,7 +107,6 @@ public class Market {
 		quantitaRootCrash.getNumberField().setDisable(true);
 		quantitaVirus.getNumberField().setDisable(true);
 		quantitaAntivirus.getNumberField().setDisable(true);
-		/*NumberSpinner listeners per max quantita*/ 
 		quantitaRootCrash.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -230,8 +229,7 @@ public class Market {
 		fwInc.setOnAction(e -> {
 			if(++fwAdd==1&&fwAdd+baseUtente.getLvl_firewall()<=fwMax) {
 				fwFinal = baseUtente.getLvl_firewall() + fwAdd;
-				//TODO: PRENDESE IL COSTO DEL FW
-				total+=mercato.getCostoCpu(1);
+				total+=mercato.getPrezzoFirewall();
 			}else {
 				fwAdd--;
 			}
@@ -242,8 +240,7 @@ public class Market {
 		fwDec.setOnAction(e -> {
 			if(--fwAdd >=0){
 				cpuFinal = baseUtente.getLvl_firewall() + fwAdd;
-				//TODO: PRENDESE IL COSTO DEL FW
-				total-=mercato.getCostoCpu(1);
+				total-=mercato.getPrezzoFirewall();
 			}else
 				fwAdd++;
 			setLableText(totaleCarrello,String.valueOf(total));

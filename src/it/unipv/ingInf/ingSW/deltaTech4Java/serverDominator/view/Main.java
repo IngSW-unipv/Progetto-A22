@@ -30,10 +30,15 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFaca
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -139,6 +144,7 @@ public class Main extends Application {
 		StatsNodePane sPane = new StatsNodePane(bU);
 		//offset scroll risolto
 		centerPane.setOnMouseClicked(event -> {
+			
 			double xMouse=event.getX();
 			double yMouse=event.getY();
 			double xBase=pt.getBasicCanvas().getWidth()-(pt.getScrollPane().getViewportBounds().getMaxX()-pt.getScrollPane().getViewportBounds().getMinX());
@@ -148,6 +154,7 @@ public class Main extends Application {
 			System.out.println(
 					"----inizio---\n"
 					+pt.getScrollPane().getViewportBounds().toString()+"\n"
+					+pt.getBasicCanvas().toString()
 					+"\nxScorriBarra,yScorriBarra\t"+pt.getScrollPane().getHvalue()+","+pt.getScrollPane().getVvalue()
 					+"\nxMaouse,yMaouse\t"+xMouse+","+yMouse
 					+"\nxBase,yBase\t"+xBase+","+yBase
@@ -285,4 +292,16 @@ public class Main extends Application {
 			}
 		}.start();
 	}
+    private ScrollBar getVerticalScrollbar(TableView<?> table) {
+        ScrollBar result = null;
+        for (Node n : table.lookupAll(".scroll-bar")) {
+            if (n instanceof ScrollBar) {
+                ScrollBar bar = (ScrollBar) n;
+                if (bar.getOrientation().equals(Orientation.VERTICAL)) {
+                    result = bar;
+                }
+            }
+        }       
+        return result;
+    }
 }

@@ -27,6 +27,7 @@ public class StatsNodePane {
 		this.bU = bU;
 	}	
 	
+	@SuppressWarnings("unused")
 	private Base bU = new Base();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Label titleL = new Label("Info Nodo");

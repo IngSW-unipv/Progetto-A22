@@ -51,12 +51,23 @@ public class Market {
 		eMax=ramMax;
 		this.mercato=mercato;
 		total=0;
+		cpuAdd = 0;
+		cpuFinal = baseUtente.getLvl_cpu(); 
+		fwAdd =0;
+		fwFinal = baseUtente.getLvl_firewall() ;
+		ramAdd = 0; 
+		ramFinal = baseUtente.getLvl_ram(); 
+		eAdd = 0; 
+		eFinal = baseUtente.getE_lvl();
+		xS = 20; yS = 10;
 		
 	}
 	
 	public void market(Base baseUtente) {
 		istance(new Mercato(), baseUtente);
 		market();
+		
+		
 	}
 	
 	public void market() {
@@ -68,9 +79,7 @@ public class Market {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(PopUpFacade.sX); stage.setY(PopUpFacade.sY);
 		
-		cpuAdd = 0; cpuFinal = 0; fwAdd = 0; fwFinal = 0; ramAdd = 0; ramFinal = 0; eAdd = 0; eFinal = 0;
-		xS = 20; yS = 10;
-		
+
 		VBox vM = new VBox();
 		vM.setPrefWidth(800);
 		HBox initBill = new HBox();
@@ -238,8 +247,8 @@ public class Market {
 		});
 		
 		fwDec.setOnAction(e -> {
-			if(--fwAdd >=0){
-				cpuFinal = baseUtente.getLvl_firewall() + fwAdd;
+			if(--fwAdd>=0){
+				fwFinal = baseUtente.getLvl_firewall() + fwAdd;
 				total-=mercato.getPrezzoFirewall();
 			}else
 				fwAdd++;

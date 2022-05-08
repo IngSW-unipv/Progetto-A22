@@ -1,9 +1,14 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
+import java.util.Set;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -26,7 +31,30 @@ public class PlayTable {
 	
 	public ScrollPane getPlayTable(Pair<Integer, Integer> dimensioni, MapData mapData, Base bU, int ray) {
 		
-		ScrollPane centerPane = new ScrollPane();
+		ScrollPane centerPane = new ScrollPane(){
+			ScrollBar horizontal;
+			ScrollBar vertical;
+            @Override
+            protected void layoutChildren() {
+                super.layoutChildren();
+               if (horizontal == null) {
+                	horizontal=findScrollBar(lookupAll(".scroll-bar"),Orientation.HORIZONTAL);
+                	if(horizontal!=null) {
+                		horizontal.visibleProperty().addListener((obs, old, val) -> updateHval(val));
+                		updateHval(horizontal.isVisible());
+                	}
+                    
+                }
+               if (vertical == null) {
+            	   vertical=findScrollBar(lookupAll(".scroll-bar"),Orientation.VERTICAL);
+               	if(vertical!=null) {
+               		vertical.visibleProperty().addListener((obs, old, val) -> updateVval(val));
+               		updateVval(vertical.isVisible());
+               	}
+                   
+               }
+            }
+        };
 		
 		Canvas basicCanvas = getTableCanvas(dimensioni, ray);
 		GraphicsContext basicGC = basicCanvas.getGraphicsContext2D();
@@ -70,7 +98,35 @@ public class PlayTable {
 		
 		return basicCanvas;
 	}
-	
+	  private void updateHval(boolean scrollBarVisible) {
+		 // System.out.println("###########visibility Horizontal: "+scrollBarVisible+"###########v");
+	        if(!scrollBarVisible) {
+	        	scrollPane.setHvalue(0);
+	        }
+	    }
+	  private void updateVval(boolean scrollBarVisible) {
+		  //System.out.println("###########visibility vertical: "+scrollBarVisible+"###########v");
+	        if(!scrollBarVisible) {
+	        	scrollPane.setVvalue(0);
+	        }
+	    }
+	  
+	  private ScrollBar findScrollBar(Set<Node> set , Orientation orientation) {
+
+	        // this would be the preferred solution, but it doesn't work. it always gives back the vertical scrollbar
+	        //      return (ScrollBar) table.lookup(".scroll-bar:horizontal");
+	        //
+	        // => we have to search all scrollbars and return the one with the proper orientation
+
+	        for (Node node : set) {
+	            ScrollBar bar = (ScrollBar) node;
+	            if (bar.getOrientation() == orientation) {
+	                return bar;
+	            }
+	        }
+
+	        return null;
+	    }
 	public Pair<Integer, Integer> getDimTable() {
 		return dimTable;
 	}

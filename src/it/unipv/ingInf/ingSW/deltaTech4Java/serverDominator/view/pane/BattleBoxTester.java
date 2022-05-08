@@ -46,14 +46,13 @@ public class BattleBoxTester  extends Application{
 		long durata5 = 19000;
 		String battleTitle6 = new String("User attacca xBot in nodo (10,6)");
 		long durata6 = 10000;
-		String battleTitle7 = new String("User attacca xBot in nodo (15,7)");
-		long durata7 = 15000;
+		
 
 		bBox.addbattaglia(battleTitle3, durata3);
 		bBox.addbattaglia(battleTitle4, durata4);
 		bBox.addbattaglia(battleTitle5, durata5);
 		bBox.addbattaglia(battleTitle6, durata6);
-		bBox.addbattaglia(battleTitle7, durata7);
+
 		
 		battleBox = bBox.getBattleBox(bU);
 		p.getChildren().add(battleBox);

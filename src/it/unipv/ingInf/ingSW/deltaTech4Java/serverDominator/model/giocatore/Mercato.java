@@ -35,7 +35,7 @@ public class Mercato {
 		if (quantita>nodo.getSpazio_Ram()) {
 			quantita=nodo.getSpazio_Ram();
 		}
-		if(software=="virus") {	
+		if(software.equalsIgnoreCase("virus")) {	
 			if(user.getValuta()>=prezzoVirus*quantita);
 				if(nodo.compra_software(software, quantita) ) {
 					valuta=user.getValuta()-prezzoVirus*quantita;
@@ -43,7 +43,7 @@ public class Mercato {
 				}
 				
 		}
-		if(software=="antivirus") {
+		if(software.equalsIgnoreCase("antivirus")) {
 			if(user.getValuta()>=prezzoAntivirus*quantita);
 			if(nodo.compra_software(software, quantita) ) {
 				valuta=user.getValuta()-prezzoAntivirus*quantita;
@@ -51,7 +51,7 @@ public class Mercato {
 			}
 			
 		}
-		if(software=="rootcrash") {
+		if(software.equalsIgnoreCase("rootcrash")) {
 			if(user.getValuta()>=prezzoRootcrash*quantita);
 			if(nodo.compra_software(software, quantita) ) {
 				valuta=user.getValuta()-prezzoRootcrash*quantita;
@@ -64,7 +64,7 @@ public class Mercato {
 	public void compraRisorse(Giocatore user, Nodo nodo, String risorsa) {
 		int valuta;
 		
-		if(risorsa=="ram") {
+		if(risorsa.equalsIgnoreCase("ram")) {
 			if(user.getValuta()>=prezzoRam);
 				if(nodo.compra_risorsa(risorsa) ) {
 					valuta=user.getValuta()-prezzoRam;
@@ -72,7 +72,7 @@ public class Mercato {
 				}
 				
 		}
-		if(risorsa=="cpu") {
+		if(risorsa.equalsIgnoreCase("cpu")) {
 			if(user.getValuta()>=prezzoCpu);
 			if(nodo.compra_risorsa(risorsa) ) {
 				valuta=user.getValuta()-prezzoCpu;
@@ -80,7 +80,7 @@ public class Mercato {
 			}
 			
 		}
-		if(risorsa=="energia") {
+		if(risorsa.equalsIgnoreCase("energia")) {
 			if(user.getValuta()>=prezzoEnergia);
 			if(nodo.compra_risorsa(risorsa) ) {
 				valuta=user.getValuta()-prezzoEnergia;
@@ -88,7 +88,7 @@ public class Mercato {
 			}
 			
 		}
-		if(risorsa=="Firewall") {
+		if(risorsa.equalsIgnoreCase("Firewall")) {
 			if(user.getValuta()>=prezzoFirewall);
 				if(nodo.compra_risorsa(risorsa) ) {
 					valuta=user.getValuta()-prezzoFirewall;

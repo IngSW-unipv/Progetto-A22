@@ -165,7 +165,7 @@ public class MainDefinitivo extends Thread{
 		 * di sua proprieta e abilita il pulsante per la creazione software.
 		 */
 		boolean checks=false;
-		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
+		if(tabellone.getNodo(x, y).getPossessore().equals(giocatori[1])) {
 			checks=true;
 		}
 		return checks;

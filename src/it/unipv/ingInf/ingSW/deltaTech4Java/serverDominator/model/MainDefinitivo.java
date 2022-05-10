@@ -227,7 +227,7 @@ public class MainDefinitivo extends Thread{
 	public boolean softcheck(int x, int y) {
 		
 		boolean checks=false;
-		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
+		if(tabellone.getNodo(x, y).getPossessore().equals(giocatori[1])) {
 			checks=true;
 		}
 		return checks;

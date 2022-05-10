@@ -66,7 +66,7 @@ public class ActionPane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.market(bU);
+            	p.avviaMarket(bU);
             }
 		});
 		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
@@ -78,7 +78,7 @@ public class ActionPane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.powerUp(bU);
+            	p.avviaPowerUp(bU);
             }
 		});
 		
@@ -90,7 +90,7 @@ public class ActionPane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.development(bU);
+            	p.avviaDevelopment(bU);
             }
 		});
 		

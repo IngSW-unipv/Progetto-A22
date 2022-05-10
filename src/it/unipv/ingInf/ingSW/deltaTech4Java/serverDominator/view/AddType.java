@@ -43,7 +43,7 @@ public class AddType {
 	public void launchMalware(HBox hBox, Base bU) {
 		addType(hBox, "attack", (event -> {
 
-			pU.selectMalware(bU);
+			pU.avviaSelectMalware(bU);
 
 		}));
 		hBox.setSpacing(0); 
@@ -55,7 +55,7 @@ public class AddType {
 	public void launchDevelopment(HBox hBox, Base bU) {
 		addType(hBox, "develop software", (event -> {
 			
-			pU.development(bU);
+			pU.avviaDevelopment(bU);
 
 
 		}));
@@ -68,7 +68,7 @@ public class AddType {
 	public void launchPowerUp(HBox hBox, Base bU) {
 		addType(hBox, "power-up!", (event -> {
 
-			pU.powerUp(bU);
+			pU.avviaPowerUp(bU);
 
 		}));
 		hBox.setSpacing(0); 
@@ -80,7 +80,7 @@ public class AddType {
 	public void launchMarket(HBox hBox, Base bU) {
 		addType(hBox, "market", (event -> {
 			
-			pU.market(bU);
+			pU.avviaMarket(bU);
 
 		}));
 		hBox.setSpacing(0); 

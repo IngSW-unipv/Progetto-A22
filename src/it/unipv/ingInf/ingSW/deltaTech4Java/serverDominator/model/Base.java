@@ -12,7 +12,6 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Rootc
  * @since 1.0
  * prima versione della classe Base, nodo principale di ogni giocatore.
  */
-
 public class Base extends Nodo{
 	private Software[] stats_software_creati;
 	private final int TIPI_SOFTWARE=3;

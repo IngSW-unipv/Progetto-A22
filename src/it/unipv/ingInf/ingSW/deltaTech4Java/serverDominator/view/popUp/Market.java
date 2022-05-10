@@ -31,6 +31,7 @@ public class Market {
 	private Base baseUtente;
 	private Mercato mercato=new Mercato();
 	private int total;
+	private Stage stage;
 	
 	public Market(Base baseUtente) {
 		istance(new Mercato(), baseUtente);
@@ -75,7 +76,7 @@ public class Market {
 		setLableText(finalBillL, "Totale carrello" );
 		Label totaleCarrello=ComponentCreator.getIstance().lableCreator(Pos.BASELINE_RIGHT);
 		setLableText(totaleCarrello, String.valueOf(total) );
-		Stage stage = new Stage();
+		stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(PopUpFacade.sX); stage.setY(PopUpFacade.sY);
 		
@@ -506,5 +507,14 @@ public class Market {
 	public void setQuantitaAntivirus(NumberSpinner quantitaAntivirus) {
 		this.quantitaAntivirus = quantitaAntivirus;
 	}
+
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	
 
 }

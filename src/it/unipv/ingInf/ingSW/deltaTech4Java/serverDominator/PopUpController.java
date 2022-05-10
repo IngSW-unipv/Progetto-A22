@@ -43,12 +43,14 @@ public class PopUpController {
                     "Firewall");
             mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloEnergiata(),
                     "Energia");
+            popUpFacade.getPopUpMarket().getStage().close();
         });
     }
 
     public void initSelectMalware(MainDefinitivo mainModello,PopUpFacade popUpFacade,int x , int y){
         popUpFacade.getPopUpSelectmalware().getFightButton().setOnAction(actionEvent -> {
             mainModello.avvioBattaglia(popUpFacade.getBaseUtente().getPossessore(), x ,y);
+            popUpFacade.getPopUpSelectmalware().getStage().close();
         });
 
     }
@@ -63,6 +65,7 @@ public class PopUpController {
                 mainModello.powerup(x,y,"firewall");
             if(popUpFacade.getPopUpPowerup().getRam()>0)
                 mainModello.powerup(x,y,"ram");
+            popUpFacade.getPopUpPowerup().getStage().close();
         });
 
     }
@@ -75,6 +78,7 @@ public class PopUpController {
                     popUpFacade.getPopUpDevelopment().getQuantitaVirus().getNumber().intValue(),x,y);
             mainModello.creazioneSoftware("rootcrash",
                     popUpFacade.getPopUpDevelopment().getQuantitaRootCrash().getNumber().intValue(),x,y);
+            popUpFacade.getPopUpDevelopment().getStage().close();
         });
 
 

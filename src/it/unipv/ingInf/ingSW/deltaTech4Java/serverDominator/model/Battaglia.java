@@ -1,16 +1,15 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-/**
- * @author Luca Casto 
- * v1.0
- * prima versione dell'oggetto battaglia. Si occupa di calcolare il vincitore di uno scontro.
- */
-
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
 
-
+/**
+ * @author Luca Casto 
+ * @version 1.0
+ * @since 1.0
+ * prima versione dell'oggetto battaglia. Si occupa di calcolare il vincitore di uno scontro.
+ */
 public class Battaglia extends Thread{
 	private Nodo attaccante;
 	private Nodo difensore;
@@ -33,12 +32,14 @@ public class Battaglia extends Thread{
 	
 	}
 
+	/**usato per selezionare quante unita software
+	 * si vogliono inviare in battaglia contro un nodo selezionato
+	 * @param quantita_v
+	 * quantita di unita software virus che si vogliono inviare
+	 * @param quantita_r
+	 * quantita di unita software rootcrash che si vogliono inviare max 1
+	 */
 	public void selezione(int quantita_v, int quantita_r) {
-		/**necessario selezionare i software da mandare all'attacco del nodo bersaglio.
-		 * questo metodo prepara i dati necessari al calcolo del vincitore
-		 * @param quantità_v: rappresenta la quantità selezionata dal giocatore di Virus da mandare in attacco
-		 * @param quantità_r: rappresenta la quantità selezionata dal giocatore di Rootcrash da mandare all'attacco, max 1.
-		 */
 		
 		int[] disp;
 		int q_root, q_virus;
@@ -60,20 +61,25 @@ public class Battaglia extends Thread{
 	}
 	
 
+	/**aggiorna il firewall del nodo bersaglio considerando il suo livello e il livello del
+	 * software rootcrash che l'attaccante ha inviato
+	 * @return
+	 * il valore aggiornato di bonus difensivo dato dal firewall
+	 */
 	public int aggiorna_firewall() {
-		/**metodo per calcolare gli effetti del software Rootcrash
-		 */
+		
 		Firewall temp;		
 		temp= new Firewall(difensore.getLvl_firewall()-sel_attaccanti[2].getVal_atk());
 		return temp.getStat1();
-	}	
-	
+	}		
 
+	/**usando i valori dei software di attacco e i valori di difesa calcola il vincitore della battaglia
+	 * 
+	 * @return
+	 * true se l'attaccante ha vinto la battaglia
+	 * false se l'attaccante non ha vinto la battaglia
+	 */
 	public boolean calcola_vincitore() {
-		/**calcola il vincitore dello scontro confrontando i valori di attacco e di difesa
-		 * dei nodi coinvolti. L'attacco parte sempre dal nodo base, anche se l'attacco è possibile
-		 * solo se il nodo difensore è vicino ad almeno un nodo dell'attaccante.
-		 */
 		
 		int attacco, difesa;
 		boolean successo=false;
@@ -86,9 +92,9 @@ public class Battaglia extends Thread{
 	}
 	
 
+	/**stampa il report di fine battaglia */
 	public String stampa_report(boolean esito) {
-		/**stampa il report di fine battaglia
-		*/
+		
 		String report;
 		if(esito) {
 			report="Hai conquistato il nodo"+difensore.getPossessore().getNome();
@@ -97,6 +103,11 @@ public class Battaglia extends Thread{
 		return report;
 	}
 	
+	/**aggiorna lo stato del nodo bersaglio con i dati del giocatore attaccante 
+	 * in caso di vittoria del giocatore attaccante, inoltre se il nodo bersaglio
+	 * e' tipo cloud, potenzia le risorse del nodo base del giocatore attaccante
+	 * in funzione alle risorse che possiede il nodo cloud
+	 */
 	public void aggiornastati() {
 		difensore.setDist_base(partenza.getDist_base()+1);
 		difensore.setPossessore(partenza.getPossessore());
@@ -116,11 +127,8 @@ public class Battaglia extends Thread{
 		}
 	}
 	
-	
+	/**esecuzione della battaglia */
 	public void run() {
-		/**esecuzione battaglia in thread separato dal main
-		 * per far si che si possano eseguire più battaglie
-		 */
 		
 		time.countdown(t_timer);
 		time.timer(t_timer);
@@ -131,7 +139,7 @@ public class Battaglia extends Thread{
 		}
 	}
 
-/** getter and setter*/
+//--------------getter and setter------------//
 	
 	public boolean getEsito() {
 		return esito;

@@ -1,15 +1,19 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 
+/**
+ * @author Matteo c
+ * @version 1.0
+ * @since 1.0
+ */
 public class Mercato {
 	private int prezzoRam, prezzoCpu, prezzoEnergia, prezzoVirus;
 	private int prezzoAntivirus;
 	private int prezzoRootcrash;
 	private int prezzoFirewall;
 	
-	
+	/** inizializza il mercato impostando i prezzi dei vari item */
 	public Mercato() {
 		prezzoRam=10;
 		prezzoCpu=10; 
@@ -20,6 +24,21 @@ public class Mercato {
 		prezzoRootcrash=5;
 		
 	}
+	/**inizializza il mercato accettando come parametri i prezzi degli item vendibili
+	 * 
+	 * @param prezzoRam
+	 * prezzo di un potenziamento ram
+	 * @param prezzoCpu
+	 * prezzo di un potenziamento cpu
+	 * @param prezzoEnergia
+	 * prezzo di un potenziamento energetico
+	 * @param prezzoVirus
+	 * prezzo di un unita software virus
+	 * @param prezzoAntivirus
+	 * prezzo di una unita software antivirus
+	 * @param prezzoRootcrash
+	 * prezzo di una unita software rootcrash
+	 */
 	public Mercato(int prezzoRam,int prezzoCpu, int prezzoEnergia,int prezzoVirus, int prezzoAntivirus,  int prezzoRootcrash) {
 		this.prezzoRam=prezzoRam;
 		this.prezzoCpu=prezzoCpu; 
@@ -30,6 +49,17 @@ public class Mercato {
 		
 	}
 	
+	/**usato per comprare unita software dal mercato
+	 * 
+	 * @param user
+	 * colui che effettua l'acquisto
+	 * @param nodo
+	 * destinatario dell'acquisto
+	 * @param quantita
+	 * quantita che si vuole acquistare
+	 * @param software
+	 * tipologia di software che si vuole acquistare
+	 */
 	public void compraSoftware(Giocatore user, Nodo nodo, int quantita, String software) {
 		int valuta;
 		if (quantita>nodo.getSpazio_Ram()) {
@@ -60,7 +90,15 @@ public class Mercato {
 			
 		}
 	}
-	
+	/**usato per comprare potenziamenti delle risorse
+	 * 
+	 * @param user
+	 * colui che effettua l'acquisto
+	 * @param nodo
+	 * destinatario del potenziamento acquistato
+	 * @param risorsa
+	 * tipologia di risorsa che si intende acquistare
+	 */
 	public void compraRisorse(Giocatore user, Nodo nodo, String risorsa) {
 		int valuta;
 		
@@ -97,6 +135,8 @@ public class Mercato {
 				
 		}
 	}
+	//--------------getter and setter------------//
+	
 	public int getCostoRam(int quantita) {
 		return prezzoRam*quantita;
 	}

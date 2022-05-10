@@ -1,16 +1,16 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-/**
- * @author Luca Casto 
- * v1.0
- * prima versione della classe Cloud, nodo necessario al miglioramento
- * delle risorse del nodo base.
- */
-
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 
+/**
+ * @author Luca Casto 
+ * @version 1.0
+ * @since 1.0
+ * prima versione della classe Cloud, nodo necessario al miglioramento
+ * delle risorse del nodo base.
+ */
 public class Cloud extends Nodo {
 	private Software[] stats_software_creati;
 	private Risorse[] risorse;
@@ -37,11 +37,9 @@ public class Cloud extends Nodo {
 		stats_software_creati= new Software[1];
 	}
 
-
+	/**inizializza le risorse del nodo cloud */
 	public void inizializza_risorse() {
-		/** inizializza un vettore di Risorse con livelli che possono essere 0 o 1
-		* NB: 0=cpu, 1=ram, 2=energia,3=firewall
-		*/	
+		/* NB: 0=cpu, 1=ram, 2=energia,3=firewall*/	
 		
 		int casual;
 		risorse[0]=new Cpu(casual=(int)(Math.random()*2));
@@ -54,15 +52,17 @@ public class Cloud extends Nodo {
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 
+	/**potenziamento di una risorsa
+	 * @param nome
+	 * nome della risorsa che si intede potenziare
+	 */
 	public void potenzia_risorsa(String nome) {
-		/** metodo per il potenziamento della risorsa firewall
-		 */
-		
+				
 		boolean check=false;
 		if(nome!="Firewall") {
 			System.out.println("risorsa non potenziabile");
 		}else {
-			/**start timer per potenziamento firewall*/
+			/*start timer per potenziamento firewall*/
 			super.time1.countdown(risorse[3].getTempo_richiesto());
 			super.time1.timer(risorse[3].getTempo_richiesto());
 			check=risorse[3].potenziamento();
@@ -73,11 +73,14 @@ public class Cloud extends Nodo {
 		
 	}
 
+	/** crea unita software
+	 * @param nome
+	 * nome della unita software che si vuole creare
+	 * @param quantita
+	 * quantita della unita software che si vuole creare	
+	 */
 	public void crea_software(String nome, int quantita) {
-		/**metodo perla creazione di software, in particolare il nodo cloud può creare solo antivirus
-		 * in quantitita limitata.
-		 */
-		
+			
 		boolean check=false;
 		int n_soft;
 		if(nome!="Antivirus") {
@@ -85,7 +88,7 @@ public class Cloud extends Nodo {
 		}else {
 			n_soft=quantita+super.getSoftware_disponibile();
 			if(n_soft<=super.getSoftware_max()) {
-			/**start timer per creazione software*/
+			/*start timer per creazione software*/
 				super.time2.countdown(stats_software_creati[0].getTemp_richiesto()*quantita);
 				super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantita);
 				stats_software_creati[0]= new Antivirus(1,n_soft);
@@ -99,7 +102,7 @@ public class Cloud extends Nodo {
 		
 	}
 
-/**getter and setter*/
+//-------------getter and setter------------//
 		
 	public int getLvl_cpu() {
 		return risorse[0].getLivello_risorsa();

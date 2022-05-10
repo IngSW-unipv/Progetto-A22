@@ -2,7 +2,8 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
 
 /**
  * @author Luca Casto 
- * v1.0
+ * @versione 1.0
+ * @since 1.0
  * estensione della classe astratta software.
  * la classe Rootcrash è pensata come unità speciale del gioco
  * server dominator, per ridurre il livello del firewall avversario
@@ -27,8 +28,7 @@ public class Rootcrash extends Software {
 		super.setTemp_richiesto(40);
 		super.setQuantita(quantita);
 	}
-/**getter and setter*/
-	
+//--------getter and setter-------//	
 	public int getVal_def() {
 		return val_def;
 	}

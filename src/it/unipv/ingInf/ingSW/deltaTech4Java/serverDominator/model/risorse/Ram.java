@@ -2,14 +2,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 
 /**
  * @author Luca Casto 
- * v1.0
+ * @version 1.0
+ * @since 1.0
  * prima versione risorsa ram, serve per aumentare il numero massimo 
  * delle classi software, il numero massimo dei software viene aggiornato
  * in funzione del livello di questa risorsa, passando una variabile 
  * intera, alla classe nodo, la quale interagisce veramente con i software.
- * NB: stat1=max_software.
  */
-
 public class Ram extends Risorse{
 	private int max_software;
 	
@@ -22,11 +21,11 @@ public class Ram extends Risorse{
 		this.effetto();
 	}
 	
-
+	/**aggiorna, in funzione del livello risorsa, le caratteristiche
+	* che vengono sbloccate e i requisiti per il livello successivo
+	*/
 	public void effetto() {
-		/**aggiorna, in funzione del livello risorsa, le caratteristiche
-		 * che vengono sbloccate e i requisiti per il livello successivo
-		 */
+		
 		
 		switch ( super.getLivello_risorsa() ) {
 		case 0: max_software=0;
@@ -73,10 +72,10 @@ public class Ram extends Risorse{
 		}
 	}
 	
-/**getter and setter ovverrides dei metodi della superclasse
- * Risorse.
- */
-	
+//--------getter and setter-------//
+	/**stat1 usato per max_software
+	 * @return max_software
+	 */
 	public int getStat1() {
 		return max_software;
 	}

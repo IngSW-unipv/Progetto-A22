@@ -8,6 +8,13 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Merc
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 
+/**@author Luca Casto 
+ * @author Matteo Caprio
+ * @version 1.0
+ * @since 1.0
+ * classe facade del modello, crea la partita, crea e avvia i bot.
+ * classe con cui comunica il controller dell'interfaccia grafica
+ */
 public class MainDefinitivo extends Thread{
 	private MappaDefinitiva tabellone;
 	private int n_basi;
@@ -40,6 +47,18 @@ public class MainDefinitivo extends Thread{
 	//selezione utente
 		//selezione lingua
 	
+	/** avvia la partita costruendo la mappa e creando i giocatori
+	 * 
+	 * @param x_max
+	 * coordinata massima delle ascisse
+	 * @param y_max
+	 * corrdinata massima delle ordinate
+	 * @param nomeUtente
+	 * nome dell'utente
+	 * @param valuta
+	 * quantita di moneta di gioco posseduta dall'utente prima di iniziare una partita
+	 * @throws InterruptedException
+	 */
 	public void avvioPartita(int x_max, int y_max, String nomeUtente, int valuta) throws InterruptedException {
 		//giocoAttivo=true;
 		t_unitario=10;
@@ -59,6 +78,12 @@ public class MainDefinitivo extends Thread{
 	}
 
 //---------------metodi generici--------------------//
+	
+	/**usato nel caso l'utente abbia conquistato nodi base di altri giocatori
+	 * serve per decidere da quale nodo base deve partire un attacco
+	 * @param scelta
+	 * scelta dell'utente di una base diversa da quella iniziale
+	 */
 	public void sceltabase(int scelta) {
 		/** metodo usato nel caso l'utente abbia più di una base
 		 * in questo caso deve selezionarne una dalla quale partiranno
@@ -71,6 +96,12 @@ public class MainDefinitivo extends Thread{
 		
 	}
 
+	/**inizializza il vettore dei giocatori partecipanti alla partita
+	 * 
+	 * @param utente
+	 * @param x_max
+	 * @param valuta
+	 */
 	public void creazioneGiocatori(String utente, int x_max, int valuta) {  
 		Collections.shuffle(Colore.colori);
 				
@@ -120,6 +151,10 @@ public class MainDefinitivo extends Thread{
 		
 	}
 
+	/**avviamento dei bot
+	 * 
+	 * @throws InterruptedException
+	 */
 	@SuppressWarnings("static-access")
 	public void avvioBot() throws InterruptedException {
 		int i;
@@ -129,6 +164,10 @@ public class MainDefinitivo extends Thread{
 		}
 	}
 	
+	/**usato per spegnere i bot
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void stopBot() throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
@@ -138,10 +177,18 @@ public class MainDefinitivo extends Thread{
 	
 //----------------metodi per potenziamento---------------//
 	
+	/**controlla se il nodo selezionato appartiene all'utente e abilita il pulsante power-up
+	 * 
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @return
+	 * true il nodo selezionato appartiene all'utente
+	 * false il nodo selezionato non appartiene all'utente
+	 */
 	public boolean powerupCheck(int x, int y){
-		/** metodo chiamato dopo che l'utente ha selezionato un nodo di
-		 * sua proprieta, abilita il pulsante per eventuali potenziamenti risorse.
-		 */
+	
 		boolean checkp= false;
 		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
 			checkp=true;
@@ -149,10 +196,17 @@ public class MainDefinitivo extends Thread{
 		return checkp;
 	}
 		
+	/** usato per il potenziamento di una risorsa
+	 * 
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @param risorsa
+	 * tipologia di risorsa che si intende potenziare
+	 */
 	public void powerup(int x, int y, String risorsa) {
-		/** metodo lanciato dopo aver selezionato la risorsa da potenziare
-		 * dall'interfaccia grafica.
-		 */
+		
 		if(this.powerupCheck(x, y)) {
 			tabellone.getNodo(x, y).potenzia_risorsa(risorsa);
 		}
@@ -160,10 +214,18 @@ public class MainDefinitivo extends Thread{
 
 //------------metodi per creazione software----------//
 	
+	/**controlla se un nodo appartiene all'utente e abilita il pulsante development
+	 * 
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @return
+	 * true se il nodo appartiene all'utente abilitando l'azione
+	 * false se il nodo non appartiene all'utente inibendo l'azione
+	 */
 	public boolean softcheck(int x, int y) {
-		/** il metodo viene lanciato quando l'utente clicca su un nodo
-		 * di sua proprieta e abilita il pulsante per la creazione software.
-		 */
+		
 		boolean checks=false;
 		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
 			checks=true;
@@ -171,20 +233,39 @@ public class MainDefinitivo extends Thread{
 		return checks;
 	}
 	
+	/**usato per selezionare le unita software da creare
+	 * 
+	 * @param nome
+	 * tipologia di unita software da creare
+	 * @param quantita
+	 * quantita da creare
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 */
 	public void creazioneSoftware(String nome, int quantita, int x, int y) {
-		/** metodo usato dopo la selezione del software da parte dell'utente
-		 * 
-		 */
+		
 		if(this.softcheck(x, y)) {
 			tabellone.getNodo(x, y).crea_software(nome, quantita);
 		}
 	}
 		
 //------------- metodi per mercato------------//
+	
+	/**controlla se il nodo selezionato appartiene all'utente e che sia un nodo base
+	 * 
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @return
+	 * true se nodo selezionato appartiene all'utente e tipo base
+	 * false se nodo selezionato non appartiene all'utente oppure se 
+	 * il tipo del nodo non e' base
+	 */
 	public boolean marketcheck(int x, int y) {
-		/**metodo per la scelta della base in cui si vuole comprare
-		 * risorse o software dal mercato
-		 */
+		
 		boolean check=false;
 		if(tabellone.getNodo(x, y).getTipologia().equals("base")) {
 			if(tabellone.getNodo(x, y).getPossessore().equals(giocatori[1])) {
@@ -195,7 +276,14 @@ public class MainDefinitivo extends Thread{
 	}
 	
 	/**Metodo per comprare software e potenziamenti dal mercato, in input bisogna passare il giocatore che vuole comprare il potenziamento, la quantita e il nome 
-	 * dell'oggetto da potenziare. La quantita deve essere settata a -1 se si vuole acquistare un potenziamento risorsa*/
+	 * dell'oggetto da potenziare. La quantita deve essere settata a -1 se si vuole acquistare un potenziamento risorsa
+	 * @param utente
+	 * colui che vuole acquistare
+	 * @param quantita
+	 * quantita che vuole acquistare
+	 * @param oggetto
+	 * cosa l'utente vuole acquistare
+	 */
 	public void acquistoMercato(Giocatore utente, int quantita, String oggetto) {
 		if(quantita==-1)
 			mercato.compraRisorse(utente, tabellone.trovaBase(utente), oggetto);
@@ -204,14 +292,22 @@ public class MainDefinitivo extends Thread{
 	}
 
 //---------------metodi per battaglia-------------//
-		
+	
+	/**controlla se un nodo è confinantee quindi attaccabile da un giocatore
+	 * e se lo spazio disponibile per gli attacchi simultaneri non sia vuoto
+	 * massimo 6 attacchi consentiti in simultanea
+	 * @param attaccante
+	 * giocatore che vuole attaccare
+	 * @param x
+	 * ascissa del nodo bersaglio
+	 * @param y
+	 * ordinata del nodo bersaglio
+	 * @return
+	 * true nodo selezionato attaccabile
+	 * false nodo selezionato non attaccabile
+	 */
 	public boolean nodecheck(Giocatore attaccante, int x, int y) {
-		/** metodo per il controllo se un nodo e' attaccabile,
-		 * controlla anche se lo spazio disponibile per gli attacchi simultanei
-		 * non e' vuoto.
-		 * NB: un utente puo' eseguire 6 attacchi simultaneamente.
-		 * metodo eseguito quando un utente clicca su un nodo
-		 */
+	
 		boolean checkf=false;
 		if(maxbattle>0) {
 			if(tabellone.attaccabile(x,y, attaccante)) {
@@ -222,14 +318,24 @@ public class MainDefinitivo extends Thread{
 		return checkf;
 	}
 		
+	/**gestisce le operazioni preliminari necessarie per la battaglia, quali la selezione delle unita
+	 * software da inviare al nodo bersaglio
+	 * 
+	 * @param attaccante
+	 * giocatore che attacca
+	 * @param x
+	 * ascissa del nodo bersaglio
+	 * @param y
+	 * ordinata del nodo bersaglio
+	 * @param quantitaV
+	 * quantita di unita software virus che il giocatore attaccante intende inviare
+	 * @param quantitaR
+	 * quantita di unita software rootcrash che il giocatore attacante intende inviare
+	 * @return
+	 * tempo necessario perla battagli
+	 */
 	public int battlecheck(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
-		/** il seguente metodo, gestisce le operazioni preliminari alla battaglia
-		 * dati due interi, le coordinate del nodo bersaglio, e il Giocatore attaccante.
-		 * le quantita di software dovranno essere inizializati correttamente tramite un metodo del controllore 
-		 * che restituisce il numero di virus e rootcrash che l'utente seleziona 
-		 * in fase di attacco dall'interfaccia grafica.
-		 * il metodo viene lanciato quando il giocatore clicca sul pulsante attacca
-		 */
+		
 		t_timer=0;
 		if(this.nodecheck(attaccante, x, y)){
 			t_timer=t_unitario+(t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base() );
@@ -243,12 +349,17 @@ public class MainDefinitivo extends Thread{
 		return t_timer; 
 	}
 			
+	/** avvia la battaglia
+	 * 
+	 * @param attaccante
+	 * giocatore che attacca
+	 * @param x
+	 * ascissa nodo bersaglio
+	 * @param y
+	 * ordinata nodo bersaglio
+	 */
 	public void avvioBattaglia(Giocatore attaccante, int x, int y) {
-		/** metodo che lancia il thread relativo alla singola battaglia, 
-		 * successivo ai controlli di prossimita e numeri di attacchi contemporanei,
-		 * questo metodo viene lanciato quando l'utente clicca su conferma, per confermare i
-		 * software da inviare in battaglia.
-		 */
+		
 		fight[count].start();
 		/*le  istruzioni seguenti sono da lanciare una volta terminato l'esecuzione
 		 * del thread di battaglia
@@ -264,6 +375,12 @@ public class MainDefinitivo extends Thread{
 		System.out.println( fight[count].getReport() );
 	}
 //-------------metodi di fine partita------------//
+	
+	/**usato alla fine della partita restituisce la classifica e stampa a video
+	 * il nome del giocatore vincitore
+	 * @return
+	 * classifica giocatori
+	 */
 	public Classifica gameover() {
 		/** metodo usato alla fine della partita per restituire la classifica finale della partita
 		 * e stampare a video il nome del giocatore vincitore
@@ -276,7 +393,7 @@ public class MainDefinitivo extends Thread{
 		return classifica;
 	}
 	
-/**getter and setter */
+//--------------getter and setter-------------//
 	
 	public int getX_max() {
 		return tabellone.getX_max();

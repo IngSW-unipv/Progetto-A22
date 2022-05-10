@@ -1,20 +1,16 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
-/**
- * @author Luca Casto 
- * v1.0
- * prima versione della classe Bot, simulatore di giocatore reale, 
- * con scelta di comportamenti randomici.
- */
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Battaglia;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
 
+/**
+ * @author Luca Casto 
+ * @version 1.0
+ * @since 1.0
+ * prima versione della classe Bot, simulatore di giocatore reale, 
+ * con scelta di comportamenti randomici.
+ */
 public class Bot extends Giocatore{
 	
 	private MappaDefinitiva map;
@@ -31,8 +27,10 @@ public class Bot extends Giocatore{
 	 * maggiormente lontane
 	 */
 	
-	/**Permette di creare un oggetto Bot passando come parametro il suo nome*/
-	
+	/**Permette di creare un oggetto Bot passando come parametro il suo nome
+	 * @param nome
+	 * nome del bot
+	 */
 	public Bot(String nome) {
 		super(nome);
 		super.setPunteggio(0);
@@ -53,6 +51,9 @@ public class Bot extends Giocatore{
 		}
 	}
 
+	/** metodo che simula il comportamento di un giocatore scegliendo in modo casuale
+	 * tra 3 possibili azioni: potenziamento risorse nodo, creazione software, attacco nodi vicini
+	 */
 	public void comportamento() {
 		int min=1;
 		int max=3;
@@ -62,7 +63,7 @@ public class Bot extends Giocatore{
 		scelta= (int)(Math.random()*(max-min))+ min;
 		switch(scelta) {
 		case 1: 
-			/** potenziamento risorse del nodo base del bot */
+			/* potenziamento risorse del nodo base del bot */
 			
 			scelta=(int)(Math.random()*(max-min));
 			switch(scelta) {
@@ -82,7 +83,7 @@ public class Bot extends Giocatore{
 			map.trovaBase(this).potenzia_risorsa(risorsa);
 			break;
 		case 2:
-			/** creazione software nel nodo base del bot */
+			/* creazione software nel nodo base del bot */
 			
 			map.trovaBase(this).crea_software("Antivirus", 5);
 			map.trovaBase(this).crea_software("Virus", 5);
@@ -105,6 +106,8 @@ public class Bot extends Giocatore{
 		}
 			
 	}
+	
+	/**usato per aggiornare il bersaglio di un attacco */
 	public void cambiaTarget() {
 		if (cont>5) {
 			incremento++;
@@ -118,6 +121,10 @@ public class Bot extends Giocatore{
 		confini[5]= new Coordinate(base.getX(), base.getY()+incremento);
 				
 	}
+	
+	/**usato per fornire al bot le informazioni della sua base
+	 * quali le coordinate
+	 */
 	public void datiBase() {
 		int i;
 		int x=0;
@@ -133,7 +140,7 @@ public class Bot extends Giocatore{
 	}
 	
 
-	/**getter and setter */
+	//------------getter and setter------------//
 	
 	public void setMap(MappaDefinitiva map) {
 		this.map = map;

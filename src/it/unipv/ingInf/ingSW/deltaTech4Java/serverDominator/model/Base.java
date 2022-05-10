@@ -1,20 +1,17 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-/**
- * @author Luca Casto 
- * v1.0
- * prima versione della classe Base, nodo principale di ogni giocatore.
- */
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
-
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Rootcrash;
 
+
+/**
+ * @author Luca Casto 
+ * @version 1.0
+ * @since 1.0
+ * prima versione della classe Base, nodo principale di ogni giocatore.
+ */
 
 public class Base extends Nodo{
 	private Software[] stats_software_creati;
@@ -44,17 +41,18 @@ public class Base extends Nodo{
 		this.inizializza_risorse();
 	}
 	
+	/** inizializza le unita software del nodo base */
 	public void inizializza_software() {
-		/** inizializza un vettore di Software  */
+		
 		stats_software_creati[0]=new Antivirus(0,0);
 		stats_software_creati[1]=new Virus(0,0);
 		stats_software_creati[2]=new Rootcrash(0,0);
 	}
 	
+	/** inizializza le risorse iniziali di un nodo base */
 	public void inizializza_risorse() {
-		/** inizializza un vettore di Risorse
-		 * NB: 0=cpu, 1=ram, 2=energia,3=firewall
-		 */
+		/* NB: 0=cpu, 1=ram, 2=energia,3=firewall */
+		
 		risorse[0]=new Cpu(1);
 		super.setLvl_cpu(risorse[0].getLivello_risorsa());
 		risorse[1]=new Ram(1);
@@ -65,13 +63,13 @@ public class Base extends Nodo{
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 
+	/**usato per il potenziamento di una risorsa tramite mercato, oppure 
+	 * successivamente alla conquista di un nodo cloud
+	 * @param nome 
+	 * nome della risorsa che si intende potenziare tramite il mercato
+	 */
 	public boolean compra_risorsa(String nome) {
-		/**metodo usato per il potenziamento tramite mercato
-		 * di una risorsa generica. Aggiorna le statistiche della risorsa
-		 * passata e i valori necessari per il livello successivo.
-		 * Questo metodo è usato anche per il potenziamento successivo alla
-		 * conquista di un nodo cloud.
-		 */
+	
 		boolean check=false;
 		int i;
 		for(i=0; i<TIPI_RISORSE;i++) {
@@ -83,11 +81,11 @@ public class Base extends Nodo{
 		return check;
 	}
 
+	/** usato per il potenziamento standard di una risorsa
+	 *  @param nome
+	 *  nome della risorsa che si vuole potenziare
+	 */
 	public void potenzia_risorsa(String nome) {
-		/** metodo usato per il potenziamento di una risorsa generica
-		 * aggiorna le statistiche della risorsa passata e i valori necessari
-		 * per il livello successivo
-		 */
 		
 		boolean check=false;
 		int en_usata, i;
@@ -108,10 +106,13 @@ public class Base extends Nodo{
 		} else System.out.println("potenziamento fallito");
 	}
 	
+	/** usato per creare risorse comprandole dal mercato
+	 * @param nome
+	 * nome della unita software che si vuole creare tramite mercato
+	 * @param quantita
+	 * quantita di unita software che si vuole creare tramite mercato
+	 */
 	public boolean compra_software(String nome, int quantita) {
-		/**metodo per la creazione di nuovo software tramite negozio, 
-		 * con aggiornamento della quantita' totali
-		 */
 
 		boolean check=false;
 		int n_soft;
@@ -143,9 +144,14 @@ public class Base extends Nodo{
 		return check;
 	}
 	
+	/**creazione software standard
+	 * @param nome
+	 * nome della unita software che si vuole creare
+	 * @param quantita
+	 * quantita della unita software che si vuole creare
+	 */
 	public void crea_software(String nome, int quantita) {
-	/**metodo per la creazione di nuovo software, con aggiornamento della quantitï¿½ totali*/
-		
+	
 		boolean check=false;
 		int n_soft;
 		int i;
@@ -189,7 +195,7 @@ public class Base extends Nodo{
 		} else System.out.println("azione non eseguita");	
 	}
 	
-/**getter and setter*/
+//---------------getter and setter--------------//
 	
 	public int getSoftware_max() {
 		return risorse[1].getStat1();

@@ -2,10 +2,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 /**
  * @author Luca Casto 
- * v1.01
- *coordinate di una base, usate come indice per il veloce ritrovamento nella mappa
+ * @version 1.01
+ * @since 1.0
+ * coordinate di una base, usate come indice per il veloce ritrovamento nella mappa
  */
-
 public class Coordinate {
 	private int x;
 	private int y;
@@ -16,13 +16,14 @@ public class Coordinate {
 		this.y=y;
 	}
 	
+	/**aggiunta nella @version 1.01*/
 	public Coordinate(int x, int y, String nome) {
 		this.x=x;
 		this.y=y;
 		this.nome= nome;
 	}
 	
-/**getter and setter*/
+//------------getter and setter---------------//
 
 	public int getX() {
 		return x;

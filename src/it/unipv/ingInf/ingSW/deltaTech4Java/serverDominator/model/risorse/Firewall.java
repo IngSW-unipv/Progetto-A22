@@ -2,13 +2,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 
 /**
  * @author Luca Casto 
- * v1.0
+ * @version 1.0
+ * @since 1.0
  * prima versione risorsa firewall, serve per aumentare il valore di
  * difesa del nodo. 
  * in funzione del livello di questa risorsa, passando una variabile 
  * intera, alla classe nodo, la quale interagisce veramente con i software.
  */
-
 public class Firewall extends Risorse{
 	private final int MAX_FIREWALL=9;
 	private int bonus_def;
@@ -21,11 +21,12 @@ public class Firewall extends Risorse{
 		super.setNome("Firewall");
 		this.effetto();
 	}
-
+	
+	/**metodo che per ogni livello della risorsa specifica le sue caratteristiche
+	* e il necessario per il livello successivo
+	*/
 	public void effetto() {
-		/**metodo che per ogni livello della risorsa specifica le sue caratteristiche
-		 * e il necessario per il livello successivo
-		 */
+		
 		
 		switch ( super.getLivello_risorsa() ) {
 		case 0: bonus_def=0;
@@ -68,8 +69,10 @@ public class Firewall extends Risorse{
 		}
 	}
 
-/**getter and setter ovverrides dei metodi chiamati dalla superclasse*/
-	
+//--------getter and setter-------//	
+	/** stat1 usato per bonus_def
+	 * @return bonus_def
+	 */
 	public int getStat1() {
 		return bonus_def;
 	}

@@ -2,12 +2,11 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 
 /**
  * @author Luca Casto 
- * v1.0
+ * @version 1.0
+ * @since 1.0
  * astrazione delle risorse usate nel gioco server dominator, 
  * usata astrazione per risorse aggiuntive in versioni successive
  */
-
-
 public abstract class Risorse {
 	private int livello_risorsa;
 	private String nome;
@@ -24,9 +23,9 @@ public abstract class Risorse {
 		tempo_richiesto=0;
 	}
 	
+	/**aggiorna il livello delle risorse, generico per tutte le risorse */
 	public boolean potenziamento() {
-		/**aggiorna il livello delle risorse, generico per tutte le risorse */
-
+		
 		boolean powerup=false;
 		int i;
 		i=livello_risorsa+1;
@@ -42,7 +41,7 @@ public abstract class Risorse {
 	public abstract void effetto();
 
 	
-/** getter and setter*/
+//--------getter and setter-------//	
 	
 	public int getLivello_risorsa() {
 		return livello_risorsa;
@@ -77,7 +76,8 @@ public abstract class Risorse {
 	public void setTempo_richiesto(int tempo_richiesto) {
 		this.tempo_richiesto = tempo_richiesto;
 	}
-/** ATTENZIONE: le stat rappresentano le variabili che le risorse specifiche
+	
+/* ATTENZIONE: le stat rappresentano le variabili che le risorse specifiche
  * devono riportate ad altre classi, nelle sottoclassi questi metodi saranno
  * specializzati.
  */

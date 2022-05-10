@@ -2,15 +2,14 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 
 /**
  * @author Luca Casto 
- * v1.0
+ * @versio 1.0
+ * @since 1.0
  * prima versione risorsa cpu, serve per aumentare il livello 
  * delle classi software, il livello dei software viene aggiornato
  * in funzione del livello di questa risorsa, passando variabili intere,
  * indicanti i livelli da passare nella creazione software,
  * alla classe nodo, la quale interagisce veramente con i software.
- * NB: stat1 = antivirus, stat2= virus, stat3= rootcrash.
  */
-
 public class Cpu extends Risorse{
 	private int antivirus, virus, rootcrash;
 	
@@ -29,12 +28,11 @@ public class Cpu extends Risorse{
 		System.out.println("rootcrash lvl"+ rootcrash);
 */
 	}
-
+	
+	/**aggiorna, in funzione del livello risorsa, le caratteristiche
+	 * che vengono sbloccate e i requisiti per il livello successivo
+	 */
 	public void effetto() {
-		/**aggiorna, in funzione del livello risorsa, le caratteristiche
-		 * che vengono sbloccate e i requisiti per il livello successivo
-		 */
-		
 		switch ( super.getLivello_risorsa() ) {
 		case 0: antivirus=0;
 				virus=0;
@@ -105,18 +103,25 @@ public class Cpu extends Risorse{
 */
 	}
 	
-/**getter and setter ovverrides dei metodi della superclasse
- * Risorse, per restituire i valori.
- */
+//--------getter and setter-------//
 
+	/**stat1 usato per livello antivirus
+	 * @return antivirus
+	 */
 	public int getStat1() {
 		return antivirus;
 	}
 
+	/**stat2 usato per livello virus
+	 * @return virus
+	 */
 	public int getStat2() {
 		return virus;
 	}
 
+	/**stat 3 usato per livello rootcrash
+	 * @return rootcrash
+	 */
 	public int getStat3() {
 		return rootcrash;
 	}

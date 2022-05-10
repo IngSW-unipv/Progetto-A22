@@ -5,6 +5,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+/**
+ * @author Matteo c
+ * @version 1.0
+ * @since 1.0
+ */
 public class Timer {
 	public boolean timer(int tempo){
 		if(tempo>0) {	

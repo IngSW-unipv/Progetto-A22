@@ -5,13 +5,13 @@ import java.util.Arrays;
 
 /**
  * @author Luca Casto 
- * v1.0
+ * @version 1.0
+ * @since 1.0
  * variabile interna alla classe Giocatore.
  * Usata per identificare graficamente il nodo di ogni giocatore. 
  * attribuisce a variabili dei valori esadecimali, 
  * restituiti poi da un getter nella classe Giocatore.
  */
-
 public class Colore {
 
 	private int grigio, giallo, arancione;

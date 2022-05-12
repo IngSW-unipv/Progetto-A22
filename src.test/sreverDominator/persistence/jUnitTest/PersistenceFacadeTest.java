@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwnId;
@@ -141,7 +142,7 @@ class PersistenceFacadeTest {
 		} catch (Exception e) {
 			System.err.println("configurazione errata!!!!!");
 		}
-		man.insertLanguegeList(p, FilesLanguageManager.getCurrentLanguage());
+		man.insertLanguegeList(p, ILanguageManager.getCurrentLanguage());
 
 		
 	}

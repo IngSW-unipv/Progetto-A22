@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 import serverDominator.config.model.ScriptsFacade;
@@ -51,7 +52,7 @@ public class Controller {
 	
 	private void initListenersPanelBenvenuto() {
 		cfgFrame.getPanelBenvenuto().getIndietroBott().setEnabled(false);
-		cfgFrame.getPanelBenvenuto().getListaLingue().setSelectedValue(FilesLanguageManager.getCurrentLanguage(), true);
+		cfgFrame.getPanelBenvenuto().getListaLingue().setSelectedValue(ILanguageManager.getCurrentLanguage(), true);
 		//String selectedItem = cfgFrame.getPanelBenvenuto().getListaLingue().getSelectedValue();
 		cfgFrame.getPanelBenvenuto().getAvantiBott().addActionListener(new ActionListener() {
 			
@@ -67,18 +68,18 @@ public class Controller {
 					Properties p=new Properties();
 					try {
 						p=PropertiesFile.loadPropertiesFromFile(
-								FilesLanguageManager.getLanguageFilePath(FilesLanguageManager.getCurrentLanguage())
+								FilesLanguageManager.getLanguageFilePath(ILanguageManager.getCurrentLanguage())
 								);
 					} catch (Exception e2) {
 						// TODO: handle exception
 					}
 					try {
-						JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(LinguaNonSelezionata, "Non è Stata Selezionata Una Lingua").getBytes(),"UTF-8"));
+						JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(LinguaNonSelezionata, "Non ï¿½ Stata Selezionata Una Lingua").getBytes(),"UTF-8"));
 					} catch (HeadlessException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (UnsupportedEncodingException e1) {
-						JOptionPane.showMessageDialog(cfgFrame, "Non è Stata Selezionata Una Lingua");
+						JOptionPane.showMessageDialog(cfgFrame, "Non ï¿½ Stata Selezionata Una Lingua");
 					}
 				}				
 			}
@@ -97,7 +98,7 @@ public class Controller {
 		        	   	cfgFrame.onlyDescriptionPanelCreator();
 		        	   	cfgFrame.loadFirstPanel();
 		        	   	initListeners();
-		        	   	cfgFrame.getPanelBenvenuto().getListaLingue().setSelectedValue(FilesLanguageManager.getCurrentLanguage(), true);
+		        	   	cfgFrame.getPanelBenvenuto().getListaLingue().setSelectedValue(ILanguageManager.getCurrentLanguage(), true);
 		           }
 		         }
 		    }
@@ -163,7 +164,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
-				Properties p=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
+				Properties p=FilesLanguageManager.getPropertiesLanguage(ILanguageManager.getCurrentLanguage());
 				boolean result=DataBase.createDataBase(cfgFrame.getPanelConfig().getTextUrlToDataBase().getText(), 
 						cfgFrame.getPanelConfig().getTextUserName().getText(), 
 						String.valueOf(cfgFrame.getPanelConfig().getTextPassword().getPassword()));

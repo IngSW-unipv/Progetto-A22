@@ -6,17 +6,18 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
 
 /**
  * Obiettivi query
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
+ * @see Obiettivo
  * @see IObiettiviDAO
  * @see DbConnection
  */
@@ -30,10 +31,10 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	}
 	
 	@Override
-	public ArrayList<Obiettivi> selectAll() {
-		ArrayList<Obiettivi> result = new ArrayList<>();
+	public ArrayList<Obiettivo> selectAll() {
+		ArrayList<Obiettivo> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		int posizioneColonna =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
+		int posizioneColonna =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
 		
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		Statement st1;
@@ -47,7 +48,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(1), rs1.getString(2+posizioneColonna),rs1.getInt(3));
+				Obiettivo a=new Obiettivo(rs1.getInt(1), rs1.getString(2+posizioneColonna),rs1.getInt(3));
 
 				result.add(a);
 			}
@@ -58,10 +59,10 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	}
 
 	@Override
-	public ArrayList<Obiettivi> selectByRicompensa(Obiettivi obRi) {
-		ArrayList<Obiettivi> result = new ArrayList<>();
+	public ArrayList<Obiettivo> selectByRicompensa(Obiettivo obRi) {
+		ArrayList<Obiettivo> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		int position =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
+		int position =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
 		
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
@@ -76,7 +77,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(1), rs1.getString(2+position),rs1.getInt(3));
+				Obiettivo a=new Obiettivo(rs1.getInt(1), rs1.getString(2+position),rs1.getInt(3));
 
 				result.add(a);
 			}
@@ -87,10 +88,10 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	}
 	/*
 	 * attenzione a come si usa 'a' deve contenere il valore della descrizione e non una chiave 
-	 * il valore però deve esistere nel dataBase e deve essere  lingua corrente 
+	 * il valore perï¿½ deve esistere nel dataBase e deve essere  lingua corrente 
 	 */
 	@Override
-	public boolean insertObiettivo(Obiettivi a) {
+	public boolean insertObiettivo(Obiettivo a) {
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
@@ -102,7 +103,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			st1 = conn.prepareStatement(query);
 			DBLinguaManager man=new DBLinguaManager(propConn);
 			st1.setInt(1, a.getIdObiettivo());
-			st1.setString(2,man.getLanguageKayByValue(a.getDescrizione(), FilesLanguageManager.getCurrentLanguage()));
+			st1.setString(2,man.getLanguageKayByValue(a.getDescrizione(), ILanguageManager.getCurrentLanguage()));
 			st1.setInt(3,a.getRicompensa());
 
 			st1.executeUpdate();
@@ -117,10 +118,10 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	}
 	/*
 	 * attenzione a come si usa 'a' deve contenere il valore della descrizione e non una chiave 
-	 * il valore però deve esistere nel dataBase e deve essere  lingua corrente 
+	 * il valore perï¿½ deve esistere nel dataBase e deve essere  lingua corrente 
 	 */
 	@Override
-	public boolean updateObiettiviById(Obiettivi newO) {
+	public boolean updateObiettiviById(Obiettivo newO) {
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		
@@ -134,7 +135,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1,newO.getRicompensa());
-			st1.setString(2,man.getLanguageKayByValue(newO.getDescrizione(), FilesLanguageManager.getCurrentLanguage()));
+			st1.setString(2,man.getLanguageKayByValue(newO.getDescrizione(), ILanguageManager.getCurrentLanguage()));
 			st1.setInt(3,newO.getIdObiettivo());
 
 			st1.executeUpdate();
@@ -149,7 +150,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	}
 
 	@Override
-	public boolean updateRicompensaObiettivoByRicompensa(Obiettivi oldR, Obiettivi newR) {
+	public boolean updateRicompensaObiettivoByRicompensa(Obiettivo oldR, Obiettivo newR) {
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
@@ -174,10 +175,10 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	}
 
 	@Override
-	public Obiettivi selectObiettiviById(Obiettivi Id) {
-		Obiettivi risult=new Obiettivi();
+	public Obiettivo selectObiettiviById(Obiettivo Id) {
+		Obiettivo risult=new Obiettivo();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		int posizioneLingua =man.exists(FilesLanguageManager.getCurrentLanguage())? man.getLanguegePosition(FilesLanguageManager.getCurrentLanguage())+1:0;
+		int posizioneLingua =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
@@ -191,7 +192,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 			int i=0;
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(1), rs1.getString(2+posizioneLingua),rs1.getInt(3));
+				Obiettivo a=new Obiettivo(rs1.getInt(1), rs1.getString(2+posizioneLingua),rs1.getInt(3));
 				risult.setDescrizione(a.getDescrizione());
 				risult.setIdObiettivo(a.getIdObiettivo());
 				risult.setRicompensa(a.getRicompensa());

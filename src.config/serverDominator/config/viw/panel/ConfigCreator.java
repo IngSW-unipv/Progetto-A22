@@ -1,27 +1,28 @@
 package serverDominator.config.viw.panel;
 
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
-
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JRadioButton;
 import java.awt.Font;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
  * Panello per creazione del DataBase e per aquisire il percorso di una cartella
@@ -73,7 +74,7 @@ public class ConfigCreator extends JPanel {
 	
 	public ConfigCreator() {
 		super();
-		this.init(FilesLanguageManager.getCurrentLanguage());
+		this.init(ILanguageManager.getCurrentLanguage());
 	}
 	/**
 	 * Create the panel.

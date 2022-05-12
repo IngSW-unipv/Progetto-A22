@@ -3,9 +3,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
@@ -63,8 +63,8 @@ public class PersistenceFacade{
 	 * @param a
 	 * Asset da inserire
 	 * @return
-	 * vero se asset è stato inserito con sucesso 
-	 * </br>falso se l'operazione non è andata a buon fine
+	 * vero se asset Ã¨ stato inserito con sucesso 
+	 * </br>falso se l'operazione non Ã¨ andata a buon fine
 	 */
 	public boolean insertAsset(Asset a) {
 		return asset.insertAsset(a);
@@ -76,8 +76,8 @@ public class PersistenceFacade{
 	 * @param newA
 	 * Asset da aggiornare
 	 * @return
-	 * vero se asset è stato inserito con sucesso 
-	 * </br>falso se l'operazione non è andata a buon fine
+	 * vero se asset Ã¨ stato inserito con sucesso 
+	 * </br>falso se l'operazione non Ã¨ andata a buon fine
 	 */
 	public boolean updateAssetById(Asset newA) {
 		return asset.updateAssetById(newA);
@@ -90,8 +90,8 @@ public class PersistenceFacade{
 	 * @param newPrice
 	 * prezzo aggiornato
 	 * @return
-	 * vero se asset è stato inserito con sucesso 
-	 * </br>falso se l'operazione non è andata a buon fine
+	 * vero se asset Ã¨ stato inserito con sucesso 
+	 * </br>falso se l'operazione non Ã¨ andata a buon fine
 	 */
 	public boolean updatePriceAssetByPrice(Asset oldPrice, Asset newPrice) {
 		return asset.updatePriceAssetByPrice(oldPrice, newPrice);
@@ -122,39 +122,39 @@ public class PersistenceFacade{
 	
 	/**
 	 * Inserisce Asset in possesso dal giocatpre 
-	 * @see AsetOwn
+	 * @see AssetOwn
 	 * @param a
 	 * AssetOwn che si vole inserire
 	 * @return
-	 *  Vero se l'operazione è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 *  Vero se l'operazione Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 * 
 	 */
-	public boolean insertAssetOwn(AsetOwn a){
+	public boolean insertAssetOwn(AssetOwn a){
 		return assetOwn.insertAssetOwn(a);
 	}
 	
 	/**
 	 * Aggiorna quantita di un'asset posseduto dal giocatore 
-	 * @see AsetOwn
+	 * @see AssetOwn
 	 * @param newA
 	 * 
 	 * @return
-	 *  Vero se l'operazione è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 *  Vero se l'operazione Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 */
-	public boolean updateQuantityAssetOwnByAssetOwnId(AsetOwn newA) {
+	public boolean updateQuantityAssetOwnByAssetOwnId(AssetOwn newA) {
 		return assetOwn.updateQuantityAssetOwnById(newA);
 	}
 	
 	/**
 	 * Seleziona gli obiettivi che hanno la stessa ricompensa dell'obiettivo argomento
 	 * @param obRi
-	 * </br>Obiettivo argomento; è sifficiente che abbia solo la ricompensa settata
+	 * </br>Obiettivo argomento; Ã¨ sifficiente che abbia solo la ricompensa settata
 	 * @return
 	 * Lista Obiettivi che hanno la stessa ricompenza dell'obiettivo argomento
 	 */
-	public ArrayList<Obiettivi> selectObiettiviByRicompensa(Obiettivi obRi){
+	public ArrayList<Obiettivo> selectObiettiviByRicompensa(Obiettivo obRi){
 		return IObiettiviDAOFactory.getIObiettiviDAO(obRi).selectByRicompensa(obRi);
 	}
 	
@@ -163,10 +163,10 @@ public class PersistenceFacade{
 	 * @param a
 	 * </br>Obiettivo da inserire 
 	 * @return
-	 * Vero se l'operazione è andata a buon fine </br>
-	 * Falso se loperazione è fallita
+	 * Vero se l'operazione Ã¨ andata a buon fine </br>
+	 * Falso se loperazione Ã¨ fallita
 	 */
-	public boolean insertObiettivo(Obiettivi a){
+	public boolean insertObiettivo(Obiettivo a){
 		return IObiettiviDAOFactory.getIObiettiviDAO(a).insertObiettivo(a);
 	}
 	
@@ -176,10 +176,10 @@ public class PersistenceFacade{
 	 * @param newO
 	 * </br> Obiettivo da aggiornare
 	 * @return
-	 * Vero se l'operazion è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 * Vero se l'operazion Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 */
-	public boolean updateObiettiviByObiettivoId( Obiettivi newO){
+	public boolean updateObiettiviByObiettivoId( Obiettivo newO){
 		return IObiettiviDAOFactory.getIObiettiviDAO(newO).updateObiettiviById(newO);
 	}
 	
@@ -190,10 +190,10 @@ public class PersistenceFacade{
 	 * @param newR
 	 * </br>Ricompensa nuova
 	 * @return
-	 * Vero se l'aggiornamento è andato a buon fine 
-	 * </br>Falso se l'aggiornamento è fallito
+	 * Vero se l'aggiornamento Ã¨ andato a buon fine 
+	 * </br>Falso se l'aggiornamento Ã¨ fallito
 	 */
-	public boolean updateRicompensaObiettivoByRicompensa(Obiettivi oldR, Obiettivi newR){
+	public boolean updateRicompensaObiettivoByRicompensa(Obiettivo oldR, Obiettivo newR){
 		return this.obiettivi.updateRicompensaObiettivoByRicompensa(oldR, newR);
 	}
 	
@@ -201,11 +201,11 @@ public class PersistenceFacade{
 	 * Seleziona biettivo dal id dell'obiettivo
 	 * @param Id
 	 * </br>Obiettivo da selezionare;
-	 * </br>è sufficiente che abbia almeno l'id Settato
+	 * </br>Ã¨ sufficiente che abbia almeno l'id Settato
 	 * @return
 	 * Obiettivo Completo di tutte le informazioni
 	 */
-	public Obiettivi selectObiettiviByObiettiviId(Obiettivi id) {
+	public Obiettivo selectObiettiviByObiettiviId(Obiettivo id) {
 		return IObiettiviDAOFactory.getIObiettiviDAO(id).selectObiettiviById(id);
 	}
 	
@@ -215,7 +215,7 @@ public class PersistenceFacade{
 	 * </br>UserAccount di cui si cogliono conoscere gli obiettivi
 	 * @return
 	 * Lista Obiettivi del giocatore
-	 * </br>null se qualcosa è andato storto
+	 * </br>null se qualcosa Ã¨ andato storto
 	 */
 	public ArrayList<ObiettiviUser> selectObiettiviUserByUserId(UserAccount accInput){
 		return this.userAccount.getObiettiviUserByUserAccount(accInput);
@@ -228,9 +228,9 @@ public class PersistenceFacade{
 	 * @return
 	 * Lista UserAccount che hanno l'obiettivoargomento; 
 	 * </br> Si conosce solo lo username degli userAccount
-	 * </br> lista nulla se l'operazione non è andata abuon fine
+	 * </br> lista nulla se l'operazione non Ã¨ andata abuon fine
 	 */
-	public ArrayList<ObiettiviUser> selectObiettiviUserByObiettiviId(Obiettivi obInput){
+	public ArrayList<ObiettiviUser> selectObiettiviUserByObiettiviId(Obiettivo obInput){
 		return this.obiettiviUser.selectByObiettiviId(obInput);
 	}
 	
@@ -239,8 +239,8 @@ public class PersistenceFacade{
 	 * @param o
 	 * @see ObiettiviUser
 	 * @return
-	 * Vero se l'assegnazione è andata a buon fine 
-	 * </br>Fasso se l'assegnazione è fallita
+	 * Vero se l'assegnazione Ã¨ andata a buon fine 
+	 * </br>Fasso se l'assegnazione Ã¨ fallita
 	 */
 	public boolean insertObiettiviUser(ObiettiviUser o){
 		return this.obiettiviUser.insertObiettiviUser(o);
@@ -254,8 +254,8 @@ public class PersistenceFacade{
 	 * @see ObiettiviUserId
 	 * @see ObiettiviUser
 	 * @return
-	 * Vero se l'operazione è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 * Vero se l'operazione Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 */
 	public boolean updateStatoObiettiviUserbyObiettiviUserId(ObiettiviUser newOU) {
 		return this.obiettiviUser.updateStatoObiettiviUserbyId(newOU);
@@ -266,11 +266,11 @@ public class PersistenceFacade{
 	 * @param us
 	 * vuser Account che si vuole inserire
 	 * @return
-	 * Vero se l'operazione è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 * Vero se l'operazione Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 */
-	public boolean insetUserAccount(UserAccount us){
-		return this.userAccount.insetUserAccount(us);
+	public boolean insertUserAccount(UserAccount us){
+		return this.userAccount.insertUserAccount(us);
 	}
 	
 	/**
@@ -279,8 +279,8 @@ public class PersistenceFacade{
 	 * </br> se l'utente non esiste nel data base lo inserisce
 	 * @param us
 	 * @return
-	 * Vero se l'operazione è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 * Vero se l'operazione Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 */
 	public boolean updateUserAccount(UserAccount us){
 		return this.userAccount.updateUserAccount(us);
@@ -293,8 +293,8 @@ public class PersistenceFacade{
 	 * @param newUsername
 	 * </br> Nuovo username da sostituire a quello vecchio
 	 * @return
-	 * Vero se l'operazione è andata a buon fine 
-	 * </br>Falso se l'operazione è fallita
+	 * Vero se l'operazione Ã¨ andata a buon fine 
+	 * </br>Falso se l'operazione Ã¨ fallita
 	 */
 	public boolean updateUserAccountUsername(UserAccount us, String newUsername){
 		return this.userAccount.updateUserAccountUsername(us, newUsername);
@@ -305,8 +305,8 @@ public class PersistenceFacade{
 	 * @param us
 	 * </br>User id di cui si vogliono recuperare i dati i dati
 	 * @return
-	 * User account completo se tutto è andato bene</br>
-	 * null se qualcosa è andato storto
+	 * User account completo se tutto Ã¨ andato bene</br>
+	 * null se qualcosa Ã¨ andato storto
 	 */
 	public UserAccount getUserAccountById(UserAccount us){
 		return this.userAccount.getUserAccountById(us);
@@ -333,17 +333,17 @@ public class PersistenceFacade{
 	 * @return
 	 * Tutti gli asset posseduti dallo user account
 	 */
-	public ArrayList<AsetOwn> getAssetOwndByUserAccount(UserAccount us){
+	public ArrayList<AssetOwn> getAssetOwndByUserAccount(UserAccount us){
 		return this.userAccount.getAssetOwndByUserAccount(us);
 	}
 	
 	/**
 	 * Recupera gli obiettivi assegnati allo userAcocunt
 	 * @param us
-	 * userAccount </br> è sufficiente che abbia username e password correte
+	 * userAccount </br> Ã¨ sufficiente che abbia username e password correte
 	 * @return 
 	 * Lista obiettivi assegnati allo userAccount </br> 
-	 * nullo se è impossibile recuperare le informazioni richeiste 
+	 * nullo se Ã¨ impossibile recuperare le informazioni richeiste 
 	 */
 	public ArrayList<ObiettiviUser> getObiettiviUserByUserAccount(UserAccount us){
 		return this.userAccount.getObiettiviUserByUserAccount(us);
@@ -353,12 +353,12 @@ public class PersistenceFacade{
 	 *Aggiorna punteggio di userAccount
 	 * @param us
 	 * userAccount </br> 
-	 * è sufficiente che abbia username e password correte
+	 * Ã¨ sufficiente che abbia username e password correte
 	 * @param newPunteggio
 	 * nuovo punteggio da assegnare a useraccount 
 	 * @return 
 	 * </br> vero se aggiornamento fatto
-	 * </br> falso se aggiornamento è fallito
+	 * </br> falso se aggiornamento Ã¨ fallito
 	 */
 	public boolean updateUserAccountPunteggio(UserAccount us, int newPunteggio){
 		return this.userAccount.updateUserAccountPunteggio(us, newPunteggio);
@@ -368,12 +368,12 @@ public class PersistenceFacade{
 	 * Aggiorna soldi giocatore 
 	 * @param us
 	 * userAccount </br>
-	 * è sufficiente che abbia username e password correte
+	 * Ã¨ sufficiente che abbia username e password correte
 	 * @param newmny
 	 * nuovo ammoto di denaro
 	 * @return
 	 * </br> vero se aggiornamento fatto
-	 * </br> falso se aggiornamento è fallit
+	 * </br> falso se aggiornamento Ã¨ fallit
 	 */
 	public boolean updateUserAccountMny(UserAccount us, int newmny) {
 		return this.userAccount.updateUserAccountMny(us, newmny);

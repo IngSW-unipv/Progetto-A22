@@ -1,6 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
 
 /**
@@ -27,7 +27,7 @@ public class IObiettiviDAOFactory {
 	 * @return
 	 * IObiettiviDAO che accede alla tabella che viene mappata dall'oggetto 
 	 */
-	public static IObiettiviDAO getIObiettiviDAO(Obiettivi ob) {
+	public static IObiettiviDAO getIObiettiviDAO(Obiettivo ob) {
 		return DBObiettiviDOAFactory.getIObiettiviDAO(ob);
 	}
 }

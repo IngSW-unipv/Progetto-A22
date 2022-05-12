@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * Qualunque obiettivo raggiungibele da gioco
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
+ * @see Obiettivo
  * @see ArrayList
  */
-public class Obiettivi {
+public class Obiettivo {
 
 	/**
 	 * Identificativo dell'obiettivo
@@ -32,7 +32,7 @@ public class Obiettivi {
 	/**
 	 * Crea obiettivo vuoto
 	 */
-	public Obiettivi() {
+	public Obiettivo() {
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class Obiettivi {
 	 * @param descrizione
 	 * @param ricompensa
 	 */
-	public Obiettivi(Integer idObiettivo, String descrizione, Integer ricompensa) {
+	public Obiettivo(Integer idObiettivo, String descrizione, Integer ricompensa) {
 		this.idObiettivo = idObiettivo;
 		this.descrizione = descrizione;
 		this.ricompensa = ricompensa;
@@ -54,7 +54,7 @@ public class Obiettivi {
 	 * @param ricompensa
 	 * @param obiettiviUsers
 	 */
-	public Obiettivi(Integer idObiettivo, String descrizione, Integer ricompensa, ArrayList<ObiettiviUser> obiettiviUsers) {
+	public Obiettivo(Integer idObiettivo, String descrizione, Integer ricompensa, ArrayList<ObiettiviUser> obiettiviUsers) {
 		this.idObiettivo = idObiettivo;
 		this.descrizione = descrizione;
 		this.ricompensa = ricompensa;
@@ -107,14 +107,14 @@ public class Obiettivi {
 	}
 
 	/**
-	 * @return users a cui è associato l'obiettivo
+	 * @return users a cui Ã¨ associato l'obiettivo
 	 */
 	public ArrayList<ObiettiviUser> getObiettiviUsers() {
 		return this.obiettiviUsers;
 	}
 
 	/**
-	 * Setta users a cui è associato l'obiettivo
+	 * Setta users a cui Ã¨ associato l'obiettivo
 	 * @param obiettiviUsers
 	 */
 	public void setObiettiviUsers(ArrayList<ObiettiviUser> obiettiviUsers) {
@@ -125,7 +125,7 @@ public class Obiettivi {
 	/**
 	 * @return Questo obiettivo
 	 */
-	public Obiettivi getObiettivi() {
+	public Obiettivo getObiettivi() {
 		return this;
 	}
 	/**
@@ -149,12 +149,12 @@ public class Obiettivi {
 				+ "]";
 	}
 
-	public boolean equals(Obiettivi obj) {
+	public boolean equals(Obiettivo obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		Obiettivi other = (Obiettivi) obj;
+		Obiettivo other = (Obiettivo) obj;
 		if (idObiettivo == other.getIdObiettivo()&&this.descrizione.equalsIgnoreCase(other.getDescrizione())&&this.ricompensa.equals(other.getRicompensa()))
 			return true;
 		return false;

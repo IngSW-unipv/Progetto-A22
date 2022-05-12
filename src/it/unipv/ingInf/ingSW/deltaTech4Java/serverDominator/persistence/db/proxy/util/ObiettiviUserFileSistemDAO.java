@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
@@ -148,7 +148,7 @@ public class ObiettiviUserFileSistemDAO {
 				
 				if (tokens.length == 4) {
 					try {
-					Obiettivi o =new Obiettivi(Integer.valueOf(tokens[ID]),tokens[DESCRIZIONE],Integer.valueOf(tokens[RICOMPENSA]));
+					Obiettivo o =new Obiettivo(Integer.valueOf(tokens[ID]),tokens[DESCRIZIONE],Integer.valueOf(tokens[RICOMPENSA]));
 					ObiettiviUser ou = new ObiettiviUser(o,null, tokens[STATO]);
 					ObiettiviUser.add(ou);
 					ObiettiviUser=getObiettiviListWithoutDuplicate(ObiettiviUser);

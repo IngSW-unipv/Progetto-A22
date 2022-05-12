@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//resources/config/persistence/dataBase/connWith_root=UTF-8
+encoding//resources/config/persistence/dataBase/connWith_sd_sys=UTF-8
 encoding//resources/language/LingueDisponibili=UTF-8
 encoding//resources/language/currentLanguage=UTF-8
 encoding//resources/language/espa\u00F1ol=UTF-8

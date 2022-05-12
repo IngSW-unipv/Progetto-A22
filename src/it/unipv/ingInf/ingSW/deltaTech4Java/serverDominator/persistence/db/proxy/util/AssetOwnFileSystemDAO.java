@@ -7,8 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
@@ -17,7 +17,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
  * (file semistrutturato, tipo csv)
  * @author TawaHabib
  * @version 1.0
- * @see AsetOwn
+ * @see AssetOwn
  */
 public class AssetOwnFileSystemDAO {
 
@@ -44,13 +44,13 @@ public class AssetOwnFileSystemDAO {
      * @param fileName
      * percorso del file in cui si vogliono salvare
      */
-    public static boolean saveInCsvFile(ArrayList<AsetOwn> asetOwns,String fileName) {
+    public static boolean saveInCsvFile(ArrayList<AssetOwn> asetOwns,String fileName) {
     	File fls=new File(fileName);
     	if (!fls.exists()) {
     		return saveFile(getAssetListWithoutDuplicate(asetOwns),fileName);
     	}
     	else {
-    		ArrayList<AsetOwn> ass=readAssetOwnFromCsvFile(fileName);
+    		ArrayList<AssetOwn> ass=readAssetOwnFromCsvFile(fileName);
     		ass.addAll(asetOwns);
     		return saveFile(getAssetListWithoutDuplicate(ass), fileName);
     	}
@@ -61,13 +61,13 @@ public class AssetOwnFileSystemDAO {
      * salva assetOwn n un percorso redefinito
      * @param asetOwns
      */
-    public static boolean saveInCsvFile(ArrayList<AsetOwn> asetOwns) {
+    public static boolean saveInCsvFile(ArrayList<AssetOwn> asetOwns) {
        	File fls=new File(FILE_NAME);
     	if (!fls.exists()) {
     		return saveFile(getAssetListWithoutDuplicate(asetOwns),FILE_NAME);
     	}
     	else {
-    		ArrayList<AsetOwn> ass=readAssetOwnFromCsvFile(FILE_NAME);
+    		ArrayList<AssetOwn> ass=readAssetOwnFromCsvFile(FILE_NAME);
     		ass.addAll(asetOwns);
     		return saveFile(getAssetListWithoutDuplicate(ass), FILE_NAME);
     	}
@@ -76,11 +76,11 @@ public class AssetOwnFileSystemDAO {
      * prendi assetOwn nel file predefinito
      * @return lista AsetOwn
      */
-    public static ArrayList<AsetOwn> readAssetOwnFromCsvFile() {
+    public static ArrayList<AssetOwn> readAssetOwnFromCsvFile() {
     	return readAssetOwnFromCsvFile(FILE_NAME);
     }
     
-	private static boolean saveFile(ArrayList<AsetOwn> asetOwns,String fileName) {
+	private static boolean saveFile(ArrayList<AssetOwn> asetOwns,String fileName) {
 		boolean ris=true;
 		FileWriter fileWriter = null;
 		asetOwns=getAssetListWithoutDuplicate(asetOwns);
@@ -91,7 +91,7 @@ public class AssetOwnFileSystemDAO {
 			fileWriter.append(FILE_HEADER.toString());
 			fileWriter.append(LINE_SEPARATOR);
 			
-			for (AsetOwn a : asetOwns) {
+			for (AssetOwn a : asetOwns) {
 				
 				fileWriter.append(String.valueOf(a.getAsset().getIdAsset()));
 				fileWriter.append(COMMA_DELIMITER);
@@ -130,16 +130,16 @@ public class AssetOwnFileSystemDAO {
 	
 	/**
 	 * legge da file semistruttorato gli asset posseduti
-	 * valori duplicari--> vale la con numero più alto
+	 * valori duplicari--> vale la con numero piï¿½ alto
 	 * @param fileName
 	 * percorso del file da cui si vuole leggere
 	 * @return lista asset presenti nei file
 	 */
-	public static ArrayList<AsetOwn> readAssetOwnFromCsvFile(String fileName) {
+	public static ArrayList<AssetOwn> readAssetOwnFromCsvFile(String fileName) {
 		
 		BufferedReader fileReader = null;
 		
-		ArrayList<AsetOwn> asetOwn = new ArrayList<AsetOwn> ();
+		ArrayList<AssetOwn> asetOwn = new ArrayList<AssetOwn> ();
 		
 		try {
 			
@@ -154,7 +154,7 @@ public class AssetOwnFileSystemDAO {
 				if (tokens.length == 6) {
 					try {
 					Asset a =new Asset(Integer.valueOf(tokens[ID]),Integer.valueOf(tokens[COSTO]),tokens[NOME],tokens[DESCRIZIONE],Integer.valueOf(tokens[LIVELLO]));
-					AsetOwn ao = new AsetOwn(new AsetOwnId(a, null), Integer.valueOf(tokens[QUANTITA]));
+					AssetOwn ao = new AssetOwn(new AssetOwnId(a, null), Integer.valueOf(tokens[QUANTITA]));
 					asetOwn.add(ao);
 					asetOwn=getAssetListWithoutDuplicate(asetOwn);
 					}
@@ -188,9 +188,9 @@ public class AssetOwnFileSystemDAO {
 	}
 	
 
-	private static ArrayList<AsetOwn>  getAssetListWithoutDuplicate(ArrayList<AsetOwn> ass){
-		ArrayList<AsetOwn> newList=new ArrayList<AsetOwn>();
-		for(AsetOwn a : ass) {
+	private static ArrayList<AssetOwn>  getAssetListWithoutDuplicate(ArrayList<AssetOwn> ass){
+		ArrayList<AssetOwn> newList=new ArrayList<AssetOwn>();
+		for(AssetOwn a : ass) {
 			if(!newList.contains(a)) {
 				newList.add(a);
 			}
@@ -228,10 +228,10 @@ public class AssetOwnFileSystemDAO {
  * prova
  */
 	    public static void main(String[] args) {
-			ArrayList<AsetOwn> ab=readAssetOwnFromCsvFile(FILE_NAME);
+			ArrayList<AssetOwn> ab=readAssetOwnFromCsvFile(FILE_NAME);
 			
 			UserAccount us=new UserAccount();
-			for(AsetOwn ass: ab){
+			for(AssetOwn ass: ab){
 				ass.setUserAccount(us);
 				System.out.println(ass.toString());
 			}

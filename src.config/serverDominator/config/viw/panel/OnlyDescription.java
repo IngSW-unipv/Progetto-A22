@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 
 public class OnlyDescription extends JPanel {
 
@@ -27,7 +28,7 @@ public class OnlyDescription extends JPanel {
 	public void init() {
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
-		Properties p=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
+		Properties p=FilesLanguageManager.getPropertiesLanguage(ILanguageManager.getCurrentLanguage());
 		
 		label = new Label(p.getProperty(KEY_LABLE,"Gioco configurato con sucesso"));
 		springLayout.putConstraint(SpringLayout.NORTH, label, 122, SpringLayout.NORTH, this);

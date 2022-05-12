@@ -2,7 +2,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 /**
@@ -18,11 +18,11 @@ public interface IUserAccountDAO {
 	 * @param us
 	 * @return
 	 */
-	public boolean insetUserAccount(UserAccount us);
+	public boolean insertUserAccount(UserAccount us);
 	
 	/**
 	 * controlla e aggiorna tutti i dati di userAccount tranne username e la password
-	 * lo username non deve ambiare. se username non esiste o se password non è quella nel db 
+	 * lo username non deve ambiare. se username non esiste o se password non ï¿½ quella nel db 
 	 * tronca l'operazione, Fallisce 
 	 * @param us
 	 * @return
@@ -30,7 +30,7 @@ public interface IUserAccountDAO {
 	public boolean updateUserAccount(UserAccount us);
 	
 	/**
-	 * Agguirna lo username, se nuova username già usata da un'altro giocatore fallicse
+	 * Agguirna lo username, se nuova username giï¿½ usata da un'altro giocatore fallicse
 	 * @param us
 	 * @param newUsername
 	 * @return
@@ -61,7 +61,7 @@ public interface IUserAccountDAO {
 	 * userAccount di cui si vogliono conoscere gli asset posseduti
 	 * @return tutti gli asset posseduti dallo UserAccount passato
 	 */
-	public ArrayList<AsetOwn> getAssetOwndByUserAccount(UserAccount us);
+	public ArrayList<AssetOwn> getAssetOwndByUserAccount(UserAccount us);
 	
 	/**
 	 * recuperare tutti gli gli obiettivi assegnati al giocatore

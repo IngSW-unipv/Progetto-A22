@@ -1,7 +1,7 @@
 package sreverDominator.persistence.prove;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
@@ -17,7 +17,7 @@ public class PersistenceFacadeProva {
 		for(ObiettiviUser o: tawa.getObiettiviUsers()) {
 			System.out.println(o.toString());
 		}
-		for(AsetOwn a:tawa.getAsetOwns()) {
+		for(AssetOwn a:tawa.getAsetOwns()) {
 			System.out.println(a.toString());;
 		}
 		if(p.chengeUserAccountPassword(tawa, "123456789")) System.out.println("ok");;

@@ -10,7 +10,7 @@ import java.util.Objects;
  * @see UserAccount
  */
 
-public class AsetOwnId{
+public class AssetOwnId{
 
 	/**
 	 * asset posseduto dallo user
@@ -24,7 +24,7 @@ public class AsetOwnId{
 	/**
 	 * Crea id vuoto
 	 */
-	public AsetOwnId() {
+	public AssetOwnId() {
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class AsetOwnId{
 	 * @param asset
 	 * @param userAccount
 	 */
-	public AsetOwnId(Asset asset, UserAccount userAccount) {
+	public AssetOwnId(Asset asset, UserAccount userAccount) {
 		this.asset = asset;
 		this.userAccount = userAccount;
 	}
@@ -79,7 +79,7 @@ public class AsetOwnId{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AsetOwnId other = (AsetOwnId) obj;
+		AssetOwnId other = (AssetOwnId) obj;
 		return Objects.equals(asset, other.asset) && Objects.equals(userAccount, other.userAccount);
 	}
 	

@@ -2,7 +2,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 
@@ -10,7 +10,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
  * ObiettiviUser query
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
+ * @see Obiettivo
  * @see UserAccount
  * @see ObiettiviUser
  */
@@ -34,7 +34,7 @@ public interface IObiettiviUserDAO {
 	 * obiettivo per cui si desidera fare la ricerca
 	 * @return tutti gli user che hanno lo stesso obiettivo
 	 */
-	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivi obInput);
+	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivo obInput);
 	
 	/**
 	 * Assegnare un obiettivo ad uno user

@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetOwnDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
@@ -19,7 +19,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Con
  * AssetOwm query
  * @author TawaHabib
  * @version 1.0
- * @see AsetOwn
+ * @see AssetOwn
  * @see UserAcount
  * @see IAssetOwnDAO
  * @see Dbconnection 
@@ -33,8 +33,8 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	}
 
 	@Override
-	public ArrayList<AsetOwn> selectAll() {
-		ArrayList<AsetOwn> result = new ArrayList<>();
+	public ArrayList<AssetOwn> selectAll() {
+		ArrayList<AssetOwn> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		Statement st1;
@@ -49,11 +49,11 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			while(rs1.next())
 			{
 				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),
-						man.getLanguageValueByKay(rs1.getString(6), FilesLanguageManager.getCurrentLanguage()) ,
-						man.getLanguageValueByKay(rs1.getString(7), FilesLanguageManager.getCurrentLanguage()),rs1.getInt(8));
+						man.getLanguageValueByKay(rs1.getString(6), ILanguageManager.getCurrentLanguage()) ,
+						man.getLanguageValueByKay(rs1.getString(7), ILanguageManager.getCurrentLanguage()),rs1.getInt(8));
 				UserAccount b =new UserAccount(rs1.getString(2),0);
-				AsetOwnId c= new AsetOwnId(a,b);
-				AsetOwn d=new AsetOwn(c, rs1.getInt(3));
+				AssetOwnId c= new AssetOwnId(a,b);
+				AssetOwn d=new AssetOwn(c, rs1.getInt(3));
 				result.add(d);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -63,8 +63,8 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	}
 
 	@Override
-	public ArrayList<AsetOwn> selectByUserOwner(UserAccount assInput) {
-		ArrayList<AsetOwn> result = new ArrayList<>();
+	public ArrayList<AssetOwn> selectByUserOwner(UserAccount assInput) {
+		ArrayList<AssetOwn> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
@@ -81,11 +81,11 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 			while(rs1.next())
 			{
 				Asset a=new Asset(rs1.getInt(4), rs1.getInt(5),
-						man.getLanguageValueByKay(rs1.getString(6), FilesLanguageManager.getCurrentLanguage()) ,
-						man.getLanguageValueByKay(rs1.getString(7), FilesLanguageManager.getCurrentLanguage()),rs1.getInt(8));
+						man.getLanguageValueByKay(rs1.getString(6), ILanguageManager.getCurrentLanguage()) ,
+						man.getLanguageValueByKay(rs1.getString(7), ILanguageManager.getCurrentLanguage()),rs1.getInt(8));
 				UserAccount b =new UserAccount(rs1.getString(9), rs1.getInt(10));
-				AsetOwnId c= new AsetOwnId(a,b);
-				AsetOwn d=new AsetOwn(c, rs1.getInt(3));
+				AssetOwnId c= new AssetOwnId(a,b);
+				AssetOwn d=new AssetOwn(c, rs1.getInt(3));
 				result.add(d);
 			}
 		}catch (Exception e){
@@ -125,7 +125,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	}
 
 	@Override
-	public boolean insertAssetOwn(AsetOwn a) {
+	public boolean insertAssetOwn(AssetOwn a) {
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
@@ -151,7 +151,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	}
 
 	@Override
-	public boolean updateQuantityAssetOwnById(AsetOwn newA) {
+	public boolean updateQuantityAssetOwnById(AssetOwn newA) {
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -182,7 +182,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 		
 	}
 	
-	public boolean existAssetOwn(AsetOwn newOU) {
+	public boolean existAssetOwn(AssetOwn newOU) {
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;

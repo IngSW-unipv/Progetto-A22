@@ -9,7 +9,7 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.FileToString;
 import serverDominator.config.viw.panel.ConfigCreator;
 import serverDominator.config.viw.panel.InitLinguaChooser;
@@ -63,7 +63,7 @@ public class ConfigFrame extends JFrame {
 			}
 		}
 		
-		panelBenvenuto = new InitLinguaChooser(myList, FilesLanguageManager.getCurrentLanguage());
+		panelBenvenuto = new InitLinguaChooser(myList, ILanguageManager.getCurrentLanguage());
 	}
 	
 	public void runPanelCreator() {

@@ -2,13 +2,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence;
 
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 
 /**
  * Obiettivi query
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
+ * @see Obiettivo
  *
  */
 public interface IObiettiviDAO {
@@ -17,7 +17,7 @@ public interface IObiettiviDAO {
 	 * Seleziona tutti gli obiettivi 
 	 * @return Tutti gli obiettivi nel Db
 	 */
-	public ArrayList<Obiettivi> selectAll();
+	public ArrayList<Obiettivo> selectAll();
 	
 	/**
 	 * Seleziona tutti gli obiettivi che hanno come ricompensa la Stessa 
@@ -25,21 +25,21 @@ public interface IObiettiviDAO {
 	 * @param obRi
 	 * @return Obiettivi
 	 */
-	public ArrayList<Obiettivi> selectByRicompensa(Obiettivi obRi);
+	public ArrayList<Obiettivo> selectByRicompensa(Obiettivo obRi);
 	
 	/**
 	 * Inserisce obiettivo
 	 * @param a
 	 * @return
 	 */
-	public boolean insertObiettivo(Obiettivi a);
+	public boolean insertObiettivo(Obiettivo a);
 	
 	/**
 	 * Aggiorna Obiettivo Dato il Suo id
 	 * @param newO
 	 * @return
 	 */
-	public boolean updateObiettiviById( Obiettivi newO);
+	public boolean updateObiettiviById( Obiettivo newO);
 	
 	/**
 	 * Aggiorna Obiettivi per Ricompensa
@@ -49,13 +49,13 @@ public interface IObiettiviDAO {
 	 * nuovo obettivo
 	 * @return
 	 */
-	public boolean updateRicompensaObiettivoByRicompensa(Obiettivi oldR, Obiettivi newR);
+	public boolean updateRicompensaObiettivoByRicompensa(Obiettivo oldR, Obiettivo newR);
 	
 	/**
 	 * seleziona un obiettivo Dato l'identificativo dell'Obiettivo
 	 * @param Id
 	 * @return
 	 */
-	public Obiettivi selectObiettiviById(Obiettivi Id);
+	public Obiettivo selectObiettiviById(Obiettivo Id);
 
 }

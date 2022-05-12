@@ -23,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
@@ -54,7 +55,7 @@ public class InitLinguaChooser extends JPanel{
 	 */
 	public InitLinguaChooser(ArrayList<String> c) {
 		super();
-		this.init(c, FilesLanguageManager.getCurrentLanguage());
+		this.init(c, ILanguageManager.getCurrentLanguage());
 	}
 	
 	public InitLinguaChooser(ArrayList<String> c, String lingua) {
@@ -73,7 +74,7 @@ public class InitLinguaChooser extends JPanel{
 		}
 		this.lableTtitolo = DefaultComponentFactory.getInstance().createTitle(new String(poropLang.getProperty(InitLinguaChooser_lableTtitolo_KEY_IN_FILE, 
 				"BENVENUTO IN SERVER DOMINATR").getBytes(),StandardCharsets.UTF_8));
-		this.lableTtitolo.setFont(new Font("Arial Black", Font.BOLD, 13));
+		this.lableTtitolo.setFont(new Font("italic", Font.BOLD, 13));
 		this.lableTtitolo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lableTtitolo.setBounds(10, 11, 755, 14);
 		add(this.lableTtitolo);

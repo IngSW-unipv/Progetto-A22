@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwnId;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
@@ -36,7 +36,7 @@ class PersistenceFacadeTest {
 	private static PersistenceFacade p=PersistenceFacade.getInstance();
 	private static ArrayList<UserAccount> us= new ArrayList<UserAccount>();
 	private static ArrayList<Asset> ass= new ArrayList<Asset>();
-	private static ArrayList<Obiettivi> ob=new ArrayList<Obiettivi>();
+	private static ArrayList<Obiettivo> ob=new ArrayList<Obiettivo>();
 	private static ArrayList<ObPunteggio> obp=new ArrayList<ObPunteggio>();
 	
 	/*IMPORTANTE: file che devono esistere e il loro contenuto 
@@ -59,9 +59,9 @@ class PersistenceFacadeTest {
 		ass.add(asset2);
 		ass.add(asset1);
 		
-		Obiettivi ob1=new Obiettivi(1,"EN LEGA 1",100);
-		Obiettivi ob2=new Obiettivi(2,"EN LEGA 2",200);
-		Obiettivi ob3=new Obiettivi(3,"EN LEGA 3",400);
+		Obiettivo ob1=new Obiettivo(1,"EN LEGA 1",100);
+		Obiettivo ob2=new Obiettivo(2,"EN LEGA 2",200);
+		Obiettivo ob3=new Obiettivo(3,"EN LEGA 3",400);
 		ob.add(ob3);
 		ob.add(ob2);
 		ob.add(ob1);
@@ -78,7 +78,7 @@ class PersistenceFacadeTest {
 		UserAccount user1=new UserAccount("Gio","","123456789");
 		user1.setMny(900);
 		user1.setPunteggio(700);
-		user1.addAssetOwn(new AsetOwn(new AsetOwnId(asset2,user1),2));
+		user1.addAssetOwn(new AssetOwn(new AssetOwnId(asset2,user1),2));
 		user1.addObiettiviUser(new ObiettiviUser(ob1,user1,"COMPLETATO"));
 		user1.addObiettiviUser(new ObiettiviUser(ob2,user1,"COMPLETATO"));
 		user1.addObiettiviUser(new ObiettiviUser(ob3,user1,"COMPLETATO"));
@@ -89,7 +89,7 @@ class PersistenceFacadeTest {
 		user2.addObiettiviUser(new ObiettiviUser(ob1,user2,"COMPLETATO"));
 		user2.addObiettiviUser(new ObiettiviUser(ob2,user2,"COMPLETATO"));
 		user2.addObiettiviUser(new ObiettiviUser(ob3,user2,"COMPLETATO"));
-		user2.addAssetOwn(new AsetOwn(new AsetOwnId(asset2,user2),2));
+		user2.addAssetOwn(new AssetOwn(new AssetOwnId(asset2,user2),2));
 		
 		UserAccount user3=new UserAccount("MatC","","123456789");
 		user3.setMny(900);
@@ -97,8 +97,8 @@ class PersistenceFacadeTest {
 		user3.addObiettiviUser(new ObiettiviUser(ob1,user3,"COMPLETATO"));
 		user3.addObiettiviUser(new ObiettiviUser(ob2,user3,"COMPLETATO"));
 		user3.addObiettiviUser(new ObiettiviUser(ob3,user3,"COMPLETATO"));
-		user3.addAssetOwn(new AsetOwn(new AsetOwnId(asset1,user3),3));
-		user3.addAssetOwn(new AsetOwn(new AsetOwnId(asset3,user3),1));
+		user3.addAssetOwn(new AssetOwn(new AssetOwnId(asset1,user3),3));
+		user3.addAssetOwn(new AssetOwn(new AssetOwnId(asset3,user3),1));
 		
 		UserAccount user4=new UserAccount("MatPara","","123456789");
 		user4.setMny(900);
@@ -106,9 +106,9 @@ class PersistenceFacadeTest {
 		user4.addObiettiviUser(new ObiettiviUser(ob1,user4,"COMPLETATO"));
 		user4.addObiettiviUser(new ObiettiviUser(ob2,user4,"COMPLETATO"));
 		user4.addObiettiviUser(new ObiettiviUser(ob3,user4,"COMPLETATO"));
-		user4.addAssetOwn(new AsetOwn(new AsetOwnId(asset1,user4),3));
-		user4.addAssetOwn(new AsetOwn(new AsetOwnId(asset2,user4),2));
-		user4.addAssetOwn(new AsetOwn(new AsetOwnId(asset3,user4),1));
+		user4.addAssetOwn(new AssetOwn(new AssetOwnId(asset1,user4),3));
+		user4.addAssetOwn(new AssetOwn(new AssetOwnId(asset2,user4),2));
+		user4.addAssetOwn(new AssetOwn(new AssetOwnId(asset3,user4),1));
 		
 		UserAccount user5=new UserAccount("TawaHabib","","123456789");
 		user5.setMny(900);
@@ -116,8 +116,8 @@ class PersistenceFacadeTest {
 		user5.addObiettiviUser(new ObiettiviUser(ob1,user5,"COMPLETATO"));
 		user5.addObiettiviUser(new ObiettiviUser(ob2,user5,"COMPLETATO"));
 		user5.addObiettiviUser(new ObiettiviUser(ob3,user5,"COMPLETATO"));
-		user5.addAssetOwn(new AsetOwn(new AsetOwnId(asset1,user5),3));
-		user5.addAssetOwn(new AsetOwn(new AsetOwnId(asset3,user5),1));
+		user5.addAssetOwn(new AssetOwn(new AssetOwnId(asset1,user5),3));
+		user5.addAssetOwn(new AssetOwn(new AssetOwnId(asset3,user5),1));
 		us.add(user1);
 		us.add(user2);
 		us.add(user3);
@@ -217,7 +217,7 @@ class PersistenceFacadeTest {
 	
 	@Test
 	void testInsertAssetOwn() {
-		assertTrue(p.insertAssetOwn(new AsetOwn(ass.get(0),us.get(0),3)));
+		assertTrue(p.insertAssetOwn(new AssetOwn(ass.get(0),us.get(0),3)));
 	}
 
 	/**
@@ -247,7 +247,7 @@ class PersistenceFacadeTest {
 	@Test
 	void testInsertObiettivo() {
 		
-		assertTrue(p.insertObiettivo(new Obiettivi(5,"en LEGA 5",400)));
+		assertTrue(p.insertObiettivo(new Obiettivo(5,"en LEGA 5",400)));
 	}
 
 	/**
@@ -345,10 +345,10 @@ class PersistenceFacadeTest {
 	@Test
 	void testInsertObiettiviUser() {
 		//assegno obiettivo che non esiste 
-		assertFalse(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(6,"LEGA6",600),us.get(3),"NON COMPLETATO")));
-		p.insertObiettivo(new Obiettivi(7,"en LEGA 7",300));
+		assertFalse(p.insertObiettiviUser(new ObiettiviUser(new Obiettivo(6,"LEGA6",600),us.get(3),"NON COMPLETATO")));
+		p.insertObiettivo(new Obiettivo(7,"en LEGA 7",300));
 		//assegno obiettivo che esiste
-		assertTrue(p.insertObiettiviUser(new ObiettiviUser(new Obiettivi(7,"en LEGA7",300),us.get(3),"NON COMPLETATO")));
+		assertTrue(p.insertObiettiviUser(new ObiettiviUser(new Obiettivo(7,"en LEGA7",300),us.get(3),"NON COMPLETATO")));
 	}
 
 	/**
@@ -366,7 +366,7 @@ class PersistenceFacadeTest {
 	 */
 	@Test
 	void testInsetUserAccount() {
-		assertTrue(p.insetUserAccount(new UserAccount("Username1","email1","pssword1")));
+		assertTrue(p.insertUserAccount(new UserAccount("Username1","email1","pssword1")));
 	}
 
 	/**
@@ -416,8 +416,8 @@ class PersistenceFacadeTest {
 	@Test
 	void testGetAssetOwndByUserAccount() {
 		boolean ris=false;
-		for(AsetOwn o:p.getAssetOwndByUserAccount(us.get(0))) {
-			for(AsetOwn ou: us.get(0).getAsetOwns()) {
+		for(AssetOwn o:p.getAssetOwndByUserAccount(us.get(0))) {
+			for(AssetOwn ou: us.get(0).getAsetOwns()) {
 				if(o.equals(ou)) {
 					ris=true;
 					break;

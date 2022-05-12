@@ -3,7 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db;
 import java.lang.reflect.Constructor;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
@@ -49,7 +49,7 @@ public class DBObiettiviDOAFactory {
 	 * obiettivo di cui si vogliono salcare il info nel db
 	 * @return IObiettiviDAO pecifico per salvare correttamento l'obiettivo passato per argomento
 	 */
-	public static IObiettiviDAO getIObiettiviDAO(Obiettivi ob) {
+	public static IObiettiviDAO getIObiettiviDAO(Obiettivo ob) {
 		return getIObiettiviDAO(ob, connectionFilePth);
 	}
 
@@ -62,7 +62,7 @@ public class DBObiettiviDOAFactory {
 	 * @return IObiettiviDAO pecifico per salvare correttamento l'obiettivo passato per argomento
 	 */
 	@SuppressWarnings("rawtypes")
-	public static IObiettiviDAO getIObiettiviDAO(Obiettivi ob, String fileConnPath){
+	public static IObiettiviDAO getIObiettiviDAO(Obiettivo ob, String fileConnPath){
 		IObiettiviDAO obb;
 		try {
 			String className=PropertiesFile.getPropertieFromFile(ob.getClass().getName(), propertieDBObiettiviDOAFactory);

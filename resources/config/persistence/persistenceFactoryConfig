@@ -1,8 +1,7 @@
-#Sun May 01 19:38:10 CEST 2022
+#Thu May 12 22:00:33 CEST 2022
 IUserAccountDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.proxy.ProxyUserAccountDAO
 strategy.cmdFull.class.name=serverDominator.config.model.cmdCreator.FullStrategy
 strategy.fxCmd.class.name=serverDominator.config.model.cmdCreator.NotFullStrategy
-it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
 ILanguageManager.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager
 IAssetDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.AssetDAO
 it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObPunteggioDAO
@@ -12,5 +11,6 @@ IAssetOwnDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.per
 obiettiviDiPunteggioDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObPunteggioDAO
 classe.name.for.fileExtension.macos=serverDominator.config.model.fileExtention.UnixStrategy
 src.cofg.context=5
+it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
 classe.name.for.fileExtension.windows=serverDominator.config.model.fileExtention.WindowsStrategy
 obiettiviDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO

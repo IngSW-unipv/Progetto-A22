@@ -11,13 +11,13 @@ import java.util.Objects;
  * @see UserAccount
  */
 
-public class AsetOwn{
+public class AssetOwn{
 
 	/**
 	 * Id composto da: Asset, UserAccount
 	 *@see AssetOwnId
 	 */
-	private AsetOwnId primaryKey ;
+	private AssetOwnId primaryKey ;
  
 	/**
 	 * Quantita posseduta
@@ -27,14 +27,14 @@ public class AsetOwn{
 	/**
 	 * Crea AssetOwn vuoto
 	 */
-	public AsetOwn() {
+	public AssetOwn() {
 	}
 
 	/**
-	 * Crea assetOwn con quntit‡=0
+	 * Crea assetOwn con quntit√†=0
 	 * @param id
 	 */
-	public AsetOwn(AsetOwnId id) {
+	public AssetOwn(AssetOwnId id) {
 		this.primaryKey  = id;
 		this.quantita=0;
 	}
@@ -46,19 +46,19 @@ public class AsetOwn{
 	 * @param userAccount
 	 * @param quantita
 	 */
-	public AsetOwn(AsetOwnId id, Integer quantita) {
+	public AssetOwn(AssetOwnId id, Integer quantita) {
 		this.primaryKey  = id;
 		this.quantita = quantita;
 	}
-	public AsetOwn(Asset aid, UserAccount ucc,Integer quantita) {
-		this.primaryKey  = new AsetOwnId(aid,ucc);
+	public AssetOwn(Asset aid, UserAccount ucc,Integer quantita) {
+		this.primaryKey  = new AssetOwnId(aid,ucc);
 		this.quantita = quantita;
 	}
 	/**
 	 * @return id AssetOwm
 	 */
 	
-	public AsetOwnId getPrimaryKey () {
+	public AssetOwnId getPrimaryKey () {
 		return this.primaryKey ;
 	}
 
@@ -66,7 +66,7 @@ public class AsetOwn{
 	 * Setta id assetOwm
 	 * @param id
 	 */
-	public void setPrimaryKey (AsetOwnId id) {
+	public void setPrimaryKey (AssetOwnId id) {
 		this.primaryKey  = id;
 	}
 	/**
@@ -126,7 +126,7 @@ public class AsetOwn{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AsetOwn other = (AsetOwn) obj;
+		AssetOwn other = (AssetOwn) obj;
 		return Objects.equals(primaryKey, other.primaryKey) && quantita == other.quantita;
 	}
 	

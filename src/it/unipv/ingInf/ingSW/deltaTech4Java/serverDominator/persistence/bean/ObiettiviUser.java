@@ -34,7 +34,7 @@ public class ObiettiviUser {
 	 * @param userAccount
 	 * @param stato
 	 */
-	public ObiettiviUser(ObiettiviUserId id, Obiettivi obiettivi, UserAccount userAccount, String stato) {
+	public ObiettiviUser(ObiettiviUserId id, Obiettivo obiettivi, UserAccount userAccount, String stato) {
 		this.primaryKey = id;
 		this.stato = stato;
 	}
@@ -44,7 +44,7 @@ public class ObiettiviUser {
 	 * @param userAccount
 	 * @param stato
 	 */
-	public ObiettiviUser(Obiettivi obiettivi, UserAccount userAccount, String stato) {
+	public ObiettiviUser(Obiettivo obiettivi, UserAccount userAccount, String stato) {
 		this.primaryKey = new ObiettiviUserId(userAccount,obiettivi);
 		this.stato = stato;
 	}
@@ -75,7 +75,7 @@ public class ObiettiviUser {
 	/**
 	 * @return Obiettivo
 	 */
-	public Obiettivi getObiettivi() {
+	public Obiettivo getObiettivi() {
 		return this.primaryKey.getObiettivo();
 	}
 
@@ -83,7 +83,7 @@ public class ObiettiviUser {
 	 * Setta Obiettivi
 	 * @param obiettivi
 	 */
-	public void setObiettivi(Obiettivi obiettivi) {
+	public void setObiettivi(Obiettivo obiettivi) {
 		this.primaryKey.setObiettiviIdObiettivo(obiettivi);;
 	}
 

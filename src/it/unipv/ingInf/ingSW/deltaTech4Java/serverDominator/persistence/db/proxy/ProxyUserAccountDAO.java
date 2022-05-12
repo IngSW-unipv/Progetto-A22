@@ -3,7 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.prox
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAccountDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.UserAccountDAO;
@@ -40,8 +40,8 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	
 	
 	@Override
-	public boolean insetUserAccount(UserAccount us) {
-		if (this.us.insetUserAccount(us)) {
+	public boolean insertUserAccount(UserAccount us) {
+		if (this.us.insertUserAccount(us)) {
 			UserAccountInfo.saveUserAccountData(us);
 			return true;
 		}
@@ -99,11 +99,11 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 	}
 
 	@Override
-	public ArrayList<AsetOwn> getAssetOwndByUserAccount(UserAccount us) {
+	public ArrayList<AssetOwn> getAssetOwndByUserAccount(UserAccount us) {
 		UserAccount uss=UserAccountInfo.getUserAccountData();
 		if(this.us.getAssetOwndByUserAccount(us)==null&&us.getUsername()==uss.getUsername()&&us.getPassw()==uss.getPassw()) {
-			ArrayList<AsetOwn> aWs=AssetOwnFileSystemDAO.readAssetOwnFromCsvFile();
-			for(AsetOwn a: aWs) {
+			ArrayList<AssetOwn> aWs=AssetOwnFileSystemDAO.readAssetOwnFromCsvFile();
+			for(AssetOwn a: aWs) {
 				a.setUserAccount(uss);
 			}
 			return aWs;

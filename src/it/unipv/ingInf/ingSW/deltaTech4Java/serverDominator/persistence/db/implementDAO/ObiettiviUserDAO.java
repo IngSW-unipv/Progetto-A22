@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviUserDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivi;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
@@ -20,7 +20,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Con
  * ObiettiviUser query
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
+ * @see Obiettivo
  * @see ObiettiviUser
  * @see UserAccount
  * @see IObiettiviUserDAO
@@ -48,7 +48,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			DBLinguaManager man=new DBLinguaManager(propConn);
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(1),man.getLanguageValueByKay(rs1.getString(2), FilesLanguageManager.getCurrentLanguage()) ,rs1.getInt(3));
+				Obiettivo a=new Obiettivo(rs1.getInt(1),man.getLanguageValueByKay(rs1.getString(2), ILanguageManager.getCurrentLanguage()) ,rs1.getInt(3));
 				UserAccount b =new UserAccount(rs1.getString(5));
 				ObiettiviUser c=new ObiettiviUser(a,b,rs1.getString(4));
 				result.add(c);
@@ -78,7 +78,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 			while(rs1.next())
 			{
-				Obiettivi a=new Obiettivi(rs1.getInt(4),man.getLanguageValueByKay(rs1.getString(5),FilesLanguageManager.getCurrentLanguage()),rs1.getInt(6));
+				Obiettivo a=new Obiettivo(rs1.getInt(4),man.getLanguageValueByKay(rs1.getString(5),ILanguageManager.getCurrentLanguage()),rs1.getInt(6));
 				UserAccount b =new UserAccount(rs1.getString(7), rs1.getInt(8));
 				ObiettiviUser c=new ObiettiviUser(a,b,rs1.getString(1));
 				result.add(c);
@@ -90,7 +90,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 	}
 
 	@Override
-	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivi obInput) {
+	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivo obInput) {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
@@ -104,7 +104,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 			st1.setInt(1, obInput.getIdObiettivo());
 			rs1=st1.executeQuery();
 			IObiettiviDAO ob=DBObiettiviDOAFactory.getIObiettiviDAO(obInput, propConn);
-			Obiettivi obiettivo;
+			Obiettivo obiettivo;
 			while(rs1.next())
 			{
 				UserAccount a=new UserAccount(rs1.getString(2));

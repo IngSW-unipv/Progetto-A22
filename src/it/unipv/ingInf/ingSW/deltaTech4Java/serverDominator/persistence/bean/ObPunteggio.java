@@ -5,9 +5,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
  * Obiettivi di punteggio
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
+ * @see Obiettivo
  */
-public class ObPunteggio extends Obiettivi{
+public class ObPunteggio extends Obiettivo{
 
 	/**
 	 * Punteggio necessario per raggiungere l'obiettivo
@@ -26,7 +26,7 @@ public class ObPunteggio extends Obiettivi{
 	 * @param obiettivi
 	 * @param punteggioObiettivo
 	 */
-	public ObPunteggio(Obiettivi obiettivi, Integer punteggioObiettivo) {
+	public ObPunteggio(Obiettivo obiettivi, Integer punteggioObiettivo) {
 		super(	obiettivi.getIdObiettivo(),obiettivi.getDescrizione(),
 				obiettivi.getRicompensa(),obiettivi.getObiettiviUsers());
 		this.punteggioObiettivo = punteggioObiettivo;
@@ -51,7 +51,7 @@ public class ObPunteggio extends Obiettivi{
 	/**
 	 *@return Obiettivo padre
 	 */
-	public Obiettivi getObiettivi() {
+	public Obiettivo getObiettivi() {
 		return super.getObiettivi();
 	}
 
@@ -59,7 +59,7 @@ public class ObPunteggio extends Obiettivi{
 	 * Setta l'obiettivo
 	 * @param obiettivi
 	 */
-	public void setObiettivi(Obiettivi obiettivi) {
+	public void setObiettivi(Obiettivo obiettivi) {
 		super.setIdObiettivo(obiettivi.getIdObiettivo());
 		super.setDescrizione(obiettivi.getDescrizione());
 		super.setRicompensa(obiettivi.getRicompensa());

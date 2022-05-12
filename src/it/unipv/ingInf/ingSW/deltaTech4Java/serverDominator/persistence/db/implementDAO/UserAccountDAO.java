@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAccountDAO;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AsetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
@@ -14,7 +14,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.Con
 * UserAccount query
 * @author TawaHabib
 * @version 1.0
-* @see AsetOwn
+* @see AssetOwn
 * @see ObiettiviUserDAO
 * @see UserAccount
 * @see IUserAccountDAO
@@ -29,7 +29,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 	}
 	
 	@Override
-	public boolean insetUserAccount(UserAccount us) {
+	public boolean insertUserAccount(UserAccount us) {
 		conn=ConnectionFactory.getIstance().getConnection(propConn);
 		PreparedStatement st1;
 
@@ -54,7 +54,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 			}
 			
 			AssetOwnDAO as=new AssetOwnDAO(propConn);
-			for(AsetOwn a: us.getAsetOwns()) {
+			for(AssetOwn a: us.getAsetOwns()) {
 				as.updateQuantityAssetOwnById(a);
 			}
 			
@@ -93,13 +93,12 @@ public class UserAccountDAO implements IUserAccountDAO {
 			}
 			
 			AssetOwnDAO as=new AssetOwnDAO(propConn);
-			for(AsetOwn a: us.getAsetOwns()) {
+			for(AssetOwn a: us.getAsetOwns()) {
 				as.updateQuantityAssetOwnById(a);
 			}
 			
 		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
+			return insertUserAccount(us);
 		}
 
 		//DbConnection.closeConnection(conn);
@@ -195,7 +194,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 	}
 
 	@Override
-	public ArrayList<AsetOwn> getAssetOwndByUserAccount(UserAccount us) {
+	public ArrayList<AssetOwn> getAssetOwndByUserAccount(UserAccount us) {
 		AssetOwnDAO ass=new AssetOwnDAO(propConn);
 		return ass.selectByUserOwner(us);
 	}

@@ -1,21 +1,21 @@
 package serverDominator.config.viw.panel;
 
-import javax.swing.JPanel;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
-
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.io.UnsupportedEncodingException;
-import java.awt.event.ActionEvent;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 
 /**
  * Panello per esecuzione
@@ -41,7 +41,7 @@ public class RunPanel extends JPanel {
 	}
 	
 	private void init() {
-		Properties prop=FilesLanguageManager.getPropertiesLanguage(FilesLanguageManager.getCurrentLanguage());
+		Properties prop=FilesLanguageManager.getPropertiesLanguage(ILanguageManager.getCurrentLanguage());
 		try {
 			titoloLabel = DefaultComponentFactory.getInstance().createTitle(new String(prop.getProperty(KEY_titoloLabel, "Inizia a giocare").getBytes(),"UTF-8"));
 		} catch (UnsupportedEncodingException e2) {

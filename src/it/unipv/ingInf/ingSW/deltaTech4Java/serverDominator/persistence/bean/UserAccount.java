@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * UserAccount
  * @author TawaHabib
  * @version 1.0
- * @see Obiettivi
- * @see AsetOwn
+ * @see Obiettivo
+ * @see AssetOwn
  * @see Giocatore
  * @see ObiettiviUser
  * @see ArrayList
@@ -41,7 +41,7 @@ public class UserAccount {
 	/**
 	 * Gli asset posseduti dallo  UserAccount
 	 */
-	private ArrayList<AsetOwn> asetOwns = new ArrayList<AsetOwn>(0);
+	private ArrayList<AssetOwn> asetOwns = new ArrayList<AssetOwn>(0);
 	
 	/**
 	 * Gli obiettivi associati Allo UserAccount
@@ -117,7 +117,7 @@ public class UserAccount {
 	 * Obiettivi Dello UserAccounts
 	 */
 	public UserAccount(String username, Integer mny, Integer punteggio, 
-			ArrayList<AsetOwn> asetOwns, ArrayList<ObiettiviUser> obiettiviUsers) {
+			ArrayList<AssetOwn> asetOwns, ArrayList<ObiettiviUser> obiettiviUsers) {
 		this.username = username;
 		this.mny = mny;
 		this.punteggio = punteggio;
@@ -176,7 +176,7 @@ public class UserAccount {
 	 * @return Asset in possesso di account
 	 */
 
-	public ArrayList<AsetOwn> getAsetOwns() {
+	public ArrayList<AssetOwn> getAsetOwns() {
 		return this.asetOwns;
 	}
 	   
@@ -185,7 +185,7 @@ public class UserAccount {
 	 * @param asetOwns
 	 */
 
-	public void setAsetOwns(ArrayList<AsetOwn> asetOwns) {
+	public void setAsetOwns(ArrayList<AssetOwn> asetOwns) {
 		this.asetOwns = asetOwns;
 	}
 	
@@ -207,14 +207,14 @@ public class UserAccount {
 	 * Aggiungi Asset posseduto dallo UserAccount
 	 * @param asetOwns
 	 */
-	public void addAssetOwn(AsetOwn asetOwns) {
+	public void addAssetOwn(AssetOwn asetOwns) {
 		this.asetOwns.add(asetOwns);
 	}
 	/**
 	 * Togli Asset posseduto dallo UserAccount
 	 * @param asetOwns
 	 */
-	public void removeAssetOwn(AsetOwn asetOwns) {
+	public void removeAssetOwn(AssetOwn asetOwns) {
 		this.asetOwns.remove(asetOwns);
 	}
 	

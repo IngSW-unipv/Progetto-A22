@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author TawaHabib
  * @version 1.0
  * @see UserAccount
- * @see Obiettivi
+ * @see Obiettivo
  */
 
 public class ObiettiviUserId {
@@ -19,14 +19,14 @@ public class ObiettiviUserId {
 	/**
 	 * Obiattivo
 	 */
-	private Obiettivi obiettivo;
+	private Obiettivo obiettivo;
 
 	/**
 	 * Crea identificativo vuoto
 	 */
 	public ObiettiviUserId() {
 		this.userAccount = new UserAccount();
-		this.obiettivo = new Obiettivi();
+		this.obiettivo = new Obiettivo();
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class ObiettiviUserId {
 	 * @param userAccount
 	 * @param obiettivo
 	 */
-	public ObiettiviUserId(UserAccount userAccount, Obiettivi obiettivo) {
+	public ObiettiviUserId(UserAccount userAccount, Obiettivo obiettivo) {
 		this.userAccount = userAccount;
 		this.obiettivo = obiettivo;
 	}
@@ -55,7 +55,7 @@ public class ObiettiviUserId {
 	/**
 	 * @return Obiettivi (parte dell'id)
 	 */
-	public Obiettivi getObiettivo() {
+	public Obiettivo getObiettivo() {
 		return this.obiettivo;
 	}
 
@@ -63,7 +63,7 @@ public class ObiettiviUserId {
 	 * Setta Obiettivi (parte dell'id)
 	 * @param obiettivo
 	 */
-	public void setObiettiviIdObiettivo(Obiettivi obiettivo) {
+	public void setObiettiviIdObiettivo(Obiettivo obiettivo) {
 		this.obiettivo = obiettivo;
 	}
 

@@ -24,7 +24,7 @@ public class ILanguageManagerFactory {
 				@SuppressWarnings("rawtypes")
 				Constructor c = Class.forName(className).getConstructor(String.class);
 				
-				linguaMan=(ILanguageManager)c.newInstance(FilesLanguageManager.getCurrentLanguage());
+				linguaMan=(ILanguageManager)c.newInstance(ILanguageManager.getCurrentLanguage());
 				
 			} catch (Exception e) {
 				e.printStackTrace();

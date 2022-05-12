@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Qualunque asset aquistabile nel gioco 
  * @author TawaHabib
  * @version 1.0
- * @see AsetOwn
+ * @see AssetOwn
  */
 public class Asset{
 
@@ -39,7 +39,7 @@ public class Asset{
 	/**
 	 * Associazione uno a molti con AssetOun
 	 */
-	private ArrayList<AsetOwn> asetOwns = new ArrayList<AsetOwn>(0);
+	private ArrayList<AssetOwn> asetOwns = new ArrayList<AssetOwn>(0);
 
 	/**
 	 * Crea asset vuoto
@@ -155,7 +155,7 @@ public class Asset{
      * @return
      */
 
-	public ArrayList<AsetOwn> getAsetOwns() {
+	public ArrayList<AssetOwn> getAsetOwns() {
 		return this.asetOwns;
 	}
 
@@ -163,7 +163,7 @@ public class Asset{
 	 * settare gli assetOwm (relationship)
 	 * @param asetOwns
 	 */
-	public void setAsetOwns(ArrayList<AsetOwn> asetOwns) {
+	public void setAsetOwns(ArrayList<AssetOwn> asetOwns) {
 		this.asetOwns = asetOwns;
 	}
 	/**
@@ -177,14 +177,14 @@ public class Asset{
 	 * Asset viene posseduto dal giocatore
 	 * @param asetOwns
 	 */
-	public void addAssetOwn(AsetOwn asetOwns) {
+	public void addAssetOwn(AssetOwn asetOwns) {
 		this.asetOwns.add(asetOwns);
 	}
 	/**
 	 * Rimozione asset Psseduto dal giocatore
 	 * @param asetOwns
 	 */
-	public void remuveAssetOwn(AsetOwn asetOwns) {
+	public void remuveAssetOwn(AssetOwn asetOwns) {
 		this.asetOwns.remove(asetOwns);
 	}
 

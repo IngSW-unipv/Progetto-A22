@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,22 +14,23 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-class OneBattle extends ProgressBar implements Comparable<OneBattle>{
+class ProgressBarElement extends ProgressBar implements Comparable<ProgressBarElement>{
 
-	private String bTitle; 					// titolo di ogni battaglia
-	ProgressBar pB = new ProgressBar(0);
-	VBox bBox = new VBox();
-	long durata;
-	double timeScale;
+	private String bTitle;
+	private long durata;
+	private double timeScale;
 	
-	public  OneBattle(String bTitle, long durata) {
-		super();
+	public  ProgressBarElement(String bTitle, long durata) {
+		super(0);
+		super.setBackground(
+				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 		this.bTitle = bTitle;
 		this.durata = durata;
 		this.timeScale = 1 / durata;
@@ -48,38 +49,52 @@ class OneBattle extends ProgressBar implements Comparable<OneBattle>{
 	}
 	
 	public void setDurata(long durata) {
+		this.durata=durata;
 	}
 	
+	public String getbTitle() {
+		return bTitle;
+	}
+
+	public void setbTitle(String bTitle) {
+		this.bTitle = bTitle;
+	}
+
+	public double getTimeScale() {
+		return timeScale;
+	}
+
+	public void setTimeScale(double timeScale) {
+		this.timeScale = timeScale;
+	}
+
 	@Override
-	public int compareTo(OneBattle o) {
-		if(this.pB.getProgress() > o.pB.getProgress())
+	public int compareTo(ProgressBarElement o) {
+		if(super.getProgress() > o.getProgress())
 			return -1;
-		if(this.pB.getProgress() < o.pB.getProgress())
+		if(super.getProgress() < o.getProgress())
 			return 1;
 		return 0;
 	}
 	
-	// 
-	
 }
 	
 	
-public class BattleBox {	
+public class ProgressBarConteiner extends Pane{	
 	
-	Base bU;
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
-	public BattleBox (Base bU) {
-		
-		this.bU = bU;
+	private VBox battaglie;				// contiene tutte le battaglie
+	private Label elementTitle;  				// titolo della VBox battaglie
+	private List<ProgressBarElement> battles = new ArrayList<ProgressBarElement>();	// collezione delle battaglie
+	private GridPane bGrid;				// griglia che dispone le battaglie in corso	
+	private HBox battleTitle;			
+	
+	public ProgressBarConteiner () {
+		super();
+		disponiTestata();
 	}
-	
-	VBox battaglie;				// contiene tutte le battaglie
-	Label bTitle;  				// titolo della VBox battaglie
-	List<OneBattle> battles = new ArrayList<OneBattle>();	// collezione delle battaglie
-	GridPane bGrid;				// griglia che dispone le battaglie in corso	
-	HBox battleTitle;			
-	
+
 	public VBox getBattleBox(Base bU) {
 		
 		if(battaglie == null)
@@ -93,17 +108,17 @@ public class BattleBox {
 
 //aggiungere una battaglia (titolo, durata) dentro alla Lista 
 	
-	public void addbattaglia(String battleTitle, long durata) {
+	public void addElement(String battleTitle, long durata) {
 		if (this.battles == null)
-			this.battles = new ArrayList<OneBattle>(0);
+			this.battles = new ArrayList<ProgressBarElement>(0);
 
-		OneBattle battle = new OneBattle(battleTitle, durata);
+		ProgressBarElement battle = new ProgressBarElement(battleTitle, durata);
 		this.battles.add(battle);
 		Collections.sort(this.battles);
 		//disponiBattaglie();
 	}
 
-	public HBox creaOneBattle(String battleTitle, long durata) {
+	public HBox createElement(String battleTitle, long durata) {
 		
 		HBox oneB = new HBox();
 		VBox inOneB = new VBox();
@@ -116,7 +131,7 @@ public class BattleBox {
 		double progress = 0;
 		
 		for (int i = 0; i <= (int) durata/1000; i++) {
-			progB.setProgress(battleProgress(progress, durata));
+			progB.setProgress(elementProgress(progress, durata));
 		}
 		
 		inOneB.getChildren().addAll(hbT, progB);
@@ -125,7 +140,7 @@ public class BattleBox {
 		return oneB;
 	}
 	
-	public double battleProgress(double progress, double durata) {
+	public double elementProgress(double progress, double durata) {
 
 		double timeScale = 1 / durata;
 
@@ -143,11 +158,12 @@ public class BattleBox {
 // dispone battaglie dentro alla griglia
 	
 	private void disponiTestata() {
-		
+		super.setBackground(
+				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
 		battaglie = new VBox();
-		battaglie.setSpacing(0);
+		battaglie.setSpacing(5);
 		battaglie.setPadding(STANDARD_PADDING);
-		battaglie.setMaxWidth(390);
+		//battaglie.setMaxWidth(390);
 		
 		battleTitle = new HBox();
 		battleTitle.setPadding(STANDARD_PADDING);
@@ -159,14 +175,14 @@ public class BattleBox {
 								new CornerRadii(10), 
 								new Insets(5, 5, 5, 5))));
 		
-		bTitle = new Label("BATTAGLIE IN CORSO");
-		bTitle.setFont(Font.font(
+		elementTitle = new Label("BATTAGLIE IN CORSO");
+		elementTitle.setFont(Font.font(
 							"Verdana", 
 							FontWeight.BOLD, 
 							FontPosture.REGULAR, 12));
 		
-		bTitle.setTextFill(Color.DARKGREEN);
-		battleTitle.getChildren().add(bTitle);
+		elementTitle.setTextFill(Color.DARKGREEN);
+		battleTitle.getChildren().add(elementTitle);
 		
 		bGrid = new GridPane();
 		bGrid.setAlignment(Pos.BASELINE_CENTER);
@@ -178,6 +194,7 @@ public class BattleBox {
 		bGrid = disponiBattaglie();
 		
 		battaglie.getChildren().addAll(battleTitle, bGrid);
+		super.getChildren().addAll(battaglie);
 	}
 	
 	public GridPane disponiBattaglie() {
@@ -185,16 +202,16 @@ public class BattleBox {
 		bGrid.getChildren().clear();
 		
 		
-		for (OneBattle o : this.battles) { // for each
+		for (ProgressBarElement o : this.battles) { // for each
 
-			ProgressBar btt = o.pB;
-			btt.setProgress(btt.getProgress() + 1 / ((double) o.durata / 1000));
+			ProgressBar btt = o;
+			btt.setProgress(btt.getProgress() + 1 / ((double) o.getDurata() / 1000));
 			
-			System.out.println(o.durata);
+			System.out.println(o.getDurata());
 
 		}
 		
-		this.battles.removeIf(o -> o.pB.getProgress() >= 1);
+		this.battles.removeIf(o -> o.getProgress() >= 1);
 		Collections.sort(this.battles);
 		
 
@@ -206,7 +223,7 @@ public class BattleBox {
 			hbB.setPadding(new Insets(0, 0, 10, 0));
 			
 			title.setText(this.battles.get(i).getTitle());
-			ProgressBar btt = this.battles.get(i).pB;
+			ProgressBar btt = this.battles.get(i);
 
 			hbB.getChildren().add(btt);
 			
@@ -221,34 +238,28 @@ public class BattleBox {
 		
 		return bGrid;
 	}
-
 	
-	
-	public Base getbU() {
-		return bU;
-	}
-
-	public void setbU(Base bU) {
-		this.bU = bU;
+	public int getElementCard() {
+		return battles.size();
 	}
 
 	public VBox getBattleBox() {
 		return battaglie;
 	}
 
-	public Label getTitoloBattaglie() {
-		return bTitle;
+	public Label getElementTitle() {
+		return elementTitle;
 	}
 
-	public void setTitoloBattaglie(Label bTitle) {
-		this.bTitle = bTitle;
+	public void setElementTitle(Label bTitle) {
+		this.elementTitle = bTitle;
 	}
 
-	public List<OneBattle> getBattlesList() {
+	public List<ProgressBarElement> getBattlesList() {
 		return battles;
 	}
 
-	public void setBattle(List<OneBattle> battles) {
+	public void setBattle(List<ProgressBarElement> battles) {
 		this.battles = battles;
 	}
 

@@ -1,7 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

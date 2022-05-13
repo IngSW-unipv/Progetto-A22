@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
@@ -15,26 +15,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class BaseStatsPane {
+public class BaseStatsPane extends Pane{
 	
 	private Base nodeBase = new Base();
-	private Pane yourBasePane;
 	private Button buttonTitle;
 	
 	public final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
 	
 	public  BaseStatsPane(Base bU) {
-		
+		super();
 		this.nodeBase = bU;
 	}
 		
 	public Pane getBsPane(Base bU) {
-
-		yourBasePane = new Pane();
-		yourBasePane.setBackground(
+		super.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-		yourBasePane.setPadding(STANDARD_PADDING);
+		super.setPadding(STANDARD_PADDING);
 
 		VBox yb = new VBox();
 		yb.setPadding(STANDARD_PADDING);
@@ -92,9 +89,9 @@ public class BaseStatsPane {
 		hBg.getChildren().add(ybG);
 
 		yb.getChildren().addAll(ybTitle, hBg);
-		yourBasePane.getChildren().add(yb);
+		super.getChildren().add(yb);
 
-		return yourBasePane;
+		return this;
 	}
 
 	public Base getNodeBase() {
@@ -103,14 +100,6 @@ public class BaseStatsPane {
 
 	public void setNodeBase(Base bU) {
 		this.nodeBase = bU;
-	}
-
-	public Pane getYourBasePane() {
-		return yourBasePane;
-	}
-
-	public void setYourBasePane(Pane yourBasePane) {
-		this.yourBasePane = yourBasePane;
 	}
 
 	public Button getButtonTitle() {

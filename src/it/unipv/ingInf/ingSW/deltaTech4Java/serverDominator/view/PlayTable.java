@@ -2,7 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import java.util.Set;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -18,10 +17,10 @@ import javafx.util.Pair;
 
 public class PlayTable {
 	
-	Pair<Integer, Integer> dimTable;
+	private Pair<Integer, Integer> dimTable;
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
-	Canvas basicCanvas;
-	ScrollPane scrollPane;
+	private Canvas basicCanvas;
+	private ScrollPane scrollPane;
 	
 	public PlayTable(Pair<Integer, Integer> dimensioni) {
 		
@@ -29,7 +28,7 @@ public class PlayTable {
 		
 	}
 	
-	public ScrollPane getPlayTable(Pair<Integer, Integer> dimensioni, MapData mapData, Base bU, int ray) {
+	public ScrollPane getPlayTable(Pair<Integer, Integer> dimensioni, MapData mapData, int ray) {
 		
 		ScrollPane centerPane = new ScrollPane(){
 			ScrollBar horizontal;
@@ -99,24 +98,17 @@ public class PlayTable {
 		return basicCanvas;
 	}
 	  private void updateHval(boolean scrollBarVisible) {
-		 // System.out.println("###########visibility Horizontal: "+scrollBarVisible+"###########v");
 	        if(!scrollBarVisible) {
 	        	scrollPane.setHvalue(0);
 	        }
 	    }
 	  private void updateVval(boolean scrollBarVisible) {
-		  //System.out.println("###########visibility vertical: "+scrollBarVisible+"###########v");
 	        if(!scrollBarVisible) {
 	        	scrollPane.setVvalue(0);
 	        }
 	    }
 	  
 	  private ScrollBar findScrollBar(Set<Node> set , Orientation orientation) {
-
-	        // this would be the preferred solution, but it doesn't work. it always gives back the vertical scrollbar
-	        //      return (ScrollBar) table.lookup(".scroll-bar:horizontal");
-	        //
-	        // => we have to search all scrollbars and return the one with the proper orientation
 
 	        for (Node node : set) {
 	            ScrollBar bar = (ScrollBar) node;

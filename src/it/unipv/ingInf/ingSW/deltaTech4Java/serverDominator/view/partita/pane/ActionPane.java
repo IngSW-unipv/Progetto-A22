@@ -1,7 +1,9 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,25 +22,21 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-public class ActionPane {
+public class ActionPane extends Pane{
 
-	Base bU = new Base();
-	HBox hB = new HBox();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
-	Pane actionPane;
-	Label actionTitleL;
-	Button actionMarketL;
-	Button powerUpL;
-	Button develop ;
+	private Label actionTitleL;
+	private Button actionMarketL;
+	private Button powerUpL;
+	private Button develop ;
 	
-	public ActionPane(Base bU) {
-		this.bU = bU;
+	public ActionPane() {
+		super();
 	}
 
-	public Pane getActionPane(Base bU) {
-			
-		actionPane = new Pane();
-		actionPane.setBackground(
+	public Pane getActionPane() {
+		
+		super.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 
 		VBox controlli = new VBox();
@@ -66,7 +64,8 @@ public class ActionPane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.avviaMarket(bU);
+            	Giocatore g=new Utente();
+            	p.avviaMarket(new Base(g));
             }
 		});
 		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
@@ -78,7 +77,7 @@ public class ActionPane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.avviaPowerUp(bU);
+            	p.avviaPowerUp(new Base());
             }
 		});
 		
@@ -90,43 +89,18 @@ public class ActionPane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.avviaDevelopment(bU);
+            	p.avviaDevelopment(new Base());
             }
 		});
 		
 		controlli.setSpacing(10);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
-		actionPane.getChildren().add(controlli);
+		super.getChildren().add(controlli);
 
-		return actionPane;
+		return this;
 	}
 
 	
-	
-	public Base getbU() {
-		return bU;
-	}
-
-	public void setbU(Base bU) {
-		this.bU = bU;
-	}
-
-	public HBox gethB() {
-		return hB;
-	}
-
-	public void sethB(HBox hB) {
-		this.hB = hB;
-	}
-
-	public Pane getActionPane() {
-		return actionPane;
-	}
-
-	public void setActionPane(Pane actionPane) {
-		this.actionPane = actionPane;
-	}
-
 	public Label getActionTitleL() {
 		return actionTitleL;
 	}
@@ -162,5 +136,6 @@ public class ActionPane {
 	public Insets getSTANDARD_PADDING() {
 		return STANDARD_PADDING;
 	}
+	
 	
 }

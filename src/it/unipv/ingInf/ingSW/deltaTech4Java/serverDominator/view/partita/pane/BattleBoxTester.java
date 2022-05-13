@@ -1,9 +1,7 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.SwingUtilities;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.application.Application;
@@ -28,15 +26,15 @@ public class BattleBoxTester  extends Application{
 				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 		VBox battleBox = new VBox();
 		Base bU = new Base();
-		BattleBox bBox = new BattleBox(bU);
+		ProgressBarConteiner bBox = new ProgressBarConteiner();
 		
 		String battleTitle1 = new String("User attacca xBot in nodo (4,1)");
 		long durata1 = 4000;
-		bBox.addbattaglia(battleTitle1, durata1);
+		bBox.addElement(battleTitle1, durata1);
 		
 		String battleTitle2 = new String("User attacca xBot in nodo (6,2)");
 		long durata2 = 6000;
-		bBox.addbattaglia(battleTitle2, durata2);
+		bBox.addElement(battleTitle2, durata2);
 		
 		String battleTitle3 = new String("User attacca xBot in nodo (7,3)");
 		long durata3 = 7000;
@@ -48,10 +46,10 @@ public class BattleBoxTester  extends Application{
 		long durata6 = 10000;
 		
 
-		bBox.addbattaglia(battleTitle3, durata3);
-		bBox.addbattaglia(battleTitle4, durata4);
-		bBox.addbattaglia(battleTitle5, durata5);
-		bBox.addbattaglia(battleTitle6, durata6);
+		bBox.addElement(battleTitle3, durata3);
+		bBox.addElement(battleTitle4, durata4);
+		bBox.addElement(battleTitle5, durata5);
+		bBox.addElement(battleTitle6, durata6);
 
 		
 		battleBox = bBox.getBattleBox(bU);
@@ -81,6 +79,9 @@ public class BattleBoxTester  extends Application{
         Scene s=new Scene(p);
         primaryStage.setScene(s);
         primaryStage.show();
+        String battle = new String("uuu");
+		long durat = 50000;
+		bBox.addElement(battle, durat);
 
 	}
 	public static void main(String[] args) {

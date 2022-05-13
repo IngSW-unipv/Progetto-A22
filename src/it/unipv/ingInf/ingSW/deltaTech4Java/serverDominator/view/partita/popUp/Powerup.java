@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;

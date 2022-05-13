@@ -7,11 +7,11 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.ActionPane;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.BaseStatsPane;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.BattlePane;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane.StatsNodePane;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ActionPane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.BaseStatsPane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ProgressBarConteiner;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.StatsNodePane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 
 /**
  * @author Matteo Para 
@@ -38,7 +38,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -83,7 +82,6 @@ public class Main extends Application {
 		launch(args); // fa partire la funzione start di JavaFX
 	}
 
-	AddType aT = new AddType();
 	int click = 0;
 	
 	
@@ -125,7 +123,7 @@ public class Main extends Application {
 		
 		ScrollPane centerPane = new ScrollPane();
 		PlayTable pt = new PlayTable(dimensioneMappa);
-		centerPane = pt.getPlayTable(dimensioneMappa, mapData, bU, ray);
+		centerPane = pt.getPlayTable(dimensioneMappa, mapData, ray);
 		
 		Canvas basicCanvas = pt.getBasicCanvas();
 		//GraphicsContext basicGC = pt.getBasicCanvas();
@@ -218,14 +216,15 @@ public class Main extends Application {
 		
 		Pane statsNodePane = new Pane();
 		statsNodePane = sPane.getSnPane(bU);
-		
+		Pane battlePane = new ProgressBarConteiner();
+		/*
 		BattlePane bPane = new BattlePane(bU);
 		Pane battlePane = new Pane();
 		battlePane = bPane.getBattlePain(bU);
-		
-		ActionPane aPane = new ActionPane(bU);
+		*/
+		ActionPane aPane = new ActionPane();
 		Pane actionPane = new Pane();
-		actionPane = aPane.getActionPane(bU);
+		actionPane = aPane.getActionPane();
 
 // ------------------------------------------ //		
 		

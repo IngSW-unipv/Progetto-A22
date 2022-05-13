@@ -1,7 +1,7 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.pane;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +26,9 @@ public class StatsNodePane {
 	public StatsNodePane(Base bU) {
 		this.bU = bU;
 	}	
-	
+	//TODO: IMPORTANTE:
+	//TODO: DA RIVEDERE CON GLI ALTRI LE COSE DA MOSTRARE E LE COSE DA NASCONDERE 
+	//TODO: RICORDARSIII!!!!
 	@SuppressWarnings("unused")
 	private Base bU = new Base();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);

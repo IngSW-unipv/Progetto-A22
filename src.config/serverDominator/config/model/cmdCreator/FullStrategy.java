@@ -2,6 +2,11 @@ package serverDominator.config.model.cmdCreator;
 
 import java.nio.file.Paths;
 
+/**
+ * JRE completa 
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class FullStrategy implements ICmdCreatorStrategy {
 	private String jarPath;
 	/*public FullStrategy(String jarPath) {

@@ -16,6 +16,11 @@ import serverDominator.config.viw.panel.InitLinguaChooser;
 import serverDominator.config.viw.panel.OnlyDescription;
 import serverDominator.config.viw.panel.RunPanel;
 
+/**
+ * contenitore dei pannelli
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class ConfigFrame extends JFrame {
 
 	/**

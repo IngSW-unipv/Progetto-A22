@@ -6,6 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+/**
+ * classe responsabile della creazione di uno script shell
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class ScriptCreator {
 	
 	/**
@@ -15,7 +20,7 @@ public class ScriptCreator {
 	 * @param fileName
 	 * Nome dello script
 	 * @return
-	 * Vero se la creazione è andata a buon fine 
+	 * Vero se la creazione Ã¨ andata a buon fine 
 	 * </br> falso altriomenti
 	 */
 	public static boolean createScript(String cmd, String fileName) {

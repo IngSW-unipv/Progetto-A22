@@ -2,6 +2,12 @@ package serverDominator.config.model.cmdCreator;
 
 import java.nio.file.Paths;
 
+/**
+ * Classe responsabile della creazione del comando 
+ * per una configurazione non full
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class NotFullStrategy implements ICmdCreatorStrategy {
 	private String pathToFxLib;
 	private String jarPath;

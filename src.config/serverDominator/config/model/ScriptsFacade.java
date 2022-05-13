@@ -9,7 +9,7 @@ import serverDominator.config.model.scripts.ScriptCreator;
 import serverDominator.config.model.scripts.ScriptRunner;
 
 /**
- * <h5>Classe con utililità per la creazione ed esecuzione di uno script per lanciare un jar con java Fx</h5>
+ * <h5>Classe con utililitÃ  per la creazione ed esecuzione di uno script per lanciare un jar con java Fx</h5>
  * @author TawaHabib
  * @version 1.0
  */
@@ -27,7 +27,7 @@ public class ScriptsFacade {
 
 	/**
 	 * Crea uno script per con nome di default e con 
-	 * dentro solo il comando per eseguire un jar il cui nome è quello di default
+	 * dentro solo il comando per eseguire un jar il cui nome Ã¨ quello di default
 	 * @param fxLib
 	 * Percorso alla cartella "lib" di javaFX
 	 * @return
@@ -69,8 +69,8 @@ public class ScriptsFacade {
 	 * @param fileName
 	 * Nome dello script shell (non deve a vere un'estensione in quando la crea lui)
 	 * @return
-	 * Vero se il file è stato creato </br>
-	 * Flaso se c'è qualcosa che è andato storto
+	 * Vero se il file ï¿½ stato creato </br>
+	 * Flaso se c'ï¿½ qualcosa che Ã¨ andato storto
 	 */
 	public static boolean createScript(String cmd, String fileName) {
 		return ScriptCreator.createScript(cmd, fileName+FileExtentionFactory.getIFileExtensionStrategy().getFileExtension());

@@ -4,6 +4,11 @@ import java.lang.reflect.Constructor;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * classe respnsabile della creazione di IFileExtensionStrategy
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class FileExtentionFactory {
 	
 	private static String STRATEGY_PROP="classe.name.for.fileExtension.";

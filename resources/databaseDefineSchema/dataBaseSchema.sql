@@ -6,6 +6,7 @@
 -- 8.0.XX
 -- -----------------------------------------------------
 
+
 -- -----------------------------------------------------
 -- Schema serverdomdb
 -- -----------------------------------------------------
@@ -25,8 +26,8 @@ DROP TABLE IF EXISTS `serverdomdb`.`lingua` ;
 CREATE TABLE IF NOT EXISTS `serverdomdb`.`lingua` (
   `CHIAVE` VARCHAR(60) NOT NULL,
   `TIPO` ENUM('INTERNO', 'ESTERNO') NULL DEFAULT 'INTERNO',
-  `ITALIANO` VARCHAR(200) unique NULL,
-  `ENGLISH` VARCHAR(200)  unique NULL,
+  `ITALIANO` VARCHAR(200) NULL DEFAULT NULL,
+  `ENGLISH` VARCHAR(200) NULL DEFAULT NULL,
   PRIMARY KEY (`CHIAVE`))
 ENGINE = InnoDB;
 
@@ -153,6 +154,39 @@ CREATE TABLE IF NOT EXISTS `serverdomdb`.`obiettivi_user` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `serverdomdb`.`USERS`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `serverdomdb`.`USERS` ;
+
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`USERS` (
+  `user_account_USERNAME` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`user_account_USERNAME`),
+  CONSTRAINT `fk_USERS_user_account1`
+    FOREIGN KEY (`user_account_USERNAME`)
+    REFERENCES `serverdomdb`.`user_account` (`USERNAME`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `serverdomdb`.`id_punteggio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `serverdomdb`.`id_punteggio` ;
+
+CREATE TABLE IF NOT EXISTS `serverdomdb`.`id_punteggio` (
+  `id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_id_punteggio_ob_punteggio1_idx` (`id` ASC) VISIBLE,
+  CONSTRAINT `fk_id_punteggio_ob_punteggio1`
+    FOREIGN KEY (`id`)
+    REFERENCES `serverdomdb`.`ob_punteggio` (`OBIETTIVI_idObiettivo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `serverdomdb`;
 
 DELIMITER $$
@@ -206,6 +240,25 @@ END$$
 
 
 USE `serverdomdb`$$
+DROP TRIGGER IF EXISTS `serverdomdb`.`user_account_AFTER_INSERT` $$
+USE `serverdomdb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `serverdomdb`.`user_account_AFTER_INSERT` AFTER INSERT ON `user_account` FOR EACH ROW
+BEGIN
+	INSERT INTO ServerDomDB.USERS VALUES( NEW.USERNAME);
+END$$
+
+
+USE `serverdomdb`$$
+DROP TRIGGER IF EXISTS `serverdomdb`.`ob_punteggio_AFTER_INSERT` $$
+USE `serverdomdb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `serverdomdb`.`ob_punteggio_AFTER_INSERT` AFTER INSERT ON `ob_punteggio` FOR EACH ROW
+BEGIN
+	insert into serverdomdb.id_punteggio values(NEW.OBIETTIVI_idObiettivo);
+	
+END$$
+
+
+USE `serverdomdb`$$
 DROP TRIGGER IF EXISTS `serverdomdb`.`CONTROLLO_RAGGIUNGIMENTO_OB_PUNTEGGIO` $$
 USE `serverdomdb`$$
 CREATE
@@ -248,7 +301,19 @@ END IF;
 END$$
 
 
+USE `serverdomdb`$$
+DROP TRIGGER IF EXISTS `serverdomdb`.`id_punteggio_AFTER_INSERT` $$
+USE `serverdomdb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `serverdomdb`.`id_punteggio_AFTER_INSERT` AFTER INSERT ON `id_punteggio` FOR EACH ROW
+BEGIN
+	INSERT INTO serverdomdb.obiettivi_user
+		SELECT 'NON COMPLETATO',users.user_account_USERNAME, NEW.id FROM users
+		WHERE TRUE;
+END$$
+
+
 DELIMITER ;
+
 DROP USER IF EXISTS sd_sys;
 
 CREATE USER 'sd_sys' IDENTIFIED BY '12345678';

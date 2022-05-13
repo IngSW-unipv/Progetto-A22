@@ -4,6 +4,12 @@ import java.lang.reflect.Constructor;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
+/**
+ * Classe responsabile delle creazione delle strategie
+ * per la creazione dei comandi 
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class CmdCreatorFactory {
 	
 	public static final String CMD_FULL="strategy.cmdFull.class.name";

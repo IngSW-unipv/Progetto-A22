@@ -1,7 +1,11 @@
 package serverDominator.config.model.scripts;
 
 import java.io.IOException;
-
+/**
+ * classe responsabile del lancio di uno script shell
+ * @author TawaHabib
+ * @version 1.0
+ */
 public class ScriptRunner {
 	
 	/**

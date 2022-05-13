@@ -3,6 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 import java.math.BigDecimal;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.NumberSpinner;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.event.ActionEvent;
@@ -23,7 +24,7 @@ public class Development {
 	public static int sX = 400;
 	public static int sY = 400;	
 	public static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
-	private Base baseUtente;
+	private Nodo baseUtente;
 	private NumberSpinner quantitaRootCrash;
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus;
@@ -66,9 +67,9 @@ public class Development {
 		layout.setVgap(5);
 		layout.setHgap(5);
 
-		Label rcQty = new Label("Own " + String.valueOf(baseUtente.getQnt_rootcrash()) + " rootcrash, dev ");
-		Label vrQty = new Label("Own " + String.valueOf(baseUtente.getQnt_virus()) + " virus, dev ");
-		Label avQty = new Label("Own " + String.valueOf(baseUtente.getQnt_antivirus()) + " antivirus, dev ");
+		Label rcQty = new Label(" Rootcrash\t");
+		Label vrQty = new Label(" Virus\t");
+		Label avQty = new Label(" Antivirus\t");
 		quantitaRootCrash = new NumberSpinner(0, baseUtente.getSpazio_Ram());
 		quantitaVirus = new NumberSpinner(0, baseUtente.getSpazio_Ram());
 		quantitaAntivirus = new NumberSpinner(0, baseUtente.getSpazio_Ram());
@@ -154,7 +155,7 @@ public class Development {
 		stage.showAndWait();
 	}
 
-	public Base getBaseUtente() {
+	public Nodo getBaseUtente() {
 		return baseUtente;
 	}
 

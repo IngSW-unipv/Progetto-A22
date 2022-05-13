@@ -1,8 +1,8 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.util;
 
 public class Point {
-    double x;
-    double y;
+	private  double x;
+    private double y;
 
     public Point(double x, double y) {
         this.x = x;
@@ -16,8 +16,17 @@ public class Point {
     public double getY() {
         return y;
     }
+    
 
-    @Override
+    public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	@Override
     public String toString() {
         return "Point{" +
                 "x=" + x +

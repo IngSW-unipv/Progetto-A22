@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa;
 
 
 
@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.HexData;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.Hexagon;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.util.Point;
 
 /**
  * @author para
@@ -14,13 +17,13 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
  */
 
 public class MapData {
-    HashMap<Hexagon, HexData> data;  //  l'hashMap che contiene tutti gli esagoni ed il rispettivo dato
+    private HashMap<Hexagon, HexData> data;  //  l'hashMap che contiene tutti gli esagoni ed il rispettivo dato
     
-    int ray = 25;
+    private int ray = 25;
     
-    Orientation layout_pointy = new Orientation(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,  Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
-    List<Hexagon> directions = Arrays.asList(new Hexagon(1,0), new Hexagon(1,-1), new Hexagon(0,-1), new Hexagon(-1,0), new Hexagon(-1,1), new Hexagon(0,1)); // direzioni dall'esagono 0,0 
-    Layout layout = new Layout(layout_pointy, new Point(ray,ray), new Point(ray,ray));  // definisco orientation, size e origin
+    private Orientation layout_pointy = new Orientation(Math.sqrt(3.0), Math.sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,  Math.sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0, 0.5);
+    private List<Hexagon> directions = Arrays.asList(new Hexagon(1,0), new Hexagon(1,-1), new Hexagon(0,-1), new Hexagon(-1,0), new Hexagon(-1,1), new Hexagon(0,1)); // direzioni dall'esagono 0,0 
+    private Layout layout = new Layout(layout_pointy, new Point(ray,ray), new Point(ray,ray));  // definisco orientation, size e origin
     
     
    // System.out.println("layout = " );
@@ -56,27 +59,27 @@ public class MapData {
     }
 
 
-    Point hex_to_pixel(Hexagon h) {  			// metodo per calcolare il pixel corrispondente al centro di un determinato esagono
+    public Point hex_to_pixel(Hexagon h) {  			// metodo per calcolare il pixel corrispondente al centro di un determinato esagono
         Orientation M = layout.orientation;
-        double x = (M.f0 * h.x + M.f1 * h.y) * layout.size.x;
-        double y = (M.f2 * h.x + M.f3 * h.y) * layout.size.y;
-        return new Point(x + layout.origin.x, y + layout.origin.y);
+        double x = (M.f0 * h.getX() + M.f1 * h.getY()) * layout.size.getX();
+        double y = (M.f2 * h.getX() + M.f3 * h.getY()) * layout.size.getY();
+        return new Point(x + layout.origin.getX(), y + layout.origin.getY());
     }
 
-    Point hex_corner_offset(int corner) { // restituisce un punto 
+    public Point hex_corner_offset(int corner) { // restituisce un punto 
         Point size = layout.size;
         double angle = 2.0 * Math.PI * (layout.orientation.start_angle + corner) / 6; 	// angle = 1/6 angolo giro (2*pi/6)
         																				// start_angle = 0.5*2*pi/6 = 30°
-        return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));			// corner 0 ha size.x = 21.65 ; size.y = 12.5
-        																				// corner 1 ha size.x = 0 ; size.y = 25
+        return new Point(size.getX() * Math.cos(angle), size.getY() * Math.sin(angle));			// corner 0 ha size.getX() = 21.65 ; size.getY() = 12.5
+        																				// corner 1 ha size.getX() = 0 ; size.getY() = 25
     }
 
-    List<Point> getPoints(Hexagon h) {											// creo lista dei 6 vertici dell'esagono h
+    public List<Point> getPoints(Hexagon h) {											// creo lista dei 6 vertici dell'esagono h
         List<Point> corners = new ArrayList<>();
         Point center = hex_to_pixel(h);
         for (int i = 0; i < 6; i++) {
             Point offset = hex_corner_offset(i);
-            corners.add(new Point(center.x + offset.x,center.y + offset.y));
+            corners.add(new Point(center.getX() + offset.getX(),center.getY() + offset.getY()));
         }
         return corners;
     }
@@ -84,11 +87,11 @@ public class MapData {
     public Hexagon pixelToHex(Point p){				// trasforma coordinate in pixel, in coordinate puntuali (25,25) -> (0,0)
         Orientation M = layout.orientation;
 
-        Point pt = new Point((p.getX() - layout.origin.x) / layout.size.x,
-                (p.getY() - layout.origin.y) / layout.size.y);
+        Point pt = new Point((p.getX() - layout.origin.getX()) / layout.size.getX(),
+                (p.getY() - layout.origin.getY()) / layout.size.getY());
 
-        double q = M.b0 * pt.x + M.b1 * pt.y;
-        double r = M.b2 * pt.x + M.b3 * pt.y;
+        double q = M.b0 * pt.getX() + M.b1 * pt.getY();
+        double r = M.b2 * pt.getX() + M.b3 * pt.getY();
 
         return new Hexagon((int) Math.round(q), (int) Math.round(r));
     }
@@ -97,23 +100,23 @@ public class MapData {
         return data.get(a);
     }
 
-    Hexagon add(Hexagon a, Hexagon b){
-        return new Hexagon(a.x + b.x, a.y + b.y);
+    public Hexagon add(Hexagon a, Hexagon b){
+        return new Hexagon(a.getX() + b.getX(), a.getY() + b.getY());
     }
 
-    Hexagon subtract(Hexagon a, Hexagon b){
-        return new Hexagon(a.x - b.x, a.y - b.y);
+    public Hexagon subtract(Hexagon a, Hexagon b){
+        return new Hexagon(a.getX() - b.getX(), a.getY() - b.getY());
     }
 
-    Hexagon multiply(Hexagon a, Hexagon b){
-        return new Hexagon(a.x - b.x, a.y - b.y);
+    public Hexagon multiply(Hexagon a, Hexagon b){
+        return new Hexagon(a.getX() - b.getX(), a.getY() - b.getY());
     }
 
-    int length(Hexagon a){
-        return (Math.abs(a.x) + Math.abs(a.y) + Math.abs(a.z) / 2);
+    public int length(Hexagon a){
+        return (Math.abs(a.getX()) + Math.abs(a.getY()) + Math.abs(a.getZ()) / 2);
     }
 
-    int distance(Hexagon a, Hexagon b){
+    public int distance(Hexagon a, Hexagon b){
         return length(subtract(a,b));
     }
 
@@ -138,15 +141,16 @@ public class MapData {
     }
 
     public static class Layout {
-        Orientation orientation;
-        Point size;
-        Point origin;
+        private Orientation orientation;
+        private Point size;
+        private Point origin;
 
         public Layout(Orientation orientation, Point size, Point origin) {
             this.orientation = orientation;
             this.size = size;
             this.origin = origin;
         }
+        
     }
 
     public static class Orientation {
@@ -167,4 +171,30 @@ public class MapData {
             this.start_angle = start_angle;
         }
     }
+
+	public Orientation getLayout_pointy() {
+		return layout_pointy;
+	}
+
+	public void setLayout_pointy(Orientation layout_pointy) {
+		this.layout_pointy = layout_pointy;
+	}
+
+	public List<Hexagon> getDirections() {
+		return directions;
+	}
+
+	public void setDirections(List<Hexagon> directions) {
+		this.directions = directions;
+	}
+
+	public Layout getLayout() {
+		return layout;
+	}
+
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
+	
+    
 }

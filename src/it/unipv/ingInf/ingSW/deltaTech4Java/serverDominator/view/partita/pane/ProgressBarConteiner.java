@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -92,10 +91,12 @@ public class ProgressBarConteiner extends Pane{
 	
 	public ProgressBarConteiner () {
 		super();
+		super.setBackground(
+				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
 		disponiTestata();
 	}
 
-	public VBox getBattleBox(Base bU) {
+	public VBox getBattleBox() {
 		
 		if(battaglie == null)
 			disponiTestata();
@@ -158,8 +159,7 @@ public class ProgressBarConteiner extends Pane{
 // dispone battaglie dentro alla griglia
 	
 	private void disponiTestata() {
-		super.setBackground(
-				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
+		
 		battaglie = new VBox();
 		battaglie.setSpacing(5);
 		battaglie.setPadding(STANDARD_PADDING);
@@ -243,9 +243,6 @@ public class ProgressBarConteiner extends Pane{
 		return battles.size();
 	}
 
-	public VBox getBattleBox() {
-		return battaglie;
-	}
 
 	public Label getElementTitle() {
 		return elementTitle;

@@ -3,16 +3,14 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -20,21 +18,18 @@ public class BattleBoxTester  extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane p=new Pane();
-		
+		ProgressBarConteiner p= new ProgressBarConteiner();
+		ScrollPane sp=new ScrollPane();
 		p.setBackground(
 				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
-		VBox battleBox = new VBox();
-		Base bU = new Base();
-		ProgressBarConteiner bBox = new ProgressBarConteiner();
 		
 		String battleTitle1 = new String("User attacca xBot in nodo (4,1)");
 		long durata1 = 4000;
-		bBox.addElement(battleTitle1, durata1);
+		p.addElement(battleTitle1, durata1);
 		
 		String battleTitle2 = new String("User attacca xBot in nodo (6,2)");
 		long durata2 = 6000;
-		bBox.addElement(battleTitle2, durata2);
+		p.addElement(battleTitle2, durata2);
 		
 		String battleTitle3 = new String("User attacca xBot in nodo (7,3)");
 		long durata3 = 7000;
@@ -46,14 +41,14 @@ public class BattleBoxTester  extends Application{
 		long durata6 = 10000;
 		
 
-		bBox.addElement(battleTitle3, durata3);
-		bBox.addElement(battleTitle4, durata4);
-		bBox.addElement(battleTitle5, durata5);
-		bBox.addElement(battleTitle6, durata6);
+		p.addElement(battleTitle3, durata3);
+		p.addElement(battleTitle4, durata4);
+		p.addElement(battleTitle5, durata5);
+		p.addElement(battleTitle6, durata6);
 
-		
-		battleBox = bBox.getBattleBox(bU);
-		p.getChildren().add(battleBox);
+	
+		sp.setContent(p);
+        sp.setPannable(true);;
 		
 			
 		Timer t = new Timer();						//creato un timer
@@ -65,7 +60,7 @@ public class BattleBoxTester  extends Application{
 					
 					@Override
 					public void run() {
-						bBox.disponiBattaglie();
+						p.disponiBattaglie();
 						
 					}
 				});
@@ -76,12 +71,12 @@ public class BattleBoxTester  extends Application{
 		
 		
         
-        Scene s=new Scene(p);
+        Scene s=new Scene(sp);
         primaryStage.setScene(s);
         primaryStage.show();
         String battle = new String("uuu");
 		long durat = 50000;
-		bBox.addElement(battle, durat);
+		p.addElement(battle, durat);
 
 	}
 	public static void main(String[] args) {

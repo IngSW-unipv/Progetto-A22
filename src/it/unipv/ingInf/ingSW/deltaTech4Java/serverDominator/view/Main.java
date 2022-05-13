@@ -7,6 +7,13 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.PlayTable;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa.BasicMap;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa.Map;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa.MapData;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.HexData;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.Hexagon;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.util.Point;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ActionPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.BaseStatsPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ProgressBarConteiner;
@@ -129,7 +136,7 @@ public class Main extends Application {
 		//GraphicsContext basicGC = pt.getBasicCanvas();
 		BasicMap basicMap = new BasicMap(mapData, basicCanvas.getGraphicsContext2D());
 		
-		basicMap.selected = true;
+		basicMap.setSelected(true);
 
 		ArrayList<Map> mapOrder = new ArrayList<>();
 		mapOrder.add(basicMap);
@@ -187,7 +194,7 @@ public class Main extends Application {
 				
 			
 				
-				sPane.getTitleL().setText("Stats Node: " + est.x + " , " + est.y);
+				sPane.getTitleL().setText("Stats Node: " + est.getX() + " , " + est.getY());
 				sPane.getOwner().setText("Owner: " + nodo.getPossessore().getNome());
 				sPane.getDistance().setText("Base distance: " + nodo.getDist_base());
 				sPane.getEnergy().setText("Energy: " + nodo.getE_disponibile());

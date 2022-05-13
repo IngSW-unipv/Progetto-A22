@@ -1,22 +1,51 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes;
 
-import java.io.Serializable;
 import java.util.Objects;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.*;
 
 public class Hexagon  {
     
-    public int x;
-	public int y;
-	int z;
+    private int x;
+    private int y;
+    private int z;
 
     public Hexagon(int x, int y) {
         this.x = x;
         this.y = y;
-        z = -x - y;
+        this.z = -x - y;
     }
+    
 
-    @Override
+    public int getX() {
+		return x;
+	}
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+	public int getY() {
+		return y;
+	}
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+	public int getZ() {
+		return z;
+	}
+
+
+	public void setZ(int z) {
+		this.z = z;
+	}
+
+
+	@Override
     public boolean equals(Object obj) {  // confronto tra oggetti di tipo esagono
         if (obj == null) {
             return false;

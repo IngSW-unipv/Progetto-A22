@@ -1,8 +1,12 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ActionPane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.BaseStatsPane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ProgressBarConteiner;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.StatsNodePane;
 import javafx.scene.layout.Pane;
 
-public class PartitaPane extends Pane{
+public class PartitaFacade extends Pane{
 	private ActionPane actionPane;
 	private BaseStatsPane baseStatsPane;
 	private StatsNodePane statsNodePane;

@@ -19,19 +19,28 @@ public class BaseStatsPane extends Pane{
 	
 	private Base nodeBase = new Base();
 	private Button buttonTitle;
-	
+	private Button buttonBack;
+	private Button buttonNext;
 	public final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
 	
 	public  BaseStatsPane(Base bU) {
 		super();
-		this.nodeBase = bU;
-	}
-		
-	public Pane getBsPane(Base bU) {
 		super.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		super.setPadding(STANDARD_PADDING);
+		this.nodeBase = bU;
+		buttonBack=ComponentCreator.getIstance().createButton("<<", Pos.TOP_CENTER);
+		buttonNext=ComponentCreator.getIstance().createButton(">>", Pos.TOP_CENTER);
+	}
+		
+	public Pane getBsPane(Base bU) {
+		nodeBase=bU;
+		make();
+		return this;
+	}
+	
+	private void make() {
 
 		VBox yb = new VBox();
 		yb.setPadding(STANDARD_PADDING);
@@ -67,33 +76,37 @@ public class BaseStatsPane extends Pane{
 		ybAv.setText("Antivirus disp: ");
 		ybVr.setText("Virus disp: ");
 		ybRc.setText("Rootcrash disp: ");
-		avQy.setText("" + bU.getSoftware_disponibile());
-		vrQy.setText("" + bU.getSoftware_disponibile());
-		rcQy.setText("" + bU.getSoftware_disponibile());
+		avQy.setText("" + nodeBase.getSoftware_disponibile());
+		vrQy.setText("" + nodeBase.getSoftware_disponibile());
+		rcQy.setText("" + nodeBase.getSoftware_disponibile());
 
 		ybG.add(ybEnergy, 0, 0);
-		ybG.add(new Label("" + bU.getE_disponibile()), 1, 0);
+		ybG.add(new Label("" + nodeBase.getE_disponibile()), 1, 0);
 		ybG.add(ybFwLvl, 0, 1);
-		ybG.add(new Label("" + bU.getLvl_firewall()), 1, 1);
+		ybG.add(new Label("" + nodeBase.getLvl_firewall()), 1, 1);
 		ybG.add(ybRamLvl, 0, 2);
-		ybG.add(new Label("" + bU.getLvl_ram()), 1, 2);
+		ybG.add(new Label("" + nodeBase.getLvl_ram()), 1, 2);
 		ybG.add(ybCpuLvl, 0, 3);
-		ybG.add(new Label("" + bU.getLvl_cpu()), 1, 3);
+		ybG.add(new Label("" + nodeBase.getLvl_cpu()), 1, 3);
 		ybG.add(ybAv, 0, 4);
-		ybG.add(new Label("" + bU.getQnt_antivirus()), 1, 4);
+		ybG.add(new Label("" + nodeBase.getQnt_antivirus()), 1, 4);
 		ybG.add(ybVr, 0, 5);
-		ybG.add(new Label("" + bU.getQnt_virus()), 1, 5);
+		ybG.add(new Label("" + nodeBase.getQnt_virus()), 1, 5);
 		ybG.add(ybRc, 0, 6);
-		ybG.add(new Label("" + bU.getQnt_rootcrash()), 1, 6);
+		ybG.add(new Label("" + nodeBase.getQnt_rootcrash()), 1, 6);
 
 		hBg.getChildren().add(ybG);
-
-		yb.getChildren().addAll(ybTitle, hBg);
+		hBg.setAlignment(Pos.CENTER);
+		HBox hb=new HBox();
+		hb.setPadding(STANDARD_PADDING);
+		hb.setSpacing(20);
+		hb.setAlignment(Pos.BASELINE_CENTER);
+		buttonBack.setPrefWidth(50);
+		buttonNext.setPrefWidth(50);
+		hb.getChildren().addAll(buttonBack,buttonNext);
+		yb.getChildren().addAll(ybTitle, hBg,hb);
 		super.getChildren().add(yb);
-
-		return this;
 	}
-
 	public Base getNodeBase() {
 		return nodeBase;
 	}

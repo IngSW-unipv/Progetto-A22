@@ -1,6 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
-
-import java.util.Objects;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes;
 
 // HexType serve per definire le caratteristiche dei layer di ogni esagono
 

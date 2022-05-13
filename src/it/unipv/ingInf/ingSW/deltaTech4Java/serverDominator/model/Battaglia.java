@@ -82,11 +82,18 @@ public class Battaglia extends Thread{
 	public boolean calcola_vincitore() {
 		
 		int attacco, difesa;
+		int temp;
+		
 		boolean successo=false;
 		attacco= sel_attaccanti[1].getQuantita() * sel_attaccanti[1].getVal_atk();
-		difesa=aggiorna_firewall()+sel_difensori[0].getVal_def();
+		difesa=aggiorna_firewall()+(sel_difensori[0].getVal_def()*sel_difensori[0].getQuantita());
+		
 		if(attacco>difesa) {
+			sel_difensori[0].setQuantita(0);
 			successo=true;
+		} else {
+			temp= (difesa-attacco) / (sel_difensori[0].getLivello() );
+			sel_difensori[0].setQuantita(temp);
 		}
 		return successo;
 	}

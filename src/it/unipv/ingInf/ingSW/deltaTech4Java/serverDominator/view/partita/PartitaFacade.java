@@ -4,9 +4,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.Ac
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.BaseStatsPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ProgressBarConteiner;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.StatsNodePane;
-import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-public class PartitaFacade extends Pane{
+public class PartitaFacade extends Stage{
 	private ActionPane actionPane;
 	private BaseStatsPane baseStatsPane;
 	private StatsNodePane statsNodePane;

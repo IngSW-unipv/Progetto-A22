@@ -25,7 +25,16 @@ public class Point {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+    public int getIntX() {
+		Double d=x;
+		return d.intValue();
+	}
 
+	public int getIntY() {
+		Double d=y;
+		return d.intValue();
+	}
 	@Override
     public String toString() {
         return "Point{" +

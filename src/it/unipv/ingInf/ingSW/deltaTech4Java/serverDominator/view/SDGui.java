@@ -10,7 +10,7 @@ public class SDGui {
 		
 		primaryStage.setTitle(titolo);
 		primaryStage.setIconified(false); // se TRUE lo avvia ridotto a icona
-		primaryStage.setFullScreen(false); // apre in full screen
+		primaryStage.setFullScreen(true); // apre in full screen
 		primaryStage.setX(0); // definisce la coordinata X dell'angolo in alto a sinistra della finestra
 		primaryStage.setY(0); // definisce la coordinata Y dell'angolo in alto a sinistra della finestra
 		//primaryStage.centerOnScreen();

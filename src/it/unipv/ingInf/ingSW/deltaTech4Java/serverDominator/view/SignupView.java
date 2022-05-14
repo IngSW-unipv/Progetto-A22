@@ -1,4 +1,4 @@
-package com.example.uilogin4sd;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -52,7 +52,8 @@ public class SignupView {
         return signupButtonLegit;
     }
 
-    private Scene signupView;
+    @SuppressWarnings("unused")
+	private Scene signupView;
     //view
     Parent signup;
 

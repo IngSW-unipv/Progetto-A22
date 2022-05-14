@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
@@ -13,12 +14,21 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
  * <h1>La facciata a cui si deve riferire se si vogliono fare operazione sulla persistenza </h1></br>
  * @author TawaHabib 
  * @version 1.0
- * @see IAssetDAO
- * @see IAssetOwnDAO
- * @see IObiettiviDAO 
- * @see IObiettiviUserDAO 
- * @see IUserAccountDAO 
- *
+ * <p>Interfacce esposte:<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link IAssetDAO}<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link IAssetOwnDAO}<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link IObiettiviDAO}<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link IObiettiviUserDAO}<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link IUserAccountDAO}<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link ILanguageManager}<br>
+ * </p>
+ * @see UserAccount
+ * @see Obiettivo
+ * @see Asset
+ * @see AssetOwn
+ * @see ObiettiviUser
+ * @see ObPunteggio
+ * 
  */
 public class PersistenceFacade{
 	private IAssetDAO asset;
@@ -138,7 +148,6 @@ public class PersistenceFacade{
 	 * Aggiorna quantita di un'asset posseduto dal giocatore 
 	 * @see AssetOwn
 	 * @param newA
-	 * 
 	 * @return
 	 *  Vero se l'operazione è andata a buon fine 
 	 * </br>Falso se l'operazione è fallita
@@ -320,6 +329,8 @@ public class PersistenceFacade{
 	 * @param newPassword 
 	 * </br>Nuova password da assegnare allo user account
 	 * @return
+	 * </br> vero se aggiornamento fatto
+	 * </br> falso se aggiornamento è fallito
 	 */
 	public boolean chengeUserAccountPassword(UserAccount us, String newPassword){
 		return this.userAccount.chengeUserAccountPassword(us, newPassword);
@@ -392,6 +403,7 @@ public class PersistenceFacade{
 	 * @param value
 	 * @param lingua
 	 * @return
+	 * Una possibile chive del valore passato
 	 */
 	public String getLanguageKayByValue(String value, String lingua) {
 		return this.linguaMan.getLanguageKayByValue(value, lingua);
@@ -402,6 +414,7 @@ public class PersistenceFacade{
 	 * @param kay
 	 * @param lingua
 	 * @return
+	 * valore della chiave
 	 */
 	public String getLanguageValueByKay(String kay, String lingua) {
 		return this.linguaMan.getLanguageValueByKay(kay, lingua);
@@ -412,6 +425,8 @@ public class PersistenceFacade{
 	 * @param list
 	 * @param lingua
 	 * @return
+	 * </br> vero se inserimento fatto
+	 * </br> falso se inserimento è fallito
 	 */
 	public boolean insertLanguegeList(Properties list, String lingua) {
 		return this.linguaMan.insertLanguegeList(list, lingua);
@@ -421,9 +436,17 @@ public class PersistenceFacade{
 	 * Recupero le coppie chiave valore di una lingua
 	 * @param lingua
 	 * @return
+	 * lista chiave valore della lingua passata per argomento
 	 */
 	public Properties getLanguegeList (String lingua) {
 		return this.linguaMan.getLanguegeList(lingua);
 	}
-	
+	/**
+	 * Recupera la lingua corrente
+	 * @return
+	 * lingua corrente o lingua di sistema
+	 */
+	public String getCurrentLanguage() {
+		return ILanguageManager.getCurrentLanguage();
+	}
 }

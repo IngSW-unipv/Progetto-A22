@@ -32,8 +32,8 @@ public class PlayTable {
 	public ScrollPane getPlayTable(Pair<Integer, Integer> dimensioni, MapData mapData, int ray) {
 		
 		ScrollPane centerPane = new ScrollPane(){
-			ScrollBar horizontal;
-			ScrollBar vertical;
+			private ScrollBar horizontal;
+			private ScrollBar vertical;
             @Override
             protected void layoutChildren() {
                 super.layoutChildren();

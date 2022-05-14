@@ -37,14 +37,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.P
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -95,7 +91,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) { 		// start della costruzione grafica
 		primaryStage.setTitle("Server Dominator");
-		primaryStage.setIconified(false); 			// se TRUE lo avvia ridotto a icona
+		primaryStage.setIconified(true); 			// se TRUE lo avvia ridotto a icona
 		primaryStage.setFullScreen(false); 			// apre in full screen
 		primaryStage.setX(0); 						// definisce la coordinata X dell'angolo in alto a sinistra della finestra
 		primaryStage.setY(0); 						// definisce la coordinata Y dell'angolo in alto a sinistra della finestra
@@ -140,51 +136,18 @@ public class Main extends Application {
 
 		ArrayList<Map> mapOrder = new ArrayList<>();
 		mapOrder.add(basicMap);
-		
-		double[] h =  new double[1000];
-		double[] w = new double[1000];
-			
-		h[click] = centerPane.getHeight(); w[click] = centerPane.getWidth();	
 
 		StatsNodePane sPane = new StatsNodePane(bU);
 		//offset scroll risolto
 		centerPane.setOnMouseClicked(event -> {
-			
 			double xMouse=event.getX();
 			double yMouse=event.getY();
 			double xBase=pt.getBasicCanvas().getWidth()-(pt.getScrollPane().getViewportBounds().getMaxX()-pt.getScrollPane().getViewportBounds().getMinX());
 			double yBase=pt.getBasicCanvas().getHeight()-(pt.getScrollPane().getViewportBounds().getMaxY()-pt.getScrollPane().getViewportBounds().getMinY());
 			double xOffset=(pt.getScrollPane().getHvalue()/pt.getScrollPane().getHmax())*xBase;
 			double yOffset=(pt.getScrollPane().getVvalue()/pt.getScrollPane().getVmax())*yBase;
-			System.out.println(
-					"----inizio---\n"
-					+pt.getScrollPane().getViewportBounds().toString()+"\n"
-					+pt.getBasicCanvas().toString()
-					+"\nxScorriBarra,yScorriBarra\t"+pt.getScrollPane().getHvalue()+","+pt.getScrollPane().getVvalue()
-					+"\nxMaouse,yMaouse\t"+xMouse+","+yMouse
-					+"\nxBase,yBase\t"+xBase+","+yBase
-					+"\nxOffset,yOffset\t"+xOffset+","+yOffset+"\n"
-					+"----fine---");
 			Hexagon est = mapData.pixelToHex(new Point(xMouse+xOffset,yMouse+yOffset));
-			System.out.println("vvVAlue"+pt.getScrollPane().vvalueProperty().doubleValue()+"\nvvMax"+pt.getScrollPane().vmaxProperty()
-					+"\n pane size: "+pt.getScrollPane().getViewportBounds());
 			HexData data = mapData.getHexData(est);
-			
-	// ---------- sto provando a risolvere l'offset su scroll --------------//	
-
-			if (data != null) {
-				click++;
-				
-				//h[click] = centerPane.getHeight(); w[click] = centerPane.getWidth();				
-				
-				//System.out.println("Dal click " + (click-1) + " al " + click + " -> diffHeight(): " + (h[click] - h[click-1]));
-				//System.out.println("Dal click " + (click-1) + " al " + click + " -> diffWidth(): " + (w[click] - w[click-1]));
-				
-				//System.out.println("centerPane.getWidth(): " + centerPane.getWidth() + "click: " + click);
-				
-			}
-						
-	// -----------------------------------------------------------------------//
 			
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
 				
@@ -298,16 +261,4 @@ public class Main extends Application {
 			}
 		}.start();
 	}
-    private ScrollBar getVerticalScrollbar(TableView<?> table) {
-        ScrollBar result = null;
-        for (Node n : table.lookupAll(".scroll-bar")) {
-            if (n instanceof ScrollBar) {
-                ScrollBar bar = (ScrollBar) n;
-                if (bar.getOrientation().equals(Orientation.VERTICAL)) {
-                    result = bar;
-                }
-            }
-        }       
-        return result;
-    }
 }

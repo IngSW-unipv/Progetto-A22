@@ -1,5 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,14 +13,15 @@ import java.util.List;
  * @since 1.0
  */
 public class Classifica {
+	public static final String LISTA_PROP="lista";
 	
 	private List<Giocatore> lista;
-	
+	private PropertyChangeSupport changes;
 	public Classifica(Giocatore... giocatori) {
 		this.lista = new ArrayList<Giocatore>();
 		for (int i = 0; i < giocatori.length; i++)
 			this.lista.add(giocatori[i]);
-		
+		this.changes= new PropertyChangeSupport(this);
 		this.aggiornaClassifica();
 	}
 	
@@ -27,6 +30,7 @@ public class Classifica {
 	 */
 	public Classifica() {
 		this.lista=new ArrayList<>();
+		this.changes= new PropertyChangeSupport(this);
 	}
 	
 	/**
@@ -37,6 +41,7 @@ public class Classifica {
 	public Classifica(List<Giocatore> lista) {
 		this.lista = new ArrayList<>();
 		this.lista=lista;
+		this.changes= new PropertyChangeSupport(this);
 		this.aggiornaClassifica();
 	}
 	
@@ -47,8 +52,11 @@ public class Classifica {
 	 * User da aggiungere alla lista dei giocatori
 	 */
 	public void aggiungiUtente(Giocatore user) {
+		List<Giocatore> oldList =new ArrayList<Giocatore>(lista);
 		this.lista.add(user);
-		this.aggiornaClassifica();
+		Collections.sort(lista);
+		List<Giocatore>  newList=lista;
+		changes.firePropertyChange(LISTA_PROP, oldList,newList);
 	}
 	
 	/**
@@ -88,7 +96,11 @@ public class Classifica {
 	 *(fatta in base al punteggio del giocatore interessato)
 	 */
 	public void aggiornaClassifica() {
+		
+		List<Giocatore> oldList =lista;
 		Collections.sort(lista);
+		List<Giocatore>  newList=lista;
+		changes.firePropertyChange(LISTA_PROP, oldList,newList);
 	}
 	
 	/**
@@ -108,6 +120,7 @@ public class Classifica {
 		this.lista = lista;
 		if(lista!=null)
 			this.aggiornaClassifica();
+		
 	}
 	
 	/**
@@ -117,6 +130,7 @@ public class Classifica {
 	 */
 	public int getLunghezzaClassifica() {
 		return lista.size();
+		
 	}
 	
 	/**
@@ -124,7 +138,7 @@ public class Classifica {
 	 * @param user
 	 */
 	public void removeUtente(Giocatore user) {
-		lista.remove(user);
+		changes.firePropertyChange(LISTA_PROP, lista, lista.remove(user));
 	}
 	
 	/**
@@ -134,7 +148,8 @@ public class Classifica {
 	 * posizione del giocatore da rimuovere
 	 */
 	public void removeUtente(int pos_user) {
-		lista.remove(pos_user);
+		
+		changes.firePropertyChange(LISTA_PROP, lista,lista.remove(pos_user));
 	}
 	
 	/**
@@ -147,6 +162,34 @@ public class Classifica {
 		this.aggiornaClassifica();
 	}
 	
+	public PropertyChangeSupport getPropertyChangeSupport() {
+	    return changes;
+	}
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        changes.addPropertyChangeListener(propertyName, listener);
+    }
+
+    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        changes.removePropertyChangeListener(propertyName,listener);
+    }
+    
+    
+	public List<Giocatore> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Giocatore> lista) {
+		this.lista = lista;
+	}
+
+	public PropertyChangeSupport getChanges() {
+		return changes;
+	}
+
+	public void setChanges(PropertyChangeSupport changes) {
+		this.changes = changes;
+	}
+
 	@Override
 	public String toString() {
 		String s = "Classifica:\n";

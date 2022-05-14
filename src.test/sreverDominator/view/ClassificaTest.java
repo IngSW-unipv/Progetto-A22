@@ -32,6 +32,10 @@ public class ClassificaTest extends Application{
 		c.aggiornaClassifica();
 		
 		c.aggiungiUtente(g7);
+		g5.setPunteggio(10000);
+		c.aggiornaClassifica();
+		c.removeUtente(0);
+		System.out.println(c.getLista().toString());
 	}
 	
 	public static void main(String[] args) {

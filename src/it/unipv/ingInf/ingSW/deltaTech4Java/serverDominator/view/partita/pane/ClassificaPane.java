@@ -37,7 +37,7 @@ public class ClassificaPane extends GridPane {
 			
 			HBox b1=new HBox();
 			b1.setAlignment(Pos.CENTER_LEFT);
-			b1.setBackground(new Background(new BackgroundFill(Color.gray(i%2 * (0.9 - 0.8) + 0.8),null,null)));
+			b1.setBackground(new Background(new BackgroundFill(Color.gray(0),null,null)));
 			b1.setMaxWidth(150);
 			
 			HBox b2=new HBox();
@@ -50,28 +50,15 @@ public class ClassificaPane extends GridPane {
 			b3.setBackground(new Background(new BackgroundFill(Color.gray(i%2 * (0.9 - 0.8) + 0.8),null,null)));
 			b1.setMaxWidth(300);
 			
-			Label pos = new Label();
-			pos.setAlignment(Pos.BASELINE_CENTER);
-			pos.setTextAlignment(TextAlignment.RIGHT);
-			pos.setTextFill(Paint.valueOf("#ff0000"));
-			pos.setFont(Font.font("Cambria", 13));
-			pos.setText(String.valueOf(i+1)+"  ");
-			pos.setOpacity(0.3);
+			Label pos = lblCreate(Pos.BASELINE_CENTER, TextAlignment.RIGHT, "#ff0000", 
+					15, String.valueOf(i+1),0.8);
 
-			Label name = new Label();
-			name.setText(gs.get(i).getNome());
-			name.setAlignment(Pos.BASELINE_CENTER);
-			name.setFont(Font.font("Cambria", 18));
-			name.setTextAlignment(TextAlignment.RIGHT);
-			name.setOpacity(0.8);
+			Label name = lblCreate(Pos.BASELINE_CENTER, TextAlignment.RIGHT, "#000000", 
+					20, " "+gs.get(i).getNome(),0.8);
 			
-			Label punteggio = new Label();
-			punteggio.setAlignment(Pos.BASELINE_CENTER);
-			punteggio.setTextAlignment(TextAlignment.RIGHT);
-			punteggio.setTextFill(Paint.valueOf("#000000"));
-			punteggio.setFont(Font.font("Cambria", 15));
-			punteggio.setText(" "+String.valueOf(gs.get(i).getPunteggio()));
-			punteggio.setOpacity(0.8);
+			Label punteggio =lblCreate(Pos.BASELINE_CENTER, TextAlignment.RIGHT, "#000000", 
+					15, " "+String.valueOf(gs.get(i).getPunteggio()),0.8);
+					new Label();
 			
 			b1.getChildren().add(pos);
 			b2.getChildren().add(name);
@@ -81,6 +68,18 @@ public class ClassificaPane extends GridPane {
 			super.add(b3, 2, i);
 			
 		}
+	}
+	
+	public static Label lblCreate(Pos lableAlign,TextAlignment textAlign, String textColor,int textSize, String text, double opacity) {
+			Label lbl = new Label();
+			lbl.setAlignment(lableAlign);
+			lbl.setTextAlignment(textAlign);
+			lbl.setTextFill(Paint.valueOf(textColor));
+			lbl.setFont(Font.font("Cambria", textSize));
+			lbl.setText(text);
+			lbl.setOpacity(opacity);
+			return lbl;
+		
 	}
 	
 }

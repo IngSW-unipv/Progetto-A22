@@ -97,7 +97,7 @@ public class Classifica {
 	 */
 	public void aggiornaClassifica() {
 		
-		List<Giocatore> oldList =lista;
+		List<Giocatore> oldList =new ArrayList<Giocatore>(lista);
 		Collections.sort(lista);
 		List<Giocatore>  newList=lista;
 		changes.firePropertyChange(LISTA_PROP, oldList,newList);
@@ -158,8 +158,10 @@ public class Classifica {
 	 */
 	public void aggiornaGiocatore(Giocatore user) {
 		int i=this.getPosizione(user);
+		List<Giocatore> old=new ArrayList<Giocatore>(lista);
 		lista.get(i).setPunteggio(user.getPunteggio());
-		this.aggiornaClassifica();
+		Collections.sort(lista);
+		changes.firePropertyChange(LISTA_PROP, old, lista);
 	}
 	
 	public PropertyChangeSupport getPropertyChangeSupport() {

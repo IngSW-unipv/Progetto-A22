@@ -1,19 +1,23 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class SignupView {
 
     //view nodes
     Label titleHolderText = new Label("SERVER DOMINATOR singup");
+    static Label errorMessageSignupLabel = new Label();
     Label usernameSignup = new Label("username");
     Label passwordSignup = new Label("password");
     Label ipSignup = new Label("ip");
@@ -23,6 +27,7 @@ public class SignupView {
     TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
     TextField passwordTextFieldSignup;
     TextField titleTextField;
+    private Stage signupStage;
 
     public Label getTitleHolderText(){
         return titleHolderText;
@@ -52,8 +57,7 @@ public class SignupView {
         return signupButtonLegit;
     }
 
-    @SuppressWarnings("unused")
-	private Scene signupView;
+    private Scene signupView;
     //view
     Parent signup;
 
@@ -115,6 +119,24 @@ public class SignupView {
     public Parent getSignup(){
         return signup;
     }
+
+    public Stage getStage() {
+		return signupStage;
+	}
+    
+    
+    public void setStage(Stage signupStage) {
+		this.signupStage = signupStage;
+	}
+
+
+
+	public static Labeled getErrorMessageLabel() {
+		// TODO Auto-generated method stub
+		return errorMessageSignupLabel;
+	}
+
+
 
 
 }

@@ -1,10 +1,8 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
+package sreverDominator.view;
 
-import java.util.TimerTask;
-import java.util.Timer;
-
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ProgressBarConteiner;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.ProgressStyle;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -28,7 +26,7 @@ public class BoxTester extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		/*
+		//*
 		ProgressBarConteiner p= new ProgressBarConteiner();
 		ScrollPane sp=new ScrollPane();
 		p.setBackground(
@@ -36,11 +34,11 @@ public class BoxTester extends Application {
 
 		String battleTitle1 = new String("User attacca xBot in nodo (4,1)");
 		long durata1 = 4000;
-		p.addElement(battleTitle1, durata1);
+		p.addElement(battleTitle1, durata1,ProgressStyle.RED_STYLE);
 
 		String battleTitle2 = new String("User attacca xBot in nodo (6,2)");
 		long durata2 = 6000;
-		p.addElement(battleTitle2, durata2);
+		p.addElement(battleTitle2, durata2,ProgressStyle.GRAY_STYLE);
 
 		String battleTitle3 = new String("User attacca xBot in nodo (7,3)");
 		long durata3 = 7000;
@@ -52,45 +50,25 @@ public class BoxTester extends Application {
 		long durata6 = 10000;
 
 
-		p.addElement(battleTitle3, durata3);
-		p.addElement(battleTitle4, durata4);
-		p.addElement(battleTitle5, durata5);
-		p.addElement(battleTitle6, durata6);
+		p.addElement(battleTitle3, durata3,ProgressStyle.ORANGE_STYLE);
+		p.addElement(battleTitle4, durata4,ProgressStyle.YELLO_STYLE);
+		p.addElement(battleTitle5, durata5,ProgressStyle.GRAY_STYLE);
+		p.addElement(battleTitle6, durata6,ProgressStyle.GREEN_STYLE);
 
 
 		sp.setContent(p);
-        sp.setPannable(true);;
-
-
-		Timer t = new Timer();						//creato un timer
-		t.scheduleAtFixedRate(new TimerTask() {		// imposto schedulazione del task 
-
-			@Override
-			public void run() {
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
-						p.disponiBattaglie();
-
-					}
-				});
-
-
-			}
-		}, 0, 1000);		// la schedulazione parte da 0 e arriva fino a 1000
-
-
-
+        sp.setPannable(true);
+        
+        p.disponiBattaglie();
         Scene s=new Scene(sp);
         primaryStage.setScene(s);
         primaryStage.show();
         String battle = new String("uuu");
 		long durat = 50000;
-		p.addElement(battle, durat);
+		p.addElement(battle, durat,ProgressStyle.RED_STYLE);
 		 //*/
 	
-// ----------------- test del TextBox ------------ //		
+/* ----------------- test del TextBox ------------ //		
 		
 		ScrollPane sp = new ScrollPane();
 		sp.setBackground(new Background(

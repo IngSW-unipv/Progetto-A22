@@ -16,7 +16,5 @@ public class ObserverClassifica implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		classificaPane.dispone();
-		System.out.println("aggiorno..");
 	}
-
 }

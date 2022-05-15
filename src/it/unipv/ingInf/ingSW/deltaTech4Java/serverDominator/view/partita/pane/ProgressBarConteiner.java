@@ -3,7 +3,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -26,8 +29,9 @@ class ProgressBarElement extends ProgressBar implements Comparable<ProgressBarEl
 	private long durata;
 	private double timeScale;
 	
-	public  ProgressBarElement(String bTitle, long durata) {
+	public  ProgressBarElement(String bTitle, long durata,String progressStyle) {
 		super(0);
+		super.setStyle(progressStyle);
 		super.setBackground(
 				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 		this.bTitle = bTitle;
@@ -88,12 +92,15 @@ public class ProgressBarConteiner extends Pane{
 	private List<ProgressBarElement> battles = new ArrayList<ProgressBarElement>();	// collezione delle battaglie
 	private GridPane bGrid;				// griglia che dispone le battaglie in corso	
 	private HBox battleTitle;			
-	
+	private ProgressBarConteiner istance;
 	public ProgressBarConteiner () {
 		super();
 		super.setBackground(
 				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
 		disponiTestata();
+		istance=this;
+		initScheduler();
+		
 	}
 
 	public VBox getBattleBox() {
@@ -109,11 +116,11 @@ public class ProgressBarConteiner extends Pane{
 
 //aggiungere una battaglia (titolo, durata) dentro alla Lista 
 	
-	public void addElement(String battleTitle, long durata) {
+	public void addElement(String battleTitle, long durata,String progressStyle) {
 		if (this.battles == null)
 			this.battles = new ArrayList<ProgressBarElement>(0);
 
-		ProgressBarElement battle = new ProgressBarElement(battleTitle, durata);
+		ProgressBarElement battle = new ProgressBarElement(battleTitle, durata,progressStyle);
 		this.battles.add(battle);
 		Collections.sort(this.battles);
 		//disponiBattaglie();
@@ -200,21 +207,15 @@ public class ProgressBarConteiner extends Pane{
 	public GridPane disponiBattaglie() {
 
 		bGrid.getChildren().clear();
-		
-		
 		for (ProgressBarElement o : this.battles) { // for each
-
 			ProgressBar btt = o;
 			btt.setProgress(btt.getProgress() + 1 / ((double) o.getDurata() / 1000));
-			
 			System.out.println(o.getDurata());
-
 		}
 		
 		this.battles.removeIf(o -> o.getProgress() >= 1);
 		Collections.sort(this.battles);
 		
-
 		for (int i = 0; i < this.battles.size(); i++) {
 
 			Label title = new Label();
@@ -230,14 +231,31 @@ public class ProgressBarConteiner extends Pane{
 			int posizione=i*2;
 			bGrid.add(title, 0, posizione);
 			bGrid.add(hbB, 0, ++posizione);
-			
-			
-			
-			System.out.println(btt.getProgress());
 		}
 		
 		return bGrid;
 	}
+	
+	private void initScheduler(){
+		Timer t = new Timer();						//creato un timer
+		t.scheduleAtFixedRate(new TimerTask() {		// imposto schedulazione del task 
+
+			@Override
+			public void run() {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						istance.disponiBattaglie();
+
+					}
+				});
+
+
+			}
+		}, 0, 1000);		// la schedulazione parte da 0 e arriva fino a 1000
+	}
+	
 	
 	public int getElementCard() {
 		return battles.size();

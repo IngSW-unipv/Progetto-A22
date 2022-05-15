@@ -22,15 +22,14 @@ public class PlayTable {
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Canvas basicCanvas;
 	private ScrollPane scrollPane;
+	private MapData mapData;
 	
 	public PlayTable(Pair<Integer, Integer> dimensioni) {
-		
 		this.dimTable = dimensioni;
-		
 	}
 	
 	public ScrollPane getPlayTable(Pair<Integer, Integer> dimensioni, MapData mapData, int ray) {
-		
+		this.mapData=mapData;
 		ScrollPane centerPane = new ScrollPane(){
 			private ScrollBar horizontal;
 			private ScrollBar vertical;
@@ -139,4 +138,17 @@ public class PlayTable {
 	public Canvas getBasicCanvas() {
 		return basicCanvas;
 	}
+
+	public MapData getMapData() {
+		return mapData;
+	}
+
+	public void setMapData(MapData mapData) {
+		this.mapData = mapData;
+	}
+
+	public void setScrollPane(ScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
+	}
+	
 }

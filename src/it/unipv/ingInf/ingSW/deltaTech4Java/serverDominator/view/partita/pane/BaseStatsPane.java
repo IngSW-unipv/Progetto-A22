@@ -40,7 +40,7 @@ public class BaseStatsPane extends Pane{
 		return this;
 	}
 	
-	private void make() {
+	public void make() {
 
 		VBox yb = new VBox();
 		yb.setPadding(STANDARD_PADDING);
@@ -121,6 +121,22 @@ public class BaseStatsPane extends Pane{
 
 	public void setButtonTitle(Button buttonTitle) {
 		this.buttonTitle = buttonTitle;
+	}
+
+	public Button getButtonBack() {
+		return buttonBack;
+	}
+
+	public void setButtonBack(Button buttonBack) {
+		this.buttonBack = buttonBack;
+	}
+
+	public Button getButtonNext() {
+		return buttonNext;
+	}
+
+	public void setButtonNext(Button buttonNext) {
+		this.buttonNext = buttonNext;
 	}
 	
 

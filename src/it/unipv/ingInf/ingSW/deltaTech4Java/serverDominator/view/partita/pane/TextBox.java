@@ -11,10 +11,8 @@ import java.util.Date;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -55,8 +53,9 @@ public class TextBox {
 	}
 	
 	public void generateFile() {
+		@SuppressWarnings("unused")
 		String desktop = System.getProperty("user.home");
-		File f = new File("C:\\Users\\para\\Desktop" , "SDlog.txt");
+		File f = new File("SDlog.txt");
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
 			for (Log l : logs) {

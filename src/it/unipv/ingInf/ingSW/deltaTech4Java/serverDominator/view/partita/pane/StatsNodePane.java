@@ -23,14 +23,11 @@ import javafx.scene.text.FontWeight;
 
 public class StatsNodePane {
 	
-	public StatsNodePane(Base bU) {
-		this.bU = bU;
+	public StatsNodePane() {
 	}	
 	//TODO: IMPORTANTE:
 	//TODO: DA RIVEDERE CON GLI ALTRI LE COSE DA MOSTRARE E LE COSE DA NASCONDERE 
 	//TODO: RICORDARSIII!!!!
-	@SuppressWarnings("unused")
-	private Base bU = new Base();
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Label titleL = new Label("Info Nodo");
 	private Label owner = new Label("Node owner");

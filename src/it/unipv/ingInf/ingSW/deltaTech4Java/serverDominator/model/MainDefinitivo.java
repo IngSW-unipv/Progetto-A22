@@ -85,7 +85,7 @@ public class MainDefinitivo extends Thread{
 	 * scelta dell'utente di una base diversa da quella iniziale
 	 */
 	public void sceltabase(int scelta) {
-		/** metodo usato nel caso l'utente abbia più di una base
+		/** metodo usato nel caso l'utente abbia piï¿½ di una base
 		 * in questo caso deve selezionarne una dalla quale partiranno
 		 * gli attacchi
 		 */
@@ -293,7 +293,7 @@ public class MainDefinitivo extends Thread{
 
 //---------------metodi per battaglia-------------//
 	
-	/**controlla se un nodo è confinantee quindi attaccabile da un giocatore
+	/**controlla se un nodo ï¿½ confinantee quindi attaccabile da un giocatore
 	 * e se lo spazio disponibile per gli attacchi simultaneri non sia vuoto
 	 * massimo 6 attacchi consentiti in simultanea
 	 * @param attaccante
@@ -409,6 +409,16 @@ public class MainDefinitivo extends Thread{
 	
 	public Giocatore[] getGiocatori() {
 		return giocatori;
+	}
+
+
+	public Classifica getClassifica() {
+		return classifica;
+	}
+
+
+	public void setClassifica(Classifica classifica) {
+		this.classifica = classifica;
 	}
 	
 	

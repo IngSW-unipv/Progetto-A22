@@ -34,7 +34,7 @@ public class ClassificaTest extends Application{
 		c.aggiungiUtente(g7);
 		g5.setPunteggio(10000);
 		c.aggiornaClassifica();
-		c.removeUtente(0);
+		//c.removeUtente(0);
 		System.out.println(c.getLista().toString());
 	}
 	

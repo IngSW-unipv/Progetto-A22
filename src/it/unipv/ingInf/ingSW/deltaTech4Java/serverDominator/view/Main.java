@@ -134,8 +134,8 @@ public class Main extends Application {
 		
 		basicMap.setSelected(true);
 
-		ArrayList<Map> mapOrder = new ArrayList<>();
-		mapOrder.add(basicMap);
+		//ArrayList<Map> mapOrder = new ArrayList<>();
+		//mapOrder.add(basicMap);
 
 		StatsNodePane sPane = new StatsNodePane(bU);
 		//offset scroll risolto
@@ -241,14 +241,14 @@ public class Main extends Application {
 		 * terrainCheck.selectedProperty().addListener((ov, old, newValue) -> {
 		 * terrainMap.selected = newValue; mapChange = true; });
 		 */
-		
+		basicMap.drawMap();
 	
 		Scene scena = new Scene(holder);
 		scena.getStylesheets().add("application.css");
 		primaryStage.setScene(scena);
 		primaryStage.show();
-
-		new AnimationTimer() {
+		
+		/*new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 
@@ -259,6 +259,6 @@ public class Main extends Application {
 				basicMap.drawMap();
 				
 			}
-		}.start();
+		}.start();*/
 	}
 }

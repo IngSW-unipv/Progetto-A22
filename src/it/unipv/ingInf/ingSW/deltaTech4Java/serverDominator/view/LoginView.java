@@ -1,31 +1,38 @@
-package com.example.uilogin4sd;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class LoginView{
-        Parent getLogin;
+        //Parent getLogin;
         //View Nodes
         Label titleHolderText = new Label("SERVER DOMINATOR Login");
+        static Label errorMessageLabel = new Label("");
         Label usernameText = new Label("username");
         Label passwordText = new Label("password");
-        Button loginButton = new Button("Log in");
-        Button signupButton = new Button("Sign Up"); //cambio scene
-        TextField usernameTextField; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
+        static Button loginButton = new Button("Log in");
+        static Button signupButton = new Button("Sign Up?"); //cambio scene
+        static TextField usernameTextField; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
         TextField passwordTextField;
         TextField titleTextField;
+        private static Stage loginStage;
 
         public Label getTitleHolderTextHolderText(){
             return titleHolderText;
         }
 
+       
+        
         public Label getUsernameText() {
             return usernameText;
         }
@@ -34,11 +41,11 @@ public class LoginView{
             return passwordText;
         }
 
-        public Button getLoginButton() {
+        public static Button getLoginButton() {
             return loginButton;
         }
 
-        public TextField getUsernameTextField(){
+        public static TextField getUsernameTextField(){
             return usernameTextField;
         }
 
@@ -46,7 +53,7 @@ public class LoginView{
             return passwordTextField;
         }
 
-        public Button getSignupButton(){
+        public static Button getSignupButton(){
             return signupButton;
         }
 
@@ -106,16 +113,30 @@ public class LoginView{
 
         private Node createLoginSignupButtons() {
             HBox hBox = new HBox(15);
-            hBox.getChildren().addAll(loginButton, signupButton);
+            hBox.getChildren().addAll(loginButton, signupButton, errorMessageLabel);
             return hBox;
         }
 
         public Parent getLogin(){
             return login;
         }
+        
+        public static Stage getStage() {
+    		return loginStage;
+    	}
+        
+        
+        public void setStage(Stage loginStage) {
+    		this.loginStage = loginStage;
+    	}
 
-        public void setScene(SignupView scene) {
+		public static Labeled getErrorMessageLabel() {
+			// TODO Auto-generated method stub
+			return errorMessageLabel;
+		}
 
-        }
+
+
+		
 
 }

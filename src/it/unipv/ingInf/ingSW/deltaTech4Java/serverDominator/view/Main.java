@@ -137,7 +137,7 @@ public class Main extends Application {
 		//ArrayList<Map> mapOrder = new ArrayList<>();
 		//mapOrder.add(basicMap);
 
-		StatsNodePane sPane = new StatsNodePane(bU);
+		StatsNodePane sPane = new StatsNodePane();
 		//offset scroll risolto
 		centerPane.setOnMouseClicked(event -> {
 			double xMouse=event.getX();

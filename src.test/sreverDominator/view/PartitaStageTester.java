@@ -12,7 +12,11 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.Partita
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class PartitaStageTester extends Application{
+
+//IMportante leggere i commenti
+//*solo unn esempio di come va usata PartitaStage*/
+public  class PartitaStageTester extends Application{
+	//*solo unn esempio di come va usata PartitaStage*/
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -43,8 +47,22 @@ public class PartitaStageTester extends Application{
 		Giocatore g10=new Utente("marco10",0);
 		g7.aggiornaPunteggio(1000);
 		Classifica c=new Classifica(g1,g2, g3, g4,g5, g6,g7,g8,g9,g10);
-		
-		PartitaStage ps=new PartitaStage(c, bU, nodiView, 30, 20);
+		//*solo unn esempio di come va usata PartitaStage*/
+		PartitaStage ps=new PartitaStage(c, bU, nodiView, 30, 20) {
+			@Override 
+			
+			public void doOnClic() {
+				//IMportante leggere i commenti
+				// TODO Auto-generated method stub
+				// non fa niene di aggiuntico
+				// RIVOLTO A GIAN: QUI PUOI METTERE LE ISTRUZIONI (AGGIUNTIVE) CHE
+				// VENGONO ESEGUITE QUANDO IL GIOCATORECLICCA SU UN NODO 
+				//(ESEMPIO LE POLITICHE E I CONTROLLI CHE SI FANNO PER ATTIVAZIONE DEI PULSANTI)
+				//SOLO A TITOLO DIMOSTRATIVO STAMPO LE COORDINATE DEL NODO CLICCATO
+				System.out.println("coordinate del nodo secondo la convenzione matriciale\t"
+				+this.getSelectedPoint().getIntX()+"\t"+this.getSelectedPoint().getIntY());
+			}
+		};
 		ps.disponiPannelli();
 		ps.addAvviso("prova");
 		ps.show();
@@ -58,6 +76,8 @@ public class PartitaStageTester extends Application{
 	}
 	
 	public static void main(String[] args) {
+		//*solo unn esempio di come va usata PartitaStage*/
+
 		launch(args);
 	}
 

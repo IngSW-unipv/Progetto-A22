@@ -36,7 +36,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-public class PartitaStage extends Stage{
+public abstract class PartitaStage extends Stage{
 	
 	/**
 	 * Pannello d'azione che contiene i Pulzanti:
@@ -132,7 +132,7 @@ public class PartitaStage extends Stage{
 		super();
 		super.setMinHeight(800);
 		super.setMinWidth(1000);
-		super.setAlwaysOnTop(true);
+		super.setAlwaysOnTop(false);
 		this.menuBarCreator();
 		this.statsNodePane=new StatsNodePane();
 		this.battleBox=new ProgressBarConteiner();
@@ -158,6 +158,7 @@ public class PartitaStage extends Stage{
 		this.classificaPane=new ClassificaPane(c);
 		this.classificaPane.setStyle("-fx-background-color: #000000; -fx-background-radius: 15px;");
 	}
+	public abstract void doOnClic();
 	
 	public void disponiPannelli(){
 		
@@ -264,7 +265,7 @@ public class PartitaStage extends Stage{
 				selectedPoint=new Point(Math.floor(est.getX()+(est.getY()/2)) , est.getY());
 				basicMap.drawMap(est);
 				setSelectedNodeProperty();
-
+				doOnClic();
 			}
 		});
 	}

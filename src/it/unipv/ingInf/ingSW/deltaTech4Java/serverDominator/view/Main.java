@@ -1,6 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 
-import java.util.ArrayList;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
@@ -9,7 +8,6 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.PlayTable;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa.BasicMap;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa.Map;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.mappa.MapData;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.HexData;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.Hexagon;
@@ -18,6 +16,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.Ac
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.BaseStatsPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ProgressBarConteiner;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.StatsNodePane;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.menu.SDMenuBar;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 
 /**
@@ -34,7 +33,6 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.P
  * 
  */
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -93,8 +91,8 @@ public class Main extends Application {
 		primaryStage.setTitle("Server Dominator");
 		primaryStage.setIconified(true); 			// se TRUE lo avvia ridotto a icona
 		primaryStage.setFullScreen(false); 			// apre in full screen
-		primaryStage.setX(0); 						// definisce la coordinata X dell'angolo in alto a sinistra della finestra
-		primaryStage.setY(0); 						// definisce la coordinata Y dell'angolo in alto a sinistra della finestra
+		//primaryStage.setX(0); 						// definisce la coordinata X dell'angolo in alto a sinistra della finestra
+		//primaryStage.setY(0); 						// definisce la coordinata Y dell'angolo in alto a sinistra della finestra
 		//primaryStage.centerOnScreen();
 		
 		Pair<Integer, Integer> dimensioneMappa = getDimensioniMappa(LivelloDiGioco.Hard);
@@ -185,7 +183,7 @@ public class Main extends Application {
 
 		
 		Pane statsNodePane = new Pane();
-		statsNodePane = sPane.getSnPane(bU);
+		statsNodePane = sPane.getSnPane();
 		Pane battlePane = new ProgressBarConteiner();
 		/*
 		BattlePane bPane = new BattlePane(bU);

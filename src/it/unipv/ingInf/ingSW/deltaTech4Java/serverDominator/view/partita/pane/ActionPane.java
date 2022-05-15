@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-public class ActionPane extends Pane{
+public class ActionPane extends Pane implements Drawable{
 
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Label actionTitleL;
@@ -36,70 +36,10 @@ public class ActionPane extends Pane{
 
 	public Pane getActionPane() {
 		
-		super.setBackground(
-				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
-
-		VBox controlli = new VBox();
-		controlli.setMinWidth(200.0);
-		controlli.setPadding(STANDARD_PADDING);
-		controlli.setAlignment(Pos.CENTER);
-
-		HBox actionTitle = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		actionTitle.setPadding(STANDARD_PADDING);
-		actionTitle.setBackground(
-				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(5, 5, 5, 5))));
-		actionTitleL = new Label("Action");
-		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
-		actionTitleL.setTextFill(Color.DARKGREEN);
-		actionTitle.getChildren().add(actionTitleL);
-
-		
-		HBox actionMarket = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		
-		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
-		actionMarket.setSpacing(10);
-		actionMarket.getChildren().add(actionMarketL);
-		actionMarketL.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	Giocatore g=new Utente();
-            	p.avviaMarket(new Base(g));
-            }
-		});
-		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
-		powerUp.getChildren().add(powerUpL);
-
-		powerUpL.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	p.avviaPowerUp(new Base());
-            }
-		});
-		
-		HBox dev = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
-		dev.getChildren().add(develop);
-		develop.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	p.avviaDevelopment(new Base());
-            }
-		});
-		
-		controlli.setSpacing(10);
-		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
-		super.getChildren().add(controlli);
-
+		drow();
 		return this;
 	}
-
+	
 	
 	public Label getActionTitleL() {
 		return actionTitleL;
@@ -135,6 +75,75 @@ public class ActionPane extends Pane{
 
 	public Insets getSTANDARD_PADDING() {
 		return STANDARD_PADDING;
+	}
+
+	@Override
+	public void drow() {
+
+		super.setBackground(
+				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
+
+		VBox controlli = new VBox();
+		controlli.setMinWidth(200.0);
+		controlli.setPadding(STANDARD_PADDING);
+		controlli.setAlignment(Pos.CENTER);
+
+		HBox actionTitle = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		actionTitle.setPadding(STANDARD_PADDING);
+		actionTitle.setBackground(
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(5, 5, 5, 5))));
+		actionTitleL = new Label("Action");
+		actionTitleL.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
+		actionTitleL.setTextFill(Color.DARKGREEN);
+		actionTitle.getChildren().add(actionTitleL);
+
+		
+		HBox actionMarket = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		actionMarket.setAlignment(Pos.BASELINE_CENTER);
+
+		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
+		actionMarket.setSpacing(10);
+		actionMarket.getChildren().add(actionMarketL);
+		actionMarketL.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	Giocatore g=new Utente();
+            	p.avviaMarket(new Base(g));
+            }
+		});
+		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		powerUp.setAlignment(Pos.BASELINE_CENTER);
+
+		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
+		powerUp.getChildren().add(powerUpL);
+
+		powerUpL.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	p.avviaPowerUp(new Base());
+            }
+		});
+		
+		HBox dev = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
+		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
+		dev.getChildren().add(develop);
+		develop.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent ae) {
+            	PopUpFacade p=new PopUpFacade();
+            	p.avviaDevelopment(new Base());
+            }
+		});
+		controlli.setAlignment(Pos.BASELINE_CENTER);
+		controlli.setSpacing(10);
+		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);
+		super.getChildren().add(controlli);
+		
 	}
 	
 	

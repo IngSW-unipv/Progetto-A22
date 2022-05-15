@@ -15,7 +15,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class BaseStatsPane extends Pane{
+public class BaseStatsPane extends Pane implements Drawable {
+
 	
 	private Base nodeBase = new Base();
 	private Button buttonTitle;
@@ -137,6 +138,12 @@ public class BaseStatsPane extends Pane{
 
 	public void setButtonNext(Button buttonNext) {
 		this.buttonNext = buttonNext;
+	}
+
+	@Override
+	public void drow() {
+		make();
+		
 	}
 	
 

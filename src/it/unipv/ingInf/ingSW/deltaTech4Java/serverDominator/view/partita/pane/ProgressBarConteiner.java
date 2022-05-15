@@ -85,21 +85,25 @@ class ProgressBarElement extends ProgressBar implements Comparable<ProgressBarEl
 	
 public class ProgressBarConteiner extends Pane{	
 	
-	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
-	
+	public static final Insets STANDARD_PADDING = new Insets(10,10,10,10);
+	private ArrayList<Drawable> disegnabili;
 	private VBox battaglie;				// contiene tutte le battaglie
 	private Label elementTitle;  				// titolo della VBox battaglie
-	private List<ProgressBarElement> battles = new ArrayList<ProgressBarElement>();	// collezione delle battaglie
+	private List<ProgressBarElement> battles;
 	private GridPane bGrid;				// griglia che dispone le battaglie in corso	
-	private HBox battleTitle;			
-	private ProgressBarConteiner istance;
+	private HBox battleTitle;	
+	
+	
+	
 	public ProgressBarConteiner () {
 		super();
-		super.setBackground(
-				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
-		disponiTestata();
-		istance=this;
-		initScheduler();
+		super.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
+		this.battles = new ArrayList<ProgressBarElement>();
+		
+		this.disegnabili=new ArrayList<Drawable>();
+		this.disponiTestata();
+		this.initScheduler();
+		
 		
 	}
 
@@ -168,6 +172,7 @@ public class ProgressBarConteiner extends Pane{
 	private void disponiTestata() {
 		
 		battaglie = new VBox();
+		this.battaglie.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null)));
 		battaglie.setSpacing(5);
 		battaglie.setPadding(STANDARD_PADDING);
 		//battaglie.setMaxWidth(390);
@@ -201,7 +206,7 @@ public class ProgressBarConteiner extends Pane{
 		bGrid = disponiBattaglie();
 		
 		battaglie.getChildren().addAll(battleTitle, bGrid);
-		super.getChildren().addAll(battaglie);
+		super.getChildren().add(battaglie);
 	}
 	
 	public GridPane disponiBattaglie() {
@@ -210,7 +215,9 @@ public class ProgressBarConteiner extends Pane{
 		for (ProgressBarElement o : this.battles) { // for each
 			ProgressBar btt = o;
 			btt.setProgress(btt.getProgress() + 1 / ((double) o.getDurata() / 1000));
-			System.out.println(o.getDurata());
+			if(o.getProgress()>=1)
+				for(Drawable d:disegnabili)
+					d.drow();
 		}
 		
 		this.battles.removeIf(o -> o.getProgress() >= 1);
@@ -246,7 +253,7 @@ public class ProgressBarConteiner extends Pane{
 
 					@Override
 					public void run() {
-						istance.disponiBattaglie();
+						disponiBattaglie();
 
 					}
 				});
@@ -305,5 +312,36 @@ public class ProgressBarConteiner extends Pane{
 	public Insets getSTANDARD_PADDING() {
 		return STANDARD_PADDING;
 	}
+	public void addDrawable(Drawable d) {
+		disegnabili.add(d);
+	}
+
+	public ArrayList<Drawable> getDisegnabili() {
+		return disegnabili;
+	}
+
+	public void setDisegnabili(ArrayList<Drawable> disegnabili) {
+		this.disegnabili = disegnabili;
+	}
+
+	public List<ProgressBarElement> getBattles() {
+		return battles;
+	}
+
+	public void setBattles(List<ProgressBarElement> battles) {
+		this.battles = battles;
+	}
+
+	public GridPane getbGrid() {
+		return bGrid;
+	}
+
+	public void setbGrid(GridPane bGrid) {
+		this.bGrid = bGrid;
+	}
+	public void setTitle(String titolo) {
+		elementTitle.setText(titolo);
+	}
+	
 }	
 	

@@ -3,7 +3,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
@@ -127,7 +126,7 @@ public class LoginView{
         
         
         public void setStage(Stage loginStage) {
-    		this.loginStage = loginStage;
+        	LoginView.loginStage = loginStage;
     	}
 
 		public static Labeled getErrorMessageLabel() {

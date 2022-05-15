@@ -1,6 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.event.ActionEvent;
@@ -37,8 +36,8 @@ public class StatsNodePane {
 	private Label ramLvl = new Label("Ram Level");
 	private Label cpuLvl = new Label("CPU Level");
 	private Button buttonAttacca;
-	
-	public Pane getSnPane(Base bU) {
+	private Pane statePane;
+	public Pane getSnPane() {
 
 		Label titleL = this.titleL;
 		Label owner =  this.owner;
@@ -58,7 +57,7 @@ public class StatsNodePane {
             @Override
             public void handle(ActionEvent ae) {
             	PopUpFacade p=new PopUpFacade();
-            	p.avviaSelectMalware(bU);
+            	p.avviaSelectMalware();
             }
 		});
 		Pane statsNode = new Pane();
@@ -105,8 +104,8 @@ public class StatsNodePane {
 		statsNodeVbox.getChildren().addAll(statsNodeTitle, gridBox, attack);
 		statsNodeHbox.getChildren().add(statsNodeVbox);
 		statsNode.getChildren().addAll(statsNodeHbox);
-
-		return statsNode;
+		this.statePane=statsNode;
+		return statePane;
 	}
 	
 	public void setTitle(Label title) {
@@ -176,6 +175,14 @@ public class StatsNodePane {
 
 	public void setButtonAttacca(Button buttonAttacca) {
 		this.buttonAttacca = buttonAttacca;
+	}
+
+	public Pane getStatePane() {
+		return statePane;
+	}
+
+	public void setStatePane(Pane statePane) {
+		this.statePane = statePane;
 	}
 	
 }

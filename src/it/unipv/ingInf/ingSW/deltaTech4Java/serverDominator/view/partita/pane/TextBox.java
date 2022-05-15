@@ -10,10 +10,12 @@ import java.util.Date;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Quando una battaglia si conclude viene riportato l'esito in TextBox
@@ -45,6 +47,8 @@ public class TextBox {
 		this.text.getChildren().clear();  //pulizia di sicurezza, non è necessaria
 		for (Log l : logs) {
 			Label inserted = new Label();
+			inserted.setAlignment(Pos.CENTER);
+			inserted.setTextAlignment(TextAlignment.CENTER);
 			inserted.setPadding(new Insets(10,10,10,10));
 			inserted.setText(l.displayText());
 			this.text.getChildren().add(inserted);

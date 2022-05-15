@@ -6,12 +6,14 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Uten
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
 public class ClassificaTest extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		ScrollPane sp=new ScrollPane();
 		Giocatore g1=new Utente("TawaHabib",0);
 		Giocatore g2=new Utente("Lucac999",0);
 		Giocatore g3=new Utente("Gian",0);
@@ -22,7 +24,8 @@ public class ClassificaTest extends Application{
 		g7.aggiornaPunteggio(1000);
 		Classifica c=new Classifica(g1,g2, g3, g4,g5, g6);
 		ClassificaPane cp=new ClassificaPane(c);
-		Scene s = new Scene(cp);
+		sp.setContent(cp);
+		Scene s = new Scene(sp);
 		primaryStage.setScene(s);
 		primaryStage.show();
 		cp.dispone();

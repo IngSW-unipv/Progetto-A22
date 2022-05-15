@@ -18,8 +18,21 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.Pr
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.StatsNodePane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.TextBox;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.ProgressStyle;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.menu.SDMenuBar;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -104,6 +117,11 @@ public class PartitaStage extends Stage{
 	 * Disegnatrice di mappe
 	 */
 	private BasicMap basicMap;
+	
+	/**
+	 * 
+	 */
+	private SDMenuBar menuBar;
 	//TODO: FACCIATA ALLA PARTITA
 	//CLASSE CON RESPONSABITLIA' DI: CREARE I PANELLI DELLA PARTITA, ESPORRE
 	//I METODI DI UTILITà PER I CONTROLLER, INIZIALIZZARE LEI LO SCHEDULING PER I VARI PROGRESS BAR??
@@ -112,26 +130,104 @@ public class PartitaStage extends Stage{
 	
 	public PartitaStage(Classifica classifica, Base baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa) {
 		super();
+		super.setMinHeight(800);
+		super.setMinWidth(1000);
+		super.setAlwaysOnTop(true);
+		this.menuBarCreator();
 		this.statsNodePane=new StatsNodePane();
 		this.battleBox=new ProgressBarConteiner();
+		this.battleBox.setTitle("BATTAGLIE IN CORSO");
 		this.poweUpBox=new ProgressBarConteiner();
+		this.poweUpBox.setTitle("PRODUZIONI IN CORSO");
 		this.actionPane=new ActionPane();
-		this.classificaPane=new ClassificaPane(classifica);
+		this.classificaPaneCreator(classifica);
 		this.baseStatsPane=new BaseStatsPane(baseUtente);
 		this.selectedBase=baseUtente;
 		this.dimensioni=new Pair<Integer, Integer>(nodiAltezzaMappa, nodiLarghezzaMappa);
-		this.scrollPaneMaker();
-		this.log=new TextBox(baseUtente, logScrollPane);
+		this.logScrollPaneMaker(baseUtente);
 		this.playTableMaker(nodi);
-		
+		this.poweUpBox.addDrawable(baseStatsPane);
+		this.initPlayTableListener();
 	}
-	
+
 	public PartitaStage(MainDefinitivo main,Base baseUtente) {
-		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getX_max(),main.getY_max());
+		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getTabellone().getX_max(),main.getTabellone().getY_max());
 	}
 	
-	private void scrollPaneMaker() {
-		logScrollPane=new ScrollPane();
+	public void classificaPaneCreator(Classifica c) {
+		this.classificaPane=new ClassificaPane(c);
+		this.classificaPane.setStyle("-fx-background-color: #000000; -fx-background-radius: 15px;");
+	}
+	
+	public void disponiPannelli(){
+		
+		//Righet in the borderPane
+		VBox vBaseClassificaBox=new VBox();
+		VBox.setVgrow(this.baseStatsPane.getBsPane(selectedBase), Priority.ALWAYS);
+		VBox.setVgrow(classificaPane, Priority.ALWAYS);
+		vBaseClassificaBox.setSpacing(10);
+		vBaseClassificaBox.getChildren().addAll(this.baseStatsPane.getBsPane(selectedBase),classificaPane);
+		
+		//Center in the borderPane
+		playTable.getScrollPane().setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		playTable.getScrollPane().setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		
+		Pane stateNodoPane=this.statsNodePane.getSnPane();
+		
+		Pane battleBoxScrollpane=battleBox;
+		
+		Pane powrUpScrollPane=poweUpBox;
+		HBox hProgressBox=new HBox();
+		HBox.setHgrow(powrUpScrollPane, Priority.ALWAYS);
+		HBox.setHgrow(battleBoxScrollpane, Priority.ALWAYS);
+
+		hProgressBox.getChildren().addAll(battleBoxScrollpane,powrUpScrollPane);
+		hProgressBox.setMinHeight(190);
+		hProgressBox.setMaxHeight(190);
+		logScrollPane.setMaxHeight(40);
+		
+		VBox vComunicationBox=new VBox();
+		VBox.setVgrow(vComunicationBox, Priority.ALWAYS);
+		vComunicationBox.setSpacing(10);
+		vComunicationBox.getChildren().addAll(hProgressBox,logScrollPane);
+		
+		Pane actioPane=this.actionPane.getActionPane();
+		//buttom in borderPane
+		HBox hBottomBox=new HBox();
+		hBottomBox.setSpacing(10);
+		HBox.setHgrow(vComunicationBox, Priority.ALWAYS);
+		HBox.setHgrow(stateNodoPane, Priority.ALWAYS);
+		HBox.setHgrow(actioPane, Priority.ALWAYS);
+
+		hBottomBox.getChildren().addAll(stateNodoPane,vComunicationBox,actioPane);
+		hBottomBox.setMinHeight(250);
+		hBottomBox.setMaxHeight(250);
+		BorderPane borderPane = new BorderPane();;
+		borderPane.setCenter(playTable.getScrollPane());
+		BorderPane.setMargin(playTable.getScrollPane(), new Insets(10));
+		borderPane.setRight(vBaseClassificaBox);
+		BorderPane.setMargin(vBaseClassificaBox, new Insets(10));
+
+		borderPane.setBottom(hBottomBox);
+		BorderPane.setMargin(hBottomBox, new Insets(10));
+
+		VBox vPartitaBox=new VBox();
+		vPartitaBox.setSpacing(10);
+		vPartitaBox.getChildren().addAll(menuBar.getMenuBar(),borderPane);
+		Scene scena = new Scene(vPartitaBox,1000,900);
+		scena.getStylesheets().add("application.css");
+		super.setScene(scena);
+		this.drowMappa();
+	}
+
+	private void logScrollPaneMaker(Base baseUtente) {
+		this.logScrollPane= new ScrollPane();
+		this.logScrollPane.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
+		this.log = new TextBox(null, logScrollPane);
+	}
+	public void menuBarCreator() {
+		menuBar=new SDMenuBar();
+		menuBar.addItems("SdMenu", "Abbandona partita","blabla");
 	}
 	/**
 	 * Cosctuisce il tavolo da gioco
@@ -147,6 +243,10 @@ public class PartitaStage extends Stage{
 		basicMap.setSelected(true);
 		basicMap.drawMap();
 	}
+	
+	/**
+	 * 
+	 */
 	public void initPlayTableListener() {
 		playTable.getScrollPane().setOnMouseClicked(event -> {
 			double xMouse=event.getX();
@@ -168,6 +268,15 @@ public class PartitaStage extends Stage{
 			}
 		});
 	}
+	
+	/**
+	 * 
+	 */
+	public void drowMappa() {
+		basicMap.drawMap();
+	}
+	
+	
 	/**
 	 * Costruisce la basic map
 	 * @param mappa
@@ -178,6 +287,7 @@ public class PartitaStage extends Stage{
 	private void basicMapMaker(MapData mappa,GraphicsContext contestoGrafico) {
 		 basicMap = new BasicMap(mappa, contestoGrafico);
 	}
+	
 	/**
 	 * Metodo per settare la base attuale e le relative caratteristiche 
 	 * all'internodel pannello

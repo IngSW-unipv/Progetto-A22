@@ -28,8 +28,9 @@ public class BoxTester extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		//*
 		ProgressBarConteiner p= new ProgressBarConteiner();
+		p.setTitle("bellaZii");
 		ScrollPane sp=new ScrollPane();
-		p.setBackground(
+		sp.setBackground(
 				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 
 		String battleTitle1 = new String("User attacca xBot in nodo (4,1)");

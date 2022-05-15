@@ -26,15 +26,15 @@ public  class PartitaStageTester extends Application{
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		} 
-		
+		//IMportante leggere i commenti
 		Giocatore[] gioc = mainView.getGiocatori();
 		Nodo baseU = mainView.getTabellone().trovaBase(gioc[1]);
 		Base bU = new Base(baseU.getPossessore());
-		
+		//IMportante leggere i commenti
 		MappaDefinitiva mappa = new MappaDefinitiva(30, 20, gioc);
 		mappa.assegnamento(gioc.length-1, gioc);
 		Nodo[][] nodiView = mappa.getMap();
-		
+		//IMportante leggere i commenti
 		Giocatore g1=new Utente("TawaHabib",0);
 		Giocatore g2=new Utente("Lucac999",0);
 		Giocatore g3=new Utente("Gian",0);

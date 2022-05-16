@@ -1,5 +1,9 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+
+
+import java.beans.PropertyChangeSupport;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
 /**@author Luca Casto 
@@ -9,7 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Gioc
  * classe mappa, gestisce i nodi, li assegna ai giocatori, tiene aggiornati
  * i proprietari delle basi assegnate, verifica se due nodi sono prossimi
  */
-public class MappaDefinitiva {
+public class MappaDefinitiva{
 	private Nodo[][] map;
 	private Coordinate[] basi;
 	private Coordinate[] basiutente;
@@ -19,6 +23,9 @@ public class MappaDefinitiva {
 	private String[] vicini;
 	private Coordinate[] confini; 
 	private int xsup, xinf, ysup, yinf;
+	private PropertyChangeSupport changes;
+	public static final String LISTA_PROP="lista";
+	
 
 	/**costruisce una mappa chiedendo in ingresso le coordinate massime
 	 * scelte dall'utente e la lista giocatori
@@ -47,7 +54,7 @@ public class MappaDefinitiva {
 		confini= new Coordinate[6];
 		basiutente= new Coordinate[n_basi];
 		sceltabase=0;
-		
+		this.changes= new PropertyChangeSupport(this);
 	}
 	
 	/**assegna i giocatori ai nodi base iniziali
@@ -273,18 +280,6 @@ public class MappaDefinitiva {
 			
 			return map[confini[temp].getX()][confini[temp].getY()];
 		
-		}
-		
-		/**aggiorna gli stati del nodo bersaglio con dati del nodo confinante 
-		 * del giocatore attaccante
-		 * @param bersaglio
-		 * nodo bersaglio
-		 * @param partenza
-		 * nodo confinante del giocatore attaccante
-		 */
-		public void aggiornastati(Nodo bersaglio, Nodo partenza) {
-			bersaglio.setDist_base(partenza.getDist_base()+1);
-			bersaglio.setPossessore(partenza.getPossessore());
 		}
 		
 	//-------------getter and setter--------//

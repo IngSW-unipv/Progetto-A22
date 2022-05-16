@@ -157,7 +157,6 @@ public class Main extends Application {
 				
 				sPane.getTitleL().setText("Stats Node: " + est.getX() + " , " + est.getY());
 				sPane.getOwner().setText("Owner: " + nodo.getPossessore().getNome());
-				sPane.getDistance().setText("Base distance: " + nodo.getDist_base());
 				sPane.getEnergy().setText("Energy: " + nodo.getE_disponibile());
 				sPane.getFwLvl().setText("Firewall Level: " + String.valueOf(nodo.getLvl_firewall()));
 				sPane.getRamLvl().setText("Ram Level: " + String.valueOf(nodo.getLvl_ram()));

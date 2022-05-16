@@ -20,6 +20,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.Te
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.ProgressStyle;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.menu.SDMenuBar;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ScrollPane;
@@ -28,6 +29,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -161,29 +163,43 @@ public abstract class PartitaStage extends Stage{
 	public abstract void doOnClic();
 	
 	public void disponiPannelli(){
+		Background black=new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null));
+		Background rose=new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), null));
 		
 		//Righet in the borderPane
 		VBox vBaseClassificaBox=new VBox();
-		VBox.setVgrow(this.baseStatsPane.getBsPane(selectedBase), Priority.ALWAYS);
+		ScrollPane gp=new ScrollPane(putPaneInAscrollableGridPane(
+				this.baseStatsPane.getBsPane(selectedBase), rose,null));
+		gp.setFitToWidth(true);
+		VBox.setVgrow(gp, Priority.ALWAYS);
+		
+		ScrollPane classificaPane=new ScrollPane(putPaneInAscrollableGridPane(this.classificaPane, null, null));
+		classificaPane.setFitToWidth(true);
 		VBox.setVgrow(classificaPane, Priority.ALWAYS);
 		vBaseClassificaBox.setSpacing(10);
-		vBaseClassificaBox.getChildren().addAll(this.baseStatsPane.getBsPane(selectedBase),classificaPane);
+		vBaseClassificaBox.getChildren().addAll(gp,classificaPane);
 		
 		//Center in the borderPane
 		playTable.getScrollPane().setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		playTable.getScrollPane().setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		
-		Pane stateNodoPane=this.statsNodePane.getSnPane();
+		GridPane stateNodoPane=
+				this.putPaneInAscrollableGridPane(this.statsNodePane.getSnPane(),
+						rose,new Background(new BackgroundFill(Color.web("#f8cecc"), null, null))) ;
 		
-		Pane battleBoxScrollpane=battleBox;
-		
-		Pane powrUpScrollPane=poweUpBox;
+		ScrollPane battleBoxScrollpane=new ScrollPane(
+				this.putPaneInAscrollableGridPane(this.battleBox,
+						black,new Background(new BackgroundFill(Color.web("#000000"), null, null))));
+		battleBoxScrollpane.setFitToWidth(true);
+		ScrollPane powrUpScrollPane=new ScrollPane(this.putPaneInAscrollableGridPane(this.poweUpBox,black,new Background(new BackgroundFill(Color.web("#000000"), null, null))));
+		powrUpScrollPane.setFitToWidth(true);
 		HBox hProgressBox=new HBox();
 		HBox.setHgrow(powrUpScrollPane, Priority.ALWAYS);
 		HBox.setHgrow(battleBoxScrollpane, Priority.ALWAYS);
 
 		hProgressBox.getChildren().addAll(battleBoxScrollpane,powrUpScrollPane);
 		hProgressBox.setMinHeight(190);
+		hProgressBox.setSpacing(10);
 		hProgressBox.setMaxHeight(190);
 		logScrollPane.setMaxHeight(40);
 		
@@ -192,7 +208,7 @@ public abstract class PartitaStage extends Stage{
 		vComunicationBox.setSpacing(10);
 		vComunicationBox.getChildren().addAll(hProgressBox,logScrollPane);
 		
-		Pane actioPane=this.actionPane.getActionPane();
+		GridPane actioPane=this.putPaneInAscrollableGridPane(this.actionPane.getActionPane(),rose,new Background(new BackgroundFill(Color.web("#f8cecc"), null, null)));
 		//buttom in borderPane
 		HBox hBottomBox=new HBox();
 		hBottomBox.setSpacing(10);
@@ -215,17 +231,12 @@ public abstract class PartitaStage extends Stage{
 		VBox vPartitaBox=new VBox();
 		vPartitaBox.setSpacing(10);
 		vPartitaBox.getChildren().addAll(menuBar.getMenuBar(),borderPane);
-		Scene scena = new Scene(vPartitaBox,1000,900);
+		Scene scena = new Scene(vPartitaBox,1000,800);
 		scena.getStylesheets().add("application.css");
 		super.setScene(scena);
 		this.drowMappa();
 	}
 
-	private void logScrollPaneMaker(Base baseUtente) {
-		this.logScrollPane= new ScrollPane();
-		this.logScrollPane.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
-		this.log = new TextBox(null, logScrollPane);
-	}
 	public void menuBarCreator() {
 		menuBar=new SDMenuBar();
 		menuBar.addItems("SdMenu", "Abbandona partita","blabla");
@@ -276,19 +287,7 @@ public abstract class PartitaStage extends Stage{
 	public void drowMappa() {
 		basicMap.drawMap();
 	}
-	
-	
-	/**
-	 * Costruisce la basic map
-	 * @param mappa
-	 * Dati della mappa da rappresentare
-	 * @param contestoGrafico
-	 * COntesto grafico
-	 */
-	private void basicMapMaker(MapData mappa,GraphicsContext contestoGrafico) {
-		 basicMap = new BasicMap(mappa, contestoGrafico);
-	}
-	
+
 	/**
 	 * Metodo per settare la base attuale e le relative caratteristiche 
 	 * all'internodel pannello
@@ -333,13 +332,12 @@ public abstract class PartitaStage extends Stage{
 	 * aggiornamento delle proprietà del nodo selezionato
 	 */
 	public void setSelectedNodeProperty() {
-		statsNodePane.getTitleL().setText("Stats Node: " + selectedHexagon.getX() + " , " + selectedHexagon.getY());
-		statsNodePane.getOwner().setText("Owner: " + selectedNode.getPossessore().getNome());
-		statsNodePane.getDistance().setText("Base distance: " + selectedNode.getDist_base());
-		statsNodePane.getEnergy().setText("Energy: " + selectedNode.getE_disponibile());
-		statsNodePane.getFwLvl().setText("Firewall Level: " + String.valueOf(selectedNode.getLvl_firewall()));
-		statsNodePane.getRamLvl().setText("Ram Level: " + String.valueOf(selectedNode.getLvl_ram()));
-		statsNodePane.getCpuLvl().setText("CPU Level: " + String.valueOf(selectedNode.getLvl_cpu()));
+		statsNodePane.getTitleL().setText("Stats Node:\t" + selectedHexagon.getX() + " , " + selectedHexagon.getY());
+		statsNodePane.getOwner().setText("Owner:\t" + selectedNode.getPossessore().getNome());
+		statsNodePane.getEnergy().setText("Energy:\t" + selectedNode.getE_disponibile());
+		statsNodePane.getFwLvl().setText("Firewall Level:\t" + String.valueOf(selectedNode.getLvl_firewall()));
+		statsNodePane.getRamLvl().setText("Ram Level:\t" + String.valueOf(selectedNode.getLvl_ram()));
+		statsNodePane.getCpuLvl().setText("CPU Level:\t" + String.valueOf(selectedNode.getLvl_cpu()));
 	}
 	
 	/**
@@ -589,6 +587,25 @@ public abstract class PartitaStage extends Stage{
 	public void setLog(TextBox log) {
 		this.log = log;
 	}
+
 	
+	private void basicMapMaker(MapData mappa,GraphicsContext contestoGrafico) {
+		 basicMap = new BasicMap(mappa, contestoGrafico);
+	}
+
+	private void logScrollPaneMaker(Base baseUtente) {
+		this.logScrollPane= new ScrollPane();
+		this.logScrollPane.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
+		this.log = new TextBox(null, logScrollPane);
+	}
+	private GridPane putPaneInAscrollableGridPane(Pane node,Background b,Background bPane) {
+		GridPane gp=new GridPane();
+		gp.setMinHeight(190);
+		gp.setBackground(b);
+		gp.setAlignment(Pos.CENTER);
+		gp.add(node, 0, 0);
+		node.setBackground(bPane);
+		return gp;
+	}
 	
 }

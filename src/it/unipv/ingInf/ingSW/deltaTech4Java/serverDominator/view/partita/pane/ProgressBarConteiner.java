@@ -33,7 +33,8 @@ class ProgressBarElement extends ProgressBar implements Comparable<ProgressBarEl
 		super(0);
 		super.setStyle(progressStyle);
 		super.setBackground(
-				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
+				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null)));
+		super.setMinWidth(120);
 		this.bTitle = bTitle;
 		this.durata = durata;
 		this.timeScale = 1 / durata;
@@ -97,7 +98,7 @@ public class ProgressBarConteiner extends Pane{
 	
 	public ProgressBarConteiner () {
 		super();
-		super.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(0, 10, 0, 0))));
+		super.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null)));
 		this.battles = new ArrayList<ProgressBarElement>();
 		
 		this.disegnabili=new ArrayList<Drawable>();

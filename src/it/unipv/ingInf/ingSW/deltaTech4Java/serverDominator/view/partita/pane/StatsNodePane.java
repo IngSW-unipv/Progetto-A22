@@ -30,7 +30,6 @@ public class StatsNodePane {
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Label titleL = new Label("Info Nodo");
 	private Label owner = new Label("Node owner");
-	private Label distance = new Label("Distance");
 	private Label energy = new Label("Energy");
 	private Label fwLvl = new Label("Firewall Level");
 	private Label ramLvl = new Label("Ram Level");
@@ -40,17 +39,28 @@ public class StatsNodePane {
 	public Pane getSnPane() {
 
 		Label titleL = this.titleL;
+		titleL.setFont(Font.font("Cambria", 22));
+		
 		Label owner =  this.owner;
-		Label distance = new Label();
-		distance = this.distance;
-		Label energy = new Label();
-		energy = this.energy;
-		Label fwLvl = new Label();
-		fwLvl = this.fwLvl;
-		Label ramLvl = new Label();
-		ramLvl = this.ramLvl;
-		Label cpuLvl = new Label();
-		cpuLvl = this.cpuLvl;
+		owner.setFont(Font.font("Cambria", 18));
+		owner.setOpacity(0.9);
+		
+		Label energy = this.energy;
+		energy.setFont(Font.font("Cambria", 18));
+		energy.setOpacity(0.9);
+		
+		Label fwLvl = this.fwLvl;
+		fwLvl.setFont(Font.font("Cambria", 18));
+		fwLvl.setOpacity(0.9);
+		
+		Label ramLvl =this.ramLvl;
+		ramLvl.setFont(Font.font("Cambria", 18));
+		ramLvl.setOpacity(0.9);
+		
+		Label cpuLvl = this.cpuLvl;
+		cpuLvl.setFont(Font.font("Cambria", 18));
+		cpuLvl.setOpacity(0.9);
+		
 		buttonAttacca =ComponentCreator.getIstance().createButton("attack", Pos.BASELINE_CENTER);
 		buttonAttacca.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -88,11 +98,10 @@ public class StatsNodePane {
 		gDx.setPadding(STANDARD_PADDING);
 
 		gDx.add(owner, 0, 0);
-		gDx.add(distance, 0, 1);
-		gDx.add(energy, 0, 2);
-		gDx.add(fwLvl, 1, 0);
-		gDx.add(ramLvl, 1, 1);
-		gDx.add(cpuLvl, 1, 2);
+		gDx.add(energy, 0, 1);
+		gDx.add(fwLvl, 0, 2);
+		gDx.add(ramLvl, 0, 3);
+		gDx.add(cpuLvl, 0, 4);
 
 		gridBox.getChildren().add(gDx);
 
@@ -127,14 +136,6 @@ public class StatsNodePane {
 
 	public void setOwner(Label owner) {
 		this.owner = owner;
-	}
-
-	public Label getDistance() {
-		return distance;
-	}
-
-	public void setDistance(Label distance) {
-		this.distance = distance;
 	}
 
 	public Label getEnergy() {

@@ -31,7 +31,7 @@ public class BoxTester extends Application {
 		p.setTitle("bellaZii");
 		ScrollPane sp=new ScrollPane();
 		sp.setBackground(
-				new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
+				new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 
 		String battleTitle1 = new String("User attacca xBot in nodo (4,1)");
 		long durata1 = 4000;

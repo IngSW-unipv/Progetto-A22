@@ -65,7 +65,11 @@ public  class PartitaStageTester extends Application{
 		};
 		ps.disponiPannelli();
 		ps.addAvviso("prova");
+		
 		ps.show();
+		ps.addAttacco("prova", 90000);
+		ps.addAttacco("prova", 9000);
+		ps.addDifesa("prova", 90000);
 		ps.addAvviso("prova");
 		for (int i=0;i<100;i++) {
 			ps.addAvviso("prova\t"+i);

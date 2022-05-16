@@ -2,15 +2,14 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.LoginView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.SignupView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.popUp.Market;
-import javafx.stage.Stage;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PopUp;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.SignupView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 
 /**
  * 
@@ -29,26 +28,26 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaVie
 
 public class ControllerFacade {
 	
-	private LoginView loginView;
 	private LoginView loginStage;
 	private SignupView signupView;
-	private SignupView signupStage;
-	private Main mainView;
-	private Main easyGame;
-	private Main mediumGame;
-	private Main hardGame;
+	private PartitaStage partitaStage;
 	private MainDefinitivo mainModello;
 	private LoginController loginController;
 	private SignupController signupController;
 	private PrebattagliaController prebattagliaController;
 	private PrebattagliaView prebattagliaView;
-	private PrebattagliaView prebattagliaStage;
-	private PopUp popupView;
+	private PopUpFacade popupView;
 	private PopUpController popupController;
-	private Market market;
 	private Main mView = new Main();
 	
-
+ /**
+  * 
+  * @param mainView
+  * @param mainModello
+  * @param loginController
+  * @param signupController
+  */
+	
 	public ControllerFacade(Main mainView, MainDefinitivo mainModello,LoginController loginController, SignupController signupController) {
 		this.mView=mainView;
 		this.mainModello=mainModello;
@@ -65,9 +64,38 @@ public class ControllerFacade {
 	public void setSignup(SignupView signupView) {
 		this.signupView = signupView;
 	}
-	
-	public void setLoginView(LoginView loginView) {
-		this.loginView = loginView;
+	public void partitaStageMaker(Base b) {
+		PartitaStage ps=new PartitaStage(mainModello,b) {
+			@Override 
+			
+			public void doOnClic() { //logica dei pulsanti
+				//IMportante leggere i commenti
+				// TODO Auto-generated method stub
+				// non fa niene di aggiuntico
+				// RIVOLTO A GIAN: QUI PUOI METTERE LE ISTRUZIONI (AGGIUNTIVE) CHE
+				// VENGONO ESEGUITE QUANDO IL GIOCATORECLICCA SU UN NODO 
+				//(ESEMPIO LE POLITICHE E I CONTROLLI CHE SI FANNO PER ATTIVAZIONE DEI PULSANTI)
+				//SOLO A TITOLO DIMOSTRATIVO STAMPO LE COORDINATE DEL NODO CLICCATO
+				
+				//actionevents o semplici if? NO ACTIONEVENT
+				//dopo click nodo , metodi partono tutti insieme - powerupcheck, softcheck, marketcheck, nodecheck(abilita attacca), non interessanti per la view
+				//setButtonAvailabilityInPane
+				//setButtonVisibilityInStatsPane
+				boolean samePlayer = this.getSelectedBase().getPossessore().getNome().equals(this.getSelectedNode().getPossessore().getNome());
+				this.setButtonsVisibilityInActionPane(true, samePlayer, samePlayer); // market etc
+				
+				boolean precedenteBase=mainModello.getTabellone().getScelta()>0? true:false;
+				mainModello.getTabellone().checkbasi(this.getSelectedBase().getPossessore());
+				boolean prossimaBase=mainModello.getTabellone().getContabasi()-mainModello.getTabellone().getScelta()>0? true:false;
+				this.setButtonsVisibilityInActionPaneStatsPane(precedenteBase, prossimaBase); // cambiare base
+				
+				boolean attaccabile=mainModello.nodecheck(this.getSelectedBase().getPossessore(),this.getSelectedPoint().getIntX(),
+						this.getSelectedPoint().getIntY());//attiva pulsante attacca
+				this.getStatsNodePane().getButtonAttacca().setDisable(!attaccabile);
+				
+			}
+		};
+		partitaStage=ps;
 	}
 
 
@@ -87,51 +115,30 @@ public class ControllerFacade {
 		this.prebattagliaController = prebattagliaController;
 	}
 	
-	public void setPopUpView(PopUp popupView) {
+	public void setPopUpView(PopUpFacade popupView) {
 		this.popupView = popupView;
 	}
 	
 	public void setPopUpController(PopUpController popupController) {
 		this.popupController = popupController;
 	}
-	
-	
-	
-	
+
 	
 	public PrebattagliaView getPrebattagliaView() {
 		return prebattagliaView;
 	}
-	
-	public LoginView getLoginView() {
-		return loginView;
-	}
+
 	
 	public SignupView getSignupView() {
 		return signupView;
 	}
-	
-	public Main getmainView() {
-		return mainView;
-	}
-	
-	public Market getMarket() {
-		return market;
-	}
-	
+
 	public LoginView getLoginStage() {
 		// TODO Auto-generated method stub
 		return loginStage;
 	}
+
 	
-	public SignupView getSignupStage() {
-		// TODO Auto-generated method stub
-		return signupStage;
-	}
-	
-	public PrebattagliaView getPrebattagliaStage() {
-		return prebattagliaStage;
-	}
 	//da cambiare, da richiamare da prebattaglia view o mainview? dalla view, prebattaglia non genera la mappa
 //metodi easyGame, mediumGame,hardGame da mettere in mainView
 	//13052022 rimovibili

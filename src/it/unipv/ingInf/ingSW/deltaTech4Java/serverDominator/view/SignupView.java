@@ -11,21 +11,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SignupView {
 
     //view nodes
     Label titleHolderText = new Label("SERVER DOMINATOR singup");
-    static Label errorMessageSignupLabel = new Label();
-    Label usernameSignup = new Label("username");
-    Label passwordSignup = new Label("password");
-    Label ipSignup = new Label("ip");
+    private Label errorMessageSignupLabel = new Label();
+    private Label usernameSignup = new Label("username");
+    private Label passwordSignup = new Label("password");
+    private Label ipSignup = new Label("ip");
     Label portSignup = new Label("port");
     Button loginButtonChange = new Button("Log in"); //cambio scene
     Button signupButtonLegit = new Button("Sign Up");
-    TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
-    TextField passwordTextFieldSignup;
+    private TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
+    private TextField passwordTextFieldSignup;
+    private TextField emailTextField;
     TextField titleTextField;
     private Stage signupStage;
 
@@ -56,6 +58,19 @@ public class SignupView {
     public Button getSignupButtonLegit(){
         return signupButtonLegit;
     }
+    
+    public TextField getUsernameTextFieldSignup() {
+    	return usernameTextFieldSignup;
+    }
+    
+    public TextField getPasswordTextFieldSignup() {
+    	return passwordTextFieldSignup;
+    }
+    
+    public TextField getEmailTextField() {
+    	return emailTextField;
+    }
+    
 
     private Scene signupView;
     //view
@@ -87,25 +102,25 @@ public class SignupView {
         GridPane gridPanex = new GridPane();
         Label usernameSignup = new Label("username");
         Label passwordSignup = new Label("password");
-        Label ipSignup = new Label("ip");
-        Label portSignup = new Label("port");
+        Label ipSignup = new Label("email");
+        //Label portSignup = new Label("port");
         TextField usernameTextSignup = new TextField("username");
         TextField passwordTextSignup = new TextField("password");
-        TextField ipTextSignup = new TextField("ip ");
-        TextField portTextSignup = new TextField("port");
+        TextField ipTextSignup = new TextField("email ");
+        //TextField portTextSignup = new TextField("port");
 
         GridPane.setRowIndex(usernameSignup, 0); //in scala, il numero integer la posizione 0 è la più alta
         GridPane.setRowIndex(passwordSignup, 1);
         GridPane.setRowIndex(ipSignup, 2);
-        GridPane.setRowIndex(portSignup, 3);
+        //GridPane.setRowIndex(portSignup, 3);
         GridPane.setConstraints(usernameTextSignup, 1, 0);
         GridPane.setConstraints(passwordTextSignup, 1, 1);
         GridPane.setConstraints(ipTextSignup, 1,2);
-        GridPane.setConstraints(portTextSignup, 1, 3);
+        //GridPane.setConstraints(portTextSignup, 1, 3);
 
         gridPanex.getChildren().addAll(
                 usernameSignup, passwordSignup, ipSignup, portSignup,
-                usernameTextSignup, passwordTextSignup, ipTextSignup, portTextSignup
+                usernameTextSignup, passwordTextSignup, ipTextSignup //portTextSignup
         );
 
         return gridPanex;
@@ -131,8 +146,7 @@ public class SignupView {
 
 
 
-	public static Labeled getErrorMessageLabel() {
-		// TODO Auto-generated method stub
+	public Label getErrorMessageLabel() {
 		return errorMessageSignupLabel;
 	}
 

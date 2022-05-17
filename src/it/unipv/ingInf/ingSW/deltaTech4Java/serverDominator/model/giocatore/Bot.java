@@ -1,5 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import java.beans.PropertyChangeSupport;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Battaglia;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
@@ -22,8 +24,12 @@ public class Bot extends Giocatore{
 	private int cont;
 	private Coordinate[] confini;
 	int incremento; 
+	
+	private PropertyChangeSupport changes;
+	public static final String BOT_PROP="bot";
+	
 	/*incremento e' un parametro per individuare una coordinata vicina
-	 * che ciclicamente verrà aumentato per puntare a coordinate 
+	 * che ciclicamente verrï¿½ aumentato per puntare a coordinate 
 	 * maggiormente lontane
 	 */
 	
@@ -38,6 +44,7 @@ public class Bot extends Giocatore{
 		confini= new Coordinate[6];
 		incremento=1;
 		cont=0;
+		this.changes= new PropertyChangeSupport(this);
 	}
 	
 	@Override
@@ -90,7 +97,7 @@ public class Bot extends Giocatore{
 			map.trovaBase(this).crea_software("Rootcrash", 5);
 			break;
 		case 3:
-			/** attacco da parte del bot verso un nodo prossimo */
+			/* attacco da parte del bot verso un nodo prossimo */
 			if(map.attaccabile(confini[cont].getX(), confini[cont].getY(), this)) {
 				t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
@@ -101,6 +108,14 @@ public class Bot extends Giocatore{
 					cont++;
 				}
 			}
+			/*risvegliare il listener se bot attacca l'utente
+			 * usare getter t_timer per visualizzazione a schermo della battaglia avviata
+			 * dal bot verso il nodo dell'utente
+			 */
+					
+			changes.firePropertyChange(BOT_PROP, map.getBasi()[0].getNome(),
+						map.getNodo(confini[cont].getX(), confini[cont].getY() ).getPossessore().getNome() );
+			
 			this.cambiaTarget();
 			break;
 		}
@@ -146,6 +161,10 @@ public class Bot extends Giocatore{
 		this.map = map;
 	}
 
+	public int getT_timer() {
+		return t_timer;
+	}
+	
 	
 }
 

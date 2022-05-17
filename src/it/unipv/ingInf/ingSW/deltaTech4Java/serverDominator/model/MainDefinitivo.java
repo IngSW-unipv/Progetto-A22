@@ -27,8 +27,7 @@ public class MainDefinitivo extends Thread{
 	private Battaglia[] fight;
 	private int maxbattle=7;
 	private int count;
-	//private int tempoAggiornamento;
-	//private boolean giocoAttivo=false;
+	private boolean giocoAttivo=false;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -42,11 +41,7 @@ public class MainDefinitivo extends Thread{
 		}
 */		
 	}
-	
-	
-	//selezione utente
-		//selezione lingua
-	
+
 	/** avvia la partita costruendo la mappa e creando i giocatori
 	 * 
 	 * @param x_max
@@ -60,21 +55,15 @@ public class MainDefinitivo extends Thread{
 	 * @throws InterruptedException
 	 */
 	public void avvioPartita(int x_max, int y_max, String nomeUtente, int valuta) throws InterruptedException {
-		//giocoAttivo=true;
+		giocoAttivo=true;
 		t_unitario=10;
 		this.creazioneGiocatori(nomeUtente, x_max, valuta);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
 		classifica= new Classifica(giocatori);
 		fight= new Battaglia[maxbattle];
+		this.avvioBot(); 
 		
-		this.avvioBot();  //Matteo P. L'ho commentato perchè mi blocca dentro al while di avvioBot
-		
-		
-		/*/gioco finito
-		giocoAttivo=false;
-		this.stopBot();*/
-	
 	}
 
 //---------------metodi generici--------------------//
@@ -85,10 +74,7 @@ public class MainDefinitivo extends Thread{
 	 * scelta dell'utente di una base diversa da quella iniziale
 	 */
 	public void sceltabase(int scelta) {
-		/** metodo usato nel caso l'utente abbia pi� di una base
-		 * in questo caso deve selezionarne una dalla quale partiranno
-		 * gli attacchi
-		 */
+		
 		if(tabellone.getContabasi()>0) {
 			tabellone.setScelta(scelta);
 		} else 
@@ -380,12 +366,13 @@ public class MainDefinitivo extends Thread{
 	 * il nome del giocatore vincitore
 	 * @return
 	 * classifica giocatori
+	 * @throws InterruptedException 
 	 */
-	public Classifica gameover() {
-		/** metodo usato alla fine della partita per restituire la classifica finale della partita
-		 * e stampare a video il nome del giocatore vincitore
-		 */
+	public Classifica gameover() throws InterruptedException {
 		Giocatore vincitore;
+		
+		giocoAttivo= false;
+		this.stopBot();
 		vincitore= classifica.getVincitore();
 		
 		System.out.println("il vincitore e': " + vincitore.getNome());

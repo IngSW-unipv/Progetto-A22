@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
 
+import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
@@ -14,7 +15,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
 public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	
 	/**
-	 * Punteggio del giocatore inella singola partita 
+	 * Punteggio del giocatore nella singola partita 
 	 * 
 	 */
 	private int punteggio;
@@ -30,13 +31,17 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	 * Valuta di gioco
 	 */
 	private int deltaCoin;
-	
 	private MappaDefinitiva map;
+	private int basi_prese;
+	private PropertyChangeSupport changes;
+	public static final String GIOCATORE_PROP="numero_basi";
 
 	public Giocatore(String nome) {
 		this.nome=nome;
 		punteggio=0;
 		deltaCoin=0;
+		basi_prese=1;
+		this.changes = new PropertyChangeSupport(this);
 	}
 	
 	public Giocatore() {
@@ -44,10 +49,14 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		this.nome=null;
 		punteggio=0;
 		deltaCoin=0;
+		basi_prese=1;
+		this.changes = new PropertyChangeSupport(this);
 	}
 	public Giocatore(Giocatore user) {
 		this.nome=user.getNome();
 		this.punteggio=user.getPunteggio();
+		basi_prese=1;
+		this.changes = new PropertyChangeSupport(this);
 	}
 	/**
 	 * Recupera il Punteggio del giocatore
@@ -121,6 +130,23 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		this.deltaCoin = deltaCoin;
 	}
 
+	/**restituisce il numero di nodi base che possiede il giocatore
+	 * nel caso sia 0 il giocatore esce dalla partita
+	 * @return
+	 */
+	public int getBasi_prese() {
+		return basi_prese;
+	}
+
+	public void setBasi_prese(int basi_prese) {
+		Giocatore old= new Giocatore(this) {
+			
+		};
+		this.basi_prese = basi_prese;
+		changes.firePropertyChange(GIOCATORE_PROP, old.getBasi_prese(), this.getBasi_prese());
+				
+	}
+	
 	/**
 	 * incrementa/decrementa la valuta associata al giocatore
 	 * @param valuta
@@ -174,4 +200,5 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		else
 			System.err.println("err");
 	}
+	
 }

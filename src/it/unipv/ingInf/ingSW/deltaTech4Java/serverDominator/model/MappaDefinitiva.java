@@ -1,9 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-
-
-import java.beans.PropertyChangeSupport;
-
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 
 /**@author Luca Casto 
@@ -23,8 +19,6 @@ public class MappaDefinitiva{
 	private String[] vicini;
 	private Coordinate[] confini; 
 	private int xsup, xinf, ysup, yinf;
-	private PropertyChangeSupport changes;
-	public static final String LISTA_PROP="lista";
 	
 
 	/**costruisce una mappa chiedendo in ingresso le coordinate massime
@@ -54,7 +48,7 @@ public class MappaDefinitiva{
 		confini= new Coordinate[6];
 		basiutente= new Coordinate[n_basi];
 		sceltabase=0;
-		this.changes= new PropertyChangeSupport(this);
+		
 	}
 	
 	/**assegna i giocatori ai nodi base iniziali
@@ -66,7 +60,7 @@ public class MappaDefinitiva{
 	 */
 	public void assegnamento(int n_basi, Giocatore[] giocatori) {
 		/** metodo usato per assegnare le basi ai giocatori/bot, nella mappa di gioco
-		 * selezionando in base alla difficoltà scelta
+		 * selezionando in base alla difficoltï¿½ scelta
 		 */
 			this.n_basi=n_basi;
 			basi= new Coordinate[n_basi];
@@ -147,13 +141,13 @@ public class MappaDefinitiva{
 	public void checkbasi(Giocatore player) {
 		int i;
 		int x,y;
-		contabasi=0;
+		contabasi=1;
 		
 		for(i=0;i<n_basi; i++) {
 			if(basi[i].getNome().equals(player.getNome()) ) {
 				x=basi[i].getX();
 				y=basi[i].getY();	
-				basiutente[contabasi]= new Coordinate(x, y, player.getNome());
+				basiutente[contabasi-1]= new Coordinate(x, y, player.getNome());
 				contabasi++;
 			} 
 		}
@@ -167,9 +161,7 @@ public class MappaDefinitiva{
 	 * nodo base, da cui parte l'attacco
 	 */
 	public Nodo trovaBase( Giocatore player) {
-		/** metodo usato per la ricerca della base del giocatore attaccante
-		 * nel caso di battaglia (memo: gli attacchi partono sempre da una base).
-		 */
+		
 			int i;
 			int x,y;
 			x=3;
@@ -197,16 +189,11 @@ public class MappaDefinitiva{
 	 * @param player
 	 * giocatore attaccante
 	 * @return
-	 * true se il nodo selezionato, bersaglio, è confinante con un nodo del giocatore attaccante, 
+	 * true se il nodo selezionato, bersaglio, ï¿½ confinante con un nodo del giocatore attaccante, 
 	 * false se il nodo selezionato, bersaglio,  non confina con un nodo del giocatore attacante
 	 */
 	public boolean attaccabile(int x, int y, Giocatore player) {
-		/**metodo con il quale si controlla se due nodi sono prossimi
-		 * tra loro, ossia se nelle vicinanze del nodo bersaglio esiste almeno 
-		 * un nodo posseduto dal giocatore.
-		 * Inoltre essendo i confini della mappa adiacenti tra loro, si controlla
-		 * se le coordinate sforino dalla mappa per rientrare dal lato opposto.
-		 */
+		
 			boolean prox=false;
 			int i;
 			
@@ -251,7 +238,7 @@ public class MappaDefinitiva{
 	 * @param player
 	 * giocatore attaccante
 	 * @return
-	 * nodo confinante al bersaglio il cui valore di distanza alla base è minore di tutti
+	 * nodo confinante al bersaglio il cui valore di distanza alla base ï¿½ minore di tutti
 	 * gli altri nodi del giocatore attaccante confinanti con il bersaglio
 	 */
 		public Nodo dist_minima(int x, int y, Giocatore player) {

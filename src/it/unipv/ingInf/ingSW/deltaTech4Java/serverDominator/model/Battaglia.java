@@ -29,7 +29,7 @@ public class Battaglia extends Thread{
 		sel_attaccanti= attaccante.getStats_software_creati();
 		sel_difensori=difensore.getStats_software_creati();
 		time= new Timer();
-	
+		
 	}
 
 	/**usato per selezionare quante unita software
@@ -120,7 +120,7 @@ public class Battaglia extends Thread{
 		difensore.setPossessore(partenza.getPossessore());
 		attaccante.getPossessore().aggiornaPunteggio(10);
 		
-		if (difensore.getTipologia()=="cloud") {
+		if (difensore.getTipologia().equals("cloud")) {
 			
 			attaccante.compra_risorsa("Energia");
 			
@@ -130,6 +130,11 @@ public class Battaglia extends Thread{
 			if(difensore.getLvl_ram()>0) {
 				attaccante.compra_risorsa("Ram");
 			}
+			
+		}
+		else {
+			attaccante.getPossessore().setBasi_prese(attaccante.getPossessore().getBasi_prese()+1);
+			difensore.getPossessore().setBasi_prese(difensore.getPossessore().getBasi_prese()-1);
 			
 		}
 	}

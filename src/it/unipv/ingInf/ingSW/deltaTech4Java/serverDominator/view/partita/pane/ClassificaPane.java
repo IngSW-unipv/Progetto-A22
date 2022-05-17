@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.observers.ObserverClassifica;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ObserverClassifica;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

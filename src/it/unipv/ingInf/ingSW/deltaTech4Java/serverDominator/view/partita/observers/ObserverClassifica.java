@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.observers;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

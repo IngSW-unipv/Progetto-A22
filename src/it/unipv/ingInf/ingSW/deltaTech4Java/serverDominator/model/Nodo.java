@@ -23,7 +23,7 @@ public abstract class Nodo implements INodo{
 	protected Timer time1, time2;
 	private String tipologia;
 	private PropertyChangeSupport changes;
-	public static final String LISTA_PROP="lista";
+	public static final String NOME_POSS_PROP="possessore.nome";
 /**time1 usato per risorse, time 2 usato per software*/
 	
 	public Nodo () {
@@ -31,10 +31,12 @@ public abstract class Nodo implements INodo{
 		this.time1=new Timer();
 		this.time2= new Timer();
 		this.changes= new PropertyChangeSupport(this);
-		
+		this.possessore=new Sistema();
 	}
 	
 	public Nodo (Giocatore possessore) {
+		if (possessore==null||possessore.getNome()==null)
+			possessore=new Sistema();
 		this.possessore= possessore;
 		this.software_disponibile=0;
 		this.software_max=0;
@@ -48,20 +50,8 @@ public abstract class Nodo implements INodo{
 		
 	}
 	public Nodo (Nodo nodo) {
-		this.software_disponibile=nodo.getSoftware_disponibile();
-		this.dist_base=nodo.getDist_base();
 		this.possessore=nodo.getPossessore();
-		this.software_disponibile=nodo.getSoftware_disponibile();
-		this.software_max=nodo.getSoftware_max();
-		this.bonus_def=nodo.getBonus_def();
-		this.e_disponibile=nodo.getE_disponibile();
-		this.lvl_cpu=nodo.getLvl_cpu();
-		this.lvl_ram=nodo.getLvl_ram();
-		this.lvl_firewall=nodo.getLvl_firewall();
-		this.tipologia=nodo.getTipologia();
-		this.time1=new Timer();
-		this.time2= new Timer();
-		this.changes= new PropertyChangeSupport(this);
+	
 	}
 	public boolean compra_risorsa(String nome) {
 		/**metodi da usare per il mercato, al momento specializzati 
@@ -102,21 +92,9 @@ public abstract class Nodo implements INodo{
 	}
 
 	public void setPossessore(Giocatore possessore) {
-		Nodo old=new Nodo(this) {
-			@Override
-			public Software[] getStats_software_creati(){return null;}
-			@Override
-			public void potenzia_risorsa(String nome) {
-				// TODO Auto-generated method stub
-				
-			}
-			@Override
-			public void crea_software(String nome, int quantita) {
-				// TODO Auto-generated method stub
-			}
-		};
+		Giocatore old=new Giocatore(this.possessore) {};
 		this.possessore = possessore;
-		changes.firePropertyChange(LISTA_PROP, old, this);
+		changes.firePropertyChange(NOME_POSS_PROP, old, this.getPossessore());
 	}
 
 	public int getSoftware_disponibile() {

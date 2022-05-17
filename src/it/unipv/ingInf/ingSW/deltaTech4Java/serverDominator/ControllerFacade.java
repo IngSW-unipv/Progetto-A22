@@ -9,7 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.SignupView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 
 /**
  * 

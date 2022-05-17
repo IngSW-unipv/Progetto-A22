@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.NumberSpinner;
 import javafx.event.ActionEvent;

@@ -4,9 +4,9 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PopUp;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Development;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Market;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Powerup;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Selectmalware;
 import javafx.scene.Node;

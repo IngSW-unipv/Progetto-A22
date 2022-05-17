@@ -1,9 +1,13 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita;
 
 
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Development;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Market;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Powerup;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Selectmalware;
 import javafx.geometry.Insets;
 
 public class PopUpFacade {

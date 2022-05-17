@@ -33,6 +33,20 @@ public abstract class Nodo implements INodo{
 		this.changes= new PropertyChangeSupport(this);
 		
 	}
+	
+	public Nodo (Giocatore possessore) {
+		this.possessore= possessore;
+		this.software_disponibile=0;
+		this.software_max=0;
+		this.dist_base=0;
+		
+		this.time1=new Timer();
+		this.time2= new Timer();
+		
+		
+		this.changes= new PropertyChangeSupport(this);
+		
+	}
 	public Nodo (Nodo nodo) {
 		this.software_disponibile=nodo.getSoftware_disponibile();
 		this.dist_base=nodo.getDist_base();

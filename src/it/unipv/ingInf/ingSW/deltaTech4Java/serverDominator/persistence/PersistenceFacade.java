@@ -9,6 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Ass
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.ISession;
 
 /**
  * <h1>La facciata a cui si deve riferire se si vogliono fare operazione sulla persistenza </h1></br>
@@ -37,6 +38,7 @@ public class PersistenceFacade{
 	private IObiettiviUserDAO obiettiviUser;
 	private IUserAccountDAO userAccount;
 	private  ILanguageManager linguaMan;
+	private ISession session;
 	
 	public static PersistenceFacade instance;
 	
@@ -47,6 +49,7 @@ public class PersistenceFacade{
 		this.obiettiviUser=IObiettiviUserDAOFactory.getIObiettiviUserDAO();
 		this.userAccount=IUserAccountDAOFactory.getUserAccountDAO();
 		this.linguaMan=ILanguageManagerFactory.getILanguageManager();
+		this.session=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory.getSession();
 		instance=this;
 	}
 	
@@ -448,5 +451,13 @@ public class PersistenceFacade{
 	 */
 	public String getCurrentLanguage() {
 		return ILanguageManager.getCurrentLanguage();
+	}
+	
+	/**
+	 * Disattiva i servizzi di persistenza
+	 */
+	public void persistenceOff() {
+		this.session.closeSession();
+		PersistenceFacade.instance=null;
 	}
 }

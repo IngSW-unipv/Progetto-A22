@@ -40,17 +40,17 @@ public class PropertiesFile {
 	}
 	
 	/**
-	 * Salva le propriet‡ in un file cifrato secondo 
+	 * Salva le propriet√† in un file cifrato secondo 
 	 * </br>la cifratura di default messa a disposizione da {@link CryptoUtil}
 	 * Scenari possibibli (che vengono gestiti):
 	 * </BR>1: file esiste vuoto --> carico le prop passate
 	 * </BR>2: file esiste e dentro ha delle prop(crittate) --> carico lo prop passate e se ci sono conflitti valgono le nuove prop
 	 * </BR>3: file non esiste --> creao il file com percorso passato e carico le prop 
-	 * </br> E' responsabilit‡ di chi usa questo metodo assicurarsi che se il file esiste deve essere
+	 * </br> E' responsabilit√† di chi usa questo metodo assicurarsi che se il file esiste deve essere
 	 * </br>cifrato secondo la cifratura di defaoult messa a disposizione 
 	 * dalla classe {@link CryptoUtil} 
 	 * @param propertie
-	 * le propriet‡
+	 * le propriet√†
 	 * @param perco
 	 * persorco del file
 	 * @return
@@ -91,7 +91,7 @@ public class PropertiesFile {
 	
 	/**
 	 * @param keyString
-	 * chiave della proprit‡ (puÚ esistere o non): se esista si cambia il valore a cui Ë 
+	 * chiave della proprit√† (pu√≤ esistere o non): se esista si cambia il valore a cui √® 
 	 * associata, se non esiste la si crea
 	 * @param valueString
 	 * valore associato alla chiave.
@@ -106,13 +106,13 @@ public class PropertiesFile {
 	}
 
 	/**
-	 * Salva le proprit‡ passate in un file. 
+	 * Salva le proprit√† passate in un file. 
 	 * Scenari possibibli (che vengono gestiti):
 	 * </BR>1: file esiste vuoto	--> carico le prop passate
 	 * </BR>2: file esiste e dentro ha delle prop --> carico lo prop passate e se ci sono conflitti valgono le nuove prop
 	 * </BR>3: file non esiste--> creao il file com percorso passato e carico le prop 
 	 * @param propertie
-	 * le propriet‡
+	 * le propriet√†
 	 * @param perco
 	 * persorco del file
 	 * @return
@@ -156,7 +156,7 @@ public class PropertiesFile {
 	}
 	
 	/**
-	 * Prende le proprit‡ contenute in un xml file
+	 * Prende le proprit√† contenute in un xml file
 	 * @param filePath
 	 * @return {@link Properties} salvate  nel file il cui percorso relativo </br> quello passato nell'argometo
 	 * @throws Exception
@@ -247,7 +247,7 @@ public class PropertiesFile {
 			e.printStackTrace();
 		} 
 		
-		System.out.println("\ncontenuto del file cifrato dopo aver aggiunto le proprit‡ di p\n"+prova);
+		System.out.println("\ncontenuto del file cifrato dopo aver aggiunto le propritÔøΩ di p\n"+prova);
 		
 		
 	}

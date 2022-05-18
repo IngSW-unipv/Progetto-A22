@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn;
 
 import java.sql.Connection;
 import java.util.Hashtable;
@@ -11,33 +11,20 @@ import java.util.Hashtable;
  * @author TawaHabib
  *
  */
-public class ConnectionFactory {
-	
-	private static ConnectionFactory istance=null;
+public class ConnectionFactory implements ISession{
 	
 	private Hashtable<String, Connection> conns;
 	
-	private ConnectionFactory() {
+	public ConnectionFactory() {
 		this.conns=new Hashtable<String, Connection>();
 	}
-	
+
+	 @Override
 	/**
-	 * Metodo per avere l'istanza di connection factory
-	 * @return
-	 * ConnectionFactory
-	 */
-	public static ConnectionFactory getIstance() {
-		if(istance==null) {
-			istance=new ConnectionFactory();
-		}
-		return istance;
-	}
-	
-	/**
-	 * Metodo che prende la connessione che utilizza come file di proprit‡ 
+	 * Metodo che prende la connessione che utilizza come file di proprit√†
 	 * il file passato per argomento
 	 * @param pathToOpenConnection
-	 * file delle proprit‡ della connsione
+	 * file delle proprit√† della connsione
 	 * @return
 	 * Connection
 	 */
@@ -57,7 +44,7 @@ public class ConnectionFactory {
 	
 	/**
 	 * Metodo che chiude la connessione che utilizza 
-	 * le proprit‡ del file passato come argomento
+	 * le proprit√† del file passato come argomento
 	 * @param ConnectionToClose
 	 * File argomento di cui si vogliono eleminare le connessioni a lui associate
 	 */
@@ -74,5 +61,16 @@ public class ConnectionFactory {
 			this.closeConnection(c);
 			
 		}
+	}
+
+	@Override
+	public void openSession() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeSession() {
+		this.closeAllConnections();		
 	}
 }

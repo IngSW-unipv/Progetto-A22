@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 /**
  * classe che si ocupa della gestione delle lingue nel db
@@ -51,7 +51,7 @@ public class DBLinguaManager implements ILanguageManager{
 		String result="";
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
 		String s1="SELECT * from LINGUA WHERE "+lingua+"=?";
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		
@@ -78,7 +78,7 @@ public class DBLinguaManager implements ILanguageManager{
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
 		String s1="SELECT * from LINGUA WHERE CHIAVE=?";
 		int position=this.getLanguegePosition(lingua);
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		
@@ -108,7 +108,7 @@ public class DBLinguaManager implements ILanguageManager{
 		if(!this.exists(lingua)) {
 			this.createNewLingua(lingua);
 		}
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		for (Entry<Object,Object> s:list.entrySet()) {
 			try {
@@ -138,7 +138,7 @@ public class DBLinguaManager implements ILanguageManager{
 		Properties result=new Properties();
 		String s1="SELECT * from LINGUA";
 		int position=this.getLanguegePosition(lingua);
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		
@@ -165,7 +165,7 @@ public class DBLinguaManager implements ILanguageManager{
 	public int getLanguegePosition(String lingua) {
 		int result =1;
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		int a=DataBase.getColumnPosition("serverdomdb", "LINGUA", lingua, conn);
 		//DbConnection.closeConnection(conn);
 		result=a>0?a:1;
@@ -180,7 +180,7 @@ public class DBLinguaManager implements ILanguageManager{
 			return true;
 		}
 		lingua=lingua.replaceAll(ILanguageManager.invalidLinguaChar, "");
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		try
 		{
@@ -198,7 +198,7 @@ public class DBLinguaManager implements ILanguageManager{
 	public boolean exists(String lingua) {
 		boolean result=false;
 		lingua=lingua.replaceAll(invalidLinguaChar, "");
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1=null;
 		try

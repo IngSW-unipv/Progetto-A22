@@ -2,7 +2,7 @@ package sreverDominator.persistence.prove.util;
 
 import java.sql.Connection;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.DbConnection;
 
 public class DbConnectionProva {
 

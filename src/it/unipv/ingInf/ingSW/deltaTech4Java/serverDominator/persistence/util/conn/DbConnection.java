@@ -1,9 +1,11 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 /**
  * stabilire connessione con il db
@@ -95,7 +97,7 @@ public class DbConnection {
 	}
 	
 	/**
-	 * stabilire se la connessione passata è aperta o no
+	 * stabilire se la connessione passata ï¿½ aperta o no
 	 * @param conn
 	 * connesione
 	 * @return boolean

@@ -12,7 +12,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IAssetDA
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 /**
  * Asset query
@@ -56,7 +56,7 @@ public class AssetDAO implements IAssetDAO {
 	public ArrayList<Asset> selectAll() {
 		ArrayList<Asset> result = new ArrayList<>();
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 		
@@ -84,7 +84,7 @@ public class AssetDAO implements IAssetDAO {
 		ArrayList<Asset> result = new ArrayList<>();
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
 		
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -116,7 +116,7 @@ public class AssetDAO implements IAssetDAO {
 	@Override
 	public boolean insertAsset(Asset a) {
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -145,7 +145,7 @@ public class AssetDAO implements IAssetDAO {
 	@Override
 	public boolean updateAssetById(Asset newA) {
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -173,7 +173,7 @@ public class AssetDAO implements IAssetDAO {
 
 	@Override
 	public boolean updatePriceAssetByPrice(Asset oldPrice, Asset newPrice) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -201,7 +201,7 @@ public class AssetDAO implements IAssetDAO {
 		Asset result=null;
 		DBLinguaManager lingua=new DBLinguaManager(propConn);
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 

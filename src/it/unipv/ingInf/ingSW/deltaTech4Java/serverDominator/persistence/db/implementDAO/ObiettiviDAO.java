@@ -10,8 +10,8 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguag
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObiettiviDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 /**
  * Obiettivi query
@@ -36,7 +36,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int posizioneColonna =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
 		
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 		
@@ -64,7 +64,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int position =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
 		
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -92,7 +92,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	 */
 	@Override
 	public boolean insertObiettivo(Obiettivo a) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -122,7 +122,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 	 */
 	@Override
 	public boolean updateObiettiviById(Obiettivo newO) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		
 		boolean esito=true;
@@ -151,7 +151,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 
 	@Override
 	public boolean updateRicompensaObiettivoByRicompensa(Obiettivo oldR, Obiettivo newR) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -179,7 +179,7 @@ public class ObiettiviDAO implements IObiettiviDAO {
 		Obiettivo risult=new Obiettivo();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int posizioneLingua =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 

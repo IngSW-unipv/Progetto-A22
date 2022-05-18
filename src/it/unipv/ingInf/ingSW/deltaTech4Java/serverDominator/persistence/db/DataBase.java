@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.CryptoUtil;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DbConnection;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ExecuteSQLfiel;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.FileToString;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.scriptRunner.ExecuteSQLfiel;
 
 /**
- * Classe con utilità per il database
+ * Classe con utilitï¿½ per il database
  * @author TawaHabib
  * @version 1.0
  */
@@ -23,7 +23,7 @@ public class DataBase {
 	private static final String CONFIGURATION_FILE_NAME ="resources/config/persistence/dataBase/connWith_root";
 	
 	/**
-	 * Proprità nel file di configurazione per indicare e è la prima volta.
+	 * Propritï¿½ nel file di configurazione per indicare e ï¿½ la prima volta.
 	 */
 	public static final String FIRST_CONFIGURATION_PROPERTIE_NAME ="primaConfigurazione";
 		
@@ -38,26 +38,26 @@ public class DataBase {
 	private static final String POPOLA_SCHEMA_FILE_NAME ="resources/databaseDefineSchema/popolaSchema.sql";
 	
 	/**
-	 * Chiave della proprità nel file di configurazione che ha la URL.
+	 * Chiave della propritï¿½ nel file di configurazione che ha la URL.
 	 */
 	private static final String FIRST_CONFIGURATION_URL_PROPERTIE ="url";
 	
 	/**
-	 * Chiave della proprità nel file di configurazione che ha la username con il quale connettersi.
+	 * Chiave della propritï¿½ nel file di configurazione che ha la username con il quale connettersi.
 	 */
 	private static final String FIRST_CONFIGURATION_USERNAME_PROPERTIE ="username";
 	
 	/**
-	 * Chiave della proprità della password nel file di configurazione che ha la username con il quale connettersi
+	 * Chiave della propritï¿½ della password nel file di configurazione che ha la username con il quale connettersi
 	 */
 	private static final String FIRST_CONFIGURATION_PASSWORD_PROPERTIE ="password";
 	
 	/**
-	 * Metodo per capire se è la prima volta che l'utente accede al gioco  oppure no;
+	 * Metodo per capire se ï¿½ la prima volta che l'utente accede al gioco  oppure no;
 	 * </br>
 	 * @return
-	 * Vero se è il primo acesso quindi se si deve creare il dataBase
-	 * </br>Flaso se non è il primo acesso quindi se l'utente ha gia creato ilk database tramite l'appliativo
+	 * Vero se ï¿½ il primo acesso quindi se si deve creare il dataBase
+	 * </br>Flaso se non ï¿½ il primo acesso quindi se l'utente ha gia creato ilk database tramite l'appliativo
 	 */
 	public static boolean isItTheFirstTime() {
 		Connection conn=null;
@@ -104,8 +104,8 @@ public class DataBase {
 	 * @param password
 	 * </br>password associata allo username con cui accedere per creare il db
 	 * @return
-	 * Vero se il db è stato creato o se il db esiste già
-	 * </br>Falso se il db non è stato reato
+	 * Vero se il db ï¿½ stato creato o se il db esiste giï¿½
+	 * </br>Falso se il db non ï¿½ stato reato
 	 */
 	public static boolean createDataBase(String ip, String port,String Username,String password) {
 		if(!setConfigParameter(ip, port, Username, password)) {
@@ -201,7 +201,7 @@ public class DataBase {
 	/**
 	 * Metodo che setta i parametri per la connessione secondo la url passata</br>
 	 * NB: la url non deve contenere uno schema e deve essere compatibile con </br>
-	 * il db utilizzato; di lascia la responsabilità a chu usa questo metodo </br>
+	 * il db utilizzato; di lascia la responsabilitï¿½ a chu usa questo metodo </br>
 	 * di fare i controlli per la correttezza della url 
 	 * @param url
 	 * @param Username
@@ -215,7 +215,7 @@ public class DataBase {
 	}
 	
 	/**
-	 * Metodo per creare un database secondo le proprietà presenti nel file 
+	 * Metodo per creare un database secondo le proprietï¿½ presenti nel file 
 	 * {@link CONFIGURATION_FILE_NAME}
 	 * @return boolean
 	 */
@@ -264,7 +264,7 @@ public class DataBase {
 	 * Metodo per forzare la creazione del data base
 	 * @return
 	 * vero se il database viene creato 
-	 * <br>falso se il data base non è stato creato
+	 * <br>falso se il data base non ï¿½ stato creato
 	 */
 	public static boolean forceDataBaseCreation() {
 		boolean result=true;

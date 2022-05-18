@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.scriptRunner;
 /*
  * Slightly modified version of the com.ibatis.common.jdbc.ScriptRunner class
  * from the iBATIS Apache project. Only removed dependency on Resource class

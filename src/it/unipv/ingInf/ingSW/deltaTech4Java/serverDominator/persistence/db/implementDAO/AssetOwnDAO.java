@@ -13,7 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Ass
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwnId;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 /**
  * AssetOwm query
@@ -36,7 +36,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	public ArrayList<AssetOwn> selectAll() {
 		ArrayList<AssetOwn> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 
@@ -67,7 +67,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 		ArrayList<AssetOwn> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -102,7 +102,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	public ArrayList<UserAccount> selectByAssetOwnd(Asset assInput) {
 		ArrayList<UserAccount> result = new ArrayList<>();
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -126,7 +126,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 	@Override
 	public boolean insertAssetOwn(AssetOwn a) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -156,7 +156,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 
 		boolean esito=true;
 		if(this.existAssetOwn(newA)) {
-			conn=ConnectionFactory.getIstance().getConnection(propConn);
+			conn=SessionFactory.getSession().getConnection(propConn);
 			try
 			{
 				String query1="UPDATE ASET_OWN SET QUANTITA=? WHERE ASSET_idAsset=? AND USER_ACCOUNT_USERNAME=?";
@@ -183,7 +183,7 @@ public class AssetOwnDAO implements IAssetOwnDAO {
 	}
 	
 	public boolean existAssetOwn(AssetOwn newOU) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 		boolean esito=true;

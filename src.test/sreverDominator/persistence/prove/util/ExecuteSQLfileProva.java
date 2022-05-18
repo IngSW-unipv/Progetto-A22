@@ -1,6 +1,6 @@
 package sreverDominator.persistence.prove.util;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ExecuteSQLfiel;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.scriptRunner.ExecuteSQLfiel;
 
 public class ExecuteSQLfileProva {
 	public static void main(String[] args) 

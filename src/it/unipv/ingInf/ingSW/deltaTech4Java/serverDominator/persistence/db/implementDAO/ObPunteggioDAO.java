@@ -11,7 +11,8 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IObietti
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 /**
  * ObPunteggio query
@@ -38,7 +39,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int column =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
 		
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 		try
@@ -65,7 +66,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 		ArrayList<Obiettivo> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 		int column =man.exists(ILanguageManager.getCurrentLanguage())? man.getLanguegePosition(ILanguageManager.getCurrentLanguage())+1:0;
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -93,7 +94,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 
 	@Override
 	public boolean insertObiettivo(Obiettivo a) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st2;
 		ObPunteggio o=(ObPunteggio) a;
 		boolean esito=true;
@@ -126,7 +127,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 
 	@Override
 	public boolean updateObiettiviById(Obiettivo newO) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st2;
 		ObPunteggio o=(ObPunteggio) newO;
 		boolean esito=true;
@@ -167,7 +168,7 @@ public class ObPunteggioDAO implements IObiettiviDAO {
 	@Override
 	public Obiettivo selectObiettiviById(Obiettivo Id) {
 		ObPunteggio risult=null;
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 

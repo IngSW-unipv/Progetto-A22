@@ -14,7 +14,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obi
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBLinguaManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 /**
  * ObiettiviUser query
@@ -36,7 +36,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 	public ArrayList<ObiettiviUser> selectAll() {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		Statement st1;
 		ResultSet rs1;
 
@@ -64,7 +64,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 		DBLinguaManager man=new DBLinguaManager(propConn);
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -93,7 +93,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 	public ArrayList<ObiettiviUser> selectByObiettiviId(Obiettivo obInput) {
 		ArrayList<ObiettiviUser> result = new ArrayList<>();
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -120,7 +120,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 	@Override
 	public boolean insertObiettiviUser(ObiettiviUser o) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -146,12 +146,12 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 
 	@Override
 	public boolean updateStatoObiettiviUserbyId(ObiettiviUser newOU) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
 		if(this.existObiettiviUser(newOU)) {
-			conn=ConnectionFactory.getIstance().getConnection(propConn);
+			conn=SessionFactory.getSession().getConnection(propConn);
 			try
 			{
 				String query1="UPDATE obiettivi_user SET STATO=? WHERE OBIETTIVI_idObiettivo=? AND USER_ACCOUNT_USERNAME=?";
@@ -175,7 +175,7 @@ public class ObiettiviUserDAO implements IObiettiviUserDAO {
 	}
 	
 	public boolean existObiettiviUser(ObiettiviUser newOU) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 		boolean esito=true;

@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.scriptRunner;
 
 
 import java.io.BufferedReader;
@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.exeptions.DataBaseException;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.DbConnection;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 
 
 /**
@@ -26,13 +28,13 @@ public class ExecuteSQLfiel {
 	 * @param percorsoSQLfile
 	 * percorso del file sql da eseguire 
 	 * @param percorsoPropertyConnec
-	 * percorso del file delle proprit‡ della connessione
+	 * percorso del file delle proprit√† della connessione
 	 * @return boolean
 	 */
 	public static boolean  executeSqlFile(String percorsoSQLfile, String percorsoPropertyConnec) throws NoSuchFileException, IOException, DataBaseException,SQLException {
 		boolean resul=true;
 		Connection conn=null;
-		conn=DbConnection.startConnection(conn,percorsoPropertyConnec);
+		conn=SessionFactory.getSession().getConnection(percorsoPropertyConnec);
 		ScriptRunner runner = new ScriptRunner(conn, false, false);
 		runner.runScript(new BufferedReader(new FileReader(percorsoSQLfile)));
 		DbConnection.closeConnection(conn);

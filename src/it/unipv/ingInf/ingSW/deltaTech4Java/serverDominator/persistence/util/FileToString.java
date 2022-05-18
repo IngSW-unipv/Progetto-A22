@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;;
 
 /**
- * Classe con utilit‡ per trasformare i file in stringhe
+ * Classe con utilit√† per trasformare i file in stringhe
  * @author TawaHabib
  * 
  * @version 1.0

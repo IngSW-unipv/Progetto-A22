@@ -9,7 +9,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAcc
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.ConnectionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
 /**
 * UserAccount query
 * @author TawaHabib
@@ -30,7 +30,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 	
 	@Override
 	public boolean insertUserAccount(UserAccount us) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -69,7 +69,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccount(UserAccount us) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -107,7 +107,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccountUsername(UserAccount us, String newUsername) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -135,7 +135,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 	public UserAccount getUserAccountById(UserAccount us) {
 		UserAccount result=null;
 
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 		ResultSet rs1;
 
@@ -168,7 +168,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean chengeUserAccountPassword(UserAccount us, String newPassword) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -207,7 +207,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccountPunteggio(UserAccount us, int newPunteggio) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;
@@ -233,7 +233,7 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccountMny(UserAccount us, int newmny) {
-		conn=ConnectionFactory.getIstance().getConnection(propConn);
+		conn=SessionFactory.getSession().getConnection(propConn);
 		PreparedStatement st1;
 
 		boolean esito=true;

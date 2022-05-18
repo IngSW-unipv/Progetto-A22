@@ -23,7 +23,7 @@ public  class PartitaStageTester extends Application{
 		MainDefinitivo mainView = new MainDefinitivo();
 		try {
 			mainView.avvioPartita(30, 20, "Matteo", 10);
-		} catch (Exception e1) {
+		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		} 
 		//IMportante leggere i commenti

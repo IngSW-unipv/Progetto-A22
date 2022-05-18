@@ -5,10 +5,10 @@ import java.beans.PropertyChangeListener;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
 
-public class ObserverClassifica implements PropertyChangeListener {
+public class ClassificaObserver implements PropertyChangeListener {
 	private ClassificaPane classificaPane;
 	
-	public ObserverClassifica(ClassificaPane classificaPane) {
+	public ClassificaObserver(ClassificaPane classificaPane) {
 		super();
 		this.classificaPane=classificaPane;
 	}

@@ -4,10 +4,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class BotObserver implements PropertyChangeListener {
-
+	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
+		//TODO: 
+		//partitaStage.addDifesa(evt.get, 0);
 
 	}
 

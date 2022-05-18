@@ -3,12 +3,19 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observ
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
+
 public class NodoObserver implements PropertyChangeListener {
+	private PartitaStage partitaStage;
+
+	public NodoObserver(PartitaStage partitaStage) {
+		super();
+		this.partitaStage = partitaStage;
+	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
-
+		partitaStage.drowMappa();
 	}
 
 }

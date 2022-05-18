@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ObserverClassifica;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ClassificaObserver;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -30,7 +30,7 @@ public class ClassificaPane extends GridPane {
 		super.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		this.titolo=new Label("CLASSIFICA");
 		this.classifica=classifica;
-		this.classifica.addPropertyChangeListener(Classifica.LISTA_PROP, new ObserverClassifica(this));
+		this.classifica.addPropertyChangeListener(Classifica.LISTA_PROP, new ClassificaObserver(this));
 		dispone();
 	}
 	

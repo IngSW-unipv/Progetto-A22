@@ -23,10 +23,32 @@ public class MarketmainController {
 	
 	
 	public void initMarket(MainDefinitivo mainDefinitivo, PopUpFacade popupFacade, PartitaStage partitaStage) {
+		
+		/**
+		 * Metodo abbinato all'acquisto di ANTIVIRUS
+		 */
 		popupFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
-			//partitaStage.
+			mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaAntivirus(), "antivirus");
+			
 		});
-	}
+		
+		/**
+		 * Metodo abbinato all'acquisto di ROOTCRASH
+		 */
+		popupFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
+			mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaRootCrash(), "rootcrash");
+		});
+		
+		
+		/**
+		 * Metodo abbinato all'acquisto di VIRUS
+		 */
+		popupFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
+			mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaVirus(), "virus");
+			
+		});
+		
+	}//da aggiundere scrollPane?
 	
 	
 }

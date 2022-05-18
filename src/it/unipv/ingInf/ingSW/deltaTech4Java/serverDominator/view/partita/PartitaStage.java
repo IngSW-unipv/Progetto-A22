@@ -23,6 +23,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
@@ -124,11 +126,10 @@ public abstract class PartitaStage extends Stage{
 	 * 
 	 */
 	private SDMenuBar menuBar;
-	//TODO: FACCIATA ALLA PARTITA
-	//CLASSE CON RESPONSABITLIA' DI: CREARE I PANELLI DELLA PARTITA, ESPORRE
-	//I METODI DI UTILITà PER I CONTROLLER, INIZIALIZZARE LEI LO SCHEDULING PER I VARI PROGRESS BAR??
-	//DA VEDERE SE FUNZIONA; EVENTUALMENTE METTIAMO UN TREAD PURE FABRICATION CHE SI PRENDE STA RESPONSABILITà
-	//
+	/**
+	 * Pannello che contiene la progress bar di fine partirta
+	 */
+	private ProgressBarConteiner fineProgress;
 	
 	public PartitaStage(Classifica classifica, Base baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa,int durataPartitaSeconds) {
 		super();
@@ -141,6 +142,8 @@ public abstract class PartitaStage extends Stage{
 		this.battleBox.setTitle("BATTAGLIE IN CORSO");
 		this.poweUpBox=new ProgressBarConteiner();
 		this.poweUpBox.setTitle("PRODUZIONI IN CORSO");
+		this.fineProgress=new ProgressBarConteiner();
+		
 		this.actionPane=new ActionPane();
 		this.classificaPaneCreator(classifica);
 		this.baseStatsPane=new BaseStatsPane(baseUtente);
@@ -150,6 +153,8 @@ public abstract class PartitaStage extends Stage{
 		this.playTableMaker(nodi);
 		this.poweUpBox.addDrawable(baseStatsPane);
 		this.initPlayTableListener();
+		this.fineProgress.addElement("", durataPartitaSeconds*1000, ProgressStyle.BLACK_STYLE);
+		this.fineProgress.setTitle("FINE PARTITA");
 	}
 
 	public PartitaStage(MainDefinitivo main,Base baseUtente,int durataPartitaSeconds) {
@@ -160,7 +165,18 @@ public abstract class PartitaStage extends Stage{
 		this.classificaPane=new ClassificaPane(c);
 		this.classificaPane.setStyle("-fx-background-color: #000000; -fx-background-radius: 15px;");
 	}
+	
+	/**
+	 * metodocontenente le istruzioni aggiuntive che si eseguono al momento 
+	 * di un clic sui nodi 
+	 * (se il nodo selezionato è valido)
+	 */
 	public abstract void doOnClic();
+	
+	/**
+	 * metodo che deve contenere le istuzoni per far finire il gioco
+	 */
+	public abstract void fineGioco();
 	
 	public void disponiPannelli(){
 		Background black=new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null));
@@ -170,14 +186,21 @@ public abstract class PartitaStage extends Stage{
 		VBox vBaseClassificaBox=new VBox();
 		ScrollPane gp=new ScrollPane(putPaneInAscrollableGridPane(
 				this.baseStatsPane.getBsPane(selectedBase), rose,null));
+		
 		gp.setFitToWidth(true);
 		VBox.setVgrow(gp, Priority.ALWAYS);
 		
+		GridPane finePa=putPaneInAscrollableGridPane(fineProgress.getBattlesGrid(), black,null);
+		finePa.setMinHeight(5);
+		finePa.setMinWidth(5);
+		ScrollPane sp=new ScrollPane(finePa);
+		sp.setFitToWidth(true);
 		ScrollPane classificaPane=new ScrollPane(putPaneInAscrollableGridPane(this.classificaPane, null, null));
 		classificaPane.setFitToWidth(true);
 		VBox.setVgrow(classificaPane, Priority.ALWAYS);
+		VBox.setVgrow(sp, Priority.ALWAYS);
 		vBaseClassificaBox.setSpacing(10);
-		vBaseClassificaBox.getChildren().addAll(gp,classificaPane);
+		vBaseClassificaBox.getChildren().addAll(gp,sp,classificaPane);
 		
 		//Center in the borderPane
 		playTable.getScrollPane().setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -239,7 +262,12 @@ public abstract class PartitaStage extends Stage{
 
 	public void menuBarCreator() {
 		menuBar=new SDMenuBar();
-		menuBar.addItems("SdMenu", "Abbandona partita","blabla");
+		MenuItem finePartita=new MenuItem("Fine partita");
+		finePartita.setOnAction(actionEvent ->{
+			fineGioco();
+		});
+		menuBar.addItems(new Menu("Menu"), finePartita);
+		
 	}
 	/**
 	 * Cosctuisce il tavolo da gioco
@@ -271,12 +299,12 @@ public abstract class PartitaStage extends Stage{
 			HexData data = playTable.getMapData().getHexData(est);
 			
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
-				selectedNode=data.nodo;
-				selectedHexagon=est;
-				selectedPoint=new Point(Math.floor(est.getX()+(est.getY()/2)) , est.getY());
-				basicMap.drawMap(est);
-				setSelectedNodeProperty();
-				doOnClic();
+				this.selectedNode=data.nodo;
+				this.selectedHexagon=est;
+				this.selectedPoint=new Point(Math.floor(est.getX()+(est.getY()/2)) , est.getY());
+				this.basicMap.drawMap(est);
+				this.setSelectedNodeProperty();
+				this.doOnClic();
 			}
 		});
 	}

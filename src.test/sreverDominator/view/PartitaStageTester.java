@@ -48,7 +48,7 @@ public  class PartitaStageTester extends Application{
 		g7.aggiornaPunteggio(1000);
 		Classifica c=new Classifica(g1,g2, g3, g4,g5, g6,g7,g8,g9,g10);
 		//*solo unn esempio di come va usata PartitaStage*/
-		PartitaStage ps=new PartitaStage(c, bU, nodiView, 30, 20,90000) {
+		PartitaStage ps=new PartitaStage(c, bU, nodiView, 30, 20,90) {
 			@Override 
 			
 			public void doOnClic() {
@@ -61,6 +61,13 @@ public  class PartitaStageTester extends Application{
 				//SOLO A TITOLO DIMOSTRATIVO STAMPO LE COORDINATE DEL NODO CLICCATO
 				System.out.println("coordinate del nodo secondo la convenzione matriciale\t"
 				+this.getSelectedPoint().getIntX()+"\t"+this.getSelectedPoint().getIntY());
+			}
+			//metodo che deve essere sovrascritto per far uscire il giocatore 
+			//dalla partita quando vuole
+			@Override
+			public void fineGioco() {
+				// TODO Auto-generated method stub
+				
 			}
 		};
 		ps.disponiPannelli();

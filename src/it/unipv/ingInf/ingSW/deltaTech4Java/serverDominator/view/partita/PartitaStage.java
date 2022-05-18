@@ -23,6 +23,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -37,6 +38,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -190,7 +192,7 @@ public abstract class PartitaStage extends Stage{
 		gp.setFitToWidth(true);
 		VBox.setVgrow(gp, Priority.ALWAYS);
 		
-		GridPane finePa=putPaneInAscrollableGridPane(fineProgress.getBattlesGrid(), black,null);
+		GridPane finePa=putPaneInAscrollableGridPane(fineProgress, black,null);
 		finePa.setMinHeight(5);
 		finePa.setMinWidth(5);
 		ScrollPane sp=new ScrollPane(finePa);
@@ -631,7 +633,7 @@ public abstract class PartitaStage extends Stage{
 		gp.setMinHeight(190);
 		gp.setBackground(b);
 		gp.setAlignment(Pos.TOP_CENTER);
-		gp.add(node, 0, 0);
+		gp.add(node, 1, 1);
 		node.setBackground(bPane);
 		return gp;
 	}

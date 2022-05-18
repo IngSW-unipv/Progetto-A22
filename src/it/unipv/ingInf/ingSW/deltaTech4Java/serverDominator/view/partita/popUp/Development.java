@@ -24,7 +24,7 @@ public class Development {
 	public static int sX = 400;
 	public static int sY = 400;	
 	public static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
-	private Nodo baseUtente;
+	private Nodo nodoUtente;
 	private NumberSpinner quantitaRootCrash;
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus;
@@ -32,14 +32,14 @@ public class Development {
 	private Button buttonDevelop;
 	Stage stage;
 	public Development(Base baseUtente) {
-		this.baseUtente=baseUtente;
+		this.nodoUtente=baseUtente;
 	}
 	public Development() {
 		super();
 	}
 	
 	public void development(Base baseUtente) {
-		this.baseUtente=baseUtente;
+		this.nodoUtente=baseUtente;
 		development();
 		
 	}
@@ -70,13 +70,13 @@ public class Development {
 		Label rcQty = new Label(" Rootcrash\t");
 		Label vrQty = new Label(" Virus\t");
 		Label avQty = new Label(" Antivirus\t");
-		quantitaRootCrash = new NumberSpinner(0, baseUtente.getSpazio_Ram());
-		quantitaVirus = new NumberSpinner(0, baseUtente.getSpazio_Ram());
-		quantitaAntivirus = new NumberSpinner(0, baseUtente.getSpazio_Ram());
+		quantitaRootCrash = new NumberSpinner(0, nodoUtente.getSpazio_Ram());
+		quantitaVirus = new NumberSpinner(0, nodoUtente.getSpazio_Ram());
+		quantitaAntivirus = new NumberSpinner(0, nodoUtente.getSpazio_Ram());
 		quantitaRootCrash.getNumberField().setDisable(true);
 		quantitaVirus.getNumberField().setDisable(true);
 		quantitaAntivirus.getNumberField().setDisable(true);
-		int max=baseUtente.getSpazio_Ram();
+		int max=nodoUtente.getSpazio_Ram();
 		quantitaRootCrash.getIncrementButton().setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -156,11 +156,11 @@ public class Development {
 	}
 
 	public Nodo getBaseUtente() {
-		return baseUtente;
+		return nodoUtente;
 	}
 
 	public void setBaseUtente(Base baseUtente) {
-		this.baseUtente = baseUtente;
+		this.nodoUtente = baseUtente;
 	}
 
 	public NumberSpinner getQuantitaRootCrash() {

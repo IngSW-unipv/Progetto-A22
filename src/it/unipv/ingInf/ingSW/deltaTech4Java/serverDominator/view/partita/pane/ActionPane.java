@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
-public class ActionPane extends Pane implements Drawable{
+public class ActionPane extends Pane implements IDrawable{
 
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Label actionTitleL;

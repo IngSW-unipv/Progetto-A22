@@ -87,7 +87,7 @@ class ProgressBarElement extends ProgressBar implements Comparable<ProgressBarEl
 public class ProgressBarConteiner extends Pane{	
 	
 	public static final Insets STANDARD_PADDING = new Insets(10,10,10,10);
-	private ArrayList<Drawable> disegnabili;
+	private ArrayList<IDrawable> disegnabili;
 	private VBox battaglie;				// contiene tutte le battaglie
 	private Label elementTitle;  				// titolo della VBox battaglie
 	private List<ProgressBarElement> battles;
@@ -101,7 +101,7 @@ public class ProgressBarConteiner extends Pane{
 		super.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null)));
 		this.battles = new ArrayList<ProgressBarElement>();
 		
-		this.disegnabili=new ArrayList<Drawable>();
+		this.disegnabili=new ArrayList<IDrawable>();
 		this.disponiTestata();
 		this.initScheduler();
 		
@@ -217,7 +217,7 @@ public class ProgressBarConteiner extends Pane{
 			ProgressBar btt = o;
 			btt.setProgress(btt.getProgress() + 1 / ((double) o.getDurata() / 1000));
 			if(o.getProgress()>=1)
-				for(Drawable d:disegnabili)
+				for(IDrawable d:disegnabili)
 					d.drow();
 		}
 		
@@ -313,15 +313,15 @@ public class ProgressBarConteiner extends Pane{
 	public Insets getSTANDARD_PADDING() {
 		return STANDARD_PADDING;
 	}
-	public void addDrawable(Drawable d) {
+	public void addDrawable(IDrawable d) {
 		disegnabili.add(d);
 	}
 
-	public ArrayList<Drawable> getDisegnabili() {
+	public ArrayList<IDrawable> getDisegnabili() {
 		return disegnabili;
 	}
 
-	public void setDisegnabili(ArrayList<Drawable> disegnabili) {
+	public void setDisegnabili(ArrayList<IDrawable> disegnabili) {
 		this.disegnabili = disegnabili;
 	}
 

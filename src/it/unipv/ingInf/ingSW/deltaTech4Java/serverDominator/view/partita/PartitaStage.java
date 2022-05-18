@@ -130,7 +130,7 @@ public abstract class PartitaStage extends Stage{
 	//DA VEDERE SE FUNZIONA; EVENTUALMENTE METTIAMO UN TREAD PURE FABRICATION CHE SI PRENDE STA RESPONSABILITà
 	//
 	
-	public PartitaStage(Classifica classifica, Base baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa) {
+	public PartitaStage(Classifica classifica, Base baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa,int durataPartitaSeconds) {
 		super();
 		super.setMinHeight(800);
 		super.setMinWidth(1000);
@@ -152,8 +152,8 @@ public abstract class PartitaStage extends Stage{
 		this.initPlayTableListener();
 	}
 
-	public PartitaStage(MainDefinitivo main,Base baseUtente) {
-		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getTabellone().getX_max(),main.getTabellone().getY_max());
+	public PartitaStage(MainDefinitivo main,Base baseUtente,int durataPartitaSeconds) {
+		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getTabellone().getX_max(),main.getTabellone().getY_max(),durataPartitaSeconds);
 	}
 	
 	public void classificaPaneCreator(Classifica c) {
@@ -602,7 +602,7 @@ public abstract class PartitaStage extends Stage{
 		GridPane gp=new GridPane();
 		gp.setMinHeight(190);
 		gp.setBackground(b);
-		gp.setAlignment(Pos.CENTER);
+		gp.setAlignment(Pos.TOP_CENTER);
 		gp.add(node, 0, 0);
 		node.setBackground(bPane);
 		return gp;

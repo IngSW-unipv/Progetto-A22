@@ -4,11 +4,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.IDrawable;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FinePartitaObserver implements PropertyChangeListener {
+public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	
 	/**
 	 * facciata modello
@@ -56,9 +58,18 @@ public class FinePartitaObserver implements PropertyChangeListener {
 		this.partitaStage.close();
 		this.prePartitaStage.show();
 		Stage stageClassifica=new Stage();
+		stageClassifica.initModality(Modality.APPLICATION_MODAL);
 		Scene scena = new Scene(this.classificaPane);
 		stageClassifica.setScene(scena);
 		stageClassifica.show();
+		
+	}
+
+
+
+	@Override
+	public void drow() {
+		finePartita();
 		
 	}
 		

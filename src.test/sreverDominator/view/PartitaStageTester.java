@@ -48,7 +48,7 @@ public  class PartitaStageTester extends Application{
 		g7.aggiornaPunteggio(1000);
 		Classifica c=new Classifica(g1,g2, g3, g4,g5, g6,g7,g8,g9,g10);
 		//*solo unn esempio di come va usata PartitaStage*/
-		PartitaStage ps=new PartitaStage(c, bU, nodiView, 30, 20) {
+		PartitaStage ps=new PartitaStage(c, bU, nodiView, 30, 20,90000) {
 			@Override 
 			
 			public void doOnClic() {

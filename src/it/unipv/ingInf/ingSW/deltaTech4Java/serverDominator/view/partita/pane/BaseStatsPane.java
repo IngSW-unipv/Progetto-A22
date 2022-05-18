@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class BaseStatsPane extends Pane implements Drawable {
+public class BaseStatsPane extends Pane implements IDrawable {
 
 	
 	private Base nodeBase = new Base();

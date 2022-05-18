@@ -1,5 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Battaglia;
@@ -112,9 +113,7 @@ public class Bot extends Giocatore{
 			 * usare getter t_timer per visualizzazione a schermo della battaglia avviata
 			 * dal bot verso il nodo dell'utente
 			 */
-					
-			changes.firePropertyChange(BOT_PROP, map.getBasi()[0].getNome(),
-						map.getNodo(confini[cont].getX(), confini[cont].getY() ).getPossessore().getNome() );
+			changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
 			
 			this.cambiaTarget();
 			break;

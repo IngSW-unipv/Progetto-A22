@@ -1,11 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
-import javafx.scene.Node;
-
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 
 
 public class PopUpController {

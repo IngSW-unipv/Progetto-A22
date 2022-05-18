@@ -2,14 +2,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.LoginView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.SignupView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 
 /**
  * 

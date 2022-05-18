@@ -5,7 +5,7 @@ import java.lang.reflect.Constructor;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 
 public class SessionFactory {
-	private static final String CLASS_SESSION_NAME="IAssetDAO.class.name";
+	private static final String CLASS_SESSION_NAME="ISession.class.name";
 	
 	private static final String PROPERTIE_FACTORY="resources/config/persistence/persistenceFactoryConfig";
 	

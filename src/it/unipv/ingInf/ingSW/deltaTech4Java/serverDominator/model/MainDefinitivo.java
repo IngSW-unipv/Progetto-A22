@@ -197,6 +197,32 @@ public class MainDefinitivo extends Thread{
 			tabellone.getNodo(x, y).potenzia_risorsa(risorsa);
 		}
 	}
+	/** ritorna valore intero che rappresenta il tempo di attesa per il potenziamento della risorsa selezionata
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @param nome
+	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Firewall)
+	 */
+	public int getTempoRisorsa(int x, int y, String risorsa) {
+		int tempo=-1;
+		tempo=tabellone.getNodo(x, y).getTempoRisorsa(risorsa);
+		return tempo;
+	}
+	/** ritorna valore intero che rappresenta il tempo di attesa per la creazione dei software selezionata
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @param nome
+	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Antivirus)
+	 */
+	public int getTempoSoftware(int x, int y, String software) {
+		int tempo=-1;
+		tempo=tabellone.getNodo(x, y).getTempoSoftware(software);
+		return tempo;
+	}
 
 //------------metodi per creazione software----------//
 	

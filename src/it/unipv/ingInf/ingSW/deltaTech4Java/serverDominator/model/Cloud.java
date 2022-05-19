@@ -101,7 +101,33 @@ public class Cloud extends Nodo {
 		} else System.out.println("azione non eseguita");
 		
 	}
-
+	/** ritorna valore intero che rappresenta il tempo di attesa per il potenziamento della risorsa selezionata
+	 * @param nome
+	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Firewall)
+	 */
+	public int getTempoRisorsa(String nome) {
+		int tempo=-1;
+		if(nome!="Firewall") {
+			return tempo;
+		} else {
+			tempo=risorse[3].getTempo_richiesto();
+		}
+		return tempo;
+	}
+	
+	/** ritorna valore intero che rappresenta il tempo di attesa per la creazione dei software selezionata
+	 * @param nome
+	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Antivirus)
+	 */
+	public int getTempoSoftware(String nome) {
+		int tempo=-1;
+		if(nome!="Antivirus") {
+			return tempo;
+		} else {
+			tempo=stats_software_creati[0].getTemp_richiesto();
+		}
+		return tempo;
+	}
 //-------------getter and setter------------//
 		
 	public int getLvl_cpu() {

@@ -104,7 +104,30 @@ public class Base extends Nodo{
 			System.out.println("potenziamento eseguito");
 		} else System.out.println("potenziamento fallito");
 	}
-	
+	/** ritorna valore intero che rappresenta il tempo di attesa per il potenziamento della risorsa selezionata
+	 * @param nome
+	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento
+	 */
+	public int getTempoRisorsa(String nome) {
+		int tempo=-1;
+		for(int i=0; i<TIPI_RISORSE;i++) {
+			if(risorse[i].getNome()==nome)
+				tempo=risorse[i].getTempo_richiesto();
+		}
+		return tempo;
+	}
+	/** ritorna valore intero che rappresenta il tempo di attesa per la creazione dei software selezionata
+	 * @param nome
+	 * nome del software di cui si vuole sapere il tempo di potenziamento
+	 */
+	public int getTempoSoftware(String nome) {
+		int tempo=-1;
+		for(int i=0;i<TIPI_SOFTWARE;i++) {
+			if(stats_software_creati[i].getNome()==nome)
+				tempo=stats_software_creati[i].getTemp_richiesto();
+		}
+		return tempo;
+	}
 	/** usato per creare risorse comprandole dal mercato
 	 * @param nome
 	 * nome della unita software che si vuole creare tramite mercato

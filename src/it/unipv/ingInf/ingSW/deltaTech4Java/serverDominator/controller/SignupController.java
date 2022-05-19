@@ -25,14 +25,15 @@ public class SignupController {
 	}
 	
 			
-	public void initSignup(SignupView signupView, PersistenceFacade persistenceFacade, ControllerFacade controllerFacade, Stage loginStage, UserAccount userAccount) {
+	public void initSignup(SignupView signupView, PersistenceFacade persistenceFacade, Stage loginStage, UserAccount userAccount) {
 		//String username = null;
 		//String passw = null;
 		//String email = null;
 		signupView.getSignupButtonLegit().setOnAction(ActionEvent ->{
 			
 			//userAccount=new UserAccount(signupView.getUsernameTextFieldSignup().getText(), signupView.getPasswordTextFieldSignup().getText());
-			boolean user = PersistenceFacade.getInstance().insertUserAccount(new UserAccount(signupView.getUsernameTextFieldSignup().getText(), signupView.getUsernameTextFieldSignup().getText(), signupView.getEmailTextField().getText()));
+			boolean user = PersistenceFacade.getInstance().insertUserAccount(new UserAccount(signupView.getUsernameTextFieldSignup().getText(), 
+					signupView.getUsernameTextFieldSignup().getText(), signupView.getEmailTextField().getText()));
 			if(user) {
 				//boolean true passa logged in
 				signupView.getStage().close();

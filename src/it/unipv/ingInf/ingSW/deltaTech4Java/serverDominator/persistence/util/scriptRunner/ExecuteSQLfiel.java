@@ -37,7 +37,7 @@ public class ExecuteSQLfiel {
 		conn=SessionFactory.getSession().getConnection(percorsoPropertyConnec);
 		ScriptRunner runner = new ScriptRunner(conn, false, false);
 		runner.runScript(new BufferedReader(new FileReader(percorsoSQLfile)));
-		DbConnection.closeConnection(conn);
+		//DbConnection.closeConnection(conn);
 		return resul;
 	}
 }

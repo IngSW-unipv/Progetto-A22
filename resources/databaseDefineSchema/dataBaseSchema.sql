@@ -166,8 +166,8 @@ CREATE TABLE IF NOT EXISTS `serverdomdb`.`USERS` (
   CONSTRAINT `fk_USERS_user_account1`
     FOREIGN KEY (`user_account_USERNAME`)
     REFERENCES `serverdomdb`.`user_account` (`USERNAME`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -183,8 +183,8 @@ CREATE TABLE IF NOT EXISTS `serverdomdb`.`id_punteggio` (
   CONSTRAINT `fk_id_punteggio_ob_punteggio1`
     FOREIGN KEY (`id`)
     REFERENCES `serverdomdb`.`ob_punteggio` (`OBIETTIVI_idObiettivo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 USE `serverdomdb`;

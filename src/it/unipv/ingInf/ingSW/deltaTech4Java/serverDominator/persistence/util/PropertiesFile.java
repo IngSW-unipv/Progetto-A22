@@ -127,8 +127,8 @@ public class PropertiesFile {
 			p1.store(ou,null);
 			ou.close();
 		} catch (Exception e) {
-			System.err.println("error when i try save propertie into the File: "+perco);
-		    System.err.println("traying to create a new file: "+perco);
+			System.err.println("Error when i try save propertie into the File: "+perco);
+		    System.err.println("\tTraying to create a new file: "+perco);
 		    File nFile = new File(perco);
 		    if(!nFile.exists())	{
 		    	nFile.createNewFile();
@@ -136,7 +136,7 @@ public class PropertiesFile {
 		    ou= new FileWriter(perco);
 		    propertie.store(ou,null);	
 		    ou.close();
-		    System.err.println("tt'apposto "+perco);
+		    System.err.println("\tTt'apposto "+perco);
 		}
 		return ris;
 	}

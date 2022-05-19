@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -15,16 +16,16 @@ import javafx.stage.Stage;
 public class LoginView{
         //Parent getLogin;
         //View Nodes
-        Label titleHolderText = new Label("SERVER DOMINATOR Login");
-        static Label errorMessageLabel = new Label("");
-        Label usernameText = new Label("username");
-        Label passwordText = new Label("password");
-        static Button loginButton = new Button("Log in");
-        static Button signupButton = new Button("Sign Up?"); //cambio scene
-        static TextField usernameTextField; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
-        TextField passwordTextField;
-        TextField titleTextField;
-        private static Stage loginStage;
+		private Label titleHolderText = new Label("SERVER DOMINATOR Login");
+        private Label errorMessageLabel = new Label("");
+        private Label usernameText = new Label("username");
+        private Label passwordText = new Label("password");
+        private Button loginButton = new Button("Log in");
+        private Button signupButton = new Button("Sign Up?"); //cambio scene
+        private TextField usernameTextField; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
+        private PasswordField passwordTextField;
+        private TextField titleTextField;
+        private Stage loginStage;
 
         public Label getTitleHolderTextHolderText(){
             return titleHolderText;
@@ -40,19 +41,19 @@ public class LoginView{
             return passwordText;
         }
 
-        public static Button getLoginButton() {
+        public Button getLoginButton() {
             return loginButton;
         }
 
-        public static TextField getUsernameTextField(){
+        public TextField getUsernameTextField(){
             return usernameTextField;
         }
 
-        public TextField getPasswordTextField(){
+        public PasswordField getPasswordTextField(){
             return passwordTextField;
         }
 
-        public static Button getSignupButton(){
+        public Button getSignupButton(){
             return signupButton;
         }
 
@@ -87,7 +88,8 @@ public class LoginView{
             Label usernameHolderText = new Label("Username : ");
             TextField usernameTextField = new TextField("username");
             Label passwordText = new Label("Password : ");
-            TextField passwordTextField = new TextField("password");
+
+            PasswordField passwordTexField = new PasswordField();
 
             GridPane.setRowIndex(usernameHolderText, 0); //in scala, il numero integer la posizione 0 è la più alta
             GridPane.setRowIndex(passwordText, 1);
@@ -120,16 +122,16 @@ public class LoginView{
             return login;
         }
         
-        public static Stage getStage() {
+        public Stage getStage() {
     		return loginStage;
     	}
         
         
         public void setStage(Stage loginStage) {
-        	LoginView.loginStage = loginStage;
+        	this.loginStage = loginStage;
     	}
 
-		public static Labeled getErrorMessageLabel() {
+		public Labeled getErrorMessageLabel() {
 			// TODO Auto-generated method stub
 			return errorMessageLabel;
 		}

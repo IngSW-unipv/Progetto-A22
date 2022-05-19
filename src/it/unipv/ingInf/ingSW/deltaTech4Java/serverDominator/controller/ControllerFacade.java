@@ -1,14 +1,21 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.LoginView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.SignupView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.BotObserver;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ClassificaObserver;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.NodoObserver;
 
 /**
  * 
@@ -38,7 +45,16 @@ public class ControllerFacade {
 	private PopUpFacade popupView;
 	private PopUpController popupController;
 	
-	private Main mView = new Main();
+	private AttackmainController attackmainController;
+	private CheckButtonController checkbuttonController;
+	private PotenziamentomainController potenziamentomainController;
+	private MarketmainController marketmainController;
+	private ProduzionemainController produzionemainController;
+	
+	private BotObserver botObserver;
+	private FinePartitaObserver finepartitaObserver;
+	private NodoObserver nodoObserver;
+	
 	
  /**
   * @author Gianl Castillo
@@ -48,16 +64,21 @@ public class ControllerFacade {
   * @param signupController
   */ 
 	
-	public ControllerFacade(Main mainView, MainDefinitivo mainModello,LoginController loginController, SignupController signupController) {
-		this.mView=mainView;
+	public ControllerFacade(Main mainView, MainDefinitivo mainModello,LoginController loginController, SignupController signupController, Base b) {
+		
 		this.mainModello=mainModello;
+		
+		this.partitaStageMaker(b);
 		this.loginController = loginController;
 		this.signupController = signupController;
+		this.botObserver = new BotObserver(mainModello, partitaStage);
+		this.finepartitaObserver = new FinePartitaObserver(mainModello, partitaStage, prebattagliaView.getStage(), partitaStage.getClassificaPane()); //fine partita
+		this.nodoObserver = new NodoObserver(partitaStage);
 	}
 	
 	public ControllerFacade() {
 		super();
-		this.mView = new Main();
+		
 	}
 	
 	//DA RIPULIRE BENE poi in assemblaggio
@@ -74,7 +95,7 @@ public class ControllerFacade {
 	 */
 	
 	public void partitaStageMaker(Base b) {
-		PartitaStage ps=new PartitaStage(mainModello,b) {
+		PartitaStage ps=new PartitaStage(mainModello,b, 0) { //durataPartitaSeconds*60
 			@Override 
 			
 			public void doOnClic() { //logica dei pulsanti
@@ -103,8 +124,87 @@ public class ControllerFacade {
 				this.getStatsNodePane().getButtonAttacca().setDisable(!attaccabile);
 				
 			}
+
+			@Override
+			public void fineGioco() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		partitaStage=ps;
+	}
+	
+	/**
+	 * @author Gianl Castillo
+	 * @param mainView
+	 * @param mainModello
+	 * @param controllerFacade
+	 * @param userAccount
+	 * Metodo per generare la partita e la mappa di gioco, con modalità facile e dimensioni ridotte
+	 */
+	public void initEasyGame(Main mainView, MainDefinitivo mainModello, ControllerFacade controllerFacade, UserAccount userAccount, PartitaStage partitaStage) {
+		controllerFacade.getPrebattagliaView().getEasyGame().setOnAction(actionEvent ->{
+			//mainView.generateEasyMap();
+			
+			//controllerFacade.getPartitaStage().getScene().show();
+			
+			partitaStage.show(); //non esattamente
+				try {
+					mainModello.avvioPartita(15, 10, userAccount.getUsername(), userAccount.getMny());
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 
+		});
+			
+	}
+	
+	
+	/**
+	 * @author Gianl Castillo
+	 * @param mainView
+	 * @param mainModello
+	 * @param controllerFacade
+	 * @param userAccount
+	 * Metodo per generare la partita e la mappa di gioco, con modalità media (standard) e dimensioni normali
+	 */
+	public void initMediumGame(Main mainView, MainDefinitivo mainModello, ControllerFacade controllerFacade, UserAccount userAccount) {
+		controllerFacade.getPrebattagliaView().getMediumGame().setOnAction(actionEvent ->{
+			//mainView.generateMediumMap();
+			//mainView.getDimensioniMappa(null);
+				try {
+					mainModello.avvioPartita(20, 15, userAccount.getUsername(), userAccount.getMny());
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		});
+		
+	}
+	
+	
+	/**
+	 * @author Gianl Castillo
+	 * @param mainView
+	 * @param mainModello
+	 * @param controllerFacade
+	 * @param userAccount
+	 * Metodo per generare la partita e la mappa di gioco, con modalità difficile e dimensioni massime
+	 */
+	public void initHardGame(Main mainView, MainDefinitivo mainModello, ControllerFacade controllerFacade, UserAccount userAccount) {
+		controllerFacade.getPrebattagliaView().getHardGame().setOnAction(actionEvent ->{
+			//mainView.generateHardMap();
+			//mainView.getDimensioniMappa(null);
+			
+				try {
+					mainModello.avvioPartita(20, 30, userAccount.getUsername(), userAccount.getMny());
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+		});
 	}
 
 
@@ -135,7 +235,42 @@ public class ControllerFacade {
 	public void setPartitaStage(PartitaStage partitaStage) {
 		this.partitaStage = partitaStage;
 	}
+	
+	public void setAttackmainController(AttackmainController attackmainController) {
+		this.attackmainController = attackmainController;
+	}
+	
+	public void setCheckButtonController(CheckButtonController checkbuttonController) {
+		this.checkbuttonController = checkbuttonController;
+	}
 
+	public void setMarketmainController(MarketmainController marketmainController) {
+		this.marketmainController = marketmainController;
+	}
+	
+	public void setPotenziamentomainController(PotenziamentomainController potenziamentomainController) {
+		this.potenziamentomainController = potenziamentomainController;
+	}
+	
+	public void setProduzionemainController(ProduzionemainController produzionemainController) {
+		this.produzionemainController = produzionemainController;
+	}
+	
+	public void setBotObserver(BotObserver botObserver) {
+		this.botObserver = botObserver;
+	}
+	
+	//public void setClassificaObserver(ClassificaObserver classificaObserver) {
+		//this.classificaObserver = classificaObserver;
+	//}
+	
+	public void setFinePartitaObserver(FinePartitaObserver finepartitaObserver) {
+		this.finepartitaObserver = finepartitaObserver;
+	}
+	
+	public  void setNodoObserver(NodoObserver nodoObserver) {
+		this.nodoObserver = nodoObserver;
+	}
 	
 	public PrebattagliaView getPrebattagliaView() {
 		return prebattagliaView;
@@ -154,7 +289,44 @@ public class ControllerFacade {
 	public PartitaStage getPartitaStage() {
 		return partitaStage;
 	}
+	
+	public AttackmainController getAttackmainController() {
+		return attackmainController;
+	}
+	
+	public CheckButtonController getCheckButtonController() {
+		return checkbuttonController;
+	}
+	
+	public MarketmainController getMarketmainController() {
+		return marketmainController;
+	}
+	
+	public PotenziamentomainController getPotenziamentomainController() {
+		return potenziamentomainController;
+	}
+	
+	public ProduzionemainController getProduzionemainController() {
+		return produzionemainController;
+	}
+	
+	public BotObserver getBotObserver() {
+		return botObserver;
+	}
+	
+	//public ClassificaObserver getClassificaObserver() {
+		//return classificaObserver;
+	//}
+	
+	public FinePartitaObserver getFinePartitaObserver() {
+		return finepartitaObserver;
+	}
 
+	public NodoObserver getNodoObserver() {
+		return nodoObserver;
+	}
+	
+	
 	
 	//da cambiare, da richiamare da prebattaglia view o mainview? dalla view, prebattaglia non genera la mappa
 //metodi easyGame, mediumGame,hardGame da mettere in mainView

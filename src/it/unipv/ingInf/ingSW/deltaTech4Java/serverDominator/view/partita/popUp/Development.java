@@ -2,7 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 
 import java.math.BigDecimal;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.NumberSpinner;
@@ -24,23 +23,26 @@ public class Development {
 	public static int sX = 400;
 	public static int sY = 400;	
 	public static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
+	
 	private Nodo nodoUtente;
+	
 	private NumberSpinner quantitaRootCrash;
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus;
 	
 	private Button buttonDevelop;
-	Stage stage;
-	public Development(Base baseUtente) {
-		this.nodoUtente=baseUtente;
+	private Stage stage;
+	
+	public Development(Nodo nodoUtente) {
+		this.nodoUtente=nodoUtente;
 	}
+	
 	public Development() {
 		super();
 	}
 	
-	public void development(Base baseUtente) {
+	public void development(Nodo baseUtente) {
 		this.nodoUtente=baseUtente;
-		development();
 		
 	}
 	public void development() {
@@ -155,32 +157,36 @@ public class Development {
 		stage.showAndWait();
 	}
 
-	public Nodo getBaseUtente() {
+	public Nodo getNodoUtente() {
 		return nodoUtente;
 	}
 
-	public void setBaseUtente(Base baseUtente) {
-		this.nodoUtente = baseUtente;
+	public void setNodoUtente(Nodo nodoUtente) {
+		this.nodoUtente = nodoUtente;
 	}
 
 	public NumberSpinner getQuantitaRootCrash() {
 		return quantitaRootCrash;
 	}
 
+	public void setQuantitaRootCrash(NumberSpinner quantitaRootCrash) {
+		this.quantitaRootCrash = quantitaRootCrash;
+	}
+
 	public NumberSpinner getQuantitaVirus() {
 		return quantitaVirus;
+	}
+
+	public void setQuantitaVirus(NumberSpinner quantitaVirus) {
+		this.quantitaVirus = quantitaVirus;
 	}
 
 	public NumberSpinner getQuantitaAntivirus() {
 		return quantitaAntivirus;
 	}
 
-	public Button getDevelopButton() {
-		return buttonDevelop;
-	}
-
-	public void setButton(Button button) {
-		this.buttonDevelop = button;
+	public void setQuantitaAntivirus(NumberSpinner quantitaAntivirus) {
+		this.quantitaAntivirus = quantitaAntivirus;
 	}
 
 	public Button getButtonDevelop() {
@@ -199,16 +205,6 @@ public class Development {
 		this.stage = stage;
 	}
 
-	public void setQuantitaRootCrash(NumberSpinner quantitaRootCrash) {
-		this.quantitaRootCrash = quantitaRootCrash;
-	}
-
-	public void setQuantitaVirus(NumberSpinner quantitaVirus) {
-		this.quantitaVirus = quantitaVirus;
-	}
-
-	public void setQuantitaAntivirus(NumberSpinner quantitaAntivirus) {
-		this.quantitaAntivirus = quantitaAntivirus;
-	}
+	
 
 }

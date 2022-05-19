@@ -42,7 +42,6 @@ public class Powerup {
 	}
 	public void powerUp(Nodo NodoUtente) {
 		this.NodoUtente=NodoUtente;
-		powerUp();
 	}
 	
 	public void powerUp() {
@@ -213,6 +212,48 @@ public class Powerup {
 
 	public void setButtonPowerUp(Button buttonPowerUp) {
 		this.buttonPowerUp = buttonPowerUp;
+	}
+	public static int getsX() {
+		return sX;
+	}
+	public static void setsX(int sX) {
+		Powerup.sX = sX;
+	}
+	public static int getsY() {
+		return sY;
+	}
+	public static void setsY(int sY) {
+		Powerup.sY = sY;
+	}
+	public int getCpuAdd() {
+		return cpuAdd;
+	}
+	public void setCpuAdd(int cpuAdd) {
+		this.cpuAdd = cpuAdd;
+	}
+	public int getFwAdd() {
+		return fwAdd;
+	}
+	public void setFwAdd(int fwAdd) {
+		this.fwAdd = fwAdd;
+	}
+	public int getRamAdd() {
+		return ramAdd;
+	}
+	public void setRamAdd(int ramAdd) {
+		this.ramAdd = ramAdd;
+	}
+	public int geteAdd() {
+		return eAdd;
+	}
+	public void seteAdd(int eAdd) {
+		this.eAdd = eAdd;
+	}
+	public static Insets getStandardPadding() {
+		return STANDARD_PADDING;
+	}
+	public void setNodoUtente(Nodo nodoUtente) {
+		NodoUtente = nodoUtente;
 	}
 	
 	

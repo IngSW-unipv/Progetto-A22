@@ -67,9 +67,6 @@ public class Market {
 	
 	public void market(Base baseUtente) {
 		istance(new Mercato(), baseUtente);
-		market();
-		
-		
 	}
 	
 	public void market() {
@@ -515,6 +512,46 @@ public class Market {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+
+	public Base getBaseUtente() {
+		return baseUtente;
+	}
+
+	public void setBaseUtente(Base baseUtente) {
+		this.baseUtente = baseUtente;
+	}
+
+	public Mercato getMercato() {
+		return mercato;
+	}
+
+	public void setMercato(Mercato mercato) {
+		this.mercato = mercato;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getCpuAdd() {
+		return cpuAdd;
+	}
+
+	public int getFwAdd() {
+		return fwAdd;
+	}
+
+	public int getRamAdd() {
+		return ramAdd;
+	}
+
+	public int geteAdd() {
+		return eAdd;
 	}
 	
 

@@ -25,6 +25,11 @@ public class PopUpFacade {
 	public PopUpFacade(Mercato mercato, Base baseUtente ) {
 		this.mkt=mercato;
 		this.baseUtente=baseUtente;
+		this.popUpPowerup =new Powerup(baseUtente);
+		this.popUpSelectmalware=new Selectmalware(baseUtente);
+		this.popUpDevelopment= new Development(baseUtente);
+		this.popUpMarket=new Market(mkt,baseUtente); 
+		
 	}
 	
 	public PopUpFacade() {
@@ -55,23 +60,19 @@ public class PopUpFacade {
 	
 	
 	public void avviaSelectMalware() {
-		popUpSelectmalware= new Selectmalware(baseUtente);
 		popUpSelectmalware.selectMalware();
 		
 	}
 
 	public void avviaDevelopment() {
-		popUpDevelopment= new Development(baseUtente);
 		popUpDevelopment.development();
 	}
 	
 	public void avviaPowerUp() {
-		popUpPowerup=new Powerup(baseUtente);
 		popUpPowerup.powerUp();	
 	}
 	
 	public void avviaMarket() {
-		popUpMarket=new Market(mkt,baseUtente);
 		popUpMarket.market();
 	}
 

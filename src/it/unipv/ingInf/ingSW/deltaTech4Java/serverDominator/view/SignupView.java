@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -26,7 +27,7 @@ public class SignupView {
     Button loginButtonChange = new Button("Log in"); //cambio scene
     Button signupButtonLegit = new Button("Sign Up");
     private TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
-    private TextField passwordTextFieldSignup;
+    private PasswordField passwordTextFieldSignup;
     private TextField emailTextField;
     TextField titleTextField;
     private Stage signupStage;
@@ -63,7 +64,7 @@ public class SignupView {
     	return usernameTextFieldSignup;
     }
     
-    public TextField getPasswordTextFieldSignup() {
+    public PasswordField getPasswordTextFieldSignup() {
     	return passwordTextFieldSignup;
     }
     

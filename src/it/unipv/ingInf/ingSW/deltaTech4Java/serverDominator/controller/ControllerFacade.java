@@ -6,16 +6,16 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.LoginView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.SignupView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.BotObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ClassificaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.NodoObserver;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.PrebattagliaView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
+import sreverDominator.view.Main;
 
 /**
  * 

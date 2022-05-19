@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;

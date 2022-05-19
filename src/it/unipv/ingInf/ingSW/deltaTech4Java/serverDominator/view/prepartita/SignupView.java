@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;

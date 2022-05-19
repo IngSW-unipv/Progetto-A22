@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view;
+package sreverDominator.view;
 
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;

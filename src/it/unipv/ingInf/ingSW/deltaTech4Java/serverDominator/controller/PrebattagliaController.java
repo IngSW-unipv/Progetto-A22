@@ -3,9 +3,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.Main;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.PrebattagliaView;
+import sreverDominator.view.Main;
 
 public class PrebattagliaController {
 	

@@ -1,159 +1,222 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sreverDominator.view.Main;
 
 public class PrebattagliaView {
-	
-	private Stage stagePrebattaglia;
-	public Button easyGame = new Button("EASY");
-	public Button mediumGame = new Button("MEDIUM");
-	public Button hardGame = new Button("HARD");
-	
-	public Label gameTitle = new Label();
-	public Label easyDescription = new Label("Bots fairly easy to beat");
-	public Label mediumDescription = new Label("Bots are trouble");
-	public Label hardDescription = new Label("Rip and tear... until it's done");
-	private Main mainView;
-	private MainDefinitivo mainModello;
-	
-	public Button getEasyGame() {
-		return easyGame;
-	}
-	
-	public Button getMediumGame() {
-		return mediumGame;
-	}
-	
-	public Button getHardGame() {
-		return hardGame;
-	}
-	
-	public Label getEasyDescription() {
-		return easyDescription;
-	}
-	
-	public Label getMediumDescription() {
-		return mediumDescription;
-	}
-	
-	public Label getHardDescription() {
-		return hardDescription;
-	}
-	
-	private Stage getStagePreBattaglia() {
-		return stagePrebattaglia;
-	}
-	
-	
-	public PrebattagliaView(PrebattagliaView preBattagliaView, Main mainView, MainDefinitivo mainModello) {
-		istance(new PrebattagliaView(), mainView, mainModello);
-	}
-	
-	public PrebattagliaView() {
-		super();
-	}
-	
-	private void istance(PrebattagliaView prebattagliaView, Main mainView, MainDefinitivo mainModello) {
-		// TODO Auto-generated method stub
-		this.mainView = mainView;
-		
-		
-		this.mainModello = mainModello;
-		
-		//to define
-	}
+    private static Stage prebattagliaStage;
+    private Button easyGame = new Button("EASY");
+    private Button mediumGame = new Button("MEDIUM");
+    private Button hardGame = new Button("HARD");
+    private RadioButton r1 = new RadioButton("EASY");
+    private RadioButton r2 = new RadioButton("MEDIUM");
+    private RadioButton r3 = new RadioButton("HARD");
 
-	//UI Design
-	public void prebattagliaView() {
-		Label gameTitle = ComponentCreator.getIstance().lableCreator(Pos.TOP_CENTER);
-		setLabelText(gameTitle, "SERVER DOMINATOR : choose difficulty!");
-		
-		stagePrebattaglia = new Stage();
-		stagePrebattaglia.initModality(Modality.APPLICATION_MODAL);
-		
-		VBox vPre = new VBox();
-		vPre.setPrefWidth(800);
-        
-		//sezione Easy di scelta
-        VBox easyPreBtl = new VBox();
-        easyPreBtl.setPrefHeight(250);
-		easyPreBtl.setPrefWidth(500);
-		easyPreBtl.setPadding(new Insets(15));
-		GridPane mPreBtl = new GridPane();
-		mPreBtl.setVgap(5);
-		mPreBtl.setHgap(5);
-		easyPreBtl.getChildren().addAll(easyGame, easyDescription);
-		
-		//sezione Medium di scelta
-		VBox mediumPreBtl = new VBox();
-        easyPreBtl.setPrefHeight(250);
-		easyPreBtl.setPrefWidth(500);
-		easyPreBtl.setPadding(new Insets(15));
-		GridPane nPreBtl = new GridPane();
-		nPreBtl.setVgap(5);
-		nPreBtl.setHgap(5);
-		easyPreBtl.getChildren().addAll(mediumGame, mediumDescription);
-		
-		//sezione Hard di scelta
-		VBox hardPreBtl = new VBox();
-        hardPreBtl.setPrefHeight(250);
-		hardPreBtl.setPrefWidth(500);
-		hardPreBtl.setPadding(new Insets(15));
-		GridPane bPreBtl = new GridPane();
-		bPreBtl.setVgap(5);
-		bPreBtl.setHgap(5);
-		easyPreBtl.getChildren().addAll(hardGame, hardDescription);
-		
-		vPre.setAlignment(Pos.BASELINE_CENTER);
-		vPre.getChildren().addAll(easyPreBtl, mediumPreBtl, hardPreBtl);
-		
-		Scene scenePre = new Scene(vPre);
-		scenePre.getStylesheets().add("application.css");
-		stagePrebattaglia.setTitle("Pre Battaglia");
-		stagePrebattaglia.setScene(scenePre);
-		stagePrebattaglia.showAndWait();
-	}
-	
-	
-	
-	public void setLabelText(Label gameTitle, String stringTxt) {
-		gameTitle.setText(stringTxt);
-	}
-	
-	public void setEayButton(Button easyGame) {
-		this.easyGame = easyGame;
-	}
-	
-	public void setMediumButton(Button mediumGame) {
-		this.mediumGame = mediumGame;
-	}
-	
-	public void setHardButton(Button hardGame) {
-		this.hardGame = hardGame;
-	}
-	
-	
+    private Label gameTitle = new Label();
+    private Label easyDescription = new Label("Bots fairly easy to beat");
+    private Label mediumDescription = new Label("Bots are trouble");
+    private Label hardDescription = new Label("Rip and tear... until it's done");
+    private MenuButton menuButton = new MenuButton("Log Out");
 
-	public Stage getStage() {
-		return stagePrebattaglia;
-	}
+    //private Main mainView;
+    //private MainDefinitivo mainModello;
+    //private PrebattagliaController prebattagliaController;
 
-	public void setStage(Stage stagePrebattaglia) {
-		this.stagePrebattaglia = stagePrebattaglia;
-	}
-	
+    public Button getEasyGame() {
+        return easyGame;
+    }
+
+    public Button getMediumGame() {
+        return mediumGame;
+    }
+
+    public Button getHardGame() {
+        return hardGame;
+    }
+
+    public Label getEasyDescription() {
+        return easyDescription;
+    }
+
+    public Label getMediumDescription() {
+        return mediumDescription;
+    }
+
+    public Label getHardDescription() {
+        return hardDescription;
+    }
+
+    
+
+
+
+    //public PrebattagliaView(PrebattagliaView preBattagliaView, Main mainView, MainDefinitivo mainModello) {
+        //istance(new PrebattagliaView(), mainView, mainModello);
+    //}
+    Parent prebattaglia;
+    public PrebattagliaView() {
+        prebattaglia = createPrebattaglia();
+    }
+
+    private Parent createPrebattaglia() {
+        VBox vPre = new VBox();
+        vPre.setPrefWidth(500);
+        //vPre.setPrefHeight(250);
+        vPre.setPadding(new Insets(15));
+        vPre.setSpacing(50);
+
+        //vPre.getChildren().add(createTitle());
+        vPre.getChildren().add(createEasyGame());
+        vPre.getChildren().add(createMediumGame());
+        vPre.getChildren().add(createHardGame());
+
+        return vPre;
+    }
+
+
+    //private void istance(PrebattagliaView prebattagliaView, Main mainView, MainDefinitivo mainModello) {
+        // TODO Auto-generated method stub
+        //this.mainView = mainView;
+
+
+        //this.mainModello = mainModello;
+
+        //to define
+    //}
+
+    //UI Design
+    private HBox prebattagliaView() {
+        HBox vPre = new HBox();
+        vPre.setPrefWidth(800);
+        vPre.setPrefHeight(250);
+        vPre.setPadding(new Insets(10));
+
+        vPre.getChildren().add(createTitle());
+        //vPre.getChildren().add(createMenu());
+        vPre.getChildren().add(createEasyGame());
+        vPre.getChildren().add(createMediumGame());
+        vPre.getChildren().add(createHardGame());
+
+        return vPre;
+    }
+
+    //private Node createMenu() { //DA SISTEMARE BENE, sfasa il button difficolta HARD
+        //VBox menuBox = new VBox();
+        //Menu menu = new Menu("LOGO");
+        //menu.setGraphic(new ImageView(""));
+
+        //MenuButton logoutButton = new MenuButton("Log Out");
+        //menuBox.getChildren().add(logoutButton);
+
+        //return menuBox;
+    //}
+
+    private Node createHardGame() {
+        GridPane gridPane = new GridPane();
+        Button hardGame = new Button("Hard");
+        Label hardDescription = new Label("Rip and tear, until it's done!");
+
+        GridPane.setRowIndex(hardGame, 0); //in scala, il numero integer la posizione 0 è la più alta
+        //GridPane.setRowIndex(hardDescription, 1);
+        //GridPane.setConstraints(hardDescription, 1, 0);
+        GridPane.setConstraints(hardDescription, 1, 0);
+
+        gridPane.getChildren().addAll(
+                hardGame, hardDescription
+        );
+
+
+        return gridPane;
+    }
+
+    private Node createMediumGame() {
+        GridPane gridPane = new GridPane();
+        Button mediumGame = new Button("Medium");
+        Label mediumDescription = new Label("Fair challenge");
+
+        GridPane.setRowIndex(mediumGame, 0); //in scala, il numero integer la posizione 0 è la più alta
+        //GridPane.setRowIndex(hardGame, 1);
+        GridPane.setConstraints(mediumDescription, 1, 0);
+        //GridPane.setConstraints(hardDescription, 1, 1);
+
+        gridPane.getChildren().addAll(
+                mediumGame, mediumDescription
+        );
+        return gridPane;
+    }
+
+    private Node createEasyGame() {
+        GridPane gridPane = new GridPane();
+        Button easyGame = new Button("Easy");
+        Label easyDescription = new Label("I'm too young to die, taskete");
+
+        GridPane.setRowIndex(easyGame, 0); //in scala, il numero integer la posizione 0 è la più alta
+        //GridPane.setRowIndex(hardGame, 1);
+        GridPane.setConstraints(easyDescription, 1, 0);
+        //GridPane.setConstraints(hardDescription, 1, 1);
+
+        gridPane.getChildren().addAll(
+                easyGame, easyDescription
+        );
+        return gridPane;
+    }
+
+    private Node createTitle() {
+        Label titleLabel = new Label("SERVER DOMINATOR Choose Difficulty");
+        titleLabel.setMaxWidth(600);
+        return titleLabel;
+    }
+
+
+
+
+    public Parent getPrebattaglia(){
+        return prebattaglia;
+    }
+
+    public static Stage getStage() {
+        return prebattagliaStage;
+    }
+
+
+    public void setStage(Stage prebattagliaStage) {
+        this.prebattagliaStage = prebattagliaStage;
+    }
+
+
+
+
+    //public void setLabelText(Label gameTitle, String stringTxt) {
+     //   gameTitle.setText(stringTxt);
+    //}
+
+    //public void setEayButton(Button easyGame) {
+      //  this.easyGame = easyGame;
+    //}
+
+    //public void setMediumButton(Button mediumGame) {
+        //this.mediumGame = mediumGame;
+    //}
+
+    //public void setHardButton(Button hardGame) {
+      //  this.hardGame = hardGame;
+    //}
+
+
+    //public Stage getPrebattagliaStage() {
+      //  return stagePrebattaglia;
+    //}
+
+
+    //public void setStage(Stage prebattagliaStage) {
+      //  this.prebattagliaStage = prebattagliaStage;
+    //}
+
 }

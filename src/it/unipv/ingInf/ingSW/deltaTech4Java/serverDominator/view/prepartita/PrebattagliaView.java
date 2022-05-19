@@ -15,9 +15,7 @@ public class PrebattagliaView {
     private Button easyGame = new Button("EASY");
     private Button mediumGame = new Button("MEDIUM");
     private Button hardGame = new Button("HARD");
-    private RadioButton r1 = new RadioButton("EASY");
-    private RadioButton r2 = new RadioButton("MEDIUM");
-    private RadioButton r3 = new RadioButton("HARD");
+   
 
     private Label gameTitle = new Label();
     private Label easyDescription = new Label("Bots fairly easy to beat");

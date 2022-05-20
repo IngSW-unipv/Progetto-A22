@@ -7,7 +7,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean;
  * @version 1.0
  * @see Obiettivo
  */
-public class ObPunteggio extends Obiettivo{
+public class ObPunteggio extends Obiettivo implements Comparable<ObPunteggio>{
 
 	/**
 	 * Punteggio necessario per raggiungere l'obiettivo
@@ -95,6 +95,13 @@ public class ObPunteggio extends Obiettivo{
 		return 
 				(punteggioObiettivo.equals(other.getPunteggioObiettivo())&&
 				super.equals(other.getObiettivi()));
+	}
+
+	@Override
+	public int compareTo(ObPunteggio o) {
+		Integer i=this.getPunteggioObiettivo()-o.getPunteggioObiettivo();
+		
+		return i!=null?i:0;
 	}
 
 }

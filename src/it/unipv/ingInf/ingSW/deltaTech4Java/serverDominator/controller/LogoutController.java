@@ -43,7 +43,7 @@ public class LogoutController {
 		prebattagliaView.getLogoutButton().setOnAction(actionEvent -> {
 			//disactivate persistencefacade
 			//loginView show
-			persistenceFacade.persistenceOff();
+			persistenceFacade.getInstance().persistenceOff();
 			
 			prebattagliaView.getStage().close();
 			loginStage.show();

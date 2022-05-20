@@ -16,6 +16,7 @@ public class BaseCambioController {
 		super();
 		this.mainDefinitivo = mainDefinitivo;
 		this.partitaStage = partitaStage;
+		this.initAll();
 	}
 	public void initAll() {
 		initAvantiBase();

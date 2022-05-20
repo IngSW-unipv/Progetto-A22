@@ -401,7 +401,7 @@ public class Market {
 	public int getLivelloRam() {
 		return ramAdd;
 	}
-	public int getLivelloEnergiata() {
+	public int getLivelloEnergia() {
 		return eAdd;
 	}
 	public Button getButtonPay() {

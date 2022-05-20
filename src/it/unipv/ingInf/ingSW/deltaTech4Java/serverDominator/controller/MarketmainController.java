@@ -25,28 +25,26 @@ public class MarketmainController {
 	public void initMarket(MainDefinitivo mainDefinitivo, PopUpFacade popupFacade, PartitaStage partitaStage) {
 		
 		/**
-		 * Metodo abbinato all'acquisto di ANTIVIRUS
+		 * Metodo abbinato all'acquisto di risorse software e hardware dal mercato
 		 */
 		popupFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
-			mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaAntivirus(), "antivirus");
-			
+			int quantitaHardware=-1;
+			if(popupFacade.getPopUpMarket().getQuantitaAntivirus()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaAntivirus(), "antivirus");
+			if(popupFacade.getPopUpMarket().getQuantitaVirus()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaVirus(), "virus");
+			if(popupFacade.getPopUpMarket().getQuantitaRootCrash()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaRootCrash(), "rootcrash");
+			if(popupFacade.getPopUpMarket().getLivelloCPU()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "cpu");
+			if(popupFacade.getPopUpMarket().getLivelloRam()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "ram");
+			if(popupFacade.getPopUpMarket().getLivelloEnergia()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "energia");
+			if(popupFacade.getPopUpMarket().getLivelloFirewall()>0)
+				mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "firewall");
 		});
 		
-		/**
-		 * Metodo abbinato all'acquisto di ROOTCRASH
-		 */
-		popupFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
-			mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaRootCrash(), "rootcrash");
-		});
-		
-		
-		/**
-		 * Metodo abbinato all'acquisto di VIRUS
-		 */
-		popupFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
-			mainDefinitivo.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popupFacade.getPopUpMarket().getQuantitaVirus(), "virus");
-			
-		});
 		
 	}//da aggiundere scrollPane?
 	

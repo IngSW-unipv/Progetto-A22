@@ -31,6 +31,7 @@ public class BaseCambioController {
 		partitaStage.getBaseStatsPane().getButtonNext().setOnAction(actionEvent -> {
 			mainDefinitivo.getTabellone().checkbasi(giocatore);
 			mainDefinitivo.getTabellone().trovaBase(giocatore);
+			//manca un comando?
 			partitaStage.changeSelectedBase(b);
 		});
 	}

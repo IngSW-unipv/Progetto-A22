@@ -2,24 +2,25 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 
 public class BaseCambioController {
 
-	private static BaseCambioController basecambioController = null;
 	private MainDefinitivo mainDefinitivo;
-	private BaseCambioController() {
+	private PartitaStage partitaStage;
+	
+	
+	
+	
+	public BaseCambioController(MainDefinitivo mainDefinitivo, PartitaStage partitaStage) {
 		super();
+		this.mainDefinitivo = mainDefinitivo;
+		this.partitaStage = partitaStage;
 	}
-	
-	public static BaseCambioController getIstance() {
-		if(basecambioController == null)
-			basecambioController = new BaseCambioController();
-		
-		return basecambioController;
+	public void initAll() {
+		initAvantiBase();
+		iniIndietroBase();
 	}
-	
 	/**
 	 * 
 	 * @param partitaStage
@@ -27,12 +28,11 @@ public class BaseCambioController {
 	 * @param giocatore
 	 * Metodo associato al pulsante per visualizzare la prossima base posseduta dal giocatore
 	 */
-	public void initAvantiBase(PartitaStage partitaStage, Base b, Giocatore giocatore) {
+	public void initAvantiBase() {
 		partitaStage.getBaseStatsPane().getButtonNext().setOnAction(actionEvent -> {
-			mainDefinitivo.getTabellone().checkbasi(giocatore);
-			mainDefinitivo.getTabellone().trovaBase(giocatore);
-			//manca un comando?
-			partitaStage.changeSelectedBase(b);
+			mainDefinitivo.getTabellone().checkbasi(partitaStage.getSelectedBase().getPossessore());
+			mainDefinitivo.getTabellone().setScelta(mainDefinitivo.getTabellone().getScelta()+1);
+			partitaStage.changeSelectedBase((Base)mainDefinitivo.getTabellone().trovaBase(partitaStage.getSelectedBase().getPossessore()));
 		});
 	}
 	
@@ -43,11 +43,15 @@ public class BaseCambioController {
 	 * @param giocatore
 	 * Metodo associato al pulsante per visualizzare la precedente base posseduta dal giocatore
 	 */
-	public void iniIndietroBase(PartitaStage partitaStage, Base b, Giocatore giocatore) {
+	public void iniIndietroBase() {
 		partitaStage.getBaseStatsPane().getButtonBack().setOnAction(actionEvent -> {
-			mainDefinitivo.getTabellone().checkbasi(giocatore);
-			mainDefinitivo.getTabellone().trovaBase(giocatore);
-			partitaStage.changeSelectedBase(b);
+			mainDefinitivo.getTabellone().checkbasi(partitaStage.getSelectedBase().getPossessore());
+			int i=mainDefinitivo.getTabellone().getScelta()-1;
+			if(i>=0) {
+				mainDefinitivo.getTabellone().setScelta(mainDefinitivo.getTabellone().getScelta()+1);
+				partitaStage.changeSelectedBase((Base)mainDefinitivo.getTabellone().trovaBase(partitaStage.getSelectedBase().getPossessore()));
+			}
+			
 		});
 	}
 	

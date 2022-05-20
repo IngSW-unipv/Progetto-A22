@@ -8,8 +8,15 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 
 public class BotObserver implements PropertyChangeListener {
-	MainDefinitivo mainDefinitivo;
-	PartitaStage partitaStage;
+	private MainDefinitivo mainDefinitivo;
+	private PartitaStage partitaStage;
+	
+	public BotObserver(MainDefinitivo mainDefinitivo, PartitaStage partitaStage) {
+		super();
+		this.mainDefinitivo = mainDefinitivo;
+		this.partitaStage = partitaStage;
+	}
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getNewValue() instanceof Coordinate && evt.getOldValue() instanceof Coordinate ) {

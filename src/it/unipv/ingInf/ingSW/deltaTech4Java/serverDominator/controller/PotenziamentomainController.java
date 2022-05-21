@@ -28,69 +28,31 @@ public class PotenziamentomainController {
 	public void initPotenziamento (PartitaStage partitaStage, MainDefinitivo mainDefinitivo, PopUpFacade popupFacade, Base base, Risorse risorse, Energia energia) {
 		
 		/**
-		 * Metodo associato al pulsante power up riguardante la RAM
+		 * Metodo associato al pulsante power up, per potenziare le risorse
 		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO RAM, BASE \t", 0); //al posto di 0, meotdo da modello getRisorseDisponibile getnodo.getselectednodo.getRisorse()esporreRisorse per il tempo
-			//addScrollPane
-			
 		
-			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), 
-					 "ram");
+		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent ->{
 			
-		});
-		
-		/**
-		 * Metodo potenziamento relativo alla CPU
-		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO CPU, BASE \t", 0); //sameissue mainDefinitivo
+			if(popupFacade.getPopUpPowerup().getCpuAdd()>0)
+				partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO CPU, BASE \t", 
+						mainDefinitivo.getTempoRisorsa(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "cpu"));
 			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "cpu");
 			
-		});
-		
-		
-		/**
-		 * Metodo potenziamento relativo al FIREWALL
-		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO FIREWALL, BASE \t", 0);
-			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "firewall");
-		});
-		
-		
-		/**
-		 * Metodo potenziamento all'ENERGIA
-		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent ->{
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO ENERGIA, BASE\t", 0);
-			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "energia");
+			if(popupFacade.getPopUpPowerup().getRamAdd()>0)
+				partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO RAM, BASE \t", 
+						mainDefinitivo.getTempoRisorsa(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "ram"));
+			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "ram");
 			
-		});
-		
-		/**
-		 * Metodo potenziamento relativo all'antivirus
-		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO ANTIVIRUS, BASE \t", 0);
-			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "antivirus");
-		});
-		
-		
-		/**
-		 * Metodo potenziamento relativo al rootcrash
-		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO ROOTCRASH, BASE \t", 0);
-			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "rootcrash");
-		});
-		
-		/**
-		 * Metodo potenziamento relativo al virus
-		 */
-		popupFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-			partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO VIRUS, BASE \t",0 );
-			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "virus");
+			if(popupFacade.getPopUpPowerup().getFwAdd()>0)
+				partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO FIREWALL, BASE \t", 
+						mainDefinitivo.getTempoRisorsa(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "firewall"));
+			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "firewall");
+			
+			if(popupFacade.getPopUpPowerup().geteAdd()>0)
+				partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO ENERGIA, BASE \t", 
+						mainDefinitivo.getTempoRisorsa(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "energia"));
+			
+			
 		});
 		
 		

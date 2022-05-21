@@ -33,7 +33,7 @@ public class PopUpController {
                     "RAM");
             mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloFirewall(),
                     "Firewall");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloEnergiata(),
+            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloEnergia(),
                     "Energia");
             popUpFacade.getPopUpMarket().getStage().close();
         });

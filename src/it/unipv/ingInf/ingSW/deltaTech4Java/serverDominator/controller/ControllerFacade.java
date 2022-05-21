@@ -64,15 +64,17 @@ public class ControllerFacade {
   * @param signupController
   */ 
 	
-	public ControllerFacade(Main mainView, MainDefinitivo mainModello,LoginController loginController, SignupController signupController, Base b) {
-		
-		this.mainModello=mainModello;
-		
+	public ControllerFacade(Main mainView, MainDefinitivo mainModello, LoginController loginController,
+			SignupController signupController, Base b) {
+
+		this.mainModello = mainModello;
+
 		this.partitaStageMaker(b);
 		this.loginController = loginController;
 		this.signupController = signupController;
 		this.botObserver = new BotObserver(mainModello, partitaStage);
-		this.finepartitaObserver = new FinePartitaObserver(mainModello, partitaStage, prebattagliaView.getStage(), partitaStage.getClassificaPane()); //fine partita
+		this.finepartitaObserver = new FinePartitaObserver(mainModello, partitaStage, prebattagliaView.getStage(),
+				partitaStage.getClassificaPane()); // fine partita
 		this.nodoObserver = new NodoObserver(partitaStage);
 	}
 	
@@ -95,11 +97,11 @@ public class ControllerFacade {
 	 */
 	
 	public void partitaStageMaker(Base b) {
-		PartitaStage ps=new PartitaStage(mainModello,b, 0) { //durataPartitaSeconds*60
+		PartitaStage ps = new PartitaStage(mainModello, b, 0) { //durataPartitaSeconds*60
 			@Override 
 			
 			public void doOnClic() { //logica dei pulsanti
-				//IMportante leggere i commenti
+				// Importante leggere i commenti
 				// TODO Auto-generated method stub
 				// non fa niene di aggiuntico
 				// RIVOLTO A GIAN: QUI PUOI METTERE LE ISTRUZIONI (AGGIUNTIVE) CHE
@@ -131,7 +133,8 @@ public class ControllerFacade {
 				
 			}
 		};
-		partitaStage=ps;
+		
+		partitaStage = ps;
 	}
 	
 	/**

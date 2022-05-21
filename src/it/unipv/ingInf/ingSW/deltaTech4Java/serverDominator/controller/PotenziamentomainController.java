@@ -51,7 +51,7 @@ public class PotenziamentomainController {
 			if(popupFacade.getPopUpPowerup().geteAdd()>0)
 				partitaStage.addPtenziamentoRisorsa("POTENZIAMENTO ENERGIA, BASE \t", 
 						mainDefinitivo.getTempoRisorsa(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "energia"));
-			
+			mainDefinitivo.powerup(partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), "energia");
 			
 		});
 		

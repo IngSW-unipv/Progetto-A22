@@ -88,5 +88,36 @@ public class SignupController {
 		});
 	
 }
+	
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+	public PersistenceFacade getPersistenceFacade() {
+		return persistenceFacade;
+	}
+	public void setPersistenceFacade(PersistenceFacade persistenceFacade) {
+		this.persistenceFacade = persistenceFacade;
+	}
+	public SignupView getSignupView() {
+		return signupView;
+	}
+	public void setSignupView(SignupView signupView) {
+		this.signupView = signupView;
+	}
+	public PrebattagliaView getPrebattagliaView() {
+		return prebattagliaView;
+	}
+	public void setPrebattagliaView(PrebattagliaView prebattagliaView) {
+		this.prebattagliaView = prebattagliaView;
+	}
+	public Stage getLoginStage() {
+		return loginStage;
+	}
+	public void setSignupStage(Stage loginStage) {
+		this.loginStage = loginStage;
+	}
 		
 }

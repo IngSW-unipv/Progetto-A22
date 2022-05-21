@@ -20,7 +20,7 @@ public class SignupController {
 	
 	private static SignupController signupController = null;
 	
-	private SignupController(UserAccount userAccount, PersistenceFacade persistenceFacade, SignupView signupView,
+	public SignupController(UserAccount userAccount, PersistenceFacade persistenceFacade, SignupView signupView,
 			PrebattagliaView prebattagliaView, Stage loginStage) {
 		super();
 		this.userAccount = userAccount;

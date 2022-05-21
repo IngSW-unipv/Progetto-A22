@@ -1,80 +1,98 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 
 
 public class PopUpController {
 
-    private static PopUpController popUpController=null;
+    private MainDefinitivo mainModello;
+    private PopUpFacade popUpFacade;
+    private PartitaStage partitaStage;
+    
+    
 
-    private  PopUpController(){
-        super();
-    }
 
+    public PopUpController(MainDefinitivo mainModello, PopUpFacade popUpFacade, PartitaStage partitaStage) {
+		super();
+		this.mainModello = mainModello;
+		this.popUpFacade = popUpFacade;
+		this.partitaStage = partitaStage;
+		this.initPowerUp();
+		this.initDevelopment();
+	}
 
-    public static PopUpController getIstance(){
-        if(popUpController==null)
-            popUpController=new PopUpController();
-        return popUpController;
-    }
-
-    public void initMercatoController(MainDefinitivo mainModello,PopUpFacade popUpFacade){ //int x, int y passati dopo aver cliccato btn Market
-        popUpFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getQuantitaAntivirus(),
-                    "Antivirus");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getQuantitaVirus(),
-                    "Virus");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getQuantitaRootCrash(),
-                    "Rootcrash");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloCPU(),
-                    "CPU");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloRam(),
-                    "RAM");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloFirewall(),
-                    "Firewall");
-            mainModello.acquistoMercato(popUpFacade.getBaseUtente().getPossessore(),popUpFacade.getPopUpMarket().getLivelloEnergia(),
-                    "Energia");
-            popUpFacade.getPopUpMarket().getStage().close();
-        });
-    }
-
-    public void initSelectMalware(MainDefinitivo mainModello,PopUpFacade popUpFacade,int x , int y){
-        popUpFacade.getPopUpSelectmalware().getFightButton().setOnAction(actionEvent -> {
-            mainModello.avvioBattaglia(popUpFacade.getBaseUtente().getPossessore(), x ,y);
-            popUpFacade.getPopUpSelectmalware().getStage().close();
-        });
-
-    }
-
-    public void initPowerUp(MainDefinitivo mainModello,PopUpFacade popUpFacade,int x, int y){
+	public void initPowerUp(){
         popUpFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-            if(popUpFacade.getPopUpPowerup().getEnergy()>0)
-                mainModello.powerup(x,y,"energia");
-            if(popUpFacade.getPopUpPowerup().getCpu()>0)
-                mainModello.powerup(x,y,"cpu");
-            if(popUpFacade.getPopUpPowerup().getFirewall()>0)
-                mainModello.powerup(x,y,"firewall");
-            if(popUpFacade.getPopUpPowerup().getRam()>0)
-                mainModello.powerup(x,y,"ram");
+            if(popUpFacade.getPopUpPowerup().getEnergy()>0) {
+                mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"energia");
+                partitaStage.addPtenziamentoRisorsa("Potenziamento energia in corso", mainModello.getTempoRisorsa(
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"energia"));
+            }
+
+            if(popUpFacade.getPopUpPowerup().getCpu()>0) {
+                mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"cpu");
+                partitaStage.addPtenziamentoRisorsa("Potenziamento cpu in corso", mainModello.getTempoRisorsa(
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"cpu"));
+            }
+
+            if(popUpFacade.getPopUpPowerup().getFirewall()>0) {
+                mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"firewall");
+                partitaStage.addPtenziamentoRisorsa("Potenziamento firewall in corso", mainModello.getTempoRisorsa(
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"firewall"));
+            }
+
+            if(popUpFacade.getPopUpPowerup().getRam()>0) {
+                mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"ram");
+                partitaStage.addPtenziamentoRisorsa("Potenziamento ram in corso", mainModello.getTempoRisorsa(
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"ram"));
+            }
+
             popUpFacade.getPopUpPowerup().getStage().close();
         });
-
     }
 
-    public void initDevelopment(MainDefinitivo mainModello,PopUpFacade popUpFacade,int x, int y){
+    public void initDevelopment(){
         popUpFacade.getPopUpDevelopment().getButtonDevelop().setOnAction(actionEvent -> {
             mainModello.creazioneSoftware("antivirus",
-                    popUpFacade.getPopUpDevelopment().getQuantitaAntivirus().getNumber().intValue(),x,y);
+                    popUpFacade.getPopUpDevelopment().getQuantitaAntivirus().getNumber().intValue(),
+                    partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY());
             mainModello.creazioneSoftware("virus",
-                    popUpFacade.getPopUpDevelopment().getQuantitaVirus().getNumber().intValue(),x,y);
+                    popUpFacade.getPopUpDevelopment().getQuantitaVirus().getNumber().intValue(),
+                    partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY());
             mainModello.creazioneSoftware("rootcrash",
-                    popUpFacade.getPopUpDevelopment().getQuantitaRootCrash().getNumber().intValue(),x,y);
+                    popUpFacade.getPopUpDevelopment().getQuantitaRootCrash().getNumber().intValue(),
+                    partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY());
             popUpFacade.getPopUpDevelopment().getStage().close();
         });
 
 
     }
+
+	public MainDefinitivo getMainModello() {
+		return mainModello;
+	}
+
+	public void setMainModello(MainDefinitivo mainModello) {
+		this.mainModello = mainModello;
+	}
+
+	public PopUpFacade getPopUpFacade() {
+		return popUpFacade;
+	}
+
+	public void setPopUpFacade(PopUpFacade popUpFacade) {
+		this.popUpFacade = popUpFacade;
+	}
+
+	public PartitaStage getPartitaStage() {
+		return partitaStage;
+	}
+
+	public void setPartitaStage(PartitaStage partitaStage) {
+		this.partitaStage = partitaStage;
+	}
 
 
 }

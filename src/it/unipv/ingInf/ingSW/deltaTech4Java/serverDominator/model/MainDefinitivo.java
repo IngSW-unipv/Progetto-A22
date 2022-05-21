@@ -176,7 +176,7 @@ public class MainDefinitivo extends Thread{
 	public boolean powerupCheck(int x, int y){
 	
 		boolean checkp= false;
-		if(tabellone.getNodo(x, y).getPossessore()==giocatori[1]) {
+		if(tabellone.getNodo(x, y).getPossessore().getNome().equals(giocatori[1].getNome())) {
 			checkp=true;
 		}
 		return checkp;
@@ -203,7 +203,7 @@ public class MainDefinitivo extends Thread{
 	 * @param y
 	 * ordinata del nodo selezionato
 	 * @param nome
-	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Firewall)
+	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud ï¿½ disponibile solo Firewall)
 	 */
 	public int getTempoRisorsa(int x, int y, String risorsa) {
 		int tempo=-1;
@@ -216,7 +216,7 @@ public class MainDefinitivo extends Thread{
 	 * @param y
 	 * ordinata del nodo selezionato
 	 * @param nome
-	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Antivirus)
+	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud ï¿½ disponibile solo Antivirus)
 	 */
 	public int getTempoSoftware(int x, int y, String software) {
 		int tempo=-1;

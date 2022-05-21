@@ -20,16 +20,28 @@ public class SignupController {
 	
 	private static SignupController signupController = null;
 	
-	private SignupController() {
+	private SignupController(UserAccount userAccount, PersistenceFacade persistenceFacade, SignupView signupView,
+			PrebattagliaView prebattagliaView, Stage loginStage) {
 		super();
+		this.userAccount = userAccount;
+		this.persistenceFacade = persistenceFacade;
+		this.signupView = signupView;
+		this.prebattagliaView = prebattagliaView;
+		this.loginStage = loginStage;
 	}
 	
-	public static SignupController getInstanSignupController() {
-		if(signupController == null) 
-			signupController = new SignupController();
-		
-		return signupController;
+	public void initListeners() {
+		initSignup();
+		initChangeContext();
+
 	}
+	
+	//public static SignupController getInstanSignupController() {
+		//if(signupController == null) 
+			//signupController = new SignupController();
+		
+		//return signupController;
+	//}
 	
 	/**
 	 * 

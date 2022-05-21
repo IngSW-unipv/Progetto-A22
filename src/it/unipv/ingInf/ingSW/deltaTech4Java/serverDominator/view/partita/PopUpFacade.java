@@ -3,6 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita;
 
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Development;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Market;
@@ -38,23 +39,24 @@ public class PopUpFacade {
 	}
 
 	public void avviaSelectMalware(Base baseUtente) {
-		popUpSelectmalware= new Selectmalware(baseUtente);
+		popUpSelectmalware.setBaseUtente(baseUtente);
+		this.baseUtente=baseUtente;
 		popUpSelectmalware.selectMalware();
 		
 	}
 
-	public void avviaDevelopment(Base baseUtente) {
-		popUpDevelopment= new Development(baseUtente);
+	public void avviaDevelopment(Nodo baseUtente) {
+		popUpDevelopment.setNodoUtente(baseUtente);;
 		popUpDevelopment.development();
 	}
 	
-	public void avviaPowerUp(Base baseUtente) {
-		popUpPowerup=new Powerup(baseUtente);
+	public void avviaPowerUp(Nodo baseUtente) {
+		popUpPowerup.setNodoUtente(baseUtente);
 		popUpPowerup.powerUp();	
 	}
 	
 	public void avviaMarket(Base baseUtente) {
-		popUpMarket=new Market(mkt,baseUtente);
+		popUpMarket.setBaseUtente(baseUtente);
 		popUpMarket.market();
 	}
 	

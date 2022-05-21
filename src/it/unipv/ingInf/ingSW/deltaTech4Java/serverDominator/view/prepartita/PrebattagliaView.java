@@ -235,6 +235,9 @@ public class PrebattagliaView extends Stage implements IDrawable {
 
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
+		this.userInfo=this.infoUserMaker();
+		this.obiettivi=obiettiviGiocatoreMaker();
+		this.disponi();
 	}
 
 	public int[] getSelectedDifecolta() {

@@ -6,38 +6,36 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFa
 
 public class AttackmainController {
 
-	private static AttackmainController attackmainController = null;
 	private MainDefinitivo mainDefinitivo;
-	private AttackmainController() {
+	private PartitaStage partitaStage; 
+	private PopUpFacade popupFacade;
+	
+	
+	public AttackmainController(MainDefinitivo mainDefinitivo, PartitaStage partitaStage, PopUpFacade popupFacade) {
 		super();
+		this.mainDefinitivo = mainDefinitivo;
+		this.partitaStage = partitaStage;
+		this.popupFacade = popupFacade;
+		this.initAttackMain();
 	}
-	
-	public static AttackmainController getInstance() {
-		if(attackmainController == null) 
-			attackmainController = new AttackmainController();
-			
-			return attackmainController;
-	}
-	
+
+
 	/**
-	 * 
-	 * @param mainDefinitivo
-	 * @param partitaStage
-	 * @param popupFacade
-	 * 
-	 * metodo abbinato al button di attacco del popup, avviobattaglia implementa quello preparato da battlecheck
-	 * avanzamento della battaglia, grafica in ms, in modello secondi, causa *1000
+	 * Controller attacco inizializzazione;
 	 */
 	
-	public void initAttackMain(MainDefinitivo mainDefinitivo, PartitaStage partitaStage, PopUpFacade popupFacade) { //dov'è il getButton d'attacco del modello?
+	public void initAttackMain() {
 		
 		popupFacade.getPopUpSelectmalware().getFightButton().setOnAction(actionEvent ->{
-			//nodo selezionato, da modello t d'attacco
+			/*
+			 * mainDefinitivo.battlecheck restituisce un tempo in secondi e 
+			 * partitaStage.addAttacco accetta tempo in millisecondi; per questo c'è il *1000
+			 */
 			partitaStage.addAttacco(partitaStage.getSelectedBase().getPossessore().getNome() + "\t vs \t" + partitaStage.getSelectedNode().getPossessore().getNome()  //
 			+ "(" + partitaStage.getSelectedPoint().getIntX() + ", " + partitaStage.getSelectedPoint().getIntY() + ") ",  
 			mainDefinitivo.battlecheck(partitaStage.getSelectedBase().getPossessore(), 
 			partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), 
-			popupFacade.getPopUpSelectmalware().getQuantitaVirus(), popupFacade.getPopUpSelectmalware().getQuantitaRootCrash() *1000 )); //TO-DO pulsante dopo get nome, stampa anche cooridnate
+			popupFacade.getPopUpSelectmalware().getQuantitaVirus(), popupFacade.getPopUpSelectmalware().getQuantitaRootCrash()) *1000 ); //TO-DO pulsante dopo get nome, stampa anche cooridnate
 
 			
 			mainDefinitivo.avvioBattaglia(partitaStage.getSelectedBase().getPossessore(), partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY());
@@ -47,14 +45,35 @@ public class AttackmainController {
 		
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public MainDefinitivo getMainDefinitivo() {
+		return mainDefinitivo;
+	}
+
+
+	public void setMainDefinitivo(MainDefinitivo mainDefinitivo) {
+		this.mainDefinitivo = mainDefinitivo;
+	}
+
+
+	public PartitaStage getPartitaStage() {
+		return partitaStage;
+	}
+
+
+	public void setPartitaStage(PartitaStage partitaStage) {
+		this.partitaStage = partitaStage;
+	}
+
+
+	public PopUpFacade getPopupFacade() {
+		return popupFacade;
+	}
+
+
+	public void setPopupFacade(PopUpFacade popupFacade) {
+		this.popupFacade = popupFacade;
+	}
+
 	
 }

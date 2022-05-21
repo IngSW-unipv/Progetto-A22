@@ -55,5 +55,17 @@ public class BaseCambioController {
 			
 		});
 	}
+	public MainDefinitivo getMainDefinitivo() {
+		return mainDefinitivo;
+	}
+	public void setMainDefinitivo(MainDefinitivo mainDefinitivo) {
+		this.mainDefinitivo = mainDefinitivo;
+	}
+	public PartitaStage getPartitaStage() {
+		return partitaStage;
+	}
+	public void setPartitaStage(PartitaStage partitaStage) {
+		this.partitaStage = partitaStage;
+	}
 	
 }

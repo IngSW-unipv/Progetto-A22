@@ -1,54 +1,81 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.LoginView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.PrebattagliaView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.PrebattagliaView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 
 public class LogoutController {
 
-	private static LogoutController logoutController = null;
-	private MainDefinitivo mainDefinitivo;
 	private PrebattagliaView prebattagliaView;
 	private PersistenceFacade persistenceFacade;
 	private LoginView loginStage;
 	
-	//DA CAMBIARE PrebattagliaView, restyling da parte di Habib
 	
 	
-	
-	public LogoutController() {
+	public LogoutController(PrebattagliaView prebattagliaView, PersistenceFacade persistenceFacade,
+			LoginView loginStage) {
 		super();
+		this.prebattagliaView = prebattagliaView;
+		this.persistenceFacade = persistenceFacade;
+		this.loginStage = loginStage;
 		this.initLogoutController();
 	}
-	
-	
-	public LogoutController getInstancer() {
-		if(logoutController == null) 
-			logoutController = new LogoutController();
-	
-		return logoutController;
-	}
-	
+
+
+
 	/**
-	 * @param persistenceFacade
-	 * @param loginStage
-	 * @param prebattagliaView
-	 * Metodo associato al pulsante Log Out nella lobby, per chiudere la sessione e tornare alla view di Login
+	 * Metodo che aggiunge la azioni che è neccessario svolgere per 
+	 * fare il logOut
 	 */
 	
-	private void initLogoutController() {
-		// TODO Auto-generated method stub
-		prebattagliaView.getLogoutButton().setOnAction(actionEvent -> {
-			//disactivate persistencefacade
-			//loginView show
-			persistenceFacade.getInstance().persistenceOff();
+	public void initLogoutController() {
+		Menu menu=new Menu("SdMenu");
+		MenuItem menuItem=new MenuItem("Logout");
+		menuItem.setOnAction(event->{
+			persistenceFacade.persistenceOff();
+			prebattagliaView.close();
+			loginStage.getStage().show();
 			
-			prebattagliaView.getStage().close();
-			loginStage.show();
 		});
-		
+		menu.getItems().addAll(menuItem);
+		prebattagliaView.getMenu().getMenus().addAll(menu);
+	}
+
+
+	public PrebattagliaView getPrebattagliaView() {
+		return prebattagliaView;
+	}
+
+
+
+	public void setPrebattagliaView(PrebattagliaView prebattagliaView) {
+		this.prebattagliaView = prebattagliaView;
+	}
+
+
+
+	public PersistenceFacade getPersistenceFacade() {
+		return persistenceFacade;
+	}
+
+
+
+	public void setPersistenceFacade(PersistenceFacade persistenceFacade) {
+		this.persistenceFacade = persistenceFacade;
+	}
+
+
+
+	public LoginView getLoginStage() {
+		return loginStage;
+	}
+
+
+
+	public void setLoginStage(LoginView loginStage) {
+		this.loginStage = loginStage;
 	}
 	
 }

@@ -190,14 +190,14 @@ public class Controller {
 
 							}
 						}else {
-							if(!ScriptsFacade.createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
+							if(!ScriptsFacade.getIstance().createScript(cfgFrame.getPanelConfig().getTextToJavaFxLibPath().getText())) {
 								JOptionPane.showMessageDialog(cfgFrame, p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt."));
 							}else {
 								cfgFrame.loadRunPanel();
 							}
 						}
 					}else {
-						if(!ScriptsFacade.createScript(ScriptsFacade.createCMDToRunFxApp(ScriptsFacade.JAR_NAME), ScriptsFacade.SCRIPT_NAME))
+						if(!ScriptsFacade.getIstance().createScript(ScriptsFacade.getIstance().createCMDToRunFxApp(ScriptsFacade.getIstance().getJarName()), ScriptsFacade.getIstance().getScriptName()))
 							try {
 								JOptionPane.showMessageDialog(cfgFrame, new String(p.getProperty(NoRunFileCreate, "Impossibile creare lo Scipt.").getBytes(),"Utf-8"));
 							} catch (HeadlessException | UnsupportedEncodingException e1) {
@@ -216,7 +216,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ScriptsFacade.runShellScript();
+					ScriptsFacade.getIstance().runShellScript();
 					cfgFrame.dispose();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

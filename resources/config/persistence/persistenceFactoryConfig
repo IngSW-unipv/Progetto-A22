@@ -15,3 +15,5 @@ it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo=
 classe.name.for.fileExtension.windows=serverDominator.config.model.fileExtention.WindowsStrategy
 obiettiviDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
 ISession.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.ConnectionFactory
+scriptsFacade.scriptName.toCreaste=serverDominator
+scriptsFacade.jarName.toRun=serverDOminator

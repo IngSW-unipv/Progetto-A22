@@ -20,7 +20,7 @@ public class AppLauncher {
 		//System.out.println(ctx);
 		p.clear();
 		if(ctx!=1) {
-			ScriptsFacade.runShellScript();
+			ScriptsFacade.getIstance().runShellScript();
 		}else {
 			p.put(CONTEXT, "5");
 			PropertiesFile.savePropertyInFile(p, PROP_FILE);

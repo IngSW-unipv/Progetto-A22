@@ -276,7 +276,7 @@ public class PersistenceFacade{
 	/**
 	 * Inserisci nuovo user acount;
 	 * @param us
-	 * vuser Account che si vuole inserire
+	 * user Account che si vuole inserire
 	 * @return
 	 * Vero se l'operazione è andata a buon fine 
 	 * </br>Falso se l'operazione è fallita

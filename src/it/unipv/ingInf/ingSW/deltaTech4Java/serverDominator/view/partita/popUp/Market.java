@@ -69,6 +69,10 @@ public class Market {
 		istance(new Mercato(), baseUtente);
 	}
 	
+	/**
+	 * Interfaccia popup dove si sceglie la risorsa, software da acquistare
+	 */
+	
 	public void market() {
 		Label finalBillL =ComponentCreator.getIstance().lableCreator(Pos.BASELINE_LEFT);
 		setLableText(finalBillL, "Totale carrello" );
@@ -354,6 +358,13 @@ public class Market {
 		stage.setScene(scene);
 		stage.showAndWait();
 	}
+	
+	/**
+	 * Metodo abbinato al pulsante aumento del number spinner
+	 * @param sumMax
+	 * @param target
+	 * @param controllers
+	 */
 	private void aumentoLogica(int sumMax,NumberSpinner target,NumberSpinner... controllers) {
 		{
         	int aumento=target.getStepWitdhProperty().get().intValue();

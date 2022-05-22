@@ -45,6 +45,10 @@ public class Development {
 		this.nodoUtente=baseUtente;
 		
 	}
+	
+	/**
+	 * Interfaccia popup per scegliere il software da sviluppare
+	 */
 	public void development() {
 		
 		stage = new Stage();
@@ -165,6 +169,10 @@ public class Development {
 		this.nodoUtente = nodoUtente;
 	}
 
+	/**
+	 * Restituisce la quantita di rootcrash scelta dal giocatore
+	 * @return
+	 */
 	public NumberSpinner getQuantitaRootCrash() {
 		return quantitaRootCrash;
 	}
@@ -173,6 +181,10 @@ public class Development {
 		this.quantitaRootCrash = quantitaRootCrash;
 	}
 
+	/**
+	 * Restituisce la quantita di virus scelta dal giocatore
+	 * @return
+	 */
 	public NumberSpinner getQuantitaVirus() {
 		return quantitaVirus;
 	}
@@ -180,6 +192,11 @@ public class Development {
 	public void setQuantitaVirus(NumberSpinner quantitaVirus) {
 		this.quantitaVirus = quantitaVirus;
 	}
+	
+	/**
+	 * Restituisce la quantita di antivirus scelta dal giocatore
+	 * @return
+	 */
 
 	public NumberSpinner getQuantitaAntivirus() {
 		return quantitaAntivirus;
@@ -189,6 +206,10 @@ public class Development {
 		this.quantitaAntivirus = quantitaAntivirus;
 	}
 
+	/**
+	 * Restituisce il pulsante per sviluppare i software scelti
+	 * @return
+	 */
 	public Button getButtonDevelop() {
 		return buttonDevelop;
 	}

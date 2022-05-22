@@ -17,8 +17,9 @@ public class PrebattagliaTester extends Application {
 		MenuItem menuItem=new MenuItem("Logout");
 		menuItem.setOnAction(event->{
 			p.close();
-			
+			p.show();
 		});
+		
 		menu.getItems().addAll(menuItem);
 		p.getMenu().getMenus().addAll(menu);
 	}

@@ -65,6 +65,11 @@ public class PrebattagliaView extends Stage implements IDrawable {
 		this.disponi();
 	}
 	
+	/**
+	 * Metodo che dispone nello stage della lobby gli elementi radio buttons, classifica, obbiettivi, pulsante di avvio partita
+	 * nelle rispettive posizioni
+	 */
+	
 	public void disponi() {
 		ScrollPane sp=new ScrollPane();
 		
@@ -100,12 +105,20 @@ public class PrebattagliaView extends Stage implements IDrawable {
 		vbox.setAlignment(Pos.TOP_CENTER);
 	}
 	
+	/**
+	 * Sezione della lobby contenente il titolo del gioco
+	 */
+	
 	private void initTitolo() {
 		titolo=new Label();
 		titolo.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 12));
 		titolo.setTextFill(Color.DARKGREEN);
 		titolo.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), null)));
 	}
+	
+	/**
+	 * Sezione di Prebattaglia che permette la scelta della difficolta della partita tramite radio buttons
+	 */
 	private void makeSelezioneDifficolta() {
 		RadioButton facile = new RadioButton("FACILE");
 		 facile.setOnAction(event->{
@@ -132,6 +145,10 @@ public class PrebattagliaView extends Stage implements IDrawable {
 		 radios.add(facile);
 	}
 	
+	/**
+	 * Tabella con informazioni da partite precedenti nel server dominator con punteggi rispettivi dei giocatori
+	 * 
+	 */
 	private HBox infoUserMaker() {
 		HBox b=new HBox();
 		Label punteggio=new Label("Punteggio");
@@ -162,6 +179,11 @@ public class PrebattagliaView extends Stage implements IDrawable {
 		b.setSpacing(10);
 		return b;		
 	}
+	
+	/**
+	 * Sezione della lobby che illustra gli obbiettivi per vincere una partita di server dominator
+	 * 
+	 */
 	
 	private GridPane obiettiviGiocatoreMaker() {
 		GridPane grid=new GridPane();
@@ -228,7 +250,10 @@ public class PrebattagliaView extends Stage implements IDrawable {
 		return grid;
 	}
 
-	
+	/**
+	 * Metodo che restituisce account dell'utente
+	 * 
+	 */
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}

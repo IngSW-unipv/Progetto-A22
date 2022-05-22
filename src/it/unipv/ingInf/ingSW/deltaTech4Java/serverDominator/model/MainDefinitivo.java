@@ -23,6 +23,7 @@ public class MainDefinitivo extends Thread{
 	private int t_unitario, t_timer;
 	Thread threadBot[];
 	private Classifica classifica;
+	private Colore colore;
 	
 	private Battaglia[] fight;
 	private int maxbattle=7;
@@ -87,14 +88,14 @@ public class MainDefinitivo extends Thread{
 	 * @param valuta
 	 */
 	public void creazioneGiocatori(String utente, int x_max, int valuta) {  
-		Collections.shuffle(Colore.colori);
+		Collections.shuffle(colore.getColori());
 				
 		switch(x_max) {
 		case 15:
 			n_basi=3;
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
-			giocatori[0].colore = Colore.GRIGIO;
+			giocatori[0].setColore(colore.getGrigio()); 
 			giocatori[1]= new Utente(utente, valuta); 
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -103,7 +104,7 @@ public class MainDefinitivo extends Thread{
 			n_basi=5;
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema();
-			giocatori[0].colore = Colore.GRIGIO;
+			giocatori[0].setColore(colore.getGrigio()); 
 			giocatori[1]= new Utente(utente, valuta);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -114,7 +115,7 @@ public class MainDefinitivo extends Thread{
 			n_basi=10;
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
-			giocatori[0].colore = Colore.GRIGIO;
+			giocatori[0].setColore(colore.getGrigio()); 
 			giocatori[1]= new Utente(utente, valuta);
 			giocatori[2]= new Bot("bob");
 			giocatori[3]= new Bot("sandra");
@@ -129,8 +130,7 @@ public class MainDefinitivo extends Thread{
 		}
 		
 		for (int i = 1; i < giocatori.length; i++) {
-			giocatori[i].colore = Colore.colori.get(i-1);
-			
+			giocatori[i].setColore(colore.getColori().get(i-1)); 
 		}
 		
 	}

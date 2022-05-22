@@ -14,37 +14,73 @@ import java.util.Arrays;
  */
 public class Colore {
 
-	private int grigio, giallo, arancione;
-	private int verde, rosso, viola;
-	private int verde_scuro, rosa, rosa_scuro;
-	private int azzurro, blu;
 	
+	private final String GRIGIO = "#D4D4D4";
+	private final String GIALLO = "#FFFF00";
+	private final String ARANCIO = "#FF8000";
+	private final String VERDE = "#00FF00";
+	private final String ROSSO = "#FF0000";
+	private final String VIOLA = "#4000FF";
+	private final String VERDE_SCURO = "#006633";
+	private final String ROSA = "#FF4ADB";
+	private final String ROSA_SCURO = "#B5739D";
+	private final String AZZURRO = "#00FFFF";
+	private final String BLU = "#3399FF";
+	
+	private ArrayList<String> colori = new ArrayList( Arrays.asList(GIALLO , ARANCIO , VERDE , ROSSO , VIOLA , VERDE_SCURO , ROSA , ROSA_SCURO , AZZURRO , BLU));
+
 	public Colore() {
-		grigio=0xD4D4D4;
-		giallo=0XFFFF00;
-		arancione=0xFF8000;
-		verde=0x00FF00;
-		rosso=0xFF0000;
-		viola=0x4000FF;
-		verde_scuro=0x006633;
-		rosa=0xFF4ADB;
-		rosa_scuro=0xB5739D;
-		azzurro=0x00FFFF;
-		blu=0x3399FF;
+	
 	}
 	
-	public static final String GRIGIO = "#D4D4D4";
-	public static final String GIALLO = "#FFFF00";
-	public static final String ARANCIO = "#FF8000";
-	public static final String VERDE = "#00FF00";
-	public static final String ROSSO = "#FF0000";
-	public static final String VIOLA = "#4000FF";
-	public static final String VERDE_SCURO = "#006633";
-	public static final String ROSA = "#FF4ADB";
-	public static final String ROSA_SCURO = "#B5739D";
-	public static final String AZZURRO = "#00FFFF";
-	public static final String BLU = "#3399FF";
 	
-	public static ArrayList<String> colori = new ArrayList( Arrays.asList(GIALLO , ARANCIO , VERDE , ROSSO , VIOLA , VERDE_SCURO , ROSA , ROSA_SCURO , AZZURRO , BLU));
+	public  String getGrigio() {
+		return GRIGIO;
+	}
+
+	public  String getGiallo() {
+		return GIALLO;
+	}
+
+	public  String getArancio() {
+		return ARANCIO;
+	}
+
+	public  String getVerde() {
+		return VERDE;
+	}
+
+	public  String getRosso() {
+		return ROSSO;
+	}
+
+	public  String getViola() {
+		return VIOLA;
+	}
+
+	public  String getVerdeScuro() {
+		return VERDE_SCURO;
+	}
+
+	public  String getRosa() {
+		return ROSA;
+	}
+
+	public  String getRosaScuro() {
+		return ROSA_SCURO;
+	}
+
+	public  String getAzzurro() {
+		return AZZURRO;
+	}
+
+	public  String getBlu() {
+		return BLU;
+	}
+
+	public  ArrayList<String> getColori() {
+		return colori;
+	}
+	
 	
 }

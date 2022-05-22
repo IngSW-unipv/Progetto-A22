@@ -21,8 +21,12 @@ public class PopUpController {
 		this.partitaStage = partitaStage;
 		this.initPowerUp();
 		this.initDevelopment();
+		this.initAll();
 	}
-
+    public void initAll() {
+    	this.initPowerUp();
+		this.initDevelopment();
+    }
 	public void initPowerUp(){
         popUpFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
             if(popUpFacade.getPopUpPowerup().getEnergy()>0) {

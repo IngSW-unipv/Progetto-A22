@@ -87,7 +87,7 @@ public class SignupController {
 			loginStage.show();
 		});
 	
-}
+	}
 	
 	public UserAccount getUserAccount() {
 		return userAccount;

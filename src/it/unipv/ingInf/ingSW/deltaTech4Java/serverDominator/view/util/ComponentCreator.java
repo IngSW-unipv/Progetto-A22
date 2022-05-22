@@ -3,6 +3,8 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
@@ -41,5 +43,21 @@ public class ComponentCreator {
 		lbl.autosize();
 		lbl.setFont(Font.font("Cambria", 22));
 		return lbl;
+	}
+	
+	public PasswordField passwordFieldCreator(String text) {
+		PasswordField p=new PasswordField();
+		p.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-text-fill: #000000");
+		p.setPrefWidth(250);
+		p.setPromptText(text);
+		return p;
+	}
+	
+	public TextField textFieldreator(String text) {
+		TextField p=new TextField();
+		p.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-text-fill: #000000");
+		p.setPrefWidth(250);
+		p.setPromptText(text);
+		return p;
 	}
 }

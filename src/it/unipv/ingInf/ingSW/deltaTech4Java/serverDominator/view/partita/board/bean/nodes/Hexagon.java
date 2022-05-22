@@ -45,8 +45,11 @@ public class Hexagon  {
 	}
 
 
+	/**
+	 * confronto tra oggetti di tipo esagono
+	 */
 	@Override
-    public boolean equals(Object obj) {  // confronto tra oggetti di tipo esagono
+    public boolean equals(Object obj) {  // 
         if (obj == null) {
             return false;
         }

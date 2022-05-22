@@ -30,6 +30,10 @@ public class BasicMap extends Map {
 		this.hexagon = hexagon;
 		drawMap();
 	}
+	
+	/**
+	 * genera la mappa, il tavolo di gioco con tutti gli esagoni 
+	 */
 	@Override
 	public void drawMap() {
 		for (HashMap.Entry<Hexagon, HexData> entry : getMapData().getData().entrySet()) {
@@ -41,7 +45,12 @@ public class BasicMap extends Map {
 			}
 		}
 	}
-
+	/**
+	 * Metodo che genera gli esagoni che rappresentano i nodi nel tavolo da gioco
+	 * @param points
+	 * @param colore
+	 * @param bordo
+	 */
 	public void drawHex(List<Point> points, String colore, Color bordo) {
 		double[] x = points.stream().mapToDouble(Point::getX).toArray();  //Point::getX prende tutte le x contenute in Point
 		double[] y = points.stream().mapToDouble(Point::getY).toArray();

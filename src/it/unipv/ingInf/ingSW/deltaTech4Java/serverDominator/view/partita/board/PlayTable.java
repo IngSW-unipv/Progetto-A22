@@ -28,6 +28,14 @@ public class PlayTable {
 		this.dimTable = dimensioni;
 	}
 	
+	/**
+	 * Genera la battlefield, la schermata vera e propria di gioco dove ci sono i nodi da conquistare,
+	 * il tavolo da gioco
+	 * @param dimensioni
+	 * @param mapData
+	 * @param ray
+	 * @return
+	 */
 	public ScrollPane getPlayTable(Pair<Integer, Integer> dimensioni, MapData mapData, int ray) {
 		this.mapData=mapData;
 		ScrollPane centerPane = new ScrollPane(){
@@ -119,6 +127,11 @@ public class PlayTable {
 
 	        return null;
 	    }
+	  
+	  /**
+	   * Restituisce dimensioni del tavolo da gioco
+	   * @return
+	   */
 	public Pair<Integer, Integer> getDimTable() {
 		return dimTable;
 	}

@@ -1,8 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
-
 /**
  * @author Luca Casto 
  * @version 1.0

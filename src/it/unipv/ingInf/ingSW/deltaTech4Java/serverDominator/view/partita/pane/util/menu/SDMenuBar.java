@@ -16,6 +16,11 @@ public class SDMenuBar {
 		items=new Hashtable<Menu, ArrayList<MenuItem>>();
 	}
 	
+	/**
+	 * aggiunge i componenti della menu bar
+	 * @param menuName
+	 * @param menuItems
+	 */
 	public void addItems(String menuName, String... menuItems) {
 		Menu menu=new Menu(menuName);
 		MenuItem mi;
@@ -44,6 +49,10 @@ public class SDMenuBar {
 		this.menuBar = menuBar;
 	}
 
+	/**
+	 * Restituisce la barra di menu
+	 * @return
+	 */
 	public MenuBar getMenuBar() {
 		return menuBar;
 	}

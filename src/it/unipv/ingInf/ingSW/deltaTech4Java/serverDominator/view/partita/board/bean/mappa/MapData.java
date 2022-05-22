@@ -38,10 +38,13 @@ public class MapData {
     	this.ray = ray;
     }
     
+    /**
+     * creazione delle coordinate per una matrice di tipo Nodo [i][j]
+     * @param nodi
+     */
     public MapData(Nodo[][] nodi){
         data = new HashMap<>();
 
-   // Creazione delle coordinate per una matrice di tipo Nodo[i][j]
    
         for (int r = 0; r < nodi[0].length; r++) { 							//nodi.length è il valore massimo di i
         																	// nodi[i].length è il valore massimo di j
@@ -52,6 +55,10 @@ public class MapData {
         }
     }
 
+    /**
+     * Restituisce le coordinate della matrice del tavolo di gioco
+     * @return
+     */
     public HashMap<Hexagon, HexData> getData() {
         return data;
     }
@@ -61,14 +68,24 @@ public class MapData {
     }
 
 
-    public Point hex_to_pixel(Hexagon h) {  			// metodo per calcolare il pixel corrispondente al centro di un determinato esagono
+    /**
+     *  metodo per calcolare il pixel corrispondente al centro di un determinato esagono
+     * @param h
+     * @return
+     */
+    public Point hex_to_pixel(Hexagon h) {  			
         Orientation M = layout.orientation;
         double x = (M.f0 * h.getX() + M.f1 * h.getY()) * layout.size.getX();
         double y = (M.f2 * h.getX() + M.f3 * h.getY()) * layout.size.getY();
         return new Point(x + layout.origin.getX(), y + layout.origin.getY());
     }
 
-    public Point hex_corner_offset(int corner) { // restituisce un punto 
+    /**
+     * restituisce un punto 
+     * @param corner
+     * @return
+     */
+    public Point hex_corner_offset(int corner) { // 
         Point size = layout.size;
         double angle = 2.0 * Math.PI * (layout.orientation.start_angle + corner) / 6; 	// angle = 1/6 angolo giro (2*pi/6)
         																				// start_angle = 0.5*2*pi/6 = 30°
@@ -86,7 +103,12 @@ public class MapData {
         return corners;
     }
 
-    public Hexagon pixelToHex(Point p){				// trasforma coordinate in pixel, in coordinate puntuali (25,25) -> (0,0)
+    /**
+     * trasforma coordinate in pixel, in coordinate puntuali (25,25) -> (0,0)
+     * @param p
+     * @return
+     */
+    public Hexagon pixelToHex(Point p){				// 
         Orientation M = layout.orientation;
 
         Point pt = new Point((p.getX() - layout.origin.getX()) / layout.size.getX(),
@@ -130,8 +152,13 @@ public class MapData {
         return add(a, directions.get(direction));
     }
 
-    // elenco degli esagoni vicini
+    // 
     
+    /**
+     * elenco degli esagoni vicini
+     * @param a
+     * @return
+     */
     public ArrayList<Hexagon> getNeighbors(Hexagon a){
         ArrayList<Hexagon> neighbors = new ArrayList<>();
         for(int x = 0; x < 6; x++){

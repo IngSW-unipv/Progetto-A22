@@ -12,6 +12,10 @@ public abstract class Map {
 		this.gc = gc;
 	}
 
+	/**
+	 * Restituisce la mappa, il tavolo di gioco
+	 * @return
+	 */
 	public MapData getMapData() {
 		return mapData;
 	}

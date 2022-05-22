@@ -4,12 +4,12 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.Logi
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class LoginTester extends Application{
+public class LoginTester extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		LoginView v=new LoginView();
+		LoginView v = new LoginView();
 		v.disponi();
-		v.getStage().show();
+		v.getStage().show(); 
 	}
 
 	public static void main(String[] args) {

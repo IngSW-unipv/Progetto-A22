@@ -19,6 +19,10 @@ public class ApriPopUpController {
 		this.initOpenAttaccoController();
 	}
 	
+	/**
+	 * Metodo per aprire il PopUp con le azioni per la partita di gioco 
+	 */
+	
 	public void initOpenPopUpActionController() {
 		
 		partitaStage.getActionPane().getActionMarketL().setOnAction(event -> {
@@ -36,6 +40,10 @@ public class ApriPopUpController {
 			popUpFacade.avviaDevelopment();
 		});
 	}
+	
+	/**
+	 * Metodo che carica il pop per scegliere il malware con cui attaccare il nodo scelto
+	 */
 	
 	public void initOpenAttaccoController() {
 		partitaStage.getStatsNodePane().getButtonAttacca().setOnAction(event->{

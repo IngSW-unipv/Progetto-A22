@@ -20,13 +20,6 @@ public class AvvioPartitaController {
 	private MainDefinitivo mainDefinitivo;
 	private UserAccount userAccount;
 	
-	public AvvioPartitaController getInstance() {    // posso solo usare l'oggetto esistente
-		
-		if (avvioPartitaC == null) 
-			avvioPartitaC = new AvvioPartitaController();
-		
-		return avvioPartitaC;
-	}
 	
 	
 	
@@ -42,19 +35,17 @@ public class AvvioPartitaController {
 	public void initAvvioPartita() {
 		
 		prebattagliaView.getAvvioPartita().setOnAction(actionEvent -> {
+			try {
+				mainDefinitivo.avvioPartita(prebattagliaView.getSelectedDifecolta(), partitaStage.getDimensioni().getValue(), userAccount.getUsername(), userAccount.getMny());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			if(prebattagliaView.getGroup().getSelectedToggle().getToggleGroup() != null) //facile choice? getSelectedDifficolta.getSelectedToggle, come richiamo il giusto radiobutton?
-				partitaStage.getDimensioni().getValue();
-				try {
-					mainDefinitivo.avvioPartita(10, 15, userAccount.getUsername(), userAccount.getMny());
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				controllerFacade.initEasyGame(null, mainDefinitivo, controllerFacade, userAccount, partitaStage);
 			
-		});
-		
-	}
+	});
 	
+
+	}
 }
+

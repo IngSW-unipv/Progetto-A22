@@ -40,6 +40,10 @@ public class TextBox {
 	}
 	
 	
+	/**
+	 * Metodo che genera la box in cui vengono visualizzati avvisi al giocatore
+	 * @param text
+	 */
 	
 	public void insertText(String text) {
 		

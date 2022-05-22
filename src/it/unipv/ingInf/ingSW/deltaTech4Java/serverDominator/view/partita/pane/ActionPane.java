@@ -49,6 +49,10 @@ public class ActionPane extends Pane implements IDrawable{
 		this.actionTitleL = actionTitleL;
 	}
 
+	/**
+	 * Restituisce pulsante che genera il popup di Market
+	 * @return
+	 */
 	public Button getActionMarketL() {
 		return actionMarketL;
 	}
@@ -56,6 +60,11 @@ public class ActionPane extends Pane implements IDrawable{
 	public void setActionMarketL(Button actionMarketL) {
 		this.actionMarketL = actionMarketL;
 	}
+	
+	/**
+	 * Restituisce il pulsante che genera il popup di potenziamento
+	 * @return
+	 */
 
 	public Button getPowerUpL() {
 		return powerUpL;
@@ -65,6 +74,10 @@ public class ActionPane extends Pane implements IDrawable{
 		this.powerUpL = powerUpL;
 	}
 
+	/**
+	 * Restituisce il pulsante che genera il popup di sviluppo
+	 * @return
+	 */
 	public Button getDevelop() {
 		return develop;
 	}
@@ -77,6 +90,9 @@ public class ActionPane extends Pane implements IDrawable{
 		return STANDARD_PADDING;
 	}
 
+	/**
+	 * Metodo che genera la zona con i pulsanti per generare i popup di azione
+	 */
 	@Override
 	public void drow() {
 

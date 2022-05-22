@@ -34,6 +34,9 @@ public class ClassificaPane extends GridPane {
 		dispone();
 	}
 	
+	/**
+	 * Metodo che genera la zona della view con la classifica dei giocatori
+	 */
 	public void dispone() {
 		List<Giocatore> gs=classifica.getLista();
 	

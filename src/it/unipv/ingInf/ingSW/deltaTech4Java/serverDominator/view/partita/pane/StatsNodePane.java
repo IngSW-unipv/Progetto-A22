@@ -36,6 +36,11 @@ public class StatsNodePane {
 	private Label cpuLvl = new Label("CPU Level");
 	private Button buttonAttacca;
 	private Pane statePane;
+	
+	/**
+	 * Metodo che genera la zone dove sono visibili i dettagli del nodo selezionato
+	 * @return
+	 */
 	public Pane getSnPane() {
 
 		Label titleL = this.titleL;
@@ -130,6 +135,10 @@ public class StatsNodePane {
 		this.titleL = titleL;
 	}
 
+	/**
+	 * Restituisce nome del possessore del nodo selezionato
+	 * @return
+	 */
 	public Label getOwner() {
 		return owner;
 	}
@@ -138,6 +147,10 @@ public class StatsNodePane {
 		this.owner = owner;
 	}
 
+	/**
+	 * Restituisce dati di energia del nodo selezionato
+	 * @return
+	 */
 	public Label getEnergy() {
 		return energy;
 	}
@@ -146,6 +159,10 @@ public class StatsNodePane {
 		this.energy = energy;
 	}
 
+	/**
+	 * Restituisce dati del firewall del nodo selezionato
+	 * @return
+	 */
 	public Label getFwLvl() {
 		return fwLvl;
 	}
@@ -154,6 +171,10 @@ public class StatsNodePane {
 		this.fwLvl = fwLvl;
 	}
 
+	/**
+	 * Restituisce dati della ram del nodo selezionato
+	 * @return
+	 */
 	public Label getRamLvl() {
 		return ramLvl;
 	}
@@ -162,6 +183,10 @@ public class StatsNodePane {
 		this.ramLvl = ramLvl;
 	}
 
+	/**
+	 * Restituisce dati della cpu del nodo selezionato
+	 * @return
+	 */
 	public Label getCpuLvl() {
 		return cpuLvl;
 	}
@@ -170,6 +195,10 @@ public class StatsNodePane {
 		this.cpuLvl = cpuLvl;
 	}
 
+	/**
+	 * Restituisce pulsante per attaccare il nodo selezionato
+	 * @return
+	 */
 	public Button getButtonAttacca() {
 		return buttonAttacca;
 	}

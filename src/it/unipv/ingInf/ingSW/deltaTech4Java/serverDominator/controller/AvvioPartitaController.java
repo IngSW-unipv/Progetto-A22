@@ -14,9 +14,18 @@ public class AvvioPartitaController {
 	private MainDefinitivo mainDefinitivo;
 	private UserAccount userAccount;
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public AvvioPartitaController(PrebattagliaView prebattagliaView, UserAccount userAccount) {
-		super();
-		this.prebattagliaView = prebattagliaView;
+
 		this.userAccount = userAccount;
 	}
 
@@ -89,5 +98,7 @@ public class AvvioPartitaController {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-	
+
+
 }
+

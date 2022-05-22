@@ -13,6 +13,9 @@ public class ClassificaObserver implements PropertyChangeListener {
 		this.classificaPane=classificaPane;
 	}
 
+	/**
+	 * Permette agli altri oggetti di vedere gli update della classifica
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		classificaPane.dispone();

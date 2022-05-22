@@ -44,6 +44,10 @@ public class Powerup {
 		this.NodoUtente=NodoUtente;
 	}
 	
+	/**
+	 * Interfaccia pop up per scegliere la risorsa da potenziare
+	 */
+	
 	public void powerUp() {
 		
 		stage = new Stage();

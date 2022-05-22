@@ -13,12 +13,20 @@ public class HexInfoMap extends Map {
 		super(mapData, gc);
 	}
 
+	/**
+	 * genera la mappa, il tavolo di gioco con tutti gli esagoni
+	 */
 	public void drawMap() {
 		for (HashMap.Entry<Hexagon, HexData> entry : getMapData().getData().entrySet()) {
 			drawHex(entry.getKey(), getMapData().hex_to_pixel(entry.getKey()));
 		}
 	}
 
+	/**
+	 * Metodo per la struttura degli esagoni
+	 * @param a
+	 * @param center
+	 */
 	public void drawHex(Hexagon a, Point center) {
 		getGc().setFill(Color.BLACK);
 		getGc().fillText("" + a.getX(), center.getX() - 14, center.getY() - 6);

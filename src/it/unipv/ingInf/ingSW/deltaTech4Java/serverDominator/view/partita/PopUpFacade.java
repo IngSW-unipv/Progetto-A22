@@ -38,6 +38,10 @@ public class PopUpFacade {
 		this.mkt=new Mercato();
 	}
 
+	/**
+	 * Metodo dentro il Pop up di azione, inizializza la scelta del malware per attaccare il nodo selezionato
+	 * @param baseUtente
+	 */
 	public void avviaSelectMalware(Base baseUtente) {
 		popUpSelectmalware.setBaseUtente(baseUtente);
 		this.baseUtente=baseUtente;
@@ -45,26 +49,47 @@ public class PopUpFacade {
 		
 	}
 
+	/**
+	 * Metodo dentro il pop up di azione, inizializza lo produzione di software
+	 * @param baseUtente
+	 */
 	public void avviaDevelopment(Nodo baseUtente) {
 		popUpDevelopment.setNodoUtente(baseUtente);;
 		popUpDevelopment.development();
 	}
+	
+	/**
+	 * Metodo dentro il pop up di azione, inizializza il potenziamento delle risorse
+	 * @param baseUtente
+	 */
 	
 	public void avviaPowerUp(Nodo baseUtente) {
 		popUpPowerup.setNodoUtente(baseUtente);
 		popUpPowerup.powerUp();	
 	}
 	
+	/**
+	 * Metodo che inizializza l'interfaccia di mercato
+	 * @param baseUtente
+	 */
+	
 	public void avviaMarket(Base baseUtente) {
 		popUpMarket.setBaseUtente(baseUtente);
 		popUpMarket.market();
 	}
 	
+	/**
+	 * Metodo per la selezione del malware di attacco
+	 */
 	
 	public void avviaSelectMalware() {
 		popUpSelectmalware.selectMalware();
 		
 	}
+	
+	/**
+	 * Metodo per la
+	 */
 
 	public void avviaDevelopment() {
 		popUpDevelopment.development();

@@ -41,14 +41,13 @@ public class Cloud extends Nodo {
 	public void inizializza_risorse() {
 		/* NB: 0=cpu, 1=ram, 2=energia,3=firewall*/	
 		
-		int casual;
-		risorse[0]=new Cpu(casual=(int)(Math.random()*2));
+		risorse[0]=new Cpu((int)(Math.random()*2));
 		super.setLvl_cpu(risorse[0].getLivello_risorsa());
-		risorse[1]=new Ram(casual=(int)(Math.random()*2));
+		risorse[1]=new Ram((int)(Math.random()*2));
 		super.setLvl_ram(risorse[1].getLivello_risorsa());
 		risorse[2]=new Energia(1);
 		super.setE_disponibile(risorse[2].getStat1());
-		risorse[3]=new Firewall(casual=(int)(Math.random()*2));
+		risorse[3]=new Firewall((int)(Math.random()*2));
 		super.setLvl_firewall(risorse[3].getLivello_risorsa());
 	}
 

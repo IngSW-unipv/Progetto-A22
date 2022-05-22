@@ -44,6 +44,10 @@ public class LogoutController {
 	}
 
 
+	/**
+	 * Restituisce la view della lobby
+	 * @return
+	 */
 	public PrebattagliaView getPrebattagliaView() {
 		return prebattagliaView;
 	}
@@ -66,7 +70,10 @@ public class LogoutController {
 		this.persistenceFacade = persistenceFacade;
 	}
 
-
+	/**
+	 * Restituisce la view della login
+	 * @return
+	 */
 
 	public LoginView getLoginStage() {
 		return loginStage;

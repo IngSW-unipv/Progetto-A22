@@ -41,6 +41,10 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		return this;
 	}
 	
+	/**
+	 * Metodo che genera la zona della view della partita con i dati aggiornati della base selezionata dal giocatore 
+	 * con i pulsanti per scegliere quale base posseduta dal giocatore visualizzare
+	 */
 	public void make() {
 
 		VBox yb = new VBox();
@@ -108,6 +112,10 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		yb.getChildren().addAll(ybTitle, hBg,hb);
 		super.getChildren().add(yb);
 	}
+	/**
+	 * Restituisce nodo base
+	 * @return
+	 */
 	public Base getNodeBase() {
 		return nodeBase;
 	}
@@ -124,6 +132,10 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		this.buttonTitle = buttonTitle;
 	}
 
+	/**
+	 * Restituisce il pulsante per passare alla base precedente a quella attualmente selezionata
+	 * @return
+	 */
 	public Button getButtonBack() {
 		return buttonBack;
 	}
@@ -131,6 +143,10 @@ public class BaseStatsPane extends Pane implements IDrawable {
 	public void setButtonBack(Button buttonBack) {
 		this.buttonBack = buttonBack;
 	}
+	/**
+	 * Restituisce il pulsante per passare alla prossima base a quella attualmente selezionata
+	 * @return
+	 */
 
 	public Button getButtonNext() {
 		return buttonNext;

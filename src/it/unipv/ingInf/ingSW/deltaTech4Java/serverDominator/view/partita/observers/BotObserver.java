@@ -17,6 +17,9 @@ public class BotObserver implements PropertyChangeListener {
 		this.partitaStage = partitaStage;
 	}
 
+	/**
+	 * Permette agli altri oggetti di vedere gli update dello stato del bot
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if(evt.getNewValue() instanceof Coordinate && evt.getOldValue() instanceof Coordinate ) {

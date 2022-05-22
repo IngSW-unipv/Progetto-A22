@@ -41,13 +41,18 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	}
 
 
-
+	/**
+	 * Permette agli altri oggetti di vedere se lo status della partita è finito
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		this.finePartita();
 		
 	}
 	
+	/**
+	 * Metodo che conclude la partita attuale
+	 */
 	public void finePartita() {
 		try {
 			this.mainDefinitivoModello.stopBot();

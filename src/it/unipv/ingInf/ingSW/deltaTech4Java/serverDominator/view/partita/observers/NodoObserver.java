@@ -13,6 +13,9 @@ public class NodoObserver implements PropertyChangeListener {
 		this.partitaStage = partitaStage;
 	}
 
+	/**
+	 * Permette agli altri oggetti di vedere se ci sono stati aggiornamenti al nodo scelto
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		partitaStage.drowMappa();

@@ -119,7 +119,12 @@ public class ProgressBarConteiner extends Pane{
 		return battaglie;
 	}
 
-//aggiungere una battaglia (titolo, durata) dentro alla Lista 
+	/**
+	 * Aggiunge una battaglia(titolo, durata) dentro alla lista
+	 * @param battleTitle
+	 * @param durata
+	 * @param progressStyle
+	 */
 	
 	public void addElement(String battleTitle, long durata,String progressStyle) {
 		if (this.battles == null)
@@ -130,6 +135,8 @@ public class ProgressBarConteiner extends Pane{
 		Collections.sort(this.battles);
 		//disponiBattaglie();
 	}
+	
+	
 
 	public HBox createElement(String battleTitle, long durata) {
 		
@@ -153,6 +160,13 @@ public class ProgressBarConteiner extends Pane{
 		return oneB;
 	}
 	
+	/**
+	 * Visualizza in una progressbar la durata di un evento nella view
+	 * @param progress
+	 * @param durata
+	 * @return
+	 */
+	
 	public double elementProgress(double progress, double durata) {
 
 		double timeScale = 1 / durata;
@@ -168,7 +182,10 @@ public class ProgressBarConteiner extends Pane{
 		return progress;
 	}
 
-// dispone battaglie dentro alla griglia
+
+	/**
+	 * Dispone le battaglie all'interno della griglia
+	 */
 	
 	private void disponiTestata() {
 		

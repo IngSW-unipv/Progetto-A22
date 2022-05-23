@@ -1,5 +1,8 @@
 package sreverDominator.view;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller.PartitaController;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
 import javafx.application.Application;
@@ -22,7 +25,9 @@ public class PrebattagliaTester extends Application {
 		
 		menu.getItems().addAll(menuItem);
 		p.getMenu().getMenus().addAll(menu);
-		
+		if(PartitaController.class.isAssignableFrom(new Utente("",5).getClass()))
+			System.out.println("si");
+		else System.err.println("no");
 	}
 
 	public static void main(String[] args) {

@@ -16,6 +16,8 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observe
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 
 public class MainController {
 
@@ -31,12 +33,10 @@ public class MainController {
 	private UserAccount userAccount;
 		
 	public static void main(String[] args) {
-		//prova se ricordavo bene o no
 		if(Giocatore.class.isAssignableFrom(new Utente("",5).getClass()))
 			System.out.println("si");
 		else 
 			System.err.println("no");
-		
 		if(PartitaController.class.isAssignableFrom(new Utente("",5).getClass()))
 			System.out.println("si");
 		else 
@@ -48,10 +48,11 @@ public class MainController {
 	}
 
 	public void inizializzazione() {
-		loginView= new LoginView();
-		signupView = new SignupView();
-		login= new LoginController(loginView, signupView);
-		
+		this.loginView= new LoginView();
+		this.signupView = new SignupView();
+		this.login= new LoginController(loginView, signupView);
+		this.loginView.getStage().show();
+		this.initLogin();
 		
 	}
 		
@@ -66,13 +67,19 @@ public class MainController {
 				lobbyView.setUserAccount(userAccount);
 				loginView.getStage().close();
 				lobbyView= new LobbyView(userAccount);
-				
+				initLobbyController();
 				lobbyView.show();
 			}
 			
 		});
 		
 	}
+	
+	public void initLobbyController() {
+		this.initAvvioPartita();
+		this.initLogoutController();
+	}
+	
 	
 	public void initAvvioPartita() {
 		//quando utente dopo aver scelto difficolta clicca su avvio partita
@@ -103,6 +110,19 @@ public class MainController {
 		
 	}
 	
+	public void initLogoutController() {
+		Menu menu=new Menu("SdMenu");
+		MenuItem menuItem=new MenuItem("Logout");
+		menuItem.setOnAction(event->{
+			PersistenceFacade.getInstance().persistenceOff();
+			lobbyView.close();
+			loginView.getStage().show();
+			
+		});
+		menu.getItems().addAll(menuItem);
+		lobbyView.getMenu().getMenus().addAll(menu);
+	}
+
 	private void initObservers(MainDefinitivo main,FinePartitaObserver finePartita,BotObserver bo,NodoObserver o ) {
 		main.getGiocatori()[1].getChanges().addPropertyChangeListener(Giocatore.GIOCATORE_PROP,finePartita);
 		for(int i=2;i<main.getGiocatori().length;i++) {

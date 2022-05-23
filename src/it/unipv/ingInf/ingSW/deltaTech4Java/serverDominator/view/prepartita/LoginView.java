@@ -42,20 +42,21 @@ public class LoginView {
 	private Stage loginStage;
 
 	public LoginView() {
-		titleHolderText = new Label("Server Dominator");
-		titleHolderText.setStyle(" -fx-text-fill: #ffff00; -fx-font-weight: bold");
-		subTitleHolderText = new Label("ACCESSO");
-		subTitleHolderText.setStyle(" -fx-text-fill: #ffff00");
-		errorMessageLabel = new Label("");
-		errorMessageLabel.setStyle(" -fx-text-fill: #ff0000");
-		usernameText = new Label("USERNAME");
-		passwordText = new Label("PASSWORD");
-		loginButton = ComponentCreator.getIstance().createButton("ACCEDI", Pos.CENTER);
-		signupButton = new Button("Sign Up", null);
-		signupButton.setStyle("-fx-text-fill: #0606B8");
-		usernameTextField = ComponentCreator.getIstance().textFieldreator("Username");
-		passwordTextField = ComponentCreator.getIstance().passwordFieldCreator("password");
-		loginStage = new Stage();
+		this.titleHolderText = new Label("Server Dominator");
+		this.titleHolderText.setStyle(" -fx-text-fill: #ffff00; -fx-font-weight: bold");
+		this.subTitleHolderText = new Label("ACCESSO");
+		this.subTitleHolderText.setStyle(" -fx-text-fill: #ffff00");
+		this.errorMessageLabel = new Label("");
+		this.errorMessageLabel.setStyle(" -fx-text-fill: #ff0000");
+		this.usernameText = new Label("USERNAME");
+		this.passwordText = new Label("PASSWORD");
+		this.loginButton = ComponentCreator.getIstance().createButton("ACCEDI", Pos.CENTER);
+		this.signupButton = new Button("Sign Up", null);
+		this.signupButton.setStyle("-fx-text-fill: #0606B8");
+		this.usernameTextField = ComponentCreator.getIstance().textFieldreator("Username");
+		this.passwordTextField = ComponentCreator.getIstance().passwordFieldCreator("password");
+		this.loginStage = new Stage();
+		this.disponi();
 	}
 
 	public void disponi() {

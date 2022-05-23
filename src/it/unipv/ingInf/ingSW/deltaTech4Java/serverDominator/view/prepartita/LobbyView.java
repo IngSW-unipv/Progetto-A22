@@ -100,7 +100,6 @@ public class LobbyView extends Stage implements IDrawable {
 		sp.setFitToWidth(true);
 		sp.setFitToHeight(true);
 		super.setScene(new Scene(sp));
-		super.show();
 		vbox.setBackground(new Background(new BackgroundFill(Color.web("#6BC723"), new CornerRadii(10), null)));
 		vbox.setAlignment(Pos.TOP_CENTER);
 	}

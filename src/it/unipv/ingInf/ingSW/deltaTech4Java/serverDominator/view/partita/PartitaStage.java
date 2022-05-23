@@ -155,6 +155,7 @@ public abstract class PartitaStage extends Stage{
 		this.initPlayTableListener();
 		this.fineProgress.addElement("", durataPartitaSeconds*1000, ProgressStyle.BLACK_STYLE);
 		this.fineProgress.setTitle("FINE PARTITA");
+		this.disponiPannelli();
 	}
 
 	public PartitaStage(MainDefinitivo main,Base baseUtente,int durataPartitaSeconds) {

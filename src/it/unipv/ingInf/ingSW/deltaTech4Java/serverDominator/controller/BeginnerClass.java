@@ -1,5 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
@@ -11,13 +12,15 @@ public class BeginnerClass {
 	SignupView signupView;
 	PrebattagliaView prebattagliaView;
 	UserAccount userAccount;
+	Base b;
 	
 	
 	
-	public BeginnerClass(LoginView loginView, SignupView signupView) {
+	public BeginnerClass(LoginView loginView, SignupView signupView, Base b) {
 		super();
 		this.loginView = loginView;
 		this.signupView = signupView;
+		this.b = b;
 		this.initAll();
 	}
 	public void initAll() {
@@ -37,8 +40,9 @@ public class BeginnerClass {
 			}else if(userAccount!= null) {//us !=  null --> LoggedIn View
 				prebattagliaView.setUserAccount(userAccount);
 				loginView.getStage().close();
-				//TODO: istanziare prebattaglia e visualizzarla
-				prebattagliaView.show();
+				//TODO: istanziare prebattaglia e visualizzarla. PrebattagliaView lobby = new Prebattaglia(base)
+				PrebattagliaView lobby = new PrebattagliaView(userAccount);
+				lobby.show();
 			}
 			
 		});

@@ -20,7 +20,7 @@ public class Bot extends Giocatore{
 	private Coordinate base;
 	private Timer time;
 	private Battaglia battle;
-	private final int T_UNITARIO=10;
+	private final int T_UNITARIO=5;
 	private int t_timer;
 	private int cont;
 	private Coordinate[] confini;

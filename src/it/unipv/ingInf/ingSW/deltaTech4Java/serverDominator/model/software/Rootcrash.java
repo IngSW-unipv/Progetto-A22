@@ -5,12 +5,12 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
  * @versione 1.0
  * @since 1.0
  * estensione della classe astratta software.
- * la classe Rootcrash è pensata come unità speciale del gioco
+ * la classe Rootcrash ï¿½ pensata come unitï¿½ speciale del gioco
  * server dominator, per ridurre il livello del firewall avversario
- * Il valore offensivo è indicato come val_atk è 3 volte
- * il valore del livello, questo valore in fase di battaglia sarà 
+ * Il valore offensivo ï¿½ indicato come val_atk ï¿½ 3 volte
+ * il valore del livello, questo valore in fase di battaglia sarï¿½ 
  * confrontato con il livello del firewall del bersaglio
- * Invece il valore difensivo val_def è 0.
+ * Invece il valore difensivo val_def ï¿½ 0.
  */
 public class Rootcrash extends Software {
 	private int val_def;
@@ -25,7 +25,7 @@ public class Rootcrash extends Software {
 		}
 		val_atk= 3*super.getLivello();
 		val_def= 0;
-		super.setTemp_richiesto(40);
+		super.setTemp_richiesto(4);
 		super.setQuantita(quantita);
 	}
 //--------getter and setter-------//	

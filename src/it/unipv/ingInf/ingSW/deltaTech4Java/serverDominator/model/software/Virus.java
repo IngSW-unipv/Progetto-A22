@@ -5,10 +5,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
  * @versione 1.0
  * @since 1.0
  * estensione della classe astratta software.
- * la classe virus è pensata come unità offensiva del gioco
- * server dominator. Il valore offensivo è indicato come val_atk ed è 
+ * la classe virus ï¿½ pensata come unitï¿½ offensiva del gioco
+ * server dominator. Il valore offensivo ï¿½ indicato come val_atk ed ï¿½ 
  * uguale al valore attribuito al livello.
- * Invece il valore difensivo val_def è 0.
+ * Invece il valore difensivo val_def ï¿½ 0.
  */
 public class Virus extends Software{
 	private int val_def;
@@ -19,7 +19,7 @@ public class Virus extends Software{
 		super(livello);
 		super.setMax_lvl(5);
 		super.setNome("Virus");
-		super.setTemp_richiesto(20);
+		super.setTemp_richiesto(2);
 		val_def=0;
 		val_atk= super.getLivello();
 		super.setQuantita(quantita);

@@ -430,6 +430,10 @@ public class MainDefinitivo extends Thread{
 	public void setClassifica(Classifica classifica) {
 		this.classifica = classifica;
 	}
-	
+
+	public Mercato getMercato() {
+		return mercato;
+	}
+
 	
 }

@@ -32,7 +32,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class PrebattagliaView extends Stage implements IDrawable {
+public class LobbyView extends Stage implements IDrawable {
 	private UserAccount userAccount;
 	private int[] selectedDifecolta=new int[2];
 	private Button avvioPartita;
@@ -47,7 +47,7 @@ public class PrebattagliaView extends Stage implements IDrawable {
 	private Label titolo;
 	
 	
-	public PrebattagliaView(UserAccount userAccount) {
+	public LobbyView(UserAccount userAccount) {
 		super();
 		super.setMinHeight(200);
 		super.setMinWidth(300);

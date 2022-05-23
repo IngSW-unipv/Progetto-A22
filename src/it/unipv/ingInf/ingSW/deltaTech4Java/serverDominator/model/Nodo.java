@@ -171,6 +171,11 @@ public abstract class Nodo implements INodo{
 		return Objects.equals(possessore.getNome(), other.possessore.getNome());
 	}
 	
+	public PropertyChangeSupport getChanges() {
+		return changes;
+	}
+
+
 /**getter astratto per restituire i valori dei software delle classi specializzate*/
 	public abstract Software[] getStats_software_creati();
 	public abstract int getTempoRisorsa(String nome);

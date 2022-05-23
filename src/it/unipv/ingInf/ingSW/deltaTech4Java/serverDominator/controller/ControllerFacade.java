@@ -13,7 +13,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observe
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.NodoObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.PrebattagliaView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
 import sreverDominator.view.Main;
 
@@ -23,7 +23,7 @@ import sreverDominator.view.Main;
  * @version 1.0
  * @see LoginView
  * @see SignupView
- * @see PrebattagliaView
+ * @see LobbyView
  * @see PersistenceFacade
  * @see MainDefinitivo
  * @see Main 
@@ -41,7 +41,7 @@ public class ControllerFacade {
 	private LoginController loginController;
 	private SignupController signupController;
 	private PrebattagliaController prebattagliaController;
-	private PrebattagliaView prebattagliaView;
+	private LobbyView prebattagliaView;
 	private PopUpFacade popupView;
 	private PopUpController popupController;
 	
@@ -146,7 +146,7 @@ public class ControllerFacade {
 		this.loginController = loginController;
 	}
 	
-	public void setPrebattagliaView(PrebattagliaView prebattagliaView) {
+	public void setPrebattagliaView(LobbyView prebattagliaView) {
 		this.prebattagliaView = prebattagliaView;
 	}
 	
@@ -202,7 +202,7 @@ public class ControllerFacade {
 		this.nodoObserver = nodoObserver;
 	}
 	
-	public PrebattagliaView getPrebattagliaView() {
+	public LobbyView getPrebattagliaView() {
 		return prebattagliaView;
 	}
 

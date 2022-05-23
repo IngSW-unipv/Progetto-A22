@@ -163,6 +163,10 @@ public class Bot extends Giocatore{
 	public int getT_timer() {
 		return t_timer;
 	}
+
+	public PropertyChangeSupport getChanges() {
+		return changes;
+	}
 	
 	
 }

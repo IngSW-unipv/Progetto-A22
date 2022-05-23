@@ -200,5 +200,10 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		else
 			System.err.println("err");
 	}
+
+	public PropertyChangeSupport getChanges() {
+		return changes;
+	}
+
 	
 }

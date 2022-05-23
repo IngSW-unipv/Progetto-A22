@@ -31,9 +31,22 @@ public class MainController {
 	private UserAccount userAccount;
 		
 	public static void main(String[] args) {
+		//prova se ricordavo bene o no
+		if(Giocatore.class.isAssignableFrom(new Utente("",5).getClass()))
+			System.out.println("si");
+		else 
+			System.err.println("no");
 		
+		if(PartitaController.class.isAssignableFrom(new Utente("",5).getClass()))
+			System.out.println("si");
+		else 
+			System.err.println("no");
 	}
 	
+	public MainController() {
+		super();
+	}
+
 	public void inizializzazione() {
 		loginView= new LoginView();
 		signupView = new SignupView();

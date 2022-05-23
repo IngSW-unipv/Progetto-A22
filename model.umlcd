@@ -2622,6 +2622,24 @@
   <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_tGIPMNnrEeyLEqkuLu3S6A" targetItem="_JqSD0NkREeyLEqkuLu3S6A" sourceItem="_tGGaANnrEeyLEqkuLu3S6A"/>
   <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_tGNHsNnrEeyLEqkuLu3S6A" targetItem="_JqSD1dkREeyLEqkuLu3S6A" sourceItem="_tGKEYNnrEeyLEqkuLu3S6A"/>
   <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_tGQLANnrEeyLEqkuLu3S6A" targetItem="_OodOANkREeyLEqkuLu3S6A" sourceItem="_tGOV0NnrEeyLEqkuLu3S6A"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_b9HHsNoKEeyLEqkuLu3S6A" source="_JqjJedkREeyLEqkuLu3S6A">
+    <modelElement href="model.uml#_b89WsNoKEeyLEqkuLu3S6A"/>
+    <stereotypes xmi:id="_b9HHsdoKEeyLEqkuLu3S6A" name="Reference">
+      <modelElement href="model.uml#_b899wNoKEeyLEqkuLu3S6A"/>
+    </stereotypes>
+    <nameVisual xmi:id="_b9HHstoKEeyLEqkuLu3S6A" text=""/>
+    <sourceRole xmi:id="_b9HHs9oKEeyLEqkuLu3S6A" aggregationKind="NONE" name="">
+      <modelElement href="model.uml#_b89WsdoKEeyLEqkuLu3S6A"/>
+      <visibility xmi:id="_b9HHtNoKEeyLEqkuLu3S6A" label="+"/>
+      <cardinality xmi:id="_b9HHtdoKEeyLEqkuLu3S6A" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_b9HHttoKEeyLEqkuLu3S6A" aggregationKind="NONE" name="subTitleHolderText" navigable="true">
+      <modelElement href="model.uml#_b85sUNoKEeyLEqkuLu3S6A"/>
+      <stereotypes xmi:id="_b_9nYNoKEeyLEqkuLu3S6A" name="LegacyStyledElement"/>
+      <visibility xmi:id="_b9HHt9oKEeyLEqkuLu3S6A" label="-"/>
+      <cardinality xmi:id="_b9HHuNoKEeyLEqkuLu3S6A" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
   <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_4Mn6ANkQEeyLEqkuLu3S6A" sourceConnectionVisual="_4MpIINkQEeyLEqkuLu3S6A" text="&#xD;&#xA;@author para&#xD;&#xA; *" item="_4M2jgNkQEeyLEqkuLu3S6A">
     <modelElement href="model.uml#_Ne1v4NkQEeyLEqkuLu3S6A"/>
   </nodes>
@@ -3386,7 +3404,7 @@
       </parameters>
     </operations>
   </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_JqjJedkREeyLEqkuLu3S6A" containment="_JqWVINkREeyLEqkuLu3S6A" name="LoginView" package="_C1rjYNkREeyLEqkuLu3S6A" associationsOut="_JqT44NkREeyLEqkuLu3S6A _JqUf8NkREeyLEqkuLu3S6A _JqUf8dkREeyLEqkuLu3S6A _JqVHANkREeyLEqkuLu3S6A _JqVHAdkREeyLEqkuLu3S6A _JqVHAtkREeyLEqkuLu3S6A _JqVHA9kREeyLEqkuLu3S6A _JqgGINkREeyLEqkuLu3S6A _JqgtMNkREeyLEqkuLu3S6A">
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_JqjJedkREeyLEqkuLu3S6A" containment="_JqWVINkREeyLEqkuLu3S6A" name="LoginView" package="_C1rjYNkREeyLEqkuLu3S6A" associationsOut="_JqT44NkREeyLEqkuLu3S6A _JqUf8NkREeyLEqkuLu3S6A _JqUf8dkREeyLEqkuLu3S6A _JqVHANkREeyLEqkuLu3S6A _JqVHAdkREeyLEqkuLu3S6A _JqVHAtkREeyLEqkuLu3S6A _JqVHA9kREeyLEqkuLu3S6A _JqgGINkREeyLEqkuLu3S6A _JqgtMNkREeyLEqkuLu3S6A _b9HHsNoKEeyLEqkuLu3S6A">
     <modelElement href="model.uml#_NSTIsdkQEeyLEqkuLu3S6A"/>
     <visualProperties xmi:id="_JqjJetkREeyLEqkuLu3S6A" position="-2283.0,58.0" size="-1.0,-1.0"/>
     <visibility xmi:id="_JqjJe9kREeyLEqkuLu3S6A" label="+"/>
@@ -3469,6 +3487,17 @@
       <cardinality xmi:id="_JqjJpdkREeyLEqkuLu3S6A" label="1" max="1" min="1"/>
       <type xmi:id="_JqjJptkREeyLEqkuLu3S6A" name="Stage">
         <modelElement href="model.uml#_NRxkQNkQEeyLEqkuLu3S6A"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_b9AaANoKEeyLEqkuLu3S6A" name="subTitleHolderText">
+      <modelElement href="model.uml#_b85sUNoKEeyLEqkuLu3S6A"/>
+      <stereotypes xmi:id="_b9AaAdoKEeyLEqkuLu3S6A" name="LegacyStyledElement">
+        <modelElement href="model.uml#_b86TYNoKEeyLEqkuLu3S6A"/>
+      </stereotypes>
+      <visibility xmi:id="_b9AaAtoKEeyLEqkuLu3S6A" label="-"/>
+      <cardinality xmi:id="_b9AaA9oKEeyLEqkuLu3S6A" label="1" max="1" min="1"/>
+      <type xmi:id="_b9AaBNoKEeyLEqkuLu3S6A" name="Label">
+        <modelElement href="model.uml#_P5E9stkQEeyLEqkuLu3S6A"/>
       </type>
     </attributes>
     <operations xmi:id="_JqjJrNkREeyLEqkuLu3S6A" name="getTitleHolderTextHolderText">

@@ -165,7 +165,7 @@ public class MappaDefinitiva{
 	 * @return
 	 * nodo base, da cui parte l'attacco
 	 */
-	public Base trovaBase( Giocatore player) {
+	public Nodo trovaBase( Giocatore player) {
 		
 			int i;
 			int x,y;
@@ -182,7 +182,7 @@ public class MappaDefinitiva{
 					} 
 				}
 			
-			return (Base)map[x][y];
+			return map[x][y];
 		}
 	
 	/**controlla se due nodi sono prossimi ossia confinanti, date le coordinate

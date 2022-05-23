@@ -22,7 +22,7 @@ public class Battaglia extends Thread{
 	private String report;
 	private Nodo partenza;
 		
-	public Battaglia(Base attaccante, Nodo difensore, int t_timer) {
+	public Battaglia(Nodo attaccante, Nodo difensore, int t_timer) {
 		this.attaccante=attaccante;
 		this.difensore=difensore;
 		this.t_timer= t_timer;

@@ -102,7 +102,7 @@ public class Cloud extends Nodo {
 	}
 	/** ritorna valore intero che rappresenta il tempo di attesa per il potenziamento della risorsa selezionata
 	 * @param nome
-	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Firewall)
+	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud ï¿½ disponibile solo Firewall)
 	 */
 	public int getTempoRisorsa(String nome) {
 		int tempo=-1;
@@ -116,7 +116,7 @@ public class Cloud extends Nodo {
 	
 	/** ritorna valore intero che rappresenta il tempo di attesa per la creazione dei software selezionata
 	 * @param nome
-	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud è disponibile solo Antivirus)
+	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud ï¿½ disponibile solo Antivirus)
 	 */
 	public int getTempoSoftware(String nome) {
 		int tempo=-1;
@@ -159,7 +159,11 @@ public class Cloud extends Nodo {
 	public Software[] getStats_software_creati() {
 		return stats_software_creati;
 	}
-	
+		
+	public Risorse[] getRisorse() {
+		return risorse;
+	}
+
 	public int getQnt_antivirus() {
 		return super.getSoftware_disponibile();
 	}

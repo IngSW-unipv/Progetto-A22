@@ -17,7 +17,13 @@ public class Partita extends PartitaStage {
 		this.mainDefinitivo=main;
 		this.initDrowableFinePartita();
 	}
-
+	
+	public Partita(MainDefinitivo main, Base baseUtente, int durataPartitaSeconds) {
+		super(main, baseUtente, durataPartitaSeconds);
+		this.drawable=fineObserver;
+		this.mainDefinitivo=main;
+		
+	}
 	@Override
 	public void doOnClic() {
 		boolean samePlayer = this.getSelectedBase().getPossessore().getNome().equals(this.getSelectedNode().getPossessore().getNome());
@@ -59,6 +65,7 @@ public class Partita extends PartitaStage {
 
 	public void setFineObserver(FinePartitaObserver fineObserver) {
 		this.fineObserver = fineObserver;
+		initDrowableFinePartita();
 	}
 
 	public MainDefinitivo getMainDefinitivo() {

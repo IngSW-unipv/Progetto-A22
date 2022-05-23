@@ -59,7 +59,7 @@ public class SignupController {
 		signupView.getSignupButtonLegit().setOnAction(ActionEvent ->{
 			
 			//userAccount=new UserAccount(signupView.getUsernameTextFieldSignup().getText(), signupView.getPasswordTextFieldSignup().getText());
-			boolean us = persistenceFacade.getInstance().insertUserAccount(new UserAccount(signupView.getUsernameTextFieldSignup().getText(),  //togliere static a getInstance? 
+			boolean us = PersistenceFacade.getInstance().insertUserAccount(new UserAccount(signupView.getUsernameTextFieldSignup().getText(),  //togliere static a getInstance? 
 					signupView.getPasswordTextFieldSignup().getText(), signupView.getEmailTextField().getText()));
 			if(us) {
 				//boolean true passa logged in

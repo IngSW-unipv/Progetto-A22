@@ -13,11 +13,11 @@ public class FactoryController {
 	UserAccount userAccount;
 	Base b;
 	
-	public FactoryController(PartitaStage partitaStage, MainDefinitivo mainDefinitivo, Base b, Giocatore giocatore) {
+	public FactoryController(PartitaStage partitaStage, MainDefinitivo mainDefinitivo, Base b, UserAccount userAccount) {
 		super();
 		this.partitaStage = partitaStage;
 		this.mainDefinitivo = mainDefinitivo;
-		//this.userAccount = userAccount;
+		this.userAccount = userAccount;
 		this.b = b;
 	}
 	

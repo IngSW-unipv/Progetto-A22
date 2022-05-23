@@ -4,10 +4,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
  * @version 1.0
  * @since 1.0
  * estensione della classe astratta software.
- * la classe antivirus è pensata come unità difensiva del gioco
- * server dominator. Il valore difensivo è indicato come val_def ed è 
+ * la classe antivirus ï¿½ pensata come unitï¿½ difensiva del gioco
+ * server dominator. Il valore difensivo ï¿½ indicato come val_def ed ï¿½ 
  * uguale al valore attribuito al livello.
- * Invece il valore di attacco val_atk è 0.
+ * Invece il valore di attacco val_atk ï¿½ 0.
  */
 public class Antivirus extends Software{
 	private int val_atk;
@@ -19,7 +19,7 @@ public class Antivirus extends Software{
 		val_def= super.getLivello();
 		super.setMax_lvl(5);
 		super.setNome("Antivirus");
-		super.setTemp_richiesto(20);
+		super.setTemp_richiesto(2);
 		super.setQuantita(quantita);
 	}
 	

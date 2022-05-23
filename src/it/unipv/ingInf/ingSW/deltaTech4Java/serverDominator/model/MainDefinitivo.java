@@ -55,7 +55,8 @@ public class MainDefinitivo extends Thread{
 	 * @throws InterruptedException
 	 */
 	public void avvioPartita(int x_max, int y_max, String nomeUtente, int valuta) throws InterruptedException {
-		t_unitario=10;
+		t_unitario=5;
+		colore= new Colore();
 		this.creazioneGiocatori(nomeUtente, x_max, valuta);
 		tabellone = new MappaDefinitiva(x_max, y_max, giocatori);
 		mercato=new Mercato();
@@ -430,6 +431,10 @@ public class MainDefinitivo extends Thread{
 	public void setClassifica(Classifica classifica) {
 		this.classifica = classifica;
 	}
-	
+
+	public Mercato getMercato() {
+		return mercato;
+	}
+
 	
 }

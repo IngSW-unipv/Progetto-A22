@@ -8,10 +8,7 @@ public class BaseCambioController {
 
 	private MainDefinitivo mainDefinitivo;
 	private PartitaStage partitaStage;
-	
-	
-	
-	
+
 	public BaseCambioController(MainDefinitivo mainDefinitivo, PartitaStage partitaStage) {
 		super();
 		this.mainDefinitivo = mainDefinitivo;

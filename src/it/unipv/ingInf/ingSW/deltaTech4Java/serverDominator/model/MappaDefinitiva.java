@@ -36,14 +36,19 @@ public class MappaDefinitiva{
 		this.y_max=y_max;
 		int i,j;
 		
+		
 		map= new Nodo[x_max][y_max];
+		
+		this.assegnamento(n_basi, giocatori);
 		
 		for(i=0; i<x_max; i++) {
 			for(j=0; j<y_max; j++ ) {
-				map[i][j]= new Cloud(giocatori[0]);
+				if(map[i][j]==null) {
+					map[i][j]= new Cloud(giocatori[0]);
+				}
 			} 
 		}
-		this.assegnamento(n_basi, giocatori);
+		
 		vicini= new String[6];
 		confini= new Coordinate[6];
 		basiutente= new Coordinate[n_basi];
@@ -160,7 +165,7 @@ public class MappaDefinitiva{
 	 * @return
 	 * nodo base, da cui parte l'attacco
 	 */
-	public Nodo trovaBase( Giocatore player) {
+	public Base trovaBase( Giocatore player) {
 		
 			int i;
 			int x,y;
@@ -177,7 +182,7 @@ public class MappaDefinitiva{
 					} 
 				}
 			
-			return map[x][y];
+			return (Base)map[x][y];
 		}
 	
 	/**controlla se due nodi sono prossimi ossia confinanti, date le coordinate

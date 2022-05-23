@@ -1,7 +1,10 @@
 package sreverDominator.view;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller.PartitaController;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.PrebattagliaView;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
 import javafx.application.Application;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -11,7 +14,7 @@ public class PrebattagliaTester extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		PrebattagliaView p=new PrebattagliaView(new UserAccount());
+		LobbyView p=new LobbyView(new UserAccount());
 		p.setUserAccount(new UserAccount("tawa",1000,1000,null,null));
 		Menu menu=new Menu("SdMenu");
 		MenuItem menuItem=new MenuItem("Logout");
@@ -22,6 +25,9 @@ public class PrebattagliaTester extends Application {
 		
 		menu.getItems().addAll(menuItem);
 		p.getMenu().getMenus().addAll(menu);
+		if(PartitaController.class.isAssignableFrom(new Utente("",5).getClass()))
+			System.out.println("si");
+		else System.err.println("no");
 	}
 
 	public static void main(String[] args) {

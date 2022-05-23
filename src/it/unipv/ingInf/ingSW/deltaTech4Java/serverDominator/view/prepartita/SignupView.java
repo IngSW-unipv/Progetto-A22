@@ -1,6 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,18 +15,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 
 public class SignupView {
 
     //view nodes
     Label titleHolderText = new Label("SERVER DOMINATOR singup");
+    private Label subTitleHolderText;
     private Label errorMessageSignupLabel = new Label();
     private Label usernameSignup = new Label("username");
     private Label passwordSignup = new Label("password");
     private Label ipSignup = new Label("ip");
     Label portSignup = new Label("port");
-    Button loginButtonChange = new Button("Log in"); //cambio scene
-    Button signupButtonLegit = new Button("Sign Up");
+    private Button loginButtonChange = new Button("Log in"); //cambio scene
+    private Button signupButtonLegit = new Button("Sign Up");
     private TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
     private PasswordField passwordTextFieldSignup;
     private TextField emailTextField;
@@ -46,6 +49,10 @@ public class SignupView {
 
     public Label getIpSignup() {
         return ipSignup;
+    }
+    
+    public Label getSubTitleHolderText() {
+    	return subTitleHolderText;
     }
 
     public Label getPortSignup() {
@@ -79,6 +86,17 @@ public class SignupView {
 
     public SignupView(){
         signup = createSignup();
+        titleHolderText.setStyle(" -fx-text-fill: #ffff00; -fx-font-weight: bold");
+        subTitleHolderText = new Label("REGISTRAZIONE");
+        subTitleHolderText.setStyle(" -fx-text-fill: #ffff00");
+		errorMessageSignupLabel = new Label("");
+		errorMessageSignupLabel.setStyle(" -fx-text-fill: #ff0000");
+		signupButtonLegit = ComponentCreator.getIstance().createButton("REGISTRAZIONE", Pos.CENTER);
+		loginButtonChange = new Button("Login", null);
+		loginButtonChange.setStyle("-fx-text-fill: #0606B8");
+		usernameTextFieldSignup = ComponentCreator.getIstance().textFieldreator("Username");
+		passwordTextFieldSignup = ComponentCreator.getIstance().passwordFieldCreator("password");
+		
     }
 
     private VBox createSignup() {

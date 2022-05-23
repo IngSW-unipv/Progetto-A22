@@ -617,6 +617,22 @@ public abstract class PartitaStage extends Stage{
 	}
 
 	
+	public SDMenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	public void setMenuBar(SDMenuBar menuBar) {
+		this.menuBar = menuBar;
+	}
+
+	public ProgressBarConteiner getFineProgress() {
+		return fineProgress;
+	}
+
+	public void setFineProgress(ProgressBarConteiner fineProgress) {
+		this.fineProgress = fineProgress;
+	}
+
 	private void basicMapMaker(MapData mappa,GraphicsContext contestoGrafico) {
 		 basicMap = new BasicMap(mappa, contestoGrafico);
 	}

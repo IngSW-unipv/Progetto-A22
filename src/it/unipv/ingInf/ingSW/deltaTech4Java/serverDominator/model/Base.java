@@ -111,7 +111,7 @@ public class Base extends Nodo{
 	public int getTempoRisorsa(String nome) {
 		int tempo=-1;
 		for(int i=0; i<TIPI_RISORSE;i++) {
-			if(risorse[i].getNome()==nome)
+			if(risorse[i].getNome().equalsIgnoreCase(nome))
 				tempo=risorse[i].getTempo_richiesto();
 		}
 		return tempo;

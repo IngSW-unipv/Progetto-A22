@@ -289,39 +289,77 @@ public class MappaDefinitiva{
 		}
 		
 	//-------------getter and setter--------//
-		
+		/**
+		 * returna il nodo identificato dalle coordinate passate come parametro
+		 * @param x
+		 * @param y
+		 * @return
+		 * nodo selezionato
+		 */
 		public Nodo getNodo(int x, int y) {
 			return map[x][y];
 		}
-		
+		/**
+		 * returna la x massima
+		 * @return
+		 * x massima
+		 */
 		public int getX_max() {
 			return x_max;
 		}
-		
+		/**
+		 * returna la y massima
+		 * @return
+		 * y massima
+		 */
 		public int getY_max() {
 			return y_max;
 		}
-
+		/**
+		 * returna un array a doppia entrata rappresentante l'elenco dei nodi contenuti dentro la mappa i cui ingressi sono rispettivamente la coordinata x e la coordinata y assegnate al nodo
+		 * @return
+		 * nodi della mappa
+		 */
 		public Nodo[][] getMap() {
 			return map;
 		}
-
+		/**
+		 * returna un array di coordinate che sono associate alle basi della mappa
+		 * @return
+		 * nodi della mappa
+		 */
 		public Coordinate[] getBasi() {
 			return basi;
 		}
-
+		/**
+		 * returna il valore int a cui è associata la base scelta all'interno dell'array "basi" di tipo coordinate
+		 * @return
+		 * identificatore base scelta
+		 */
 		public int getScelta() {
 			return sceltabase;
 		}
-
+		/**
+		 * setta il valore int a cui è associata la base scelta all'interno dell'array "basi" di tipo coordinate
+		 * @param
+		 * identificatore base scelta
+		 */
 		public void setScelta(int scelta) {
 			this.sceltabase = scelta;
 		}
-
+		/**
+		 * returna la quantita di basi possedute dal giocatore
+		 * @return
+		 * numero di basi possedute
+		 */
 		public int getContabasi() {
 			return contabasi;
 		}
-
+		/**
+		 * returna l'array di coordinate contenenti le basi conquistate dal giocatore
+		 * @return
+		 * basi possedute
+		 */
 		public Coordinate[] getBasiutente() {
 			return basiutente;
 		}

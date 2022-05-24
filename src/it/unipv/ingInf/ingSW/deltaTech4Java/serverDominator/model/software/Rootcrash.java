@@ -15,7 +15,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
 public class Rootcrash extends Software {
 	private int val_def;
 	private int val_atk;
-	
+	/**
+	 * costruttore che crea un oggetto Rootcrash con un livello e una quantita pari a quelle passate come parametro
+	 * @param livello
+	 * livello Rootcrash
+	 * @param quantita
+	 * quantita Rootcrash
+	 */
 	public Rootcrash (int livello, int quantita) {
 		super(livello);
 		super.setMax_lvl(3);
@@ -29,14 +35,27 @@ public class Rootcrash extends Software {
 		super.setQuantita(quantita);
 	}
 //--------getter and setter-------//	
+	/**
+	 * returna il valore della difesa del Rootcrash
+	 * @return
+	 * valore difesa
+	 */
 	public int getVal_def() {
 		return val_def;
 	}
-
+	/**
+	 * returna il valore dell'attacco del Rootcrash
+	 * @return
+	 * valore attacco
+	 */
 	public int getVal_atk() {
 		return val_atk;
 	}
-
+	/**
+	 * setta il valore dell' attacco del Rootcrash
+	 * @param
+	 * valore attacco
+	 */
 	public void setVal_atk(int val_atk) {
 		this.val_atk = val_atk;
 	}

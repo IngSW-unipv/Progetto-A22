@@ -14,28 +14,19 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
  */
 public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	
-	/**
-	 * Punteggio del giocatore nella singola partita 
-	 * 
-	 */
-	private int punteggio;
-	/**
-	 * nickName del giocatore
-	 */
-	private String nome;
-	/**
-	 * Colore associato al giocatore
-	 */
-	public String colore;
-	/**
-	 * Valuta di gioco
-	 */
-	private int deltaCoin;
+	private int punteggio;//Punteggio del giocatore nella singola partita
+	private String nome;//nickName del giocatore
+	public String colore;//Colore associato al giocatore
+	private int deltaCoin;//Valuta di gioco
 	private MappaDefinitiva map;
 	private int basi_prese;
 	private PropertyChangeSupport changes;
 	public static final String GIOCATORE_PROP="numero_basi";
-
+	/**
+	 * Costruttore di un nuovo giocatore
+	 * @param nome
+	 * assegna al giocatore il nome passato come parametro
+	 */
 	public Giocatore(String nome) {
 		this.nome=nome;
 		punteggio=0;
@@ -43,7 +34,9 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		basi_prese=1;
 		this.changes = new PropertyChangeSupport(this);
 	}
-	
+	/**
+	 * costruttore di un nuovo giocatore
+	 */
 	public Giocatore() {
 		super();
 		this.nome=null;
@@ -52,6 +45,10 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		basi_prese=1;
 		this.changes = new PropertyChangeSupport(this);
 	}
+	/**
+	 * crea un nuovo giocatore con gli stessi valori del giocatore passato come parametro
+	 * @param user
+	 */
 	public Giocatore(Giocatore user) {
 		this.nome=user.getNome();
 		this.punteggio=user.getPunteggio();
@@ -125,7 +122,10 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	public int getValuta() {
 		return deltaCoin;
 	}
-	
+	/**
+	 * setta il valore della valuta di gioco assegnata al giocatore uguale al valore passato come parametro
+	 * @param deltaCoin
+	 */
 	public void setValuta(int deltaCoin) {
 		this.deltaCoin = deltaCoin;
 	}
@@ -137,10 +137,12 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	public int getBasi_prese() {
 		return basi_prese;
 	}
-
+	/**
+	 * setta il numero di basi conquistate dal giocatore uguale a quello passato come parametro
+	 * @param basi_prese
+	 */
 	public void setBasi_prese(int basi_prese) {
-		Giocatore old= new Giocatore(this) {
-			
+		Giocatore old= new Giocatore(this) {	
 		};
 		this.basi_prese = basi_prese;
 		changes.firePropertyChange(GIOCATORE_PROP, old.getBasi_prese(), this.getBasi_prese());
@@ -155,11 +157,18 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	public void aggiornaValuta(int valuta) {
 		this.deltaCoin += valuta;
 	}
-	
+	/**
+	 * setta il valore di mappa uguale a quella passata come parametro
+	 * @param mappa
+	 */
 	public void setMap(MappaDefinitiva map) {
 		this.map = map;
 	}
-	
+	/**
+	 * returna la mappa
+	 * @return
+	 * mappa
+	 */
 	public MappaDefinitiva getMap() {
 		return map;
 	}
@@ -189,21 +198,4 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		return "Giocatore [punteggio=" + punteggio + ", nome=" + nome + ", colore=" + colore + ", deltaCoin="
 				+ deltaCoin + "]";
 	}
-	
-	public static void main(String[] args) {
-		Utente u=new Utente();
-		Giocatore g=new Giocatore() {
-		};
-		UserAccount s=new UserAccount();
-		if(g.getClass().isAssignableFrom(u.getClass()))
-			System.out.println("ok");
-		else
-			System.err.println("err");
-	}
-
-	public PropertyChangeSupport getChanges() {
-		return changes;
-	}
-
-	
 }

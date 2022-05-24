@@ -17,7 +17,9 @@ public class Base extends Nodo{
 	private final int TIPI_SOFTWARE=3;
 	private Risorse[] risorse;
 	private final int TIPI_RISORSE=4;
-	
+	/**
+	 * Permette di creare un oggetto di tipo Base vuoto
+	 */
 	public Base() {
 		super.setTipologia("base");
 		super.setDist_base(0);
@@ -28,7 +30,10 @@ public class Base extends Nodo{
 		risorse=new Risorse[TIPI_RISORSE];
 		this.inizializza_risorse();
 	}
-	
+	/**Permette di creare un oggetto di tipo Base il cui possessore sara quello passato come parametro
+	 * @param possessore
+	 * possessore della base
+	 */
 	public Base(Giocatore possessore) {
 		super.setTipologia("base");
 		super.setDist_base(0);
@@ -218,80 +223,163 @@ public class Base extends Nodo{
 	}
 	
 //---------------getter and setter--------------//
-	
+	/**
+	 * Returna la capacita' massima di stoccaggio dei software
+	 * @return
+	 * quantita massima software
+	 */
 	public int getSoftware_max() {
 		return risorse[1].getStat1();
 	}
-	
+	/**
+	 * returna il valore della difesa data dal livello del Firewall
+	 * @return
+	 * bonus difesa del Firewall
+	 */
 	public int getBonus_def() {
 		return risorse[3].getStat1();
 	}
-	
+	/**
+	 * setta il valore della difesa data dal livello del Firewall
+	 * @param
+	 * bonus difesa del Firewall
+	 */
 	public void setBonus_def(int bonus_def) {
 		risorse[3].setStat1(bonus_def);;
 	}
-	
+	/**
+	 * returna l'energia disponibile della base
+	 * @return
+	 * energia disponibile
+	 */
 	public int getE_disponibile() {
 		return risorse[2].getStat1();
 	}
+	/**
+	 * returna il livello dell'energia della base
+	 * @return
+	 * livello energia
+	 */
 	public int getE_lvl() {
 		return risorse[2].getLivello_risorsa();
 	}
-	
+	/**
+	 * returna il livello della Cpu della base
+	 * @return
+	 * livello Cpu
+	 */
 	public int getLvl_cpu() {
 		return risorse[0].getLivello_risorsa();
 	}
-	
+	/**
+	 * returna il livello della Ram della base
+	 * @return
+	 * livello Ram
+	 */
 	public int getLvl_ram() {
 		return risorse[1].getLivello_risorsa();
 	}
-	
+	/**
+	 * returna il livello della Firewall della base
+	 * @return
+	 * livello Firewall
+	 */
 	public int getLvl_firewall() {
 		return risorse[3].getLivello_risorsa();
 	}
-
+	/**
+	 * returna i software creati della base (0=Antivirus, 1=Virus, 2=Rootcrash)
+	 * @return
+	 * Software creati
+	 */
 	public Software[] getStats_software_creati() {
 		return stats_software_creati;
 	}
-	
+	/**
+	 * returna le risorse disponibili del nodo (0=cpu, 1=ram, 2=energia, 3=firewall)
+	 * @return
+	 * risorse
+	 */
 	public Risorse[] getRisorse() {
 		return risorse;
 	}
-
+	/**
+	 * returna il livello massimo della Cpu della base
+	 * @return
+	 * livello massimo Cpu
+	 */
 	public int getLvl_max_cpu() {
 		return risorse[0].getMAX_LVL();
 	}
-	
+	/**
+	 * returna il livello massimo della Ram della base
+	 * @return
+	 * livello massimo Ram
+	 */
 	public int getLvl_max_ram() {
 		return risorse[1].getMAX_LVL();
 	}
+	/**
+	 * returna lo spazio disponibile nella Ram della base per creare nuovi Software
+	 * @return
+	 * spazio libero Ram
+	 */
 	public int getSpazio_Ram() {
 		return risorse[1].getStat1()-super.getSoftware_disponibile();
 	}
-	
+	/**
+	 * returna il livello massimo del Firewall della base
+	 * @return
+	 * livello massimo Firewall
+	 */
 	public int getLvl_max_firewall() {
 		return risorse[3].getMAX_LVL();
 	}
-	
+	/**
+	 * returna il livello dei Virus della base
+	 * @return
+	 * livello Virus
+	 */
 	public int getLvl_virus() {
 		return risorse[0].getStat2();
 	}
-	
+	/**
+	 * returna la quantita' dei Virus della base
+	 * @return
+	 * quantita' Virus
+	 */
 	public int getQnt_virus() {
 		return stats_software_creati[1].getQuantita();
 	}
-
+	/**
+	 * returna il livello degli Antivirus della base
+	 * @return
+	 * livello Antivirus
+	 */
 	public int getLvl_antivirus() {
 		return risorse[0].getStat1();
 	}
-	
+	/**
+	 * returna la quantita' dei Antivirus della base
+	 * @return
+	 * quantita' Antivirus
+	 */
 	public int getQnt_antivirus() {
 		return stats_software_creati[0].getQuantita();
 	}
+	/**
+	 * returna il livello dei Rootcrash della base
+	 * @return
+	 * livello Rootcrash
+	 */
 	public int getLvl_rootcrash() {
 		return risorse[0].getStat3();
 	}
-	
+	/**
+	 * returna la quantita' dei Rootcrash della base
+	 * @return
+	 * quantita' Rootcrash
+	 */
 	public int getQnt_rootcrash() {
 		return stats_software_creati[2].getQuantita();
 	}

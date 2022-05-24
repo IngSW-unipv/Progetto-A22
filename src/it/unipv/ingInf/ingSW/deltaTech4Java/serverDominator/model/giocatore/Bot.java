@@ -155,11 +155,17 @@ public class Bot extends Giocatore{
 	
 
 	//------------getter and setter------------//
-	
+	/**
+	 * setta il valore di mappa uguale a quella passata come parametro
+	 * @param mappa
+	 */
 	public void setMap(MappaDefinitiva map) {
 		this.map = map;
 	}
-
+	/**
+	 * returna il valore corrispondente al tempo di attessa per eseguire l'attacco verso il nodo selezionato dal bot
+	 * @return
+	 */
 	public int getT_timer() {
 		return t_timer;
 	}

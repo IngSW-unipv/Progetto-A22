@@ -136,22 +136,57 @@ public class Mercato {
 		}
 	}
 	//--------------getter and setter------------//
-	
+	/**
+	 * ritorna il prezzo della risorsa Ram in base alla quantita passata come parametro
+	 * @param quantita
+	 * @return
+	 * prezzo risorsa*quantita
+	 */
 	public int getCostoRam(int quantita) {
 		return prezzoRam*quantita;
 	}
+	/**
+	 * ritorna il prezzo della risorsa Cpu in base alla quantita passata come parametro
+	 * @param quantita
+	 * @return
+	 * prezzo risorsa*quantita
+	 */
 	public int getCostoCpu(int quantita) {
 		return prezzoCpu*quantita;
 	}
+	/**
+	 * ritorna il prezzo della risorsa Energia in base alla quantita passata come parametro
+	 * @param quantita
+	 * @return
+	 * prezzo risorsa*quantita
+	 */
 	public int getCostoEnergia(int quantita) {
 		return prezzoEnergia*quantita;
 	}
+	/**
+	 * ritorna il prezzo dei Virus in base alla quantita passata come parametro
+	 * @param quantita
+	 * @return
+	 * prezzo risorsa*quantita
+	 */
 	public int getCostoVirus(int quantita) {
 		return prezzoVirus*quantita;
 	}
+	/**
+	 * ritorna il prezzo degli Antivirus in base alla quantita passata come parametro
+	 * @param quantita
+	 * @return
+	 * prezzo risorsa*quantita
+	 */
 	public int getCostoAntivirus(int quantita) {
 		return prezzoAntivirus*quantita;
 	}
+	/**
+	 * ritorna il prezzo dei Rootcrash in base alla quantita passata come parametro
+	 * @param quantita
+	 * @return
+	 * prezzo risorsa*quantita
+	 */
 	public int getCostoRootcrash(int quantita) {
 		return prezzoRootcrash*quantita;
 	}

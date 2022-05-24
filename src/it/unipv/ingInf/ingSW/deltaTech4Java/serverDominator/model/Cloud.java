@@ -15,7 +15,11 @@ public class Cloud extends Nodo {
 	private Software[] stats_software_creati;
 	private Risorse[] risorse;
 	private final int TIPI_RISORSE=4;
-	
+	/**
+	 * Costruttore per creare un oggetto Cloud il cui possessore sara' quello passato come parametro
+	 * @param 
+	 * possessore
+	 */
 	public Cloud (Giocatore possessore) {
 		super.setTipologia("cloud");
 		super.setDist_base(0);
@@ -26,7 +30,9 @@ public class Cloud extends Nodo {
 		this.inizializza_risorse();
 		stats_software_creati= new Software[1];
 	}
-	
+	/**
+	 * Costruttore per creare un oggetto Cloud vuoto
+	 */
 	public Cloud () {
 		super.setTipologia("cloud");
 		super.setDist_base(0);
@@ -128,42 +134,83 @@ public class Cloud extends Nodo {
 		return tempo;
 	}
 //-------------getter and setter------------//
-		
+	/**
+	 * returna il livello della Cpu del nodo
+	 * @return
+	 * livello Cpu
+	 */		
 	public int getLvl_cpu() {
 		return risorse[0].getLivello_risorsa();
 	}
-	
+	/**
+	 * returna gli Antivirus disponibili del nodo
+	 * @return
+	 * Software Antivirus
+	 */
 	public Software getAntivirus() {
 		return stats_software_creati[0];
 	}
-
+	/**
+	 * returna il livello della Ram del nodo
+	 * @return
+	 * livello Ram
+	 */
 	public int getLvl_ram() {
 		return risorse[1].getLivello_risorsa();
 	}
-
+	/**
+	 * returna l'energia disponibile del nodo
+	 * @return
+	 * energia disponibile
+	 */
 	public int getE_disponibile() {
 		return risorse[2].getStat1();
 	}
-	
+	/**
+	 * returna il livello del Firewall del nodo
+	 * @return
+	 * livello Ram
+	 */
 	public int getLvl_firewall() {
 		return risorse[3].getLivello_risorsa();
 	}
+	/**
+	 * returna il bonus difensivo dato dal Firewall del nodo
+	 * @return
+	 * bonus difensivo del Firewall
+	 */
 	public int getBonus_def() {
 		return risorse[3].getStat1();
 	}
-	
+	/**
+	 * setta il bonus difensivo dato dal Firewall del nodo
+	 * @param
+	 * bonus difensivo del Firewall
+	 */
 	public void setBonus_def(int bonus_def) {
 		risorse[3].setStat1(bonus_def);
 	}
-	
+	/**
+	 * returna i software creati del nodo (0=Antivirus, 1=Virus, 2=Rootcrash)
+	 * @return
+	 * Software creati
+	 */
 	public Software[] getStats_software_creati() {
 		return stats_software_creati;
 	}
-		
+	/**
+	 * returna le risorse disponibili del nodo(0=cpu, 1=ram, 2=energia, 3=firewall)
+	 * @return
+	 * risorse
+	 */
 	public Risorse[] getRisorse() {
 		return risorse;
 	}
-
+	/**
+	 * returna la quantita di antivirus disponibili
+	 * @return
+	 * Quantita' Antivirus
+	 */
 	public int getQnt_antivirus() {
 		return super.getSoftware_disponibile();
 	}

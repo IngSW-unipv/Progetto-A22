@@ -28,58 +28,106 @@ public class Colore {
 	private final String BLU = "#3399FF";
 	
 	private ArrayList<String> colori;
-	
+	/**
+	 * Costruttore per inizializzare e utilizzare i colori
+	 */
 	public Colore() {
-	
 		colori= new ArrayList<String>( Arrays.asList(GIALLO , ARANCIO , VERDE , ROSSO , VIOLA , VERDE_SCURO , ROSA , ROSA_SCURO , AZZURRO , BLU));
-
 	}
 	
-	
+	/**
+	 * returna il valore esadecimale corrispondente al colore grigio
+	 * @return
+	 * grigio in esadecimale
+	 */
 	public  String getGrigio() {
 		return GRIGIO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore giallo
+	 * @return
+	 * giallo in esadecimale
+	 */
 	public  String getGiallo() {
 		return GIALLO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore arancio
+	 * @return
+	 * arancio in esadecimale
+	 */
 	public  String getArancio() {
 		return ARANCIO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore verde
+	 * @return
+	 * verde in esadecimale
+	 */
 	public  String getVerde() {
 		return VERDE;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore rosso
+	 * @return
+	 * rosso in esadecimale
+	 */
 	public  String getRosso() {
 		return ROSSO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore viola
+	 * @return
+	 * viola in esadecimale
+	 */
 	public  String getViola() {
 		return VIOLA;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore verde scuro
+	 * @return
+	 * verde scuro in esadecimale
+	 */
 	public  String getVerdeScuro() {
 		return VERDE_SCURO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore rosa
+	 * @return
+	 * rosa in esadecimale
+	 */
 	public  String getRosa() {
 		return ROSA;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore Rosa Scuro
+	 * @return
+	 * rosa scuro in esadecimale
+	 */
 	public  String getRosaScuro() {
 		return ROSA_SCURO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore azzurro
+	 * @return
+	 * azzurro in esadecimale
+	 */
 	public  String getAzzurro() {
 		return AZZURRO;
 	}
-
+	/**
+	 * returna il valore esadecimale corrispondente al colore blu
+	 * @return
+	 * blu in esadecimale
+	 */
 	public  String getBlu() {
 		return BLU;
 	}
-
+	/**
+	 * returna l'array di stringhe i colori in esadecimale
+	 * @return
+	 * colori in esadecimale(0=Giallo, 1=Arancio, 2=Verde, 3=Rosso, 4=Viola, 5=Verde scuro, 6=Rosa, 7=Rosa scuro, 8=Azzurro, 9=Blu)
+	 */
 	public  ArrayList<String> getColori() {
 		return colori;
 	}

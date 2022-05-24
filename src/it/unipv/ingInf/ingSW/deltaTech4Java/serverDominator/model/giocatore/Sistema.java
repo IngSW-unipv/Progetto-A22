@@ -1,7 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Colore;
-
 /**
  * @author Luca Casto 
  * @version 1.0
@@ -11,9 +9,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Colore;
  */
 public class Sistema extends Giocatore {
 	
-	
+	/**
+	 * Costruttore che crea un nuovo oggetto Sistema
+	 */
 	public Sistema() {
-		
 		super.setNome("sistema");
 		super.setPunteggio(0);
 	}

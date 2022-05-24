@@ -11,6 +11,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * @since 1.0
  */
 public class Timer {
+	/**
+	 * fa avviare un timer che blocca la funzione chiamante
+	 * @param tempo
+	 * per quanto tempo si vuole bloccare la funzione chiamante
+	 * @return
+	 * true=e' passato il tempo richiesto, false=errore, non è passato il tempo richiesto
+	 */
 	public boolean timer(int tempo){
 		if(tempo>0) {	
 			try {
@@ -24,7 +31,10 @@ public class Timer {
 		System.out.println("errore timer");
 		return false;
 	}
-	
+	/**
+	 * stampa un countodown per il tempo richiesto
+	 * @param temp
+	 */
 	public void countdown(int temp) {
 		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 

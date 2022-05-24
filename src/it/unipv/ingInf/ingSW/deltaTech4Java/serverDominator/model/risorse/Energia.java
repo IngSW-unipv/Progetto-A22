@@ -11,7 +11,11 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 public class Energia extends Risorse{
 	private final int INCREMENTATORE_EN= 75;
 	private int e_disponibile;
-	
+	/**
+	 * costruttore che crea un oggetto Energia con un livello pari a quello passato come parametro
+	 * @param livello_risorsa
+	 * livello dell'energia
+	 */
 	public Energia(int livello_risorsa) {
 		super(livello_risorsa);
 		if (livello_risorsa>= super.MAX_LVL) {
@@ -39,7 +43,10 @@ public class Energia extends Risorse{
 	public int getStat1() {
 		return e_disponibile;
 	}
-
+	/**imposta stat1 che viene usato per e_disponibile
+	 * @param e_disponibile
+	 * valore dell'energia
+	 */
 	public void setStat1(int e_disponibile) {
 		this.e_disponibile = e_disponibile;
 	}

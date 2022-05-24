@@ -11,7 +11,11 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
  */
 public class Ram extends Risorse{
 	private int max_software;
-	
+	/**
+	 * costruttore che crea un oggetto Ram con un livello pari a quello passato come parametro
+	 * @param livello_risorsa
+	 * livello della Ram
+	 */
 	public Ram (int livello_risorsa) {
 		super(livello_risorsa);
 		if (livello_risorsa>= super.MAX_LVL) {

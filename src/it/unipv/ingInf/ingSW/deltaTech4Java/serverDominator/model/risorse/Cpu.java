@@ -12,7 +12,11 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
  */
 public class Cpu extends Risorse{
 	private int antivirus, virus, rootcrash;
-	
+	/**
+	 * costruttore che crea un oggetto Cpu con un livello pari a quello passato come parametro
+	 * @param livello_risorsa
+	 * livello della Cpu
+	 */
 	public Cpu (int livello_risorsa) {
 		super(livello_risorsa);
 		if (livello_risorsa>= super.MAX_LVL) {
@@ -20,13 +24,6 @@ public class Cpu extends Risorse{
 		}
 		super.setNome("Cpu");
 		this.effetto();
-		//per test
-/*		System.out.println("livelli sbloccati:");
-		System.out.println("pre powerup");
-		System.out.println("virus lvl"+virus);
-		System.out.println("antivirus lvl"+ antivirus);
-		System.out.println("rootcrash lvl"+ rootcrash);
-*/
 	}
 	
 	/**aggiorna, in funzione del livello risorsa, le caratteristiche
@@ -94,13 +91,6 @@ public class Cpu extends Risorse{
 				antivirus=5;
 				break;
 		}
-		//per test
-/*		System.out.println("livelli sbloccati:");
-		System.out.println("post powerup");
-		System.out.println("virus lvl"+virus);
-		System.out.println("antivirus lvl"+ antivirus);
-		System.out.println("rootcrash lvl"+ rootcrash);
-*/
 	}
 	
 //--------getter and setter-------//

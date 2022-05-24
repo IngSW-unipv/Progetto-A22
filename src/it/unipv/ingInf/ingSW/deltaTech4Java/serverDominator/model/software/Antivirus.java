@@ -12,7 +12,13 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software;
 public class Antivirus extends Software{
 	private int val_atk;
 	private int val_def;
-	
+	/**
+	 * costruttore che crea un oggetto Antivirus con un livello e una quantita pari a quelle passate come parametro
+	 * @param livello
+	 * livello dell'Antivirus
+	 * @param quantita
+	 * quantita dell'Antivirus
+	 */
 	public Antivirus(int livello, int quantita) {
 		super(livello);
 		val_atk= 0;
@@ -24,13 +30,27 @@ public class Antivirus extends Software{
 	}
 	
 //--------getter and setter-------//
-	
+	/**
+	 * returna il valore della difesa dell'Antivirus
+	 * @return
+	 * valore difesa
+	 */
 	public int getVal_def() {
 		return val_def;
 	}
+	/**
+	 * setta il valore della difesa dell'Antivirus
+	 * @param
+	 * valore difesa
+	 */
 	public void setVal_def(int val_def) {
 		this.val_def = val_def;
 	}
+	/**
+	 * returna il valore dell'attacco dell'Antivirus
+	 * @return
+	 * valore attacco
+	 */
 	public int getVal_atk() {
 		return val_atk;
 	}

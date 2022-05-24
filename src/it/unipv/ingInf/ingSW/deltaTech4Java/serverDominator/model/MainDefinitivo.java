@@ -405,33 +405,58 @@ public class MainDefinitivo extends Thread{
 	}
 	
 //--------------getter and setter-------------//
-	
+	/**
+	 * returna la x massima
+	 * @return
+	 * x massima
+	 */
 	public int getX_max() {
 		return tabellone.getX_max();
 	}
-	
+	/**
+	 * returna la y massima
+	 * @return
+	 * y massima
+	 */
 	public int getY_max() {
 		return tabellone.getY_max();
 	}
-	
+	/**
+	 * returna la mappa di gioco
+	 * @return
+	 * mappa di gioco
+	 */
 	public MappaDefinitiva getTabellone() {
 		return tabellone;
 	}
-	
+	/**
+	 * returna la lista dei giocatori
+	 * @return
+	 * giocatori
+	 */
 	public Giocatore[] getGiocatori() {
 		return giocatori;
 	}
-
-
+	/**
+	 * returna la classifica di gioco
+	 * @return
+	 * classifica
+	 */
 	public Classifica getClassifica() {
 		return classifica;
 	}
-
-
+	/**
+	 * setta la classifica
+	 * @param classifica
+	 */
 	public void setClassifica(Classifica classifica) {
 		this.classifica = classifica;
 	}
-
+	/**
+	 * returna il mercato
+	 * @return
+	 * mercato
+	 */
 	public Mercato getMercato() {
 		return mercato;
 	}

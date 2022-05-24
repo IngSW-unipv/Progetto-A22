@@ -17,6 +17,10 @@ public class Classifica {
 	
 	private List<Giocatore> lista;
 	private PropertyChangeSupport changes;
+	/**
+	 * crea una classifica con la lista di giocatori passata come parametro
+	 * @param giocatori
+	 */
 	public Classifica(Giocatore... giocatori) {
 		this.lista = new ArrayList<Giocatore>();
 		for (int i = 0; i < giocatori.length; i++)
@@ -130,7 +134,6 @@ public class Classifica {
 	 */
 	public int getLunghezzaClassifica() {
 		return lista.size();
-		
 	}
 	
 	/**
@@ -143,7 +146,7 @@ public class Classifica {
 	
 	/**
 	 * Permette di rimuovere dalla classifica l'Utente la cui posizione 
-	 * è stato passata come parametro
+	 * e' stato passata come parametro
 	 * @param pos_user
 	 * posizione del giocatore da rimuovere
 	 */
@@ -175,11 +178,19 @@ public class Classifica {
         changes.removePropertyChangeListener(propertyName,listener);
     }
     
-    
+    /**
+	 * Restituisce la classifica
+	 * @return
+	 * classifica in formato List di Giocatore
+	 */
 	public List<Giocatore> getLista() {
 		return lista;
 	}
-
+	/**
+	 * Setta la classifica con la classificia passata come parametro
+	 * @param
+	 * lista dei giocatori di cui fare la classifica
+	 * */
 	public void setLista(List<Giocatore> lista) {
 		this.lista = lista;
 	}
@@ -202,11 +213,11 @@ public class Classifica {
         }
         return s;
 	}
+	/**
+	 * Returna il giocatore che si trova al primo posto della classifica
+	 * @return
+	 */
 	public Giocatore getVincitore() {
 		return lista.get(0);
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }

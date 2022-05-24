@@ -12,7 +12,11 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
 public class Firewall extends Risorse{
 	private final int MAX_FIREWALL=9;
 	private int bonus_def;
-	
+	/**
+	 * costruttore che crea un oggetto Firewall con un livello pari a quello passato come parametro
+	 * @param livello_risorsa
+	 * livello del Firewall
+	 */
 	public Firewall(int livello_risorsa) {
 		super(livello_risorsa);
 		if (livello_risorsa>= super.MAX_LVL) {
@@ -76,11 +80,18 @@ public class Firewall extends Risorse{
 	public int getStat1() {
 		return bonus_def;
 	}
-
+	/**imposta stat1 che viene usato per bonus_def
+	 * @param bonus
+	 * bonus difesa
+	 */
 	public void setStat1(int bonus_def) {
 		this.bonus_def = bonus_def;
 	}
-	
+	/**
+	 * returna il livello massimo del firewall
+	 * @return
+	 * livello massimo
+	 */
 	public int getMAX_LVL() {
 		return MAX_FIREWALL;
 	}

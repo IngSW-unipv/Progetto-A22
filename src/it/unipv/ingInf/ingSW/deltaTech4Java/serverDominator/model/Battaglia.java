@@ -21,7 +21,15 @@ public class Battaglia extends Thread{
 	private int t_timer;
 	private String report;
 	private Nodo partenza;
-		
+	
+	/**Permette di creare un oggetto di tipo Battaglia
+	 * @param Nodo attaccante
+	 * base che fa partire l'attacco
+	 * @param Nodo difensore
+	 * nodo che viene attaccato
+	 * @param timer
+	 * tempo necessario per eseguire l'attacco
+	 */
 	public Battaglia(Nodo attaccante, Nodo difensore, int t_timer) {
 		this.attaccante=attaccante;
 		this.difensore=difensore;
@@ -99,7 +107,10 @@ public class Battaglia extends Thread{
 	}
 	
 
-	/**stampa il report di fine battaglia */
+	/**stampa il report di fine battaglia
+	 * @return
+	 * report("Hai conquistato il nodo difensore"/"Non hai conquistato il nodo difensore")
+	 * */
 	public String stampa_report(boolean esito) {
 		
 		String report;
@@ -152,15 +163,27 @@ public class Battaglia extends Thread{
 	}
 
 //--------------getter and setter------------//
-	
+	/**
+	 * returna l'esito della battaglia
+	 * @return
+	 * true=l'attacco ha avuto successo, false=attacco fallito
+	 */
 	public boolean getEsito() {
 		return esito;
 	}
-
+	/**
+	 * returna il report della battaglia
+	 * @return
+	 * report("Hai conquistato il nodo difensore"/"Non hai conquistato il nodo difensore")
+	 */
 	public String getReport() {
 		return report;
 	}
-
+	/**
+	 * setta il nodo da cui parte l'attacco
+	 * @param
+	 * Nodo da cui parte l'attacco
+	 */
 	public void setPartenza(Nodo partenza) {
 		this.partenza = partenza;
 	}

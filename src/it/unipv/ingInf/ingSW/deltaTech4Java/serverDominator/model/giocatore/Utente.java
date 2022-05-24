@@ -20,13 +20,14 @@ public class Utente extends Giocatore{
 		super.setPunteggio(0);
 		super.setValuta(valuta);;
 	}
-	
+	/**
+	 * Permette di creare un oggetto di tipo Utente vuoto
+	 */
 	public Utente() {
 		super();
 		super.setPunteggio(0);
 		super.setValuta(0);
 	}
-	
 	
 	@Override
 	public void run() {

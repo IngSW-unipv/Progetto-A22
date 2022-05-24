@@ -27,10 +27,12 @@ public class Colore {
 	private final String AZZURRO = "#00FFFF";
 	private final String BLU = "#3399FF";
 	
-	private ArrayList<String> colori = new ArrayList( Arrays.asList(GIALLO , ARANCIO , VERDE , ROSSO , VIOLA , VERDE_SCURO , ROSA , ROSA_SCURO , AZZURRO , BLU));
-
+	private ArrayList<String> colori;
+	
 	public Colore() {
 	
+		colori= new ArrayList<String>( Arrays.asList(GIALLO , ARANCIO , VERDE , ROSSO , VIOLA , VERDE_SCURO , ROSA , ROSA_SCURO , AZZURRO , BLU));
+
 	}
 	
 	

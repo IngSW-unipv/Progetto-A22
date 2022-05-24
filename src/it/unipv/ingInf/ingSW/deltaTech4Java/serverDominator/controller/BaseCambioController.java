@@ -29,8 +29,16 @@ public class BaseCambioController {
 	public void initAvantiBase() {
 		partitaStage.getBaseStatsPane().getButtonNext().setOnAction(actionEvent -> {
 			mainDefinitivo.getTabellone().checkbasi(partitaStage.getSelectedBase().getPossessore());
-			mainDefinitivo.getTabellone().setScelta(mainDefinitivo.getTabellone().getScelta()+1);
-			partitaStage.changeSelectedBase((Base)mainDefinitivo.getTabellone().trovaBase(partitaStage.getSelectedBase().getPossessore()));
+			{
+				if(mainDefinitivo.getTabellone().getContabasi()>mainDefinitivo.getTabellone().getScelta()) {
+					mainDefinitivo.getTabellone().setScelta(mainDefinitivo.getTabellone().getScelta()+1);
+					partitaStage.changeSelectedBase((Base)mainDefinitivo.getTabellone().trovaBase(partitaStage.getSelectedBase().getPossessore()));
+				}else {
+					partitaStage.getBaseStatsPane().getButtonNext().setDisable(true);
+				}
+				
+			}
+			
 		});
 	}
 	
@@ -48,6 +56,8 @@ public class BaseCambioController {
 			if(i>=0) {
 				mainDefinitivo.getTabellone().setScelta(mainDefinitivo.getTabellone().getScelta()+1);
 				partitaStage.changeSelectedBase((Base)mainDefinitivo.getTabellone().trovaBase(partitaStage.getSelectedBase().getPossessore()));
+			}else {
+				partitaStage.getBaseStatsPane().getButtonBack().setDisable(true);
 			}
 			
 		});

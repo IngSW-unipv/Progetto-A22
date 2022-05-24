@@ -129,10 +129,12 @@ public class ProgressBarConteiner extends Pane{
 	public void addElement(String battleTitle, long durata,String progressStyle) {
 		if (this.battles == null)
 			this.battles = new ArrayList<ProgressBarElement>(0);
-
-		ProgressBarElement battle = new ProgressBarElement(battleTitle, durata,progressStyle);
-		this.battles.add(battle);
-		Collections.sort(this.battles);
+		if(durata>1000) {
+			ProgressBarElement battle = new ProgressBarElement(battleTitle, durata,progressStyle);
+			this.battles.add(battle);
+			Collections.sort(this.battles);
+		}
+		
 		//disponiBattaglie();
 	}
 	

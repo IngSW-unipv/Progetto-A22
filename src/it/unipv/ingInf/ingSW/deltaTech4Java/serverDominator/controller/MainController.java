@@ -79,7 +79,7 @@ public class MainController {
 						lobbyView.getUserAccount().getUsername(), lobbyView.getUserAccount().getMny());
 					
 				partitaStage=new Partita(mainDefinitivo, 
-							(Base)mainDefinitivo.getTabellone().trovaBase
+							mainDefinitivo.getTabellone().trovaBase
 							(new Utente(userAccount.getUsername(),userAccount.getMny())), lobbyView.getSelectedDifecolta()[0]*60*1000);
 					
 				partitaCont = new PartitaController(mainDefinitivo, partitaStage,

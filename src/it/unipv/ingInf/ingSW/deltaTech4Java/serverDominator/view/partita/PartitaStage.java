@@ -1,7 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita;
 
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
@@ -156,10 +155,10 @@ public abstract class PartitaStage extends Stage{
 		this.initPlayTableListener();
 		this.fineProgress.addElement("", durataPartitaSeconds*1000, ProgressStyle.BLACK_STYLE);
 		this.fineProgress.setTitle("FINE PARTITA");
-		//this.disponiPannelli();
+		this.disponiPannelli();
 	}
 
-	public PartitaStage(MainDefinitivo main,Base baseUtente,int durataPartitaSeconds) {
+	public PartitaStage(MainDefinitivo main,Nodo baseUtente,int durataPartitaSeconds) {
 		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getTabellone().getX_max(),main.getTabellone().getY_max(),durataPartitaSeconds);
 	}
 	
@@ -197,8 +196,10 @@ public abstract class PartitaStage extends Stage{
 		finePa.setMinWidth(5);
 		ScrollPane sp=new ScrollPane(finePa);
 		sp.setFitToWidth(true);
-		ScrollPane classificaPane=new ScrollPane(putPaneInAscrollableGridPane(this.classificaPane, null, null));
+		this.classificaPane.setAlignment(Pos.TOP_CENTER);
+		ScrollPane classificaPane=new ScrollPane(this.classificaPane);
 		classificaPane.setFitToWidth(true);
+		
 		VBox.setVgrow(classificaPane, Priority.ALWAYS);
 		VBox.setVgrow(sp, Priority.ALWAYS);
 		vBaseClassificaBox.setSpacing(10);
@@ -323,7 +324,7 @@ public abstract class PartitaStage extends Stage{
 	 * all'internodel pannello
 	 * @param nuovaBaseSelezionata
 	 */
-	public void changeSelectedBase(Base nuovaBaseSelezionata) {
+	public void changeSelectedBase(Nodo nuovaBaseSelezionata) {
 		this.baseStatsPane.setNodeBase(nuovaBaseSelezionata);
 		this.baseStatsPane.make();
 		this.selectedBase=nuovaBaseSelezionata;
@@ -338,8 +339,8 @@ public abstract class PartitaStage extends Stage{
 	 * buttone avanti
 	 */
 	public void setButtonsVisibilityInActionPaneStatsPane(boolean indietroButton , boolean avantiButton) {
-		this.baseStatsPane.getButtonBack().setDisable(!indietroButton);
-		this.baseStatsPane.getButtonNext().setDisable(!avantiButton);
+		this.baseStatsPane.getButtonBack().setVisible(indietroButton);
+		this.baseStatsPane.getButtonNext().setVisible(avantiButton);
 	}
 	
 	/**
@@ -353,9 +354,9 @@ public abstract class PartitaStage extends Stage{
 	 * bottone per potenziamento risorse
 	 */
 	public void setButtonsVisibilityInActionPane(boolean mercatoBtn,boolean sviluppoSoftwareBtn,boolean potenziaRisorseBtn) {
-		this.actionPane.getDevelop().setDisable(!sviluppoSoftwareBtn);
-		this.actionPane.getActionMarketL().setDisable(!mercatoBtn);
-		this.actionPane.getPowerUpL().setDisable(!potenziaRisorseBtn);
+		this.actionPane.getDevelop().setVisible(sviluppoSoftwareBtn);
+		this.actionPane.getActionMarketL().setVisible(mercatoBtn);
+		this.actionPane.getPowerUpL().setVisible(potenziaRisorseBtn);
 	}
 	
 	/**
@@ -478,7 +479,7 @@ public abstract class PartitaStage extends Stage{
 	 * @param selectedBase
 	 * base attuale
 	 */
-	public void setSelectedBase(Base selectedBase) {
+	public void setSelectedBase(Nodo selectedBase) {
 		changeSelectedBase(selectedBase);
 	}
 

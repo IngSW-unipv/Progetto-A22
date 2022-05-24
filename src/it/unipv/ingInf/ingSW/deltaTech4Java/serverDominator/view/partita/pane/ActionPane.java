@@ -1,12 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -32,6 +26,8 @@ public class ActionPane extends Pane implements IDrawable{
 	
 	public ActionPane() {
 		super();
+		drow();
+		
 	}
 
 	public Pane getActionPane() {
@@ -120,41 +116,17 @@ public class ActionPane extends Pane implements IDrawable{
 		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
 		actionMarket.setSpacing(10);
 		actionMarket.getChildren().add(actionMarketL);
-		actionMarketL.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	Giocatore g=new Utente();
-            	p.avviaMarket(new Base(g));
-            }
-		});
 		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		powerUp.setAlignment(Pos.BASELINE_CENTER);
 
 		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
 		powerUp.getChildren().add(powerUpL);
 
-		powerUpL.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	p.avviaPowerUp(new Base());
-            }
-		});
 		
 		HBox dev = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
 		dev.getChildren().add(develop);
-		develop.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	p.avviaDevelopment(new Base());
-            }
-		});
 		controlli.setAlignment(Pos.BASELINE_CENTER);
 		controlli.setSpacing(10);
 		controlli.getChildren().addAll(actionTitle, actionMarket, powerUp, dev);

@@ -46,7 +46,7 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if((int)evt.getNewValue()==0)
+		if((Integer)evt.getNewValue()==0)
 			this.finePartita();
 		
 	}

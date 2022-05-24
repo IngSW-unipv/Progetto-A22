@@ -2,7 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita;
 
 
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp.Development;
@@ -21,9 +20,9 @@ public class PopUpFacade {
 	private Development popUpDevelopment;
 	private Market popUpMarket;
 	private Mercato mkt = new Mercato();
-	private  Base baseUtente;
+	private  Nodo baseUtente;
 	
-	public PopUpFacade(Mercato mercato, Base baseUtente ) {
+	public PopUpFacade(Mercato mercato, Nodo baseUtente ) {
 		this.mkt=mercato;
 		this.baseUtente=baseUtente;
 		this.popUpPowerup =new Powerup(baseUtente);
@@ -42,7 +41,7 @@ public class PopUpFacade {
 	 * Metodo dentro il Pop up di azione, inizializza la scelta del malware per attaccare il nodo selezionato
 	 * @param baseUtente
 	 */
-	public void avviaSelectMalware(Base baseUtente) {
+	public void avviaSelectMalware(Nodo baseUtente) {
 		popUpSelectmalware.setBaseUtente(baseUtente);
 		this.baseUtente=baseUtente;
 		popUpSelectmalware.selectMalware();
@@ -73,7 +72,7 @@ public class PopUpFacade {
 	 * @param baseUtente
 	 */
 	
-	public void avviaMarket(Base baseUtente) {
+	public void avviaMarket(Nodo baseUtente) {
 		popUpMarket.setBaseUtente(baseUtente);
 		popUpMarket.market();
 	}
@@ -143,11 +142,11 @@ public class PopUpFacade {
 		this.mkt = mkt;
 	}
 
-	public Base getBaseUtente() {
+	public Nodo getBaseUtente() {
 		return baseUtente;
 	}
 
-	public void setBaseUtente(Base baseUtente) {
+	public void setBaseUtente(Nodo baseUtente) {
 		this.baseUtente = baseUtente;
 	}
 	

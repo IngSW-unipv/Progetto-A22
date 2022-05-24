@@ -2,7 +2,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 
 import java.math.BigDecimal;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
@@ -35,22 +34,26 @@ public class Market {
 	private int total;
 	private Stage stage;
 	
-	public Market(Base baseUtente) {
+	public Market(Nodo baseUtente) {
 		istance(new Mercato(), baseUtente);
+		buttonPay = ComponentCreator.getIstance().createButton("buy!", Pos.BASELINE_CENTER);
 	}
 	
-	public Market(Mercato mercato, Base baseUtente) {
+	public Market(Mercato mercato, Nodo baseUtente) {
 		istance(mercato, baseUtente);
-	}
+		buttonPay = ComponentCreator.getIstance().createButton("buy!", Pos.BASELINE_CENTER);
+		}
 	
 	public Market() {
 		super();
+		buttonPay = ComponentCreator.getIstance().createButton("buy!", Pos.BASELINE_CENTER);
+
 	}
-	private void istance(Mercato mercato, Base baseUtente) {
+	private void istance(Mercato mercato, Nodo baseUtente) {
 		this.baseUtente=baseUtente;
-		this.cpuMax=baseUtente.getLvl_max_cpu();
-		fwMax=baseUtente.getLvl_max_firewall();
-		ramMax=baseUtente.getLvl_max_ram();
+		this.cpuMax=baseUtente.getRisorse()[0].getMAX_LVL();
+		fwMax=baseUtente.getRisorse()[3].getMAX_LVL();
+		ramMax=baseUtente.getRisorse()[1].getMAX_LVL();
 		eMax=ramMax;
 		this.mercato=mercato;
 		total=0;
@@ -66,7 +69,7 @@ public class Market {
 		
 	}
 	
-	public void market(Base baseUtente) {
+	public void market(Nodo baseUtente) {
 		istance(new Mercato(), baseUtente);
 	}
 	
@@ -333,7 +336,6 @@ public class Market {
 		
 		
 		hMktP.getChildren().add(mktP);
-		buttonPay = ComponentCreator.getIstance().createButton("buy!", Pos.BASELINE_CENTER);
 		buttonPay.setOnAction(e -> {
 			// username = text1.getText();
 			// password = text2.getText();
@@ -530,7 +532,7 @@ public class Market {
 		return baseUtente;
 	}
 
-	public void setBaseUtente(Base baseUtente) {
+	public void setBaseUtente(Nodo baseUtente) {
 		this.baseUtente = baseUtente;
 	}
 

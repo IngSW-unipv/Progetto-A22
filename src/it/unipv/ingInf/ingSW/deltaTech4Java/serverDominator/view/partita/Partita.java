@@ -1,7 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.IDrawable;
 
@@ -10,7 +10,7 @@ public class Partita extends PartitaStage {
 	private FinePartitaObserver fineObserver;
 	private MainDefinitivo mainDefinitivo;
 	
-	public Partita(MainDefinitivo main, Base baseUtente, int durataPartitaSeconds, FinePartitaObserver fineObserver) {
+	public Partita(MainDefinitivo main, Nodo baseUtente, int durataPartitaSeconds, FinePartitaObserver fineObserver) {
 		super(main, baseUtente, durataPartitaSeconds);
 		this.drawable=fineObserver;
 		this.fineObserver=fineObserver;
@@ -18,7 +18,7 @@ public class Partita extends PartitaStage {
 		this.initDrowableFinePartita();
 	}
 	
-	public Partita(MainDefinitivo main, Base baseUtente, int durataPartitaSeconds) {
+	public Partita(MainDefinitivo main, Nodo baseUtente, int durataPartitaSeconds) {
 		super(main, baseUtente, durataPartitaSeconds);
 		this.drawable=fineObserver;
 		this.mainDefinitivo=main;
@@ -30,7 +30,9 @@ public class Partita extends PartitaStage {
 		this.setButtonsVisibilityInActionPane(true, samePlayer, samePlayer); 
 		
 		boolean precedenteBase=mainDefinitivo.getTabellone().getScelta()>0? true:false;
+		
 		mainDefinitivo.getTabellone().checkbasi(this.getSelectedBase().getPossessore());
+		
 		boolean prossimaBase=mainDefinitivo.getTabellone().getContabasi()-mainDefinitivo.getTabellone().getScelta()>0? true:false;
 		this.setButtonsVisibilityInActionPaneStatsPane(precedenteBase, prossimaBase);
 		

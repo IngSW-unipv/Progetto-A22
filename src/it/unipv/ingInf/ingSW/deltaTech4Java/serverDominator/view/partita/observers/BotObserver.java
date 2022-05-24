@@ -22,7 +22,7 @@ public class BotObserver implements PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getNewValue() instanceof Coordinate && evt.getOldValue() instanceof Coordinate ) {
+		if(Coordinate.class.isAssignableFrom(evt.getNewValue().getClass())&& Coordinate.class.isAssignableFrom(evt.getOldValue().getClass())) {
 			Coordinate attaccante=(Coordinate)evt.getNewValue();
 			Coordinate difensore=(Coordinate)evt.getOldValue();;
 			if(mainDefinitivo.getTabellone().getNodo(difensore.getX(), difensore.getY()).getPossessore().getNome().equals(mainDefinitivo.getGiocatori()[0].getNome())) {

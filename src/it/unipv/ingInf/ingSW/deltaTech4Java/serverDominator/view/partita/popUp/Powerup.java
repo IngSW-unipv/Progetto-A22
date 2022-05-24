@@ -34,14 +34,18 @@ public class Powerup {
 	public Powerup(Nodo NodoUtente) {
 		this.NodoUtente=NodoUtente;
 		cpuAdd = 0;  fwAdd = 0;  ramAdd = 0; eAdd = 0; 
+		buttonPowerUp = ComponentCreator.getIstance().createButton("powerUp!", Pos.BASELINE_CENTER);
 		
 	}
 	public Powerup() {
 		cpuAdd = 0;  fwAdd = 0; ; ramAdd = 0; eAdd = 0; 
+		buttonPowerUp = ComponentCreator.getIstance().createButton("powerUp!", Pos.BASELINE_CENTER);
+
 		
 	}
 	public void powerUp(Nodo NodoUtente) {
 		this.NodoUtente=NodoUtente;
+		
 	}
 	
 	/**
@@ -154,13 +158,7 @@ public class Powerup {
 		energiaHbox.setSpacing(8.0);
 		
 		HBox pUButton = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		buttonPowerUp = ComponentCreator.getIstance().createButton("powerUp!", Pos.BASELINE_CENTER);
 		
-		buttonPowerUp.setOnAction(e -> {
-			// username = text1.getText();
-			// password = text2.getText();
-			stage.close();
-		});
 		pUButton.getChildren().add(buttonPowerUp);
 		pUButton.setPadding(new Insets(10, 10, 10, 10));
 		

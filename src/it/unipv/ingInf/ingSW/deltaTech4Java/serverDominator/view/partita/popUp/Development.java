@@ -35,22 +35,20 @@ public class Development {
 	
 	public Development(Nodo nodoUtente) {
 		this.nodoUtente=nodoUtente;
-	}
+		buttonDevelop = ComponentCreator.getIstance().createButton("Develop!", Pos.BASELINE_CENTER);	}
 	
 	public Development() {
 		super();
+		development();
 	}
 	
 	public void development(Nodo baseUtente) {
 		this.nodoUtente=baseUtente;
-		
+		development();
 	}
 	
-	/**
-	 * Interfaccia popup per scegliere il software da sviluppare
-	 */
-	public void development() {
-		
+	public void crea() {
+
 		stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setX(sX); stage.setY(sY);
@@ -137,7 +135,7 @@ public class Development {
 		/*NumberSpinner listeners per max quantita*/ 
 		
 		HBox devB = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		buttonDevelop = ComponentCreator.getIstance().createButton("Develop!", Pos.BASELINE_CENTER);
+		
 			
 		buttonDevelop.setOnAction(e -> {
 			stage.close();
@@ -158,6 +156,15 @@ public class Development {
 		scene.getStylesheets().add("application.css");
 		stage.setTitle("Development");
 		stage.setScene(scene);
+		stage.close();
+	}
+	
+	
+	/**
+	 * Interfaccia popup per scegliere il software da sviluppare
+	 */
+	public void development() {
+		crea();
 		stage.showAndWait();
 	}
 

@@ -254,6 +254,10 @@ public class Base extends Nodo{
 		return stats_software_creati;
 	}
 	
+	public Risorse[] getRisorse() {
+		return risorse;
+	}
+
 	public int getLvl_max_cpu() {
 		return risorse[0].getMAX_LVL();
 	}

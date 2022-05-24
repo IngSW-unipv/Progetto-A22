@@ -1,7 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-import java.beans.PropertyChangeSupport;
-import java.util.Objects;
 
 /**
  * @author Luca Casto 
@@ -10,7 +8,10 @@ import java.util.Objects;
  */
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.Risorse;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Software;
+import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
 public abstract class Nodo implements INodo{
 	private int dist_base;
@@ -19,7 +20,7 @@ public abstract class Nodo implements INodo{
 	private int software_max;
 	private int bonus_def;
 	private int e_disponibile;
-	private int lvl_cpu, lvl_ram, lvl_firewall;
+	private int lvl_cpu, lvl_ram, lvl_firewall, E_lvl;
 	protected Timer time1, time2;
 	private String tipologia;
 	private PropertyChangeSupport changes;
@@ -129,6 +130,14 @@ public abstract class Nodo implements INodo{
 		this.e_disponibile = e_disponibile;
 	}
 	
+	public int getE_lvl() {
+		return E_lvl;
+	}
+
+	public void setE_lvl(int e_lvl) {
+		E_lvl = e_lvl;
+	}
+
 	public int getLvl_cpu() {
 		return lvl_cpu;
 	}
@@ -178,7 +187,8 @@ public abstract class Nodo implements INodo{
 
 /**getter astratto per restituire i valori dei software delle classi specializzate*/
 	public abstract Software[] getStats_software_creati();
+	public abstract Risorse[] getRisorse();
 	public abstract int getTempoRisorsa(String nome);
 	public abstract int getTempoSoftware(String nome);
-		
+	
 }

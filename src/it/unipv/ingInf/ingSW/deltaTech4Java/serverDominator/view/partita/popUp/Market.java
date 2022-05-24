@@ -3,6 +3,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 import java.math.BigDecimal;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
@@ -29,7 +30,7 @@ public class Market {
 	private NumberSpinner quantitaRootCrash;
 	private NumberSpinner quantitaVirus;
 	private NumberSpinner quantitaAntivirus ;
-	private Base baseUtente;
+	private Nodo baseUtente;
 	private Mercato mercato=new Mercato();
 	private int total;
 	private Stage stage;
@@ -99,9 +100,9 @@ public class Market {
 		mktP.setVgap(5);
 		mktP.setHgap(5);
 		
-		Label rcQty = new Label("Own " + String.valueOf(baseUtente.getQnt_rootcrash()) + " rootcrash, buy ");
-		Label vrQty = new Label("Own " + String.valueOf(baseUtente.getQnt_virus()) + " virus, buy ");
-		Label avQty = new Label("Own " + String.valueOf(baseUtente.getQnt_antivirus()) + " antivirus, buy ");
+		Label rcQty = new Label("Own " + String.valueOf(baseUtente.getStats_software_creati()[2].getQuantita()) + " rootcrash, buy ");
+		Label vrQty = new Label("Own " + String.valueOf(baseUtente.getStats_software_creati()[1].getQuantita()) + " virus, buy ");
+		Label avQty = new Label("Own " + String.valueOf(baseUtente.getStats_software_creati()[0].getQuantita()) + " antivirus, buy ");
 		
 		
 		/*NumberSpinner*/

@@ -20,21 +20,23 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentC
 public class SignupView {
 
     //view nodes
-    Label titleHolderText = new Label("SERVER DOMINATOR singup");
+    private Label titleHolderText = new Label("SERVER DOMINATOR singup");
     private Label subTitleHolderText;
     private Label errorMessageSignupLabel = new Label();
     private Label usernameSignup = new Label("username");
     private Label passwordSignup = new Label("password");
     private Label ipSignup = new Label("ip");
-    Label portSignup = new Label("port");
+    private Label portSignup = new Label("port");
     private Button loginButtonChange = new Button("Log in"); //cambio scene
     private Button signupButtonLegit = new Button("Sign Up");
     private TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
     private PasswordField passwordTextFieldSignup;
     private TextField emailTextField;
-    TextField titleTextField;
+    private TextField titleTextField;
     private Stage signupStage;
 
+    
+    
     public Label getTitleHolderText(){
         return titleHolderText;
     }

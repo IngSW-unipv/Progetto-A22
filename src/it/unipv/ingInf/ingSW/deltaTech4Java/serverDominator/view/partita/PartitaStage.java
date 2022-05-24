@@ -11,6 +11,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.b
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.HexData;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.nodes.Hexagon;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.board.bean.util.Point;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ActionPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.BaseStatsPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
@@ -110,7 +111,7 @@ public abstract class PartitaStage extends Stage{
 	/**
 	 * base le cui proprietà sono visualizzate 
 	 */
-	private Base selectedBase;
+	private Nodo selectedBase;
 	
 	/**
 	 * dimensioni del tavolo da gioco
@@ -131,7 +132,7 @@ public abstract class PartitaStage extends Stage{
 	 */
 	private ProgressBarConteiner fineProgress;
 	
-	public PartitaStage(Classifica classifica, Base baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa,int durataPartitaSeconds) {
+	public PartitaStage(Classifica classifica, Nodo baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa,int durataPartitaSeconds) {
 		super();
 		super.setMinHeight(800);
 		super.setMinWidth(1000);
@@ -155,7 +156,7 @@ public abstract class PartitaStage extends Stage{
 		this.initPlayTableListener();
 		this.fineProgress.addElement("", durataPartitaSeconds*1000, ProgressStyle.BLACK_STYLE);
 		this.fineProgress.setTitle("FINE PARTITA");
-		this.disponiPannelli();
+		//this.disponiPannelli();
 	}
 
 	public PartitaStage(MainDefinitivo main,Base baseUtente,int durataPartitaSeconds) {
@@ -462,13 +463,13 @@ public abstract class PartitaStage extends Stage{
 	public void setBasicMap(BasicMap basicMap) {
 		this.basicMap = basicMap;
 	}
-
+	public void setFineObserver(FinePartitaObserver fineObserver) {};
 	/**
 	 * Recupera la proprità selectedBase
 	 * @return
 	 * base attuale
 	 */
-	public Base getSelectedBase() {
+	public Nodo getSelectedBase() {
 		return selectedBase;
 	}
 	
@@ -638,7 +639,7 @@ public abstract class PartitaStage extends Stage{
 		 basicMap = new BasicMap(mappa, contestoGrafico);
 	}
 
-	private void logScrollPaneMaker(Base baseUtente) {
+	private void logScrollPaneMaker(Nodo baseUtente) {
 		this.logScrollPane= new ScrollPane();
 		this.logScrollPane.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 		this.log = new TextBox(null, logScrollPane);

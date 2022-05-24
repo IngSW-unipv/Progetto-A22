@@ -1,6 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,14 +18,14 @@ import javafx.scene.paint.Color;
 public class BaseStatsPane extends Pane implements IDrawable {
 
 	
-	private Base nodeBase = new Base();
+	private Nodo nodeBase;
 	private Button buttonTitle;
 	private Button buttonBack;
 	private Button buttonNext;
 	public final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	
 	
-	public  BaseStatsPane(Base bU) {
+	public  BaseStatsPane(Nodo bU) {
 		super();
 		super.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
@@ -35,7 +35,7 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		buttonNext=ComponentCreator.getIstance().createButton(">>", Pos.TOP_CENTER);
 	}
 		
-	public Pane getBsPane(Base bU) {
+	public Pane getBsPane(Nodo bU) {
 		nodeBase=bU;
 		make();
 		return this;
@@ -94,11 +94,11 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		ybG.add(ybCpuLvl, 0, 3);
 		ybG.add(new Label("" + nodeBase.getLvl_cpu()), 1, 3);
 		ybG.add(ybAv, 0, 4);
-		ybG.add(new Label("" + nodeBase.getQnt_antivirus()), 1, 4);
+		ybG.add(new Label("" + nodeBase.getStats_software_creati()[0].getQuantita()), 1, 4);
 		ybG.add(ybVr, 0, 5);
-		ybG.add(new Label("" + nodeBase.getQnt_virus()), 1, 5);
+		ybG.add(new Label("" + nodeBase.getStats_software_creati()[1].getQuantita()), 1, 5);
 		ybG.add(ybRc, 0, 6);
-		ybG.add(new Label("" + nodeBase.getQnt_rootcrash()), 1, 6);
+		ybG.add(new Label("" + nodeBase.getStats_software_creati()[2].getQuantita()), 1, 6);
 
 		hBg.getChildren().add(ybG);
 		hBg.setAlignment(Pos.CENTER);
@@ -116,11 +116,11 @@ public class BaseStatsPane extends Pane implements IDrawable {
 	 * Restituisce nodo base
 	 * @return
 	 */
-	public Base getNodeBase() {
+	public Nodo getNodeBase() {
 		return nodeBase;
 	}
 
-	public void setNodeBase(Base bU) {
+	public void setNodeBase(Nodo bU) {
 		this.nodeBase = bU;
 	}
 

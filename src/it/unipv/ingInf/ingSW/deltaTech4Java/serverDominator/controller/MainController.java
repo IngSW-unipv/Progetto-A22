@@ -33,29 +33,17 @@ public class MainController {
 	private UserAccount userAccount;
 		
 	public static void main(String[] args) {
-		if(Giocatore.class.isAssignableFrom(new Utente("",5).getClass()))
-			System.out.println("si");
-		else 
-			System.err.println("no");
-		if(PartitaController.class.isAssignableFrom(new Utente("",5).getClass()))
-			System.out.println("si");
-		else 
-			System.err.println("no");
+		MainController m= new MainController();
 	}
 	
 	public MainController() {
-		super();
-	}
-
-	public void inizializzazione() {
 		this.loginView= new LoginView();
 		this.signupView = new SignupView();
 		this.login= new LoginController(loginView, signupView);
 		this.loginView.getStage().show();
 		this.initLogin();
-		
-	}
-		
+		}
+
 	public void initLogin() {
 		//quando utente clicca su login
 		loginView.getLoginButton().setOnAction(event ->{
@@ -64,7 +52,7 @@ public class MainController {
 			if(userAccount == null) {
 				loginView.getErrorMessageLabel().setText("Login error, account non existing");
 			}else if(userAccount!= null) {//us !=  null --> LoggedIn View
-				lobbyView.setUserAccount(userAccount);
+				
 				loginView.getStage().close();
 				lobbyView= new LobbyView(userAccount);
 				initLobbyController();
@@ -89,18 +77,21 @@ public class MainController {
 			try {
 				mainDefinitivo.avvioPartita(lobbyView.getSelectedDifecolta()[0], lobbyView.getSelectedDifecolta()[1], 
 						lobbyView.getUserAccount().getUsername(), lobbyView.getUserAccount().getMny());
-					partitaStage=new Partita(mainDefinitivo, 
-							(Base)mainDefinitivo.getTabellone().trovaBase
-							(new Utente(userAccount.getUsername(),userAccount.getMny())), 0);
 					
-					partitaCont = new PartitaController(mainDefinitivo, partitaStage,
+				partitaStage=new Partita(mainDefinitivo, 
+							(Base)mainDefinitivo.getTabellone().trovaBase
+							(new Utente(userAccount.getUsername(),userAccount.getMny())), lobbyView.getSelectedDifecolta()[0]*60*1000);
+					
+				partitaCont = new PartitaController(mainDefinitivo, partitaStage,
 								(Base)mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
 					
-					finePartita= new FinePartitaObserver(mainDefinitivo, partitaStage, lobbyView, partitaStage.getClassificaPane());
-					this.initObservers(mainDefinitivo, finePartita, new BotObserver(mainDefinitivo, partitaStage),new NodoObserver(partitaStage));
-					partitaStage.disponiPannelli();
-					partitaStage.show();
+				finePartita= new FinePartitaObserver(mainDefinitivo, partitaStage, lobbyView, partitaStage.getClassificaPane());
+				Partita p=(Partita)partitaStage;
+				p.setFineObserver(finePartita);
 				lobbyView.close();
+				this.initObservers(mainDefinitivo, finePartita, new BotObserver(mainDefinitivo, partitaStage),new NodoObserver(partitaStage));
+				partitaStage.show();
+				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,7 +102,7 @@ public class MainController {
 	}
 	
 	public void initLogoutController() {
-		Menu menu=new Menu("SdMenu");
+		Menu menu=new Menu("Menu");
 		MenuItem menuItem=new MenuItem("Logout");
 		menuItem.setOnAction(event->{
 			PersistenceFacade.getInstance().persistenceOff();
@@ -126,7 +117,6 @@ public class MainController {
 	private void initObservers(MainDefinitivo main,FinePartitaObserver finePartita,BotObserver bo,NodoObserver o ) {
 		main.getGiocatori()[1].getChanges().addPropertyChangeListener(Giocatore.GIOCATORE_PROP,finePartita);
 		for(int i=2;i<main.getGiocatori().length;i++) {
-			//TODO
 			if (Bot.class.isAssignableFrom(main.getGiocatori()[i].getClass()))
 				main.getGiocatori()[i].getChanges().addPropertyChangeListener(Bot.BOT_PROP,bo );
 		}
@@ -137,5 +127,9 @@ public class MainController {
 		}
 		
 	}
-	
+	/*
+	 * Exception in thread "JavaFX Application Thread" java.lang.ClassCastException: class it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud 
+	 * cannot be cast to class it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base (it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud 
+	 * and it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base are in unnamed module of loader 'app')
+	 */
 }

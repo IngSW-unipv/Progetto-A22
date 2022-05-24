@@ -1,10 +1,10 @@
-#Thu May 19 20:45:46 CEST 2022
+#Mon May 23 22:26:02 CEST 2022
 config.creator.lable.password=Password
 config.creator.lable.pathToJavaFxLib=path to the JavaFX 'lib' folder
 Controller.err.LinguaNonSelezionata=You have to choose a language
 InitLinguaChooser.listaLingue.Titolo=Choose the language
-RunPanel.button.run=Run the game
 config.creator.lable.dataBaseUrl=DataBase URL
+RunPanel.button.run=Run the game
 InitLinguaChooser.lable.Titolo=Welcome to server dominator
 asset4=en Asset 4
 Controller.err.dataBaseCreator=Unable to create database

@@ -36,8 +36,19 @@ public class MappaDefinitiva{
 		this.y_max=y_max;
 		int i,j;
 		
-		
 		map= new Nodo[x_max][y_max];
+		
+		switch(x_max) {
+		case(15):
+			n_basi=3;
+			break;
+		case(20):
+			n_basi=5;
+			break;
+		case(30):
+			n_basi=10;
+			break;
+		}
 		
 		this.assegnamento(n_basi, giocatori);
 		
@@ -67,7 +78,7 @@ public class MappaDefinitiva{
 		/** metodo usato per assegnare le basi ai giocatori/bot, nella mappa di gioco
 		 * selezionando in base alla difficolt� scelta
 		 */
-			this.n_basi=n_basi;
+		
 			basi= new Coordinate[n_basi];
 			
 			switch(n_basi) {

@@ -213,7 +213,10 @@ public class MappaDefinitiva{
 			boolean prox=false;
 			int i;
 			
-			if(x+1> x_max) {
+			x= x - Math.floorDiv(y, 2) ;
+			
+			
+			if(x+1 > x_max) {
 				xsup= 0;
 			} else xsup= x+1;
 			

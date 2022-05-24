@@ -469,7 +469,7 @@ public abstract class PartitaStage extends Stage{
 	 * @return
 	 * base attuale
 	 */
-	public Base getSelectedBase() {
+	public Nodo getSelectedBase() {
 		return selectedBase;
 	}
 	
@@ -639,7 +639,7 @@ public abstract class PartitaStage extends Stage{
 		 basicMap = new BasicMap(mappa, contestoGrafico);
 	}
 
-	private void logScrollPaneMaker(Base baseUtente) {
+	private void logScrollPaneMaker(Nodo baseUtente) {
 		this.logScrollPane= new ScrollPane();
 		this.logScrollPane.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), new CornerRadii(10), new Insets(10, 10, 10, 10))));
 		this.log = new TextBox(null, logScrollPane);

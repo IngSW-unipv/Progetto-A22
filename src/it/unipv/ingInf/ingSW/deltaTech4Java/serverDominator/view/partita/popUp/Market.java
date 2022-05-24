@@ -269,7 +269,7 @@ public class Market {
 			}
 			ramAdd=1;
 			ramFinal = baseUtente.getLvl_ram() + ramAdd; 
-			if(ramFinal>=baseUtente.getLvl_max_ram()) {
+			if(ramFinal>=baseUtente.getRisorse()[0].getMAX_LVL()) {
 				ramFinal--;
 			}
 			setLableText(totaleCarrello,String.valueOf(total));
@@ -526,7 +526,7 @@ public class Market {
 		this.stage = stage;
 	}
 
-	public Base getBaseUtente() {
+	public Nodo getBaseUtente() {
 		return baseUtente;
 	}
 

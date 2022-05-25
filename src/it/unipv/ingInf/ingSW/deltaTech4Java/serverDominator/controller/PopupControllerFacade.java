@@ -53,12 +53,7 @@ public class PopupControllerFacade {
 	}
 	public void initPowerUp(){
         popUpFacade.getPopUpPowerup().getButtonPowerUp().setOnAction(actionEvent -> {
-            if(popUpFacade.getPopUpPowerup().getEnergy()>0) {
-                mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia");
-                partitaStage.addPtenziamentoRisorsa("Potenziamento energia in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia")*1000+200);
-            }
-
+            
             if(popUpFacade.getPopUpPowerup().getCpu()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento cpu in corso", mainModello.getTempoRisorsa(

@@ -28,17 +28,17 @@ public class Powerup {
 	private static final Insets STANDARD_PADDING = new Insets(10, 10, 10, 10);
 	private Stage stage;
 	private Button buttonPowerUp;
-	private int cpuAdd, fwAdd,  ramAdd, eAdd;
+	private int cpuAdd, fwAdd,  ramAdd;
 	//Luca: attenzione che si deve potenziare anche l'energia
 	//Habib: aggiunta
 	public Powerup(Nodo NodoUtente) {
 		this.NodoUtente=NodoUtente;
-		cpuAdd = 0;  fwAdd = 0;  ramAdd = 0; eAdd = 0; 
+		cpuAdd = 0;  fwAdd = 0;  ramAdd = 0; 
 		buttonPowerUp = ComponentCreator.getIstance().createButton("powerUp!", Pos.BASELINE_CENTER);
 		
 	}
 	public Powerup() {
-		cpuAdd = 0;  fwAdd = 0; ; ramAdd = 0; eAdd = 0; 
+		cpuAdd = 0;  fwAdd = 0; ; ramAdd = 0;
 		buttonPowerUp = ComponentCreator.getIstance().createButton("powerUp!", Pos.BASELINE_CENTER);
 
 		
@@ -138,24 +138,6 @@ public class Powerup {
 		ramAdjust.getChildren().addAll(ramInc, ramDec, ramResult);
 		ramAdjust.setSpacing(8.0);
 
-		Label energiaPlus = new Label("Actual Energy level: " + NodoUtente.getE_disponibile()/75);
-		HBox energiaHbox = new HBox();
-		Button energiaInc = new Button("Energy+1"); //ramInc.setPrefSize(xS, yS);
-		Button energiaDec = new Button("Energy-1"); //ramDec.setPrefSize(xS, yS);
-		Label energiaResult = new Label();
-		
-		
-		energiaInc.setOnAction(e -> {
-			eAdd=1 ;
-			energiaResult.setText(" add: " + eAdd);
-		});
-		
-		energiaDec.setOnAction(e -> {
-			eAdd=0 ;
-			energiaResult.setText(" add: " + eAdd );
-		});
-		energiaHbox.getChildren().addAll(energiaInc, energiaDec, energiaResult);
-		energiaHbox.setSpacing(8.0);
 		
 		HBox pUButton = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		
@@ -168,8 +150,6 @@ public class Powerup {
 		layout.add(ramAdjust, 1, 1);
 		layout.add(fwPlus, 0, 2);
 		layout.add(fwAdjust, 1, 2);
-		layout.add(energiaPlus, 0, 3);
-		layout.add(energiaHbox, 1, 3);
 		
 		powerUp.getChildren().addAll(powerUpTitle, availableE, layout, pUButton);
 		
@@ -180,7 +160,7 @@ public class Powerup {
 		stage.showAndWait();
 	}
 	public void initAllZero() {
-		cpuAdd = 0;  fwAdd = 0;  ramAdd = 0; eAdd = 0; 
+		cpuAdd = 0;  fwAdd = 0;  ramAdd = 0;
 	}
 	public Stage getStage() {
 		return stage;
@@ -204,10 +184,6 @@ public class Powerup {
 
 	public int getRam() {
 		return ramAdd;
-	}
-
-	public int getEnergy() {
-		return eAdd;
 	}
 
 	public Button getButtonPowerUp() {
@@ -247,12 +223,7 @@ public class Powerup {
 	public void setRamAdd(int ramAdd) {
 		this.ramAdd = ramAdd;
 	}
-	public int geteAdd() {
-		return eAdd;
-	}
-	public void seteAdd(int eAdd) {
-		this.eAdd = eAdd;
-	}
+	
 	public static Insets getStandardPadding() {
 		return STANDARD_PADDING;
 	}

@@ -35,7 +35,7 @@ public class Partita extends PartitaStage {
 		super.getBaseStatsPane().getButtonBack().setDisable(!precedenteBase);
 
 		mainDefinitivo.getTabellone().checkbasi(super.getSelectedBase().getPossessore());
-		boolean prossimaBase=mainDefinitivo.getTabellone().getContabasi()-mainDefinitivo.getTabellone().getScelta()<=0? false:true;
+		boolean prossimaBase=super.getSelectedBase().getPossessore().getBasi_prese()-(mainDefinitivo.getTabellone().getScelta()+1)<=0? false:true;
 		super.getBaseStatsPane().getButtonNext().setDisable(!prossimaBase);
 		
 		boolean attaccabile=mainDefinitivo.nodecheck(this.getSelectedBase().getPossessore(),super.getSelectedPoint().getIntX(),

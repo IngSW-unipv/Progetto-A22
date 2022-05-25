@@ -304,7 +304,8 @@ public abstract class PartitaStage extends Stage{
 			if (data != null) { 			// controllo se il click avviene fuori dagli esagoni
 				this.selectedNode=data.nodo;
 				this.selectedHexagon=est;
-				this.selectedPoint=new Point(Math.floor(est.getX()+(est.getY()/2)) , est.getY());
+				Double d= Math.floor(est.getX()+(est.getY()/2));
+				this.selectedPoint=new Point(d.intValue() , est.getY());
 				this.basicMap.drawMap(est);
 				this.setSelectedNodeProperty();
 				this.doOnClic();

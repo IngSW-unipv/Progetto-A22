@@ -21,11 +21,9 @@ public abstract class Nodo implements INodo{
 	private int bonus_def;
 	private int e_disponibile;
 	private int lvl_cpu, lvl_ram, lvl_firewall, E_lvl;
-	protected Timer time1, time2;
 	private String tipologia;
 	private PropertyChangeSupport changes;
 	public static final String NOME_POSS_PROP="possessore.nome";
-	/**time1 usato per risorse, time 2 usato per software*/
 	
 	/**
 	 * Costruttore per creare un oggetto astratto Nodo vuoto
@@ -34,8 +32,6 @@ public abstract class Nodo implements INodo{
 	 */
 	public Nodo () {
 		software_disponibile=0;
-		this.time1=new Timer();
-		this.time2= new Timer();
 		this.changes= new PropertyChangeSupport(this);
 		this.possessore=new Sistema();
 	}
@@ -51,11 +47,6 @@ public abstract class Nodo implements INodo{
 		this.software_disponibile=0;
 		this.software_max=0;
 		this.dist_base=0;
-		
-		this.time1=new Timer();
-		this.time2= new Timer();
-		
-		
 		this.changes= new PropertyChangeSupport(this);
 		
 	}
@@ -71,16 +62,11 @@ public abstract class Nodo implements INodo{
 		this.software_disponibile=nodo.getSoftware_disponibile();
 		this.software_max=nodo.getSoftware_max();
 		this.dist_base=nodo.getDist_base();
-		
-		this.time1=new Timer();
-		this.time2= new Timer();
-
 		this.changes= new PropertyChangeSupport(this);
 	}
-	//COS'E'?!!!!!!!!!!!!!
 		/**metodi da usare per il mercato, al momento specializzati 
 		 * solo per il nodo base. Metodo usato anche per il potenziamento
-		 * immediato dopo la conquista di un nodo cloud.
+		 * immediato dopo la conquista di un nodo cloud, fatto override.
 		 * @param
 		 * nome risorsa
 		 */
@@ -89,9 +75,9 @@ public abstract class Nodo implements INodo{
 		
 		return check;
 	}
-	//COS'E'?!!!!!!!!!!!!!
+	
 	/**metodi da usare per il mercato, al momento specializzati 
-	 * solo per il nodo base
+	 * solo per il nodo base, fatto override.
 	 * @param
 	 * nome software
 	 * @param

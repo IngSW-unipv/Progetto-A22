@@ -62,7 +62,8 @@ public class Test4 {
 		
 		System.out.println("tutto ok");
 		
-		System.out.println(medio.trovaBase(gmedio[1]).getTipologia());
+		
+		System.out.println(medio.getNodo(1, 14));
 		System.out.println(medio.trovaBase(gmedio[1]).getPossessore().getNome());
 	
 	}

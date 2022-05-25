@@ -2,6 +2,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
+
+import java.beans.PropertyChangeSupport;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
 
 /**
@@ -21,6 +24,10 @@ public class Battaglia extends Thread{
 	private int t_timer;
 	private String report;
 	private Nodo partenza;
+	private boolean life=false;
+	private PropertyChangeSupport changes;
+	public static final String BATTLE_PROP="battaglia";
+	
 	
 	/**Permette di creare un oggetto di tipo Battaglia
 	 * @param Nodo attaccante
@@ -37,6 +44,8 @@ public class Battaglia extends Thread{
 		sel_attaccanti= attaccante.getStats_software_creati();
 		sel_difensori=difensore.getStats_software_creati();
 		time= new Timer();
+		life=true;
+		changes= new PropertyChangeSupport(this);
 		
 	}
 
@@ -152,14 +161,18 @@ public class Battaglia extends Thread{
 	
 	/**esecuzione della battaglia */
 	public void run() {
-		
-		time.countdown(t_timer);
-		time.timer(t_timer);
-		esito= this.calcola_vincitore();
-		report=stampa_report(esito);
-		if(esito) {
-			this.aggiornastati();
+		while(life) {
+			time.timer(t_timer);
+			esito= this.calcola_vincitore();
+			report=stampa_report(esito);
+			if(esito) {
+				this.aggiornastati();
+				
+			}
+			changes.firePropertyChange(BATTLE_PROP, 0, 1);
+			life=false;
 		}
+		
 	}
 
 //--------------getter and setter------------//
@@ -187,8 +200,18 @@ public class Battaglia extends Thread{
 	public void setPartenza(Nodo partenza) {
 		this.partenza = partenza;
 	}
+
+	public Nodo getAttaccante() {
+		return attaccante;
+	}
+
+	public Nodo getDifensore() {
+		return difensore;
+	}
+
+	public PropertyChangeSupport getChanges() {
+		return changes;
+	}
 	
-	
-		
 	
 }

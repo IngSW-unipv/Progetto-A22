@@ -1,9 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -23,10 +20,9 @@ import javafx.scene.text.FontWeight;
 public class StatsNodePane {
 	
 	public StatsNodePane() {
+		buttonAttacca =ComponentCreator.getIstance().createButton("attack", Pos.BASELINE_CENTER);
+
 	}	
-	//TODO: IMPORTANTE:
-	//TODO: DA RIVEDERE CON GLI ALTRI LE COSE DA MOSTRARE E LE COSE DA NASCONDERE 
-	//TODO: RICORDARSIII!!!!
 	final Insets STANDARD_PADDING = new Insets(10,10,10,10);
 	private Label titleL = new Label("Info Nodo");
 	private Label owner = new Label("Node owner");
@@ -66,15 +62,7 @@ public class StatsNodePane {
 		cpuLvl.setFont(Font.font("Cambria", 18));
 		cpuLvl.setOpacity(0.9);
 		
-		buttonAttacca =ComponentCreator.getIstance().createButton("attack", Pos.BASELINE_CENTER);
-		buttonAttacca.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent ae) {
-            	PopUpFacade p=new PopUpFacade();
-            	p.avviaSelectMalware();
-            }
-		});
+		
 		Pane statsNode = new Pane();
 		statsNode.setBackground(
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 10, 0, 0))));

@@ -87,6 +87,7 @@ public class MainController {
 					
 				finePartita= new FinePartitaObserver(mainDefinitivo, partitaStage, lobbyView, partitaStage.getClassificaPane());
 				Partita p=(Partita)partitaStage;
+				partitaStage.addAvviso("inizio partita...");
 				p.setFineObserver(finePartita);
 				lobbyView.close();
 				this.initObservers(mainDefinitivo, finePartita, new BotObserver(mainDefinitivo, partitaStage),new NodoObserver(partitaStage));

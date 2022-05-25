@@ -64,12 +64,9 @@ public class Cloud extends Nodo {
 	public void potenzia_risorsa(String nome) {
 				
 		boolean check=false;
-		if(nome!="Firewall") {
+		if(!nome.equalsIgnoreCase("firewall")) {
 			System.out.println("risorsa non potenziabile");
 		}else {
-			/*start timer per potenziamento firewall*/
-			super.time1.countdown(risorse[3].getTempo_richiesto());
-			super.time1.timer(risorse[3].getTempo_richiesto());
 			check=risorse[3].potenziamento();
 		}
 		if(check) {
@@ -88,14 +85,11 @@ public class Cloud extends Nodo {
 			
 		boolean check=false;
 		int n_soft;
-		if(nome!="Antivirus") {
+		if(!nome.equalsIgnoreCase("Antivirus")) {
 			System.out.println("software non disponibile in nodo cloud");
 		}else {
 			n_soft=quantita+super.getSoftware_disponibile();
 			if(n_soft<=super.getSoftware_max()) {
-			/*start timer per creazione software*/
-				super.time2.countdown(stats_software_creati[0].getTemp_richiesto()*quantita);
-				super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantita);
 				stats_software_creati[0]= new Antivirus(1,n_soft);
 				check=true;
 				super.setSoftware_disponibile(n_soft);
@@ -106,13 +100,14 @@ public class Cloud extends Nodo {
 		} else System.out.println("azione non eseguita");
 		
 	}
+	
 	/** ritorna valore intero che rappresenta il tempo di attesa per il potenziamento della risorsa selezionata
 	 * @param nome
 	 * nome della risorsa di cui si vuole sapere il tempo di potenziamento (per il nodo cloud � disponibile solo Firewall)
 	 */
 	public int getTempoRisorsa(String nome) {
 		int tempo=-1;
-		if(nome!="Firewall") {
+		if(!nome.equalsIgnoreCase("firewall")) {
 			return tempo;
 		} else {
 			tempo=risorse[3].getTempo_richiesto();
@@ -126,7 +121,7 @@ public class Cloud extends Nodo {
 	 */
 	public int getTempoSoftware(String nome) {
 		int tempo=-1;
-		if(nome!="Antivirus") {
+		if(!nome.equalsIgnoreCase("Antivirus")) {
 			return tempo;
 		} else {
 			tempo=stats_software_creati[0].getTemp_richiesto();

@@ -77,7 +77,7 @@ public class Base extends Nodo{
 		boolean check=false;
 		int i;
 		for(i=0; i<TIPI_RISORSE;i++) {
-			if(risorse[i].getNome()==nome) {
+			if(risorse[i].getNome().equalsIgnoreCase(nome)) {
 				check= risorse[i].potenziamento(); 
 			}
 		}
@@ -94,13 +94,10 @@ public class Base extends Nodo{
 		boolean check=false;
 		int en_usata, i;
 		for(i=0; i<TIPI_RISORSE;i++) {
-			if(risorse[i].getNome()==nome) {
+			if(risorse[i].getNome().equalsIgnoreCase(nome)) {
 				if(risorse[i].getE_richiesta()<= risorse[2].getStat1()) {
 						en_usata= risorse[2].getStat1()-risorse[i].getE_richiesta();
 						risorse[2].setStat1(en_usata);
-						/*start countdown per potenziamento risorsa*/
-						super.time1.countdown(risorse[i].getTempo_richiesto()); //countdown per visualizzazione a schermo
-						super.time1.timer(risorse[i].getTempo_richiesto());		//timer per attesa operazione
 						check= risorse[i].potenziamento(); 
 				}
 			}
@@ -128,7 +125,7 @@ public class Base extends Nodo{
 	public int getTempoSoftware(String nome) {
 		int tempo=-1;
 		for(int i=0;i<TIPI_SOFTWARE;i++) {
-			if(stats_software_creati[i].getNome()==nome)
+			if(stats_software_creati[i].getNome().equalsIgnoreCase(nome))
 				tempo=stats_software_creati[i].getTemp_richiesto();
 		}
 		return tempo;
@@ -149,7 +146,7 @@ public class Base extends Nodo{
 			quantita=this.getSpazio_Ram();
 		}
 		for(i=0;i<TIPI_SOFTWARE;i++) {
-			if(stats_software_creati[i].getNome()==nome) {
+			if(stats_software_creati[i].getNome().equalsIgnoreCase(nome)) {
 				n_soft=super.getSoftware_disponibile()+quantita;
 				quantita=stats_software_creati[i].getQuantita()+quantita;
 				switch(i) {
@@ -186,27 +183,21 @@ public class Base extends Nodo{
 		n_soft=super.getSoftware_disponibile() + quantita;
 		if(n_soft<=risorse[1].getStat1()) {
 			for(i=0;i<TIPI_SOFTWARE;i++) {
-				if(stats_software_creati[i].getNome()==nome) {
+				if(stats_software_creati[i].getNome().equalsIgnoreCase(nome)) {
 					quantita=stats_software_creati[i].getQuantita()+quantita;
 					switch(i) {
 					case 0: 
-						super.time2.countdown(stats_software_creati[0].getTemp_richiesto()* quantita);
-						super.time2.timer(stats_software_creati[0].getTemp_richiesto()*quantita);
 						if(this.getSpazio_Ram()-quantita>=0) {
 							stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
 						}
 						
 						break;
 					case 1: 
-						super.time2.countdown(stats_software_creati[1].getTemp_richiesto()*quantita);
-						super.time2.timer(stats_software_creati[1].getTemp_richiesto()*quantita);
 						if(this.getSpazio_Ram()-quantita>=0) {
 							stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
 						}
 						break;
 					case 2:
-						super.time2.countdown(stats_software_creati[2].getTemp_richiesto()*quantita);
-						super.time2.timer(stats_software_creati[2].getTemp_richiesto()*quantita);
 						if(this.getSpazio_Ram()-quantita>=0) {
 							stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
 						}

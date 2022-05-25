@@ -133,8 +133,8 @@ public abstract class PartitaStage extends Stage{
 	
 	public PartitaStage(Classifica classifica, Nodo baseUtente,Nodo[][] nodi, Integer nodiAltezzaMappa,Integer nodiLarghezzaMappa,int durataPartitaSeconds) {
 		super();
-		super.setMinHeight(800);
-		super.setMinWidth(1000);
+		super.setMinHeight(700);
+		super.setMinWidth(800);
 		super.setAlwaysOnTop(false);
 		this.menuBarCreator();
 		this.statsNodePane=new StatsNodePane();
@@ -148,7 +148,7 @@ public abstract class PartitaStage extends Stage{
 		this.classificaPaneCreator(classifica);
 		this.baseStatsPane=new BaseStatsPane(baseUtente);
 		this.selectedBase=baseUtente;
-		this.dimensioni=new Pair<Integer, Integer>(nodiAltezzaMappa, nodiLarghezzaMappa);
+		this.dimensioni=new Pair<Integer, Integer>(nodiLarghezzaMappa,nodiAltezzaMappa );
 		this.logScrollPaneMaker(baseUtente);
 		this.playTableMaker(nodi);
 		this.poweUpBox.addDrawable(baseStatsPane);
@@ -159,7 +159,7 @@ public abstract class PartitaStage extends Stage{
 	}
 
 	public PartitaStage(MainDefinitivo main,Nodo baseUtente,int durataPartitaSeconds) {
-		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getTabellone().getX_max(),main.getTabellone().getY_max(),durataPartitaSeconds);
+		this(main.getClassifica(),baseUtente,main.getTabellone().getMap(),main.getTabellone().getY_max(),main.getTabellone().getX_max(),durataPartitaSeconds);
 	}
 	
 	public void classificaPaneCreator(Classifica c) {
@@ -257,7 +257,7 @@ public abstract class PartitaStage extends Stage{
 		VBox vPartitaBox=new VBox();
 		vPartitaBox.setSpacing(10);
 		vPartitaBox.getChildren().addAll(menuBar.getMenuBar(),borderPane);
-		Scene scena = new Scene(vPartitaBox,1000,800);
+		Scene scena = new Scene(vPartitaBox,800,700);
 		scena.getStylesheets().add("application.css");
 		super.setScene(scena);
 		this.drowMappa();

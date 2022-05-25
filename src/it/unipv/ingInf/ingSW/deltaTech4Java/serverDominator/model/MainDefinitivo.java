@@ -1,5 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Collections;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
@@ -15,13 +17,12 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Uten
  * classe facade del modello, crea la partita, crea e avvia i bot.
  * classe con cui comunica il controller dell'interfaccia grafica
  */
-public class MainDefinitivo extends Thread{
+public class MainDefinitivo extends Thread {
 	private MappaDefinitiva tabellone;
 	private int n_basi;
 	private Giocatore[] giocatori;
 	private Mercato mercato;
 	private int t_unitario, t_timer;
-	Thread threadBot[];
 	private Classifica classifica;
 	private Colore colore;
 	
@@ -62,7 +63,8 @@ public class MainDefinitivo extends Thread{
 		mercato=new Mercato();
 		classifica= new Classifica(giocatori);
 		fight= new Battaglia[maxbattle];
-		this.avvioBot(); 
+		
+	//	this.avvioBot(); 
 		
 	}
 
@@ -175,7 +177,7 @@ public class MainDefinitivo extends Thread{
 	public boolean powerupCheck(int x, int y){
 	
 		boolean checkp= false;
-		if(tabellone.getNodo(x, y).getPossessore().getNome().equals(giocatori[1].getNome())) {
+		if(tabellone.getNodo(x, y).getPossessore().getNome().equalsIgnoreCase(giocatori[1].getNome())) {
 			checkp=true;
 		}
 		return checkp;
@@ -192,10 +194,16 @@ public class MainDefinitivo extends Thread{
 	 */
 	public void powerup(int x, int y, String risorsa) {
 		
-		if(this.powerupCheck(x, y)) {
-			tabellone.getNodo(x, y).potenzia_risorsa(risorsa);
-		}
+		PowerupThread powerupth;
+			
+			if(this.powerupCheck(x, y)) {
+				powerupth= new PowerupThread(tabellone.getNodo(x, y), risorsa);
+				powerupth.countdown();
+				
+			}
+		
 	}
+	
 	/** ritorna valore intero che rappresenta il tempo di attesa per il potenziamento della risorsa selezionata
 	 * @param x
 	 * ascissa del nodo selezionato
@@ -209,19 +217,7 @@ public class MainDefinitivo extends Thread{
 		tempo=tabellone.getNodo(x, y).getTempoRisorsa(risorsa);
 		return tempo;
 	}
-	/** ritorna valore intero che rappresenta il tempo di attesa per la creazione dei software selezionata
-	 * @param x
-	 * ascissa del nodo selezionato
-	 * @param y
-	 * ordinata del nodo selezionato
-	 * @param nome
-	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud � disponibile solo Antivirus)
-	 */
-	public int getTempoSoftware(int x, int y, String software) {
-		int tempo=-1;
-		tempo=tabellone.getNodo(x, y).getTempoSoftware(software);
-		return tempo;
-	}
+	
 
 //------------metodi per creazione software----------//
 	
@@ -257,11 +253,27 @@ public class MainDefinitivo extends Thread{
 	 */
 	public void creazioneSoftware(String nome, int quantita, int x, int y) {
 		
+		CreazioneThread creazioneth;
+		
 		if(this.softcheck(x, y)) {
-			tabellone.getNodo(x, y).crea_software(nome, quantita);
+			 creazioneth= new CreazioneThread(tabellone.getNodo(x, y), nome, quantita);
+			 creazioneth.countdown();
 		}
 	}
-		
+	
+	/** ritorna valore intero che rappresenta il tempo di attesa per la creazione dei software selezionata
+	 * @param x
+	 * ascissa del nodo selezionato
+	 * @param y
+	 * ordinata del nodo selezionato
+	 * @param nome
+	 * nome del software di cui si vuole sapere il tempo di potenziamento (per il nodo cloud � disponibile solo Antivirus)
+	 */
+	public int getTempoSoftware(int x, int y, String software) {
+		int tempo=-1;
+		tempo=tabellone.getNodo(x, y).getTempoSoftware(software);
+		return tempo;
+	}
 //------------- metodi per mercato------------//
 	
 	/**controlla se il nodo selezionato appartiene all'utente e che sia un nodo base
@@ -278,7 +290,7 @@ public class MainDefinitivo extends Thread{
 	public boolean marketcheck(int x, int y) {
 		
 		boolean check=false;
-		if(tabellone.getNodo(x, y).getTipologia().equals("base")) {
+		if(tabellone.getNodo(x, y).getTipologia().equalsIgnoreCase("base")) {
 			if(tabellone.getNodo(x, y).getPossessore().equals(giocatori[1])) {
 				check=true;
 			}
@@ -347,10 +359,14 @@ public class MainDefinitivo extends Thread{
 	 */
 	public int battlecheck(Giocatore attaccante, int x, int y,int quantitaV, int quantitaR) {
 		
+		ObserverFineBattaglia finebattagliaobs;
 		t_timer=0;
+		
 		if(this.nodecheck(attaccante, x, y)){
 			t_timer=t_unitario+(t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base() );
 			fight[maxbattle]=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y), t_timer);
+			finebattagliaobs= new ObserverFineBattaglia(attaccante, x, y, this);
+			fight[maxbattle].getChanges().addPropertyChangeListener(Battaglia.BATTLE_PROP, finebattagliaobs);
 			fight[maxbattle].setPartenza(tabellone.dist_minima(x, y, attaccante));
 			fight[maxbattle].selezione(quantitaV, quantitaR);
 			count=maxbattle;
@@ -372,9 +388,11 @@ public class MainDefinitivo extends Thread{
 	public void avvioBattaglia(Giocatore attaccante, int x, int y) {
 		
 		fight[count].start();
-		/*le  istruzioni seguenti sono da lanciare una volta terminato l'esecuzione
-		 * del thread di battaglia
-		 */
+				
+	}
+	
+	public void fineBattaglia(Giocatore attaccante, int x, int y) {
+		
 		if(fight[count].getEsito()) {
 			if(tabellone.getNodo(x, y).getTipologia().equals("base")) {
 			tabellone.aggiornabasi(x,y, attaccante);
@@ -385,6 +403,7 @@ public class MainDefinitivo extends Thread{
 		classifica.aggiornaClassifica();
 		System.out.println( fight[count].getReport() );
 	}
+	
 //-------------metodi di fine partita------------//
 	
 	/**usato alla fine della partita restituisce la classifica e stampa a video

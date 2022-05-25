@@ -19,6 +19,7 @@ public class Bot extends Giocatore{
 	private MappaDefinitiva map;
 	private Coordinate base;
 	private Timer time;
+	private Timer time2;
 	private Battaglia battle;
 	private final int T_UNITARIO=5;
 	private int t_timer;
@@ -42,6 +43,7 @@ public class Bot extends Giocatore{
 		super(nome);
 		super.setPunteggio(0);
 		time= new Timer();
+		time2 = new Timer();
 		confini= new Coordinate[6];
 		incremento=1;
 		cont=0;
@@ -88,13 +90,17 @@ public class Bot extends Giocatore{
 				risorsa= "Energia";
 				break;
 			}
+			time2.timer(map.trovaBase(this).getTempoRisorsa(risorsa));
 			map.trovaBase(this).potenzia_risorsa(risorsa);
 			break;
 		case 2:
 			/* creazione software nel nodo base del bot */
 			
+			time2.timer(map.trovaBase(this).getTempoSoftware("Antivirus"));
 			map.trovaBase(this).crea_software("Antivirus", 5);
+			time2.timer(map.trovaBase(this).getTempoSoftware("Virus"));	
 			map.trovaBase(this).crea_software("Virus", 5);
+			time2.timer(map.trovaBase(this).getTempoSoftware("Rootcrash"));
 			map.trovaBase(this).crea_software("Rootcrash", 5);
 			break;
 		case 3:

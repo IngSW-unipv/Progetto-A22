@@ -336,11 +336,6 @@ public class Market {
 		
 		
 		hMktP.getChildren().add(mktP);
-		buttonPay.setOnAction(e -> {
-			// username = text1.getText();
-			// password = text2.getText();
-			stage.close();
-		});
 		buttonPay.setPrefWidth(200);
 		buttonPay.setPrefHeight(20);
 		HBox finalBill = new HBox();

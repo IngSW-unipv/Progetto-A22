@@ -213,15 +213,14 @@ public class MappaDefinitiva{
 			boolean prox=false;
 			int i;
 			
-			x= x - Math.floorDiv(y, 2) ;
-			
-			
-			if(x+1 > x_max) {
+			x= x - y/2;
+
+			if(x+1> x_max) {
 				xsup= 0;
 			} else xsup= x+1;
 			
 			if (x-1<0) {
-				xinf=x_max;
+				xinf=x_max-1;
 			} else xinf=x-1;
 			
 			if(y+1> y_max) {
@@ -229,15 +228,15 @@ public class MappaDefinitiva{
 			} else ysup=y+1;
 			
 			if (y-1<0) {
-				yinf=y_max;
+				yinf=y_max-1;
 			} else yinf= y-1;
 
-			vicini[0]=map[xinf][y].getPossessore().getNome();	
-			vicini[1]=map[xsup][y].getPossessore().getNome();
-			vicini[2]=map[x][ysup].getPossessore().getNome();
-			vicini[3]=map[x][yinf].getPossessore().getNome();
-			vicini[4]=map[xsup][yinf].getPossessore().getNome();
-			vicini[5]=map[xinf][ysup].getPossessore().getNome();
+			vicini[0]=map[xinf+(y/2)][y].getPossessore().getNome();	
+			vicini[1]=map[xsup+(y/2)][y].getPossessore().getNome();
+			vicini[2]=map[x+(ysup/2)][ysup].getPossessore().getNome();
+			vicini[3]=map[x+(yinf/2)][yinf].getPossessore().getNome();
+			vicini[4]=map[xsup+(yinf/2)][yinf].getPossessore().getNome();
+			vicini[5]=map[xinf+(ysup/2)][ysup].getPossessore().getNome();
 			
 			for(i=0;i<6;i++) {
 				if(vicini[i]== player.getNome() ) {
@@ -332,7 +331,7 @@ public class MappaDefinitiva{
 			return basi;
 		}
 		/**
-		 * returna il valore int a cui è associata la base scelta all'interno dell'array "basi" di tipo coordinate
+		 * returna il valore int a cui ï¿½ associata la base scelta all'interno dell'array "basi" di tipo coordinate
 		 * @return
 		 * identificatore base scelta
 		 */
@@ -340,7 +339,7 @@ public class MappaDefinitiva{
 			return sceltabase;
 		}
 		/**
-		 * setta il valore int a cui è associata la base scelta all'interno dell'array "basi" di tipo coordinate
+		 * setta il valore int a cui ï¿½ associata la base scelta all'interno dell'array "basi" di tipo coordinate
 		 * @param
 		 * identificatore base scelta
 		 */

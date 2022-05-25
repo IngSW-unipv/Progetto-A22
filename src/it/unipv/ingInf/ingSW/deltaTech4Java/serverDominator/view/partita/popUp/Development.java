@@ -136,10 +136,6 @@ public class Development {
 		
 		HBox devB = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		
-			
-		buttonDevelop.setOnAction(e -> {
-			stage.close();
-		});
 		
 		layout.add(avQty, 0	, 0);
 		layout.add(quantitaAntivirus, 1, 0);

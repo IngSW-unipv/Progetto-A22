@@ -56,25 +56,25 @@ public class PopupControllerFacade {
             if(popUpFacade.getPopUpPowerup().getEnergy()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento energia in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia")*1000);
             }
 
             if(popUpFacade.getPopUpPowerup().getCpu()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento cpu in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu")*1000);
             }
 
             if(popUpFacade.getPopUpPowerup().getFirewall()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Firewall");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento firewall in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Firewall"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Firewall")*1000);
             }
 
             if(popUpFacade.getPopUpPowerup().getRam()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Ram");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento ram in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Ram"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Ram")*1000);
             }
 
             popUpFacade.getPopUpPowerup().getStage().close();
@@ -91,7 +91,8 @@ public class PopupControllerFacade {
                         partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY());
                 partitaStage.addProduzioneSoftware("Produzione antivirus: "+quantitaAntiVirus+"Per il nodo ("
                 		+partitaStage.getSelectedHexagon().getX()+","+partitaStage.getSelectedHexagon().getY()+")", mainModello.getTempoSoftware(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "antivirus"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "antivirus")*1000
+                		*quantitaAntiVirus +1000);
         	}
             if(quantitaVirus>0) {
 
@@ -99,7 +100,8 @@ public class PopupControllerFacade {
                         partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY());
                 partitaStage.addProduzioneSoftware("Produzione virus: "+quantitaVirus+"Per il nodo ("
                 		+partitaStage.getSelectedHexagon().getX()+","+partitaStage.getSelectedHexagon().getY()+")", mainModello.getTempoSoftware(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "virus"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "virus")*1000
+                		*quantitaVirus+ 1000);
                 
             }
             if(quantitaRootcrash>0) {
@@ -107,7 +109,8 @@ public class PopupControllerFacade {
                         partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY());
                 partitaStage.addProduzioneSoftware("Produzione rootcrash: "+quantitaRootcrash+"Per il nodo ("
                 		+partitaStage.getSelectedHexagon().getX()+","+partitaStage.getSelectedHexagon().getY()+")", mainModello.getTempoSoftware(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "virus"));
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "rootcrash")*1000
+                		*quantitaRootcrash +1000);
             }
             popUpFacade.getPopUpDevelopment().getStage().close();
         });

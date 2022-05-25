@@ -198,4 +198,9 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		return "Giocatore [punteggio=" + punteggio + ", nome=" + nome + ", colore=" + colore + ", deltaCoin="
 				+ deltaCoin + "]";
 	}
+	public PropertyChangeSupport getChanges() {
+		return changes;
+	}
+	
+	
 }

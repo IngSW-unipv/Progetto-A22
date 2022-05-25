@@ -166,6 +166,7 @@ public class PopupControllerFacade {
 			}
 			popUpFacade.getPopUpMarket().initAllZero();
 			this.partitaStage.getBaseStatsPane().make();
+			popUpFacade.getPopUpMarket().getStage().close();
 			});
 	}
 	public PartitaStage getPartitaStage() {

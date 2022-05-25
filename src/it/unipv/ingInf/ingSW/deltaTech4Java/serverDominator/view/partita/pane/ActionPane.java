@@ -26,6 +26,9 @@ public class ActionPane extends Pane implements IDrawable{
 	
 	public ActionPane() {
 		super();
+		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
+		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
+		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
 		drow();
 		
 	}
@@ -113,19 +116,17 @@ public class ActionPane extends Pane implements IDrawable{
 		HBox actionMarket = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		actionMarket.setAlignment(Pos.BASELINE_CENTER);
 
-		actionMarketL = ComponentCreator.getIstance().createButton("Market", Pos.BASELINE_CENTER);
 		actionMarket.setSpacing(10);
 		actionMarket.getChildren().add(actionMarketL);
 
 		HBox powerUp =ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
 		powerUp.setAlignment(Pos.BASELINE_CENTER);
 
-		powerUpL = ComponentCreator.getIstance().createButton("PowerUp", Pos.BASELINE_CENTER);
 		powerUp.getChildren().add(powerUpL);
 
 		
 		HBox dev = ComponentCreator.getIstance().createHbox(Pos.BASELINE_CENTER);
-		develop = ComponentCreator.getIstance().createButton("development", Pos.BASELINE_CENTER);
+		
 		dev.getChildren().add(develop);
 		controlli.setAlignment(Pos.BASELINE_CENTER);
 		controlli.setSpacing(10);

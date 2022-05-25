@@ -5,7 +5,6 @@ import java.util.Collections;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -65,7 +64,6 @@ public void disponi() {
 		signupStage.setScene(new Scene(sp));
 	}
 
-    private Scene signupView; //view
    
     Parent signup;
 
@@ -94,11 +92,6 @@ public void disponi() {
         return xBox;
     }
 
-    private Node createTitle() {
-        Label signupTitle = new Label("Sign up");
-        return signupTitle;
-    }
-    
     private HBox createSuperTitle() {
     	
     	HBox superTitle = new HBox();

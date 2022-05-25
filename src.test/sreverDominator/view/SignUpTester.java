@@ -1,6 +1,5 @@
 package sreverDominator.view;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
 import javafx.application.Application;
 import javafx.stage.Stage;

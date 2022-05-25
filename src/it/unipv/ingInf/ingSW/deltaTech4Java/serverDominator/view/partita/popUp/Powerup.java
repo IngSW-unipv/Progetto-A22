@@ -179,7 +179,9 @@ public class Powerup {
 		stage.setScene(scene);
 		stage.showAndWait();
 	}
-
+	public void initAllZero() {
+		cpuAdd = 0;  fwAdd = 0;  ramAdd = 0; eAdd = 0; 
+	}
 	public Stage getStage() {
 		return stage;
 	}

@@ -31,10 +31,6 @@ public class MainController {
 	private LoginView loginView;
 	private SignupView signupView;
 	private UserAccount userAccount;
-		
-	public static void main(String[] args) {
-		MainController m= new MainController();
-	}
 	
 	public MainController() {
 		this.loginView= new LoginView();
@@ -128,9 +124,77 @@ public class MainController {
 		}
 		
 	}
-	/*
-	 * Exception in thread "JavaFX Application Thread" java.lang.ClassCastException: class it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud 
-	 * cannot be cast to class it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base (it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud 
-	 * and it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base are in unnamed module of loader 'app')
-	 */
+
+	public MainDefinitivo getMainDefinitivo() {
+		return mainDefinitivo;
+	}
+
+	public void setMainDefinitivo(MainDefinitivo mainDefinitivo) {
+		this.mainDefinitivo = mainDefinitivo;
+	}
+
+	public LoginController getLogin() {
+		return login;
+	}
+
+	public void setLogin(LoginController login) {
+		this.login = login;
+	}
+
+	public PartitaController getPartitaCont() {
+		return partitaCont;
+	}
+
+	public void setPartitaCont(PartitaController partitaCont) {
+		this.partitaCont = partitaCont;
+	}
+
+	public PartitaStage getPartitaStage() {
+		return partitaStage;
+	}
+
+	public void setPartitaStage(PartitaStage partitaStage) {
+		this.partitaStage = partitaStage;
+	}
+
+	public FinePartitaObserver getFinePartita() {
+		return finePartita;
+	}
+
+	public void setFinePartita(FinePartitaObserver finePartita) {
+		this.finePartita = finePartita;
+	}
+
+	public LobbyView getLobbyView() {
+		return lobbyView;
+	}
+
+	public void setLobbyView(LobbyView lobbyView) {
+		this.lobbyView = lobbyView;
+	}
+
+	public LoginView getLoginView() {
+		return loginView;
+	}
+
+	public void setLoginView(LoginView loginView) {
+		this.loginView = loginView;
+	}
+
+	public SignupView getSignupView() {
+		return signupView;
+	}
+
+	public void setSignupView(SignupView signupView) {
+		this.signupView = signupView;
+	}
+
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
+	
 }

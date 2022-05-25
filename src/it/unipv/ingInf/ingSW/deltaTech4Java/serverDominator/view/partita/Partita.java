@@ -27,18 +27,20 @@ public class Partita extends PartitaStage {
 	@Override
 	public void doOnClic() {
 		boolean samePlayer = this.getSelectedBase().getPossessore().getNome().equals(this.getSelectedNode().getPossessore().getNome());
-		this.setButtonsVisibilityInActionPane(true, samePlayer, samePlayer); 
+		//this.setButtonsVisibilityInActionPane(true, samePlayer, samePlayer); 
+		super.getActionPane().getDevelop().setDisable(!samePlayer);
+		super.getActionPane().getPowerUpL().setDisable(!samePlayer);
 		
 		boolean precedenteBase=mainDefinitivo.getTabellone().getScelta()>0? true:false;
+		super.getBaseStatsPane().getButtonBack().setDisable(!precedenteBase);
+
+		mainDefinitivo.getTabellone().checkbasi(super.getSelectedBase().getPossessore());
+		boolean prossimaBase=mainDefinitivo.getTabellone().getContabasi()-mainDefinitivo.getTabellone().getScelta()<=0? false:true;
+		super.getBaseStatsPane().getButtonNext().setDisable(!prossimaBase);
 		
-		mainDefinitivo.getTabellone().checkbasi(this.getSelectedBase().getPossessore());
-		
-		boolean prossimaBase=mainDefinitivo.getTabellone().getContabasi()-mainDefinitivo.getTabellone().getScelta()>0? true:false;
-		this.setButtonsVisibilityInActionPaneStatsPane(precedenteBase, prossimaBase);
-		
-		boolean attaccabile=mainDefinitivo.nodecheck(this.getSelectedBase().getPossessore(),this.getSelectedPoint().getIntX(),
-				this.getSelectedPoint().getIntY());
-		this.getStatsNodePane().getButtonAttacca().setDisable(!attaccabile);
+		boolean attaccabile=mainDefinitivo.nodecheck(this.getSelectedBase().getPossessore(),super.getSelectedPoint().getIntX(),
+				super.getSelectedPoint().getIntY());
+		super.getStatsNodePane().getButtonAttacca().setDisable(!attaccabile);
 
 	}
 

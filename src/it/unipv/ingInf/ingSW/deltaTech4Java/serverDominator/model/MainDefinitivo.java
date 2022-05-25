@@ -1,7 +1,5 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Collections;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;

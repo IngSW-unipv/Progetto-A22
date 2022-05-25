@@ -56,27 +56,27 @@ public class PopupControllerFacade {
             if(popUpFacade.getPopUpPowerup().getEnergy()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento energia in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia")*1000);
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Energia")*1000+200);
             }
 
             if(popUpFacade.getPopUpPowerup().getCpu()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento cpu in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu")*1000);
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Cpu")*1000+200);
             }
 
             if(popUpFacade.getPopUpPowerup().getFirewall()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Firewall");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento firewall in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Firewall")*1000);
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Firewall")*1000+200);
             }
 
             if(popUpFacade.getPopUpPowerup().getRam()>0) {
                 mainModello.powerup(partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Ram");
                 partitaStage.addPtenziamentoRisorsa("Potenziamento ram in corso", mainModello.getTempoRisorsa(
-                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Ram")*1000);
+                		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(),"Ram")*1000+200);
             }
-
+            popUpFacade.getPopUpPowerup().initAllZero();
             popUpFacade.getPopUpPowerup().getStage().close();
         });
     }
@@ -92,7 +92,7 @@ public class PopupControllerFacade {
                 partitaStage.addProduzioneSoftware("Produzione antivirus: "+quantitaAntiVirus+"Per il nodo ("
                 		+partitaStage.getSelectedHexagon().getX()+","+partitaStage.getSelectedHexagon().getY()+")", mainModello.getTempoSoftware(
                 		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "antivirus")*1000
-                		*quantitaAntiVirus +1000);
+                		*quantitaAntiVirus+200);
         	}
             if(quantitaVirus>0) {
 
@@ -101,7 +101,7 @@ public class PopupControllerFacade {
                 partitaStage.addProduzioneSoftware("Produzione virus: "+quantitaVirus+"Per il nodo ("
                 		+partitaStage.getSelectedHexagon().getX()+","+partitaStage.getSelectedHexagon().getY()+")", mainModello.getTempoSoftware(
                 		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "virus")*1000
-                		*quantitaVirus+ 1000);
+                		*quantitaVirus+200);
                 
             }
             if(quantitaRootcrash>0) {
@@ -110,8 +110,9 @@ public class PopupControllerFacade {
                 partitaStage.addProduzioneSoftware("Produzione rootcrash: "+quantitaRootcrash+"Per il nodo ("
                 		+partitaStage.getSelectedHexagon().getX()+","+partitaStage.getSelectedHexagon().getY()+")", mainModello.getTempoSoftware(
                 		partitaStage.getSelectedPoint().getIntX(),partitaStage.getSelectedPoint().getIntY(), "rootcrash")*1000
-                		*quantitaRootcrash +1000);
+                		*quantitaRootcrash+200);
             }
+            
             popUpFacade.getPopUpDevelopment().getStage().close();
         });
 
@@ -120,17 +121,13 @@ public class PopupControllerFacade {
 	public void initAttackMain() {
 		
 		popUpFacade.getPopUpSelectmalware().getFightButton().setOnAction(actionEvent ->{
-			/*
-			 * mainModello.battlecheck restituisce un tempo in secondi e 
-			 * partitaStage.addAttacco accetta tempo in millisecondi; per questo c'è il *1000
-			 */
-			partitaStage.addAttacco(partitaStage.getSelectedBase().getPossessore().getNome() + "\t vs \t" + partitaStage.getSelectedNode().getPossessore().getNome()  //
-			+ "(" + partitaStage.getSelectedPoint().getIntX() + ", " + partitaStage.getSelectedPoint().getIntY() + ") ",  
-			mainModello.battlecheck(partitaStage.getSelectedBase().getPossessore(), 
-			partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), 
-			popUpFacade.getPopUpSelectmalware().getQuantitaVirus(), popUpFacade.getPopUpSelectmalware().getQuantitaRootCrash()) *1000 ); //TO-DO pulsante dopo get nome, stampa anche cooridnate
-
-			
+			partitaStage.addAttacco(
+					  partitaStage.getSelectedBase().getPossessore().getNome() 
+					+ "\t vs \t" + partitaStage.getSelectedNode().getPossessore().getNome()  
+					+ "(" + partitaStage.getSelectedPoint().getIntX() + ", " + partitaStage.getSelectedPoint().getIntY() + ") "
+					,  mainModello.battlecheck(partitaStage.getSelectedBase().getPossessore(), 
+							partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), 
+							popUpFacade.getPopUpSelectmalware().getQuantitaVirus(), popUpFacade.getPopUpSelectmalware().getQuantitaRootCrash()) *1000+300 ); 
 			mainModello.avvioBattaglia(partitaStage.getSelectedBase().getPossessore(), partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY());
 		});
 	
@@ -144,20 +141,35 @@ public class PopupControllerFacade {
 		 */
 		popUpFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
 			int quantitaHardware=-1;
-			if(popUpFacade.getPopUpMarket().getQuantitaAntivirus()>0)
+			if(popUpFacade.getPopUpMarket().getQuantitaAntivirus()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaAntivirus(), "antivirus");
-			if(popUpFacade.getPopUpMarket().getQuantitaVirus()>0)
+			}
+				
+			if(popUpFacade.getPopUpMarket().getQuantitaVirus()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaVirus(), "virus");
-			if(popUpFacade.getPopUpMarket().getQuantitaRootCrash()>0)
+
+			}
+			if(popUpFacade.getPopUpMarket().getQuantitaRootCrash()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaRootCrash(), "rootcrash");
-			if(popUpFacade.getPopUpMarket().getLivelloCPU()>0)
+
+			}
+			if(popUpFacade.getPopUpMarket().getLivelloCPU()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "cpu");
-			if(popUpFacade.getPopUpMarket().getLivelloRam()>0)
+
+			}
+			if(popUpFacade.getPopUpMarket().getLivelloRam()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "ram");
-			if(popUpFacade.getPopUpMarket().getLivelloEnergia()>0)
+
+			}
+			if(popUpFacade.getPopUpMarket().getLivelloEnergia()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "energia");
-			if(popUpFacade.getPopUpMarket().getLivelloFirewall()>0)
+
+			}
+			if(popUpFacade.getPopUpMarket().getLivelloFirewall()>0) {
 				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "firewall");
+
+			}
+			popUpFacade.getPopUpMarket().initAllZero();
 			this.partitaStage.getBaseStatsPane().make();
 			});
 	}

@@ -1,7 +1,6 @@
 package sreverDominator.view;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller.PartitaController;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;

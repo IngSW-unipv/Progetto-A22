@@ -392,6 +392,20 @@ public class Market {
     	}
     	
 	}
+	public void initAllZero(){
+		total=0;
+		cpuAdd = 0;
+		cpuFinal = 0; 
+		fwAdd =0;
+		fwFinal =0;
+		ramAdd = 0; 
+		ramFinal = 0; 
+		eAdd = 0; 
+		eFinal = 0;
+		quantitaRootCrash.setNumber(BigDecimal.valueOf(0));
+		quantitaVirus.setNumber(BigDecimal.valueOf(0));
+		quantitaAntivirus.setNumber(BigDecimal.valueOf(0)) ;
+	}
 	public int getQuantitaRootCrash() {
 		return quantitaRootCrash.getNumberField().getNumber().intValue();
 	}

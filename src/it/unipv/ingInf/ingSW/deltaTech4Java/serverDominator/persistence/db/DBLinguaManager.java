@@ -150,7 +150,6 @@ public class DBLinguaManager implements ILanguageManager{
 			while(rs1.next())
 			{
 				result.setProperty(rs1.getNString(1), rs1.getNString(position));
-				break;
 			}
 		}catch (Exception e){
 			if(!exists(lingua))

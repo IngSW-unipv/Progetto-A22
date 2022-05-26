@@ -3,10 +3,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.IDrawable;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
@@ -79,13 +79,17 @@ public class LobbyView extends Stage implements IDrawable {
 		userInfo.setAlignment(Pos.CENTER);
 		ScrollPane obiettivi=new ScrollPane();
 		obiettivi.setContent(this.obiettivi);
+		
 		GridPane seeltaDifficol=new GridPane();
+		seeltaDifficol.setAlignment(Pos.CENTER);
+
 		seeltaDifficol.setBackground(new Background(new BackgroundFill(Color.web("#DCDCDC"), new CornerRadii(10), null)));
 		
 		seeltaDifficol.addRow(0, titolo);
 		for(int i=0; i<radios.size();i++)
 			seeltaDifficol.addRow(i+1, radios.get(i));
 		seeltaDifficol.addRow(radios.size()+1, avvioPartita);
+		obiettivi.setMaxHeight(150);
 		GridPane center=new GridPane();
 		center.addColumn(0, obiettivi);
 		HBox space=new HBox();
@@ -188,10 +192,11 @@ public class LobbyView extends Stage implements IDrawable {
 		GridPane grid=new GridPane();
 		grid.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null)));
 		grid.setOpacity(0.8);
-		final ArrayList<Obiettivo> obiettivi=DBObiettiviDOAFactory.getIObiettiviDAO(new ObPunteggio()).selectAll();
 		ArrayList<ObPunteggio> obiettiviPunteggio=new ArrayList<ObPunteggio>();
-		for(Obiettivo o:obiettivi) {
-			obiettiviPunteggio.add((ObPunteggio)o);
+		for(ObiettiviUser o:userAccount.getObiettiviUsers()) {
+			if(!o.getStato().equalsIgnoreCase("completato")) {
+				obiettiviPunteggio.add((ObPunteggio)PersistenceFacade.getInstance().selectObiettiviByObiettiviId(new ObPunteggio(o.getPrimaryKey().getObiettivo(), null)));
+			}
 		}
 		int i=0;
 		Collections.sort(obiettiviPunteggio);

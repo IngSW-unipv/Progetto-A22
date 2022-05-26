@@ -284,12 +284,13 @@ public class MappaDefinitiva{
 		
 			int i, temp, dist_min;
 
-				confini[0]= new Coordinate(xinf,y, vicini[0]);
-				confini[1]= new Coordinate(xsup,y, vicini[1]);
-				confini[2]= new Coordinate(x, ysup, vicini[2]);
-				confini[3]= new Coordinate(x, yinf, vicini[3]);
-				confini[4]= new Coordinate(xsup,yinf, vicini[4]);
-				confini[5]= new Coordinate(xinf,ysup, vicini[5]);	
+				confini[0]= new Coordinate(check(xinf+(y/2)),y, vicini[0]);
+				confini[1]= new Coordinate(check(xsup+(y/2)),y, vicini[1]);
+				confini[2]= new Coordinate(check(x+(ysup/2)), ysup, vicini[2]);
+				confini[3]= new Coordinate(check(x+(yinf/2)), yinf, vicini[3]);
+				confini[4]= new Coordinate(check(xsup+(yinf/2)),yinf, vicini[4]);
+				confini[5]= new Coordinate(check(xinf+(ysup/2)),ysup, vicini[5]);	
+				
 			
 			dist_min=10000;
 			temp=0;

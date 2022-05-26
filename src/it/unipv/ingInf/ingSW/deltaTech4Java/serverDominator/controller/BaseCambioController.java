@@ -27,7 +27,7 @@ public class BaseCambioController {
 	 * Metodo associato al pulsante per visualizzare la prossima base posseduta dal giocatore
 	 */
 	public void initAvantiBase() {
-		partitaStage.getBaseStatsPane().getButtonNext().setOnAction(actionEvent -> {
+	/*	partitaStage.getBaseStatsPane().getButtonNext().setOnAction(actionEvent -> {
 			mainDefinitivo.getTabellone().checkbasi(partitaStage.getSelectedBase().getPossessore());
 			{
 				if(mainDefinitivo.getTabellone().getContabasi()>mainDefinitivo.getTabellone().getScelta()) {
@@ -39,7 +39,7 @@ public class BaseCambioController {
 				
 			}
 			
-		});
+		});*/
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class BaseCambioController {
 	 * Metodo associato al pulsante per visualizzare la precedente base posseduta dal giocatore
 	 */
 	public void iniIndietroBase() {
-		partitaStage.getBaseStatsPane().getButtonBack().setOnAction(actionEvent -> {
+	/*	partitaStage.getBaseStatsPane().getButtonBack().setOnAction(actionEvent -> {
 			mainDefinitivo.getTabellone().checkbasi(partitaStage.getSelectedBase().getPossessore());
 			int i=mainDefinitivo.getTabellone().getScelta()-1;
 			if(i>=0) {
@@ -60,7 +60,7 @@ public class BaseCambioController {
 				partitaStage.getBaseStatsPane().getButtonBack().setDisable(true);
 			}
 			
-		});
+		}); */
 	}
 	public MainDefinitivo getMainDefinitivo() {
 		return mainDefinitivo;

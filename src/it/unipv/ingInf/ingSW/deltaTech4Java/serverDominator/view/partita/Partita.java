@@ -30,14 +30,14 @@ public class Partita extends PartitaStage {
 		//this.setButtonsVisibilityInActionPane(true, samePlayer, samePlayer); 
 		super.getActionPane().getDevelop().setDisable(!samePlayer);
 		super.getActionPane().getPowerUpL().setDisable(!samePlayer);
-		
+	/*	
 		boolean precedenteBase=mainDefinitivo.getTabellone().getScelta()>0? true:false;
 		super.getBaseStatsPane().getButtonBack().setDisable(!precedenteBase);
 
 		mainDefinitivo.getTabellone().checkbasi(super.getSelectedBase().getPossessore());
 		boolean prossimaBase=super.getSelectedBase().getPossessore().getBasi_prese()-(mainDefinitivo.getTabellone().getScelta()+1)<=0? false:true;
 		super.getBaseStatsPane().getButtonNext().setDisable(!prossimaBase);
-		
+*/		
 		boolean attaccabile=mainDefinitivo.nodecheck(this.getSelectedBase().getPossessore(),super.getSelectedPoint().getIntX(),
 				super.getSelectedPoint().getIntY());
 		super.getStatsNodePane().getButtonAttacca().setDisable(!attaccabile);

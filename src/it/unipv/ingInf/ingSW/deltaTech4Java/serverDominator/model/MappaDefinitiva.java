@@ -139,7 +139,7 @@ public class MappaDefinitiva{
 	 * @param attaccante
 	 * giocatore che sceglie di attaccare un altro nodo
 	 */
-	public void aggiornabasi(int x, int y, Giocatore attaccante) {
+/*	public void aggiornabasi(int x, int y, Giocatore attaccante) {
 	
 		int i;
 		for(i=0;i<n_basi;i++) {
@@ -148,13 +148,14 @@ public class MappaDefinitiva{
 			}
 		}
 	}
+	*/
 	
 	/**controlla se un giocatore ha piu di un nodo base, 
 	 * avendone magari conquistata una da un' altro giocatore
 	 * @param player
 	 * utente o giocatore in generale, che possiede piu di un nodo base
 	 */
-	public void checkbasi(Giocatore player) {
+/*	public void checkbasi(Giocatore player) {
 		int i;
 		int x,y;
 		contabasi=1;
@@ -167,7 +168,7 @@ public class MappaDefinitiva{
 				contabasi++;
 			} 
 		}
-	}
+	}*/
 	
 	/** usato per individuare, dato il giocatore che intende attaccare, 
 	 * il nodo base del giocatore attaccante
@@ -182,10 +183,10 @@ public class MappaDefinitiva{
 			int x,y;
 			x=3;
 			y=1;
-			if(sceltabase!=0) {
+			/*if(sceltabase!=0) {
 				x=basiutente[sceltabase].getX();
 				y=basiutente[sceltabase].getY();
-			}else 
+			}else*/ 
 				for(i=0;i<n_basi; i++) {
 					if(basi[i].getNome().equals(player.getNome()) ) {
 						x=basi[i].getX();

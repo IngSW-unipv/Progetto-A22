@@ -213,7 +213,7 @@ public void potenzia_risorsa(String nome) {
 			}
 		}else System.out.println("spazio non disponibile in ram");
 		if(check){
-			System.out.println("successo");
+			System.out.println("software creati con successo");
 		} else System.out.println("azione non eseguita");	
 	}
 	

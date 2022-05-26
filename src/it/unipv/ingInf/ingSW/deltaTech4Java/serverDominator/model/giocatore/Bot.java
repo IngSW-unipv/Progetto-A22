@@ -109,8 +109,12 @@ public class Bot extends Giocatore{
 				t_timer= T_UNITARIO;
 				//t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
+				
+				System.out.println("bot crea battaglia");
 			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
 				battle.selezione( (int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1, 1);
+				System.out.println("bot seleziona software");
+				
 				if(battle.calcola_vincitore() ) {
 					battle.aggiornastati();
 					cont++;
@@ -129,11 +133,16 @@ public class Bot extends Giocatore{
 				t_timer= T_UNITARIO;
 				//t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
+				System.out.println("bot crea battaglia");
+				
 			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
 				battle.selezione( (int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1, 1);
+				System.out.println("bot seleziona software");
+				
 				if(battle.calcola_vincitore() ) {
 					battle.aggiornastati();
 					cont++;
+					
 					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
 				}
 			

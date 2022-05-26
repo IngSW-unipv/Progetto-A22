@@ -371,6 +371,7 @@ public class MainDefinitivo extends Thread {
 		//	fight[maxbattle].setPartenza(tabellone.dist_minima(x, y, attaccante));
 			fight[maxbattle].selezione(quantitaV, quantitaR);
 			count=maxbattle;
+			
 			maxbattle--;
 			
 		}
@@ -396,8 +397,8 @@ public class MainDefinitivo extends Thread {
 		
 		if(fight[count].getEsito()) {
 			if(tabellone.getNodo(x, y).getTipologia().equals("base")) {
-			tabellone.aggiornabasi(x,y, attaccante);
-			tabellone.checkbasi(attaccante);
+	//		tabellone.aggiornabasi(x,y, attaccante);
+	//		tabellone.checkbasi(attaccante);
 			}
 		}
 		maxbattle++;
@@ -481,5 +482,13 @@ public class MainDefinitivo extends Thread {
 		return mercato;
 	}
 
+	public int getT_unitario() {
+		return t_unitario;
+	}
+
+	public void setT_unitario(int t_unitario) {
+		this.t_unitario = t_unitario;
+	}
+	
 	
 }

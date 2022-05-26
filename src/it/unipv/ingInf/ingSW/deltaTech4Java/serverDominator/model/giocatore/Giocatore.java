@@ -5,7 +5,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+
 
 /**
  * @author Matteo c

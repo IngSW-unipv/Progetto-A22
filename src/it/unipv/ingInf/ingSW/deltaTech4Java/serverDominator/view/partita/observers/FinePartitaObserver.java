@@ -4,10 +4,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.IDrawable;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
@@ -19,25 +20,21 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	/**
 	 * partita (stage da chiudere)
 	 */
-	private Stage partitaStage;
+	private PartitaStage partitaStage;
 	/**
 	 * prepartita (stage da aprire)
 	 */
 	private Stage prePartitaStage;
-	/**
-	 * classifica da stampare
-	 */
-	private Pane classificaPane;
 	
-
-
-	public FinePartitaObserver(MainDefinitivo mainDefinitivoModello, Stage partitaStage, Stage prepartitaStage,
+	private Stage stageClassifica=null;
+	
+	public FinePartitaObserver(MainDefinitivo mainDefinitivoModello, PartitaStage partitaStage, Stage prepartitaStage,
 			Pane classificaPane) {
 		super();
 		this.mainDefinitivoModello = mainDefinitivoModello;
 		this.partitaStage = partitaStage;
 		this.prePartitaStage = prepartitaStage;
-		this.classificaPane = classificaPane;
+		
 	}
 
 
@@ -46,8 +43,11 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if((Integer)evt.getNewValue()==0)
+		if((Integer)evt.getNewValue()==0) {
+			partitaStage.getFineProgress().setRunning(false);
 			this.finePartita();
+
+		}
 		
 	}
 	
@@ -55,26 +55,36 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	 * Metodo che conclude la partita attuale
 	 */
 	public void finePartita() {
+		partitaStage.getFineProgress().setRunning(false);
+		
 		try {
 			this.mainDefinitivoModello.stopBot();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		this.partitaStage.close();
 		this.prePartitaStage.show();
-		Stage stageClassifica=new Stage();
-		stageClassifica.initModality(Modality.APPLICATION_MODAL);
-		Scene scena = new Scene(this.classificaPane);
-		stageClassifica.setScene(scena);
-		stageClassifica.show();
+		
+		this.createClassificaStage();
+		
+		
 		
 	}
 
-
-
+	private void createClassificaStage() {
+		if(this.stageClassifica==null) {
+			this.stageClassifica=new Stage();
+			this.stageClassifica.setScene(null);
+			this.stageClassifica.setScene(new Scene(new ClassificaPane(mainDefinitivoModello.getClassifica())));
+			this.stageClassifica.showAndWait();
+		}
+		
+	}
+	
 	@Override
 	public void drow() {
+		partitaStage.getFineProgress().setRunning(false);
 		finePartita();
 		
 	}

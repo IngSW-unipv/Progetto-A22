@@ -14,6 +14,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observe
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ClassificaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.NodoObserver;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.util.ProgressStyle;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
@@ -76,14 +77,15 @@ public class MainController {
 						lobbyView.getUserAccount().getUsername(), lobbyView.getUserAccount().getMny());
 					
 				partitaStage=new Partita(mainDefinitivo, 
-							mainDefinitivo.getTabellone().trovaBase
-							(new Utente(userAccount.getUsername(),userAccount.getMny())), lobbyView.getSelectedDifecolta()[0]*60*1000);
+							mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
 					
 				partitaCont = new PartitaController(mainDefinitivo, partitaStage,
 								(Base)mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
 					
 				finePartita= new FinePartitaObserver(mainDefinitivo, partitaStage, lobbyView, partitaStage.getClassificaPane());
 				Partita p=(Partita)partitaStage;
+				p.setFineObserver(finePartita);
+				partitaStage.getFineProgress().addElement("tempo partita", lobbyView.getSelectedDifecolta()[0]*60*1000, ProgressStyle.BLACK_STYLE);
 				partitaStage.addAvviso("inizio partita...");
 				p.setFineObserver(finePartita);
 				lobbyView.close();

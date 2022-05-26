@@ -1,10 +1,12 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -93,7 +95,7 @@ public class ProgressBarConteiner extends Pane{
 	private List<ProgressBarElement> battles;
 	private GridPane bGrid;				// griglia che dispone le battaglie in corso	
 	private HBox battleTitle;	
-	
+	private boolean running=true;
 	
 	
 	public ProgressBarConteiner () {
@@ -230,7 +232,7 @@ public class ProgressBarConteiner extends Pane{
 	}
 	
 	public GridPane disponiBattaglie() {
-
+		Platform.runLater(() -> {
 		bGrid.getChildren().clear();
 		for (ProgressBarElement o : this.battles) { // for each
 			ProgressBar btt = o;
@@ -238,6 +240,7 @@ public class ProgressBarConteiner extends Pane{
 			if(o.getProgress()>=1)
 				for(IDrawable d:disegnabili)
 					d.drow();
+			
 		}
 		
 		this.battles.removeIf(o -> o.getProgress() >= 1);
@@ -259,31 +262,36 @@ public class ProgressBarConteiner extends Pane{
 			bGrid.add(title, 0, posizione);
 			bGrid.add(hbB, 0, ++posizione);
 		}
-		
+		});
 		return bGrid;
 	}
 	
 	private void initScheduler(){
-		Timer t = new Timer();						//creato un timer
-		t.scheduleAtFixedRate(new TimerTask() {		// imposto schedulazione del task 
+		
+		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-			@Override
-			public void run() {
-				Platform.runLater(new Runnable() {
-
-					@Override
-					public void run() {
-						disponiBattaglie();
-
-					}
-				});
-
-
-			}
-		}, 0, 1000);		// la schedulazione parte da 0 e arriva fino a 1000
+        final Runnable runnable = new Runnable() {
+            public void run() {
+            	disponiBattaglie();
+				if(!running) {
+					scheduler.shutdown();
+				}
+        };
+        };
+        
+        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+      
 	}
 	
 	
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
 	public int getElementCard() {
 		return battles.size();
 	}

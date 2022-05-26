@@ -10,17 +10,16 @@ public class Partita extends PartitaStage {
 	private FinePartitaObserver fineObserver;
 	private MainDefinitivo mainDefinitivo;
 	
-	public Partita(MainDefinitivo main, Nodo baseUtente, int durataPartitaSeconds, FinePartitaObserver fineObserver) {
-		super(main, baseUtente, durataPartitaSeconds);
+	public Partita(MainDefinitivo main, Nodo baseUtente, FinePartitaObserver fineObserver) {
+		super(main, baseUtente, 0);
 		this.drawable=fineObserver;
 		this.fineObserver=fineObserver;
 		this.mainDefinitivo=main;
-		this.initDrowableFinePartita();
+
 	}
 	
-	public Partita(MainDefinitivo main, Nodo baseUtente, int durataPartitaSeconds) {
-		super(main, baseUtente, durataPartitaSeconds);
-		this.drawable=fineObserver;
+	public Partita(MainDefinitivo main, Nodo baseUtente) {
+		super(main, baseUtente,0);
 		this.mainDefinitivo=main;
 		
 	}
@@ -69,6 +68,7 @@ public class Partita extends PartitaStage {
 
 	public void setFineObserver(FinePartitaObserver fineObserver) {
 		this.fineObserver = fineObserver;
+		this.drawable=fineObserver;
 		initDrowableFinePartita();
 	}
 

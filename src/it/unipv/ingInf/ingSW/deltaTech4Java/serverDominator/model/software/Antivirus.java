@@ -29,9 +29,11 @@ public class Antivirus extends Software{
 		super.setQuantita(quantita);
 	}
 	
+	
+	
 //--------getter and setter-------//
 	/**
-	 * returna il valore della difesa dell'Antivirus
+	 * ritorna il valore della difesa dell'Antivirus
 	 * @return
 	 * valore difesa
 	 */
@@ -47,12 +49,31 @@ public class Antivirus extends Software{
 		this.val_def = val_def;
 	}
 	/**
-	 * returna il valore dell'attacco dell'Antivirus
+	 * ritorna il valore dell'attacco dell'Antivirus
 	 * @return
 	 * valore attacco
 	 */
 	public int getVal_atk() {
 		return val_atk;
+	}
+	
+	/**setta il valore di attacco del software
+	 * 
+	 * @param val_atk
+	 * valore di attacco
+	 */
+	public void setVal_atk(int val_atk) {
+		this.val_atk = val_atk;
+	}
+
+	/**
+	 * setta il livello del software con valore pari a quello passato come parametro
+	 * @param
+	 * valore livello
+	 */
+	public void setLivello(int livello) {
+		super.setLivello(livello);
+		this.setVal_atk(livello);
 	}
 		
 }

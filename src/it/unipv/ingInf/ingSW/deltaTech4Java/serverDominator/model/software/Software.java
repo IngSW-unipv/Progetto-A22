@@ -28,7 +28,7 @@ public abstract class Software {
 	
 //-------------getter and setter-----//
 	/**
-	 * returna il livello del software
+	 * ritorna il livello del software
 	 * @return
 	 * livello
 	 */
@@ -44,7 +44,7 @@ public abstract class Software {
 		this.livello = livello;
 	}
 	/**
-	 * returna il livello massimo del software
+	 * ritorna il livello massimo del software
 	 * @return
 	 * livello massimo
 	 */
@@ -60,7 +60,7 @@ public abstract class Software {
 		this.max_lvl = max_lvl;
 	}
 	/**
-	 * returna il nome del software
+	 * ritorna il nome del software
 	 * @return
 	 * nome
 	 */
@@ -76,7 +76,7 @@ public abstract class Software {
 		this.nome = nome;
 	}
 	/**
-	 * returna la quantita disponibile del software
+	 * ritorna la quantita disponibile del software
 	 * @return
 	 * quantita' software
 	 */
@@ -92,7 +92,7 @@ public abstract class Software {
 		this.quantita = quantita;
 	}
 	/**
-	 * returna il tempo richiesto per creare il software
+	 * ritorna il tempo richiesto per creare il software
 	 * @return
 	 * tempo
 	 */

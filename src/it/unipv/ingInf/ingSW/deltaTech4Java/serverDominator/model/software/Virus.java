@@ -33,7 +33,7 @@ public class Virus extends Software{
 	}
 //---------------getter and setter------------//
 	/**
-	 * returna il valore della difesa del Virus
+	 * ritorna il valore della difesa del Virus
 	 * @return
 	 * valore difesa
 	 */
@@ -49,7 +49,7 @@ public class Virus extends Software{
 		this.val_def = val_def;
 	}
 	/**
-	 * returna il valore dell'attacco del Virus
+	 * ritorna il valore dell'attacco del Virus
 	 * @return
 	 * valore attacco
 	 */
@@ -57,5 +57,23 @@ public class Virus extends Software{
 		return val_atk;
 	}
 
+	/**setta il valore di attacco del software
+	 * 
+	 * @param val_atk
+	 * valore di attacco
+	 */
+	public void setVal_atk(int val_atk) {
+		this.val_atk = val_atk;
+	}
+	
+	/**
+	 * setta il livello del software con valore pari a quello passato come parametro
+	 * @param
+	 * valore livello
+	 */
+	public void setLivello(int livello) {
+		super.setLivello(livello);
+		this.setVal_atk(livello);
+	}
 	
 }

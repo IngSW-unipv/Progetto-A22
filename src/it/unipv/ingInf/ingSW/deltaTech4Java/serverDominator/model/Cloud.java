@@ -29,6 +29,7 @@ public class Cloud extends Nodo {
 		risorse= new Risorse[TIPI_RISORSE];
 		this.inizializza_risorse();
 		stats_software_creati= new Software[1];
+		stats_software_creati[0]= new Antivirus(0, 0);
 	}
 	/**
 	 * Costruttore per creare un oggetto Cloud vuoto
@@ -41,6 +42,7 @@ public class Cloud extends Nodo {
 		risorse= new Risorse[TIPI_RISORSE];
 		this.inizializza_risorse();
 		stats_software_creati= new Software[1];
+		stats_software_creati[0]= new Antivirus(0, 0);
 	}
 
 	/**inizializza le risorse del nodo cloud */

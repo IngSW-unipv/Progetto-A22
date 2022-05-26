@@ -61,6 +61,7 @@ public class MainDefinitivo extends Thread {
 		mercato=new Mercato();
 		classifica= new Classifica(giocatori);
 		fight= new Battaglia[maxbattle];
+		maxbattle=6;
 		
 	//	this.avvioBot(); 
 		

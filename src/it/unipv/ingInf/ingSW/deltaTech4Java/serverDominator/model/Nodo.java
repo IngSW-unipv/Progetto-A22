@@ -97,7 +97,7 @@ public abstract class Nodo implements INodo{
 		this.tipologia=tipologia;
 	}
 	/**
-	 * returna la tipologia del nodo
+	 * ritorna la tipologia del nodo
 	 * @return
 	 * tipologia
 	 */
@@ -105,7 +105,7 @@ public abstract class Nodo implements INodo{
 		return tipologia;
 	}
 	/**
-	 * returna la distanza del nodo dalla base del giocatore
+	 * ritorna la distanza del nodo dalla base del giocatore
 	 * @return
 	 * distanza dalla base
 	 */
@@ -121,7 +121,7 @@ public abstract class Nodo implements INodo{
 		this.dist_base = dist_base;
 	}
 	/**
-	 * returna il possessore del nodo
+	 * ritorna il possessore del nodo
 	 * @return
 	 * possessore
 	 */
@@ -139,7 +139,7 @@ public abstract class Nodo implements INodo{
 		changes.firePropertyChange(NOME_POSS_PROP, old, this.getPossessore());
 	}
 	/**
-	 * returna la quantita' di software disponibile
+	 * ritorna la quantita' di software disponibile, ossia gia creati
 	 * @return
 	 * quantita dei software
 	 */
@@ -275,7 +275,7 @@ public abstract class Nodo implements INodo{
 		return possessore.getColore();
 	}
 	/**
-	 * returna lo spazio disponibile nella Ram del nodo per creare nuovi Software
+	 * ritorna lo spazio disponibile nella Ram del nodo per creare nuovi Software
 	 * @return
 	 * spazio libero Ram
 	 */

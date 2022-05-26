@@ -64,7 +64,7 @@ public class Battaglia extends Thread{
 		disp[0]= sel_attaccanti[1].getQuantita();
 		disp[1]= sel_attaccanti[2].getQuantita();
 		
-		if (disp[1]>=quantita_r|| quantita_r<=1) {
+		if (disp[1]>1 && quantita_r==1) {
 			sel_attaccanti[2].setQuantita(quantita_r);
 			q_root=disp[1]-1;
 			attaccante.getStats_software_creati()[2].setQuantita(q_root);
@@ -103,15 +103,24 @@ public class Battaglia extends Thread{
 		
 		boolean successo=false;
 		attacco= sel_attaccanti[1].getQuantita() * sel_attaccanti[1].getVal_atk();
+		
 		difesa=aggiorna_firewall()+(sel_difensori[0].getVal_def()*sel_difensori[0].getQuantita());
 		
-		if(attacco>difesa) {
-			sel_difensori[0].setQuantita(0);
+		temp= attacco-difesa;
+				
+		if(temp>0) {
 			successo=true;
+			sel_difensori[0].setQuantita(0);
+			
 		} else {
-			temp= (difesa-attacco) / (sel_difensori[0].getLivello() );
-			sel_difensori[0].setQuantita(temp);
+			if(temp<0) {
+				if(sel_difensori[0].getLivello()!=0) {
+					temp= temp/sel_difensori[0].getLivello();
+					sel_difensori[0].setQuantita(temp);
+				}
+			} else sel_difensori[0].setQuantita(0); 
 		}
+		
 		return successo;
 	}
 	
@@ -124,8 +133,8 @@ public class Battaglia extends Thread{
 		
 		String report;
 		if(esito) {
-			report="Hai conquistato il nodo"+difensore.getPossessore().getNome();
-		}else report="Non hai conquistare il nodo"+difensore.getPossessore().getNome();
+			report="Hai conquistato il nodo di "+difensore.getPossessore().getNome();
+		}else report="Non hai conquistato il nodo di "+difensore.getPossessore().getNome();
 		
 		return report;
 	}

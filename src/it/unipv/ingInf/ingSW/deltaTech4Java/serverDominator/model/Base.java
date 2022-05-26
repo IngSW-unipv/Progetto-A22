@@ -142,22 +142,24 @@ public class Base extends Nodo{
 		int n_soft;
 		int i;
 		
-		if(quantita>this.getSpazio_Ram()) {
+		if(quantita>risorse[1].getStat1()) {
 			quantita=this.getSpazio_Ram();
 		}
 		for(i=0;i<TIPI_SOFTWARE;i++) {
 			if(stats_software_creati[i].getNome().equalsIgnoreCase(nome)) {
 				n_soft=super.getSoftware_disponibile()+quantita;
-				quantita=stats_software_creati[i].getQuantita()+quantita;
 				switch(i) {
 				case 0: 
-					stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
+					stats_software_creati[0].setQuantita(stats_software_creati[0].getQuantita()+quantita);
+					stats_software_creati[0].setLivello(risorse[0].getStat1());
 					break;
 				case 1: 
-					stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
+					stats_software_creati[1].setQuantita(stats_software_creati[1].getQuantita()+quantita);
+					stats_software_creati[0].setLivello(risorse[0].getStat2());
 					break;
 				case 2:
-					stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
+					stats_software_creati[2].setQuantita(stats_software_creati[2].getQuantita()+quantita);
+					stats_software_creati[0].setLivello(risorse[0].getStat3());
 					break;
 				}
 				super.setSoftware_disponibile(n_soft);
@@ -184,22 +186,29 @@ public class Base extends Nodo{
 		if(n_soft<=risorse[1].getStat1()) {
 			for(i=0;i<TIPI_SOFTWARE;i++) {
 				if(stats_software_creati[i].getNome().equalsIgnoreCase(nome)) {
-					quantita=stats_software_creati[i].getQuantita()+quantita;
 					switch(i) {
 					case 0: 
-						if(this.getSpazio_Ram()-quantita>=0) {
-							stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
+						if(risorse[0].getStat1()!=0) {
+							if(risorse[1].getStat1()-quantita>=0) {
+								stats_software_creati[0].setQuantita(stats_software_creati[0].getQuantita()+quantita);
+								stats_software_creati[0].setLivello(risorse[0].getStat1());
+							}
 						}
-						
 						break;
 					case 1: 
-						if(this.getSpazio_Ram()-quantita>=0) {
-							stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
+						if(risorse[0].getStat2()!=0) {
+							if(risorse[1].getStat1()-quantita>=0) {
+								stats_software_creati[1].setQuantita(stats_software_creati[1].getQuantita()+quantita);
+								stats_software_creati[0].setLivello(risorse[0].getStat2());
+							}
 						}
 						break;
 					case 2:
-						if(this.getSpazio_Ram()-quantita>=0) {
-							stats_software_creati[2] = new Rootcrash(risorse[0].getStat3(), quantita);
+						if(risorse[0].getStat2()!=0) {
+							if(risorse[1].getStat1()-quantita>=0) {
+								stats_software_creati[2].setQuantita(stats_software_creati[2].getQuantita()+quantita);
+								stats_software_creati[0].setLivello(risorse[0].getStat3());
+							}
 						}
 						break;
 					}
@@ -215,7 +224,7 @@ public class Base extends Nodo{
 	
 //---------------getter and setter--------------//
 	/**
-	 * Returna la capacita' massima di stoccaggio dei software
+	 * ritorna la capacita' massima di stoccaggio dei software
 	 * @return
 	 * quantita massima software
 	 */
@@ -223,7 +232,7 @@ public class Base extends Nodo{
 		return risorse[1].getStat1();
 	}
 	/**
-	 * returna il valore della difesa data dal livello del Firewall
+	 * ritorna il valore della difesa data dal livello del Firewall
 	 * @return
 	 * bonus difesa del Firewall
 	 */
@@ -239,7 +248,7 @@ public class Base extends Nodo{
 		risorse[3].setStat1(bonus_def);;
 	}
 	/**
-	 * returna l'energia disponibile della base
+	 * ritorna l'energia disponibile della base
 	 * @return
 	 * energia disponibile
 	 */
@@ -247,7 +256,7 @@ public class Base extends Nodo{
 		return risorse[2].getStat1();
 	}
 	/**
-	 * returna il livello dell'energia della base
+	 * ritorna il livello dell'energia della base
 	 * @return
 	 * livello energia
 	 */
@@ -255,7 +264,7 @@ public class Base extends Nodo{
 		return risorse[2].getLivello_risorsa();
 	}
 	/**
-	 * returna il livello della Cpu della base
+	 * ritorna il livello della Cpu della base
 	 * @return
 	 * livello Cpu
 	 */
@@ -263,7 +272,7 @@ public class Base extends Nodo{
 		return risorse[0].getLivello_risorsa();
 	}
 	/**
-	 * returna il livello della Ram della base
+	 * ritorna il livello della Ram della base
 	 * @return
 	 * livello Ram
 	 */
@@ -271,7 +280,7 @@ public class Base extends Nodo{
 		return risorse[1].getLivello_risorsa();
 	}
 	/**
-	 * returna il livello della Firewall della base
+	 * ritorna il livello della Firewall della base
 	 * @return
 	 * livello Firewall
 	 */
@@ -279,7 +288,7 @@ public class Base extends Nodo{
 		return risorse[3].getLivello_risorsa();
 	}
 	/**
-	 * returna i software creati della base (0=Antivirus, 1=Virus, 2=Rootcrash)
+	 * ritorna i software creati della base (0=Antivirus, 1=Virus, 2=Rootcrash)
 	 * @return
 	 * Software creati
 	 */
@@ -287,7 +296,7 @@ public class Base extends Nodo{
 		return stats_software_creati;
 	}
 	/**
-	 * returna le risorse disponibili del nodo (0=cpu, 1=ram, 2=energia, 3=firewall)
+	 * ritorna le risorse disponibili del nodo (0=cpu, 1=ram, 2=energia, 3=firewall)
 	 * @return
 	 * risorse
 	 */
@@ -295,7 +304,7 @@ public class Base extends Nodo{
 		return risorse;
 	}
 	/**
-	 * returna il livello massimo della Cpu della base
+	 * ritorna il livello massimo della Cpu della base
 	 * @return
 	 * livello massimo Cpu
 	 */
@@ -303,7 +312,7 @@ public class Base extends Nodo{
 		return risorse[0].getMAX_LVL();
 	}
 	/**
-	 * returna il livello massimo della Ram della base
+	 * ritorna il livello massimo della Ram della base
 	 * @return
 	 * livello massimo Ram
 	 */
@@ -311,7 +320,7 @@ public class Base extends Nodo{
 		return risorse[1].getMAX_LVL();
 	}
 	/**
-	 * returna lo spazio disponibile nella Ram della base per creare nuovi Software
+	 * ritorna lo spazio disponibile nella Ram della base per creare nuovi Software
 	 * @return
 	 * spazio libero Ram
 	 */
@@ -319,7 +328,7 @@ public class Base extends Nodo{
 		return risorse[1].getStat1()-super.getSoftware_disponibile();
 	}
 	/**
-	 * returna il livello massimo del Firewall della base
+	 * ritorna il livello massimo del Firewall della base
 	 * @return
 	 * livello massimo Firewall
 	 */
@@ -327,7 +336,7 @@ public class Base extends Nodo{
 		return risorse[3].getMAX_LVL();
 	}
 	/**
-	 * returna il livello dei Virus della base
+	 * ritorna il livello dei Virus della base
 	 * @return
 	 * livello Virus
 	 */
@@ -335,7 +344,7 @@ public class Base extends Nodo{
 		return risorse[0].getStat2();
 	}
 	/**
-	 * returna la quantita' dei Virus della base
+	 * ritorna la quantita' dei Virus della base
 	 * @return
 	 * quantita' Virus
 	 */
@@ -343,7 +352,7 @@ public class Base extends Nodo{
 		return stats_software_creati[1].getQuantita();
 	}
 	/**
-	 * returna il livello degli Antivirus della base
+	 * ritorna il livello degli Antivirus della base
 	 * @return
 	 * livello Antivirus
 	 */
@@ -351,7 +360,7 @@ public class Base extends Nodo{
 		return risorse[0].getStat1();
 	}
 	/**
-	 * returna la quantita' dei Antivirus della base
+	 * ritorna la quantita' dei Antivirus della base
 	 * @return
 	 * quantita' Antivirus
 	 */
@@ -359,7 +368,7 @@ public class Base extends Nodo{
 		return stats_software_creati[0].getQuantita();
 	}
 	/**
-	 * returna il livello dei Rootcrash della base
+	 * ritorna il livello dei Rootcrash della base
 	 * @return
 	 * livello Rootcrash
 	 */
@@ -367,7 +376,7 @@ public class Base extends Nodo{
 		return risorse[0].getStat3();
 	}
 	/**
-	 * returna la quantita' dei Rootcrash della base
+	 * ritorna la quantita' dei Rootcrash della base
 	 * @return
 	 * quantita' Rootcrash
 	 */

@@ -36,7 +36,7 @@ public class Rootcrash extends Software {
 	}
 //--------getter and setter-------//	
 	/**
-	 * returna il valore della difesa del Rootcrash
+	 * ritorna il valore della difesa del Rootcrash
 	 * @return
 	 * valore difesa
 	 */
@@ -44,7 +44,7 @@ public class Rootcrash extends Software {
 		return val_def;
 	}
 	/**
-	 * returna il valore dell'attacco del Rootcrash
+	 * ritorna il valore dell'attacco del Rootcrash
 	 * @return
 	 * valore attacco
 	 */
@@ -58,6 +58,16 @@ public class Rootcrash extends Software {
 	 */
 	public void setVal_atk(int val_atk) {
 		this.val_atk = val_atk;
+	}
+	
+	/**
+	 * setta il livello del software con valore pari a quello passato come parametro
+	 * @param
+	 * valore livello
+	 */
+	public void setLivello(int livello) {
+		super.setLivello(livello);
+		this.setVal_atk(livello);
 	}
 	
 	

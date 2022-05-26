@@ -1,6 +1,5 @@
 package sreverDominator.model;
 
-import java.util.Collections;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Colore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
@@ -15,6 +14,7 @@ public class Test4 {
 	 * 
 	 */
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		MappaDefinitiva easy, medio, hard;
 		Colore colore;

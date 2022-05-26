@@ -1,7 +1,6 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
+package sreverDominator.model;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
 
 public class Prova {
 

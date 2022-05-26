@@ -39,7 +39,6 @@ public class ClassificaPane extends GridPane {
 	 */
 	public void dispone() {
 		List<Giocatore> gs=classifica.getLista();
-	
 		super.getChildren().clear();
 		
 		HBox btitolo=new HBox();

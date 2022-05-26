@@ -17,7 +17,7 @@ public class HexData  { //
 	 * @return
 	 */
 	public boolean isBase() {
-    	if(nodo instanceof Base) {
+    	if(Base.class.isAssignableFrom(nodo.getClass())) {
     		return true;
     	}
     	return false;

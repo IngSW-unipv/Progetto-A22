@@ -3,12 +3,12 @@ package sreverDominator.model;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 
 public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		@SuppressWarnings("unused")
 		Nodo b1,b2,c1,c2;
 		Giocatore giallo, rosso;
 			

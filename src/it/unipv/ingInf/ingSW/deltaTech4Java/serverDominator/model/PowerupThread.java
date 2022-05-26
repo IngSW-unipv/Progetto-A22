@@ -1,15 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
-
 public class PowerupThread {
 
-	private Timer time;
 	private Nodo nodo;
 	private String risorsa;
 	private int check;
@@ -42,12 +38,6 @@ public class PowerupThread {
         };
         scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
 	}
-	
-	
-       
-		
-		
-		
 	
 	
 	/**controllo se il nodo passato è base o cloud per
@@ -85,12 +75,6 @@ public class PowerupThread {
 		nodo.potenzia_risorsa(risorsa);
 	}
 
-	//--------------getter and setter-----------//
-	
-	
-	public Timer getTime() {
-		return time;
-	}
-	
+
 }
 

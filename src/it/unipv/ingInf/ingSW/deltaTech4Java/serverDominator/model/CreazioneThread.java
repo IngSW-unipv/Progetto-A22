@@ -1,15 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
-
 public class CreazioneThread {
 
-	private Timer time;
 	private Nodo nodo;
 	private String nome;
 	private int quantita;
@@ -20,7 +16,7 @@ public class CreazioneThread {
 		this.nome=nome;
 		this.quantita=quantita;
 		
-		time= new Timer();
+		
 		check=0;
 		
 	}
@@ -81,10 +77,4 @@ public class CreazioneThread {
 		nodo.crea_software(nome, quantita);
 	}
 
-	//--------------getter and setter--------//
-	
-	public Timer getTime() {
-		return time;
-	}
-	
 }

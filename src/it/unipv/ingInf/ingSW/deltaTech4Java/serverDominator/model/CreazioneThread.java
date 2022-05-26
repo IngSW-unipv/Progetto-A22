@@ -27,7 +27,7 @@ public class CreazioneThread {
         final Runnable runnable = new Runnable() {
         int tempo=checknodo();
             public void run() {
-                tempo--;
+                tempo=-1;
                 if (tempo < 0) {
                 	if(check==0) {
             			crea_softwareBase();	
@@ -39,7 +39,7 @@ public class CreazioneThread {
              }
             
         };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+        scheduler.scheduleAtFixedRate(runnable, checknodo(), 1, SECONDS);
 	}
 	
 	/**controllo se il nodo passato è base o cloud per

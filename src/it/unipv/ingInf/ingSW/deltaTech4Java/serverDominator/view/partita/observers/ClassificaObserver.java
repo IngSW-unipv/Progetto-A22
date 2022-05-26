@@ -18,6 +18,8 @@ public class ClassificaObserver implements PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		classificaPane.dispone();
+		System.out.println("eseguo observer classifica");
+				classificaPane.dispone();
+			
 	}
 }

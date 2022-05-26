@@ -248,7 +248,7 @@ public class MappaDefinitiva{
 			vicini[5]=map[check(xinf+(ysup/2))][ysup].getPossessore().getNome();
 			
 			for(i=0;i<6;i++) {
-				if(vicini[i].equals(player.getNome())) {
+				if(vicini[i].equalsIgnoreCase(player.getNome())) {
 					prox=true;
 					break;
 				}
@@ -267,6 +267,7 @@ public class MappaDefinitiva{
 		return i;
 	}
 	
+	/*
 	/**calcola la distanza minima partendo dal nodo base del giocatore attaccante fino
 	 * al nodo selezionato come obbiettivo dell'attacco, necessario per calcolare il
 	 * tempo necessario alla battaglia
@@ -280,6 +281,7 @@ public class MappaDefinitiva{
 	 * nodo confinante al bersaglio il cui valore di distanza alla base � minore di tutti
 	 * gli altri nodi del giocatore attaccante confinanti con il bersaglio
 	 */
+	/*
 		public Nodo dist_minima(int x, int y, Giocatore player) {
 		
 			int i, temp, dist_min;
@@ -307,7 +309,7 @@ public class MappaDefinitiva{
 			return map[confini[temp].getX()][confini[temp].getY()];
 		
 		}
-		
+	*/
 	//-------------getter and setter--------//
 		/**
 		 * returna il nodo identificato dalle coordinate passate come parametro

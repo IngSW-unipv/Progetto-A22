@@ -36,6 +36,7 @@ public class BasicMap extends Map {
 	 */
 	@Override
 	public void drawMap() {
+		//Platform.runLater(() -> {
 		for (HashMap.Entry<Hexagon, HexData> entry : getMapData().getData().entrySet()) {
 			if (entry.getKey().equals(this.hexagon)) {
 				drawHex(getMapData().getPoints(entry.getKey()), entry.getValue().nodo.getColore(), Color.RED);
@@ -44,6 +45,7 @@ public class BasicMap extends Map {
 				drawHex(getMapData().getPoints(entry.getKey()), entry.getValue().nodo.getColore(), null);
 			}
 		}
+		//});
 	}
 	/**
 	 * Metodo che genera gli esagoni che rappresentano i nodi nel tavolo da gioco

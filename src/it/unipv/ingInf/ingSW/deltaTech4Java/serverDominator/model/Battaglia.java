@@ -158,8 +158,8 @@ public class Battaglia extends Thread{
 	 * in funzione alle risorse che possiede il nodo cloud
 	 */
 	public void aggiornastati() {
-		difensore.setDist_base(partenza.getDist_base()+1);
-		difensore.setPossessore(partenza.getPossessore());
+		//difensore.setDist_base(partenza.getDist_base()+1);
+		difensore.setPossessore(attaccante.getPossessore());
 		attaccante.getPossessore().aggiornaPunteggio(10);
 		
 		if (difensore.getTipologia().equals("cloud")) {

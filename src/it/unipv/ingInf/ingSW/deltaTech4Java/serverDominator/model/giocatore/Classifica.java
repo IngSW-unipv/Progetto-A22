@@ -101,10 +101,8 @@ public class Classifica {
 	 */
 	public void aggiornaClassifica() {
 		
-		List<Giocatore> oldList =new ArrayList<Giocatore>(lista);
 		Collections.sort(lista);
-		List<Giocatore>  newList=lista;
-		changes.firePropertyChange(LISTA_PROP, oldList,newList);
+		changes.firePropertyChange(LISTA_PROP, 0,1);
 	}
 	
 	/**

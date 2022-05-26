@@ -1,10 +1,12 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane;
 
+import java.util.Collections;
 import java.util.List;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ClassificaObserver;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -38,8 +40,15 @@ public class ClassificaPane extends GridPane {
 	 * Metodo che genera la zona della view con la classifica dei giocatori
 	 */
 	public void dispone() {
+		Platform.runLater(() -> {
+			Collections.sort(classifica.getLista());
+		try {
+			if(!super.getChildren().isEmpty())
+				super.getChildren().clear();
+		}catch (Exception e) {}
+		
 		List<Giocatore> gs=classifica.getLista();
-		super.getChildren().clear();
+		
 		
 		HBox btitolo=new HBox();
 		btitolo.setPadding(ProgressBarConteiner.STANDARD_PADDING);
@@ -88,6 +97,7 @@ public class ClassificaPane extends GridPane {
 			bbb.setMinWidth(10);
 			super.add(bbb, 3, i+2);
 		}
+		});
 	}
 	
 	public static Label lblCreate(Pos lableAlign,TextAlignment textAlign, String textColor,int textSize, String text, double opacity) {

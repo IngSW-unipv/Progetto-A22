@@ -63,7 +63,7 @@ public class MainDefinitivo extends Thread {
 		fight= new Battaglia[maxbattle];
 		maxbattle=6;
 		
-	//	this.avvioBot(); 
+		this.avvioBot(); 
 		
 	}
 
@@ -100,6 +100,7 @@ public class MainDefinitivo extends Thread {
 			giocatori[0].setColore(colore.getGrigio()); 
 			giocatori[1]= new Utente(utente, valuta); 
 			giocatori[2]= new Bot("bob");
+			
 			giocatori[3]= new Bot("sandra");
 			break;
 		case 20:
@@ -362,11 +363,12 @@ public class MainDefinitivo extends Thread {
 		t_timer=0;
 		
 		if(this.nodecheck(attaccante, x, y)){
-			t_timer=t_unitario+(t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base() );
+			//t_timer=t_unitario+(t_unitario*tabellone.dist_minima(x,y, attaccante).getDist_base() );
+			t_timer= t_unitario;
 			fight[maxbattle]=new Battaglia(tabellone.trovaBase(attaccante), tabellone.getNodo(x,y), t_timer);
 			finebattagliaobs= new ObserverFineBattaglia(attaccante, x, y, this);
 			fight[maxbattle].getChanges().addPropertyChangeListener(Battaglia.BATTLE_PROP, finebattagliaobs);
-			fight[maxbattle].setPartenza(tabellone.dist_minima(x, y, attaccante));
+		//	fight[maxbattle].setPartenza(tabellone.dist_minima(x, y, attaccante));
 			fight[maxbattle].selezione(quantitaV, quantitaR);
 			count=maxbattle;
 			maxbattle--;

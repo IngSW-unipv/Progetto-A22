@@ -24,7 +24,7 @@ public class PowerupThread {
         final Runnable runnable = new Runnable() {
         int tempo=checknodo();
             public void run() {
-                tempo--;
+                tempo=-1;
                 if (tempo < 0) {
                 	if(check==0) {
             			potenzia_risorsaBase();	
@@ -36,7 +36,7 @@ public class PowerupThread {
              }
             
         };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+        scheduler.scheduleAtFixedRate(runnable, checknodo(), 1, SECONDS);
 	}
 	
 	

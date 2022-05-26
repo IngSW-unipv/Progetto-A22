@@ -18,7 +18,11 @@ public class NodoObserver implements PropertyChangeListener {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		partitaStage.drowMappa();
+
+				partitaStage.drowMappa();				
+			
 	}
+		
+	
 
 }

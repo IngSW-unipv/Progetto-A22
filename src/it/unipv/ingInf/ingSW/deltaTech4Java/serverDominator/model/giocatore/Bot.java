@@ -29,7 +29,7 @@ public class Bot extends Giocatore{
 	
 	private PropertyChangeSupport changes;
 	public static final String BOT_PROP="bot";
-	
+	public static final String PUNTEGGIO_BOT="fineBattagliaBot";
 	/*incremento e' un parametro per individuare una coordinata vicina
 	 * che ciclicamente verr� aumentato per puntare a coordinate 
 	 * maggiormente lontane
@@ -56,7 +56,7 @@ public class Bot extends Giocatore{
 		this.datiBase();
 		this.cambiaTarget();
 		while(map.getNodo(base.getX(), base.getY()).getPossessore().getNome().equals(this.getNome())) {
-			time.timer(30);
+			time.timer(5);
 			this.comportamento();
 		}
 	}
@@ -66,7 +66,7 @@ public class Bot extends Giocatore{
 	 */
 	public void comportamento() {
 		int min=1;
-		int max=3;
+		int max=4;
 		int scelta;
 		String risorsa="Energia";
 			
@@ -106,19 +106,39 @@ public class Bot extends Giocatore{
 		case 3:
 			/* attacco da parte del bot verso un nodo prossimo */
 			if(map.attaccabile(confini[cont].getX(), confini[cont].getY(), this)) {
-				t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
+				t_timer= T_UNITARIO;
+				//t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
-				battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
+			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
 				battle.selezione( (int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1, 1);
 				if(battle.calcola_vincitore() ) {
 					battle.aggiornastati();
 					cont++;
+					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
 				}
+			
 			}
-			/*risvegliare il listener se bot attacca l'utente
-			 * usare getter t_timer per visualizzazione a schermo della battaglia avviata
-			 * dal bot verso il nodo dell'utente
-			 */
+			
+			changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
+			
+			this.cambiaTarget();
+			break;
+		default: 
+			/* attacco da parte del bot verso un nodo prossimo */
+			if(map.attaccabile(confini[cont].getX(), confini[cont].getY(), this)) {
+				t_timer= T_UNITARIO;
+				//t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
+				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
+			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
+				battle.selezione( (int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1, 1);
+				if(battle.calcola_vincitore() ) {
+					battle.aggiornastati();
+					cont++;
+					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
+				}
+			
+			}
+			
 			changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
 			
 			this.cambiaTarget();

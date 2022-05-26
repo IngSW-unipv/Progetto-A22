@@ -158,6 +158,7 @@ public abstract class PartitaStage extends Stage{
 		this.fineProgress.setTitle("FINE PARTITA");
 		this.battleBox.addDrawable(baseStatsPane);
 		this.disponiPannelli();
+		
 	}
 
 	public PartitaStage(MainDefinitivo main,Nodo baseUtente,int durataPartitaSeconds) {
@@ -261,6 +262,10 @@ public abstract class PartitaStage extends Stage{
 		vPartitaBox.getChildren().addAll(menuBar.getMenuBar(),borderPane);
 		Scene scena = new Scene(vPartitaBox,800,700);
 		scena.getStylesheets().add("application.css");
+		actionPane.getPowerUpL().setDisable(true);
+		actionPane.getDevelop().setDisable(true);
+		statsNodePane.getButtonAttacca().setDisable(true);
+		this.setButtonsVisibilityInActionPaneStatsPane(false, false);
 		super.setScene(scena);
 		this.drowMappa();
 	}
@@ -342,8 +347,8 @@ public abstract class PartitaStage extends Stage{
 	 * buttone avanti
 	 */
 	public void setButtonsVisibilityInActionPaneStatsPane(boolean indietroButton , boolean avantiButton) {
-		this.baseStatsPane.getButtonBack().setVisible(indietroButton);
-		this.baseStatsPane.getButtonNext().setVisible(avantiButton);
+		this.baseStatsPane.getButtonBack().setDisable(avantiButton);
+		this.baseStatsPane.getButtonNext().setDisable(avantiButton);
 	}
 	
 	/**
@@ -357,9 +362,9 @@ public abstract class PartitaStage extends Stage{
 	 * bottone per potenziamento risorse
 	 */
 	public void setButtonsVisibilityInActionPane(boolean mercatoBtn,boolean sviluppoSoftwareBtn,boolean potenziaRisorseBtn) {
-		this.actionPane.getDevelop().setVisible(sviluppoSoftwareBtn);
-		this.actionPane.getActionMarketL().setVisible(mercatoBtn);
-		this.actionPane.getPowerUpL().setVisible(potenziaRisorseBtn);
+		this.actionPane.getDevelop().setDisable(sviluppoSoftwareBtn);
+		this.actionPane.getActionMarketL().setDisable(mercatoBtn);
+		this.actionPane.getPowerUpL().setDisable(potenziaRisorseBtn);
 	}
 	
 	/**

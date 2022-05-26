@@ -11,6 +11,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.Partita;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.BotObserver;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.ClassificaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.FinePartitaObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observers.NodoObserver;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
@@ -86,7 +87,7 @@ public class MainController {
 				partitaStage.addAvviso("inizio partita...");
 				p.setFineObserver(finePartita);
 				lobbyView.close();
-				this.initObservers(mainDefinitivo, finePartita, new BotObserver(mainDefinitivo, partitaStage),new NodoObserver(partitaStage));
+				this.initObservers(mainDefinitivo, finePartita, partitaStage);
 				partitaStage.show();
 				
 			} catch (InterruptedException e) {
@@ -111,15 +112,17 @@ public class MainController {
 		lobbyView.getMenu().getMenus().addAll(menu);
 	}
 
-	private void initObservers(MainDefinitivo main,FinePartitaObserver finePartita,BotObserver bo,NodoObserver o ) {
+	private void initObservers(MainDefinitivo main,FinePartitaObserver finePartita,PartitaStage  partitaStage) {
+		//mainDefinitivo, finePartita, new BotObserver(mainDefinitivo, partitaStage),new NodoObserver(partitaStage)
 		main.getGiocatori()[1].getChanges().addPropertyChangeListener(Giocatore.GIOCATORE_PROP,finePartita);
 		for(int i=2;i<main.getGiocatori().length;i++) {
 			if (Bot.class.isAssignableFrom(main.getGiocatori()[i].getClass()))
-				main.getGiocatori()[i].getChanges().addPropertyChangeListener(Bot.BOT_PROP,bo );
+				main.getGiocatori()[i].getChanges().addPropertyChangeListener(Bot.BOT_PROP,new BotObserver(mainDefinitivo, partitaStage) );
+				main.getGiocatori()[i].getChanges().addPropertyChangeListener(Bot.PUNTEGGIO_BOT,new ClassificaObserver(this.partitaStage.getClassificaPane()));
 		}
 		for(int i=0;i<main.getTabellone().getX_max(); i++) {
 			for(int j=0; j<main.getTabellone().getY_max();j++) {
-				main.getTabellone().getNodo(i, j).getChanges().addPropertyChangeListener(Nodo.NOME_POSS_PROP,o );
+				main.getTabellone().getNodo(i, j).getChanges().addPropertyChangeListener(Nodo.NOME_POSS_PROP,new NodoObserver(partitaStage) );
 			}
 		}
 		

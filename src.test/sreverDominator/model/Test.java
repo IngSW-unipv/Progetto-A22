@@ -1,5 +1,7 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package sreverDominator.model;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 
@@ -16,7 +18,7 @@ public class Test {
 		b2= new Base(rosso);
 		
 		b1.crea_software("Rootcrash", 1);
-		System.out.println("software disp è"+b1.getSoftware_disponibile());
+		System.out.println("software disp ï¿½"+b1.getSoftware_disponibile());
 		
 		b1.crea_software("Antivirus", 1);
 		System.out.println("adesso soft disp"+b1.getSoftware_disponibile());
@@ -25,10 +27,10 @@ public class Test {
 		
 		System.out.println("ora puoi farne"+b1.getSoftware_max());
 		
-		System.out.println("perchè il lvl ram è "+b1.getLvl_ram());
+		System.out.println("perchï¿½ il lvl ram ï¿½ "+b1.getLvl_ram());
 		
 		b1.crea_software("Virus", 1);
-		System.out.println("software disp ora è " +b1.getSoftware_disponibile());
+		System.out.println("software disp ora ï¿½ " +b1.getSoftware_disponibile());
 	}
 
 }

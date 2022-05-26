@@ -3,7 +3,6 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.Rootcrash;
 
 
 /**
@@ -89,7 +88,7 @@ public class Base extends Nodo{
 	 *  @param nome
 	 *  nome della risorsa che si vuole potenziare
 	 */
-	public void potenzia_risorsa(String nome) {
+public void potenzia_risorsa(String nome) {
 		
 		boolean check=false;
 		int en_usata, i;
@@ -148,18 +147,16 @@ public class Base extends Nodo{
 		for(i=0;i<TIPI_SOFTWARE;i++) {
 			if(stats_software_creati[i].getNome().equalsIgnoreCase(nome)) {
 				n_soft=super.getSoftware_disponibile()+quantita;
+				quantita= stats_software_creati[i].getQuantita()+quantita;
 				switch(i) {
 				case 0: 
-					stats_software_creati[0].setQuantita(stats_software_creati[0].getQuantita()+quantita);
-					stats_software_creati[0].setLivello(risorse[0].getStat1());
+					stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
 					break;
 				case 1: 
-					stats_software_creati[1].setQuantita(stats_software_creati[1].getQuantita()+quantita);
-					stats_software_creati[0].setLivello(risorse[0].getStat2());
+					stats_software_creati[1]= new Virus(risorse[0].getStat1(), quantita);
 					break;
 				case 2:
-					stats_software_creati[2].setQuantita(stats_software_creati[2].getQuantita()+quantita);
-					stats_software_creati[0].setLivello(risorse[0].getStat3());
+					stats_software_creati[2]= new Rootcrash(risorse[0].getStat1(), quantita);
 					break;
 				}
 				super.setSoftware_disponibile(n_soft);
@@ -186,28 +183,26 @@ public class Base extends Nodo{
 		if(n_soft<=risorse[1].getStat1()) {
 			for(i=0;i<TIPI_SOFTWARE;i++) {
 				if(stats_software_creati[i].getNome().equalsIgnoreCase(nome)) {
+					quantita= stats_software_creati[i].getQuantita()+quantita;
 					switch(i) {
 					case 0: 
 						if(risorse[0].getStat1()!=0) {
 							if(risorse[1].getStat1()-quantita>=0) {
-								stats_software_creati[0].setQuantita(stats_software_creati[0].getQuantita()+quantita);
-								stats_software_creati[0].setLivello(risorse[0].getStat1());
+								stats_software_creati[0]= new Antivirus(risorse[0].getStat1(), quantita);
 							}
 						}
 						break;
 					case 1: 
 						if(risorse[0].getStat2()!=0) {
 							if(risorse[1].getStat1()-quantita>=0) {
-								stats_software_creati[1].setQuantita(stats_software_creati[1].getQuantita()+quantita);
-								stats_software_creati[0].setLivello(risorse[0].getStat2());
+								stats_software_creati[1]= new Virus(risorse[0].getStat2(), quantita);
 							}
 						}
 						break;
 					case 2:
 						if(risorse[0].getStat2()!=0) {
 							if(risorse[1].getStat1()-quantita>=0) {
-								stats_software_creati[2].setQuantita(stats_software_creati[2].getQuantita()+quantita);
-								stats_software_creati[0].setLivello(risorse[0].getStat3());
+								stats_software_creati[2]= new Rootcrash(risorse[0].getStat3(), quantita);
 							}
 						}
 						break;

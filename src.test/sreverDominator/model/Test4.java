@@ -1,7 +1,9 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package sreverDominator.model;
 
 import java.util.Collections;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Colore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;

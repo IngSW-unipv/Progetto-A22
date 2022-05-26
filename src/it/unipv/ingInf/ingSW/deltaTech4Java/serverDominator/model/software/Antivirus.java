@@ -73,7 +73,7 @@ public class Antivirus extends Software{
 	 */
 	public void setLivello(int livello) {
 		super.setLivello(livello);
-		this.setVal_atk(livello);
+		this.setVal_def(livello);
 	}
 		
 }

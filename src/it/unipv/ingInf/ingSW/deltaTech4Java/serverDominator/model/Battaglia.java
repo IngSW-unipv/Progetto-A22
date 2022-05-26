@@ -41,8 +41,9 @@ public class Battaglia extends Thread{
 		this.attaccante=attaccante;
 		this.difensore=difensore;
 		this.t_timer= t_timer;
-		sel_attaccanti= attaccante.getStats_software_creati();
-		sel_difensori=difensore.getStats_software_creati();
+		
+		sel_attaccanti= new Software[3];
+		sel_difensori= new Software[3];
 		time= new Timer();
 		life=true;
 		changes= new PropertyChangeSupport(this);
@@ -58,23 +59,24 @@ public class Battaglia extends Thread{
 	 */
 	public void selezione(int quantita_v, int quantita_r) {
 		
-		int[] disp;
-		int q_root, q_virus;
-		disp=new int [2];
-		disp[0]= sel_attaccanti[1].getQuantita();
-		disp[1]= sel_attaccanti[2].getQuantita();
+		sel_attaccanti[1]= new Virus(attaccante.getStats_software_creati()[1].getLivello(), quantita_v);
+		sel_attaccanti[2]= new Rootcrash(attaccante.getStats_software_creati()[2].getLivello(), quantita_r);
 		
-		if (disp[1]>1 && quantita_r==1) {
+		sel_difensori[0]= new Antivirus(difensore.getStats_software_creati()[0].getLivello(), difensore.getStats_software_creati()[0].getQuantita());
+		
+		if (attaccante.getStats_software_creati()[2].getQuantita()>1 && quantita_r==1) {
 			sel_attaccanti[2].setQuantita(quantita_r);
-			q_root=disp[1]-1;
-			attaccante.getStats_software_creati()[2].setQuantita(q_root);
+			
+			attaccante.getStats_software_creati()[2].setQuantita(attaccante.getStats_software_creati()[2].getQuantita()-1);
 			
 		}
-		if(disp[0]>=quantita_v) {
+		if(attaccante.getStats_software_creati()[1].getQuantita()>=quantita_v) {
 			sel_attaccanti[1].setQuantita(quantita_v);
-			q_virus= disp[0]-quantita_v;
-			attaccante.getStats_software_creati()[1].setQuantita(q_virus);
+			
+			attaccante.getStats_software_creati()[1].setQuantita(attaccante.getStats_software_creati()[1].getQuantita()-quantita_v);
 		}
+		
+		attaccante.setSoftware_disponibile(attaccante.getSoftware_disponibile()-(quantita_v+ quantita_r) );
 	}
 	
 
@@ -98,27 +100,38 @@ public class Battaglia extends Thread{
 	 */
 	public boolean calcola_vincitore() {
 		
-		int attacco, difesa;
+		int attacco, difesa, difesa1, difesa2;
 		int temp;
 		
 		boolean successo=false;
 		attacco= sel_attaccanti[1].getQuantita() * sel_attaccanti[1].getVal_atk();
+		difesa1=aggiorna_firewall();
+		difesa2=(sel_difensori[0].getVal_def()*sel_difensori[0].getQuantita());
 		
-		difesa=aggiorna_firewall()+(sel_difensori[0].getVal_def()*sel_difensori[0].getQuantita());
+		difesa= difesa1+difesa2;
 		
-		temp= attacco-difesa;
-				
-		if(temp>0) {
+		/*per test
+		System.out.println("attacco valore" + attacco);
+		System.out.println("difesa valore" +difesa);
+		*/
+		
+		if(attacco>difesa) {
 			successo=true;
 			sel_difensori[0].setQuantita(0);
 			
-		} else {
-			if(temp<0) {
+		} 
+		else {
+			if(attacco<difesa) {
 				if(sel_difensori[0].getLivello()!=0) {
-					temp= temp/sel_difensori[0].getLivello();
-					sel_difensori[0].setQuantita(temp);
+					temp= (difesa2/sel_difensori[0].getVal_def()) - attacco;
+					
+					/*System.out.println(temp); 
+					 */
+					difensore.getStats_software_creati()[0].setQuantita(temp);
 				}
-			} else sel_difensori[0].setQuantita(0); 
+			} else if(attacco==difesa) {
+				difensore.getStats_software_creati()[0].setQuantita(0); 
+			}
 		}
 		
 		return successo;

@@ -124,8 +124,9 @@ public class PopupControllerFacade {
 							partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), 
 							popUpFacade.getPopUpSelectmalware().getQuantitaVirus(), popUpFacade.getPopUpSelectmalware().getQuantitaRootCrash()) *1000+300 ); 
 			mainModello.avvioBattaglia(partitaStage.getSelectedBase().getPossessore(), partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY());
+		popUpFacade.getPopUpSelectmalware().getStage().close();	
 		});
-	
+		
 		
 		
 	}
@@ -137,31 +138,31 @@ public class PopupControllerFacade {
 		popUpFacade.getPopUpMarket().getButtonPay().setOnAction(actionEvent -> {
 			int quantitaHardware=-1;
 			if(popUpFacade.getPopUpMarket().getQuantitaAntivirus()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaAntivirus(), "antivirus");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaAntivirus(), "antivirus");
 			}
 				
 			if(popUpFacade.getPopUpMarket().getQuantitaVirus()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaVirus(), "virus");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaVirus(), "virus");
 
 			}
 			if(popUpFacade.getPopUpMarket().getQuantitaRootCrash()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaRootCrash(), "rootcrash");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), popUpFacade.getPopUpMarket().getQuantitaRootCrash(), "rootcrash");
 
 			}
 			if(popUpFacade.getPopUpMarket().getLivelloCPU()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "cpu");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), quantitaHardware, "cpu");
 
 			}
 			if(popUpFacade.getPopUpMarket().getLivelloRam()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "ram");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), quantitaHardware, "ram");
 
 			}
 			if(popUpFacade.getPopUpMarket().getLivelloEnergia()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "energia");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), quantitaHardware, "energia");
 
 			}
 			if(popUpFacade.getPopUpMarket().getLivelloFirewall()>0) {
-				mainModello.acquistoMercato(partitaStage.getSelectedNode().getPossessore(), quantitaHardware, "firewall");
+				mainModello.acquistoMercato(partitaStage.getSelectedBase().getPossessore(), quantitaHardware, "firewall");
 
 			}
 			popUpFacade.getPopUpMarket().initAllZero();

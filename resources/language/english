@@ -1,10 +1,10 @@
-#Wed May 25 21:45:45 CEST 2022
+#Thu May 26 12:22:23 CEST 2022
 config.creator.lable.password=Password
 config.creator.lable.pathToJavaFxLib=path to the JavaFX 'lib' folder
 Controller.err.LinguaNonSelezionata=You have to choose a language
 InitLinguaChooser.listaLingue.Titolo=Choose the language
-RunPanel.button.run=Run the game
 config.creator.lable.dataBaseUrl=DataBase URL
+RunPanel.button.run=Run the game
 InitLinguaChooser.lable.Titolo=Welcome to server dominator
 asset4=en Asset 4
 Controller.err.dataBaseCreator=Unable to create database
@@ -17,9 +17,17 @@ config.creator.lable.titoloPanel=Game setup
 config.creator.lable.scegliereTipologiaDiJre=JRE THAT YOU USE
 InitLinguaChooser.buttone.avanti=Next >>
 OnlyDescription.lable.descrizione=Done game setup
+descrizione2=ENdescrizione2
 descrizione1=ENdescrizione1
 Controller.err.RunnerFileCreate=Unable to create setup script
 config.creator.bottone.avanti=OK
+descrizione3=ENdescrizione3
+LEGA\ 2=EN LEGA 2
+nome3=ENnome3
+LEGA\ 1=EN LEGA 1
+nome1=ENnome1
+LEGA\ 3=EN LEGA 3
+nome2=ENnome2
 config.creator.lable.username=Username
 config.creator.bottone.naviga=Browse 
 config.creator.JRadioButton.jreAndFX=jre and javafx

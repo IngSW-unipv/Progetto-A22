@@ -148,6 +148,7 @@ public abstract class PartitaStage extends Stage{
 		this.classificaPaneCreator(classifica);
 		this.baseStatsPane=new BaseStatsPane(baseUtente);
 		this.selectedBase=baseUtente;
+		this.selectedNode=baseUtente;
 		this.dimensioni=new Pair<Integer, Integer>(nodiLarghezzaMappa,nodiAltezzaMappa );
 		this.logScrollPaneMaker(baseUtente);
 		this.playTableMaker(nodi);
@@ -155,6 +156,7 @@ public abstract class PartitaStage extends Stage{
 		this.initPlayTableListener();
 		this.fineProgress.addElement("", durataPartitaSeconds*1000, ProgressStyle.BLACK_STYLE);
 		this.fineProgress.setTitle("FINE PARTITA");
+		this.battleBox.addDrawable(baseStatsPane);
 		this.disponiPannelli();
 	}
 

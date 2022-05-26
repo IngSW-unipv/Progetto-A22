@@ -1,9 +1,14 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package sreverDominator.model;
 
 import java.util.Hashtable;
 import java.util.Map;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 
 public class Test3 {
 
@@ -58,8 +63,8 @@ public class Test3 {
 		
 	//	System.out.println("test possessore:"+ map.get(c1).getPossessore().getNome());
 		
-		System.out.println("il possessore del cloud è:"+ posizioni[0][0].getPossessore());
-		System.out.println("invece quello della base è:"+posizioni[3][1].getPossessore().getNome());
+		System.out.println("il possessore del cloud ï¿½:"+ posizioni[0][0].getPossessore());
+		System.out.println("invece quello della base ï¿½:"+posizioni[3][1].getPossessore().getNome());
 		
 	}
 

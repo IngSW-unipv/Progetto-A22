@@ -1,9 +1,11 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package sreverDominator.model;
 
 import java.util.Hashtable;
 import java.util.Map;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
 

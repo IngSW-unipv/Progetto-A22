@@ -3,9 +3,10 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita;
 import java.io.File;
 import java.util.Collections;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,8 +21,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,77 +30,49 @@ import javafx.stage.Stage;
 
 public class SignupView {
 
-    //view nodes
-    private Label titleHolderText = new Label("Server Dominator");
-    private Label subTitleHolderText = new Label("SIGNUP");
-	//subTitleHolderText.setStyle("-fx-text-fill: #ffff00");
-    private Label errorMessageSignupLabel = new Label();
-    private Label usernameSignup = new Label("username");
-    private Label passwordSignup = new Label("password");
-    private Label ipSignup = new Label("ip");
-    Label portSignup = new Label("port");
-    Button loginButtonChange = new Button("Log in"); //cambio scene
-    Button signupButtonLegit = new Button("Sign Up");
-    private TextField usernameTextFieldSignup; // da correggere? Dovrebbe essere TextField per scrivere username e password ma da errore se collego a presistence facade
+    private Label titleHolderText;
+    private Label subTitleHolderText;
+    private Label errorMessageSignupLabel;
+    private Label usernameSignup;
+    private Label passwordSignup;
+    private Label email;
+    private Button loginButtonChange;
+    private Button signupButtonLegit;
+    private TextField usernameTextFieldSignup; 
     private PasswordField passwordTextFieldSignup;
     private TextField emailTextField;
-    TextField titleTextField;
-    public Stage signupStage = new Stage();
+    private Stage signupStage;
     
-public void disponi() {
-		
-		ScrollPane sp = new ScrollPane();
-		
-		VBox v = new VBox();
-
-		HBox error = new HBox();
-		error.setAlignment(Pos.CENTER);
-		error.getChildren().addAll(getErrorMessageLabel());
-
-		v = createSignup();
-
-		sp.setContent(v);
-		sp.setFitToHeight(true);
-		sp.setFitToWidth(true);
-		signupStage.setScene(new Scene(sp));
-	}
-
-   
-    Parent signup;
 
     public SignupView(){
-        signup = createSignup();
+    	titleHolderText = new Label("Server Dominator");
+        subTitleHolderText = new Label("SIGNUP");
+        errorMessageSignupLabel = new Label();
+        usernameSignup = new Label("Username");
+        passwordSignup = new Label("Password");
+        loginButtonChange = new Button("Log in"); 
+        signupButtonLegit = ComponentCreator.getIstance().createButton("Sign Up", Pos.CENTER);
+        email=new Label("Email\t");
+        usernameTextFieldSignup=ComponentCreator.getIstance().textFieldreator("USERNAME");
+        passwordTextFieldSignup=ComponentCreator.getIstance().passwordFieldCreator("PASSWORD");
+        emailTextField=ComponentCreator.getIstance().textFieldreator("E-MAIL");
+        signupStage = new Stage();
+        this.titleHolderText.setStyle(" -fx-text-fill: #ffff00; -fx-font-weight: bold");
+        this.subTitleHolderText.setStyle(" -fx-text-fill: #ffff00");
         disponi();
     }
-
-    private VBox createSignup() {
-        VBox xBox =  new VBox();
-        xBox.setPrefHeight(350);
-        xBox.setPrefWidth(300);
-        xBox.setPadding(new Insets(15));
-        
-        xBox.setBackground(new Background(Collections.singletonList(new BackgroundFill(Color.WHITE, null, null)),
-				Collections.singletonList(new BackgroundImage(
-						new Image(new File("resources/img/bit.png").toURI().toString(), 1000, 503, false, true),
-						BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-						new BackgroundSize(1.0, 1.0, true, true, false, false)))));
+    
+    public void disponi() {
+    	ScrollPane sp = new ScrollPane();
 		
-
-        xBox.getChildren().add(createSuperTitle());
-        xBox.getChildren().add(createUser());
-        xBox.getChildren().add(createButtons());
-        
-        return xBox;
-    }
-
-    private HBox createSuperTitle() {
-    	
-    	HBox superTitle = new HBox();
+		VBox v = new VBox();
+		
+		HBox superTitle = new HBox();
 		superTitle.setAlignment(Pos.CENTER);
 		superTitle.setBackground(
-				new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), new Insets(30,25,30,25))));
-		superTitle.setMinHeight(100);
-		
+				new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), new Insets(10,50,10,50))));
+		superTitle.setMinHeight(60);
+		superTitle.setSpacing(20);
 		
 		VBox titleAndSubtitle = new VBox();
 		titleAndSubtitle.setAlignment(Pos.CENTER);
@@ -108,103 +81,91 @@ public void disponi() {
 		title.setAlignment(Pos.BOTTOM_CENTER);
 		titleHolderText.setAlignment(Pos.CENTER);
 		titleHolderText.setFont(new Font("", 15));
-		titleHolderText.setStyle(" -fx-text-fill: #ffff00; -fx-font-weight: bold");
 		title.getChildren().addAll(titleHolderText);		
 		
 		HBox subTitle = new HBox();
 		subTitle.setAlignment(Pos.TOP_CENTER);
 		subTitleHolderText.setAlignment(Pos.CENTER);
 		subTitleHolderText.setFont(new Font("", 10));
-		subTitleHolderText.setStyle(" -fx-text-fill: #ffff00");
 		subTitle.getChildren().addAll(subTitleHolderText);
 		
 		titleAndSubtitle.getChildren().addAll(title, subTitle);
 		
 		superTitle.getChildren().add(titleAndSubtitle);
-    	
-    	return superTitle;
-    }
-      
-	private HBox createUser() {
 
-		HBox x = new HBox();
-		x.setAlignment(Pos.CENTER);
-
-		GridPane gridPanex = new GridPane();
-		gridPanex.setHgap(10);
-		gridPanex.setVgap(10);
+		HBox credenziali = new HBox();
+		credenziali.setPrefWidth(400);
+		credenziali.setPrefHeight(100);
+		credenziali.setAlignment(Pos.CENTER);
 		
-		Label usernameSignup = new Label("username");
-		usernameSignup.setStyle(" -fx-text-fill: #000000; -fx-font-weight: bold");
-		usernameSignup.setFont(new Font("", 13));
-		Label passwordSignup = new Label("password");
-		passwordSignup.setStyle(" -fx-text-fill: #000000; -fx-font-weight: bold");
-		passwordSignup.setFont(new Font("", 13));
-		Label ipSignup = new Label("email");
-		ipSignup.setStyle(" -fx-text-fill: #000000; -fx-font-weight: bold");
-		ipSignup.setFont(new Font("", 13));
-		// Label portSignup = new Label("port");
 		
-		TextField usernameTextSignup = new TextField("username");
-		PasswordField passwordTextFieldSignup = new PasswordField(); //CAMBIATO DA TEXTFIELD A PASSWORDFIELD 27052022
-		TextField ipTextSignup = new TextField("email ");
-		// TextField portTextSignup = new TextField("port");
-
-		GridPane.setRowIndex(usernameSignup, 0); // in scala, il numero integer la posizione 0 è la più alta
-		GridPane.setRowIndex(passwordSignup, 1);
-		GridPane.setRowIndex(ipSignup, 2);
-		// GridPane.setRowIndex(portSignup, 3);
+		VBox userAndPassword = new VBox();
+		userAndPassword.setAlignment(Pos.CENTER);
 		
-		GridPane.setConstraints(usernameTextSignup, 1, 0);
-		GridPane.setConstraints(passwordTextFieldSignup, 1, 1);
-		GridPane.setConstraints(ipTextSignup, 1, 2);
-		// GridPane.setConstraints(portTextSignup, 1, 3);
+		HBox username = new HBox();
+		username.setAlignment(Pos.CENTER);
+		username.setPrefHeight(40);
+		username.setSpacing(10);
+		usernameSignup.setFont(new Font(15));
+		usernameTextFieldSignup.setPrefSize(200, 10);
+		username.getChildren().addAll(usernameSignup, usernameTextFieldSignup);
+		
 
-		gridPanex.getChildren().addAll(
-				usernameSignup, passwordSignup, ipSignup, 
-				usernameTextSignup, passwordTextFieldSignup, ipTextSignup
-		);
+		HBox password = new HBox();
+		password.setAlignment(Pos.CENTER);
+		password.setPrefHeight(40);
+		password.setSpacing(10);
+		passwordSignup.setFont(new Font(15));
+		passwordTextFieldSignup.setPrefSize(200, 10);
+		password.getChildren().addAll(passwordSignup, passwordTextFieldSignup);
 
-		x.getChildren().add(gridPanex);
+		
+		HBox email = new HBox();
+		email.setAlignment(Pos.CENTER);
+		email.setPrefHeight(40);
+		email.setSpacing(10);
+		this.email.setFont(new Font(15));
+		emailTextField.setPrefSize(200, 10);
+		email.getChildren().addAll(this.email, emailTextField);
+		HBox.setHgrow(this.email, Priority.ALWAYS);
+		HBox.setHgrow(emailTextField, Priority.ALWAYS);
+		
+		userAndPassword.getChildren().addAll(username,email, password);
+		
+		credenziali.getChildren().add(userAndPassword);
 
-		return x;
-	}
-   
-	private HBox createButtons() {
-        HBox yBox = new HBox(15);
-        yBox.setSpacing(10);
-        yBox.setAlignment(Pos.CENTER);
-        yBox.setPrefHeight(80);
-        
-        loginButtonChange.setStyle(
-        	"-fx-background-color: #3c7fb1, linear-gradient(#fafdfe, #e8f5fc),linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);"
-          + "-fx-background-insets: 0,1,2;"
-          + "-fx-background-radius: 3,2,1;"
-          + "-fx-padding: 3 30 3 30;"
-          + "-fx-text-fill: black;"
-          + "-fx-font-size: 14px;");
-       
-        signupButtonLegit.setStyle(
-        		"-fx-background-color: linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);"
-        	  + "-fx-background-radius: 3,2,1;"  
-        	  + "-fx-background-insets: 0,1,2;"
-        	  + "-fx-padding: 3 30 3 30;"
-        	  + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );"  
-        	  + "-fx-text-fill: #395306;"
-        	  + "-fx-font-size: 14px;");
-        
-        yBox.getChildren().addAll(loginButtonChange, signupButtonLegit);
-        return yBox; 
-	}
-        
-        public void setStage(Stage signupStage) {
-		this.signupStage = signupStage;
+		HBox accedi = new HBox();
+		accedi.setAlignment(Pos.CENTER);
+		accedi.setPrefHeight(50);
+		
+		accedi.getChildren().addAll(signupButtonLegit);
+
+		HBox error = new HBox();
+		error.setAlignment(Pos.CENTER);
+		
+		error.getChildren().addAll(errorMessageSignupLabel);
+
+		HBox registrazione = new HBox();
+		registrazione.setAlignment(Pos.CENTER);
+		loginButtonChange.setStyle("-fx-background-color: transparent;-fx-text-fill: #0606B8;");
+		loginButtonChange.setCursor(Cursor.HAND);		
+		
+		registrazione.getChildren().addAll(new Label("Sei gia utente?"), loginButtonChange);
+	
+		v.getChildren().addAll(superTitle, credenziali, accedi, error, registrazione);
+		//v.setSpacing(10);
+		v.setBackground(new Background(Collections.singletonList(new BackgroundFill(Color.WHITE, null, null)),
+				Collections.singletonList(new BackgroundImage(
+						new Image(new File("resources/img/bit.png").toURI().toString(), 1000, 503, false, true),
+						BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+						new BackgroundSize(1.0, 1.0, true, true, false, false)))));
+		
+		sp.setContent(v);
+		sp.setFitToHeight(true);
+		sp.setFitToWidth(true);
+		signupStage.setScene(new Scene(sp));
 	}
     
-    public Parent getSignup(){
-        return signup;
-    }
-
     public Stage getStage() {
 		return signupStage;
 	}
@@ -221,13 +182,6 @@ public void disponi() {
         return passwordSignup;
     }
 
-    public Label getIpSignup() {
-        return ipSignup;
-    }
-
-    public Label getPortSignup() {
-        return portSignup;
-    }
 
     public Button getLoginButtonChange(){
         return loginButtonChange;
@@ -253,7 +207,60 @@ public void disponi() {
 		return errorMessageSignupLabel;
 	}
 
+	public Label getSubTitleHolderText() {
+		return subTitleHolderText;
+	}
 
+	public void setSubTitleHolderText(Label subTitleHolderText) {
+		this.subTitleHolderText = subTitleHolderText;
+	}
 
+	public Label getErrorMessageSignupLabel() {
+		return errorMessageSignupLabel;
+	}
+
+	public void setErrorMessageSignupLabel(Label errorMessageSignupLabel) {
+		this.errorMessageSignupLabel = errorMessageSignupLabel;
+	}
+
+	public Stage getSignupStage() {
+		return signupStage;
+	}
+
+	public void setSignupStage(Stage signupStage) {
+		this.signupStage = signupStage;
+	}
+
+	public void setTitleHolderText(Label titleHolderText) {
+		this.titleHolderText = titleHolderText;
+	}
+
+	public void setUsernameSignup(Label usernameSignup) {
+		this.usernameSignup = usernameSignup;
+	}
+
+	public void setPasswordSignup(Label passwordSignup) {
+		this.passwordSignup = passwordSignup;
+	}
+
+	public void setLoginButtonChange(Button loginButtonChange) {
+		this.loginButtonChange = loginButtonChange;
+	}
+
+	public void setSignupButtonLegit(Button signupButtonLegit) {
+		this.signupButtonLegit = signupButtonLegit;
+	}
+
+	public void setUsernameTextFieldSignup(TextField usernameTextFieldSignup) {
+		this.usernameTextFieldSignup = usernameTextFieldSignup;
+	}
+
+	public void setPasswordTextFieldSignup(PasswordField passwordTextFieldSignup) {
+		this.passwordTextFieldSignup = passwordTextFieldSignup;
+	}
+
+	public void setEmailTextField(TextField emailTextField) {
+		this.emailTextField = emailTextField;
+	}
 
 }

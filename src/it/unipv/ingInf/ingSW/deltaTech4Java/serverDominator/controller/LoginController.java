@@ -7,10 +7,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.Lobb
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
 
 public class LoginController {
-	private LoginView loginView;
-	private SignupView signupView;
-	private LobbyView prebattagliaView;
-	private UserAccount userAccount;
+	LoginView loginView;
+	SignupView signupView;
+	LobbyView prebattagliaView;
+	UserAccount userAccount;
 	
 	
 	
@@ -22,13 +22,13 @@ public class LoginController {
 		this.initAll();
 	}
 	public void initAll() {
-		this.initLogin();
+		//this.initLogin();
 		this.initChangeContextlogin();
 		this.initSignup();
 		this.initChangeContextSignUp();
 		
 	}
-	
+	/*
 	public void initLogin() {
 		loginView.getLoginButton().setOnAction(event ->{
 			userAccount=new UserAccount(loginView.getUsernameTextField().getText(), loginView.getPasswordTextField().getText());
@@ -45,7 +45,7 @@ public class LoginController {
 			
 		});
 			
-	}
+	}*/
 	
 	/**
 	 * Metodo abbinato al pulsante Signup di LoginView, cambia Stage e porta l'utente all'interfaccia di registrazione SignupView
@@ -61,7 +61,7 @@ public class LoginController {
 	public void initSignup() {
 		signupView.getSignupButtonLegit().setOnAction(ActionEvent ->{
 			boolean us = PersistenceFacade.getInstance().insertUserAccount(new UserAccount(signupView.getUsernameTextFieldSignup().getText(), 
-					signupView.getPasswordTextFieldSignup().getText(), signupView.getEmailTextField().getText()));
+					 signupView.getEmailTextField().getText(),signupView.getPasswordTextFieldSignup().getText()));
 			if(us) {
 				signupView.getStage().close();
 				loginView.getStage().show();
@@ -79,30 +79,6 @@ public class LoginController {
 			loginView.getStage().show();
 		});
 	
-	}
-	public LoginView getLoginView() {
-		return loginView;
-	}
-	public void setLoginView(LoginView loginView) {
-		this.loginView = loginView;
-	}
-	public SignupView getSignupView() {
-		return signupView;
-	}
-	public void setSignupView(SignupView signupView) {
-		this.signupView = signupView;
-	}
-	public LobbyView getPrebattagliaView() {
-		return prebattagliaView;
-	}
-	public void setPrebattagliaView(LobbyView prebattagliaView) {
-		this.prebattagliaView = prebattagliaView;
-	}
-	public UserAccount getUserAccount() {
-		return userAccount;
-	}
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
 	}
 	
 }

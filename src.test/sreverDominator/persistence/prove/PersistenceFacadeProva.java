@@ -11,7 +11,7 @@ public class PersistenceFacadeProva {
 		PersistenceFacade p=PersistenceFacade.getInstance();
 		
 		UserAccount tawa= new UserAccount("Tawa","123456789");
-		tawa=p.getUserAccountById(tawa);//getuserAccount from db
+		p.getUserAccountById(tawa);//getuserAccount from db
 		if(tawa!=null)
 			System.out.println(tawa.toString());
 		for(ObiettiviUser o: tawa.getObiettiviUsers()) {

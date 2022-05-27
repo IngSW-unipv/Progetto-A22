@@ -1,19 +1,19 @@
-#Thu May 26 12:32:57 CEST 2022
-IUserAccountDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.proxy.ProxyUserAccountDAO
-strategy.cmdFull.class.name=serverDominator.config.model.cmdCreator.FullStrategy
+#Fri May 27 19:51:25 CEST 2022
+IUserAccountDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.proxy.ProxyUserAccountDAO
 strategy.fxCmd.class.name=serverDominator.config.model.cmdCreator.NotFullStrategy
-ILanguageManager.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager
+strategy.cmdFull.class.name=serverDominator.config.model.cmdCreator.FullStrategy
+ILanguageManager.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.FilesLanguageManager
 scriptsFacade.jarName.toRun=serverDOminator
-IAssetDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.AssetDAO
-it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObPunteggioDAO
-IOibiettiviUserDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviUserDAO
+IAssetDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.asset.AssetDAO
+it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObPunteggioDAO
+IOibiettiviUserDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.obiettivi.ObiettiviUserDAO
 classe.name.for.fileExtension.linux=serverDominator.config.model.fileExtention.UnixStrategy
-IAssetOwnDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.AssetOwnDAO
+IAssetOwnDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.asset.AssetOwnDAO
 ISession.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.ConnectionFactory
 scriptsFacade.scriptName.toCreaste=serverDominator
-obiettiviDiPunteggioDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObPunteggioDAO
+obiettiviDiPunteggioDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObPunteggioDAO
 classe.name.for.fileExtension.macos=serverDominator.config.model.fileExtention.UnixStrategy
-src.cofg.context=5
-it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
+src.cofg.context=1
+it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObiettiviDAO
 classe.name.for.fileExtension.windows=serverDominator.config.model.fileExtention.WindowsStrategy
-obiettiviDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.ObiettiviDAO
+obiettiviDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObiettiviDAO

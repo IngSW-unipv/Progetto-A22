@@ -80,5 +80,29 @@ public class LoginController {
 		});
 	
 	}
+	public LoginView getLoginView() {
+		return loginView;
+	}
+	public void setLoginView(LoginView loginView) {
+		this.loginView = loginView;
+	}
+	public SignupView getSignupView() {
+		return signupView;
+	}
+	public void setSignupView(SignupView signupView) {
+		this.signupView = signupView;
+	}
+	public LobbyView getPrebattagliaView() {
+		return prebattagliaView;
+	}
+	public void setPrebattagliaView(LobbyView prebattagliaView) {
+		this.prebattagliaView = prebattagliaView;
+	}
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(UserAccount userAccount) {
+		this.userAccount = userAccount;
+	}
 	
 }

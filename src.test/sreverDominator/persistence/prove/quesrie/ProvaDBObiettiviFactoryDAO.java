@@ -2,7 +2,7 @@ package sreverDominator.persistence.prove.quesrie;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DBObiettiviDOAFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.DBObiettiviDOAFactory;
 
 public class ProvaDBObiettiviFactoryDAO {
 

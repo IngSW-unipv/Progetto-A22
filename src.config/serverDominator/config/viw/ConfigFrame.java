@@ -9,7 +9,7 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.ILanguageManager;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.FileToString;
 import serverDominator.config.viw.panel.ConfigCreator;
 import serverDominator.config.viw.panel.InitLinguaChooser;

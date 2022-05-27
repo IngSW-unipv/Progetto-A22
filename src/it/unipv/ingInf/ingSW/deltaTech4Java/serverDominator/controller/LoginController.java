@@ -7,10 +7,10 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.Lobb
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
 
 public class LoginController {
-	LoginView loginView;
-	SignupView signupView;
-	LobbyView prebattagliaView;
-	UserAccount userAccount;
+	private LoginView loginView;
+	private SignupView signupView;
+	private LobbyView prebattagliaView;
+	private UserAccount userAccount;
 	
 	
 	

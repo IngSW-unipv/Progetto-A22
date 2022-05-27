@@ -5,10 +5,22 @@ import java.util.Properties;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.AssetOwn;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.asset.IAssetDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.asset.IAssetDAOFactory;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.ILanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.ILanguageManagerFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.IObiettiviDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.IObiettiviDAOFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.IUserAccountDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.IUserAccountDAOFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.asset.IAssetOwnDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.asset.IAssetOwnDAOFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.obiettivi.IObiettiviUserDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.obiettivi.IObiettiviUserDAOFactory;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.ISession;
 
 /**

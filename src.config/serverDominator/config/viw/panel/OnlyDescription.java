@@ -6,8 +6,8 @@ import java.util.Properties;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.ILanguageManager;
 
 public class OnlyDescription extends JPanel {
 

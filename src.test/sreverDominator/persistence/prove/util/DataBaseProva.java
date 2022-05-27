@@ -1,6 +1,6 @@
 package sreverDominator.persistence.prove.util;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DataBase;
 
 public class DataBaseProva {
 	public static void main(String[] args) {

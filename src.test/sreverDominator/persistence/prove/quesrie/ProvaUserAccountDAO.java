@@ -1,8 +1,8 @@
 package sreverDominator.persistence.prove.quesrie;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.UserAccountDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.UserAccountDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DataBase;
 
 public class ProvaUserAccountDAO {
 

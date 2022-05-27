@@ -8,9 +8,9 @@ import java.nio.file.NoSuchFileException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.exeptions.DataBaseException;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.DbConnection;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.SessionFactory;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.exeptions.DataBaseException;
 
 
 /**

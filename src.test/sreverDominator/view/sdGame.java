@@ -1,6 +1,6 @@
 package sreverDominator.view;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller.MainController;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller.ControllerFacade;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,7 +14,7 @@ public class sdGame extends Application{
 		partitaStage.show();*/
 		//@SuppressWarnings("unused")
 		@SuppressWarnings("unused")
-		MainController c=new MainController();
+		ControllerFacade c=new ControllerFacade();
 	/*	MainDefinitivo mainDefinitivo=new MainDefinitivo();
 		mainDefinitivo.avvioPartita(30, 20, "tawa", 0);
 		

@@ -2,7 +2,7 @@ package serverDominator.config;
 
 import java.util.Properties;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 import serverDominator.config.controllers.Controller;
 import serverDominator.config.model.ScriptsFacade;

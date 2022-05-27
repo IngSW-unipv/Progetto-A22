@@ -1,9 +1,9 @@
 package sreverDominator.persistence.prove;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.IUserAccountDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.proxy.ProxyUserAccountDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.IUserAccountDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.proxy.ProxyUserAccountDAO;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DataBase;
 
 public class UserAccountProxyProva {
 	public static void main(String[] args) {

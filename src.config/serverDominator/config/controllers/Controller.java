@@ -17,9 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.FilesLanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.ILanguageManager;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.DataBase;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.FilesLanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.ILanguageManager;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.DataBase;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.PropertiesFile;
 import serverDominator.config.model.ScriptsFacade;
 import serverDominator.config.viw.ConfigFrame;

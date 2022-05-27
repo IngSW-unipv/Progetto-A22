@@ -2,8 +2,8 @@ package sreverDominator.persistence.prove.quesrie;
 
 import java.util.ArrayList;
 
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.asset.AssetDAO;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Asset;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.db.implementDAO.AssetDAO;
 
 
 

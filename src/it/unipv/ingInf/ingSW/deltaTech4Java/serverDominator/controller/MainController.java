@@ -82,7 +82,7 @@ public class MainController {
 				partitaCont = new PartitaController(mainDefinitivo, partitaStage,
 								(Base)mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
 					
-				finePartita= new FinePartitaObserver(mainDefinitivo, partitaStage, lobbyView, partitaStage.getClassificaPane());
+				finePartita= new FinePartitaObserver(mainDefinitivo, partitaStage, lobbyView, userAccount);
 				Partita p=(Partita)partitaStage;
 				p.setFineObserver(finePartita);
 				partitaStage.getFineProgress().addElement("tempo partita", lobbyView.getSelectedDifecolta()[0]*60*1000, ProgressStyle.BLACK_STYLE);

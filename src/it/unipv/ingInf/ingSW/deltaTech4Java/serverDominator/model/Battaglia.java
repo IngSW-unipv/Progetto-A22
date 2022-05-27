@@ -23,6 +23,7 @@ public class Battaglia extends Thread{
 	private Timer time;
 	private int t_timer;
 	private String report;
+	@SuppressWarnings("unused")
 	private Nodo partenza;
 	private boolean life=false;
 	private PropertyChangeSupport changes;

@@ -66,7 +66,7 @@ public class Mercato {
 			quantita=nodo.getSpazio_Ram();
 		}
 		if(software.equalsIgnoreCase("virus")) {	
-			if(user.getValuta()>=prezzoVirus*quantita);
+			if(user.getValuta()>=prezzoVirus*quantita)
 				if(nodo.compra_software(software, quantita) ) {
 					valuta=user.getValuta()-prezzoVirus*quantita;
 					user.setValuta(valuta);
@@ -74,7 +74,7 @@ public class Mercato {
 				
 		}
 		if(software.equalsIgnoreCase("antivirus")) {
-			if(user.getValuta()>=prezzoAntivirus*quantita);
+			if(user.getValuta()>=prezzoAntivirus*quantita)
 			if(nodo.compra_software(software, quantita) ) {
 				valuta=user.getValuta()-prezzoAntivirus*quantita;
 				user.setValuta(valuta);
@@ -82,10 +82,10 @@ public class Mercato {
 			
 		}
 		if(software.equalsIgnoreCase("rootcrash")) {
-			if(user.getValuta()>=prezzoRootcrash*quantita);
-			if(nodo.compra_software(software, quantita) ) {
-				valuta=user.getValuta()-prezzoRootcrash*quantita;
-				user.setValuta(valuta);
+			if(user.getValuta()>=prezzoRootcrash*quantita)
+				if(nodo.compra_software(software, quantita) ) {
+					valuta=user.getValuta()-prezzoRootcrash*quantita;
+					user.setValuta(valuta);
 			}
 			
 		}
@@ -103,7 +103,7 @@ public class Mercato {
 		int valuta;
 		
 		if(risorsa.equalsIgnoreCase("ram")) {
-			if(user.getValuta()>=prezzoRam);
+			if(user.getValuta()>=prezzoRam)
 				if(nodo.compra_risorsa(risorsa) ) {
 					valuta=user.getValuta()-prezzoRam;
 					user.setValuta(valuta);
@@ -111,23 +111,23 @@ public class Mercato {
 				
 		}
 		if(risorsa.equalsIgnoreCase("cpu")) {
-			if(user.getValuta()>=prezzoCpu);
-			if(nodo.compra_risorsa(risorsa) ) {
-				valuta=user.getValuta()-prezzoCpu;
-				user.setValuta(valuta);
+			if(user.getValuta()>=prezzoCpu)
+				if(nodo.compra_risorsa(risorsa) ) {
+					valuta=user.getValuta()-prezzoCpu;
+					user.setValuta(valuta);
 			}
 			
 		}
 		if(risorsa.equalsIgnoreCase("energia")) {
-			if(user.getValuta()>=prezzoEnergia);
-			if(nodo.compra_risorsa(risorsa) ) {
-				valuta=user.getValuta()-prezzoEnergia;
-				user.setValuta(valuta);
-			}
+			if(user.getValuta()>=prezzoEnergia)
+				if(nodo.compra_risorsa(risorsa) ) {
+					valuta=user.getValuta()-prezzoEnergia;
+					user.setValuta(valuta);
+				}
 			
 		}
 		if(risorsa.equalsIgnoreCase("Firewall")) {
-			if(user.getValuta()>=prezzoFirewall);
+			if(user.getValuta()>=prezzoFirewall)
 				if(nodo.compra_risorsa(risorsa) ) {
 					valuta=user.getValuta()-prezzoFirewall;
 					user.setValuta(valuta);

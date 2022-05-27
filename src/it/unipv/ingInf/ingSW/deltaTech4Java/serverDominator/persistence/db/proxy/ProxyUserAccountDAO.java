@@ -50,7 +50,7 @@ public class ProxyUserAccountDAO implements IUserAccountDAO {
 
 	@Override
 	public boolean updateUserAccount(UserAccount us) {
-		return ((UserAccountInfo.saveUserAccountData(us) && ObiettiviUserFileSistemDAO.saveObUserInCsvFile(us.getObiettiviUsers())&&AssetOwnFileSystemDAO.saveInCsvFile(us.getAsetOwns()))|| this.us.updateUserAccount(us)); 
+		return this.us.updateUserAccount(us);
 	}
 
 	@Override

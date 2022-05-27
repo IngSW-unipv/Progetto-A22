@@ -234,7 +234,7 @@ THEN
 			WHERE 
 				T2.PUNTEGGIO_OBIETTIVO<=NEW.PUNTEGGIO
 			);
-            SET NEW.MNY=OLD.MNY+ricompensaData;
+            SET NEW.MNY=NEW.MNY+ricompensaData;
     end if;
 END$$
 
@@ -318,4 +318,4 @@ DROP USER IF EXISTS sd_sys;
 
 CREATE USER 'sd_sys' IDENTIFIED BY '12345678';
 
-GRANT SELECT, UPDATE, insert, alter, create, delete, DROP ON `ServerDomDB`.* TO 'sd_sys';
+GRANT ALL ON `ServerDomDB`.* TO 'sd_sys';

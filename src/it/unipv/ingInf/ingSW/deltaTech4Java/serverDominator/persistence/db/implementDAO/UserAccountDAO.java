@@ -86,12 +86,6 @@ public class UserAccountDAO implements IUserAccountDAO {
 
 			st1.executeUpdate();
 			
-			ObiettiviUserDAO ob=new ObiettiviUserDAO(propConn);
-			
-			for(ObiettiviUser o : us.getObiettiviUsers()) {
-				ob.updateStatoObiettiviUserbyId(o);
-			}
-			
 			AssetOwnDAO as=new AssetOwnDAO(propConn);
 			for(AssetOwn a: us.getAsetOwns()) {
 				as.updateQuantityAssetOwnById(a);

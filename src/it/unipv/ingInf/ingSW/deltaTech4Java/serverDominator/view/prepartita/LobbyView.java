@@ -264,8 +264,11 @@ public class LobbyView extends Stage implements IDrawable {
 
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
+		this.userInfo.getChildren().clear();
 		this.userInfo=this.infoUserMaker();
+		this.obiettivi.getChildren().clear();
 		this.obiettivi=obiettiviGiocatoreMaker();
+		super.setScene(null);
 		this.disponi();
 	}
 

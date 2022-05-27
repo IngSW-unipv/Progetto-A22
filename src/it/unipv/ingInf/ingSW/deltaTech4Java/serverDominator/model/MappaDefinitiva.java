@@ -17,6 +17,7 @@ public class MappaDefinitiva{
 	private int sceltabase;
 	private int x_max, y_max, n_basi;
 	private String[] vicini;
+	@SuppressWarnings("unused")
 	private Coordinate[] confini; 
 	private int xsup, xinf, ysup, yinf;
 	

@@ -63,7 +63,7 @@ public class MainDefinitivo extends Thread {
 		fight= new Battaglia[maxbattle];
 		maxbattle=6;
 		
-		this.avvioBot(); 
+	//	this.avvioBot(); 
 		
 	}
 
@@ -142,7 +142,7 @@ public class MainDefinitivo extends Thread {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@SuppressWarnings("static-access")
+	//@SuppressWarnings("static-access")
 	public void avvioBot() throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {

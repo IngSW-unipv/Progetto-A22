@@ -146,7 +146,7 @@ public void disponi() {
 		// Label portSignup = new Label("port");
 		
 		TextField usernameTextSignup = new TextField("username");
-		TextField passwordTextSignup = new TextField("password");
+		PasswordField passwordTextFieldSignup = new PasswordField(); //CAMBIATO DA TEXTFIELD A PASSWORDFIELD 27052022
 		TextField ipTextSignup = new TextField("email ");
 		// TextField portTextSignup = new TextField("port");
 
@@ -156,13 +156,13 @@ public void disponi() {
 		// GridPane.setRowIndex(portSignup, 3);
 		
 		GridPane.setConstraints(usernameTextSignup, 1, 0);
-		GridPane.setConstraints(passwordTextSignup, 1, 1);
+		GridPane.setConstraints(passwordTextFieldSignup, 1, 1);
 		GridPane.setConstraints(ipTextSignup, 1, 2);
 		// GridPane.setConstraints(portTextSignup, 1, 3);
 
 		gridPanex.getChildren().addAll(
 				usernameSignup, passwordSignup, ipSignup, 
-				usernameTextSignup, passwordTextSignup, ipTextSignup
+				usernameTextSignup, passwordTextFieldSignup, ipTextSignup
 		);
 
 		x.getChildren().add(gridPanex);

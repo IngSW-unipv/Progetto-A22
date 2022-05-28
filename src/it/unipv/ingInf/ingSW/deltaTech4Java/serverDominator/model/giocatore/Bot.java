@@ -66,7 +66,7 @@ public class Bot extends Giocatore{
 	 */
 	public void comportamento() {
 		int min=1;
-		int max=4;
+		int max=5;
 		int scelta;
 		String risorsa="Energia";
 		int n_virus;
@@ -102,25 +102,36 @@ public class Bot extends Giocatore{
 				time2.timer(map.trovaBase(this).getTempoRisorsa("Energia"));
 				map.trovaBase(this).potenzia_risorsa("Energia");
 			}
-			System.out.println(this.getNome()+ "sta potenziando " + risorsa);
+			System.out.println(this.getNome()+ " sta potenziando " + risorsa);
 			time2.timer(map.trovaBase(this).getTempoRisorsa(risorsa));
 			map.trovaBase(this).potenzia_risorsa(risorsa);
 			break;
 		case 2:
 			/* creazione software nel nodo base del bot	 */
 			
-			if(map.trovaBase(this).getSoftware_disponibile()+5 < map.trovaBase(this).getRisorse()[1].getStat1()) {	
-				System.out.println(this.getNome()+ " potenzia Ram per creazione");
+			/*controllare se bot dispone di spazio per creare software, se non possiede spazio in ram, allora
+			 * la potenzia, se non possiede energia per potenziare la ram allora prima potenzia energia
+			 */
+			if(map.trovaBase(this).getSoftware_disponibile()+5 > map.trovaBase(this).getRisorse()[1].getStat1()) {	
+				if(map.trovaBase(this).getRisorse()[1].getLivello_risorsa()==10) {
+					break;
+				} else {
+					System.out.println(this.getNome()+ " potenzia Ram per creazione");
+					if(map.trovaBase(this).getRisorse()[1].getE_richiesta()< map.trovaBase(this).getE_disponibile()) {
+						map.trovaBase(this).potenzia_risorsa("Energia");
+					}
+				}				
 				time2.timer(map.trovaBase(this).getTempoRisorsa("Ram"));
 				map.trovaBase(this).potenzia_risorsa("Ram");
 			}
+			
 			System.out.println(this.getNome()+" sta creando software");
-			time2.timer(map.trovaBase(this).getTempoSoftware("Virus"));	
+			time2.timer(map.trovaBase(this).getTempoSoftware("Virus")*5);	
 			map.trovaBase(this).crea_software("Virus", 5);
-			time2.timer(map.trovaBase(this).getTempoSoftware("Antivirus"));
+			time2.timer(map.trovaBase(this).getTempoSoftware("Antivirus")*5);
 			map.trovaBase(this).crea_software("Antivirus", 5);
 			
-			time2.timer(map.trovaBase(this).getTempoSoftware("Rootcrash"));
+			time2.timer(map.trovaBase(this).getTempoSoftware("Rootcrash")*5);
 			map.trovaBase(this).crea_software("Rootcrash", 5);
 			break;
 		case 3:
@@ -132,24 +143,26 @@ public class Bot extends Giocatore{
 				/*controllare se bot dispone di virus per attaccare, se non li possiede li crea*/
 				if(map.trovaBase(this).getStats_software_creati()[1].getQuantita()==0) {
 					System.out.println(this.getNome()+" sta creando per attaccare");
-					time2.timer(map.trovaBase(this).getTempoSoftware("Virus"));	
+					time2.timer(map.trovaBase(this).getTempoSoftware("Virus")*10);	
 					map.trovaBase(this).crea_software("Virus", 10);
 				}
 				
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
-				//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
+			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
 				System.out.println(this.getNome()+ " crea battaglia vs " + map.getNodo(confini[cont].getX(), confini[cont].getY()).getPossessore().getNome());
 				
-				/*scelta randomica di virus da mandare, se ne sceglie 0 allora li manda tutti*/
+				/*scelta randomica di virus da mandare, se ne sceglie 0 
+				 * oppure se il numero di virus inviato è inferiore al valore di difesa di un 
+				 * firewall livello 1, ossia 8, allora manda tutti i virus a disposizione
+				 */
 				n_virus=(int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1;
-				if(n_virus==0) {
+				if(n_virus==0 || n_virus < 8) {
 					n_virus= map.trovaBase(this).getStats_software_creati()[1].getQuantita();
 				}	
 				battle.selezione( n_virus, 1);
-				
+				System.out.println(this.getNome() + "ha selezionato virus: " + n_virus );
+			
 				changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
-				
-				
 				time2.timer(t_timer);
 				end_battle= battle.calcola_vincitore();
 				
@@ -179,28 +192,30 @@ public class Bot extends Giocatore{
 				}
 				
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
-				//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
+			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
 				System.out.println(this.getNome()+ " crea battaglia vs " + map.getNodo(confini[cont].getX(), confini[cont].getY()).getPossessore().getNome());
 				
-				/*scelta randomica di virus da mandare, se ne sceglie 0 allora li manda tutti*/
+				/*scelta randomica di virus da mandare, se ne sceglie 0 
+				 * oppure se il numero di virus inviato è inferiore al valore di difesa di un 
+				 * firewall livello 1, ossia 8, allora manda tutti i virus a disposizione
+				 */
 				n_virus=(int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1;
-				if(n_virus==0) {
+				if(n_virus==0 || n_virus < 8) {
 					n_virus= map.trovaBase(this).getStats_software_creati()[1].getQuantita();
 				}	
 				battle.selezione( n_virus, 1);
 				System.out.println(this.getNome() + "ha selezionato virus: " + n_virus );
-				
+			
 				changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
-				
 				time2.timer(t_timer);
 				end_battle= battle.calcola_vincitore();
-				System.out.println(this.getNome() + battle.stampa_report(battle.getEsito())); 
+				
+				System.out.println(this.getNome() + battle.stampa_report(end_battle)); 
 				
 				if(end_battle) {
 					battle.aggiornastati();
 					cont++;
 					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
-					
 				}				
 			}
 			

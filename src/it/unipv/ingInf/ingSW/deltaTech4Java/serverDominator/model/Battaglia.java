@@ -147,8 +147,8 @@ public class Battaglia extends Thread{
 		
 		String report;
 		if(esito) {
-			report="Hai conquistato il nodo di "+difensore.getPossessore().getNome();
-		}else report="Non hai conquistato il nodo di "+difensore.getPossessore().getNome();
+			report=" Ha conquistato il nodo di "+difensore.getPossessore().getNome();
+		}else report=" Non ha conquistato il nodo di "+difensore.getPossessore().getNome();
 		
 		return report;
 	}

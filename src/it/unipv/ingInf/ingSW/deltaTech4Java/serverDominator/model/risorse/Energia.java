@@ -5,7 +5,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse;
  * @version 1.0
  * @since 1.0
  * prima versione risorsa energia, serve per potenziare le altre risorse
- * la costante incrementatore_en è il valore di energia che ogni livello
+ * la costante incrementatore_en ï¿½ il valore di energia che ogni livello
  * da come aggiunta.
  */
 public class Energia extends Risorse{
@@ -24,7 +24,7 @@ public class Energia extends Risorse{
 		super.setNome("Energia");
 		e_disponibile= INCREMENTATORE_EN *super.getLivello_risorsa();
 		super.setE_richiesta(0);
-		super.setTempo_richiesto(0);
+		super.setTempo_richiesto(3);
 	}
 	
 	/** aggiorna il valore di energia utilizzabile*/
@@ -32,7 +32,7 @@ public class Energia extends Risorse{
 		
 		e_disponibile= e_disponibile +INCREMENTATORE_EN;
 		//per test
-		//System.out.println("il valore di energia è:"+e_disponibile);
+		//System.out.println("il valore di energia ï¿½:"+e_disponibile);
 	}
 
 //--------getter and setter-------// 

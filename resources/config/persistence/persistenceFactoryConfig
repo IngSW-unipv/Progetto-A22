@@ -1,4 +1,4 @@
-#Fri May 27 19:51:25 CEST 2022
+#Sat May 28 11:48:59 CEST 2022
 IUserAccountDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.proxy.ProxyUserAccountDAO
 strategy.fxCmd.class.name=serverDominator.config.model.cmdCreator.NotFullStrategy
 strategy.cmdFull.class.name=serverDominator.config.model.cmdCreator.FullStrategy

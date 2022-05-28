@@ -27,7 +27,7 @@ public class BotObserver implements PropertyChangeListener {
 			Coordinate difensore=(Coordinate)evt.getOldValue();;
 			if(mainDefinitivo.getTabellone().getNodo(difensore.getX(), difensore.getY()).getPossessore().getNome().equals(mainDefinitivo.getGiocatori()[1].getNome())) {
 				
-				int tempoAttaco=mainDefinitivo.getT_unitario();
+				int tempoAttaco=mainDefinitivo.getT_unitario()*1000;
 				partitaStage.addDifesa(mainDefinitivo.getTabellone().getNodo(attaccante.getX(), attaccante.getY()).getPossessore().getNome()+" ti sta attaccando"
 						+"("+(difensore.getX()-difensore.getY()/2)+","+ difensore.getY()+")"
 						, tempoAttaco);

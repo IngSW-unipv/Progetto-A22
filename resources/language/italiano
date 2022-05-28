@@ -1,7 +1,7 @@
-#Thu May 26 23:05:03 CEST 2022
+#Sat May 28 16:02:04 CEST 2022
 Lega1=SCRATCH
 config.creator.lable.password=Password
-Lega2=Fortran 
+Lega2=Fortran 
 config.creator.lable.pathToJavaFxLib=percorso alla cartella 'lib' di JavaFX
 Controller.err.LinguaNonSelezionata=Si deve selezionare una lingua
 InitLinguaChooser.listaLingue.Titolo=Scegli La lingua

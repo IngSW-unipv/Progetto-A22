@@ -69,11 +69,15 @@ public class Bot extends Giocatore{
 		int max=4;
 		int scelta;
 		String risorsa="Energia";
+		int n_virus;
+		boolean end_battle=false;
 			
 		scelta= (int)(Math.random()*(max-min))+ min;
 		switch(scelta) {
 		case 1: 
-			/* potenziamento risorse del nodo base del bot */
+			/* potenziamento risorse del nodo base del bot
+			 * incentivato il potenziamento energetico
+			 */
 			
 			scelta=(int)(Math.random()*(max-min));
 			switch(scelta) {
@@ -84,22 +88,38 @@ public class Bot extends Giocatore{
 				risorsa= "Ram";
 				break;
 			case 2:
-				risorsa= "Firewall";
+				risorsa= "Energia";
 				break;
 			case 3:
+				risorsa= "Firewall";
+				break;
+			default:
 				risorsa= "Energia";
 				break;
 			}
+			if(map.trovaBase(this).getRisorse()[2].getStat1()<20) {
+				System.out.println(this.getNome()+ " potenzia Energia per potenziamento ");
+				time2.timer(map.trovaBase(this).getTempoRisorsa("Energia"));
+				map.trovaBase(this).potenzia_risorsa("Energia");
+			}
+			System.out.println(this.getNome()+ "sta potenziando " + risorsa);
 			time2.timer(map.trovaBase(this).getTempoRisorsa(risorsa));
 			map.trovaBase(this).potenzia_risorsa(risorsa);
 			break;
 		case 2:
-			/* creazione software nel nodo base del bot */
+			/* creazione software nel nodo base del bot	 */
 			
-			time2.timer(map.trovaBase(this).getTempoSoftware("Antivirus"));
-			map.trovaBase(this).crea_software("Antivirus", 5);
+			if(map.trovaBase(this).getSoftware_disponibile()+5 < map.trovaBase(this).getRisorse()[1].getStat1()) {	
+				System.out.println(this.getNome()+ " potenzia Ram per creazione");
+				time2.timer(map.trovaBase(this).getTempoRisorsa("Ram"));
+				map.trovaBase(this).potenzia_risorsa("Ram");
+			}
+			System.out.println(this.getNome()+" sta creando software");
 			time2.timer(map.trovaBase(this).getTempoSoftware("Virus"));	
 			map.trovaBase(this).crea_software("Virus", 5);
+			time2.timer(map.trovaBase(this).getTempoSoftware("Antivirus"));
+			map.trovaBase(this).crea_software("Antivirus", 5);
+			
 			time2.timer(map.trovaBase(this).getTempoSoftware("Rootcrash"));
 			map.trovaBase(this).crea_software("Rootcrash", 5);
 			break;
@@ -107,23 +127,41 @@ public class Bot extends Giocatore{
 			/* attacco da parte del bot verso un nodo prossimo */
 			if(map.attaccabile(confini[cont].getX(), confini[cont].getY(), this)) {
 				t_timer= T_UNITARIO;
-				//t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
+			//	t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
+				
+				/*controllare se bot dispone di virus per attaccare, se non li possiede li crea*/
+				if(map.trovaBase(this).getStats_software_creati()[1].getQuantita()==0) {
+					System.out.println(this.getNome()+" sta creando per attaccare");
+					time2.timer(map.trovaBase(this).getTempoSoftware("Virus"));	
+					map.trovaBase(this).crea_software("Virus", 10);
+				}
+				
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
+				//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
+				System.out.println(this.getNome()+ " crea battaglia vs " + map.getNodo(confini[cont].getX(), confini[cont].getY()).getPossessore().getNome());
 				
-				System.out.println("bot crea battaglia");
-			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
-				battle.selezione( (int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1, 1);
-				System.out.println("bot seleziona software");
+				/*scelta randomica di virus da mandare, se ne sceglie 0 allora li manda tutti*/
+				n_virus=(int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1;
+				if(n_virus==0) {
+					n_virus= map.trovaBase(this).getStats_software_creati()[1].getQuantita();
+				}	
+				battle.selezione( n_virus, 1);
 				
-				if(battle.calcola_vincitore() ) {
+				changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
+				
+				
+				time2.timer(t_timer);
+				end_battle= battle.calcola_vincitore();
+				
+				System.out.println(this.getNome() + battle.stampa_report(end_battle)); 
+				
+				if(end_battle) {
 					battle.aggiornastati();
 					cont++;
 					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
-				}
-			
+				}				
 			}
 			
-			changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
 			
 			this.cambiaTarget();
 			break;
@@ -131,24 +169,41 @@ public class Bot extends Giocatore{
 			/* attacco da parte del bot verso un nodo prossimo */
 			if(map.attaccabile(confini[cont].getX(), confini[cont].getY(), this)) {
 				t_timer= T_UNITARIO;
-				//t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
+			//	t_timer=T_UNITARIO+(T_UNITARIO*map.dist_minima(confini[cont].getX(), confini[cont].getY(), this).getDist_base() );
+				
+				/*controllare se bot dispone di virus per attaccare, se non li possiede li crea*/
+				if(map.trovaBase(this).getStats_software_creati()[1].getQuantita()==0) {
+					System.out.println(this.getNome()+" sta creando per attaccare");
+					time2.timer(map.trovaBase(this).getTempoSoftware("Virus"));	
+					map.trovaBase(this).crea_software("Virus", 10);
+				}
+				
 				battle= new Battaglia(map.trovaBase(this), map.getNodo(confini[cont].getX(), confini[cont].getY() ), t_timer) ;
-				System.out.println("bot crea battaglia");
+				//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
+				System.out.println(this.getNome()+ " crea battaglia vs " + map.getNodo(confini[cont].getX(), confini[cont].getY()).getPossessore().getNome());
 				
-			//	battle.setPartenza(map.dist_minima(confini[cont].getX(), confini[cont].getY(), this) );
-				battle.selezione( (int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1, 1);
-				System.out.println("bot seleziona software");
+				/*scelta randomica di virus da mandare, se ne sceglie 0 allora li manda tutti*/
+				n_virus=(int)Math.random()*(map.trovaBase(this).getSoftware_disponibile()-1)+1;
+				if(n_virus==0) {
+					n_virus= map.trovaBase(this).getStats_software_creati()[1].getQuantita();
+				}	
+				battle.selezione( n_virus, 1);
+				System.out.println(this.getNome() + "ha selezionato virus: " + n_virus );
 				
-				if(battle.calcola_vincitore() ) {
+				changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
+				
+				time2.timer(t_timer);
+				end_battle= battle.calcola_vincitore();
+				System.out.println(this.getNome() + battle.stampa_report(battle.getEsito())); 
+				
+				if(end_battle) {
 					battle.aggiornastati();
 					cont++;
-					
 					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
-				}
-			
+					
+				}				
 			}
 			
-			changes.firePropertyChange(new PropertyChangeEvent(this, BOT_PROP, new Coordinate(confini[cont].getX(), confini[cont].getY()), base));	
 			
 			this.cambiaTarget();
 			break;
@@ -162,13 +217,15 @@ public class Bot extends Giocatore{
 			incremento++;
 			cont=0;
 		}
+		
 		confini[0]= new Coordinate(base.getX()+incremento, base.getY());
 		confini[1]= new Coordinate(base.getX()+incremento, base.getY()-incremento);
 		confini[2]= new Coordinate(base.getX(), base.getY()-incremento);
 		confini[3]= new Coordinate(base.getX()-incremento, base.getY());
 		confini[4]= new Coordinate(base.getX()-incremento, base.getY()+incremento);
 		confini[5]= new Coordinate(base.getX(), base.getY()+incremento);
-				
+	
+		
 	}
 	
 	/**usato per fornire al bot le informazioni della sua base

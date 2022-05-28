@@ -63,7 +63,7 @@ public class MainDefinitivo extends Thread {
 		fight= new Battaglia[maxbattle];
 		maxbattle=6;
 		
-	//	this.avvioBot(); 
+		this.avvioBot(); 
 		
 	}
 
@@ -403,7 +403,7 @@ public class MainDefinitivo extends Thread {
 		}
 		maxbattle++;
 		classifica.aggiornaClassifica();
-		System.out.println( fight[count].getReport() );
+		System.out.println(attaccante.getNome() + fight[count].getReport() );
 	}
 	
 //-------------metodi di fine partita------------//

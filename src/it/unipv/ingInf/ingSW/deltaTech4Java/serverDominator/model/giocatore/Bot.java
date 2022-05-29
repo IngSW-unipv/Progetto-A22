@@ -81,6 +81,10 @@ public class Bot extends Giocatore{
 			 * incentivato il potenziamento energetico
 			 */
 			
+			if (map.trovaBase(this). getLvl_cpu()==10 || map.trovaBase(this).getLvl_ram()==10 || map.trovaBase(this).getLvl_firewall()==9) {
+				break;
+			}
+			
 			scelta=(int)(Math.random()*(max-min));
 			switch(scelta) {
 			case 0: 

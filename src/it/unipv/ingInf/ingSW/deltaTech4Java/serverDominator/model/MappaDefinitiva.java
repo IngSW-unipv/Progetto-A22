@@ -211,60 +211,71 @@ public class MappaDefinitiva{
 	 * false se il nodo selezionato, bersaglio,  non confina con un nodo del giocatore attacante
 	 */
 	public boolean attaccabile(int x, int y, Giocatore player) {
-			if(map[x][y].getPossessore().getNome().equals(player.getNome()))
-				return false;
 			
-			boolean prox=false;
-			int i;
-			
-			
-			x= x - y/2;
-
-			xsup= x+1;
-			xinf=x-1;
-			ysup=y+1;
-			yinf= y-1;
-			
-			if(xsup>= x_max)
-				xsup= 0;
-				
-			if (xinf<0) 
-				xinf=x_max-1;
-
-			if(ysup>= y_max) 
-				ysup=0;
-
-			if (y-1<0)
-				yinf=y_max-1;
-
-			vicini[0]=map[check(xinf+(y/2))][y].getPossessore().getNome();	
-			
-			vicini[1]=map[check(xsup+(y/2))][y].getPossessore().getNome();
-			
-			vicini[2]=map[check(x+(ysup/2))][ysup].getPossessore().getNome();
-			
-			vicini[3]=map[check(x+(yinf/2))][yinf].getPossessore().getNome();
-			
-			vicini[4]=map[check(xsup+(yinf/2))][yinf].getPossessore().getNome();
-			
-			vicini[5]=map[check(xinf+(ysup/2))][ysup].getPossessore().getNome();
-			
-			for(i=0;i<6;i++) {
-				if(vicini[i].equalsIgnoreCase(player.getNome())) {
-					prox=true;
-					break;
-				}
-			}
-			return prox;
-		}
+		y=this.checky(y);
 		
-	private int check(int i) {
+		if(map[x][y].getPossessore().getNome().equalsIgnoreCase(player.getNome()))
+			return false;
+		
+		boolean prox=false;
+		int i;
+		
+		
+		x= x - y/2;
+		xsup= x+1;
+		xinf=x-1;
+		ysup=y+1;
+		yinf= y-1;
+		
+		if(xsup>= x_max)
+			xsup= 0;
+			
+		if (xinf<0) 
+			xinf=x_max-1;
+		if(ysup>= y_max) 
+			ysup=0;
+		if (y-1<0)
+			yinf=y_max-1;
+
+		vicini[0]=map[checkx(xinf+(y/2))][y].getPossessore().getNome();	
+			
+		vicini[1]=map[checkx(xsup+(y/2))][y].getPossessore().getNome();
+	
+		vicini[2]=map[checkx(x+(ysup/2))][ysup].getPossessore().getNome();
+		
+		vicini[3]=map[checkx(x+(yinf/2))][yinf].getPossessore().getNome();
+		
+		vicini[4]=map[checkx(xsup+(yinf/2))][yinf].getPossessore().getNome();
+		
+		vicini[5]=map[checkx(xinf+(ysup/2))][ysup].getPossessore().getNome();
+		
+		for(i=0;i<6;i++) {
+			if(vicini[i].equalsIgnoreCase(player.getNome())) {
+				prox=true;
+				break;
+			}
+		}
+		return prox;
+	}
+		
+	private int checkx(int i) {
 
 		if(i>= x_max)
 			i= 0;
 			
 		if (i<0) 
 			i=x_max-1;
+		
+		return i;
+	}
+	
+	private int checky(int i) {
+
+		if(i>= y_max)
+			i= 0;
+			
+		if (i<0) 
+			i=y_max-1;
 		
 		return i;
 	}
@@ -322,6 +333,8 @@ public class MappaDefinitiva{
 		 * nodo selezionato
 		 */
 		public Nodo getNodo(int x, int y) {
+			y= this.checky(y);
+			
 			return map[x][y];
 		}
 		/**

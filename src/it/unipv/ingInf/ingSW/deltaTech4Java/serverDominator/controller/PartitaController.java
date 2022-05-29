@@ -9,12 +9,10 @@ public class PartitaController {
 
 	//popup controller, cambio base controller
 	private PopupControllerFacade popupcontroller;
-	private BaseCambioController cambioBaseController;
 	private PopUpFacade popUp;
 	
 	public PartitaController(MainDefinitivo main, PartitaStage partita,Nodo b){
 		popUp=new PopUpFacade(main.getMercato(), b);
-		cambioBaseController=new BaseCambioController(main, partita);
 		popupcontroller=new PopupControllerFacade(partita, popUp, main);
 		
 	}
@@ -25,14 +23,6 @@ public class PartitaController {
 
 	public void setPopupcontroller(PopupControllerFacade popupcontroller) {
 		this.popupcontroller = popupcontroller;
-	}
-
-	public BaseCambioController getCambioBaseController() {
-		return cambioBaseController;
-	}
-
-	public void setCambioBaseController(BaseCambioController cambioBaseController) {
-		this.cambioBaseController = cambioBaseController;
 	}
 
 	public PopUpFacade getPopUp() {

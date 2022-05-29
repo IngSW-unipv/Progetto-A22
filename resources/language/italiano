@@ -1,15 +1,15 @@
-#Sat May 28 16:41:26 CEST 2022
+#Sun May 29 18:34:51 CEST 2022
 Lega1=SCRATCH
 config.creator.lable.password=Password
 Lega2=Fortran 
 config.creator.lable.pathToJavaFxLib=percorso alla cartella 'lib' di JavaFX
 Controller.err.LinguaNonSelezionata=Si deve selezionare una lingua
 InitLinguaChooser.listaLingue.Titolo=Scegli La lingua
-RunPanel.button.run=Inizia a guicare
+RunPanel.button.run=Inizia a giocare
 config.creator.lable.dataBaseUrl=URL che punta al tuo DataBase
 InitLinguaChooser.lable.Titolo=Benvenuto in server dominator
-Controller.err.dataBaseCreator=Problemi quando fi cerca di creare la base dei dati
-config.creator.JRadioButton.jreFull=Jre pacchetto comleto
+Controller.err.dataBaseCreator=Problemi quando si cerca di creare la base dei dati
+config.creator.JRadioButton.jreFull=Jre pacchetto completo
 config.creator.bottone.indietro=<<Indietro
 InitLinguaChooser.buttone.indietro=<< Indietro
 RunPanel.lable.titolo=Benvenuto nella baracca
@@ -17,7 +17,7 @@ Controller.err.libNoSelect=Cartella 'lib' di java fx scorretta o non selezionata
 config.creator.lable.titoloPanel=Configurazione del gioco
 config.creator.lable.scegliereTipologiaDiJre=JRE che utilizzi
 InitLinguaChooser.buttone.avanti=Avanti >>
-OnlyDescription.lable.descrizione=Configurazione gioco avvenuta con sucesso
+OnlyDescription.lable.descrizione=Configurazione gioco avvenuta con successo
 descrizione2=ITdescrizione2
 descrizione1=ITdescrizione1
 Controller.err.RunnerFileCreate=Impossibile creare lo script di configurazione

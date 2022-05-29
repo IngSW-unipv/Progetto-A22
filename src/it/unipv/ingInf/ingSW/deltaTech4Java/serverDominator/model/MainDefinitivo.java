@@ -1,5 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
 
+import java.beans.PropertyChangeSupport;
 import java.util.Collections;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
@@ -23,11 +24,12 @@ public class MainDefinitivo extends Thread {
 	private int t_unitario, t_timer;
 	private Classifica classifica;
 	private Colore colore;
-	
+	private boolean bot_vivi;
+	private PropertyChangeSupport support;
 	private Battaglia[] fight;
 	private int maxbattle=7;
 	private int count;
-	
+	public static String SUPPORT_BOT_VIVI="bot_vivi";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//prova 1:avvio partita
@@ -39,6 +41,10 @@ public class MainDefinitivo extends Thread {
 			e.printStackTrace();
 		}
 */		
+	}
+	public MainDefinitivo() {
+		bot_vivi=true;
+		support=new PropertyChangeSupport(this);
 	}
 
 	/** avvia la partita costruendo la mappa e creando i giocatori
@@ -95,16 +101,17 @@ public class MainDefinitivo extends Thread {
 		switch(x_max) {
 		case 15:
 			n_basi=3;
+			bot_vivi=true;
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
 			giocatori[0].setColore(colore.getGrigio()); 
 			giocatori[1]= new Utente(utente, valuta); 
 			giocatori[2]= new Bot("bob");
-			
 			giocatori[3]= new Bot("sandra");
 			break;
 		case 20:
 			n_basi=5;
+			bot_vivi=true;
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema();
 			giocatori[0].setColore(colore.getGrigio()); 
@@ -116,6 +123,7 @@ public class MainDefinitivo extends Thread {
 			break;
 		case 30:
 			n_basi=10;
+			bot_vivi=true;
 			giocatori= new Giocatore[n_basi+1];
 			giocatori[0]= new Sistema(); 
 			giocatori[0].setColore(colore.getGrigio()); 
@@ -158,7 +166,7 @@ public class MainDefinitivo extends Thread {
 	public void stopBot() throws InterruptedException {
 		int i;
 		for(i=2; i<=n_basi; i++) {
-			giocatori[i].interrupt();
+			giocatori[i].setLife(false);
 		}
 	}
 	
@@ -404,6 +412,9 @@ public class MainDefinitivo extends Thread {
 		maxbattle++;
 		classifica.aggiornaClassifica();
 		System.out.println(attaccante.getNome() + fight[count].getReport() );
+		this.checkbot();
+		System.out.println("bot vivi? " + bot_vivi);
+		support.firePropertyChange(SUPPORT_BOT_VIVI, true, bot_vivi);
 	}
 	
 //-------------metodi di fine partita------------//
@@ -415,6 +426,7 @@ public class MainDefinitivo extends Thread {
 	 * @throws InterruptedException 
 	 */
 	public Classifica gameover() throws InterruptedException {
+				
 		Giocatore vincitore;
 		
 		this.stopBot();
@@ -423,6 +435,39 @@ public class MainDefinitivo extends Thread {
 		System.out.println("il vincitore e': " + vincitore.getNome());
 		
 		return classifica;
+	}
+	
+	/**controllo se in partita esistono bot che possiedono
+	 * una base, se non ci sono partita finisce
+	 */
+	public void checkbot () {
+
+		int i;
+		int cont=0;
+		
+		for(i=2;i<giocatori.length;i++) {
+			if (!giocatori[i].getLife()) {
+				cont++;
+			} else {
+				bot_vivi=true;
+				break;
+			}
+			
+		/*	if(giocatori[i].getLife()==true) {
+				bot_vivi=true;
+				break;
+			} else {
+				cont++;
+			}
+		*/
+			
+		}
+			
+		if(cont== n_basi-1) {
+			bot_vivi=false;
+		}
+		
+		System.out.println("bot morti= "+ cont);
 	}
 	
 //--------------getter and setter-------------//
@@ -488,6 +533,12 @@ public class MainDefinitivo extends Thread {
 
 	public void setT_unitario(int t_unitario) {
 		this.t_unitario = t_unitario;
+	}
+	public PropertyChangeSupport getSupport() {
+		return support;
+	}
+	public void setSupport(PropertyChangeSupport support) {
+		this.support = support;
 	}
 	
 	

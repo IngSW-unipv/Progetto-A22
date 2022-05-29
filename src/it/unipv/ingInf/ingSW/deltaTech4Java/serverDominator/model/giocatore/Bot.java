@@ -18,14 +18,14 @@ public class Bot extends Giocatore{
 	
 	private MappaDefinitiva map;
 	private Coordinate base;
-	private Timer time;
 	private Timer time2;
 	private Battaglia battle;
 	private final int T_UNITARIO=5;
 	private int t_timer;
 	private int cont;
 	private Coordinate[] confini;
-	int incremento; 
+	private int incremento; 
+	
 	
 	private PropertyChangeSupport changes;
 	public static final String BOT_PROP="bot";
@@ -42,7 +42,9 @@ public class Bot extends Giocatore{
 	public Bot(String nome) {
 		super(nome);
 		super.setPunteggio(0);
-		time= new Timer();
+		super.setLife(true);
+		
+		
 		time2 = new Timer();
 		confini= new Coordinate[6];
 		incremento=1;
@@ -55,10 +57,10 @@ public class Bot extends Giocatore{
 		this.setMap(map);
 		this.datiBase();
 		this.cambiaTarget();
-		while(map.getNodo(base.getX(), base.getY()).getPossessore().getNome().equals(this.getNome())) {
-			time.timer(5);
-			this.comportamento();
+		while(map.getNodo(base.getX(), base.getY()).getPossessore().getNome().equals(this.getNome()) && super.getLife()==true) {
+			this.comportamento();			
 		}
+		super.setLife(false);
 	}
 
 	/** metodo che simula il comportamento di un giocatore scegliendo in modo casuale
@@ -280,7 +282,6 @@ public class Bot extends Giocatore{
 	public PropertyChangeSupport getChanges() {
 		return changes;
 	}
-	
 	
 }
 

@@ -22,6 +22,7 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	private int basi_prese;
 	private PropertyChangeSupport changes;
 	public static final String GIOCATORE_PROP="numero_basi";
+	private boolean life;
 	/**
 	 * Costruttore di un nuovo giocatore
 	 * @param nome
@@ -200,6 +201,15 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 	}
 	public PropertyChangeSupport getChanges() {
 		return changes;
+	}
+	
+
+	public boolean getLife() {
+		return life;
+	}
+
+	public void setLife(boolean life) {
+		this.life = life;
 	}
 	
 	

@@ -29,7 +29,6 @@ public class Battaglia extends Thread{
 	private PropertyChangeSupport changes;
 	public static final String BATTLE_PROP="battaglia";
 	
-	
 	/**Permette di creare un oggetto di tipo Battaglia
 	 * @param Nodo attaccante
 	 * base che fa partire l'attacco
@@ -176,8 +175,11 @@ public class Battaglia extends Thread{
 			
 		}
 		else {
-			attaccante.getPossessore().setBasi_prese(attaccante.getPossessore().getBasi_prese()+1);
+			//attaccante.getPossessore().setBasi_prese(attaccante.getPossessore().getBasi_prese()+1);
 			difensore.getPossessore().setBasi_prese(difensore.getPossessore().getBasi_prese()-1);
+			if(difensore.getPossessore().getBasi_prese()==0) {
+				difensore.getPossessore().setLife(false);
+			}
 			
 		}
 	}

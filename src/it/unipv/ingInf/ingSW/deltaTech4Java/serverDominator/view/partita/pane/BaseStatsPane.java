@@ -21,8 +21,6 @@ public class BaseStatsPane extends Pane implements IDrawable {
 	
 	private Nodo nodeBase;
 	private Button buttonTitle;
-	private Button buttonBack;
-	private Button buttonNext;
 	private Label ybEnergy = new Label();
 	private Label ybFwLvl = new Label();
 	private Label ybRamLvl = new Label();
@@ -42,8 +40,7 @@ public class BaseStatsPane extends Pane implements IDrawable {
 				new Background(new BackgroundFill(Color.web("#f8cecc"), new CornerRadii(10), new Insets(0, 0, 0, 0))));
 		super.setPadding(STANDARD_PADDING);
 		this.nodeBase = bU;
-		this.buttonBack=ComponentCreator.getIstance().createButton("<<", Pos.TOP_CENTER);
-		this.buttonNext=ComponentCreator.getIstance().createButton(">>", Pos.TOP_CENTER);
+		
 		this.ybEnergy = new Label();
 		this.ybFwLvl = new Label();
 		this.ybRamLvl = new Label();
@@ -127,7 +124,6 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		hb.setPadding(STANDARD_PADDING);
 		hb.setSpacing(20);
 		hb.setAlignment(Pos.CENTER);
-		buttonBack.setPrefWidth(50);
 		
 		HBox color=new HBox();
 		color.setBackground(new Background(new BackgroundFill(Paint.valueOf(nodeBase.getColore()), null, STANDARD_PADDING)));
@@ -135,8 +131,7 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		color.setPrefHeight(50);
 		color.setAlignment(Pos.CENTER);
 		
-		buttonNext.setPrefWidth(50);
-		hb.getChildren().addAll(buttonBack,color,buttonNext);
+		hb.getChildren().addAll(color);
 		yb.getChildren().addAll(ybTitle, hBg,hb);
 		super.getChildren().add(yb);
 	}
@@ -160,29 +155,7 @@ public class BaseStatsPane extends Pane implements IDrawable {
 		this.buttonTitle = buttonTitle;
 	}
 
-	/**
-	 * Restituisce il pulsante per passare alla base precedente a quella attualmente selezionata
-	 * @return
-	 */
-	public Button getButtonBack() {
-		return buttonBack;
-	}
-
-	public void setButtonBack(Button buttonBack) {
-		this.buttonBack = buttonBack;
-	}
-	/**
-	 * Restituisce il pulsante per passare alla prossima base a quella attualmente selezionata
-	 * @return
-	 */
-
-	public Button getButtonNext() {
-		return buttonNext;
-	}
-
-	public void setButtonNext(Button buttonNext) {
-		this.buttonNext = buttonNext;
-	}
+	
 
 	@Override
 	public void drow() {

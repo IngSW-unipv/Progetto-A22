@@ -75,7 +75,6 @@ public class ControllerFacade {
 			try {
 				mainDefinitivo.avvioPartita(lobbyView.getSelectedDifecolta()[0], lobbyView.getSelectedDifecolta()[1], 
 						lobbyView.getUserAccount().getUsername(), lobbyView.getUserAccount().getMny());
-					
 				partitaStage=new Partita(mainDefinitivo, 
 							mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
 					
@@ -90,6 +89,8 @@ public class ControllerFacade {
 				p.setFineObserver(finePartita);
 				lobbyView.close();
 				this.initObservers(mainDefinitivo, finePartita, partitaStage);
+				mainDefinitivo.getSupport().addPropertyChangeListener(MainDefinitivo.SUPPORT_BOT_VIVI, finePartita);
+
 				partitaStage.show();
 				
 			} catch (InterruptedException e) {

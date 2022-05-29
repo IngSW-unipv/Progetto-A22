@@ -265,7 +265,6 @@ public abstract class PartitaStage extends Stage{
 		actionPane.getPowerUpL().setDisable(true);
 		actionPane.getDevelop().setDisable(true);
 		statsNodePane.getButtonAttacca().setDisable(true);
-		this.setButtonsVisibilityInActionPaneStatsPane(false, false);
 		super.setScene(scena);
 		this.drowMappa();
 	}
@@ -337,19 +336,7 @@ public abstract class PartitaStage extends Stage{
 		this.baseStatsPane.make();
 		this.selectedBase=nuovaBaseSelezionata;
 	}
-	
-	/**
-	 * metodo per settare la visibilità dei buttoni 
-	 * all'interno del pannello delle informazione della base attuale
-	 * @param indietroButton
-	 * buttone indietro
-	 * @param avantiButton
-	 * buttone avanti
-	 */
-	public void setButtonsVisibilityInActionPaneStatsPane(boolean indietroButton , boolean avantiButton) {
-		this.baseStatsPane.getButtonBack().setDisable(avantiButton);
-		this.baseStatsPane.getButtonNext().setDisable(avantiButton);
-	}
+
 	
 	/**
 	 * Metodo per settare le visibilità dei bottoni all'interno del

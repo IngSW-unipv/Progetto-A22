@@ -21,7 +21,7 @@ Each player manages his own base node and conquers opponent nodes using malwares
 			<code>
 				java -version
 			</code>
-		</br>If the command is not recognized or (the version is < 11 and is not full JRE 8+) do one of the following
+		</br>If the command is not recognized (or the version is < 11 and is not full JRE 8+) do one of the following
 	</p>
 	<p>
 		<ol>
@@ -154,10 +154,10 @@ Now you have to download this project!
 
 That's all!
 ## Configure ServerDominator
-1. Run 'jar name' jar with doble clic or execute it with the flowing comand 
-	<code>java -jar 'jar name'</code>
+1. Run 'ServerDominator.jar' with doble clic or execute it with the flowing command 
+	<code>java -jar ServerDominator.jar</code>
 2. Choose your languege and press "next" button
-3. Choose the your JRE type (full or not full) 
+3. Choose your JRE type (full or not full) 
 4. Insert ip and port to your MySql Server 
 5. Insert admin's username and password; admin must have to the following permission: 	 
  	 * ALTER
@@ -173,10 +173,10 @@ That's all!
 	 * TRIGGER
 	 * UPDATE
 6. <b>Do this point only if you choose jre and javaFX</b>: insert the path to lib foldr in the javaFx package  
-7. Press ok button and if you want run the project pressing run button
+7. Press ok button and, if you want, run the project pressing run button
 ## Run ServerDominator
-Run 'jar name' jar with doble clic or execute it with the flowing comand 
-	<code>java -jar 'jar name'</code>
+Run 'ServerDominator.jar' with doble clic or execute it with the flowing command 
+	<code>java -jar ServerDominator.jar</code>
 ## Delta Tech 4 Java students 
 <details>
 <summary>

@@ -2,7 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Backend-java-FF334F)&emsp;
 ![JavaFX](https://img.shields.io/badge/Frontend-JavaFX-33FF93)
-![FXML](https://img.shields.io/badge/Frontend-FXML-33FF93)&emsp;
+![FXML](https://img.shields.io/badge/Frontend-SWING-33FF93)&emsp;
 ![MySql](https://img.shields.io/badge/Database-MySql-blue)
 
 Server Dominator è un gioco strategico, gestionale in tempo reale. 
@@ -152,8 +152,8 @@ Adesso devi installare questo progetto!
 
 Questo è tutto!
 ## Configurazione 
-1. Eseguire 'jar name' con doppio clic oppure eseguilo con il seguente comando
-	<code>java -jar 'jar name'</code>
+1. Eseguire 'ServerDominator.jar' con doppio clic oppure eseguilo con il seguente comando
+	<code>java -jar ServerDominator.jar</code>
 2. Scegli la tua lingua
 3. Scegli il tipo di JRE che usi (full or not full) 
 4. Insirisci l'ip e la prorta per MySql Server
@@ -173,8 +173,8 @@ Questo è tutto!
 6. <b>Fai questo punto solo se hai scelto jre e javaFX</b>: inserire la cartella 'lib' di java fx
 7. Clicca conferma e avvia il gioco con l'apposito bottone
 ## Iniziare a giocare
-Eseguire 'jar name' con doppio clic oppure eseguilo con il seguente comando 
-	<code>java -jar 'jar name'</code>
+Eseguire 'ServerDominator.jar' con doppio clic oppure eseguilo con il seguente comando 
+	<code>java -jar ServerDominator.jar</code>
 
 
 ## Studenti di Delta Tech 4 Java

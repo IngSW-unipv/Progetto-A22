@@ -1,12 +1,12 @@
-#Sun May 29 18:34:51 CEST 2022
+#Sun May 29 20:48:38 CEST 2022
 Lega1=SCRATCH
 config.creator.lable.password=Password
-Lega2=Fortran 
+Lega2=Fortran 
 config.creator.lable.pathToJavaFxLib=percorso alla cartella 'lib' di JavaFX
 Controller.err.LinguaNonSelezionata=Si deve selezionare una lingua
 InitLinguaChooser.listaLingue.Titolo=Scegli La lingua
-RunPanel.button.run=Inizia a giocare
 config.creator.lable.dataBaseUrl=URL che punta al tuo DataBase
+RunPanel.button.run=Inizia a giocare
 InitLinguaChooser.lable.Titolo=Benvenuto in server dominator
 Controller.err.dataBaseCreator=Problemi quando si cerca di creare la base dei dati
 config.creator.JRadioButton.jreFull=Jre pacchetto completo

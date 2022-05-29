@@ -1,19 +1,19 @@
-#Sat May 28 11:48:59 CEST 2022
+#Sun May 29 12:18:51 CEST 2022
 IUserAccountDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.proxy.ProxyUserAccountDAO
-strategy.fxCmd.class.name=serverDominator.config.model.cmdCreator.NotFullStrategy
 strategy.cmdFull.class.name=serverDominator.config.model.cmdCreator.FullStrategy
+strategy.fxCmd.class.name=serverDominator.config.model.cmdCreator.NotFullStrategy
 ILanguageManager.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.FilesLanguageManager
-scriptsFacade.jarName.toRun=serverDOminator
+scriptsFacade.jarName.toRun=SD_Game
 IAssetDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.asset.AssetDAO
 it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObPunteggioDAO
-IOibiettiviUserDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.obiettivi.ObiettiviUserDAO
 classe.name.for.fileExtension.linux=serverDominator.config.model.fileExtention.UnixStrategy
+IOibiettiviUserDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.obiettivi.ObiettiviUserDAO
 IAssetOwnDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.asset.AssetOwnDAO
 ISession.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.util.conn.ConnectionFactory
 scriptsFacade.scriptName.toCreaste=serverDominator
 obiettiviDiPunteggioDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObPunteggioDAO
 classe.name.for.fileExtension.macos=serverDominator.config.model.fileExtention.UnixStrategy
 src.cofg.context=1
-it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObiettiviDAO
 classe.name.for.fileExtension.windows=serverDominator.config.model.fileExtention.WindowsStrategy
+it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObiettiviDAO
 obiettiviDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.obiettivi.ObiettiviDAO

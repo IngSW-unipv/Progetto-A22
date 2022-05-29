@@ -10,6 +10,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Use
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.IDrawable;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -71,6 +72,7 @@ public class LobbyView extends Stage implements IDrawable {
 	 */
 	
 	public void disponi() {
+		Platform.runLater(() -> {
 		ScrollPane sp=new ScrollPane();
 		
 		GridPane borderPane=new GridPane();
@@ -106,6 +108,7 @@ public class LobbyView extends Stage implements IDrawable {
 		super.setScene(new Scene(sp));
 		vbox.setBackground(new Background(new BackgroundFill(Color.web("#6BC723"), new CornerRadii(10), null)));
 		vbox.setAlignment(Pos.TOP_CENTER);
+		});
 	}
 	
 	/**
@@ -153,6 +156,7 @@ public class LobbyView extends Stage implements IDrawable {
 	 * 
 	 */
 	private HBox infoUserMaker() {
+		
 		HBox b=new HBox();
 		Label punteggio=new Label("Punteggio");
 		HBox.setHgrow(punteggio, Priority.ALWAYS);
@@ -189,6 +193,7 @@ public class LobbyView extends Stage implements IDrawable {
 	 */
 	
 	private GridPane obiettiviGiocatoreMaker() {
+		
 		GridPane grid=new GridPane();
 		grid.setBackground(new Background(new BackgroundFill(Color.web("#000000"), new CornerRadii(10), null)));
 		grid.setOpacity(0.8);
@@ -263,13 +268,15 @@ public class LobbyView extends Stage implements IDrawable {
 	}
 
 	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
-		this.userInfo.getChildren().clear();
-		this.userInfo=this.infoUserMaker();
-		this.obiettivi.getChildren().clear();
-		this.obiettivi=obiettiviGiocatoreMaker();
-		super.setScene(null);
-		this.disponi();
+		Platform.runLater(() -> {
+			this.userAccount = userAccount;
+			this.userInfo.getChildren().clear();
+			this.userInfo=this.infoUserMaker();
+			this.obiettivi.getChildren().clear();
+			this.obiettivi=obiettiviGiocatoreMaker();
+			super.setScene(null);
+			this.disponi();
+			});
 	}
 
 	public int[] getSelectedDifecolta() {

@@ -10,6 +10,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.Partita
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.ClassificaPane;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.pane.IDrawable;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -56,8 +57,25 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		partitaStage.getFineProgress().setRunning(false);
-		this.finePartita();
+		boolean finePartita=false;
+		try {
+			if((Integer)evt.getNewValue()==0)
+				finePartita=true;
+			System.out.println(finePartita);
+		
+		} catch (Exception e) {
+			try {
+				if((boolean)evt.getNewValue()==false)
+					finePartita=true;
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				this.finePartita();
+			}
+		}
+
+		if(finePartita) {
+			this.finePartita();			
+		}
 		
 	}
 	
@@ -65,10 +83,12 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 	 * Metodo che conclude la partita attuale
 	 */
 	public void finePartita() {
+		partitaStage.getFineProgress().setRunning(false);
+
 		if(stageClassifica==null&&userAccount!=null) {
 			userAccount.setMny(partitaStage.getSelectedBase().getPossessore().getValuta());
 			if(mainDefinitivoModello.getClassifica().getVincitore().getNome().equalsIgnoreCase(userAccount.getUsername())) {
-				System.err.println("secondo if");
+				//System.err.println("secondo if");
 				userAccount.setPunteggio(userAccount.getPunteggio()+100);
 			}
 			if(PersistenceFacade.getInstance().updateUserAccount(userAccount)) {
@@ -87,12 +107,11 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 		}
-		
-		this.partitaStage.close();
-
-		this.prePartitaStage.show();
-		this.createClassificaStage();
-		
+		Platform.runLater(() -> {
+			this.partitaStage.close();
+			this.prePartitaStage.show();
+				this.createClassificaStage();
+		});
 		
 		
 	}

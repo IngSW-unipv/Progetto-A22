@@ -159,8 +159,7 @@ public class Battaglia extends Thread{
 	 */
 	public void aggiornastati() {
 		//difensore.setDist_base(partenza.getDist_base()+1);
-		difensore.setPossessore(attaccante.getPossessore());
-		attaccante.getPossessore().aggiornaPunteggio(10);
+		
 		
 		if (difensore.getTipologia().equals("cloud")) {
 			
@@ -182,6 +181,8 @@ public class Battaglia extends Thread{
 			}
 			
 		}
+		difensore.setPossessore(attaccante.getPossessore());
+		attaccante.getPossessore().aggiornaPunteggio(10);
 	}
 	
 	/**esecuzione della battaglia */

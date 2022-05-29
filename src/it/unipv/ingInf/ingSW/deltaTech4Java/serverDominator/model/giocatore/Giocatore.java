@@ -32,6 +32,7 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		this.nome=nome;
 		punteggio=0;
 		deltaCoin=0;
+		life=true;
 		basi_prese=1;
 		this.changes = new PropertyChangeSupport(this);
 	}
@@ -42,6 +43,7 @@ public abstract class Giocatore extends Thread implements Comparable<Giocatore>{
 		super();
 		this.nome=null;
 		punteggio=0;
+		life=true;
 		deltaCoin=0;
 		basi_prese=1;
 		this.changes = new PropertyChangeSupport(this);

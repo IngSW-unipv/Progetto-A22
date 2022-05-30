@@ -1,7 +1,7 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PopUpFacade;
 

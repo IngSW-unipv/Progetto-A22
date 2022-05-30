@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo;
 
 
 /**
@@ -18,8 +18,11 @@ public abstract class Nodo implements INodo{
 	private Giocatore possessore;
 	private int software_disponibile;
 	private int software_max;
+	@SuppressWarnings("unused")
 	private int bonus_def;
+	@SuppressWarnings("unused")
 	private int e_disponibile;
+	@SuppressWarnings("unused")
 	private int lvl_cpu, lvl_ram, lvl_firewall, E_lvl;
 	private String tipologia;
 	private PropertyChangeSupport changes;
@@ -170,30 +173,7 @@ public abstract class Nodo implements INodo{
 	public void setSoftware_max(int software_max) {
 		this.software_max = software_max;
 	}
-	/**
-	 * returna il bonus difensivo dato dal firewall del nodo
-	 * @return
-	 * bonus difensivo del firewall
-	 */
-	public int getBonus_def() {
-		return bonus_def;
-	}
-	/**
-	 * setta il bonus difensivo dato dal firewall del nodo
-	 * @param
-	 * bonus difensivo del firewall
-	 */
-	public void setBonus_def(int bonus_def) {
-		this.bonus_def = bonus_def;
-	}
-	/**
-	 * returna la quantita di energia disponibile del nodo
-	 * @return
-	 * quantita di energia disponibile
-	 */
-	public int getE_disponibile() {
-		return e_disponibile;
-	}
+	
 	/**
 	 * setta la quantita di energia disponibile del nodo
 	 * @param
@@ -219,14 +199,6 @@ public abstract class Nodo implements INodo{
 		E_lvl = e_lvl;
 	}
 	/**
-	 * returna il livello della Cpu del nodo
-	 * @return
-	 * livello Cpu
-	 */
-	public int getLvl_cpu() {
-		return lvl_cpu;
-	}
-	/**
 	 * setta il livello della Cpu del nodo
 	 * @param
 	 * livello Cpu
@@ -235,28 +207,12 @@ public abstract class Nodo implements INodo{
 		this.lvl_cpu = lvl_cpu;
 	}
 	/**
-	 * returna il livello della Ram del nodo
-	 * @return
-	 * livello Ram
-	 */
-	public int getLvl_ram() {
-		return lvl_ram;
-	}
-	/**
 	 * setta il livello della Ram del nodo
 	 * @param
 	 * livello Ram
 	 */
 	public void setLvl_ram(int lvl_ram) {
 		this.lvl_ram = lvl_ram;
-	}
-	/**
-	 * returna il livello della Firewall del nodo
-	 * @return
-	 * livello Firewall
-	 */
-	public int getLvl_firewall() {
-		return lvl_firewall;
 	}
 	/**
 	 * setta il livello della Firewall del nodo
@@ -303,5 +259,10 @@ public abstract class Nodo implements INodo{
 	public abstract Risorse[] getRisorse();
 	public abstract int getTempoRisorsa(String nome);
 	public abstract int getTempoSoftware(String nome);
-	
+	public abstract int getBonus_def();
+	public abstract void setBonus_def(int bonus_def);
+	public abstract int getLvl_cpu();
+	public abstract int getLvl_ram();
+	public abstract int getE_disponibile();
+	public abstract int getLvl_firewall();
 }

@@ -1,6 +1,6 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

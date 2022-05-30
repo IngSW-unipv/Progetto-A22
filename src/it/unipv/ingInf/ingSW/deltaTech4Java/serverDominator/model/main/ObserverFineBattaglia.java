@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

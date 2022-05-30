@@ -1,11 +1,11 @@
 package sreverDominator.model;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Battaglia;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main.Battaglia;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 
 public class testBattaglia {
 

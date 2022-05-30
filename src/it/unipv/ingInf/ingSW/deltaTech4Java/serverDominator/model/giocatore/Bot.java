@@ -3,9 +3,9 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Battaglia;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main.Battaglia;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa.Coordinate;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa.MappaDefinitiva;
 
 /**
  * @author Luca Casto 
@@ -273,6 +273,7 @@ public class Bot extends Giocatore{
 	 * setta il valore di mappa uguale a quella passata come parametro
 	 * @param mappa
 	 */
+	@Override
 	public void setMap(MappaDefinitiva map) {
 		this.map = map;
 	}

@@ -2,7 +2,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.popUp;
 
 import java.math.BigDecimal;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.ComponentCreator;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.util.NumberSpinner;
 import javafx.event.ActionEvent;

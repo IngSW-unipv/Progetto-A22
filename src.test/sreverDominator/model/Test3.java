@@ -3,12 +3,12 @@ package sreverDominator.model;
 import java.util.Hashtable;
 import java.util.Map;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Cloud;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa.Coordinate;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Cloud;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 
 public class Test3 {
 

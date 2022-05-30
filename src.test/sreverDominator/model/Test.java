@@ -1,8 +1,8 @@
 package sreverDominator.model;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Base;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Nodo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 
 public class Test {
 

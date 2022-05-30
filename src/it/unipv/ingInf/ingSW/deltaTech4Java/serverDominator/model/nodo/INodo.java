@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo;
 
 /**
  * @author Luca Casto 

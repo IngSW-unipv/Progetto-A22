@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
@@ -6,6 +6,7 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.software.*;
 import java.beans.PropertyChangeSupport;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Timer;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 
 /**
  * @author Luca Casto 

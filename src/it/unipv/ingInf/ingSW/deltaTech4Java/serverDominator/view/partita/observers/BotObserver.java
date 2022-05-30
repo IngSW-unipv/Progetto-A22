@@ -3,8 +3,8 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.observ
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.Coordinate;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main.MainDefinitivo;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa.Coordinate;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.partita.PartitaStage;
 
 public class BotObserver implements PropertyChangeListener {

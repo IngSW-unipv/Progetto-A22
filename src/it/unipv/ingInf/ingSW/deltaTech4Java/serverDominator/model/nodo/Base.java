@@ -1,4 +1,4 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.*;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.risorse.*;
@@ -218,11 +218,13 @@ public void potenzia_risorsa(String nome) {
 	}
 	
 //---------------getter and setter--------------//
+	
 	/**
 	 * ritorna la capacita' massima di stoccaggio dei software
 	 * @return
 	 * quantita massima software
-	 */
+	*/
+	@Override
 	public int getSoftware_max() {
 		return risorse[1].getStat1();
 	}
@@ -255,6 +257,7 @@ public void potenzia_risorsa(String nome) {
 	 * @return
 	 * livello energia
 	 */
+	@Override
 	public int getE_lvl() {
 		return risorse[2].getLivello_risorsa();
 	}

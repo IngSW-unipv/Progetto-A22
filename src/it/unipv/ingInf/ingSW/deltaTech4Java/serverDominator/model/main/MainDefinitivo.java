@@ -1,13 +1,18 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.main;
 
 import java.beans.PropertyChangeSupport;
 import java.util.Collections;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Bot;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Classifica;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Mercato;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Sistema;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Utente;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa.MappaDefinitiva;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Colore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.thread.CreazioneThread;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.thread.PowerupThread;
 
 /**@author Luca Casto 
  * @author Matteo Caprio

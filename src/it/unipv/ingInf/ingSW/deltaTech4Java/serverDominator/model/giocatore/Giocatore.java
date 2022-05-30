@@ -4,7 +4,7 @@ package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore;
 import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.MappaDefinitiva;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa.MappaDefinitiva;
 
 
 /**

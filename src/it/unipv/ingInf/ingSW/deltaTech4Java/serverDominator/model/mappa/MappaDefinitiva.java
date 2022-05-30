@@ -1,6 +1,9 @@
-package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model;
+package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.mappa;
 
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.giocatore.Giocatore;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Base;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Cloud;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.model.nodo.Nodo;
 
 /**@author Luca Casto 
  * @author Matteo Caprio

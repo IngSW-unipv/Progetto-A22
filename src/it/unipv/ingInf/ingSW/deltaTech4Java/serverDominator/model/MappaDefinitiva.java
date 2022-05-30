@@ -211,17 +211,16 @@ public class MappaDefinitiva{
 	 * false se il nodo selezionato, bersaglio,  non confina con un nodo del giocatore attacante
 	 */
 	public boolean attaccabile(int x, int y, Giocatore player) {
-			
-		y=this.checky(y);
-		
-		if(map[x][y].getPossessore().getNome().equalsIgnoreCase(player.getNome()))
-			return false;
-		
 		boolean prox=false;
 		int i;
 		
 		
 		x= x - y/2;
+		
+		if(map[checkx(x+(checky(checky(y))/2))][checky(y)].getPossessore().getNome().equalsIgnoreCase(player.getNome()))
+			return false;
+		
+		
 		xsup= x+1;
 		xinf=x-1;
 		ysup=y+1;
@@ -234,20 +233,20 @@ public class MappaDefinitiva{
 			xinf=x_max-1;
 		if(ysup>= y_max) 
 			ysup=0;
-		if (y-1<0)
+		if (yinf<0)
 			yinf=y_max-1;
 
-		vicini[0]=map[checkx(xinf+(y/2))][y].getPossessore().getNome();	
+		vicini[0]=map[checkx(xinf+(checky(y)/2))][checky(y)].getPossessore().getNome();	
 			
-		vicini[1]=map[checkx(xsup+(y/2))][y].getPossessore().getNome();
+		vicini[1]=map[checkx(xsup+(checky(y)/2))][checky(y)].getPossessore().getNome();
 	
-		vicini[2]=map[checkx(x+(ysup/2))][ysup].getPossessore().getNome();
+		vicini[2]=map[checkx(x+(checky(ysup)/2))][checky(ysup)].getPossessore().getNome();
 		
-		vicini[3]=map[checkx(x+(yinf/2))][yinf].getPossessore().getNome();
+		vicini[3]=map[checkx(x+(checky(yinf)/2))][checky(yinf)].getPossessore().getNome();
 		
-		vicini[4]=map[checkx(xsup+(yinf/2))][yinf].getPossessore().getNome();
+		vicini[4]=map[checkx(xsup+(checky(yinf)/2))][checky(yinf)].getPossessore().getNome();
 		
-		vicini[5]=map[checkx(xinf+(ysup/2))][ysup].getPossessore().getNome();
+		vicini[5]=map[checkx(xinf+(checky(ysup)/2))][checky(ysup)].getPossessore().getNome();
 		
 		for(i=0;i<6;i++) {
 			if(vicini[i].equalsIgnoreCase(player.getNome())) {
@@ -334,6 +333,7 @@ public class MappaDefinitiva{
 		 */
 		public Nodo getNodo(int x, int y) {
 			y= this.checky(y);
+			x=this.checkx(x);
 			
 			return map[x][y];
 		}

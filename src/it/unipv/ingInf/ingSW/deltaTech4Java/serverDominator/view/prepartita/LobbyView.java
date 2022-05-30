@@ -72,7 +72,6 @@ public class LobbyView extends Stage implements IDrawable {
 	 */
 	
 	public void disponi() {
-		Platform.runLater(() -> {
 		ScrollPane sp=new ScrollPane();
 		
 		GridPane borderPane=new GridPane();
@@ -108,7 +107,7 @@ public class LobbyView extends Stage implements IDrawable {
 		super.setScene(new Scene(sp));
 		vbox.setBackground(new Background(new BackgroundFill(Color.web("#6BC723"), new CornerRadii(10), null)));
 		vbox.setAlignment(Pos.TOP_CENTER);
-		});
+		
 	}
 	
 	/**

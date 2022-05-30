@@ -395,7 +395,7 @@ public class MainDefinitivo extends Thread {
 	 * @param y
 	 * ordinata nodo bersaglio
 	 */
-	public void avvioBattaglia(Giocatore attaccante, int x, int y) {
+	public void avvioBattaglia() {
 		
 		fight[count].start();
 				

@@ -261,7 +261,7 @@ public abstract class PartitaStage extends Stage{
 		vPartitaBox.setSpacing(10);
 		vPartitaBox.getChildren().addAll(menuBar.getMenuBar(),borderPane);
 		Scene scena = new Scene(vPartitaBox,800,700);
-		scena.getStylesheets().add("application.css");
+	
 		actionPane.getPowerUpL().setDisable(true);
 		actionPane.getDevelop().setDisable(true);
 		statsNodePane.getButtonAttacca().setDisable(true);

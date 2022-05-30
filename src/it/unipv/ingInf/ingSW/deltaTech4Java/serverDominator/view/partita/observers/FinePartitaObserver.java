@@ -110,7 +110,9 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 		Platform.runLater(() -> {
 			this.partitaStage.close();
 			this.prePartitaStage.show();
-				this.createClassificaStage();
+			this.createClassificaStage();
+			this.stageClassifica.showAndWait();
+			this.stageClassifica.setAlwaysOnTop(true);
 		});
 		
 		
@@ -123,7 +125,8 @@ public class FinePartitaObserver implements PropertyChangeListener, IDrawable {
 			this.stageClassifica.setMinWidth(100);
 			this.stageClassifica.setScene(null);
 			this.stageClassifica.setScene(new Scene(new ClassificaPane(mainDefinitivoModello.getClassifica()),200,200));
-			this.stageClassifica.showAndWait();
+			/*this.stageClassifica.showAndWait();
+			this.stageClassifica.setAlwaysOnTop(true);*/
 		}
 		
 	}

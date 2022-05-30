@@ -123,7 +123,7 @@ public class PopupControllerFacade {
 					,  mainModello.battlecheck(partitaStage.getSelectedBase().getPossessore(), 
 							partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY(), 
 							popUpFacade.getPopUpSelectmalware().getQuantitaVirus(), popUpFacade.getPopUpSelectmalware().getQuantitaRootCrash()) *1000+300 ); 
-			mainModello.avvioBattaglia(partitaStage.getSelectedBase().getPossessore(), partitaStage.getSelectedPoint().getIntX(), partitaStage.getSelectedPoint().getIntY());
+			mainModello.avvioBattaglia();
 		popUpFacade.getPopUpSelectmalware().getStage().close();	
 		});
 		

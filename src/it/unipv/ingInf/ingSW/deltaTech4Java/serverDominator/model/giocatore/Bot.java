@@ -81,7 +81,7 @@ public class Bot extends Giocatore{
 			 * incentivato il potenziamento energetico
 			 */
 			
-			if (map.trovaBase(this). getLvl_cpu()==10 || map.trovaBase(this).getLvl_ram()==10 || map.trovaBase(this).getLvl_firewall()==9) {
+			if (map.trovaBase(this). getLvl_cpu()==10 || map.trovaBase(this).getLvl_ram()==10 ) {
 				break;
 			}
 			
@@ -100,7 +100,7 @@ public class Bot extends Giocatore{
 				risorsa= "Firewall";
 				break;
 			default:
-				risorsa= "Energia";
+				risorsa= "Firewall";
 				break;
 			}
 			if(map.trovaBase(this).getRisorse()[2].getStat1()<20) {
@@ -176,13 +176,15 @@ public class Bot extends Giocatore{
 				
 				if(end_battle) {
 					battle.aggiornastati();
-					cont++;
 					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
+					cont++;
+					if (cont>5) {
+						incremento++;
+						cont=0;
+					}
 				}				
 			}
-			
-			
-			this.cambiaTarget();
+						
 			break;
 		default: 
 			/* attacco da parte del bot verso un nodo prossimo */
@@ -220,13 +222,15 @@ public class Bot extends Giocatore{
 				
 				if(end_battle) {
 					battle.aggiornastati();
-					cont++;
 					changes.firePropertyChange(PUNTEGGIO_BOT,0,1);
+					cont++;
+					if (cont>5) {
+						incremento++;
+						cont=0;
+						this.cambiaTarget();
+					}
 				}				
 			}
-			
-			
-			this.cambiaTarget();
 			break;
 		}
 			
@@ -234,10 +238,7 @@ public class Bot extends Giocatore{
 	
 	/**usato per aggiornare il bersaglio di un attacco */
 	public void cambiaTarget() {
-		if (cont>5) {
-			incremento++;
-			cont=0;
-		}
+		
 		
 		confini[0]= new Coordinate(base.getX()+incremento, base.getY());
 		confini[1]= new Coordinate(base.getX()+incremento, base.getY()-incremento);

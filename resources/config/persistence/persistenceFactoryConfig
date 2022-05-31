@@ -1,4 +1,4 @@
-#Sun May 29 23:05:15 CEST 2022
+#Tue May 31 18:07:54 CEST 2022
 IAssetDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.asset.AssetDAO
 IAssetOwnDAO.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.userAccount.userOwn.asset.AssetOwnDAO
 ILanguageManager.class.name=it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.linguaManager.FilesLanguageManager

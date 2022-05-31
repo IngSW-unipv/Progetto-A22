@@ -1,7 +1,3 @@
-#Tue May 31 18:08:58 CEST 2022
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=c418bf38cb8a4a177ae2845e307715ff46e0848b
 Controller.err.LinguaNonSelezionata=Si deve selezionare una lingua
 Controller.err.RunnerFileCreate=Impossibile creare lo script di configurazione
 Controller.err.dataBaseCreator=Problemi quando si cerca di creare la base dei dati
@@ -10,9 +6,6 @@ InitLinguaChooser.buttone.avanti=Avanti >>
 InitLinguaChooser.buttone.indietro=<< Indietro
 InitLinguaChooser.lable.Titolo=Benvenuto in server dominator
 InitLinguaChooser.listaLingue.Titolo=Scegli La lingua
-LEGA\ 1=IT LEGA 1
-LEGA\ 2=IT LEGA 2
-LEGA\ 3=IT LEGA 3
 Lega1=SCRATCH
 Lega10=HAKER ++
 Lega2=Fortran 

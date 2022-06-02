@@ -22,7 +22,7 @@ public class NotFullStrategy implements ICmdCreatorStrategy {
 	public String createCmd() {
 		 String result="java --module-path "+
 				 "\""+Paths.get(pathToFxLib).toString()+"\""+
-				 " --add-modules javafx.controls,javafx.base,javafx.graphics javafx.fxml -jar"+
+				 " --add-modules javafx.controls -jar"+
 				 Paths.get(jarPath).toString()+".jar";
 		 //System.out.println(result);
 		 return result;

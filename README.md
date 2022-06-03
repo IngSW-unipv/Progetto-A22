@@ -42,7 +42,7 @@ Each player manages his own base node and conquers opponent nodes using malwares
 <details>
 	<summary><b>MySql</b></summary>
 	<p>
-		</br>This is the <a href="https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/" target="_blank">link</a> for MySql tutorial, download it! 
+		</br>This is <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">link</a> for MySql installer! 
 	</p>
 </details>
 

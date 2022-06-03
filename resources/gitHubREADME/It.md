@@ -12,14 +12,14 @@ avversari.
 ## Richiesto
 <details>
 	<summary>
-		<b>JRE 8+ full or (JRE 11+ and JavaFX) </b>
+		<b>JRE 11+ full or (JRE 11+ and JavaFX) </b>
 	</summary>	
 	<p>
 		</br>Verificare la versione della JRE installata con in seguenete comando: 
 			<code>
 				java -version
 			</code>
-		</br>Se il comando non viene riconosciuto o(la versione è < 11 inoltre non è una JRE 8+ full) fare uno dei seguenti
+		</br>Se il comando non viene riconosciuto o(la versione è < 11 inoltre non è una JRE 11+ full) fare uno dei seguenti
 	</p>
 	<p>
 		<ol>
@@ -31,7 +31,7 @@ avversari.
 				<b><li>JavaFX SDK</li></b>
 					<dd>Puoi installarlo al questo <a href="https://gluonhq.com/products/javafx/" target="_blank" >link</a>.</dd>
 			</ol>
- 			<b><li>JRE 8+ full</li></b>
+ 			<b><li>JRE 11+ full</li></b>
 				<dd>Puoi installarlo al questo <a href="https://bell-sw.com/pages/downloads/" target="_blank">link</a>, assicurati di scegliere il pacchetto full.</dd>
 		</ol> 
 	</p>

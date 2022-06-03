@@ -14,7 +14,7 @@ Each player manages his own base node and conquers opponent nodes using malwares
 ## Required
 <details>
 	<summary>
-		<b>JRE 8+ full or (JRE 11+ and JavaFX) </b>
+		<b>JRE 11+ full or (JRE 11+ and JavaFX) </b>
 	</summary>	
 	<p>
 		</br>Verify the JRE version with the following command: 
@@ -33,7 +33,7 @@ Each player manages his own base node and conquers opponent nodes using malwares
 				<b><li>JavaFX SDK</li></b>
 					<dd>You can download it at this <a href="https://gluonhq.com/products/javafx/" target="_blank" >link</a>.</dd>
 			</ol>
- 			<b><li>JRE 8+ full</li></b>
+ 			<b><li>JRE 11+ full</li></b>
 				<dd>You can download it at this <a href="https://bell-sw.com/pages/downloads/" target="_blank">link</a>, but make sure to choose the full option package.</dd>
 		</ol> 
 	</p>

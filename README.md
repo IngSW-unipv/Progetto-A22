@@ -21,7 +21,7 @@ Each player manages his own base node and conquers opponent nodes using malwares
 			<code>
 				java -version
 			</code>
-		</br>If the command is not recognized (or the version is < 11 and is not full JRE 8+) do one of the following
+		</br>If the command is not recognized (or the version is < 11 and is not full JRE 11+) do one of the following
 	</p>
 	<p>
 		<ol>

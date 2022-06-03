@@ -1,6 +1,11 @@
 package it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.controller;
 
+import java.util.ArrayList;
+
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.PersistenceFacade;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObPunteggio;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.ObiettiviUser;
+import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
@@ -60,8 +65,16 @@ public class LoginController {
 	}
 	public void initSignup() {
 		signupView.getSignupButtonLegit().setOnAction(ActionEvent ->{
-			boolean us = PersistenceFacade.getInstance().insertUserAccount(new UserAccount(signupView.getUsernameTextFieldSignup().getText(), 
-					 signupView.getEmailTextField().getText(),signupView.getPasswordTextFieldSignup().getText()));
+			UserAccount user=new UserAccount(signupView.getUsernameTextFieldSignup().getText(), 
+					 signupView.getEmailTextField().getText(),signupView.getPasswordTextFieldSignup().getText());
+			
+			boolean us = PersistenceFacade.getInstance().insertUserAccount(user);
+			ArrayList<Obiettivo> obDiPunteggio= PersistenceFacade.getInstance().getObiettivi(new ObPunteggio()).selectAll();
+			
+			for (Obiettivo o:obDiPunteggio) {
+				PersistenceFacade.getInstance().insertObiettiviUser(new ObiettiviUser(o,user,"NON COMPLETATO"));
+			}
+			
 			if(us) {
 				signupView.getStage().close();
 				loginView.getStage().show();

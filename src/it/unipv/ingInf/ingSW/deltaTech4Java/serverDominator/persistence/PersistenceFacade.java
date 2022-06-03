@@ -49,7 +49,7 @@ public class PersistenceFacade{
 	private IObiettiviDAO obiettivi;
 	private IObiettiviUserDAO obiettiviUser;
 	private IUserAccountDAO userAccount;
-	private  ILanguageManager linguaMan;
+	private ILanguageManager linguaMan;
 	private ISession session;
 	
 	public static PersistenceFacade instance;
@@ -472,4 +472,34 @@ public class PersistenceFacade{
 		this.session.closeSession();
 		PersistenceFacade.instance=null;
 	}
+
+	public IAssetDAO getAsset() {
+		return asset;
+	}
+
+	public IAssetOwnDAO getAssetOwn() {
+		return assetOwn;
+	}
+
+	public IObiettiviDAO getObiettivi(Obiettivo o) {
+		return IObiettiviDAOFactory.getIObiettiviDAO(o);
+	}
+
+	public IObiettiviUserDAO getObiettiviUser() {
+		return obiettiviUser;
+	}
+
+	public IUserAccountDAO getUserAccount() {
+		return userAccount;
+	}
+
+	public ILanguageManager getLinguaMan() {
+		return linguaMan;
+	}
+
+	public ISession getSession() {
+		return session;
+	}
+	
+	
 }

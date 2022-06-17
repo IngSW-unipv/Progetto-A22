@@ -55,6 +55,9 @@ public class ControllerFacade {
 				lobbyView= new LobbyView(userAccount);
 				initLobbyController();
 				lobbyView.show();
+				lobbyView.setOnCloseRequest(e->{
+					logOut();
+				});
 			}
 			
 		});
@@ -77,7 +80,7 @@ public class ControllerFacade {
 						lobbyView.getUserAccount().getUsername(), lobbyView.getUserAccount().getMny());
 				partitaStage=new Partita(mainDefinitivo, 
 							mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
-					
+				
 				partitaCont = new PartitaController(mainDefinitivo, partitaStage,
 								(Base)mainDefinitivo.getTabellone().trovaBase(new Utente(userAccount.getUsername(),userAccount.getMny())));
 					
@@ -85,12 +88,20 @@ public class ControllerFacade {
 				Partita p=(Partita)partitaStage;
 				p.setFineObserver(finePartita);
 				partitaStage.getFineProgress().addElement("tempo partita", lobbyView.getSelectedDifecolta()[0]*60*1000, ProgressStyle.BLACK_STYLE);
-				partitaStage.addAvviso("inizio partita...");
+				//partitaStage.addAvviso("inizio partita...");
+				
+				
+				
 				p.setFineObserver(finePartita);
 				lobbyView.close();
 				this.initObservers(mainDefinitivo, finePartita, partitaStage);
 				mainDefinitivo.getSupport().addPropertyChangeListener(MainDefinitivo.SUPPORT_BOT_VIVI, finePartita);
-
+				
+				partitaStage.setOnCloseRequest(e->{
+					finePartita.finePartita();
+					System.out.println("fine partita..");
+				});
+				
 				partitaStage.show();
 				
 			} catch (InterruptedException e) {
@@ -106,15 +117,19 @@ public class ControllerFacade {
 		Menu menu=new Menu("Menu");
 		MenuItem menuItem=new MenuItem("Logout");
 		menuItem.setOnAction(event->{
-			PersistenceFacade.getInstance().persistenceOff();
-			lobbyView.close();
-			loginView.getStage().show();
-			
+			logOut();
 		});
 		menu.getItems().addAll(menuItem);
 		lobbyView.getMenu().getMenus().addAll(menu);
 	}
-
+	
+	private void logOut() {
+		PersistenceFacade.getInstance().persistenceOff();
+		lobbyView.close();
+		loginView.getStage().show();
+	}
+	
+	
 	private void initObservers(MainDefinitivo main,FinePartitaObserver finePartita,PartitaStage  partitaStage) {
 		//mainDefinitivo, finePartita, new BotObserver(mainDefinitivo, partitaStage),new NodoObserver(partitaStage)
 		main.getGiocatori()[1].getChanges().addPropertyChangeListener(Giocatore.GIOCATORE_PROP,finePartita);

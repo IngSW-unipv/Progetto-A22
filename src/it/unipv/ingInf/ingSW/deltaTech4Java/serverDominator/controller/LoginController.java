@@ -8,15 +8,11 @@ import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obi
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.Obiettivo;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.persistence.bean.UserAccount;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LoginView;
-import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.LobbyView;
 import it.unipv.ingInf.ingSW.deltaTech4Java.serverDominator.view.prepartita.SignupView;
 
 public class LoginController {
-	LoginView loginView;
-	SignupView signupView;
-	LobbyView prebattagliaView;
-	UserAccount userAccount;
-	
+	private LoginView loginView;
+	private SignupView signupView;
 	
 	
 	
@@ -71,11 +67,13 @@ public class LoginController {
 			boolean us = PersistenceFacade.getInstance().insertUserAccount(user);
 			ArrayList<Obiettivo> obDiPunteggio= PersistenceFacade.getInstance().getObiettivi(new ObPunteggio()).selectAll();
 			
-			for (Obiettivo o:obDiPunteggio) {
-				PersistenceFacade.getInstance().insertObiettiviUser(new ObiettiviUser(o,user,"NON COMPLETATO"));
-			}
 			
 			if(us) {
+
+				for (Obiettivo o:obDiPunteggio) {
+					PersistenceFacade.getInstance().insertObiettiviUser(new ObiettiviUser(o,user,"NON COMPLETATO"));
+				}
+				
 				signupView.getStage().close();
 				loginView.getStage().show();
 				

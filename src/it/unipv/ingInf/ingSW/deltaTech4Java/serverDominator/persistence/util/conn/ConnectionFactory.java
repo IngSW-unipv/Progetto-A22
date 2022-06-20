@@ -36,8 +36,9 @@ public class ConnectionFactory implements ISession{
 				conns.put(pathToOpenConnection,
 						DbConnection.startConnection(this.conns.get(pathToOpenConnection), pathToOpenConnection));
 		else {
-			Connection conn=null;
-			conns.put(pathToOpenConnection,DbConnection.startConnection(conn, pathToOpenConnection));
+			Connection conn=null;conn=DbConnection.startConnection(conn, pathToOpenConnection);
+			if(conn!=null)
+				conns.put(pathToOpenConnection,conn);
 		}
 		return this.conns.get(pathToOpenConnection);
 	}

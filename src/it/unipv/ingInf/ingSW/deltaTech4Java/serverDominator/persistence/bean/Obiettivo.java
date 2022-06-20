@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @see Obiettivo
  * @see ArrayList
  */
-public class Obiettivo {
+public class Obiettivo  implements Comparable<Obiettivo>{
 
 	/**
 	 * Identificativo dell'obiettivo
@@ -158,6 +158,12 @@ public class Obiettivo {
 		if (idObiettivo == other.getIdObiettivo()&&this.descrizione.equalsIgnoreCase(other.getDescrizione())&&this.ricompensa.equals(other.getRicompensa()))
 			return true;
 		return false;
+	}
+
+	@Override
+	public int compareTo(Obiettivo o) {
+		Integer i=this.getRicompensa()-o.getRicompensa();;
+		return i!=null?i:0;
 	}
 	
 	
